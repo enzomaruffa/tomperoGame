@@ -23,7 +23,7 @@ force_try:
 # rules that have both warning and error levels, can set just the warning level
 # implicitly
 line_length:
-  warning: 120
+  warning: 180
   ignores_function_declarations: true
   ignores_comments: true
 # they can set both implicitly with an array
