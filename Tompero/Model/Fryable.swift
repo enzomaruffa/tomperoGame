@@ -12,5 +12,4 @@ protocol Fryable {
     var fried: Bool { get set }
     var friedProgress: Float { get set } // [0..1]
     
-    
 }
