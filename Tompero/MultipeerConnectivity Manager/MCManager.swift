@@ -32,11 +32,26 @@ class MCManager: NSObject, MCSessionDelegate {
         let peerID = MCPeerID(displayName: UIDevice.current.name)
         self.peerID = peerID
         
+        createNewSession(peerID)
+    }
+    
+    // MARK: - Methods
+    
+    func createNewSession(_ peerID: MCPeerID) {
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession!.delegate = self
     }
     
-    // MARK: - Methods
+    func resetSession() {
+        mcSession?.disconnect()
+        if let peerID = self.peerID {
+            createNewSession(peerID)
+        } else {
+            let peerID = MCPeerID(displayName: UIDevice.current.name)
+            self.peerID = peerID
+            createNewSession(peerID)
+        }
+    }
     
     func hostSession() {
         if let mcSession = self.mcSession {
