@@ -18,11 +18,4 @@ class MCDataWrapper: Codable {
         self.type = type
     }
     
-    func dataType() -> NSObject.Type? {
-        if type == .plate {
-            //return plate type
-        }
-        return nil
-    }
-    
 }
