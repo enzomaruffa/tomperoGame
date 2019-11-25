@@ -28,7 +28,7 @@ class MCManager: NSObject, MCSessionDelegate {
     
     override private init() {
         super.init()
-        let peerID = MCPeerID(displayName: UIDevice.current.name) ?? MCPeerID(displayName: "(weird device with no name)")
+        let peerID = MCPeerID(displayName: UIDevice.current.name)
         self.peerID = peerID
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession!.delegate = self
@@ -100,7 +100,7 @@ class MCManager: NSObject, MCSessionDelegate {
     
     // MARK: - Observer Methods
     
-    func subscribeObserver(observer: MCManagerObserver)  {
+    func subscribeObserver(observer: MCManagerObserver) {
         // TODO: Add duplicate verification
         self.observers.append(observer)
     }

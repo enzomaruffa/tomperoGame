@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MCDataWrapper: Codable  {
+class MCDataWrapper: Codable {
     
     let object: Data
     let type: MCDataType
