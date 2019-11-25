@@ -14,7 +14,7 @@ class MCManager: NSObject, MCSessionDelegate {
     
     // MARK: - Variables
     
-    let shared = MCManager()
+    static let shared = MCManager()
     
     let gameName = "cookios"
     
@@ -22,7 +22,8 @@ class MCManager: NSObject, MCSessionDelegate {
     var mcSession: MCSession?
     var mcAdvertiserAssistant: MCAdvertiserAssistant?
     
-    var observers: [MCManagerObserver] = []
+    var dataObservers: [MCManagerDataObserver] = []
+    var matchmakingObservers: [MCManagerMatchmakingObserver] = []
     
     // MARK: - Initializers
     
@@ -30,6 +31,7 @@ class MCManager: NSObject, MCSessionDelegate {
         super.init()
         let peerID = MCPeerID(displayName: UIDevice.current.name)
         self.peerID = peerID
+        
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession!.delegate = self
     }
@@ -65,6 +67,7 @@ class MCManager: NSObject, MCSessionDelegate {
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        matchmakingObservers.forEach({ $0.playerUpdate(player: peerID.displayName, state: state) })
         switch state {
         case .connected:
             print("Connected: \(peerID.displayName)")
@@ -80,7 +83,7 @@ class MCManager: NSObject, MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             let wrapper = try JSONDecoder().decode(MCDataWrapper.self, from: data)
-            observers.map({ $0.receiveData(wrapper: wrapper) })
+            dataObservers.forEach({ $0.receiveData(wrapper: wrapper) })
         } catch let error {
             print("[MCManager] Error decoding data: \(error.localizedDescription)")
         }
@@ -100,9 +103,14 @@ class MCManager: NSObject, MCSessionDelegate {
     
     // MARK: - Observer Methods
     
-    func subscribeObserver(observer: MCManagerObserver) {
+    func subscribeDataObserver(observer: MCManagerDataObserver) {
         // TODO: Add duplicate verification
-        self.observers.append(observer)
+        self.dataObservers.append(observer)
+    }
+    
+    func subscribeMatchmakingObserver(observer: MCManagerMatchmakingObserver) {
+        // TODO: Add duplicate verification
+        self.matchmakingObservers.append(observer)
     }
     
 }

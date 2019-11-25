@@ -29,6 +29,7 @@ class WaitingRoomViewController: UIViewController {
 
 }
 
+// MARK: - MCBrowserViewControllerDelegate Methods
 extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
@@ -37,6 +38,15 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
+    }
+    
+}
+
+// MARK: - MCManagerMatchmakingObserver Methods
+extension WaitingRoomViewController: MCManagerMatchmakingObserver {
+    
+    func playerUpdate(player: String, state: MCSessionState) {
+        print("\(player) | \(state.rawValue)")
     }
     
 }

@@ -10,9 +10,10 @@
 		408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B688C2DD78186CF812918984 /* Pods_Tompero.framework */; };
 		471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E0238C1349000575B0 /* MCDataWrapper.swift */; };
 		471795E5238C14E7000575B0 /* MCDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E4238C14E7000575B0 /* MCDataType.swift */; };
-		471795E7238C1CB6000575B0 /* MCManagerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E6238C1CB6000575B0 /* MCManagerObserver.swift */; };
+		471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */; };
 		471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E8238C1E54000575B0 /* GameConnectionManager.swift */; };
 		471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795EA238C1E87000575B0 /* GameConnectionManagerObserver.swift */; };
+		471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */; };
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
 		5627BA86238BE7AB00151547 /* HasIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627BA85238BE7AB00151547 /* HasIngredients.swift */; };
 		5627BA88238BE93500151547 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627BA87238BE93500151547 /* Order.swift */; };
@@ -36,9 +37,10 @@
 /* Begin PBXFileReference section */
 		471795E0238C1349000575B0 /* MCDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCDataWrapper.swift; sourceTree = "<group>"; };
 		471795E4238C14E7000575B0 /* MCDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDataType.swift; sourceTree = "<group>"; };
-		471795E6238C1CB6000575B0 /* MCManagerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerObserver.swift; sourceTree = "<group>"; };
+		471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerDataObserver.swift; sourceTree = "<group>"; };
 		471795E8238C1E54000575B0 /* GameConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConnectionManager.swift; sourceTree = "<group>"; };
 		471795EA238C1E87000575B0 /* GameConnectionManagerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConnectionManagerObserver.swift; sourceTree = "<group>"; };
+		471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerMatchmakingObserver.swift; sourceTree = "<group>"; };
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		5627BA85238BE7AB00151547 /* HasIngredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasIngredients.swift; sourceTree = "<group>"; };
@@ -90,7 +92,8 @@
 				47CC66CB238C056B00EB25C1 /* MCManager.swift */,
 				471795E0238C1349000575B0 /* MCDataWrapper.swift */,
 				471795E4238C14E7000575B0 /* MCDataType.swift */,
-				471795E6238C1CB6000575B0 /* MCManagerObserver.swift */,
+				471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */,
+				471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */,
 			);
 			path = "MultipeerConnectivity Manager";
 			sourceTree = "<group>";
@@ -313,9 +316,10 @@
 				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
 				56C52236238C00F900F917AA /* Choppable.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
-				471795E7238C1CB6000575B0 /* MCManagerObserver.swift in Sources */,
+				471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */,
 				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
 				56C52232238BFC7600F917AA /* Transferable.swift in Sources */,
+				471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */,
 				562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

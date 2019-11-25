@@ -8,7 +8,13 @@
 
 import Foundation
 
-class GameConnectionManager: MCManagerObserver {
+class GameConnectionManager: MCManagerDataObserver {
+    
+    static let shared = GameConnectionManager()
+    
+    private init() {
+        MCManager.shared.subscribeDataObserver(observer: self)
+    }
     
     func receiveData(wrapper: MCDataWrapper) {
         // TODO: Decodificar o ingrediente em outrostipos
