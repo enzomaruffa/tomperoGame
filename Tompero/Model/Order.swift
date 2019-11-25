@@ -8,12 +8,15 @@
 
 import Foundation
 
-class Order: HasIngredients {
-    var ingredients: [Ingredient]
+class Order: HasIngredients, Codable {
+    var ingredients: [Ingredient] = []
     var timeLeft: Int
     
-    init() {
-        ingredients = [Ingredient]()
-        timeLeft = 30
+    init(timeLeft: Int) {
+        self.timeLeft = timeLeft
+    }
+    
+    convenience init() {
+        self.init(timeLeft: 30)
     }
 }

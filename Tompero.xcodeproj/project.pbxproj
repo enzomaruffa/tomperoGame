@@ -22,8 +22,18 @@
 		562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */; };
 		56C52232238BFC7600F917AA /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52231238BFC7600F917AA /* Transferable.swift */; };
 		56C52234238BFE9400F917AA /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52233238BFE9400F917AA /* OrderList.swift */; };
-		56C52236238C00F900F917AA /* Choppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52235238C00F900F917AA /* Choppable.swift */; };
-		56C52238238C01B100F917AA /* Fryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52237238C01B100F917AA /* Fryable.swift */; };
+		56C5223E238C063900F917AA /* Plate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C5223D238C063900F917AA /* Plate.swift */; };
+		56C52240238C0E5100F917AA /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C5223F238C0E5100F917AA /* Horn.swift */; };
+		56DCD97A238C4B3600CB7DB2 /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD979238C4B3600CB7DB2 /* Eyes.swift */; };
+		56DCD97C238C4B5A00CB7DB2 /* Tentacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD97B238C4B5A00CB7DB2 /* Tentacle.swift */; };
+		56DCD97E238C4BA400CB7DB2 /* Broccoli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD97D238C4BA400CB7DB2 /* Broccoli.swift */; };
+		56DCD980238C4BBC00CB7DB2 /* MoonCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD97F238C4BBC00CB7DB2 /* MoonCheese.swift */; };
+		56DCD982238C4C1400CB7DB2 /* SaturnOnionRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD981238C4C1400CB7DB2 /* SaturnOnionRings.swift */; };
+		56DCD984238C4C5700CB7DB2 /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD983238C4C5700CB7DB2 /* MarsSand.swift */; };
+		56DCD986238C4C7A00CB7DB2 /* Tardigrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD985238C4C7A00CB7DB2 /* Tardigrades.swift */; };
+		56DCD988238C4CA200CB7DB2 /* Asteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD987238C4CA200CB7DB2 /* Asteroid.swift */; };
+		56DCD98A238C4CDF00CB7DB2 /* SpaceshipHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD989238C4CDF00CB7DB2 /* SpaceshipHull.swift */; };
+		56DCD98C238C4D6E00CB7DB2 /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DCD98B238C4D6E00CB7DB2 /* DevilMashedBread.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,8 +54,18 @@
 		562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
 		56C52231238BFC7600F917AA /* Transferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
 		56C52233238BFE9400F917AA /* OrderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
-		56C52235238C00F900F917AA /* Choppable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choppable.swift; sourceTree = "<group>"; };
-		56C52237238C01B100F917AA /* Fryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fryable.swift; sourceTree = "<group>"; };
+		56C5223D238C063900F917AA /* Plate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plate.swift; sourceTree = "<group>"; };
+		56C5223F238C0E5100F917AA /* Horn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
+		56DCD979238C4B3600CB7DB2 /* Eyes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
+		56DCD97B238C4B5A00CB7DB2 /* Tentacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tentacle.swift; sourceTree = "<group>"; };
+		56DCD97D238C4BA400CB7DB2 /* Broccoli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broccoli.swift; sourceTree = "<group>"; };
+		56DCD97F238C4BBC00CB7DB2 /* MoonCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonCheese.swift; sourceTree = "<group>"; };
+		56DCD981238C4C1400CB7DB2 /* SaturnOnionRings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaturnOnionRings.swift; sourceTree = "<group>"; };
+		56DCD983238C4C5700CB7DB2 /* MarsSand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
+		56DCD985238C4C7A00CB7DB2 /* Tardigrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tardigrades.swift; sourceTree = "<group>"; };
+		56DCD987238C4CA200CB7DB2 /* Asteroid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asteroid.swift; sourceTree = "<group>"; };
+		56DCD989238C4CDF00CB7DB2 /* SpaceshipHull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceshipHull.swift; sourceTree = "<group>"; };
+		56DCD98B238C4D6E00CB7DB2 /* DevilMashedBread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +116,18 @@
 				5627BA89238BEFDE00151547 /* Ingredient.swift */,
 				5627BA87238BE93500151547 /* Order.swift */,
 				56C52233238BFE9400F917AA /* OrderList.swift */,
-				56C52235238C00F900F917AA /* Choppable.swift */,
-				56C52237238C01B100F917AA /* Fryable.swift */,
+				56C5223D238C063900F917AA /* Plate.swift */,
+				56C5223F238C0E5100F917AA /* Horn.swift */,
+				56DCD979238C4B3600CB7DB2 /* Eyes.swift */,
+				56DCD97B238C4B5A00CB7DB2 /* Tentacle.swift */,
+				56DCD97D238C4BA400CB7DB2 /* Broccoli.swift */,
+				56DCD97F238C4BBC00CB7DB2 /* MoonCheese.swift */,
+				56DCD981238C4C1400CB7DB2 /* SaturnOnionRings.swift */,
+				56DCD983238C4C5700CB7DB2 /* MarsSand.swift */,
+				56DCD985238C4C7A00CB7DB2 /* Tardigrades.swift */,
+				56DCD987238C4CA200CB7DB2 /* Asteroid.swift */,
+				56DCD989238C4CDF00CB7DB2 /* SpaceshipHull.swift */,
+				56DCD98B238C4D6E00CB7DB2 /* DevilMashedBread.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,15 +229,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				5627BA88238BE93500151547 /* Order.swift in Sources */,
+				56DCD988238C4CA200CB7DB2 /* Asteroid.swift in Sources */,
 				5627BA86238BE7AB00151547 /* HasIngredients.swift in Sources */,
+				56DCD98A238C4CDF00CB7DB2 /* SpaceshipHull.swift in Sources */,
 				56C52234238BFE9400F917AA /* OrderList.swift in Sources */,
+				56DCD97A238C4B3600CB7DB2 /* Eyes.swift in Sources */,
+				56DCD982238C4C1400CB7DB2 /* SaturnOnionRings.swift in Sources */,
 				5627BA8A238BEFDE00151547 /* Ingredient.swift in Sources */,
+				56C5223E238C063900F917AA /* Plate.swift in Sources */,
+				56DCD980238C4BBC00CB7DB2 /* MoonCheese.swift in Sources */,
+				56DCD97E238C4BA400CB7DB2 /* Broccoli.swift in Sources */,
+				56DCD97C238C4B5A00CB7DB2 /* Tentacle.swift in Sources */,
+				56DCD98C238C4D6E00CB7DB2 /* DevilMashedBread.swift in Sources */,
+				56DCD984238C4C5700CB7DB2 /* MarsSand.swift in Sources */,
 				562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */,
-				56C52238238C01B100F917AA /* Fryable.swift in Sources */,
+				56DCD986238C4C7A00CB7DB2 /* Tardigrades.swift in Sources */,
 				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
-				56C52236238C00F900F917AA /* Choppable.swift in Sources */,
 				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
 				56C52232238BFC7600F917AA /* Transferable.swift in Sources */,
+				56C52240238C0E5100F917AA /* Horn.swift in Sources */,
 				562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

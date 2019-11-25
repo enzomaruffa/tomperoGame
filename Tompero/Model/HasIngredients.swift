@@ -10,12 +10,11 @@ import Foundation
 
 protocol HasIngredients {
     var ingredients: [Ingredient] { get set }
-    
-    func compareWith(_: HasIngredients) -> Bool
 }
 
 extension HasIngredients {
-    func compareWith(_: HasIngredients) -> Bool {
-        return true
+    
+    func isEqual(to other: HasIngredients) -> Bool {
+        return self.ingredients.elementsEqual(other.ingredients)
     }
 }

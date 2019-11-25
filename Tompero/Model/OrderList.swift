@@ -8,8 +8,12 @@
 
 import Foundation
 
-class OrderList {
+class OrderList: Codable {
     var orders = [Order]()
+    
+    func addOrder(_ order: Order) {
+        orders.append(order)
+    }
     
     func removeOrder(ofNumber index: Int) {
         orders.remove(at: index)
