@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class WaitingRoomViewController: UIViewController {
 
@@ -27,4 +28,16 @@ class WaitingRoomViewController: UIViewController {
     }
     */
 
+}
+
+extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
+    
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        browserViewController.dismiss(animated: true)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        browserViewController.dismiss(animated: true)
+    }
+    
 }
