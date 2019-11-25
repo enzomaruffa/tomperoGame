@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B688C2DD78186CF812918984 /* Pods_Tompero.framework */; };
-		5627BA86238BE7AB00151547 /* HasIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627BA85238BE7AB00151547 /* HasIngredients.swift */; };
-		5627BA88238BE93500151547 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627BA87238BE93500151547 /* Order.swift */; };
-		5627BA8A238BEFDE00151547 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627BA89238BEFDE00151547 /* Ingredient.swift */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
 		562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5923881CF900D5D51D /* GameScene.sks */; };
 		562BCF5C23881CF900D5D51D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5B23881CF900D5D51D /* Actions.sks */; };
@@ -21,17 +18,27 @@
 		562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */; };
 		562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF732388249E00D5D51D /* WaitingRoom.storyboard */; };
 		562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */; };
-		56C52232238BFC7600F917AA /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52231238BFC7600F917AA /* Transferable.swift */; };
-		56C52234238BFE9400F917AA /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52233238BFE9400F917AA /* OrderList.swift */; };
-		56C52236238C00F900F917AA /* Choppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52235238C00F900F917AA /* Choppable.swift */; };
-		56C52238238C01B100F917AA /* Fryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52237238C01B100F917AA /* Fryable.swift */; };
+		567A07B0238C805000D6399A /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A079F238C805000D6399A /* Horn.swift */; };
+		567A07B1238C805000D6399A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A0238C805000D6399A /* Eyes.swift */; };
+		567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A1238C805000D6399A /* DevilMashedBread.swift */; };
+		567A07B3238C805000D6399A /* Tentacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A2238C805000D6399A /* Tentacle.swift */; };
+		567A07B4238C805000D6399A /* Plate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A3238C805000D6399A /* Plate.swift */; };
+		567A07B5238C805000D6399A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A4238C805000D6399A /* Ingredient.swift */; };
+		567A07B6238C805000D6399A /* Broccoli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A5238C805000D6399A /* Broccoli.swift */; };
+		567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A6238C805000D6399A /* SaturnOnionRings.swift */; };
+		567A07B8238C805000D6399A /* HasIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A7238C805000D6399A /* HasIngredients.swift */; };
+		567A07B9238C805000D6399A /* Asteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A8238C805000D6399A /* Asteroid.swift */; };
+		567A07BA238C805000D6399A /* MoonCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A9238C805000D6399A /* MoonCheese.swift */; };
+		567A07BB238C805000D6399A /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AA238C805000D6399A /* Order.swift */; };
+		567A07BC238C805000D6399A /* Tardigrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AB238C805000D6399A /* Tardigrades.swift */; };
+		567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AC238C805000D6399A /* SpaceshipHull.swift */; };
+		567A07BE238C805000D6399A /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AD238C805000D6399A /* Transferable.swift */; };
+		567A07BF238C805000D6399A /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AE238C805000D6399A /* OrderList.swift */; };
+		567A07C0238C805000D6399A /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AF238C805000D6399A /* MarsSand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
-		5627BA85238BE7AB00151547 /* HasIngredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasIngredients.swift; sourceTree = "<group>"; };
-		5627BA87238BE93500151547 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
-		5627BA89238BEFDE00151547 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		562BCF5423881CF900D5D51D /* Tompero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tompero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562BCF5723881CF900D5D51D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		562BCF5923881CF900D5D51D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -44,10 +51,23 @@
 		562BCF6923881CFC00D5D51D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562BCF732388249E00D5D51D /* WaitingRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WaitingRoom.storyboard; sourceTree = "<group>"; };
 		562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
-		56C52231238BFC7600F917AA /* Transferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
-		56C52233238BFE9400F917AA /* OrderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
-		56C52235238C00F900F917AA /* Choppable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choppable.swift; sourceTree = "<group>"; };
-		56C52237238C01B100F917AA /* Fryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fryable.swift; sourceTree = "<group>"; };
+		567A079F238C805000D6399A /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
+		567A07A0238C805000D6399A /* Eyes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
+		567A07A1238C805000D6399A /* DevilMashedBread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
+		567A07A2238C805000D6399A /* Tentacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tentacle.swift; sourceTree = "<group>"; };
+		567A07A3238C805000D6399A /* Plate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plate.swift; sourceTree = "<group>"; };
+		567A07A4238C805000D6399A /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		567A07A5238C805000D6399A /* Broccoli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broccoli.swift; sourceTree = "<group>"; };
+		567A07A6238C805000D6399A /* SaturnOnionRings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaturnOnionRings.swift; sourceTree = "<group>"; };
+		567A07A7238C805000D6399A /* HasIngredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasIngredients.swift; sourceTree = "<group>"; };
+		567A07A8238C805000D6399A /* Asteroid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asteroid.swift; sourceTree = "<group>"; };
+		567A07A9238C805000D6399A /* MoonCheese.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonCheese.swift; sourceTree = "<group>"; };
+		567A07AA238C805000D6399A /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		567A07AB238C805000D6399A /* Tardigrades.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tardigrades.swift; sourceTree = "<group>"; };
+		567A07AC238C805000D6399A /* SpaceshipHull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHull.swift; sourceTree = "<group>"; };
+		567A07AD238C805000D6399A /* Transferable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
+		567A07AE238C805000D6399A /* OrderList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
+		567A07AF238C805000D6399A /* MarsSand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		B688C2DD78186CF812918984 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -106,13 +126,23 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5627BA85238BE7AB00151547 /* HasIngredients.swift */,
-				56C52231238BFC7600F917AA /* Transferable.swift */,
-				5627BA89238BEFDE00151547 /* Ingredient.swift */,
-				5627BA87238BE93500151547 /* Order.swift */,
-				56C52233238BFE9400F917AA /* OrderList.swift */,
-				56C52235238C00F900F917AA /* Choppable.swift */,
-				56C52237238C01B100F917AA /* Fryable.swift */,
+				567A07A7238C805000D6399A /* HasIngredients.swift */,
+				567A07AD238C805000D6399A /* Transferable.swift */,
+				567A07A4238C805000D6399A /* Ingredient.swift */,
+				567A07AA238C805000D6399A /* Order.swift */,
+				567A07AE238C805000D6399A /* OrderList.swift */,
+				567A07A3238C805000D6399A /* Plate.swift */,
+				567A07A8238C805000D6399A /* Asteroid.swift */,
+				567A07A5238C805000D6399A /* Broccoli.swift */,
+				567A07A1238C805000D6399A /* DevilMashedBread.swift */,
+				567A07A0238C805000D6399A /* Eyes.swift */,
+				567A079F238C805000D6399A /* Horn.swift */,
+				567A07AF238C805000D6399A /* MarsSand.swift */,
+				567A07A9238C805000D6399A /* MoonCheese.swift */,
+				567A07A6238C805000D6399A /* SaturnOnionRings.swift */,
+				567A07AC238C805000D6399A /* SpaceshipHull.swift */,
+				567A07AB238C805000D6399A /* Tardigrades.swift */,
+				567A07A2238C805000D6399A /* Tentacle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -266,16 +296,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5627BA88238BE93500151547 /* Order.swift in Sources */,
-				5627BA86238BE7AB00151547 /* HasIngredients.swift in Sources */,
-				56C52234238BFE9400F917AA /* OrderList.swift in Sources */,
-				5627BA8A238BEFDE00151547 /* Ingredient.swift in Sources */,
+				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
+				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
+				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
+				567A07BE238C805000D6399A /* Transferable.swift in Sources */,
+				567A07BB238C805000D6399A /* Order.swift in Sources */,
 				562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */,
-				56C52238238C01B100F917AA /* Fryable.swift in Sources */,
+				567A07B6238C805000D6399A /* Broccoli.swift in Sources */,
 				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
-				56C52236238C00F900F917AA /* Choppable.swift in Sources */,
+				567A07B0238C805000D6399A /* Horn.swift in Sources */,
+				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
 				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
-				56C52232238BFC7600F917AA /* Transferable.swift in Sources */,
+				567A07B1238C805000D6399A /* Eyes.swift in Sources */,
+				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,
+				567A07BF238C805000D6399A /* OrderList.swift in Sources */,
+				567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */,
+				567A07B4238C805000D6399A /* Plate.swift in Sources */,
+				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
+				567A07C0238C805000D6399A /* MarsSand.swift in Sources */,
+				567A07B8238C805000D6399A /* HasIngredients.swift in Sources */,
+				567A07B3238C805000D6399A /* Tentacle.swift in Sources */,
 				562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
