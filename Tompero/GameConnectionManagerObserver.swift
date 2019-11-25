@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+protocol GameConnectionManagerObserver {
+    
+    // funcoes para receber ingredientes etc
+    
+}

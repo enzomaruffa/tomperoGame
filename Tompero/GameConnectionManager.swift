@@ -11,7 +11,11 @@ import Foundation
 class GameConnectionManager: MCManagerObserver {
     
     func receiveData(wrapper: MCDataWrapper) {
-        <#code#>
+        // TODO: Decodificar o ingrediente em outrostipos
     }
+//    
+//    func sendIngredient(ingredient: Ingredient) {
+//
+//    }
     
 }
