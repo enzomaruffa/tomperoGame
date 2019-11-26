@@ -9,43 +9,43 @@ class InicialViewController: UIViewController {
     @IBOutlet weak var host: UIImageView!
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//        let touch : UITouch! =  touches.first! as UITouch
+//
+//        if person.frame.contains(touch.location(in: self.view)) {
+//            location = touch.location(in: self.view)
+//            person.center = location
+//        }
         
-        let touch : UITouch! =  touches.first! as UITouch
-        
-        if person.frame.contains(touch.location(in: self.view)){
-            location = touch.location(in: self.view)
-            person.center = location
-            
-            
-        }
-        
-        func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 
             let touch : UITouch! =  touches.first! as UITouch
 
-            if touch.location(in: self.view) == person.center {
+            if person.frame.contains(touch.location(in: self.view)) {
+                //touch.location(in: self.view) == person.center {
                 location = touch.location(in: self.view)
                 person.center = location
             }
         }
         
         
-        func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
             let touch : UITouch! =  touches.first! as UITouch
             if join.frame.intersects(person.frame) {
                 person.center = join.center
             }
+            else if host.frame.intersects(person.frame){
+                person.center = host.center
+            }
             else {
-                person.center = view.frame.origin
+                person.center = CGPoint(x: view.frame.width/2, y: view.frame.height/1.5)
             }
         }
-        func viewDidLoad() {
+    override func viewDidLoad() {
             super.viewDidLoad()
-            
-            // Do any additional setup after loading the view.
         }
         
         
     }
-}
+
