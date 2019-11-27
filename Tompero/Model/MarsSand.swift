@@ -12,11 +12,21 @@ class MarsSand: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            name: "Mars Sand",
             texturePrefix: "",
             currentOwner: currentOwner,
-            recipe: [.raw, .cooked, .burnt]
+            actionCount: 2,
+            finalState: .cooked
         )
+        
+        self.states = [
+            .raw: [.cooking],
+            .cooking: [.raw, .cooked],
+            .cooked: [.burnt]
+        ]
+        
+        self.components = [
+            CookableComponent()
+        ]
     }
     
     required init(from decoder: Decoder) throws {

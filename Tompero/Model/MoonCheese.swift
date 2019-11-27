@@ -12,11 +12,20 @@ class MoonCheese: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            name: "Moon Cheese",
             texturePrefix: "",
             currentOwner: currentOwner,
-            recipe: [.raw, .chopped]
+            actionCount: 2,
+            finalState: .chopped
         )
+        
+        self.states = [
+            .raw: [.chopping],
+            .chopping: [.raw, .chopped]
+        ]
+        
+        self.components = [
+            ChoppableComponent()
+        ]
     }
     
     required init(from decoder: Decoder) throws {

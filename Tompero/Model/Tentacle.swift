@@ -12,11 +12,24 @@ class Tentacle: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            name: "Tentacle",
             texturePrefix: "",
             currentOwner: currentOwner,
-            recipe: [.raw, .chopped, .cooked, .burnt]
+            actionCount: 3,
+            finalState: .cooked
         )
+        
+        self.states = [
+            .raw: [.chopping],
+            .chopping: [.raw, .chopped],
+            .chopped: [.cooking],
+            .cooking: [.chopped, .cooked],
+            .cooked: [.burnt]
+        ]
+        
+        self.components = [
+            ChoppableComponent(),
+            CookableComponent()
+        ]
     }
     
     required init(from decoder: Decoder) throws {

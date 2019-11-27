@@ -35,6 +35,12 @@
 		567A07BE238C805000D6399A /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AD238C805000D6399A /* Transferable.swift */; };
 		567A07BF238C805000D6399A /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AE238C805000D6399A /* OrderList.swift */; };
 		567A07C0238C805000D6399A /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AF238C805000D6399A /* MarsSand.swift */; };
+		56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */; };
+		56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C1238DA2B8000F8A3F /* Component.swift */; };
+		56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */; };
+		56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C5238DC97D000F8A3F /* IngredientState.swift */; };
+		56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C7238DC992000F8A3F /* CookableComponent.swift */; };
+		56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +74,12 @@
 		567A07AD238C805000D6399A /* Transferable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
 		567A07AE238C805000D6399A /* OrderList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
 		567A07AF238C805000D6399A /* MarsSand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
+		56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoppableComponent.swift; sourceTree = "<group>"; };
+		56E2D7C1238DA2B8000F8A3F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryableComponent.swift; sourceTree = "<group>"; };
+		56E2D7C5238DC97D000F8A3F /* IngredientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientState.swift; sourceTree = "<group>"; };
+		56E2D7C7238DC992000F8A3F /* CookableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookableComponent.swift; sourceTree = "<group>"; };
+		56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		B688C2DD78186CF812918984 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -126,8 +138,14 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */,
 				567A07A7238C805000D6399A /* HasIngredients.swift */,
 				567A07AD238C805000D6399A /* Transferable.swift */,
+				56E2D7C1238DA2B8000F8A3F /* Component.swift */,
+				56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */,
+				56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */,
+				56E2D7C7238DC992000F8A3F /* CookableComponent.swift */,
+				56E2D7C5238DC97D000F8A3F /* IngredientState.swift */,
 				567A07A4238C805000D6399A /* Ingredient.swift */,
 				567A07AA238C805000D6399A /* Order.swift */,
 				567A07AE238C805000D6399A /* OrderList.swift */,
@@ -296,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */,
 				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
@@ -306,12 +325,17 @@
 				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
 				567A07B0238C805000D6399A /* Horn.swift in Sources */,
 				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
+				56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */,
 				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
 				567A07B1238C805000D6399A /* Eyes.swift in Sources */,
 				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,
 				567A07BF238C805000D6399A /* OrderList.swift in Sources */,
+				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,
 				567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */,
 				567A07B4238C805000D6399A /* Plate.swift in Sources */,
+				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
+				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
+				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
 				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
 				567A07C0238C805000D6399A /* MarsSand.swift in Sources */,
 				567A07B8238C805000D6399A /* HasIngredients.swift in Sources */,

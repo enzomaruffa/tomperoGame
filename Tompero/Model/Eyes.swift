@@ -12,11 +12,21 @@ class Eyes: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            name: "Eyes",
             texturePrefix: "",
             currentOwner: currentOwner,
-            recipe: [.raw, .chopped]
+            actionCount: 2,
+            finalState: .fried
         )
+        
+        self.states = [
+            .raw: [.frying],
+            .frying: [.raw, .fried],
+            .fried: [.burnt]
+        ]
+        
+        self.components = [
+            FryableComponent()
+        ]
     }
     
     required init(from decoder: Decoder) throws {

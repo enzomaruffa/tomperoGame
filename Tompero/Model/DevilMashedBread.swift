@@ -12,10 +12,10 @@ class DevilMashedBread: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            name: "Devil-Mashed Bread",
             texturePrefix: "",
             currentOwner: currentOwner,
-            recipe: [.raw]
+            actionCount: 1,
+            finalState: .raw
         )
     }
     

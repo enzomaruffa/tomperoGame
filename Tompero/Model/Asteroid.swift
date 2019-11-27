@@ -12,10 +12,10 @@ class Asteroid: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            name: "Asteroid",
             texturePrefix: "",
             currentOwner: currentOwner,
-            recipe: [.raw]
+            actionCount: 1,
+            finalState: .raw
         )
     }
     

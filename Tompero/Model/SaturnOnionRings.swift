@@ -12,11 +12,24 @@ class SaturnOnionRings: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            name: "Saturn Onion Rings",
             texturePrefix: "",
             currentOwner: currentOwner,
-            recipe: [.raw, .chopped, .fried, .burnt]
+            actionCount: 3,
+            finalState: .raw
         )
+        
+        self.states = [
+            .raw: [.chopping],
+            .chopping: [.raw, .chopped],
+            .chopped: [.frying],
+            .frying: [.chopped, .fried],
+            .fried: [.burnt]
+        ]
+        
+        self.components = [
+            ChoppableComponent(),
+            FryableComponent()
+        ]
     }
     
     required init(from decoder: Decoder) throws {
