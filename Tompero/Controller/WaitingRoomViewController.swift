@@ -16,11 +16,18 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     var timer = Timer()
     var counter = 0
     
+    @IBAction func backPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
     @objc func timerAction() {
         counter += 1
         //topText.text = "\(counter)"
     }
     
+    @IBAction func menuPressed(_ sender: Any) {
+        coordinator?.menu()
+    }
     override func viewWillAppear(_ animated: Bool) {
         self.hatBlue.transform = CGAffineTransform(translationX: 400, y: -200)
         
@@ -111,6 +118,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
     
     func playerUpdate(player: String, state: MCSessionState) {
         print("\(player) | \(state.rawValue)")
+        // Consigo atualizar chapeu desse player e conultar o state o que aconoteceu
     }
     
 }
