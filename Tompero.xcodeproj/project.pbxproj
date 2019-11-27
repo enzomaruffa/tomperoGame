@@ -51,6 +51,9 @@
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
 		FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */; };
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
+		FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF38E238E9CFA00437124 /* Coordinator.swift */; };
+		FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF390238E9D6A00437124 /* Storyboarded.swift */; };
+		FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF392238E9F4700437124 /* MainCoordinator.swift */; };
 		FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFDDCFD238C040700CD503A /* InicialViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +106,9 @@
 		FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
 		FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuStoryboard.storyboard; sourceTree = "<group>"; };
+		FB9BF38E238E9CFA00437124 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		FB9BF390238E9D6A00437124 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		FB9BF392238E9F4700437124 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		FBFDDCFD238C040700CD503A /* InicialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +174,7 @@
 		562BCF5623881CF900D5D51D /* Tompero */ = {
 			isa = PBXGroup;
 			children = (
+				FB9BF38D238E9CDB00437124 /* Coordinator */,
 				562BCF5723881CF900D5D51D /* AppDelegate.swift */,
 				562BCF6923881CFC00D5D51D /* Info.plist */,
 				562BCF6F2388232700D5D51D /* Model */,
@@ -243,6 +250,16 @@
 				4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FB9BF38D238E9CDB00437124 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				FB9BF38E238E9CFA00437124 /* Coordinator.swift */,
+				FB9BF390238E9D6A00437124 /* Storyboarded.swift */,
+				FB9BF392238E9F4700437124 /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,10 +385,10 @@
 				471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */,
 				471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */,
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
-				56C52238238C01B100F917AA /* Fryable.swift in Sources */,
-				56C52236238C00F900F917AA /* Choppable.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
+				FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */,
 				471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */,
+				FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */,
 				471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */,
 				56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */,
 				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
@@ -397,6 +414,7 @@
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
 				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
+				FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */,
 				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
 				567A07C0238C805000D6399A /* MarsSand.swift in Sources */,
 				567A07B8238C805000D6399A /* HasIngredients.swift in Sources */,
