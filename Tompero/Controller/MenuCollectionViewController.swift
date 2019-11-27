@@ -1,15 +1,25 @@
 import UIKit
 
-class MenuCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
+class MenuCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, Storyboarded {
+    
+    // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
+    
+    // MARK: - Variables
     let ingrediente: [UIImage] = [UIImage(named: "books")!, UIImage(named: "books")!]
+    weak var coordinator: MainCoordinator?
+    
+    // MARK: - Storyboarded
+    static var storyboardName = "MenuStoryboard"
+    
+    // MARK: - ViewLifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+    // MARK: - Collection Methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -44,6 +54,8 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(self.collectionView.contentOffset.x)/Int(self.collectionView.frame.width)
     }
+    
+    
     /*
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
