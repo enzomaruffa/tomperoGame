@@ -133,14 +133,8 @@
 		562BCF5623881CF900D5D51D /* Tompero */ = {
 			isa = PBXGroup;
 			children = (
-				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
-				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
-				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
-				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
 				562BCF5723881CF900D5D51D /* AppDelegate.swift */,
 				562BCF6923881CFC00D5D51D /* Info.plist */,
-				562BCF6123881CF900D5D51D /* Main.storyboard */,
-				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				562BCF6F2388232700D5D51D /* Model */,
 				562BCF702388233700D5D51D /* View */,
 				562BCF712388234800D5D51D /* Controller */,
@@ -185,7 +179,11 @@
 				562BCF5923881CF900D5D51D /* GameScene.sks */,
 				562BCF5B23881CF900D5D51D /* Actions.sks */,
 				562BCF5D23881CF900D5D51D /* GameScene.swift */,
+				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
+				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
+				562BCF6123881CF900D5D51D /* Main.storyboard */,
+				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -193,6 +191,8 @@
 		562BCF712388234800D5D51D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
+				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
 				562BCF5F23881CF900D5D51D /* GameViewController.swift */,
 				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
 			);
