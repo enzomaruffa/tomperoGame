@@ -27,7 +27,24 @@ class InicialViewController: UIViewController, Storyboarded {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        GameRuleFactory.generateRule(difficulty: .easy, players: [MCPeerID(displayName: "1"), MCPeerID(displayName: "2"), MCPeerID(displayName: "3"), MCPeerID(displayName: "4")])
+        
+        
+        for _ in 0..<10 {
+            print("\n\n")
+            let rule = GameRuleFactory.generateRule(difficulty: .easy, players: [MCPeerID(displayName: "1"), MCPeerID(displayName: "2"), MCPeerID(displayName: "3"), MCPeerID(displayName: "4")])
+
+            
+            for player in rule.playerTables.keys {
+                print("\(player.displayName):")
+                for table in rule.playerTables[player]! {
+                    if table.type == .ingredient {
+                        print("    \(table.type) | \(table.ingredient!)")
+                    } else {
+                        print("    \(table.type)")
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Methods

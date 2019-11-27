@@ -11,13 +11,13 @@ import Foundation
 enum IngredientState: String, Codable {
     case raw = "Raw"
     
-    static var chopping: IngredientState { raw }
+    case chopping = "Kinda chopped"
     case chopped = "Chopped"
     
-    static var cooking: IngredientState { chopped }
+    case cooking = "Kinda Cooked"
     case cooked = "Cooked"
     
-    static var frying: IngredientState { chopped }
+    case frying = "Kinda Fried"
     case fried = "Fried"
     
     case burnt = "Burnt"

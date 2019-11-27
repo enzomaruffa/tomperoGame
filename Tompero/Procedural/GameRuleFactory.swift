@@ -13,6 +13,7 @@ class GameRuleFactory {
     
     static func generateRule(difficulty: GameDifficulty, players: [MCPeerID]) -> GameRule {
         
+//        print("Creating control variables")
         // Variáveis de controle
         let totalPlayers = players.count
         let spacePerPlayer = 3
@@ -20,15 +21,21 @@ class GameRuleFactory {
         var occupiedSpaces = 0
         let maxSpaces = totalPlayers * spacePerPlayer
         
+//        print("Creating players tables")
         // Instancia as mesas dos jogadores
         var playerTables: [MCPeerID: [PlayerTable]] = [:]
         for player in players {
-            playerTables[player] = Array(repeating: PlayerTable(), count: spacePerPlayer)
+            playerTables[player] = []
+            for iterator in 0..<spacePerPlayer {
+                playerTables[player]!.append(PlayerTable())
+            }
         }
         
+//        print("Creating current ingredients")
         // Lista de ingredientes atuais
-        var currentIngredients: [Ingredient.Type] = []
+        var currentIngredients: [Ingredient] = []
         
+//        print("Generating first ingredient")
         // Gera o primeiro ingrediente aleatório
         var breadList = [SpaceshipHull(currentOwner: ""), DevilMashedBread(currentOwner: ""), Asteroid(currentOwner: "")]
         let firstIngredient = breadList.randomElement()!
@@ -38,16 +45,16 @@ class GameRuleFactory {
         occupiedSpaces += 1
         
         // Adiciona na lista de ingredientes
-        currentIngredients.append(type(of: firstIngredient))
+        currentIngredients.append(firstIngredient)
         
+//        print("Adding ingredient to random player")
         // Adiciona o ingrediente na mesa de um jogador aleatório
         var randomPlayer = playerTables.keys.randomElement()!
         var randomTable = playerTables[randomPlayer]?.randomElement()!
         randomTable?.type = .ingredient
         randomTable?.ingredient = type(of: firstIngredient)
-
-        currentIngredients.append(type(of: firstIngredient))
         
+//        print("Adding plate to random player")
         //Adiciona um prato
         occupiedSpaces += 1
         
@@ -66,6 +73,7 @@ class GameRuleFactory {
         
         var actionsList: [Component.Type] = []
         
+//        print("Starting core loop")
         while occupiedSpaces < maxSpaces {
             // Escolhe um novo ingrediente
             let newIngredient = possibleIngredients.randomElement()!
@@ -73,7 +81,9 @@ class GameRuleFactory {
             
             // Se tem poucos, adiciona mais pães
             if possibleIngredients.count < 5 {
+//                print("Adding breads")
                 possibleIngredients += breadList
+                breadList = []
             }
             
             // Verifica quantos espaços precisa pra ele:
@@ -85,12 +95,14 @@ class GameRuleFactory {
                     supposedSpaces += 1
                 }
             }
-            
+
+//            print("occupiedSpaces \(occupiedSpaces) + supposedSpaces = \(supposedSpaces) < maxSpaces \(maxSpaces)?")
             // Não ultrapassa o limite de espaços
-            guard occupiedSpaces + supposedSpaces >= maxSpaces else {
+            guard occupiedSpaces + supposedSpaces <= maxSpaces else {
                 continue
             }
             
+//            print("Adding ingredient")
             // Adiciona o ingrediente na lista
             occupiedSpaces += 1
             let players = playerTables.keys
@@ -100,7 +112,7 @@ class GameRuleFactory {
             randomTable?.type = .ingredient
             randomTable?.ingredient = type(of: newIngredient)
 
-            currentIngredients.append(type(of: newIngredient))
+            currentIngredients.append(newIngredient)
             
             // Se a ação dele ainda não existe, adiciona as ações na lista. Também adiciona bancada
             for component in newIngredient.components {
@@ -119,7 +131,7 @@ class GameRuleFactory {
                     randomTable?.type = componentToPlayerType(type: component)!
 
                     // Se o ação já existe, pode ou não adicionar mais uma mesa que faz aquilo.
-                } else if Int.random(in: 0...100) < 50 && occupiedSpaces < maxSpaces { // 50% de chance de adicionar novamente
+                } else if Int.random(in: 0...100) < 65 && occupiedSpaces + 1 < maxSpaces { // 50% de chance de adicionar novamente
                     
                     // Adiciona a ação novamente
                     occupiedSpaces += 1
@@ -130,7 +142,6 @@ class GameRuleFactory {
                     randomTable?.type = componentToPlayerType(type: component)!
                 }
             }
-            
         }
         
         return GameRule(difficulty: difficulty, possibleIngredients: currentIngredients, playerTables: playerTables)

@@ -165,6 +165,18 @@
 			path = "Game Connection";
 			sourceTree = "<group>";
 		};
+		4722D481238F42E1003D373C /* Procedural */ = {
+			isa = PBXGroup;
+			children = (
+				4722D476238EB750003D373C /* GameRuleFactory.swift */,
+				4722D478238EB762003D373C /* GameDifficulty.swift */,
+				4722D47A238EB7C9003D373C /* GameRule.swift */,
+				4722D47C238EB91F003D373C /* PlayerTable.swift */,
+				4722D47E238EB982003D373C /* PlayerTableType.swift */,
+			);
+			path = Procedural;
+			sourceTree = "<group>";
+		};
 		562BCF4B23881CF900D5D51D = {
 			isa = PBXGroup;
 			children = (
@@ -195,11 +207,7 @@
 				562BCF6423881CFC00D5D51D /* Assets.xcassets */,
 				471795ED238C692D000575B0 /* MultipeerConnectivity Manager */,
 				471795EE238C694B000575B0 /* Game Connection */,
-				4722D476238EB750003D373C /* GameRuleFactory.swift */,
-				4722D478238EB762003D373C /* GameDifficulty.swift */,
-				4722D47A238EB7C9003D373C /* GameRule.swift */,
-				4722D47C238EB91F003D373C /* PlayerTable.swift */,
-				4722D47E238EB982003D373C /* PlayerTableType.swift */,
+				4722D481238F42E1003D373C /* Procedural */,
 			);
 			path = Tompero;
 			sourceTree = "<group>";
