@@ -9,13 +9,17 @@
 import Foundation
 
 protocol Transferable {
+    
     var currentOwner: String { get set }
     
     func sendTo(_: String)
+    
 }
 
 extension Transferable {
+    
     func sendTo(_: String) {
         print("hello")
     }
+    
 }
