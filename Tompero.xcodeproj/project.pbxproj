@@ -54,6 +54,7 @@
 		FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF38E238E9CFA00437124 /* Coordinator.swift */; };
 		FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF390238E9D6A00437124 /* Storyboarded.swift */; };
 		FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF392238E9F4700437124 /* MainCoordinator.swift */; };
+		FB9BF395238EA67500437124 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB9BF394238EA67500437124 /* Game.storyboard */; };
 		FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFDDCFD238C040700CD503A /* InicialViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 		FB9BF38E238E9CFA00437124 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FB9BF390238E9D6A00437124 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		FB9BF392238E9F4700437124 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		FB9BF394238EA67500437124 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		FBFDDCFD238C040700CD503A /* InicialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,6 +230,7 @@
 				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
 				562BCF6123881CF900D5D51D /* Main.storyboard */,
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
+				FB9BF394238EA67500437124 /* Game.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB9BF395238EA67500437124 /* Game.storyboard in Resources */,
 				562BCF6323881CF900D5D51D /* Main.storyboard in Resources */,
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
 				562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */,

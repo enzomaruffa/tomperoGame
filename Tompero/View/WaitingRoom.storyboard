@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5eH-78-dlc">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Waiting Room View Controller-->
         <scene sceneID="z5W-Yt-vbs">
             <objects>
-                <viewController id="5eH-78-dlc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WaitingRoomViewController" id="5eH-78-dlc" customClass="WaitingRoomViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hFz-sl-QJG">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,18 +24,70 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7sx-QL-biX">
+                                <rect key="frame" x="44" y="70" width="808" height="323"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHatBlue" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-Hh-gEM">
+                                        <rect key="frame" x="0.0" y="0.0" width="194.5" height="323"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHatEnzo" translatesAutoresizingMaskIntoConstraints="NO" id="RMg-y6-RBw">
+                                        <rect key="frame" x="204.5" y="0.0" width="194.5" height="323"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHatGreen" translatesAutoresizingMaskIntoConstraints="NO" id="QJN-UM-JNd">
+                                        <rect key="frame" x="409" y="0.0" width="194.5" height="323"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHatOrange" translatesAutoresizingMaskIntoConstraints="NO" id="N2Y-nO-oqH">
+                                        <rect key="frame" x="613.5" y="0.0" width="194.5" height="323"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7F-M2-bfK">
+                                <rect key="frame" x="787" y="20" width="65" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="menu Restaurant"/>
+                                <connections>
+                                    <action selector="menuPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="let-A7-PwI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pu5-td-27G">
+                                <rect key="frame" x="44" y="18" width="61" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="backButton"/>
+                                <connections>
+                                    <action selector="backPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="9HI-Yw-IhU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="7sx-QL-biX" firstAttribute="leading" secondItem="9Vk-7s-UEu" secondAttribute="leading" id="H2R-JN-Toe"/>
+                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="trailing" secondItem="7sx-QL-biX" secondAttribute="trailing" id="IAh-sw-A5E"/>
+                            <constraint firstItem="7sx-QL-biX" firstAttribute="top" secondItem="9Vk-7s-UEu" secondAttribute="top" constant="70" id="kIM-Wa-NoD"/>
                             <constraint firstItem="1G4-r5-XLd" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="lDK-si-Ihe"/>
                             <constraint firstItem="1G4-r5-XLd" firstAttribute="top" secondItem="9Vk-7s-UEu" secondAttribute="top" constant="20" id="y1w-w5-qUT"/>
+                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="bottom" secondItem="7sx-QL-biX" secondAttribute="bottom" id="yC7-ZX-yVj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Vk-7s-UEu"/>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="pu5-td-27G" id="hB6-Cy-aZ1"/>
+                        <outlet property="hatBlue" destination="qhh-Hh-gEM" id="ruu-AZ-rLp"/>
+                        <outlet property="menuButton" destination="k7F-M2-bfK" id="5vm-yx-zh5"/>
+                        <outlet property="stackView" destination="7sx-QL-biX" id="Mxr-3c-cPN"/>
+                        <outlet property="topText" destination="1G4-r5-XLd" id="Lr7-Pk-eNq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJp-Ry-wMS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53.571428571428569" y="150.72463768115944"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="backButton" width="512" height="512"/>
+        <image name="chefHatBlue" width="464" height="512"/>
+        <image name="chefHatEnzo" width="464" height="512"/>
+        <image name="chefHatGreen" width="464" height="512"/>
+        <image name="chefHatOrange" width="464" height="512"/>
+        <image name="menu Restaurant" width="512" height="512"/>
+    </resources>
 </document>

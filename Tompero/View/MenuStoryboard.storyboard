@@ -11,15 +11,15 @@
         <!--Menu Collection View Controller-->
         <scene sceneID="jnH-9M-1Rh">
             <objects>
-                <viewController id="ngM-n1-4Tf" customClass="MenuCollectionViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuCollectionViewController" id="ngM-n1-4Tf" customClass="MenuCollectionViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HsO-25-kPV">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HOW TO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecu-FO-yeQ">
-                                <rect key="frame" x="368" y="25" width="161" height="47"/>
+                                <rect key="frame" x="368" y="25" width="180" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>

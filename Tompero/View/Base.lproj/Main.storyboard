@@ -10,7 +10,7 @@
         <!--Inicial View Controller-->
         <scene sceneID="T7K-uR-KAe">
             <objects>
-                <viewController id="1qB-Oy-VQR" customClass="InicialViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InicialViewController" id="1qB-Oy-VQR" customClass="InicialViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QNp-EB-RWz">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
