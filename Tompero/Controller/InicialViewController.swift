@@ -27,6 +27,7 @@ class InicialViewController: UIViewController, Storyboarded {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        GameRuleFactory.generateRule(difficulty: .easy, players: [MCPeerID(displayName: "1"), MCPeerID(displayName: "2"), MCPeerID(displayName: "3"), MCPeerID(displayName: "4")])
     }
     
     // MARK: - Methods
