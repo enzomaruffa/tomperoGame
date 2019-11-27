@@ -15,9 +15,6 @@
 		471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795EA238C1E87000575B0 /* GameConnectionManagerObserver.swift */; };
 		471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */; };
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
-		5627BA86238BE7AB00151547 /* HasIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627BA85238BE7AB00151547 /* HasIngredients.swift */; };
-		5627BA88238BE93500151547 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627BA87238BE93500151547 /* Order.swift */; };
-		5627BA8A238BEFDE00151547 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5627BA89238BEFDE00151547 /* Ingredient.swift */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
 		562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5923881CF900D5D51D /* GameScene.sks */; };
 		562BCF5C23881CF900D5D51D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5B23881CF900D5D51D /* Actions.sks */; };
@@ -28,10 +25,29 @@
 		562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */; };
 		562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF732388249E00D5D51D /* WaitingRoom.storyboard */; };
 		562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */; };
-		56C52232238BFC7600F917AA /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52231238BFC7600F917AA /* Transferable.swift */; };
-		56C52234238BFE9400F917AA /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52233238BFE9400F917AA /* OrderList.swift */; };
-		56C52236238C00F900F917AA /* Choppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52235238C00F900F917AA /* Choppable.swift */; };
-		56C52238238C01B100F917AA /* Fryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C52237238C01B100F917AA /* Fryable.swift */; };
+		567A07B0238C805000D6399A /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A079F238C805000D6399A /* Horn.swift */; };
+		567A07B1238C805000D6399A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A0238C805000D6399A /* Eyes.swift */; };
+		567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A1238C805000D6399A /* DevilMashedBread.swift */; };
+		567A07B3238C805000D6399A /* Tentacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A2238C805000D6399A /* Tentacle.swift */; };
+		567A07B4238C805000D6399A /* Plate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A3238C805000D6399A /* Plate.swift */; };
+		567A07B5238C805000D6399A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A4238C805000D6399A /* Ingredient.swift */; };
+		567A07B6238C805000D6399A /* Broccoli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A5238C805000D6399A /* Broccoli.swift */; };
+		567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A6238C805000D6399A /* SaturnOnionRings.swift */; };
+		567A07B8238C805000D6399A /* HasIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A7238C805000D6399A /* HasIngredients.swift */; };
+		567A07B9238C805000D6399A /* Asteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A8238C805000D6399A /* Asteroid.swift */; };
+		567A07BA238C805000D6399A /* MoonCheese.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A9238C805000D6399A /* MoonCheese.swift */; };
+		567A07BB238C805000D6399A /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AA238C805000D6399A /* Order.swift */; };
+		567A07BC238C805000D6399A /* Tardigrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AB238C805000D6399A /* Tardigrades.swift */; };
+		567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AC238C805000D6399A /* SpaceshipHull.swift */; };
+		567A07BE238C805000D6399A /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AD238C805000D6399A /* Transferable.swift */; };
+		567A07BF238C805000D6399A /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AE238C805000D6399A /* OrderList.swift */; };
+		567A07C0238C805000D6399A /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AF238C805000D6399A /* MarsSand.swift */; };
+		56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */; };
+		56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C1238DA2B8000F8A3F /* Component.swift */; };
+		56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */; };
+		56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C5238DC97D000F8A3F /* IngredientState.swift */; };
+		56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C7238DC992000F8A3F /* CookableComponent.swift */; };
+		56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */; };
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
 		FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */; };
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
@@ -47,9 +63,6 @@
 		471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerMatchmakingObserver.swift; sourceTree = "<group>"; };
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
-		5627BA85238BE7AB00151547 /* HasIngredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasIngredients.swift; sourceTree = "<group>"; };
-		5627BA87238BE93500151547 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
-		5627BA89238BEFDE00151547 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		562BCF5423881CF900D5D51D /* Tompero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tompero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562BCF5723881CF900D5D51D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		562BCF5923881CF900D5D51D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -62,10 +75,29 @@
 		562BCF6923881CFC00D5D51D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562BCF732388249E00D5D51D /* WaitingRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WaitingRoom.storyboard; sourceTree = "<group>"; };
 		562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
-		56C52231238BFC7600F917AA /* Transferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
-		56C52233238BFE9400F917AA /* OrderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
-		56C52235238C00F900F917AA /* Choppable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choppable.swift; sourceTree = "<group>"; };
-		56C52237238C01B100F917AA /* Fryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fryable.swift; sourceTree = "<group>"; };
+		567A079F238C805000D6399A /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
+		567A07A0238C805000D6399A /* Eyes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
+		567A07A1238C805000D6399A /* DevilMashedBread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
+		567A07A2238C805000D6399A /* Tentacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tentacle.swift; sourceTree = "<group>"; };
+		567A07A3238C805000D6399A /* Plate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plate.swift; sourceTree = "<group>"; };
+		567A07A4238C805000D6399A /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		567A07A5238C805000D6399A /* Broccoli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broccoli.swift; sourceTree = "<group>"; };
+		567A07A6238C805000D6399A /* SaturnOnionRings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaturnOnionRings.swift; sourceTree = "<group>"; };
+		567A07A7238C805000D6399A /* HasIngredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasIngredients.swift; sourceTree = "<group>"; };
+		567A07A8238C805000D6399A /* Asteroid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Asteroid.swift; sourceTree = "<group>"; };
+		567A07A9238C805000D6399A /* MoonCheese.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonCheese.swift; sourceTree = "<group>"; };
+		567A07AA238C805000D6399A /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		567A07AB238C805000D6399A /* Tardigrades.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tardigrades.swift; sourceTree = "<group>"; };
+		567A07AC238C805000D6399A /* SpaceshipHull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHull.swift; sourceTree = "<group>"; };
+		567A07AD238C805000D6399A /* Transferable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
+		567A07AE238C805000D6399A /* OrderList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
+		567A07AF238C805000D6399A /* MarsSand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
+		56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoppableComponent.swift; sourceTree = "<group>"; };
+		56E2D7C1238DA2B8000F8A3F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryableComponent.swift; sourceTree = "<group>"; };
+		56E2D7C5238DC97D000F8A3F /* IngredientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientState.swift; sourceTree = "<group>"; };
+		56E2D7C7238DC992000F8A3F /* CookableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookableComponent.swift; sourceTree = "<group>"; };
+		56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		B688C2DD78186CF812918984 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -136,14 +168,8 @@
 		562BCF5623881CF900D5D51D /* Tompero */ = {
 			isa = PBXGroup;
 			children = (
-				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
-				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
-				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
-				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
 				562BCF5723881CF900D5D51D /* AppDelegate.swift */,
 				562BCF6923881CFC00D5D51D /* Info.plist */,
-				562BCF6123881CF900D5D51D /* Main.storyboard */,
-				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				562BCF6F2388232700D5D51D /* Model */,
 				562BCF702388233700D5D51D /* View */,
 				562BCF712388234800D5D51D /* Controller */,
@@ -157,13 +183,29 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5627BA85238BE7AB00151547 /* HasIngredients.swift */,
-				56C52231238BFC7600F917AA /* Transferable.swift */,
-				5627BA89238BEFDE00151547 /* Ingredient.swift */,
-				5627BA87238BE93500151547 /* Order.swift */,
-				56C52233238BFE9400F917AA /* OrderList.swift */,
-				56C52235238C00F900F917AA /* Choppable.swift */,
-				56C52237238C01B100F917AA /* Fryable.swift */,
+				56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */,
+				567A07A7238C805000D6399A /* HasIngredients.swift */,
+				567A07AD238C805000D6399A /* Transferable.swift */,
+				56E2D7C1238DA2B8000F8A3F /* Component.swift */,
+				56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */,
+				56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */,
+				56E2D7C7238DC992000F8A3F /* CookableComponent.swift */,
+				56E2D7C5238DC97D000F8A3F /* IngredientState.swift */,
+				567A07A4238C805000D6399A /* Ingredient.swift */,
+				567A07AA238C805000D6399A /* Order.swift */,
+				567A07AE238C805000D6399A /* OrderList.swift */,
+				567A07A3238C805000D6399A /* Plate.swift */,
+				567A07A8238C805000D6399A /* Asteroid.swift */,
+				567A07A5238C805000D6399A /* Broccoli.swift */,
+				567A07A1238C805000D6399A /* DevilMashedBread.swift */,
+				567A07A0238C805000D6399A /* Eyes.swift */,
+				567A079F238C805000D6399A /* Horn.swift */,
+				567A07AF238C805000D6399A /* MarsSand.swift */,
+				567A07A9238C805000D6399A /* MoonCheese.swift */,
+				567A07A6238C805000D6399A /* SaturnOnionRings.swift */,
+				567A07AC238C805000D6399A /* SpaceshipHull.swift */,
+				567A07AB238C805000D6399A /* Tardigrades.swift */,
+				567A07A2238C805000D6399A /* Tentacle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,7 +216,11 @@
 				562BCF5923881CF900D5D51D /* GameScene.sks */,
 				562BCF5B23881CF900D5D51D /* Actions.sks */,
 				562BCF5D23881CF900D5D51D /* GameScene.swift */,
+				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
+				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
+				562BCF6123881CF900D5D51D /* Main.storyboard */,
+				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +228,8 @@
 		562BCF712388234800D5D51D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
+				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
 				562BCF5F23881CF900D5D51D /* GameViewController.swift */,
 				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
 			);
@@ -316,25 +364,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5627BA88238BE93500151547 /* Order.swift in Sources */,
 				471795E5238C14E7000575B0 /* MCDataType.swift in Sources */,
-				5627BA86238BE7AB00151547 /* HasIngredients.swift in Sources */,
-				56C52234238BFE9400F917AA /* OrderList.swift in Sources */,
 				471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */,
 				471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */,
-				5627BA8A238BEFDE00151547 /* Ingredient.swift in Sources */,
-				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
-				FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */,
-				562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */,
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
 				56C52238238C01B100F917AA /* Fryable.swift in Sources */,
-				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
 				56C52236238C00F900F917AA /* Choppable.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
 				471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */,
-				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
-				56C52232238BFC7600F917AA /* Transferable.swift in Sources */,
 				471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */,
+				56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */,
+				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
+				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
+				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
+				567A07BE238C805000D6399A /* Transferable.swift in Sources */,
+				567A07BB238C805000D6399A /* Order.swift in Sources */,
+				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
+				FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */,
+				562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */,
+				567A07B6238C805000D6399A /* Broccoli.swift in Sources */,
+				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
+				567A07B0238C805000D6399A /* Horn.swift in Sources */,
+				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
+				56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */,
+				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
+				567A07B1238C805000D6399A /* Eyes.swift in Sources */,
+				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,
+				567A07BF238C805000D6399A /* OrderList.swift in Sources */,
+				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,
+				567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */,
+				567A07B4238C805000D6399A /* Plate.swift in Sources */,
+				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
+				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
+				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
+				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
+				567A07C0238C805000D6399A /* MarsSand.swift in Sources */,
+				567A07B8238C805000D6399A /* HasIngredients.swift in Sources */,
+				567A07B3238C805000D6399A /* Tentacle.swift in Sources */,
 				FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */,
 				562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */,
 			);
@@ -482,7 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6XL2RL8RU;
+				DEVELOPMENT_TEAM = 5MSP4455P9;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -501,7 +567,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6XL2RL8RU;
+				DEVELOPMENT_TEAM = 5MSP4455P9;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
