@@ -25,6 +25,7 @@ class MCManager: NSObject, MCSessionDelegate {
     var dataObservers: [MCManagerDataObserver] = []
     var matchmakingObservers: [MCManagerMatchmakingObserver] = []
     
+    var hosting = false
     // MARK: - Initializers
     
     override private init() {
@@ -57,6 +58,7 @@ class MCManager: NSObject, MCSessionDelegate {
         if let mcSession = self.mcSession {
             mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "cookios", discoveryInfo: nil, session: mcSession)
             mcAdvertiserAssistant!.start()
+            self.hosting = true
         }
     }
     
@@ -65,10 +67,12 @@ class MCManager: NSObject, MCSessionDelegate {
             let mcBrowser = MCBrowserViewController(serviceType: "cookios", session: mcSession)
             mcBrowser.delegate = delegate
             rootViewController.present(mcBrowser, animated: true)
+            self.hosting = false
         }
     }
     
     func sendEveryone(dataWrapper: MCDataWrapper) {
+        print("[MCManager] Sending message to everyone")
         send(dataWrapper: dataWrapper, to: self.mcSession!.connectedPeers)
     }
     
@@ -85,19 +89,22 @@ class MCManager: NSObject, MCSessionDelegate {
         matchmakingObservers.forEach({ $0.playerUpdate(player: peerID.displayName, state: state) })
         switch state {
         case .connected:
-            print("Connected: \(peerID.displayName)")
+            print("[MCManager] Connected: \(peerID.displayName)")
         case .connecting:
-            print("Connecting: \(peerID.displayName)")
+            print("[MCManager] Connecting: \(peerID.displayName)")
         case .notConnected:
-            print("Not Connected: \(peerID.displayName)")
+            print("[MCManager] Not Connected: \(peerID.displayName)")
         @unknown default:
-            print("fatal error")
+            print("[MCManager] fatal error")
         }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
+            print("[MCManager] Received data")
             let wrapper = try JSONDecoder().decode(MCDataWrapper.self, from: data)
+            print("[MCManager] Wrapper: \(wrapper)")
+            print("[MCManager] Sending to dataObservers: \(dataObservers)")
             dataObservers.forEach({ $0.receiveData(wrapper: wrapper) })
         } catch let error {
             print("[MCManager] Error decoding data: \(error.localizedDescription)")
