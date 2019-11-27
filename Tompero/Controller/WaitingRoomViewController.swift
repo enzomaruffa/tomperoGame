@@ -9,10 +9,23 @@
 import UIKit
 import MultipeerConnectivity
 
-class WaitingRoomViewController: UIViewController {
+class WaitingRoomViewController: UIViewController, Storyboarded {
+    
+    static var storyboardName = "WaitingRoom"
+    weak var coordinator: MainCoordinator?
+    
+    var hosting = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if hosting {
+            MCManager.shared.hostSession()
+        } else {
+            MCManager.shared.joinSession(presentingFrom: self, delegate: self)
+        }
+        
+        MCManager.shared.subscribeMatchmakingObserver(observer: self)
 
         // Do any additional setup after loading the view.
     }
