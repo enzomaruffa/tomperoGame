@@ -165,7 +165,7 @@
 			path = "Game Connection";
 			sourceTree = "<group>";
 		};
-		4722D481238F42E1003D373C /* Procedural */ = {
+		4722D481238F42E1003D373C /* Procedural Generation */ = {
 			isa = PBXGroup;
 			children = (
 				4722D476238EB750003D373C /* GameRuleFactory.swift */,
@@ -174,7 +174,55 @@
 				4722D47C238EB91F003D373C /* PlayerTable.swift */,
 				4722D47E238EB982003D373C /* PlayerTableType.swift */,
 			);
-			path = Procedural;
+			path = "Procedural Generation";
+			sourceTree = "<group>";
+		};
+		4722D482238FF2FE003D373C /* Ingredients */ = {
+			isa = PBXGroup;
+			children = (
+				567A07A8238C805000D6399A /* Asteroid.swift */,
+				567A07A5238C805000D6399A /* Broccoli.swift */,
+				567A07A1238C805000D6399A /* DevilMashedBread.swift */,
+				567A07A0238C805000D6399A /* Eyes.swift */,
+				567A079F238C805000D6399A /* Horn.swift */,
+				567A07AF238C805000D6399A /* MarsSand.swift */,
+				567A07A9238C805000D6399A /* MoonCheese.swift */,
+				567A07A6238C805000D6399A /* SaturnOnionRings.swift */,
+				567A07AC238C805000D6399A /* SpaceshipHull.swift */,
+				567A07AB238C805000D6399A /* Tardigrades.swift */,
+				567A07A2238C805000D6399A /* Tentacle.swift */,
+			);
+			path = Ingredients;
+			sourceTree = "<group>";
+		};
+		4722D483238FF311003D373C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */,
+				567A07A7238C805000D6399A /* HasIngredients.swift */,
+				567A07AD238C805000D6399A /* Transferable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4722D484238FF317003D373C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				56E2D7C1238DA2B8000F8A3F /* Component.swift */,
+				56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */,
+				56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */,
+				56E2D7C7238DC992000F8A3F /* CookableComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		4722D485238FF320003D373C /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				567A07AA238C805000D6399A /* Order.swift */,
+				567A07AE238C805000D6399A /* OrderList.swift */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 		562BCF4B23881CF900D5D51D = {
@@ -198,16 +246,16 @@
 		562BCF5623881CF900D5D51D /* Tompero */ = {
 			isa = PBXGroup;
 			children = (
-				FB9BF38D238E9CDB00437124 /* Coordinator */,
+				562BCF6423881CFC00D5D51D /* Assets.xcassets */,
 				562BCF5723881CF900D5D51D /* AppDelegate.swift */,
 				562BCF6923881CFC00D5D51D /* Info.plist */,
+				FB9BF38D238E9CDB00437124 /* Coordinator */,
 				562BCF6F2388232700D5D51D /* Model */,
 				562BCF702388233700D5D51D /* View */,
 				562BCF712388234800D5D51D /* Controller */,
-				562BCF6423881CFC00D5D51D /* Assets.xcassets */,
 				471795ED238C692D000575B0 /* MultipeerConnectivity Manager */,
 				471795EE238C694B000575B0 /* Game Connection */,
-				4722D481238F42E1003D373C /* Procedural */,
+				4722D481238F42E1003D373C /* Procedural Generation */,
 			);
 			path = Tompero;
 			sourceTree = "<group>";
@@ -215,29 +263,13 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */,
-				567A07A7238C805000D6399A /* HasIngredients.swift */,
-				567A07AD238C805000D6399A /* Transferable.swift */,
-				56E2D7C1238DA2B8000F8A3F /* Component.swift */,
-				56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */,
-				56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */,
-				56E2D7C7238DC992000F8A3F /* CookableComponent.swift */,
+				4722D484238FF317003D373C /* Components */,
 				56E2D7C5238DC97D000F8A3F /* IngredientState.swift */,
 				567A07A4238C805000D6399A /* Ingredient.swift */,
-				567A07AA238C805000D6399A /* Order.swift */,
-				567A07AE238C805000D6399A /* OrderList.swift */,
+				4722D482238FF2FE003D373C /* Ingredients */,
 				567A07A3238C805000D6399A /* Plate.swift */,
-				567A07A8238C805000D6399A /* Asteroid.swift */,
-				567A07A5238C805000D6399A /* Broccoli.swift */,
-				567A07A1238C805000D6399A /* DevilMashedBread.swift */,
-				567A07A0238C805000D6399A /* Eyes.swift */,
-				567A079F238C805000D6399A /* Horn.swift */,
-				567A07AF238C805000D6399A /* MarsSand.swift */,
-				567A07A9238C805000D6399A /* MoonCheese.swift */,
-				567A07A6238C805000D6399A /* SaturnOnionRings.swift */,
-				567A07AC238C805000D6399A /* SpaceshipHull.swift */,
-				567A07AB238C805000D6399A /* Tardigrades.swift */,
-				567A07A2238C805000D6399A /* Tentacle.swift */,
+				4722D483238FF311003D373C /* Protocols */,
+				4722D485238FF320003D373C /* Order */,
 			);
 			path = Model;
 			sourceTree = "<group>";
