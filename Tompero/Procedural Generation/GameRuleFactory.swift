@@ -52,7 +52,7 @@ class GameRuleFactory {
         var randomPlayer = playerTables.keys.randomElement()!
         var randomTable = playerTables[randomPlayer]?.randomElement()!
         randomTable?.type = .ingredient
-        randomTable?.ingredient = type(of: firstIngredient)
+        randomTable?.ingredient = firstIngredient
         
 //        print("Adding plate to random player")
         //Adiciona um prato
@@ -110,7 +110,7 @@ class GameRuleFactory {
             randomPlayer = playerWithEmptyTablesList.randomElement()!
             randomTable = playerTables[randomPlayer]?.filter({ $0.type == .empty }).randomElement()!
             randomTable?.type = .ingredient
-            randomTable?.ingredient = type(of: newIngredient)
+            randomTable?.ingredient = newIngredient
 
             currentIngredients.append(newIngredient)
             

@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum PlayerTableType {
-    case chopping
+enum PlayerTableType: Int, Codable {
+    case chopping = 0
     case cooking
     case frying
     case ingredient

@@ -57,11 +57,22 @@
                                     <action selector="backPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="9HI-Yw-IhU"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAITING ROOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThV-tI-DOa">
+                                <rect key="frame" x="278.5" y="166.5" width="339" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="7gq-YY-xR0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="ThV-tI-DOa" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="2ue-gI-HNA"/>
                             <constraint firstItem="7sx-QL-biX" firstAttribute="leading" secondItem="9Vk-7s-UEu" secondAttribute="leading" id="H2R-JN-Toe"/>
                             <constraint firstItem="9Vk-7s-UEu" firstAttribute="trailing" secondItem="7sx-QL-biX" secondAttribute="trailing" id="IAh-sw-A5E"/>
+                            <constraint firstItem="ThV-tI-DOa" firstAttribute="centerY" secondItem="9Vk-7s-UEu" secondAttribute="centerY" id="U69-6E-Mnm"/>
                             <constraint firstItem="7sx-QL-biX" firstAttribute="top" secondItem="9Vk-7s-UEu" secondAttribute="top" constant="70" id="kIM-Wa-NoD"/>
                             <constraint firstItem="1G4-r5-XLd" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="lDK-si-Ihe"/>
                             <constraint firstItem="1G4-r5-XLd" firstAttribute="top" secondItem="9Vk-7s-UEu" secondAttribute="top" constant="20" id="y1w-w5-qUT"/>
@@ -75,6 +86,7 @@
                         <outlet property="hatGreen" destination="QJN-UM-JNd" id="hfr-xM-le5"/>
                         <outlet property="hatOrange" destination="N2Y-nO-oqH" id="8pt-tj-ao4"/>
                         <outlet property="hatPurple" destination="RMg-y6-RBw" id="gEl-7r-G9e"/>
+                        <outlet property="inviteLBL" destination="ThV-tI-DOa" id="Sk1-LX-i6u"/>
                         <outlet property="menuButton" destination="k7F-M2-bfK" id="5vm-yx-zh5"/>
                         <outlet property="stackView" destination="7sx-QL-biX" id="Mxr-3c-cPN"/>
                         <outlet property="topText" destination="1G4-r5-XLd" id="Lr7-Pk-eNq"/>
