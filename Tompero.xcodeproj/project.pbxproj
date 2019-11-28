@@ -19,6 +19,7 @@
 		4722D47B238EB7C9003D373C /* GameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47A238EB7C9003D373C /* GameRule.swift */; };
 		4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47C238EB91F003D373C /* PlayerTable.swift */; };
 		4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47E238EB982003D373C /* PlayerTableType.swift */; };
+		4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D486238FFA93003D373C /* MCPeerWithStatus.swift */; };
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
 		562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5923881CF900D5D51D /* GameScene.sks */; };
@@ -75,6 +76,7 @@
 		4722D47A238EB7C9003D373C /* GameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRule.swift; sourceTree = "<group>"; };
 		4722D47C238EB91F003D373C /* PlayerTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTable.swift; sourceTree = "<group>"; };
 		4722D47E238EB982003D373C /* PlayerTableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableType.swift; sourceTree = "<group>"; };
+		4722D486238FFA93003D373C /* MCPeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPeerWithStatus.swift; sourceTree = "<group>"; };
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		562BCF5423881CF900D5D51D /* Tompero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tompero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 				471795E4238C14E7000575B0 /* MCDataType.swift */,
 				471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */,
 				471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */,
+				4722D486238FFA93003D373C /* MCPeerWithStatus.swift */,
 			);
 			path = "MultipeerConnectivity Manager";
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
 				567A07B1238C805000D6399A /* Eyes.swift in Sources */,
 				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,
+				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
 				567A07BF238C805000D6399A /* OrderList.swift in Sources */,
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
 				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,

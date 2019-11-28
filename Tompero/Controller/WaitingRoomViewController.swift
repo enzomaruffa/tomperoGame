@@ -10,6 +10,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     // MARK: - Variables
     var currentPlayers: [String] = []
     var hosting = false
+    var playersWithStatus: [MCPeerWithStatus] = []
     
     // MARK: - Outlets
     @IBOutlet weak var topText: UILabel!
@@ -30,7 +31,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         coordinator?.menu()
     }
     
-    // MARK: - ViewMethods
+    // MARK: - View LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         caracterOrigin(caracater: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
         caracterOrigin(caracater: hatPurple, xPosition: -1000, yPosition: +1200, xScale: 0.25, yScale: 0.25)
@@ -72,6 +73,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         currentPlayers.append("Akira")
         //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAnimations)))
         if hosting {
+            playersWithStatus.append(MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected))
             MCManager.shared.hostSession()
         } else {
             MCManager.shared.joinSession(presentingFrom: self, delegate: self)
@@ -135,7 +137,15 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
 // MARK: - MCManagerMatchmakingObserver Methods
 extension WaitingRoomViewController: MCManagerMatchmakingObserver {
     
+    func playerListSent(playersWithStatus: [MCPeerWithStatus]) {
+        print("\(playersWithStatus)")
+        if self.playersWithStatus != playersWithStatus {
+            self.playersWithStatus = playersWithStatus
+        }
+    }
+    
     func playerUpdate(player: String, state: MCSessionState) {
+        // fazer lógica de atualizar / controlar jogadores
         print("\(player) | \(state.rawValue)")
         if MCSessionState.connected == state {
             currentPlayers.append(player)
@@ -150,7 +160,11 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
             // roda animação de sumir
             
         }
+        
         // Consigo atualizar chapeu desse player e conultar o state o que aconoteceu
+        if hosting {
+            MCManager.shared.sendPeersStatus(playersWithStatus: playersWithStatus)
+        }
     }
     
 }
