@@ -72,6 +72,9 @@
                     <connections>
                         <outlet property="backButton" destination="pu5-td-27G" id="hB6-Cy-aZ1"/>
                         <outlet property="hatBlue" destination="qhh-Hh-gEM" id="ruu-AZ-rLp"/>
+                        <outlet property="hatGreen" destination="QJN-UM-JNd" id="hfr-xM-le5"/>
+                        <outlet property="hatOrange" destination="N2Y-nO-oqH" id="8pt-tj-ao4"/>
+                        <outlet property="hatPurple" destination="RMg-y6-RBw" id="gEl-7r-G9e"/>
                         <outlet property="menuButton" destination="k7F-M2-bfK" id="5vm-yx-zh5"/>
                         <outlet property="stackView" destination="7sx-QL-biX" id="Mxr-3c-cPN"/>
                         <outlet property="topText" destination="1G4-r5-XLd" id="Lr7-Pk-eNq"/>
