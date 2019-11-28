@@ -9,6 +9,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     // MARK: - Variables
     var currentPlayers: [String] = []
+    var MCPlayers = MCManager.shared.mcSession?.connectedPeers
     var hosting = false
     
     // MARK: - Outlets
@@ -20,6 +21,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var hatPurple: UIImageView!
     @IBOutlet weak var hatGreen: UIImageView!
     @IBOutlet weak var hatOrange: UIImageView!
+    @IBOutlet weak var inviteLBL: UILabel!
     
     // MARK: - ActionsButtons
     @IBAction func backPressed(_ sender: Any) {
@@ -37,37 +39,37 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         caracterOrigin(caracater: hatGreen, xPosition: 3000, yPosition: 0, xScale: 0.25, yScale: 0.25)
         caracterOrigin(caracater: hatOrange, xPosition: -4000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.handleTapAnimations(hat: self.hatPurple)
-            self.handleTapAnimations(hat: self.hatBlue)
-            self.handleTapAnimations(hat: self.hatOrange)
-            self.handleTapAnimations(hat: self.hatGreen)
+        stackView.isHidden = true
+        topText.isHidden = true
+        inviteLBL.text = "WAITING FOR INVITE"
+        if MCPlayers!.count > 1 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.handleTapAnimations(hat: self.hatPurple)
+                self.stackView.isHidden = false
+                self.topText.isHidden = false
+            }
+            
+            if currentPlayers.count > 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.handleTapAnimations(hat: self.hatBlue)
+                }
+            } else if currentPlayers.count > 2 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.handleTapAnimations(hat: self.hatOrange)
+                }
+            } else if currentPlayers.count > 3 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.handleTapAnimations(hat: self.hatGreen)
+                    
+                }
+            }
         }
-        if currentPlayers.count > 1 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.handleTapAnimations(hat: self.hatBlue)
-            }
-        } else if currentPlayers.count > 2 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.handleTapAnimations(hat: self.hatOrange)
-            }
-        } else if currentPlayers.count > 3 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.handleTapAnimations(hat: self.hatGreen)
-                
-            }
-        }
-    }
-    
-    func caracterOrigin(caracater: UIImageView, xPosition: CGFloat, yPosition: CGFloat, xScale: CGFloat, yScale: CGFloat) {
-        let originalTransform = caracater.transform
-        let scaledTransform = originalTransform.scaledBy(x: xScale, y: yScale)
-        let scaledAndTranslatedTransform  = scaledTransform.translatedBy(x: xPosition, y: yPosition)
-        caracater.transform = scaledAndTranslatedTransform
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Array com lista de connected players
+        //MCManager.shared.mcSession?.connectedPeers
         
         currentPlayers.append("Akira")
         //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAnimations)))
@@ -80,6 +82,14 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         MCManager.shared.subscribeMatchmakingObserver(observer: self)
     }
     
+    func caracterOrigin(caracater: UIImageView, xPosition: CGFloat, yPosition: CGFloat, xScale: CGFloat, yScale: CGFloat) {
+        let originalTransform = caracater.transform
+        let scaledTransform = originalTransform.scaledBy(x: xScale, y: yScale)
+        let scaledAndTranslatedTransform  = scaledTransform.translatedBy(x: xPosition, y: yPosition)
+        caracater.transform = scaledAndTranslatedTransform
+    }
+    
+    
     @objc fileprivate func handleTapAnimations(hat: UIImageView) {
         UIView.animate(withDuration: 5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
             
@@ -89,32 +99,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }) { (_) in
             
         }
-    }
-    
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / image.size.width
-        let heightRatio = targetSize.height / image.size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
     }
     
 }
