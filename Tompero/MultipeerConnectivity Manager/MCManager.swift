@@ -85,6 +85,17 @@ class MCManager: NSObject, MCSessionDelegate {
         }
     }
     
+    func sendPeersStatus(playersWithStatus: [MCPeerWithStatus]) {
+        do {
+            print("[MCManager] Sending playersWithStatus to everyone")
+            let playersData = try JSONEncoder().encode(playersWithStatus)
+            let dataWrapper = MCDataWrapper(object: playersData, type: .playerData)
+            sendEveryone(dataWrapper: dataWrapper)
+        } catch let error {
+            print("[MCManager] Error sending data: \(error.localizedDescription)")
+        }
+    }
+    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         matchmakingObservers.forEach({ $0.playerUpdate(player: peerID.displayName, state: state) })
         switch state {
@@ -105,7 +116,14 @@ class MCManager: NSObject, MCSessionDelegate {
             let wrapper = try JSONDecoder().decode(MCDataWrapper.self, from: data)
             print("[MCManager] Wrapper: \(wrapper)")
             print("[MCManager] Sending to dataObservers: \(dataObservers)")
-            dataObservers.forEach({ $0.receiveData(wrapper: wrapper) })
+            
+            if wrapper.type == .playerData {
+                let peersWithStatus = try JSONDecoder().decode([MCPeerWithStatus].self, from: wrapper.object)
+                matchmakingObservers.forEach({ $0.playerListSent(playersWithStatus: peersWithStatus) })
+            } else {
+                dataObservers.forEach({ $0.receiveData(wrapper: wrapper) })
+            }
+            
         } catch let error {
             print("[MCManager] Error decoding data: \(error.localizedDescription)")
         }
