@@ -3,48 +3,74 @@ import MultipeerConnectivity
 
 class WaitingRoomViewController: UIViewController, Storyboarded {
     
+    // MARK: - Storyboarded
     static var storyboardName = "WaitingRoom"
     weak var coordinator: MainCoordinator?
     
+    // MARK: - Variables
+    var currentPlayers: [String] = []
     var hosting = false
     
+    // MARK: - Outlets
     @IBOutlet weak var topText: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var hatBlue: UIImageView!
-    var timer = Timer()
-    var counter = 0
+    @IBOutlet weak var hatPurple: UIImageView!
+    @IBOutlet weak var hatGreen: UIImageView!
+    @IBOutlet weak var hatOrange: UIImageView!
     
+    // MARK: - ActionsButtons
     @IBAction func backPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
         
     }
-    @objc func timerAction() {
-        counter += 1
-        //topText.text = "\(counter)"
-    }
-    
     @IBAction func menuPressed(_ sender: Any) {
         coordinator?.menu()
     }
+    
+    // MARK: - ViewMethods
     override func viewWillAppear(_ animated: Bool) {
-        self.hatBlue.transform = CGAffineTransform(translationX: 400, y: -200)
+        caracterOrigin(caracater: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
+        caracterOrigin(caracater: hatPurple, xPosition: -1000, yPosition: +1200, xScale: 0.25, yScale: 0.25)
+        caracterOrigin(caracater: hatGreen, xPosition: 3000, yPosition: 0, xScale: 0.25, yScale: 0.25)
+        caracterOrigin(caracater: hatOrange, xPosition: -4000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
         
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.handleTapAnimations(hat: self.hatPurple)
+            self.handleTapAnimations(hat: self.hatBlue)
+            self.handleTapAnimations(hat: self.hatOrange)
+            self.handleTapAnimations(hat: self.hatGreen)
+        }
+        if currentPlayers.count > 1 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.handleTapAnimations(hat: self.hatBlue)
+            }
+        } else if currentPlayers.count > 2 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.handleTapAnimations(hat: self.hatOrange)
+            }
+        } else if currentPlayers.count > 3 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.handleTapAnimations(hat: self.hatGreen)
+                
+            }
+        }
+    }
+    
+    func caracterOrigin(caracater: UIImageView, xPosition: CGFloat, yPosition: CGFloat, xScale: CGFloat, yScale: CGFloat) {
+        let originalTransform = caracater.transform
+        let scaledTransform = originalTransform.scaledBy(x: xScale, y: yScale)
+        let scaledAndTranslatedTransform  = scaledTransform.translatedBy(x: xPosition, y: yPosition)
+        caracater.transform = scaledAndTranslatedTransform
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hatBlue.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
-        //        if counter >= 1 {
-        //            UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-        //                self.hatBlue.transform = CGAffineTransform(translationX: 0, y: 0)
-        //        })
-        //        }
-        
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAnimations)))
+        currentPlayers.append("Akira")
+        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAnimations)))
         if hosting {
             MCManager.shared.hostSession()
         } else {
@@ -54,23 +80,16 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         MCManager.shared.subscribeMatchmakingObserver(observer: self)
     }
     
-    @objc fileprivate func handleTapAnimations() {
-        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-            //self.hatBlue.image = self.resizeImage(image: self.hatBlue.image!, targetSize: CGSize(width: 10, height: 20))
-            self.hatBlue.transform = CGAffineTransform(scaleX: 1, y: 1)
-            self.hatBlue.transform = CGAffineTransform(translationX: 0, y: 0)
-            //        }
-            //            ,completion: { finish in
-            //
-            //            UIView.animate(withDuration: 1, delay: 0.25,options: UIView.AnimationOptions.curveEaseOut,animations: {
-            //            self.hatBlue.transform = CGAffineTransform(scaleX: 0.25, y: 0.25)
-            //
+    @objc fileprivate func handleTapAnimations(hat: UIImageView) {
+        UIView.animate(withDuration: 5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+            
+            hat.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            hat.transform = CGAffineTransform(translationX: 0, y: 0)
+            
         }) { (_) in
-            //
+            
         }
     }
-    //)
-    //}
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         let size = image.size
@@ -118,6 +137,19 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
     
     func playerUpdate(player: String, state: MCSessionState) {
         print("\(player) | \(state.rawValue)")
+        if MCSessionState.connected == state {
+            currentPlayers.append(player)
+            print("DSAUDNAUSDJASUDNJASDNA")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.handleTapAnimations(hat: self.hatBlue)
+                
+            }
+            
+        } else if MCSessionState.notConnected == state {
+            currentPlayers.removeAll(where: {$0 == player})
+            // roda animação de sumir
+            
+        }
         // Consigo atualizar chapeu desse player e conultar o state o que aconoteceu
     }
     
