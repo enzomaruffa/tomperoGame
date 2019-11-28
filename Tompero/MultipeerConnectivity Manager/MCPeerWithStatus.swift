@@ -20,7 +20,10 @@ class MCPeerWithStatus: Codable, Equatable {
     }
     
     static func == (lhs: MCPeerWithStatus, rhs: MCPeerWithStatus) -> Bool {
-        lhs.name == rhs.name
+        lhs.name == rhs.name && lhs.status == rhs.status
+    }
+    func copy() -> MCPeerWithStatus {
+        return MCPeerWithStatus(peer: self.name, status: self.status)
     }
     
 }

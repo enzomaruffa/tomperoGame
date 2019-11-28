@@ -54,20 +54,20 @@ class MCManager: NSObject, MCSessionDelegate {
         }
     }
     
-    func hostSession() {
-        if let mcSession = self.mcSession {
-            mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "cookios", discoveryInfo: nil, session: mcSession)
-            mcAdvertiserAssistant!.start()
-            self.hosting = true
-        }
-    }
-    
-    func joinSession(presentingFrom rootViewController: UIViewController, delegate: MCBrowserViewControllerDelegate) {
+    func hostSession(presentingFrom rootViewController: UIViewController, delegate: MCBrowserViewControllerDelegate) {
         if let mcSession = self.mcSession {
             let mcBrowser = MCBrowserViewController(serviceType: "cookios", session: mcSession)
             mcBrowser.delegate = delegate
             rootViewController.present(mcBrowser, animated: true)
             self.hosting = false
+        }
+    }
+    
+    func joinSession() {
+        if let mcSession = self.mcSession {
+            mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "cookios", discoveryInfo: nil, session: mcSession)
+            mcAdvertiserAssistant!.start()
+            self.hosting = true
         }
     }
     
@@ -86,6 +86,9 @@ class MCManager: NSObject, MCSessionDelegate {
     }
     
     func sendPeersStatus(playersWithStatus: [MCPeerWithStatus]) {
+        guard self.mcSession!.connectedPeers.count > 1 else {
+            return
+        }
         do {
             print("[MCManager] Sending playersWithStatus to everyone")
             let playersData = try JSONEncoder().encode(playersWithStatus)
@@ -115,12 +118,13 @@ class MCManager: NSObject, MCSessionDelegate {
             print("[MCManager] Received data")
             let wrapper = try JSONDecoder().decode(MCDataWrapper.self, from: data)
             print("[MCManager] Wrapper: \(wrapper)")
-            print("[MCManager] Sending to dataObservers: \(dataObservers)")
             
             if wrapper.type == .playerData {
+                print("[MCManager] Sending playerdata to observers: \(wrapper)")
                 let peersWithStatus = try JSONDecoder().decode([MCPeerWithStatus].self, from: wrapper.object)
                 matchmakingObservers.forEach({ $0.playerListSent(playersWithStatus: peersWithStatus) })
             } else {
+                print("[MCManager] Sending to dataObservers: \(dataObservers)")
                 dataObservers.forEach({ $0.receiveData(wrapper: wrapper) })
             }
             

@@ -8,11 +8,13 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     weak var coordinator: MainCoordinator?
     
     // MARK: - Variables
-    var currentPlayers: [String] = []
-    var MCPlayers = MCManager.shared.mcSession?.connectedPeers
     var hosting = false
-    var playersWithStatus: [MCPeerWithStatus] = []
-    
+     
+    var playersWithStatus: [MCPeerWithStatus] = [MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
+        
     // MARK: - Outlets
     @IBOutlet weak var topText: UILabel!
     @IBOutlet weak var backButton: UIButton!
@@ -24,15 +26,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var hatOrange: UIImageView!
     @IBOutlet weak var inviteLBL: UILabel!
     
-    // MARK: - ActionsButtons
-    @IBAction func backPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-        
-    }
-    @IBAction func menuPressed(_ sender: Any) {
-        coordinator?.menu()
-    }
-    
     // MARK: - View LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         caracterOrigin(caracater: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
@@ -43,57 +36,46 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         stackView.isHidden = true
         topText.isHidden = true
         inviteLBL.text = "WAITING FOR INVITE"
-        if MCPlayers!.count > 1 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.handleTapAnimations(hat: self.hatPurple)
-                self.stackView.isHidden = false
-                self.topText.isHidden = false
-            }
-            
-            if currentPlayers.count > 1 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.handleTapAnimations(hat: self.hatBlue)
-                }
-            } else if currentPlayers.count > 2 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.handleTapAnimations(hat: self.hatOrange)
-                }
-            } else if currentPlayers.count > 3 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.handleTapAnimations(hat: self.hatGreen)
-                    
-                }
-            }
-        }
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Array com lista de connected players
         //MCManager.shared.mcSession?.connectedPeers
-        
-        currentPlayers.append("Akira")
         //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAnimations)))
         if hosting {
-            playersWithStatus.append(MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected))
-            playersWithStatus.append(MCPeerWithStatus(peer: "__empty__", status: .notConnected))
-            playersWithStatus.append(MCPeerWithStatus(peer: "__empty__", status: .notConnected))
-            playersWithStatus.append(MCPeerWithStatus(peer: "__empty__", status: .notConnected))
-            MCManager.shared.hostSession()
+            print(" CURRENTLY HOSTING<<")
+            playersWithStatus = [MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected),
+                MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+                MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+                MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
+            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
         } else {
-            MCManager.shared.joinSession(presentingFrom: self, delegate: self)
+            MCManager.shared.joinSession()
         }
         
         MCManager.shared.subscribeMatchmakingObserver(observer: self)
     }
     
+    // MARK: - ActionsButtons
+    @IBAction func backPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
+    @IBAction func menuPressed(_ sender: Any) {
+        coordinator?.menu()
+    }
+    
+    
+    // MARK: - Methods
     func caracterOrigin(caracater: UIImageView, xPosition: CGFloat, yPosition: CGFloat, xScale: CGFloat, yScale: CGFloat) {
         let originalTransform = caracater.transform
         let scaledTransform = originalTransform.scaledBy(x: xScale, y: yScale)
         let scaledAndTranslatedTransform  = scaledTransform.translatedBy(x: xPosition, y: yPosition)
         caracater.transform = scaledAndTranslatedTransform
     }
-    
     
     @objc fileprivate func handleTapAnimations(hat: UIImageView) {
         UIView.animate(withDuration: 5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
@@ -125,32 +107,93 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
 extension WaitingRoomViewController: MCManagerMatchmakingObserver {
     
     func playerListSent(playersWithStatus: [MCPeerWithStatus]) {
-        print("\(playersWithStatus)")
+        print("[playerListSent] \(playersWithStatus)")
         if self.playersWithStatus != playersWithStatus {
+            
+            let oldList = self.playersWithStatus
+            
+            guard !oldList.isEmpty else {
+                print("As lista está vazia")
+                // rodar as animações para todos
+                return
+            }
+            //verifica se o nome mudou pra considerar jogador entrando na sala
+            if playersWithStatus.map({$0.name}).sorted() != oldList.map({$0.name}).sorted() {
+                for index in 0..<playersWithStatus.count {
+                    if playersWithStatus[index].name != oldList[index].name {
+                        print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) entrou")
+                        // Achamos o jogador, faz o chapeu dele entrar.
+                        // Sabemos qual chapeu pelo valor de index
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                            if index == 0 {
+                                self.stackView.isHidden = false
+                                self.topText.isHidden = false
+                                self.inviteLBL.isHidden = true
+                                self.handleTapAnimations(hat: self.hatBlue)
+                            } else if index == 1 {
+                                self.handleTapAnimations(hat: self.hatPurple)
+                            } else if index == 2 {
+                                self.handleTapAnimations(hat: self.hatPurple)
+                            } else if index == 3 {
+                                self.handleTapAnimations(hat: self.hatPurple)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Mudança de estado
+            for index in 0..<playersWithStatus.count {
+                if playersWithStatus[index].status != oldList[index].status {
+                    print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) mudou de estado")
+                    // Achamos o jogador, faz o chapeu dele mudar.
+                    // Sabemos qual chapeu pelo valor de i
+                }
+            }
+            
+            // seta o da classe pro novo
             self.playersWithStatus = playersWithStatus
+        } else {
+            print("Listas iguais")
         }
     }
     
     func playerUpdate(player: String, state: MCSessionState) {
-        // fazer lógica de atualizar / controlar jogadores
-        print("\(player) | \(state.rawValue)")
-        if MCSessionState.connected == state {
-            currentPlayers.append(player)
-            print("DSAUDNAUSDJASUDNJASDNA")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.handleTapAnimations(hat: self.hatBlue)
-                
+        
+        // host envia para todos a lista
+        if hosting {
+            // atualizo a lista do host
+            
+            let newPlayerList = self.playersWithStatus.map({ $0.copy() })
+            
+            print("\n\n[playerUpdate] HOSTING")
+            print("[playerUpdate] Atualizando lista")
+            print("[playerUpdate] Players na lista: \(newPlayerList.map({$0.name}))")
+            if !newPlayerList.filter({ $0.name == player }).isEmpty {
+                // ja existe, atualiza estado
+
+                print("[playerUpdate] Atualizando estado do player \(player) para \(state)")
+                let playerWithStatus = newPlayerList.first(where: { $0.name == player })
+                playerWithStatus?.status = state
+            } else {
+                // procura espaço vazio
+                print("[playerUpdate] Adicionando o player \(player)")
+                if let emptyPlayerWithStatus = newPlayerList.filter({ $0.name == "__empty__" }).first {
+                    print("[playerUpdate] Achou espaço vazio!")
+                    emptyPlayerWithStatus.name = player
+                    emptyPlayerWithStatus.status = state
+                } else if let ncPlayerWithStatus = newPlayerList.filter({ $0.status == .notConnected }).first {
+                    ncPlayerWithStatus.name = player
+                    ncPlayerWithStatus.status = state
+                }
             }
             
-        } else if MCSessionState.notConnected == state {
-            currentPlayers.removeAll(where: {$0 == player})
-            // roda animação de sumir
+            MCManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
+            print("Calling player list sent")
             
-        }
-        
-        // Consigo atualizar chapeu desse player e conultar o state o que aconoteceu
-        if hosting {
-            MCManager.shared.sendPeersStatus(playersWithStatus: playersWithStatus)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                self.playerListSent(playersWithStatus: newPlayerList)
+            }
         }
     }
     
