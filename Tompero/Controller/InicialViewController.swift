@@ -29,7 +29,7 @@ class InicialViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         for difficulty in [GameDifficulty.easy, .medium, .hard] {
-            print("\n\n\n")
+            print("\n\n")
             print("Game Rule with difficulty \(difficulty)")
             
             let rule = GameRuleFactory.generateRule(difficulty: difficulty, players: [MCPeerID(displayName: "1"), MCPeerID(displayName: "2"), MCPeerID(displayName: "3"), MCPeerID(displayName: "4")])
