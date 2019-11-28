@@ -34,7 +34,7 @@ class InicialViewController: UIViewController, Storyboarded {
             
             let rule = GameRuleFactory.generateRule(difficulty: difficulty, players: [MCPeerID(displayName: "1"), MCPeerID(displayName: "2"), MCPeerID(displayName: "3"), MCPeerID(displayName: "4")])
 
-            for player in rule.playerTables.keys {
+            for player in rule.playerTables.keys.sorted(by: {$0.displayName < $1.displayName}) {
                 print("\(player.displayName):")
                 for table in rule.playerTables[player]! {
                     if table.type == .ingredient {
@@ -54,6 +54,20 @@ class InicialViewController: UIViewController, Storyboarded {
                     print(type(of: ingredient))
                 }
                 print("Total actions to prepare: \(order.ingredients.reduce(0, {$0 + $1.numberOfActionsTilReady}))")
+            }
+            
+            
+            
+            print("\nSample counts: ")
+            var probabilityDict: [Int: Int]  = [:]
+            for counter in 0..<100 {
+                let order = rule.generateOrder()
+                let totalActions = order.ingredients.reduce(0, {$0 + $1.numberOfActionsTilReady})
+                probabilityDict[totalActions] = (probabilityDict[totalActions] ?? 0) + 1
+            }
+            
+            for key in probabilityDict.keys.sorted() {
+                print("\(key): \(probabilityDict[key]!)")
             }
         }
     }

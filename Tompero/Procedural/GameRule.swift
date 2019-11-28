@@ -11,10 +11,11 @@ import MultipeerConnectivity
 
 class GameRule {
     
+    //Probabilidades são na forma de "um pedido com i ações tem v[i] chance de ser gerado"
     static let difficultyProbabilityDict: [GameDifficulty : [Double]] =
-        [.easy: [75.0, 20.0, 5.0, 0.0],
-         .medium: [10.0, 60.0, 25.0, 5.0],
-         .hard: [5.0, 30.0, 40.0, 25.0]]
+        [  .easy: [0, 0.1, 0, 40, 40, 15, 4.9, 0, 0, 0, 0, 0, 0, 0, 0],
+           .medium: [0, 0, 0, 10, 10, 30, 20, 20, 8, 2, 0, 0, 0, 0, 0],
+           .hard: [0, 0, 0, 3, 3, 10, 10, 10, 20, 30, 10, 3.4, 0.3, 0.2, 0.1]]
     
     let difficulty: GameDifficulty
     let possibleIngredients: [Ingredient]
@@ -27,44 +28,46 @@ class GameRule {
     }
     
     func generateOrder() -> Order {
-        let maxIngredientCount = randomNumber(probabilities: GameRule.difficultyProbabilityDict[difficulty]!) + 1
+        // Escolhemos um número aleatório de ações
+        let maxActions = randomNumber(probabilities: GameRule.difficultyProbabilityDict[difficulty]!)
         let order = Order(timeLeft: 30)
-        
-        var currentIngredientCount = 0
 
+        var currentActions = 0
+//
 //        print("\nCurrent ingredients: \(order.ingredients)")
 //        print("Current actions: \(currentActions)")
 //        print("Max actions: \(maxActions)")
-        
+
+        // Escolhemos um pão aleatório
         let breadList = [SpaceshipHull(currentOwner: ""), DevilMashedBread(currentOwner: ""), Asteroid(currentOwner: "")]
         let possibleBreads = possibleIngredients.filter({ breadList.contains($0) })
         let orderBread = possibleBreads.randomElement()!
-        
+        currentActions += 1
+
         order.ingredients.append(orderBread)
-        
-        while currentIngredientCount < maxIngredientCount {
-            
-//            print("Current ingredients: \(order.ingredients)")
-//            print("Current actions: \(currentActions)")
-//            print("Max actions: \(maxActions)")
-            
-            let currentPossibleIngredients = possibleIngredients.filter({ !breadList.contains($0) }).filter({ !order.ingredients.contains($0) })
-            
+
+        // Enquanto não atingimos nosso alvo de ações, geramos novos ingredientes
+        while currentActions < maxActions {
+
+            // Filtramos os possíveis: não é pão, não foi escolhido e não vai estourar o máximo
+            let currentPossibleIngredients = possibleIngredients
+                .filter({ !breadList.contains($0) })
+                .filter({ !order.ingredients.contains($0) })
+                .filter({ $0.numberOfActionsTilReady + currentActions <= maxActions })
+
+            // Se esgotamos, saímos do loop
             if currentPossibleIngredients.isEmpty {
 //                print("Ingredientes esgotados")
                 break
             }
-            
+
+            // Senão, criamos um novo e adicionamos na lista se não for estourar o número de ações
             let newIngredient = currentPossibleIngredients.randomElement()!
+            
             order.ingredients.append(newIngredient)
-            currentIngredientCount += 1
+            currentActions += newIngredient.numberOfActionsTilReady
         }
-        
-//        print("===exiting===")
-//        print("Current ingredients: \(order.ingredients)")
-//        print("Current actions: \(currentActions)")
-//        print("Max actions: \(maxActions)")
-        
+
         return order
     }
     
