@@ -19,6 +19,9 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
         
     }
     
+    @IBAction func backPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: false)
+    }
     // MARK: - Collection Methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections

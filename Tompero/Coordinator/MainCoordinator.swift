@@ -19,6 +19,7 @@ class MainCoordinator: Coordinator {
 
     func start() {
         let controller = InicialViewController.instantiate()
+        //let controller = InicialViewController.instantiate()
         controller.coordinator = self
         navigationController.pushViewController(controller, animated: false)
     }
