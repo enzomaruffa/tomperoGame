@@ -14,7 +14,7 @@ class SpaceshipHull: Ingredient {
         super.init(
             texturePrefix: "",
             currentOwner: currentOwner,
-            actionCount: 3,
+            actionCount: 1,
             finalState: .fried
         )
     }

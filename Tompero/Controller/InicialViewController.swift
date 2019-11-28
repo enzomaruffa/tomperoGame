@@ -28,12 +28,12 @@ class InicialViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        for _ in 0..<10 {
-            print("\n\n")
-            let rule = GameRuleFactory.generateRule(difficulty: .easy, players: [MCPeerID(displayName: "1"), MCPeerID(displayName: "2"), MCPeerID(displayName: "3"), MCPeerID(displayName: "4")])
-
+        for difficulty in [GameDifficulty.easy, .medium, .hard] {
+            print("\n\n\n")
+            print("Game Rule with difficulty \(difficulty)")
             
+            let rule = GameRuleFactory.generateRule(difficulty: difficulty, players: [MCPeerID(displayName: "1"), MCPeerID(displayName: "2"), MCPeerID(displayName: "3"), MCPeerID(displayName: "4")])
+
             for player in rule.playerTables.keys {
                 print("\(player.displayName):")
                 for table in rule.playerTables[player]! {
@@ -43,6 +43,17 @@ class InicialViewController: UIViewController, Storyboarded {
                         print("    \(table.type)")
                     }
                 }
+            }
+            
+            print("\nSample orders: ")
+            
+            for counter in 0..<3 {
+                print("\nOrder \(counter): ")
+                let order = rule.generateOrder()
+                for ingredient in order.ingredients {
+                    print(type(of: ingredient))
+                }
+                print("Total actions to prepare: \(order.ingredients.reduce(0, {$0 + $1.numberOfActionsTilReady}))")
             }
         }
     }
