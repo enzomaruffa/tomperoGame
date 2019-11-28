@@ -135,6 +135,10 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
 // MARK: - MCManagerMatchmakingObserver Methods
 extension WaitingRoomViewController: MCManagerMatchmakingObserver {
     
+    func receiveTableDistribution(playerTables: [PlayerTable]) {
+        
+    }
+    
     func playerUpdate(player: String, state: MCSessionState) {
         print("\(player) | \(state.rawValue)")
         if MCSessionState.connected == state {

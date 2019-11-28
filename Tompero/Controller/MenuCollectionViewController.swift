@@ -58,7 +58,6 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
         pageControl.currentPage = Int(self.collectionView.contentOffset.x)/Int(self.collectionView.frame.width)
     }
     
-    
     /*
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
