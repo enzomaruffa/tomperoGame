@@ -74,6 +74,9 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAnimations)))
         if hosting {
             playersWithStatus.append(MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected))
+            playersWithStatus.append(MCPeerWithStatus(peer: "__empty__", status: .notConnected))
+            playersWithStatus.append(MCPeerWithStatus(peer: "__empty__", status: .notConnected))
+            playersWithStatus.append(MCPeerWithStatus(peer: "__empty__", status: .notConnected))
             MCManager.shared.hostSession()
         } else {
             MCManager.shared.joinSession(presentingFrom: self, delegate: self)
