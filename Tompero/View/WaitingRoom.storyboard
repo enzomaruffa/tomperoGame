@@ -44,7 +44,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7F-M2-bfK">
                                 <rect key="frame" x="787" y="20" width="65" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="menu Restaurant"/>
+                                <state key="normal" image="menu"/>
                                 <connections>
                                     <action selector="menuPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="let-A7-PwI"/>
                                 </connections>
@@ -91,6 +91,6 @@
         <image name="chefHatEnzo" width="464" height="512"/>
         <image name="chefHatGreen" width="464" height="512"/>
         <image name="chefHatOrange" width="464" height="512"/>
-        <image name="menu Restaurant" width="512" height="512"/>
+        <image name="menu" width="512" height="512"/>
     </resources>
 </document>

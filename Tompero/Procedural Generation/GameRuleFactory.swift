@@ -26,7 +26,7 @@ class GameRuleFactory {
         var playerTables: [MCPeerID: [PlayerTable]] = [:]
         for player in players {
             playerTables[player] = []
-            for iterator in 0..<spacePerPlayer {
+            for _ in 0..<spacePerPlayer {
                 playerTables[player]!.append(PlayerTable())
             }
         }

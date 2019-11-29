@@ -22,7 +22,6 @@
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
 		562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5923881CF900D5D51D /* GameScene.sks */; };
-		562BCF5C23881CF900D5D51D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5B23881CF900D5D51D /* Actions.sks */; };
 		562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5D23881CF900D5D51D /* GameScene.swift */; };
 		562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5F23881CF900D5D51D /* GameViewController.swift */; };
 		562BCF6323881CF900D5D51D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF6123881CF900D5D51D /* Main.storyboard */; };
@@ -80,7 +79,6 @@
 		562BCF5423881CF900D5D51D /* Tompero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tompero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562BCF5723881CF900D5D51D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		562BCF5923881CF900D5D51D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		562BCF5B23881CF900D5D51D /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		562BCF5D23881CF900D5D51D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		562BCF5F23881CF900D5D51D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		562BCF6223881CF900D5D51D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -277,15 +275,14 @@
 		562BCF702388233700D5D51D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				562BCF5923881CF900D5D51D /* GameScene.sks */,
-				562BCF5B23881CF900D5D51D /* Actions.sks */,
-				562BCF5D23881CF900D5D51D /* GameScene.swift */,
 				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
 				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
 				562BCF6123881CF900D5D51D /* Main.storyboard */,
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
+				562BCF5923881CF900D5D51D /* GameScene.sks */,
+				562BCF5D23881CF900D5D51D /* GameScene.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -386,7 +383,6 @@
 				562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */,
 				562BCF6523881CFC00D5D51D /* Assets.xcassets in Resources */,
 				562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */,
-				562BCF5C23881CF900D5D51D /* Actions.sks in Resources */,
 				FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,7 +626,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6XL2RL8RU;
+				DEVELOPMENT_TEAM = 5MSP4455P9;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -649,7 +645,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6XL2RL8RU;
+				DEVELOPMENT_TEAM = 5MSP4455P9;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
