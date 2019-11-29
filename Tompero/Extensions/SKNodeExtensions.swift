@@ -16,21 +16,14 @@ extension SKNode {
         }
     }
     
-    var rootNode: SKNode?
-    {
-        if let parentNode = self.parent
-        {
-            if parentNode is SKScene
-            {
+    var rootNode: SKNode? {
+        if let parentNode = self.parent {
+            if parentNode is SKScene {
                 return parentNode
-            }
-            else
-            {
+            } else {
                 return parentNode.rootNode
             }
-        }
-        else
-        {
+        } else {
             return nil
         }
     }
@@ -42,7 +35,6 @@ extension SKNode {
             return nil
         }
     }
-    
     
 //    convenience init(texture: SKTexture, glowRadius: CGFloat) {
 //        self.init(texture: texture, color: .clear, size: texture.size())

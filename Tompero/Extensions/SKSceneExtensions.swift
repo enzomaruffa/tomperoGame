@@ -8,7 +8,6 @@
 
 import SpriteKit
 
-
 extension SKScene {
     // Returns how much of the scene is being shown using the scene coordinate system
     func viewSizeInLocalCoordinates(ignoreCameraScale: Bool = false) -> CGSize {
@@ -21,7 +20,7 @@ extension SKScene {
             topRight = camera.convert(topRight, from: self)
         }
         
-        let d = topRight - bottomLeft
-        return CGSize(width: d.x, height: -d.y)
+        let distance = topRight - bottomLeft
+        return CGSize(width: distance.x, height: -distance.y)
     }
 }

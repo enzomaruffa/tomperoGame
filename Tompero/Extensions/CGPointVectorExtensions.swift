@@ -8,36 +8,29 @@
 
 import UIKit
 
-func + (left: CGPoint, right: CGPoint) -> CGPoint
-{
+func + (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
 
-func + (left: CGPoint, scalar: CGFloat) -> CGPoint
-{
+func + (left: CGPoint, scalar: CGFloat) -> CGPoint {
     return CGPoint(x: left.x + scalar, y: left.y + scalar)
 }
 
-func - (left: CGPoint, scalar: CGFloat) -> CGPoint
-{
+func - (left: CGPoint, scalar: CGFloat) -> CGPoint {
     return CGPoint(x: left.x - scalar, y: left.y - scalar)
 }
 
-func - (left: CGPoint, right: CGPoint) -> CGPoint
-{
+func - (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
 
-func * (left: CGPoint, scalar: CGFloat) -> CGPoint
-{
+func * (left: CGPoint, scalar: CGFloat) -> CGPoint {
     return CGPoint(x: left.x * scalar, y: left.y * scalar)
 }
 
-func / (left: CGPoint, scalar: CGFloat) -> CGPoint
-{
+func / (left: CGPoint, scalar: CGFloat) -> CGPoint {
     return CGPoint(x: left.x / scalar, y: left.y / scalar)
 }
-
 
 extension CGPoint {
     
@@ -78,36 +71,29 @@ extension CGPoint {
 
 //
 
-func + (left: CGVector, right: CGVector) -> CGVector
-{
+func + (left: CGVector, right: CGVector) -> CGVector {
     return CGVector(dx: left.dx + right.dx, dy: left.dy + right.dy)
 }
 
-func + (left: CGVector, scalar: CGFloat) -> CGVector
-{
+func + (left: CGVector, scalar: CGFloat) -> CGVector {
     return CGVector(dx: left.dx + scalar, dy: left.dy + scalar)
 }
 
-func - (left: CGVector, scalar: CGFloat) -> CGVector
-{
+func - (left: CGVector, scalar: CGFloat) -> CGVector {
     return CGVector(dx: left.dx - scalar, dy: left.dy - scalar)
 }
 
-func - (left: CGVector, right: CGVector) -> CGVector
-{
+func - (left: CGVector, right: CGVector) -> CGVector {
     return CGVector(dx: left.dx - right.dx, dy: left.dy - right.dy)
 }
 
-func * (left: CGVector, scalar: CGFloat) -> CGVector
-{
+func * (left: CGVector, scalar: CGFloat) -> CGVector {
     return CGVector(dx: left.dx * scalar, dy: left.dy * scalar)
 }
 
-func / (left: CGVector, scalar: CGFloat) -> CGVector
-{
+func / (left: CGVector, scalar: CGFloat) -> CGVector {
     return CGVector(dx: left.dx / scalar, dy: left.dy / scalar)
 }
-
 
 extension CGVector {
     
