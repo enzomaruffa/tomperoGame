@@ -15,13 +15,17 @@ class GameViewController: UIViewController, Storyboarded {
     static var storyboardName = "Game"
     weak var coordinator: MainCoordinator?
     
+    var tables: [PlayerTable]?
+    var hosting: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = GameScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
+                scene.tables = self.tables
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene

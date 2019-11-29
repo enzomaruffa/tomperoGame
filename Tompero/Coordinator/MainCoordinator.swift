@@ -18,8 +18,13 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let controller = GameViewController.instantiate()
-        //let controller = InicialViewController.instantiate()
+        game(tables: [PlayerTable(type: .chopping, ingredient: nil),
+                      PlayerTable(type: .cooking, ingredient: nil),
+                      PlayerTable(type: .frying, ingredient: nil)], hosting: true)
+    }
+    
+    func inicial() {
+        let controller = InicialViewController.instantiate()
         controller.coordinator = self
         navigationController.pushViewController(controller, animated: false)
     }
@@ -34,6 +39,16 @@ class MainCoordinator: Coordinator {
         let controller = WaitingRoomViewController.instantiate()
         controller.coordinator = self
         controller.hosting = hosting
+        navigationController.pushViewController(controller, animated: false)
+    }
+    
+    func game(tables: [PlayerTable], hosting: Bool) {
+        guard tables.count != 3 else { return }
+        
+        let controller = GameViewController.instantiate()
+        controller.coordinator = self
+        controller.hosting = hosting
+        controller.tables = tables
         navigationController.pushViewController(controller, animated: false)
     }
 }

@@ -11,10 +11,27 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    // MARK: - Variables
+    var tables: [PlayerTable]?
     var player: String = ""
     
+    // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
+        // Adds itself as a GameConnection observer
+        GameConnectionManager.shared.subscribe(observer: self)
         
     }
     
+    // MARK: - Game Logic
+}
+
+// MARK: - GameConnectionManagerObserver Methods
+extension GameScene: GameConnectionManagerObserver {
+    func receivePlate(plate: Plate) {
+        
+    }
+    
+    func receiveIngredient(ingredient: Ingredient) {
+        
+    }
 }
