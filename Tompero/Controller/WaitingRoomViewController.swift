@@ -83,9 +83,9 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             hat.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             hat.transform = CGAffineTransform(translationX: 0, y: 0)
             
-        }) { (_) in
+        }) /*{ (_) in
             
-        }
+        }*/
     }
     
 }

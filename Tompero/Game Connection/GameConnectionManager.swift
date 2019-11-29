@@ -9,15 +9,61 @@
 import Foundation
 import MultipeerConnectivity
 
-class GameConnectionManager: MCManagerDataObserver {
+class GameConnectionManager {
     
-    var observers: [GameConnectionManagerObserver] = []
-    
+    //MARK: - Static Variables
     static let shared = GameConnectionManager()
     
+    //MARK: - Variables
+    var observers: [GameConnectionManagerObserver] = []
+    
+    //MARK: - Methods
     private init() {
         MCManager.shared.subscribeDataObserver(observer: self)
     }
+    
+    func subscribe(observer: GameConnectionManagerObserver) {
+        observers.append(observer)
+    }
+
+    
+    func sendAll(message: String) {
+        do {
+            print("[GameConnectionManager] Preparing message")
+            let messageData = try JSONEncoder().encode(message)
+            let wrapped = MCDataWrapper(object: messageData, type: .string)
+            MCManager.shared.sendEveryone(dataWrapper: wrapped)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func send(ingredient: Ingredient, to player: MCPeerID) {
+        do {
+            print("[GameConnectionManager] Preparing ingredient")
+            let ingredientData = try JSONEncoder().encode(ingredient)
+            let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
+            MCManager.shared.send(dataWrapper: wrapped, to: [player])
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func send(plate: Plate, to player: MCPeerID) {
+        do {
+            print("[GameConnectionManager] Preparing plate")
+            let plateData = try JSONEncoder().encode(plate)
+            let wrapped = MCDataWrapper(object: plateData, type: .plate)
+            MCManager.shared.send(dataWrapper: wrapped, to: [player])
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+}
+
+//MARK: - MCManagerDataObserver Methoods
+extension GameConnectionManager: MCManagerDataObserver {
     
     func receiveData(wrapper: MCDataWrapper) {
         switch wrapper.type {
@@ -51,42 +97,5 @@ class GameConnectionManager: MCManagerDataObserver {
         }
         // TODO: Decodificar o ingrediente em outrostipos
     }
-    //
-    //    func sendIngredient(ingredient: Ingredient) {
-    //
-    //    }
-    
-    func sendAll(string message: String) {
-        do {
-            print("[GameConnectionManager] Preparing message")
-            let messageData = try JSONEncoder().encode(message)
-            let wrapped = MCDataWrapper(object: messageData, type: .string)
-            MCManager.shared.sendEveryone(dataWrapper: wrapped)
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func send(ingredient: Ingredient, to player: MCPeerID) {
-        do {
-            print("[GameConnectionManager] Preparing ingredient")
-            let ingredientData = try JSONEncoder().encode(ingredient)
-            let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
-            MCManager.shared.send(dataWrapper: wrapped, to: [player])
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func send(plate: Plate, to player: MCPeerID) {
-        do {
-            print("[GameConnectionManager] Preparing plate")
-            let plateData = try JSONEncoder().encode(plate)
-            let wrapped = MCDataWrapper(object: plateData, type: .plate)
-            MCManager.shared.send(dataWrapper: wrapped, to: [player])
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
+
 }

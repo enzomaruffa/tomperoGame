@@ -62,7 +62,7 @@ class InicialViewController: UIViewController, Storyboarded {
             
             print("\nSample counts: ")
             var probabilityDict: [Int: Int]  = [:]
-            for counter in 0..<100 {
+            for _ in 0..<100 {
                 let order = rule.generateOrder()
                 let totalActions = order.ingredients.reduce(0, {$0 + $1.numberOfActionsTilReady})
                 probabilityDict[totalActions] = (probabilityDict[totalActions] ?? 0) + 1
