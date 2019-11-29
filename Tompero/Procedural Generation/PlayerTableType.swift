@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PlayerTableType: String {
+enum PlayerTableType: String, Codable {
     case chopping = "board"
     case cooking = "stove"
     case frying = "fryer"

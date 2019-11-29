@@ -13,7 +13,7 @@ class StationNode {
     var station: PlayerTable
     
     var spriteNode: SKSpriteNode {
-        station.type == .ingredient ? SKSpriteNode(imageNamed: NSStringFromClass(station.ingredient!) + ".png") : SKSpriteNode(imageNamed: station.type.rawValue + ".png")
+        station.type == .ingredient ? SKSpriteNode(imageNamed: NSStringFromClass(type(of: station.ingredient!)) + ".png") : SKSpriteNode(imageNamed: station.type.rawValue + ".png")
     }
     var spriteYPos: CGFloat {
         switch station.type {

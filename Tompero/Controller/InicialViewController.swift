@@ -32,7 +32,11 @@ class InicialViewController: UIViewController, Storyboarded {
             print("\n\n")
             print("Game Rule with difficulty \(difficulty)")
             
-            let rule = GameRuleFactory.generateRule(difficulty: difficulty, players: [MCPeerID(displayName: "1"), MCPeerID(displayName: "2"), MCPeerID(displayName: "3"), MCPeerID(displayName: "4")])
+            let rule = GameRuleFactory.generateRule(difficulty: difficulty,
+                                                    players: [MCPeerID(displayName: "1"),
+                                                              MCPeerID(displayName: "2"),
+                                                              MCPeerID(displayName: "3"),
+                                                              MCPeerID(displayName: "4")])
 
             for player in rule.playerTables.keys.sorted(by: {$0.displayName < $1.displayName}) {
                 print("\(player.displayName):")

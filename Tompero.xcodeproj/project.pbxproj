@@ -19,6 +19,7 @@
 		4722D47B238EB7C9003D373C /* GameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47A238EB7C9003D373C /* GameRule.swift */; };
 		4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47C238EB91F003D373C /* PlayerTable.swift */; };
 		4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47E238EB982003D373C /* PlayerTableType.swift */; };
+		4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D486238FFA93003D373C /* MCPeerWithStatus.swift */; };
 		476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */; };
 		476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */; };
 		476925C72390AA0900FBAB1F /* SKSceneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */; };
@@ -79,6 +80,7 @@
 		4722D47A238EB7C9003D373C /* GameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRule.swift; sourceTree = "<group>"; };
 		4722D47C238EB91F003D373C /* PlayerTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTable.swift; sourceTree = "<group>"; };
 		4722D47E238EB982003D373C /* PlayerTableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableType.swift; sourceTree = "<group>"; };
+		4722D486238FFA93003D373C /* MCPeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPeerWithStatus.swift; sourceTree = "<group>"; };
 		476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
 		476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
 		476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSceneExtensions.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				471795E4238C14E7000575B0 /* MCDataType.swift */,
 				471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */,
 				471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */,
+				4722D486238FFA93003D373C /* MCPeerWithStatus.swift */,
 			);
 			path = "MultipeerConnectivity Manager";
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				567A07B1238C805000D6399A /* Eyes.swift in Sources */,
 				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,
 				476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */,
+				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
 				567A07BF238C805000D6399A /* OrderList.swift in Sources */,
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
 				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,
@@ -654,7 +658,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -673,7 +677,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

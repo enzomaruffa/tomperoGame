@@ -12,4 +12,6 @@ enum MCDataType: Int, Codable {
     case ingredient = 0
     case plate
     case string
+    case playerData
+    case playerTableData
 }

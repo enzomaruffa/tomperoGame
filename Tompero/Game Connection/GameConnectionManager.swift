@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import MultipeerConnectivity
 
 class GameConnectionManager {
     
-    //MARK: - Static Variables
+    // MARK: - Static Variables
     static let shared = GameConnectionManager()
     
-    //MARK: - Variables
+    // MARK: - Variables
     var observers: [GameConnectionManagerObserver] = []
     
-    //MARK: - Methods
+    // MARK: - Methods
     private init() {
         MCManager.shared.subscribeDataObserver(observer: self)
     }
@@ -25,7 +26,8 @@ class GameConnectionManager {
         observers.append(observer)
     }
 
-    func sendString(message: String) {
+    
+    func sendAll(message: String) {
         do {
             print("[GameConnectionManager] Preparing message")
             let messageData = try JSONEncoder().encode(message)
@@ -36,18 +38,47 @@ class GameConnectionManager {
         }
     }
     
+    func send(ingredient: Ingredient, to player: MCPeerID) {
+        do {
+            print("[GameConnectionManager] Preparing ingredient")
+            let ingredientData = try JSONEncoder().encode(ingredient)
+            let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
+            MCManager.shared.send(dataWrapper: wrapped, to: [player])
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func send(plate: Plate, to player: MCPeerID) {
+        do {
+            print("[GameConnectionManager] Preparing plate")
+            let plateData = try JSONEncoder().encode(plate)
+            let wrapped = MCDataWrapper(object: plateData, type: .plate)
+            MCManager.shared.send(dataWrapper: wrapped, to: [player])
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
 }
 
-//MARK: - MCManagerDataObserver Methoods
+// MARK: - MCManagerDataObserver Methoods
 extension GameConnectionManager: MCManagerDataObserver {
     
     func receiveData(wrapper: MCDataWrapper) {
         switch wrapper.type {
         case .plate:
             do {
-                //                let plate = try JSONDecoder().decode(Plate.self, from: wrapper.object)
-                //                receivePlate
-                //                observers.forEach({ $0.receivePlate(plate: plate) })
+                let plate = try JSONDecoder().decode(Plate.self, from: wrapper.object)
+                observers.forEach({ $0.receivePlate(plate: plate) })
+            } catch let error {
+                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+            }
+            
+        case .ingredient:
+            do {
+                let ingredient = try JSONDecoder().decode(Ingredient.self, from: wrapper.object)
+                observers.forEach({ $0.receiveIngredient(ingredient: ingredient) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }
@@ -66,4 +97,5 @@ extension GameConnectionManager: MCManagerDataObserver {
         }
         // TODO: Decodificar o ingrediente em outrostipos
     }
+
 }
