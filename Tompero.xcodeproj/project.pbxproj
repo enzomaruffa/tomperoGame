@@ -32,6 +32,7 @@
 		562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */; };
 		562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF732388249E00D5D51D /* WaitingRoom.storyboard */; };
 		562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */; };
+		565AEFE223915E6400E3E15F /* MovableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */; };
 		567A07B0238C805000D6399A /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A079F238C805000D6399A /* Horn.swift */; };
 		567A07B1238C805000D6399A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A0238C805000D6399A /* Eyes.swift */; };
 		567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A1238C805000D6399A /* DevilMashedBread.swift */; };
@@ -93,6 +94,7 @@
 		562BCF6923881CFC00D5D51D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562BCF732388249E00D5D51D /* WaitingRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WaitingRoom.storyboard; sourceTree = "<group>"; };
 		562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
+		565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableSpriteNode.swift; sourceTree = "<group>"; };
 		567A079F238C805000D6399A /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		567A07A0238C805000D6399A /* Eyes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
 		567A07A1238C805000D6399A /* DevilMashedBread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 				562BCF5923881CF900D5D51D /* GameScene.sks */,
+				565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */,
 				562BCF5D23881CF900D5D51D /* GameScene.swift */,
 			);
 			path = View;
@@ -307,8 +310,8 @@
 		562BCF712388234800D5D51D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
 				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
+				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
 				562BCF5F23881CF900D5D51D /* GameViewController.swift */,
 				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
 			);
@@ -493,6 +496,7 @@
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
 				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
+				565AEFE223915E6400E3E15F /* MovableSpriteNode.swift in Sources */,
 				FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */,
 				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
 				567A07C0238C805000D6399A /* MarsSand.swift in Sources */,

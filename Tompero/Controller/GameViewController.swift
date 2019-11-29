@@ -25,7 +25,7 @@ class GameViewController: UIViewController, Storyboarded {
             // Load the SKScene from 'GameScene.sks'
             if let scene = GameScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
-                scene.tables = self.tables
+                //scene.tables = self.tables
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene
