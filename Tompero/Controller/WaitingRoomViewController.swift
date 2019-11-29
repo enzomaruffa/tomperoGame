@@ -166,20 +166,20 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
             
             let newPlayerList = self.playersWithStatus.map({ $0.copy() })
             
-            print("\n\n[playerUpdate] HOSTING")
+            print("\n[playerUpdate] HOSTING")
             print("[playerUpdate] Atualizando lista")
             print("[playerUpdate] Players na lista: \(newPlayerList.map({$0.name}))")
             if !newPlayerList.filter({ $0.name == player }).isEmpty {
                 // ja existe, atualiza estado
 
-                print("[playerUpdate] Atualizando estado do player \(player) para \(state)")
+                print(" [playerUpdate] Atualizando estado do player \(player) para \(state)")
                 let playerWithStatus = newPlayerList.first(where: { $0.name == player })
                 playerWithStatus?.status = state
             } else {
                 // procura espaço vazio
-                print("[playerUpdate] Adicionando o player \(player)")
+                print(" [playerUpdate] Adicionando o player \(player)")
                 if let emptyPlayerWithStatus = newPlayerList.filter({ $0.name == "__empty__" }).first {
-                    print("[playerUpdate] Achou espaço vazio!")
+                    print("     [playerUpdate] Achou espaço vazio!")
                     emptyPlayerWithStatus.name = player
                     emptyPlayerWithStatus.status = state
                 } else if let ncPlayerWithStatus = newPlayerList.filter({ $0.status == .notConnected }).first {
@@ -188,12 +188,10 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
                 }
             }
             
+            print("[playerUpdate] Enviando lista pros Peers")
             MCManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
-            print("Calling player list sent")
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                self.playerListSent(playersWithStatus: newPlayerList)
-            }
+            self.playerListSent(playersWithStatus: newPlayerList)
         }
     }
     

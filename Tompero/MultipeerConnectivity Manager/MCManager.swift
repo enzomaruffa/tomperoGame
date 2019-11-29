@@ -72,7 +72,7 @@ class MCManager: NSObject, MCSessionDelegate {
     }
     
     func sendEveryone(dataWrapper: MCDataWrapper) {
-        print("[MCManager] Sending message to everyone")
+        print("[MCManager] Sending message to everyone: \(self.mcSession?.connectedPeers)")
         send(dataWrapper: dataWrapper, to: self.mcSession!.connectedPeers)
     }
     
@@ -86,7 +86,8 @@ class MCManager: NSObject, MCSessionDelegate {
     }
     
     func sendPeersStatus(playersWithStatus: [MCPeerWithStatus]) {
-        guard self.mcSession!.connectedPeers.count > 1 else {
+        print(mcSession?.connectedPeers.map({ $0.displayName }))
+        guard !self.mcSession!.connectedPeers.isEmpty else {
             return
         }
         do {
