@@ -43,7 +43,7 @@ class MainCoordinator: Coordinator {
     }
     
     func game(tables: [PlayerTable], hosting: Bool) {
-        guard tables.count != 3 else { return }
+        guard tables.count == 3 else { return }
         
         let controller = GameViewController.instantiate()
         controller.coordinator = self
