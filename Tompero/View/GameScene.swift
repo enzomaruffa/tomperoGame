@@ -20,7 +20,9 @@ class GameScene: SKScene {
     ]
     var player: String = ""
     
-    var stations: [(SKSpriteNode, PlayerTable)]?
+    var stations: [StationNode] {
+        tables.map({ StationNode(station: $0) })
+    }
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -31,19 +33,18 @@ class GameScene: SKScene {
     }
     
     func setupStations() {
-        for (index, station) in tables.enumerated() {
-            let node = SKSpriteNode(imageNamed: station.spriteImageName)
+        for (index, station) in stations.enumerated() {
+            let node = station.spriteNode
             
             let pos = scene!.size.width/2-node.size.width/2
             let xPos = [-pos, 0.0, pos]
-            node.position = CGPoint(x: xPos[index], y: station.spriteYPos)
+            node.position = CGPoint(x: xPos[index], y: CGFloat(station.spriteYPos))
             
 //            for extra in station.secondarySpritesImageNames {
 //
 //            }
             
             self.addChild(node)
-            self.stations?.append((node, station))
         }
     }
     

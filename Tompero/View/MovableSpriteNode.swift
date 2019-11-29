@@ -20,18 +20,17 @@ class MovableSpriteNode: SKSpriteNode {
         }
     }
     
-    var lastValidLocation: SKSpriteNode?
+    var lastValidLocation: PlayerTable?
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
-//        let stations = scene?.children.filter({ (node as? Player) -> Bool in
-//            (scene as! GameScene).tables?.contains(node)
-//        })
-//
-//        scene?.children.forEach({ (node) in
-//            node.intersects(self)
-//        })
+//        let gameScene = scene as! GameScene
+//        for station in gameScene.tables {
+//            if self.intersects(station.spriteNode) {
+//                
+//            }
+//        }
         
         //lastValidPosition = self.position
         // resize sprite

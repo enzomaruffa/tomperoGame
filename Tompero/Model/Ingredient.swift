@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 class Ingredient: HasSprite, Transferable, Equatable, Codable {
     

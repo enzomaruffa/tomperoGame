@@ -33,6 +33,7 @@
 		562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF732388249E00D5D51D /* WaitingRoom.storyboard */; };
 		562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */; };
 		565AEFE223915E6400E3E15F /* MovableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */; };
+		565AEFE4239164E300E3E15F /* StationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565AEFE3239164E300E3E15F /* StationNode.swift */; };
 		567A07B0238C805000D6399A /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A079F238C805000D6399A /* Horn.swift */; };
 		567A07B1238C805000D6399A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A0238C805000D6399A /* Eyes.swift */; };
 		567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A1238C805000D6399A /* DevilMashedBread.swift */; };
@@ -95,6 +96,7 @@
 		562BCF732388249E00D5D51D /* WaitingRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WaitingRoom.storyboard; sourceTree = "<group>"; };
 		562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
 		565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableSpriteNode.swift; sourceTree = "<group>"; };
+		565AEFE3239164E300E3E15F /* StationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNode.swift; sourceTree = "<group>"; };
 		567A079F238C805000D6399A /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		567A07A0238C805000D6399A /* Eyes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
 		567A07A1238C805000D6399A /* DevilMashedBread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 				562BCF5923881CF900D5D51D /* GameScene.sks */,
+				565AEFE3239164E300E3E15F /* StationNode.swift */,
 				565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */,
 				562BCF5D23881CF900D5D51D /* GameScene.swift */,
 			);
@@ -492,6 +495,7 @@
 				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,
 				567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */,
 				4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */,
+				565AEFE4239164E300E3E15F /* StationNode.swift in Sources */,
 				567A07B4238C805000D6399A /* Plate.swift in Sources */,
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
