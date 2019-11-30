@@ -11,13 +11,14 @@ import SpriteKit
 
 class MovableSpriteNode: SKSpriteNode {
     
-    override var isUserInteractionEnabled: Bool {
-        get {
-            return true
-        }
-        set {
-            // ignore
-        }
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+        self.isUserInteractionEnabled = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.isUserInteractionEnabled = true
     }
     
     var lastValidLocation: StationNode?
@@ -25,18 +26,19 @@ class MovableSpriteNode: SKSpriteNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard touches.first != nil else { return }
         
-        let gameScene = scene as! GameScene
+        if let gameScene = scene as? GameScene {
         for station in gameScene.stations {
-            if self.intersects(station.spriteNode) {
-                lastValidLocation = station
-                print(lastValidLocation!)
+                if self.intersects(station.spriteNode) {
+                    lastValidLocation = station
+                    print(lastValidLocation!)
+                }
             }
+            
+            //lastValidPosition = self.position
+            
+            self.zPosition = 4
+            // resize sprite
         }
-        
-        //lastValidPosition = self.position
-        
-        self.zPosition = 4
-        // resize sprite
         
     }
     
@@ -52,19 +54,20 @@ class MovableSpriteNode: SKSpriteNode {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
-        let gameScene = scene as! GameScene
-        for station in gameScene.stations {
-            print("cu")
-            if station.spriteNode.contains(touch.location(in: gameScene)) {
-                print("oi")
-                self.position = station.spriteNode.position
-                // attempt move
-                // resize sprite
-                return
+        if let gameScene = scene as? GameScene {
+            for station in gameScene.stations {
+                print("cu")
+                if station.spriteNode.contains(touch.location(in: gameScene)) {
+                    print("oi")
+                    self.position = station.spriteNode.position
+                    // attempt move
+                    // resize sprite
+                    return
+                }
             }
+            
+            self.position = lastValidLocation!.spriteNode.position
         }
-        
-        self.position = lastValidLocation!.spriteNode.position
         
     }
     

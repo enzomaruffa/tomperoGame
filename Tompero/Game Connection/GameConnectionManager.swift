@@ -13,7 +13,7 @@ class GameConnectionManager {
     
     // MARK: - Static Variables
     static let shared = GameConnectionManager()
-    
+     
     // MARK: - Variables
     var observers: [GameConnectionManagerObserver] = []
     

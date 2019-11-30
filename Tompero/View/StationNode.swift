@@ -11,12 +11,12 @@ import SpriteKit
 
 class StationNode {
     
-    var typeOfStation: StationType
+    var stationType: StationType
     var ingredient: Ingredient?
     
     var spriteNode: SKSpriteNode
     var spriteYPos: CGFloat {
-        switch typeOfStation {
+        switch stationType {
         case .board: return -237.5
         case .stove: return -348.5
         case .fryer: return -342.0
@@ -29,24 +29,34 @@ class StationNode {
     
     var ingredientSlot: IngredientNode?
     
-    internal init(typeOfStation: StationType, spriteNode: SKSpriteNode?, ingredient: Ingredient?) {
-        self.typeOfStation = typeOfStation
+    internal init(stationType: StationType, spriteNode: SKSpriteNode?, ingredient: Ingredient?) {
+        self.stationType = stationType
         self.ingredient = ingredient
         
-        if typeOfStation == .ingredientBox {
+        if stationType == .ingredientBox {
             self.spriteNode = SKSpriteNode(imageNamed: NSStringFromClass(type(of: ingredient!)) + "Box.png")
-        } else if typeOfStation == .shelf || typeOfStation == .delivery {
+        } else if stationType == .shelf || stationType == .delivery {
             self.spriteNode = spriteNode!
         } else {
-            self.spriteNode = SKSpriteNode(imageNamed: typeOfStation.rawValue + ".png")
+            self.spriteNode = SKSpriteNode(imageNamed: stationType.rawValue + ".png")
         }
     }
     
-    convenience init(typeOfStation: StationType, spriteNode: SKSpriteNode) {
-        self.init(typeOfStation: typeOfStation, spriteNode: spriteNode, ingredient: nil)
+    convenience init(stationType: StationType, spriteNode: SKSpriteNode) {
+        self.init(stationType: stationType, spriteNode: spriteNode, ingredient: nil)
     }
     
-    convenience init(typeOfStation: StationType, ingredient: Ingredient?) {
-        self.init(typeOfStation: typeOfStation, spriteNode: nil, ingredient: ingredient)
+    convenience init(stationType: StationType, ingredient: Ingredient?) {
+        self.init(stationType: stationType, spriteNode: nil, ingredient: ingredient)
+    }
+    
+    func update() {
+        if stationType == .board {
+            ingredient?.choppableComponent?.update()
+        } else if stationType == .stove {
+            ingredient?.cookableComponent?.update()
+        } else if stationType == .fryer {
+            ingredient?.fryableComponent?.update()
+        }
     }
 }

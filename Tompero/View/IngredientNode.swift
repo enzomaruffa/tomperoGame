@@ -28,7 +28,7 @@ class IngredientNode {
     }
     
     func move(to station: StationNode) -> Bool {
-        switch station.typeOfStation {
+        switch station.stationType {
         case .board:
             return ingredient.changeState(to: .chopping)
             

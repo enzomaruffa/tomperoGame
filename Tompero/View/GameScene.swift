@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 
+// swiftlint:disable force_cast
 class GameScene: SKScene {
     
     // MARK: - Variables
@@ -46,7 +47,7 @@ class GameScene: SKScene {
             }
         }
         
-        stations = tables.map({ StationNode(typeOfStation: convertTableToStation(type: $0.type), ingredient: $0.ingredient) })
+        stations = tables.map({ StationNode(stationType: convertTableToStation(type: $0.type), ingredient: $0.ingredient) })
         
         for (index, station) in stations.enumerated() {
             let node = station.spriteNode
@@ -58,12 +59,12 @@ class GameScene: SKScene {
     }
     
     func setupShelves() {
-        stations.append(StationNode(typeOfStation: .shelf, spriteNode: scene?.childNode(withName: "shelf1") as! SKSpriteNode))
-        stations.append(StationNode(typeOfStation: .shelf, spriteNode: scene?.childNode(withName: "shelf2") as! SKSpriteNode))
-        stations.append(StationNode(typeOfStation: .shelf, spriteNode: scene?.childNode(withName: "shelf3") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .shelf, spriteNode: scene?.childNode(withName: "shelf1") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .shelf, spriteNode: scene?.childNode(withName: "shelf2") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .shelf, spriteNode: scene?.childNode(withName: "shelf3") as! SKSpriteNode))
         
         // change color
-        stations.append(StationNode(typeOfStation: .delivery, spriteNode: scene?.childNode(withName: "delivery") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .delivery, spriteNode: scene?.childNode(withName: "delivery") as! SKSpriteNode))
     }
     
     // MARK: - Game Logic
