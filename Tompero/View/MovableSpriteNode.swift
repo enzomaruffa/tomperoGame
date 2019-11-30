@@ -20,36 +20,52 @@ class MovableSpriteNode: SKSpriteNode {
         }
     }
     
-    var lastValidLocation: PlayerTable?
+    var lastValidLocation: StationNode?
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
+        guard touches.first != nil else { return }
         
-//        let gameScene = scene as! GameScene
-//        for station in gameScene.tables {
-//            if self.intersects(station.spriteNode) {
-//                
-//            }
-//        }
+        let gameScene = scene as! GameScene
+        for station in gameScene.stations {
+            if self.intersects(station.spriteNode) {
+                lastValidLocation = station
+                print(lastValidLocation!)
+            }
+        }
         
         //lastValidPosition = self.position
+        
+        self.zPosition = 4
         // resize sprite
-        // change zPos
+        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
+        // calculate offset
         self.position = touch.location(in: scene!)
         
+        // show indicator nodes for placeable spaces
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
-        //if touch.location(in: self.parent as! GameScene) ==
-        // resize sprite
-        // change zPos
+        let gameScene = scene as! GameScene
+        for station in gameScene.stations {
+            print("cu")
+            if station.spriteNode.contains(touch.location(in: gameScene)) {
+                print("oi")
+                self.position = station.spriteNode.position
+                // attempt move
+                // resize sprite
+                return
+            }
+        }
+        
+        self.position = lastValidLocation!.spriteNode.position
+        
     }
     
 }

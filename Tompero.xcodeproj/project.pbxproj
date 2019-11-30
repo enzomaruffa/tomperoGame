@@ -52,6 +52,8 @@
 		567A07BE238C805000D6399A /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AD238C805000D6399A /* Transferable.swift */; };
 		567A07BF238C805000D6399A /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AE238C805000D6399A /* OrderList.swift */; };
 		567A07C0238C805000D6399A /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AF238C805000D6399A /* MarsSand.swift */; };
+		56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B52391B93B005E0807 /* IngredientNode.swift */; };
+		56B3A7BA2391CDC7005E0807 /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B92391CDC7005E0807 /* StationType.swift */; };
 		56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */; };
 		56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C1238DA2B8000F8A3F /* Component.swift */; };
 		56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */; };
@@ -116,6 +118,8 @@
 		567A07AD238C805000D6399A /* Transferable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
 		567A07AE238C805000D6399A /* OrderList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
 		567A07AF238C805000D6399A /* MarsSand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
+		56B3A7B52391B93B005E0807 /* IngredientNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientNode.swift; sourceTree = "<group>"; };
+		56B3A7B92391CDC7005E0807 /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
 		56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoppableComponent.swift; sourceTree = "<group>"; };
 		56E2D7C1238DA2B8000F8A3F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryableComponent.swift; sourceTree = "<group>"; };
@@ -306,8 +310,10 @@
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 				562BCF5923881CF900D5D51D /* GameScene.sks */,
+				56B3A7B92391CDC7005E0807 /* StationType.swift */,
 				565AEFE3239164E300E3E15F /* StationNode.swift */,
 				565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */,
+				56B3A7B52391B93B005E0807 /* IngredientNode.swift */,
 				562BCF5D23881CF900D5D51D /* GameScene.swift */,
 			);
 			path = View;
@@ -496,11 +502,13 @@
 				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
 				567A07BF238C805000D6399A /* OrderList.swift in Sources */,
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
+				56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */,
 				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,
 				567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */,
 				4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */,
 				565AEFE4239164E300E3E15F /* StationNode.swift in Sources */,
 				567A07B4238C805000D6399A /* Plate.swift in Sources */,
+				56B3A7BA2391CDC7005E0807 /* StationType.swift in Sources */,
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
 				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
@@ -658,7 +666,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D9FBK2WPJX;
+				DEVELOPMENT_TEAM = 5MSP4455P9;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -677,7 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D9FBK2WPJX;
+				DEVELOPMENT_TEAM = 5MSP4455P9;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

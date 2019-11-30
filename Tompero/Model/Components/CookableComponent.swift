@@ -41,6 +41,8 @@ class CookableComponent: Component, Completable {
     }
     
     func update() {
-        
+        if !complete {
+            cookProgress += cookIncrement
+        }
     }
 }

@@ -20,9 +20,7 @@ class GameScene: SKScene {
     ]
     var player: String = ""
     
-    var stations: [StationNode] {
-        tables.map({ StationNode(station: $0) })
-    }
+    var stations: [StationNode] = []
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -30,22 +28,42 @@ class GameScene: SKScene {
         GameConnectionManager.shared.subscribe(observer: self)
         
         setupStations()
+        setupShelves()
+//        setupPipes()
+//        setupHatch()
+//        setupBackground()
     }
     
     func setupStations() {
+        func convertTableToStation(type: PlayerTableType) -> StationType {
+            switch type {
+            case .chopping: return .board
+            case .cooking: return .stove
+            case .frying: return .fryer
+            case .plate: return .plateBox
+            case .ingredient: return .ingredientBox
+            default: return .board
+            }
+        }
+        
+        stations = tables.map({ StationNode(typeOfStation: convertTableToStation(type: $0.type), ingredient: $0.ingredient) })
+        
         for (index, station) in stations.enumerated() {
             let node = station.spriteNode
-            
             let pos = scene!.size.width/2-node.size.width/2
             let xPos = [-pos, 0.0, pos]
             node.position = CGPoint(x: xPos[index], y: CGFloat(station.spriteYPos))
-            
-//            for extra in station.secondarySpritesImageNames {
-//
-//            }
-            
             self.addChild(node)
         }
+    }
+    
+    func setupShelves() {
+        stations.append(StationNode(typeOfStation: .shelf, spriteNode: scene?.childNode(withName: "shelf1") as! SKSpriteNode))
+        stations.append(StationNode(typeOfStation: .shelf, spriteNode: scene?.childNode(withName: "shelf2") as! SKSpriteNode))
+        stations.append(StationNode(typeOfStation: .shelf, spriteNode: scene?.childNode(withName: "shelf3") as! SKSpriteNode))
+        
+        // change color
+        stations.append(StationNode(typeOfStation: .delivery, spriteNode: scene?.childNode(withName: "delivery") as! SKSpriteNode))
     }
     
     // MARK: - Game Logic
