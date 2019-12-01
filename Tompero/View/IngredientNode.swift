@@ -9,40 +9,89 @@
 import Foundation
 import SpriteKit
 
-class IngredientNode {
+class IngredientNode: TappableDelegate, MovableDelegate {
     
+    var currentStation: StationNode
     var ingredient: Ingredient
-    var spriteNode: SKSpriteNode {
-        SKSpriteNode(imageNamed: ingredient.textureName)
-    }
-    var currentLocation: StationNode!
+    var spriteNode: SKSpriteNode
     
-    init(ingredient: Ingredient, currentLocation: StationNode!) {
+    init(ingredient: Ingredient, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.ingredient = ingredient
-        self.currentLocation = currentLocation
+        self.currentStation = currentLocation
+        currentStation.ingredient = self.ingredient
+        spriteNode = movableNode
+        movableNode.position = currentLocation.spriteNode.position
+        movableNode.tapDelegate = self
+        movableNode.moveDelegate = self
     }
     
-    private func disableSpriteNode() {
-        spriteNode.isHidden = true
-        spriteNode.isUserInteractionEnabled = false
+    private func hideSpriteNode() {
+        // We use a very low alpha value otherwise it's interaction is disabled
+        self.spriteNode.run(SKAction.fadeAlpha(to: 0.00001, duration: 0.1))
     }
     
-    func move(to station: StationNode) -> Bool {
+    private func showSpriteNode() {
+        self.spriteNode.run(SKAction.fadeIn(withDuration: 0.2))
+    }
+    
+    // MARK: - MovableDelegate
+    func attemptMove(to station: StationNode) -> Bool {
+        
         switch station.stationType {
         case .board:
-            return ingredient.changeState(to: .chopping)
+            let canMove = ingredient.attemptChangeState(to: .chopping)
+            if canMove {
+                currentStation = station
+                currentStation.ingredient = self.ingredient
+            }
+            return canMove
             
         case .stove:
-            disableSpriteNode()
-            return ingredient.changeState(to: .cooking)
+            let canMove = ingredient.attemptChangeState(to: .cooking)
+            if canMove {
+                currentStation = station
+                currentStation.ingredient = self.ingredient
+            }
+            return canMove
             
         case .fryer:
-            disableSpriteNode()
-            return ingredient.changeState(to: .frying)
+            let canMove = ingredient.attemptChangeState(to: .frying)
+            if canMove {
+                currentStation = station
+                currentStation.ingredient = self.ingredient
+            }
+            return canMove
             
         default:
-            return ingredient.changeState(to: ingredient.states[ingredient.currentState]!.first!)
+            currentStation = station
+            currentStation.ingredient = self.ingredient
+            return ingredient.attemptChangeState(to: ingredient.states[ingredient.currentState]!.first!)
         }
+    }
+    
+    func moveStarted(currentPosition: CGPoint) {
+        self.spriteNode.run(SKAction.scale(to: 0.7, duration: 0.2))
+    }
+    
+    func moving(currentPosition: CGPoint) {
+        
+    }
+    
+    func moveEnded(currentPosition: CGPoint) {
+        self.spriteNode.run(SKAction.scale(to: 1, duration: 0.2))
+        
+        print(currentStation.stationType)
+        if currentStation.stationType == .fryer || currentStation.stationType == .stove {
+            hideSpriteNode()
+        } else {
+            showSpriteNode()
+        }
+    }
+    
+    // MARK: - TappableDelegate
+    func tap() {
+        print("Ingredient tapped")
+        currentStation.tap()
     }
     
 }

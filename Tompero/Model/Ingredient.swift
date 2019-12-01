@@ -60,7 +60,7 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
         components.first(where: { $0 is FryableComponent }) as? FryableComponent ?? nil
     }
     
-    func changeState(to state: IngredientState) -> Bool {
+    func attemptChangeState(to state: IngredientState) -> Bool {
         if states[currentState]!.contains(state) {
             currentState = state
             return true

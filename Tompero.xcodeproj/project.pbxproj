@@ -20,9 +20,12 @@
 		4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47C238EB91F003D373C /* PlayerTable.swift */; };
 		4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47E238EB982003D373C /* PlayerTableType.swift */; };
 		4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D486238FFA93003D373C /* MCPeerWithStatus.swift */; };
+		4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733B6A52393597700D80AD0 /* MovableDelegate.swift */; };
 		476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */; };
 		476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */; };
 		476925C72390AA0900FBAB1F /* SKSceneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */; };
+		476F70A8239336490000465F /* TappableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70A7239336490000465F /* TappableSpriteNode.swift */; };
+		476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70AB23933A1C0000465F /* TappableDelegate.swift */; };
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
 		562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5923881CF900D5D51D /* GameScene.sks */; };
@@ -83,9 +86,12 @@
 		4722D47C238EB91F003D373C /* PlayerTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTable.swift; sourceTree = "<group>"; };
 		4722D47E238EB982003D373C /* PlayerTableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableType.swift; sourceTree = "<group>"; };
 		4722D486238FFA93003D373C /* MCPeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPeerWithStatus.swift; sourceTree = "<group>"; };
+		4733B6A52393597700D80AD0 /* MovableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableDelegate.swift; sourceTree = "<group>"; };
 		476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
 		476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
 		476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSceneExtensions.swift; sourceTree = "<group>"; };
+		476F70A7239336490000465F /* TappableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableSpriteNode.swift; sourceTree = "<group>"; };
+		476F70AB23933A1C0000465F /* TappableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TappableDelegate.swift; sourceTree = "<group>"; };
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		562BCF5423881CF900D5D51D /* Tompero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tompero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,6 +321,9 @@
 				565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */,
 				56B3A7B52391B93B005E0807 /* IngredientNode.swift */,
 				562BCF5D23881CF900D5D51D /* GameScene.swift */,
+				476F70A7239336490000465F /* TappableSpriteNode.swift */,
+				476F70AB23933A1C0000465F /* TappableDelegate.swift */,
+				4733B6A52393597700D80AD0 /* MovableDelegate.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -475,6 +484,7 @@
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
 				FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */,
 				4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */,
+				476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */,
 				471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */,
 				FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */,
 				471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */,
@@ -492,6 +502,7 @@
 				567A07B6238C805000D6399A /* Broccoli.swift in Sources */,
 				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
 				567A07B0238C805000D6399A /* Horn.swift in Sources */,
+				4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */,
 				4722D47B238EB7C9003D373C /* GameRule.swift in Sources */,
 				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
 				56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */,
@@ -508,6 +519,7 @@
 				4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */,
 				565AEFE4239164E300E3E15F /* StationNode.swift in Sources */,
 				567A07B4238C805000D6399A /* Plate.swift in Sources */,
+				476F70A8239336490000465F /* TappableSpriteNode.swift in Sources */,
 				56B3A7BA2391CDC7005E0807 /* StationType.swift in Sources */,
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,

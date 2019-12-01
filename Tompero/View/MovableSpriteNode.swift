@@ -21,54 +21,56 @@ class MovableSpriteNode: SKSpriteNode {
         self.isUserInteractionEnabled = true
     }
     
-    var lastValidLocation: StationNode?
+    var initialTouchPosition: CGPoint?
+    weak var tapDelegate: TappableDelegate?
+    weak var moveDelegate: MovableDelegate?
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard touches.first != nil else { return }
+        let touch = touches.first!
+        
+        moveDelegate?.moveStarted(currentPosition: touch.location(in: scene!))
         
         if let gameScene = scene as? GameScene {
-        for station in gameScene.stations {
-                if self.intersects(station.spriteNode) {
-                    lastValidLocation = station
-                    print(lastValidLocation!)
-                }
-            }
-            
-            //lastValidPosition = self.position
-            
             self.zPosition = 4
-            // resize sprite
         }
         
+        initialTouchPosition = touch.location(in: scene!)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
+        moveDelegate?.moving(currentPosition: touch.location(in: scene!))
+        
         // calculate offset
         self.position = touch.location(in: scene!)
         
-        // show indicator nodes for placeable spaces
+        // TODO: how indicator nodes for placeable spaces
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
+        moveDelegate?.moveEnded(currentPosition: touch.location(in: scene!))
+        
+        if let initialTouchPosition = self.initialTouchPosition {
+            let finalTouchPosition = touch.location(in: scene!)
+            let distanceToOrigin = initialTouchPosition.distanceTo(finalTouchPosition)
+            if distanceToOrigin < 20 {
+                tapDelegate?.tap()
+            }
+        }
+        
         if let gameScene = scene as? GameScene {
             for station in gameScene.stations {
-                print("cu")
-                if station.spriteNode.contains(touch.location(in: gameScene)) {
-                    print("oi")
+                if station.spriteNode.contains(touch.location(in: gameScene)) && (moveDelegate?.attemptMove(to: station) ?? false) {
                     self.position = station.spriteNode.position
-                    // attempt move
-                    // resize sprite
                     return
                 }
             }
             
-            self.position = lastValidLocation!.spriteNode.position
+            self.position = (moveDelegate?.currentStation.spriteNode.position)!
         }
-        
     }
-    
 }

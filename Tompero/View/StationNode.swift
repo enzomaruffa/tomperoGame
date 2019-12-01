@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class StationNode {
+class StationNode: TappableDelegate {
     
     var stationType: StationType
     var ingredient: Ingredient?
@@ -34,11 +34,15 @@ class StationNode {
         self.ingredient = ingredient
         
         if stationType == .ingredientBox {
-            self.spriteNode = SKSpriteNode(imageNamed: NSStringFromClass(type(of: ingredient!)) + "Box.png")
+            let tappableNode = TappableSpriteNode(imageNamed: NSStringFromClass(type(of: ingredient!)) + "Box.png")
+            self.spriteNode = tappableNode
+            tappableNode.delegate = self
         } else if stationType == .shelf || stationType == .delivery {
             self.spriteNode = spriteNode!
         } else {
-            self.spriteNode = SKSpriteNode(imageNamed: stationType.rawValue + ".png")
+            let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")
+            self.spriteNode = tappableNode
+            tappableNode.delegate = self
         }
     }
     
@@ -50,10 +54,18 @@ class StationNode {
         self.init(stationType: stationType, spriteNode: nil, ingredient: ingredient)
     }
     
-    func update() {
+    // Tap interaction
+    func tap() {
+        print("STATION with type \(stationType) TAPPED UHUUU")
         if stationType == .board {
+            print("Board tapped!")
             ingredient?.choppableComponent?.update()
-        } else if stationType == .stove {
+        }
+    }
+    
+    // Scene update intercation
+    func update() {
+        if stationType == .stove {
             ingredient?.cookableComponent?.update()
         } else if stationType == .fryer {
             ingredient?.fryableComponent?.update()

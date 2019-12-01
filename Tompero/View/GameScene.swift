@@ -22,6 +22,11 @@ class GameScene: SKScene {
     var player: String = ""
     
     var stations: [StationNode] = []
+    var shelves: [StationNode] {
+        stations.filter( {$0.stationType == .shelf} )
+    }
+    
+    var ingredients: [IngredientNode] = []
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -33,6 +38,11 @@ class GameScene: SKScene {
 //        setupPipes()
 //        setupHatch()
 //        setupBackground()
+        
+        let tentacleNode = scene?.childNode(withName: "ingredient") as! MovableSpriteNode
+        let ingredient = IngredientNode(ingredient: Tentacle(currentOwner: player), movableNode: tentacleNode, currentLocation: shelves.first!)
+        tentacleNode.name = "denis"
+        ingredients.append(ingredient)
     }
     
     func setupStations() {
@@ -48,6 +58,8 @@ class GameScene: SKScene {
         }
         
         stations = tables.map({ StationNode(stationType: convertTableToStation(type: $0.type), ingredient: $0.ingredient) })
+        
+        print(stations.map({$0.stationType}))
         
         for (index, station) in stations.enumerated() {
             let node = station.spriteNode
@@ -65,6 +77,7 @@ class GameScene: SKScene {
         
         // change color
         stations.append(StationNode(stationType: .delivery, spriteNode: scene?.childNode(withName: "delivery") as! SKSpriteNode))
+        
     }
     
     // MARK: - Game Logic
