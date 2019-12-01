@@ -61,6 +61,7 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
     }
     
     func attemptChangeState(to state: IngredientState) -> Bool {
+        print("Attempting change from \(currentState) to \(state)")
         if states[currentState]!.contains(state) {
             currentState = state
             return true

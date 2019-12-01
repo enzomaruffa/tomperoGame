@@ -20,7 +20,7 @@ class MarsSand: Ingredient {
         
         self.states = [
             .raw: [.cooking],
-            .cooking: [.raw, .cooked],
+            .cooking: [.raw, .cooking, .cooked],
             .cooked: [.burnt]
         ]
         
