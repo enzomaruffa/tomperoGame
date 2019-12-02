@@ -15,23 +15,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="square.and.arrow.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="YnC-Lw-Xi6">
-                                <rect key="frame" x="537" y="20" width="153" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tubo" translatesAutoresizingMaskIntoConstraints="NO" id="8V5-Pg-WIr">
+                                <rect key="frame" x="163" y="59" width="153" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8V5-Pg-WIr">
-                                <rect key="frame" x="165" y="20" width="153" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="books" translatesAutoresizingMaskIntoConstraints="NO" id="9tD-pt-Ll1">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hat+space" translatesAutoresizingMaskIntoConstraints="NO" id="9tD-pt-Ll1">
                                 <rect key="frame" x="328" y="250" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0k-8Q-Cxi">
+                                <rect key="frame" x="551" y="20" width="115" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="2hU-ba-yUD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JOIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSK-3B-Bch">
+                                <rect key="frame" x="186" y="20" width="94.5" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Y90-xe-iZu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tubo" translatesAutoresizingMaskIntoConstraints="NO" id="YnC-Lw-Xi6">
+                                <rect key="frame" x="534" y="60" width="153" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="air" translatesAutoresizingMaskIntoConstraints="NO" id="xvW-FY-ahf">
+                                <rect key="frame" x="119" y="114" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="dSK-3B-Bch" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="20" id="9Y6-mF-dSn"/>
+                            <constraint firstItem="xvW-FY-ahf" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="114" id="CO1-C9-aEO"/>
+                            <constraint firstItem="7E9-WB-dTq" firstAttribute="bottom" secondItem="xvW-FY-ahf" secondAttribute="bottom" constant="151" id="CZE-Nl-TWc"/>
+                            <constraint firstItem="U0k-8Q-Cxi" firstAttribute="leading" secondItem="7E9-WB-dTq" secondAttribute="leading" constant="507" id="DBA-XW-h1V"/>
+                            <constraint firstItem="7E9-WB-dTq" firstAttribute="trailing" secondItem="xvW-FY-ahf" secondAttribute="trailing" constant="493" id="Q0I-bt-nIk"/>
+                            <constraint firstItem="7E9-WB-dTq" firstAttribute="bottom" secondItem="dSK-3B-Bch" secondAttribute="bottom" constant="313" id="Vdl-Fh-CyL"/>
+                            <constraint firstItem="7E9-WB-dTq" firstAttribute="bottom" secondItem="U0k-8Q-Cxi" secondAttribute="bottom" constant="313" id="WG4-Ty-DWM"/>
+                            <constraint firstItem="U0k-8Q-Cxi" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="20" id="XAu-jn-l1u"/>
+                            <constraint firstItem="dSK-3B-Bch" firstAttribute="leading" secondItem="7E9-WB-dTq" secondAttribute="leading" constant="142" id="aEU-x3-pY2"/>
+                            <constraint firstItem="xvW-FY-ahf" firstAttribute="leading" secondItem="7E9-WB-dTq" secondAttribute="leading" constant="75" id="aby-OJ-atD"/>
+                            <constraint firstItem="7E9-WB-dTq" firstAttribute="trailing" secondItem="U0k-8Q-Cxi" secondAttribute="trailing" constant="186" id="pxJ-P0-MHY"/>
+                            <constraint firstItem="7E9-WB-dTq" firstAttribute="trailing" secondItem="dSK-3B-Bch" secondAttribute="trailing" constant="571.5" id="ydC-wP-c4W"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7E9-WB-dTq"/>
                     </view>
                     <connections>
+                        <outlet property="airGIF" destination="xvW-FY-ahf" id="k1b-Cq-tDO"/>
                         <outlet property="host" destination="YnC-Lw-Xi6" id="ecH-nf-SeP"/>
                         <outlet property="join" destination="8V5-Pg-WIr" id="BeG-gF-ZfM"/>
                         <outlet property="person" destination="9tD-pt-Ll1" id="v5A-yc-TdE"/>
@@ -39,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xhy-MK-IYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417.39130434782612" y="126.5625"/>
+            <point key="canvasLocation" x="-417.85714285714283" y="126.08695652173914"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -58,8 +94,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="books" width="512" height="512"/>
-        <image name="square.and.arrow.down.fill" catalog="system" width="60" height="64"/>
-        <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
+        <image name="air" width="16" height="16"/>
+        <image name="hat+space" width="400" height="512"/>
+        <image name="tubo" width="132" height="198"/>
     </resources>
 </document>

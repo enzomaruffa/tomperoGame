@@ -9,12 +9,14 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     // MARK: - Variables
     var hosting = false
-     
+    
     var playersWithStatus: [MCPeerWithStatus] = [MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-        MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
-        
+                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
+    
+    var playerHats: [UIImageView]!
+    
     // MARK: - Outlets
     @IBOutlet weak var topText: UILabel!
     @IBOutlet weak var backButton: UIButton!
@@ -25,32 +27,48 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var hatGreen: UIImageView!
     @IBOutlet weak var hatOrange: UIImageView!
     @IBOutlet weak var inviteLBL: UILabel!
+    @IBOutlet weak var level: UIButton!
     
     // MARK: - View LifeCycle
     override func viewWillAppear(_ animated: Bool) {
-        caracterOrigin(caracater: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
-        caracterOrigin(caracater: hatPurple, xPosition: -1000, yPosition: +1200, xScale: 0.25, yScale: 0.25)
-        caracterOrigin(caracater: hatGreen, xPosition: 3000, yPosition: 0, xScale: 0.25, yScale: 0.25)
-        caracterOrigin(caracater: hatOrange, xPosition: -4000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
+        self.level.titleLabel?.text = "easy"
+        playerHats = [hatBlue, hatPurple, hatGreen, hatOrange]
+        setHatOrigin(hat: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
+        setHatOrigin(hat: hatPurple, xPosition: -1000, yPosition: +1200, xScale: 0.25, yScale: 0.25)
+        setHatOrigin(hat: hatGreen, xPosition: 3000, yPosition: 0, xScale: 0.25, yScale: 0.25)
+        setHatOrigin(hat: hatOrange, xPosition: -4000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
         
-        stackView.isHidden = true
+        //        caracterOrigin(caracater: hatPurple, xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
+        //        caracterOrigin(caracater: hatGreen, xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
+        //        caracterOrigin(caracater: hatOrange, xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
+        
+        //stackView.isHidden = false
         topText.isHidden = true
         inviteLBL.text = "WAITING FOR INVITE"
         
-        
+        if hosting {
+            level.isHidden = false
+            //self.level.titleLabel?.text = "hard"
+        } else {
+            level.isHidden = false
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.level.titleLabel?.text = "hard"
+        
         // Array com lista de connected players
         //MCManager.shared.mcSession?.connectedPeers
         //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAnimations)))
         if hosting {
+            self.level.isHidden = false
+            self.level.setTitle("EASY", for: .normal)
             print(" CURRENTLY HOSTING<<")
             playersWithStatus = [MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected),
-                MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
+                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
             MCManager.shared.hostSession(presentingFrom: self, delegate: self)
         } else {
             MCManager.shared.joinSession()
@@ -67,27 +85,36 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBAction func menuPressed(_ sender: Any) {
         coordinator?.menu()
     }
+    @IBAction func play(_ sender: Any) {
+        playAnimation(hat: hatBlue)
+    }
     
+    @IBAction func levelButtom(_ sender: Any) {
+        coordinator?.levelRoom(hosting: true)
+    }
     
     // MARK: - Methods
-    func caracterOrigin(caracater: UIImageView, xPosition: CGFloat, yPosition: CGFloat, xScale: CGFloat, yScale: CGFloat) {
-        let originalTransform = caracater.transform
+    func setHatOrigin(hat: UIImageView, xPosition: CGFloat, yPosition: CGFloat, xScale: CGFloat, yScale: CGFloat) {
+        let originalTransform = CGAffineTransform.identity
         let scaledTransform = originalTransform.scaledBy(x: xScale, y: yScale)
         let scaledAndTranslatedTransform  = scaledTransform.translatedBy(x: xPosition, y: yPosition)
-        caracater.transform = scaledAndTranslatedTransform
+        hat.transform = scaledAndTranslatedTransform
     }
     
     @objc fileprivate func handleTapAnimations(hat: UIImageView) {
         UIView.animate(withDuration: 5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-            
             hat.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             hat.transform = CGAffineTransform(translationX: 0, y: 0)
-            
-        }) { (_) in
-            
-        }
+        })
     }
-    
+    func playAnimation(hat: UIImageView) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [.curveEaseInOut], animations: {
+            hat.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [.curveEaseInOut], animations: {
+                hat.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+            })
+            })
+    }
 }
 
 // MARK: - MCBrowserViewControllerDelegate Methods
@@ -95,10 +122,29 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
+        
+        //        guard playersWithStatus.count == 4 else {
+        //            self.navigationController?.popViewController(animated: true)
+        //            return
+        //        }
+        
+        self.stackView.isHidden = false
+        self.topText.isHidden = false
+        self.inviteLBL.isHidden = true
+        
+        for index in 0..<self.playersWithStatus.count {
+            print("Playing animation with index \(index)")
+            print("\(self.playerHats[index].transform)")
+            self.setHatOrigin(hat: self.playerHats[index], xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
+            print("\(self.playerHats[index].transform)")
+        }
+        
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -108,7 +154,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
     
     func playerListSent(playersWithStatus: [MCPeerWithStatus]) {
         print("[playerListSent] \(playersWithStatus)")
-        if self.playersWithStatus != playersWithStatus {
+        if self.playersWithStatus != playersWithStatus && !self.hosting {
             
             let oldList = self.playersWithStatus
             
@@ -133,9 +179,9 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
                             } else if index == 1 {
                                 self.handleTapAnimations(hat: self.hatPurple)
                             } else if index == 2 {
-                                self.handleTapAnimations(hat: self.hatPurple)
+                                self.handleTapAnimations(hat: self.hatOrange)
                             } else if index == 3 {
-                                self.handleTapAnimations(hat: self.hatPurple)
+                                self.handleTapAnimations(hat: self.hatGreen)
                             }
                         }
                     }
@@ -171,7 +217,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
             print("[playerUpdate] Players na lista: \(newPlayerList.map({$0.name}))")
             if !newPlayerList.filter({ $0.name == player }).isEmpty {
                 // ja existe, atualiza estado
-
+                
                 print(" [playerUpdate] Atualizando estado do player \(player) para \(state)")
                 let playerWithStatus = newPlayerList.first(where: { $0.name == player })
                 playerWithStatus?.status = state
@@ -190,8 +236,6 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
             
             print("[playerUpdate] Enviando lista pros Peers")
             MCManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
-            
-            self.playerListSent(playersWithStatus: newPlayerList)
         }
     }
     

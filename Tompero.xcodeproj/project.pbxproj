@@ -54,6 +54,8 @@
 		56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C5238DC97D000F8A3F /* IngredientState.swift */; };
 		56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C7238DC992000F8A3F /* CookableComponent.swift */; };
 		56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */; };
+		FB25C2A9239455E8001FEAE6 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB25C2A8239455E8001FEAE6 /* UIImage+Gif.swift */; };
+		FB25C2AB2394577B001FEAE6 /* airR1.gif in Resources */ = {isa = PBXBuildFile; fileRef = FB25C2AA2394577B001FEAE6 /* airR1.gif */; };
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
 		FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */; };
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
@@ -61,6 +63,8 @@
 		FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF390238E9D6A00437124 /* Storyboarded.swift */; };
 		FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF392238E9F4700437124 /* MainCoordinator.swift */; };
 		FB9BF395238EA67500437124 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB9BF394238EA67500437124 /* Game.storyboard */; };
+		FBC1FEA823940EBA00B33A59 /* Level.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBC1FEA723940EBA00B33A59 /* Level.storyboard */; };
+		FBC1FEAA23940FEA00B33A59 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC1FEA923940FEA00B33A59 /* LevelViewController.swift */; };
 		FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFDDCFD238C040700CD503A /* InicialViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +120,8 @@
 		56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		B688C2DD78186CF812918984 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB25C2A8239455E8001FEAE6 /* UIImage+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		FB25C2AA2394577B001FEAE6 /* airR1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = airR1.gif; sourceTree = "<group>"; };
 		FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
 		FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuStoryboard.storyboard; sourceTree = "<group>"; };
@@ -123,6 +129,8 @@
 		FB9BF390238E9D6A00437124 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		FB9BF392238E9F4700437124 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		FB9BF394238EA67500437124 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
+		FBC1FEA723940EBA00B33A59 /* Level.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Level.storyboard; sourceTree = "<group>"; };
+		FBC1FEA923940FEA00B33A59 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		FBFDDCFD238C040700CD503A /* InicialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +257,7 @@
 		562BCF5623881CF900D5D51D /* Tompero */ = {
 			isa = PBXGroup;
 			children = (
+				FB25C2AA2394577B001FEAE6 /* airR1.gif */,
 				562BCF6423881CFC00D5D51D /* Assets.xcassets */,
 				562BCF5723881CF900D5D51D /* AppDelegate.swift */,
 				562BCF6923881CFC00D5D51D /* Info.plist */,
@@ -289,6 +298,7 @@
 				562BCF6123881CF900D5D51D /* Main.storyboard */,
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
+				FBC1FEA723940EBA00B33A59 /* Level.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +310,8 @@
 				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
 				562BCF5F23881CF900D5D51D /* GameViewController.swift */,
 				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
+				FBC1FEA923940FEA00B33A59 /* LevelViewController.swift */,
+				FB25C2A8239455E8001FEAE6 /* UIImage+Gif.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -384,12 +396,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB9BF395238EA67500437124 /* Game.storyboard in Resources */,
+				FBC1FEA823940EBA00B33A59 /* Level.storyboard in Resources */,
 				562BCF6323881CF900D5D51D /* Main.storyboard in Resources */,
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
 				562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */,
 				562BCF6523881CFC00D5D51D /* Assets.xcassets in Resources */,
 				562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */,
 				562BCF5C23881CF900D5D51D /* Actions.sks in Resources */,
+				FB25C2AB2394577B001FEAE6 /* airR1.gif in Resources */,
 				FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,6 +459,7 @@
 			files = (
 				471795E5238C14E7000575B0 /* MCDataType.swift in Sources */,
 				471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */,
+				FB25C2A9239455E8001FEAE6 /* UIImage+Gif.swift in Sources */,
 				471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */,
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
@@ -481,6 +496,7 @@
 				567A07B4238C805000D6399A /* Plate.swift in Sources */,
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
+				FBC1FEAA23940FEA00B33A59 /* LevelViewController.swift in Sources */,
 				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
 				FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */,
 				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
