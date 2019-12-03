@@ -130,19 +130,24 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         rotationTimer = nil
     }
     
-    var count = 0
-    let maxcount = 5
     // MARK: - TappableDelegate
     func tap() {
         print("Ingredient tapped")
         currentStation.tap()
-        
-        count += 1
-        
-        if count > maxcount {
-            self.spriteNode.texture = SKTexture(imageNamed: ingredient.texturePrefix + "Chopped")
-        }
-        
+        checkTextureChange()
     }
     
+    func checkTextureChange() {
+        if ingredient.textureName != spriteNode.texture?.name {
+            spriteNode.texture = SKTexture(imageNamed: ingredient.textureName)
+        }
+    }
+    
+}
+
+extension SKTexture {
+    var name: String? {
+        let comps = description.components(separatedBy: "'")
+        return comps.count > 1 ? comps[1] : nil
+    }
 }
