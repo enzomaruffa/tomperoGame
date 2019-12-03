@@ -16,6 +16,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CL2-7B-5oQ" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-Hz-46C">
+                                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="Jz1-Hz-46C" firstAttribute="top" secondItem="CL2-7B-5oQ" secondAttribute="top" id="7Lm-sE-hwv"/>
+                                    <constraint firstItem="Jz1-Hz-46C" firstAttribute="leading" secondItem="CL2-7B-5oQ" secondAttribute="leading" id="LOj-0R-dSm"/>
+                                    <constraint firstAttribute="bottom" secondItem="Jz1-Hz-46C" secondAttribute="bottom" id="XwX-mS-bWE"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jz1-Hz-46C" secondAttribute="trailing" id="qb2-fk-lng"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW TO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecu-FO-yeQ">
                                 <rect key="frame" x="368" y="25" width="180" height="40"/>
                                 <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="40"/>
@@ -78,13 +93,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.0941476" constant="1" id="0nM-Ke-jBf"/>
+                            <constraint firstAttribute="bottom" secondItem="CL2-7B-5oQ" secondAttribute="bottom" id="CqO-CM-U7l"/>
                             <constraint firstAttribute="bottom" secondItem="0xh-LO-8NS" secondAttribute="bottom" constant="21" id="DSy-Dw-kj1"/>
                             <constraint firstItem="ecu-FO-yeQ" firstAttribute="leading" secondItem="JNb-eM-qbf" secondAttribute="leading" constant="324" id="Hya-aT-RyA"/>
                             <constraint firstItem="ecu-FO-yeQ" firstAttribute="top" secondItem="JNb-eM-qbf" secondAttribute="top" constant="25" id="KhL-4h-Q7p"/>
                             <constraint firstItem="0xh-LO-8NS" firstAttribute="top" secondItem="JNb-eM-qbf" secondAttribute="top" constant="70" id="Mdb-03-mig"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.0482673" constant="1" id="PmO-6p-de6"/>
+                            <constraint firstItem="CL2-7B-5oQ" firstAttribute="leading" secondItem="HsO-25-kPV" secondAttribute="leading" id="R0m-ic-LMV"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" constant="150" id="VYi-VC-rai"/>
                             <constraint firstItem="JNb-eM-qbf" firstAttribute="trailing" secondItem="0xh-LO-8NS" secondAttribute="trailing" id="XmM-No-mxd"/>
+                            <constraint firstItem="CL2-7B-5oQ" firstAttribute="top" secondItem="HsO-25-kPV" secondAttribute="top" id="arc-dA-xBk"/>
+                            <constraint firstAttribute="trailing" secondItem="CL2-7B-5oQ" secondAttribute="trailing" id="cSf-ks-sGt"/>
                             <constraint firstItem="JNb-eM-qbf" firstAttribute="trailing" secondItem="ecu-FO-yeQ" secondAttribute="trailing" constant="304" id="ehv-0t-CT1"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" id="ett-wh-ZJT"/>
                             <constraint firstItem="JNb-eM-qbf" firstAttribute="bottom" secondItem="ecu-FO-yeQ" secondAttribute="bottom" constant="328" id="fsT-KI-550"/>

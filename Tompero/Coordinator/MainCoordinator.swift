@@ -37,9 +37,4 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(controller, animated: false)
     }
     
-    func levelRoom(hosting: Bool) {
-        let controller = LevelViewController.instantiate()
-        controller.coordinator = self
-        navigationController.pushViewController(controller, animated: false)
-    }
 }
