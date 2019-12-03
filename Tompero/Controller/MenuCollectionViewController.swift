@@ -11,7 +11,7 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     weak var coordinator: MainCoordinator?
     
     // MARK: - Storyboarded
-    static var storyboardName = "MenuStoryboard"
+    static var storyboardName = "MenuCollectionViewController"
     
     // MARK: - ViewLifecycle
     override func viewDidLoad() {
@@ -19,8 +19,19 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
         
     }
     
+    var vcPai:WaitingRoomViewController!
+    
     @IBAction func backPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+       
+            self.presentingViewController?.dismiss(animated: true, completion: { () in
+                
+                self.vcPai.zoomOut()
+            })
+
+        
+        
+        //self.navigationController?.popViewController(animated: true)
+        
     }
     // MARK: - Collection Methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {

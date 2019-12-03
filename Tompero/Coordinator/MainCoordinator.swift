@@ -18,9 +18,10 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        game(tables: [PlayerTable(type: .chopping, ingredient: nil),
-                      PlayerTable(type: .cooking, ingredient: nil),
-                      PlayerTable(type: .frying, ingredient: nil)], hosting: true)
+//        game(tables: [PlayerTable(type: .chopping, ingredient: nil),
+//                      PlayerTable(type: .cooking, ingredient: nil),
+//                      PlayerTable(type: .frying, ingredient: nil)], hosting: true)
+        inicial()
     }
     
     func inicial() {
