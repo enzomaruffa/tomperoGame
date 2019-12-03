@@ -10,6 +10,7 @@ class InicialViewController: UIViewController, Storyboarded {
     // MARK: - Variables
     var location = CGPoint(x: 0, y: 0)
     weak var coordinator: MainCoordinator?
+    var animationTimer: Timer?
     
     // MARK: - Outlets
     @IBOutlet weak var person: UIImageView!
@@ -20,7 +21,7 @@ class InicialViewController: UIViewController, Storyboarded {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        airGIF.loadGif(name: "airR1")
+        //airGIF.loadGif(name: "airR1")
         //        for difficulty in [GameDifficulty.easy, .medium, .hard] {
         //            print("\n\n")
         //            print("Game Rule with difficulty \(difficulty)")
@@ -74,6 +75,13 @@ class InicialViewController: UIViewController, Storyboarded {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch : UITouch! =  touches.first! as UITouch
+        
+        if animationTimer == nil {
+            animationTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (_) in
+                self.playAnimatedSpaceship()
+            })
+            animationTimer!.fire()
+        }
     
         if person.frame.contains(touch.location(in: self.view)) {
             //touch.location(in: self.view) == person.center {
@@ -82,8 +90,23 @@ class InicialViewController: UIViewController, Storyboarded {
         }
     }
     
+    func playAnimatedSpaceship() {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveLinear , animations: {
+            self.person.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/8))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveLinear , animations: {
+                    self.person.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/8))
+                })
+            }
+        })
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.shapeLayer?.removeFromSuperlayer()
+        animationTimer?.invalidate()
+        self.person.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+        animationTimer = nil
         //            let touch: UITouch! =  touches.first! as UITouch
         if join.frame.intersects(person.frame) {
             // Currently joining

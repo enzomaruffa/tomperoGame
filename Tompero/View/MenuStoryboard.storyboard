@@ -11,14 +11,13 @@
         <!--Menu Collection View Controller-->
         <scene sceneID="jnH-9M-1Rh">
             <objects>
-                <viewController storyboardIdentifier="MenuCollectionViewController" id="ngM-n1-4Tf" customClass="MenuCollectionViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ngM-n1-4Tf" customClass="MenuCollectionViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HsO-25-kPV">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HOW TO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecu-FO-yeQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW TO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecu-FO-yeQ">
                                 <rect key="frame" x="368" y="25" width="180" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="40"/>
                                 <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -80,11 +79,15 @@
                         <constraints>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.0941476" constant="1" id="0nM-Ke-jBf"/>
                             <constraint firstAttribute="bottom" secondItem="0xh-LO-8NS" secondAttribute="bottom" constant="21" id="DSy-Dw-kj1"/>
+                            <constraint firstItem="ecu-FO-yeQ" firstAttribute="leading" secondItem="JNb-eM-qbf" secondAttribute="leading" constant="324" id="Hya-aT-RyA"/>
+                            <constraint firstItem="ecu-FO-yeQ" firstAttribute="top" secondItem="JNb-eM-qbf" secondAttribute="top" constant="25" id="KhL-4h-Q7p"/>
                             <constraint firstItem="0xh-LO-8NS" firstAttribute="top" secondItem="JNb-eM-qbf" secondAttribute="top" constant="70" id="Mdb-03-mig"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.0482673" constant="1" id="PmO-6p-de6"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" constant="150" id="VYi-VC-rai"/>
                             <constraint firstItem="JNb-eM-qbf" firstAttribute="trailing" secondItem="0xh-LO-8NS" secondAttribute="trailing" id="XmM-No-mxd"/>
+                            <constraint firstItem="JNb-eM-qbf" firstAttribute="trailing" secondItem="ecu-FO-yeQ" secondAttribute="trailing" constant="304" id="ehv-0t-CT1"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" id="ett-wh-ZJT"/>
+                            <constraint firstItem="JNb-eM-qbf" firstAttribute="bottom" secondItem="ecu-FO-yeQ" secondAttribute="bottom" constant="328" id="fsT-KI-550"/>
                             <constraint firstItem="0xh-LO-8NS" firstAttribute="leading" secondItem="JNb-eM-qbf" secondAttribute="leading" id="xrE-Hd-InD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JNb-eM-qbf"/>

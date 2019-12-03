@@ -63,8 +63,6 @@
 		FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF390238E9D6A00437124 /* Storyboarded.swift */; };
 		FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF392238E9F4700437124 /* MainCoordinator.swift */; };
 		FB9BF395238EA67500437124 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB9BF394238EA67500437124 /* Game.storyboard */; };
-		FBC1FEA823940EBA00B33A59 /* Level.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBC1FEA723940EBA00B33A59 /* Level.storyboard */; };
-		FBC1FEAA23940FEA00B33A59 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC1FEA923940FEA00B33A59 /* LevelViewController.swift */; };
 		FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFDDCFD238C040700CD503A /* InicialViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -129,8 +127,6 @@
 		FB9BF390238E9D6A00437124 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		FB9BF392238E9F4700437124 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		FB9BF394238EA67500437124 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
-		FBC1FEA723940EBA00B33A59 /* Level.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Level.storyboard; sourceTree = "<group>"; };
-		FBC1FEA923940FEA00B33A59 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
 		FBFDDCFD238C040700CD503A /* InicialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -298,7 +294,6 @@
 				562BCF6123881CF900D5D51D /* Main.storyboard */,
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
-				FBC1FEA723940EBA00B33A59 /* Level.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,7 +305,6 @@
 				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
 				562BCF5F23881CF900D5D51D /* GameViewController.swift */,
 				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
-				FBC1FEA923940FEA00B33A59 /* LevelViewController.swift */,
 				FB25C2A8239455E8001FEAE6 /* UIImage+Gif.swift */,
 			);
 			path = Controller;
@@ -396,7 +390,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB9BF395238EA67500437124 /* Game.storyboard in Resources */,
-				FBC1FEA823940EBA00B33A59 /* Level.storyboard in Resources */,
 				562BCF6323881CF900D5D51D /* Main.storyboard in Resources */,
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
 				562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */,
@@ -496,7 +489,6 @@
 				567A07B4238C805000D6399A /* Plate.swift in Sources */,
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
-				FBC1FEAA23940FEA00B33A59 /* LevelViewController.swift in Sources */,
 				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
 				FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */,
 				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
