@@ -331,6 +331,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
             
             print("[playerUpdate] Enviando lista pros Peers")
             MCManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
+            self.playersWithStatus = newPlayerLista
         }
     }
     

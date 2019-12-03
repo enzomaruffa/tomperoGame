@@ -45,6 +45,7 @@ class MCManager: NSObject, MCSessionDelegate {
     
     func resetSession() {
         mcSession?.disconnect()
+        mcSession = nil
         if let peerID = self.peerID {
             createNewSession(peerID)
         } else {
@@ -121,7 +122,7 @@ class MCManager: NSObject, MCSessionDelegate {
             print("[MCManager] Wrapper: \(wrapper)")
             
             if wrapper.type == .playerData {
-                print("[MCManager] Sending playerdata to observers: \(wrapper)")
+                print("[MCManager] Sending playerData to observers: \(wrapper)")
                 let peersWithStatus = try JSONDecoder().decode([MCPeerWithStatus].self, from: wrapper.object)
                 matchmakingObservers.forEach({ $0.playerListSent(playersWithStatus: peersWithStatus) })
             } else {
