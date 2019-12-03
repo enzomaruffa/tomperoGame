@@ -17,7 +17,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     // MARK: - Variables
     var hosting = false
     var animationTimer: Timer?
-    var countLevel = 0
+    var countLevel = GameDifficulty.easy
     
     var playersWithStatus: [MCPeerWithStatus] = [MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
@@ -42,7 +42,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var inviteLBL: UILabel!
     @IBOutlet weak var level: UIButton!
     @IBOutlet weak var playOutlet: UIButton!
-    @IBOutlet weak var levelLBL: UILabel!
+    @IBOutlet weak var painelHost: UIImageView!
+    @IBOutlet weak var levelBackImage: UIImageView!
     
     // MARK: - View LifeCycle
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +62,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         inviteLBL.text = "WAITING FOR INVITE"
         inviteLBL.isHidden = true
         level.isHidden = false
+        self.handleTapAnimations(hat: self.hatBlue)
+        self.handleTapAnimations(hat: self.hatPurple)
         if hosting {
             level.isHidden = false
             self.handleTapAnimations(hat: self.hatBlue)
@@ -70,6 +73,9 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         } else {
             level.isHidden = false
             playOutlet.isHidden = true
+            painelHost.isHidden = true
+            level.isHidden = true
+            levelBackImage.isHidden = true
         }
     }
     func zoomOut() {
@@ -82,6 +88,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             })
         }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,17 +171,18 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func levelButtom(_ sender: Any) {
-        if countLevel == 0 {
+            hatBlue.alpha = 0.2
+        UIView.animate(withDuration: 1, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.hatBlue.alpha = 1.0}, completion: nil)
+        if countLevel == .easy {
             level.setTitle("MEDIUM", for: .normal)
-            countLevel = 1
-        } else if countLevel == 1 {
+            countLevel = .medium
+        } else if countLevel == .medium {
             level.setTitle("HARD", for: .normal)
-            countLevel = 2
-        } else if countLevel == 2 {
+            countLevel = .hard
+        } else if countLevel == .hard {
             level.setTitle("EASY", for: .normal)
-            countLevel = 0
+            countLevel = .easy
         }
-        
     }
     
     // MARK: - Methods

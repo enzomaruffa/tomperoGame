@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5eH-78-dlc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5eH-78-dlc">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,29 +19,32 @@
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7sx-QL-biX">
-                                <rect key="frame" x="64" y="100" width="768" height="193"/>
+                                <rect key="frame" x="185.5" y="39.5" width="525" height="275"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHatBlue" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-Hh-gEM">
-                                        <rect key="frame" x="0.0" y="0.0" width="184.5" height="193"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="123.5" height="275"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHatEnzo" translatesAutoresizingMaskIntoConstraints="NO" id="RMg-y6-RBw">
-                                        <rect key="frame" x="194.5" y="0.0" width="184.5" height="193"/>
+                                        <rect key="frame" x="133.5" y="0.0" width="124" height="275"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHatGreen" translatesAutoresizingMaskIntoConstraints="NO" id="QJN-UM-JNd">
-                                        <rect key="frame" x="389" y="0.0" width="184.5" height="193"/>
+                                        <rect key="frame" x="267.5" y="0.0" width="124" height="275"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chefHatOrange" translatesAutoresizingMaskIntoConstraints="NO" id="N2Y-nO-oqH">
-                                        <rect key="frame" x="583.5" y="0.0" width="184.5" height="193"/>
+                                        <rect key="frame" x="401.5" y="0.0" width="123.5" height="275"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lataria" translatesAutoresizingMaskIntoConstraints="NO" id="NUl-oa-Q0e">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Painel Host" translatesAutoresizingMaskIntoConstraints="NO" id="6Re-AI-gwg">
+                                <rect key="frame" x="157" y="0.0" width="582" height="414"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7F-M2-bfK">
                                 <rect key="frame" x="707" y="4" width="108" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="menu"/>
+                                <state key="normal" image="Menu"/>
                                 <connections>
                                     <action selector="menuPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="let-A7-PwI"/>
                                 </connections>
@@ -63,22 +66,22 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dificuldade" highlightedImage="dificuldade" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp">
-                                <rect key="frame" x="75" y="327" width="176" height="92"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dificuldade" highlightedImage="dificuldade" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp">
+                                <rect key="frame" x="186" y="264.5" width="176" height="92"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ed-cWw">
-                                <rect key="frame" x="86" y="339" width="157" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ed-cWw">
+                                <rect key="frame" x="196" y="279.5" width="156.5" height="48"/>
                                 <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="30"/>
                                 <state key="normal" title="LEVEL">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="levelButtom:" destination="5eH-78-dlc" eventType="touchUpInside" id="pWV-Ks-8tE"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-2k-fAU">
-                                <rect key="frame" x="675" y="331" width="152" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="PLAY" image="Go_" backgroundImage="Go_"/>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-2k-fAU">
+                                <rect key="frame" x="598" y="321.5" width="103" height="73"/>
+                                <state key="normal" title="PLAY" image="go_" backgroundImage="go_"/>
                                 <connections>
                                     <action selector="play:" destination="5eH-78-dlc" eventType="touchUpInside" id="8Ir-gf-jh1"/>
                                 </connections>
@@ -86,20 +89,36 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="7sx-QL-biX" firstAttribute="centerY" secondItem="9Vk-7s-UEu" secondAttribute="centerY" multiplier="0.9" id="0ce-zv-1M4"/>
                             <constraint firstAttribute="trailing" secondItem="NUl-oa-Q0e" secondAttribute="trailing" id="19b-JC-Xqb"/>
+                            <constraint firstItem="pyA-2k-fAU" firstAttribute="centerX" secondItem="6Re-AI-gwg" secondAttribute="centerX" multiplier="1.45" id="1iX-aX-OHf"/>
+                            <constraint firstItem="7sx-QL-biX" firstAttribute="width" secondItem="9Vk-7s-UEu" secondAttribute="width" multiplier="0.65" id="280-iA-AAx"/>
                             <constraint firstItem="ThV-tI-DOa" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="2ue-gI-HNA"/>
                             <constraint firstAttribute="bottom" secondItem="SlI-Wy-dJf" secondAttribute="bottom" id="3AE-yq-evg"/>
+                            <constraint firstItem="itL-Jq-8zp" firstAttribute="centerX" secondItem="6Re-AI-gwg" secondAttribute="centerX" multiplier="0.612" id="3SK-AE-Y63"/>
                             <constraint firstItem="NUl-oa-Q0e" firstAttribute="leading" secondItem="hFz-sl-QJG" secondAttribute="leading" id="7U5-j5-vXi"/>
+                            <constraint firstItem="itL-Jq-8zp" firstAttribute="width" secondItem="6Re-AI-gwg" secondAttribute="width" multiplier="0.302405" id="8Ee-8k-T7e"/>
                             <constraint firstItem="NUl-oa-Q0e" firstAttribute="top" secondItem="hFz-sl-QJG" secondAttribute="top" id="AtR-am-chb"/>
-                            <constraint firstItem="7sx-QL-biX" firstAttribute="leading" secondItem="9Vk-7s-UEu" secondAttribute="leading" constant="20" id="H2R-JN-Toe"/>
-                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="trailing" secondItem="7sx-QL-biX" secondAttribute="trailing" constant="20" id="IAh-sw-A5E"/>
+                            <constraint firstItem="hGf-ed-cWw" firstAttribute="centerY" secondItem="itL-Jq-8zp" secondAttribute="centerY" multiplier="0.978" id="BaC-ou-wt5"/>
+                            <constraint firstItem="7sx-QL-biX" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="Fga-7O-iyD"/>
+                            <constraint firstItem="6Re-AI-gwg" firstAttribute="width" secondItem="hFz-sl-QJG" secondAttribute="width" multiplier="0.65" id="Mys-Ks-mvr"/>
+                            <constraint firstItem="itL-Jq-8zp" firstAttribute="centerY" secondItem="6Re-AI-gwg" secondAttribute="centerY" multiplier="1.5" id="TUK-0w-mcn"/>
                             <constraint firstItem="ThV-tI-DOa" firstAttribute="centerY" secondItem="9Vk-7s-UEu" secondAttribute="centerY" id="U69-6E-Mnm"/>
+                            <constraint firstAttribute="bottom" secondItem="6Re-AI-gwg" secondAttribute="bottom" id="U94-s7-wJS"/>
+                            <constraint firstItem="6Re-AI-gwg" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="V9M-vv-DLE"/>
                             <constraint firstItem="SlI-Wy-dJf" firstAttribute="leading" secondItem="hFz-sl-QJG" secondAttribute="leading" id="W0R-Oy-JsJ"/>
+                            <constraint firstItem="7sx-QL-biX" firstAttribute="height" secondItem="9Vk-7s-UEu" secondAttribute="height" multiplier="0.7" id="WJX-em-IYR"/>
+                            <constraint firstItem="itL-Jq-8zp" firstAttribute="height" secondItem="6Re-AI-gwg" secondAttribute="height" multiplier="0.222222" id="Xmw-l4-2nv"/>
+                            <constraint firstItem="hGf-ed-cWw" firstAttribute="height" secondItem="itL-Jq-8zp" secondAttribute="height" multiplier="0.521739" id="c4e-sc-B6P"/>
+                            <constraint firstItem="pyA-2k-fAU" firstAttribute="height" secondItem="6Re-AI-gwg" secondAttribute="height" multiplier="0.176329" id="cLx-3Y-xzc"/>
+                            <constraint firstItem="pyA-2k-fAU" firstAttribute="width" secondItem="6Re-AI-gwg" secondAttribute="width" multiplier="0.176976" id="eOa-de-hFt"/>
                             <constraint firstAttribute="bottom" secondItem="NUl-oa-Q0e" secondAttribute="bottom" id="hK5-Q2-t9N"/>
                             <constraint firstAttribute="trailing" secondItem="SlI-Wy-dJf" secondAttribute="trailing" id="i8F-uT-oXw"/>
-                            <constraint firstItem="7sx-QL-biX" firstAttribute="top" secondItem="9Vk-7s-UEu" secondAttribute="top" constant="100" id="kIM-Wa-NoD"/>
+                            <constraint firstItem="6Re-AI-gwg" firstAttribute="top" secondItem="hFz-sl-QJG" secondAttribute="top" id="jbG-Xk-Sar"/>
+                            <constraint firstItem="pyA-2k-fAU" firstAttribute="centerY" secondItem="6Re-AI-gwg" secondAttribute="centerY" multiplier="1.73" id="osn-Qk-v3I"/>
                             <constraint firstItem="SlI-Wy-dJf" firstAttribute="top" secondItem="hFz-sl-QJG" secondAttribute="top" id="qWq-pl-4Vt"/>
-                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="bottom" secondItem="7sx-QL-biX" secondAttribute="bottom" constant="100" id="yC7-ZX-yVj"/>
+                            <constraint firstItem="hGf-ed-cWw" firstAttribute="centerX" secondItem="itL-Jq-8zp" secondAttribute="centerX" id="qzQ-iV-leu"/>
+                            <constraint firstItem="hGf-ed-cWw" firstAttribute="width" secondItem="itL-Jq-8zp" secondAttribute="width" multiplier="0.889518" id="uSq-Kh-iMB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Vk-7s-UEu"/>
                     </view>
@@ -111,7 +130,9 @@
                         <outlet property="hatPurple" destination="RMg-y6-RBw" id="gEl-7r-G9e"/>
                         <outlet property="inviteLBL" destination="ThV-tI-DOa" id="Sk1-LX-i6u"/>
                         <outlet property="level" destination="hGf-ed-cWw" id="b17-Bm-feP"/>
+                        <outlet property="levelBackImage" destination="itL-Jq-8zp" id="k7x-6K-gF6"/>
                         <outlet property="menuButton" destination="k7F-M2-bfK" id="5vm-yx-zh5"/>
+                        <outlet property="painelHost" destination="6Re-AI-gwg" id="uNX-Jp-UyQ"/>
                         <outlet property="playOutlet" destination="pyA-2k-fAU" id="29G-cc-eZp"/>
                         <outlet property="stackView" destination="7sx-QL-biX" id="Mxr-3c-cPN"/>
                     </connections>
@@ -122,7 +143,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Go_" width="522" height="308"/>
+        <image name="Menu" width="284" height="210"/>
+        <image name="Painel Host" width="1526" height="1115"/>
         <image name="Votar" width="119" height="115"/>
         <image name="chefHatBlue" width="464" height="512"/>
         <image name="chefHatEnzo" width="464" height="512"/>
@@ -130,7 +152,7 @@
         <image name="chefHatOrange" width="464" height="512"/>
         <image name="dificuldade" width="314" height="152"/>
         <image name="fundo" width="2436" height="1154"/>
+        <image name="go_" width="271" height="193"/>
         <image name="lataria" width="2436" height="1154"/>
-        <image name="menu" width="284" height="210"/>
     </resources>
 </document>

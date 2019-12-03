@@ -95,9 +95,9 @@
                                 </connections>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="VuZ-S0-Uqf">
-                                <rect key="frame" x="428" y="327.5" width="40" height="38"/>
+                                <rect key="frame" x="428" y="352.5" width="40" height="38"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -108,7 +108,7 @@
                             <constraint firstItem="0xh-LO-8NS" firstAttribute="top" secondItem="JNb-eM-qbf" secondAttribute="top" constant="70" id="Mdb-03-mig"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.0482673" constant="1" id="PmO-6p-de6"/>
                             <constraint firstItem="CL2-7B-5oQ" firstAttribute="leading" secondItem="HsO-25-kPV" secondAttribute="leading" id="R0m-ic-LMV"/>
-                            <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" constant="150" id="VYi-VC-rai"/>
+                            <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" constant="175" id="VYi-VC-rai"/>
                             <constraint firstItem="JNb-eM-qbf" firstAttribute="trailing" secondItem="0xh-LO-8NS" secondAttribute="trailing" id="XmM-No-mxd"/>
                             <constraint firstItem="CL2-7B-5oQ" firstAttribute="top" secondItem="HsO-25-kPV" secondAttribute="top" id="arc-dA-xBk"/>
                             <constraint firstAttribute="trailing" secondItem="CL2-7B-5oQ" secondAttribute="trailing" id="cSf-ks-sGt"/>
