@@ -20,9 +20,9 @@ class SaturnOnionRings: Ingredient {
         
         self.states = [
             .raw: [.chopping],
-            .chopping: [.raw, .chopped],
+            .chopping: [.raw, .chopping, .chopped],
             .chopped: [.frying],
-            .frying: [.chopped, .fried],
+            .frying: [.chopped, .frying, .fried],
             .fried: [.burnt]
         ]
         

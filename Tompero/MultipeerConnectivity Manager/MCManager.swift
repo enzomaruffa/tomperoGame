@@ -36,8 +36,7 @@ class MCManager: NSObject, MCSessionDelegate {
         createNewSession(peerID)
     }
     
-    // MARK: - Methods
-    
+    // MARK: - Session Methods
     func createNewSession(_ peerID: MCPeerID) {
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession!.delegate = self
@@ -45,6 +44,7 @@ class MCManager: NSObject, MCSessionDelegate {
     
     func resetSession() {
         mcSession?.disconnect()
+        mcSession = nil
         if let peerID = self.peerID {
             createNewSession(peerID)
         } else {
@@ -71,35 +71,6 @@ class MCManager: NSObject, MCSessionDelegate {
         }
     }
     
-    func sendEveryone(dataWrapper: MCDataWrapper) {
-        print("[MCManager] Sending message to everyone: \(self.mcSession?.connectedPeers)")
-        send(dataWrapper: dataWrapper, to: self.mcSession!.connectedPeers)
-    }
-    
-    func send(dataWrapper: MCDataWrapper, to peers: [MCPeerID]) {
-        do {
-            let encodedData = try JSONEncoder().encode(dataWrapper)
-            try self.mcSession?.send(encodedData, toPeers: peers, with: .reliable)
-        } catch let error {
-            print("[MCManager] Error sending data: \(error.localizedDescription)")
-        }
-    }
-    
-    func sendPeersStatus(playersWithStatus: [MCPeerWithStatus]) {
-        print(mcSession?.connectedPeers.map({ $0.displayName }))
-        guard !self.mcSession!.connectedPeers.isEmpty else {
-            return
-        }
-        do {
-            print("[MCManager] Sending playersWithStatus to everyone")
-            let playersData = try JSONEncoder().encode(playersWithStatus)
-            let dataWrapper = MCDataWrapper(object: playersData, type: .playerData)
-            sendEveryone(dataWrapper: dataWrapper)
-        } catch let error {
-            print("[MCManager] Error sending data: \(error.localizedDescription)")
-        }
-    }
-    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         matchmakingObservers.forEach({ $0.playerUpdate(player: peerID.displayName, state: state) })
         switch state {
@@ -121,10 +92,15 @@ class MCManager: NSObject, MCSessionDelegate {
             print("[MCManager] Wrapper: \(wrapper)")
             
             if wrapper.type == .playerData {
-                print("[MCManager] Sending playerdata to observers: \(wrapper)")
+                print("[MCManager] Sending playerData to observers: \(wrapper)")
                 let peersWithStatus = try JSONDecoder().decode([MCPeerWithStatus].self, from: wrapper.object)
                 matchmakingObservers.forEach({ $0.playerListSent(playersWithStatus: peersWithStatus) })
-            } else {
+            } else if wrapper.type == .playerTableData {
+                print("[MCManager] Sending playerTableData to observers: \(wrapper)")
+                let tables = try JSONDecoder().decode([PlayerTable].self, from: wrapper.object)
+                matchmakingObservers.forEach({ $0.receiveTableDistribution(playerTables: tables) })
+            }
+            else {
                 print("[MCManager] Sending to dataObservers: \(dataObservers)")
                 dataObservers.forEach({ $0.receiveData(wrapper: wrapper) })
             }
@@ -144,6 +120,35 @@ class MCManager: NSObject, MCSessionDelegate {
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         
+    }
+    
+    // MARK: - Data Transfering Methods
+    func sendEveryone(dataWrapper: MCDataWrapper) {
+        print("[MCManager] Sending message to everyone")
+        send(dataWrapper: dataWrapper, to: self.mcSession!.connectedPeers)
+    }
+    
+    func send(dataWrapper: MCDataWrapper, to peers: [MCPeerID]) {
+        do {
+            let encodedData = try JSONEncoder().encode(dataWrapper)
+            try self.mcSession?.send(encodedData, toPeers: peers, with: .reliable)
+        } catch let error {
+            print("[MCManager] Error sending data: \(error.localizedDescription)")
+        }
+    }
+    
+    func sendPeersStatus(playersWithStatus: [MCPeerWithStatus]) {
+        guard self.mcSession!.connectedPeers.count > 1 else {
+            return
+        }
+        do {
+            print("[MCManager] Sending playersWithStatus to everyone")
+            let playersData = try JSONEncoder().encode(playersWithStatus)
+            let dataWrapper = MCDataWrapper(object: playersData, type: .playerData)
+            sendEveryone(dataWrapper: dataWrapper)
+        } catch let error {
+            print("[MCManager] Error sending data: \(error.localizedDescription)")
+        }
     }
     
     // MARK: - Observer Methods

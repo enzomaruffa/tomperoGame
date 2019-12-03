@@ -7,13 +7,22 @@
 //
 
 import Foundation
+import SpriteKit
 
 class Ingredient: HasSprite, Transferable, Equatable, Codable {
     
     var texturePrefix: String
     var textureName: String {
-        texturePrefix + currentState.rawValue
-        // update sprite (how?)
+        switch currentState {
+        case .raw: return texturePrefix + "Raw"
+        case .chopping: return texturePrefix + "Raw"
+        case .chopped: return texturePrefix + "Chopped"
+        case .cooking: return texturePrefix + "Chopped"
+        case .cooked: return texturePrefix + "Cooked"
+        case .frying: return texturePrefix + "Chopped"
+        case .fried: return texturePrefix + "Fried"
+        case .burnt: return "ashes"
+        }
     }
     var currentOwner: String
     
@@ -51,8 +60,13 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
         components.first(where: { $0 is FryableComponent }) as? FryableComponent ?? nil
     }
     
-    func update() {
-        
+    func attemptChangeState(to state: IngredientState) -> Bool {
+        print("Attempting change from \(currentState) to \(state)")
+        if states[currentState]!.contains(state) {
+            currentState = state
+            return true
+        }
+        return false
     }
     
 }

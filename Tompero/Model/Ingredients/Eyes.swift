@@ -20,7 +20,7 @@ class Eyes: Ingredient {
         
         self.states = [
             .raw: [.frying],
-            .frying: [.raw, .fried],
+            .frying: [.raw, .frying, .fried],
             .fried: [.burnt]
         ]
         

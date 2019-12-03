@@ -41,6 +41,8 @@ class FryableComponent: Component, Completable {
     }
     
     func update() {
-        
+        if !complete {
+            fryProgress += fryIncrement
+        }
     }
 }

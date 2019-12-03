@@ -13,4 +13,5 @@ enum MCDataType: Int, Codable {
     case plate
     case string
     case playerData
+    case playerTableData
 }

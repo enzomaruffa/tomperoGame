@@ -189,6 +189,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         UIView.animate(withDuration: 5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
             hat.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             hat.transform = CGAffineTransform(translationX: 0, y: 0)
+            
         })
     }
     
@@ -247,6 +248,10 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
 
 // MARK: - MCManagerMatchmakingObserver Methods
 extension WaitingRoomViewController: MCManagerMatchmakingObserver {
+    
+    func receiveTableDistribution(playerTables: [PlayerTable]) {
+        
+    }
     
     func playerListSent(playersWithStatus: [MCPeerWithStatus]) {
         print("[playerListSent] \(playersWithStatus)")
@@ -331,6 +336,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
             
             print("[playerUpdate] Enviando lista pros Peers")
             MCManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
+            self.playersWithStatus = newPlayerList
         }
     }
     

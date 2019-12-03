@@ -20,9 +20,9 @@ class Horn: Ingredient {
         
         self.states = [
             .raw: [.chopping],
-            .chopping: [.raw, .chopped],
+            .chopping: [.raw, .chopping, .chopped],
             .chopped: [.cooking],
-            .cooking: [.chopped, .cooked],
+            .cooking: [.chopped, .cooking, .cooked],
             .cooked: [.burnt]
         ]
         

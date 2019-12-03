@@ -12,7 +12,7 @@ class Tentacle: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "tentacle",
             currentOwner: currentOwner,
             actionCount: 3,
             finalState: .cooked
@@ -20,9 +20,9 @@ class Tentacle: Ingredient {
         
         self.states = [
             .raw: [.chopping],
-            .chopping: [.raw, .chopped],
+            .chopping: [.raw, .chopping, .chopped],
             .chopped: [.cooking],
-            .cooking: [.chopped, .cooked],
+            .cooking: [.chopped, .cooking, .cooked],
             .cooked: [.burnt]
         ]
         

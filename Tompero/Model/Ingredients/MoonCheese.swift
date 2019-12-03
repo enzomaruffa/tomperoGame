@@ -20,7 +20,7 @@ class MoonCheese: Ingredient {
         
         self.states = [
             .raw: [.chopping],
-            .chopping: [.raw, .chopped]
+            .chopping: [.raw, .chopping, .chopped]
         ]
         
         self.components = [
