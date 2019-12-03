@@ -23,7 +23,9 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         self.ingredient = ingredient
         self.currentStation = currentLocation
         currentStation.ingredient = self.ingredient
+        
         spriteNode = movableNode
+        
         movableNode.position = currentLocation.spriteNode.position
         movableNode.tapDelegate = self
         movableNode.moveDelegate = self
@@ -88,13 +90,15 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     
     func moveStarted(currentPosition: CGPoint) {
         scaleBeforeMove = spriteNode.yScale
-        self.spriteNode.run(SKAction.scale(to: 0.7, duration: 0.2))
     }
     
     func moving(currentPosition: CGPoint) {
-        
-        if rotationTimer == nil {
-
+        if currentPosition.distanceTo(currentStation.spriteNode.position) > 60 && rotationTimer == nil {
+            
+            print("moving cuz \(currentPosition.distanceTo(currentStation.spriteNode.position)) and \(rotationTimer)")
+            
+            self.spriteNode.run(SKAction.scale(to: 0.7, duration: 0.2))
+            
             let duration = 0.2
             
             let minRotation = CGFloat(-0.3)
@@ -112,7 +116,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
 
     func moveEnded(currentPosition: CGPoint) {
-        print(currentStation.stationType)
         if currentStation.stationType == .fryer || currentStation.stationType == .stove {
             hideSpriteNode()
         } else {
@@ -127,10 +130,19 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         rotationTimer = nil
     }
     
+    var count = 0
+    let maxcount = 5
     // MARK: - TappableDelegate
     func tap() {
         print("Ingredient tapped")
         currentStation.tap()
+        
+        count += 1
+        
+        if count > maxcount {
+            self.spriteNode.texture = SKTexture(imageNamed: ingredient.texturePrefix + "Chopped")
+        }
+        
     }
     
 }
