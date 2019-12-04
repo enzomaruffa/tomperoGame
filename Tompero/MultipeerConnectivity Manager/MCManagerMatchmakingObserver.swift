@@ -14,5 +14,5 @@ protocol MCManagerMatchmakingObserver {
     func playerUpdate(player: String, state: MCSessionState)
     func playerListSent(playersWithStatus: [MCPeerWithStatus])
     
-    func receiveTableDistribution(playerTables: [PlayerTable])
+    func receiveGameRule(rule: GameRule)
 }

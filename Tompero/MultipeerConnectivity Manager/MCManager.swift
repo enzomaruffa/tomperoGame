@@ -45,6 +45,8 @@ class MCManager: NSObject, MCSessionDelegate {
     func resetSession() {
         mcSession?.disconnect()
         mcSession = nil
+        mcAdvertiserAssistant?.stop()
+        mcAdvertiserAssistant = nil
         if let peerID = self.peerID {
             createNewSession(peerID)
         } else {
@@ -95,10 +97,11 @@ class MCManager: NSObject, MCSessionDelegate {
                 print("[MCManager] Sending playerData to observers: \(wrapper)")
                 let peersWithStatus = try JSONDecoder().decode([MCPeerWithStatus].self, from: wrapper.object)
                 matchmakingObservers.forEach({ $0.playerListSent(playersWithStatus: peersWithStatus) })
-            } else if wrapper.type == .playerTableData {
-                print("[MCManager] Sending playerTableData to observers: \(wrapper)")
-                let tables = try JSONDecoder().decode([PlayerTable].self, from: wrapper.object)
-                matchmakingObservers.forEach({ $0.receiveTableDistribution(playerTables: tables) })
+            } else if wrapper.type == .gameRule {
+                print("[MCManager] Sending gameRule to observers: \(wrapper)")
+                var rule = try JSONDecoder().decode(GameRule.self, from: wrapper.object)
+                rule.possibleIngredients = rule.possibleIngredients.map({ $0.findDowncast() })
+                matchmakingObservers.forEach({ $0.receiveGameRule(rule: rule) })
             }
             else {
                 print("[MCManager] Sending to dataObservers: \(dataObservers)")

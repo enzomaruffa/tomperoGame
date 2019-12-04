@@ -11,11 +11,11 @@ import MultipeerConnectivity
 
 class GameRuleFactory {
     
-    static func generateRule(difficulty: GameDifficulty, players: [MCPeerID]) -> GameRule {
+    static func generateRule(difficulty: GameDifficulty, players: [String]) -> GameRule {
         
 //        print("Creating control variables")
         // Variáveis de controle
-        let totalPlayers = players.count
+        let totalPlayers = players.filter({ $0 != "__empty__" }).count
         let spacePerPlayer = 3
         
         var occupiedSpaces = 0
@@ -23,8 +23,8 @@ class GameRuleFactory {
         
 //        print("Creating players tables")
         // Instancia as mesas dos jogadores
-        var playerTables: [MCPeerID: [PlayerTable]] = [:]
-        for player in players {
+        var playerTables: [String: [PlayerTable]] = [:]
+        for player in players.filter({ $0 != "__empty__" }) {
             playerTables[player] = []
             for _ in 0..<spacePerPlayer {
                 playerTables[player]!.append(PlayerTable())
@@ -60,7 +60,7 @@ class GameRuleFactory {
         
         // Pega só as mesas vazias. Filtra pelos jogadores e depois pelas mesas que possuem espaço vazio
         let players = playerTables.keys
-        let playerWithEmptyTablesList = players.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}))! })
+        let playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}))! })
         randomPlayer = playerWithEmptyTablesList.randomElement()!
         randomTable = playerTables[randomPlayer]?.filter({ $0.type == .empty }).randomElement()!
         randomTable?.type = .plate

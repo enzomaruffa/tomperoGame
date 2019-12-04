@@ -69,4 +69,53 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
         return false
     }
     
+    func findDowncast() -> Ingredient {
+        if texturePrefix == "Asteroid" {
+            return Asteroid(currentOwner: "")
+        }
+        
+        if texturePrefix == "Broccoli" {
+            return Broccoli(currentOwner: "")
+        }
+        
+        if texturePrefix == "DevilMashedBread" {
+            return DevilMashedBread(currentOwner: "")
+        }
+        
+        if texturePrefix == "Eyes" {
+            return Eyes(currentOwner: "")
+        }
+        
+        if texturePrefix == "Horn" {
+            return Horn(currentOwner: "")
+        }
+        
+        if texturePrefix == "MarsSand" {
+            return MarsSand(currentOwner: "")
+        }
+        
+        if texturePrefix == "MoonCheese" {
+            return MoonCheese(currentOwner: "")
+        }
+        
+        if texturePrefix == "SaturnOnionRings" {
+            return SaturnOnionRings(currentOwner: "")
+        }
+        
+        if texturePrefix == "SpaceshipHull" {
+            return SpaceshipHull(currentOwner: "")
+        }
+        
+        if texturePrefix == "Tardigrades" {
+            return Tardigrades(currentOwner: "")
+        }
+        
+        if texturePrefix == "Tentacle" {
+            return Tentacle(currentOwner: "")
+        }
+        
+        print("impossible to downcast")
+        return self
+    }
+    
 }

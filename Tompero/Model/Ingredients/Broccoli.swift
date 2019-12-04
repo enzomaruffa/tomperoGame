@@ -12,7 +12,7 @@ class Broccoli: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "Broccoli",
             currentOwner: currentOwner,
             actionCount: 2,
             finalState: .chopped

@@ -12,7 +12,7 @@ class Tentacle: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "tentacle",
+            texturePrefix: "Tentacle",
             currentOwner: currentOwner,
             actionCount: 3,
             finalState: .cooked

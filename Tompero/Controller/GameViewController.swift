@@ -16,6 +16,7 @@ class GameViewController: UIViewController, Storyboarded {
     weak var coordinator: MainCoordinator?
     
     var tables: [PlayerTable]?
+    var rule: GameRule?
     var hosting: Bool = false
     
     override func viewDidLoad() {

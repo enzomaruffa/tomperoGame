@@ -12,7 +12,7 @@ class Tardigrades: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "Tardigrades",
             currentOwner: currentOwner,
             actionCount: 2,
             finalState: .fried

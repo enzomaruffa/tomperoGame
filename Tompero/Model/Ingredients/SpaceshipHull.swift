@@ -12,7 +12,7 @@ class SpaceshipHull: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "SpaceshipHull",
             currentOwner: currentOwner,
             actionCount: 1,
             finalState: .fried

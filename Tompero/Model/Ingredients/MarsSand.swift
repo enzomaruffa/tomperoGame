@@ -12,7 +12,7 @@ class MarsSand: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "MarsSand",
             currentOwner: currentOwner,
             actionCount: 2,
             finalState: .cooked

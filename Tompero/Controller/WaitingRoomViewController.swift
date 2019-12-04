@@ -143,7 +143,14 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         self.present(vcd, animated: false, completion: nil)*/
         //coordinator?.menu()
     }
+    
     @IBAction func play(_ sender: Any) {
+        // Generate rules and send to other players
+        let peers = playersWithStatus.map({ $0.name })
+        let rule = GameRuleFactory.generateRule(difficulty: .easy, players: peers)
+        let ruleData = try! JSONEncoder().encode(rule)
+        MCManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
+        
         var counter = 0
         if animationTimer == nil {
             animationTimer = Timer.scheduledTimer(withTimeInterval: singleAnimationDuration, repeats: true, block: { (_) in
@@ -160,6 +167,11 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                 }
             })
             animationTimer!.fire()
+        }
+        
+        // Start game view with necessary information
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+            self.coordinator?.game(rule: rule, hosting: true)
         }
     }
     
@@ -249,8 +261,38 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
 // MARK: - MCManagerMatchmakingObserver Methods
 extension WaitingRoomViewController: MCManagerMatchmakingObserver {
     
-    func receiveTableDistribution(playerTables: [PlayerTable]) {
+    func receiveGameRule(rule: GameRule) {
+        print("Received game rule!")
+        print("\(type(of: rule.possibleIngredients))")
+
+        for player in rule.playerTables.keys.sorted(by: {$0 < $1}) {
+            print("\(player):")
+            for table in rule.playerTables[player]! {
+                if table.type == .ingredient {
+                    print("    \(table.type) | \(table.ingredient!)")
+                } else {
+                    print("    \(table.type)")
+                }
+            }
+        }
         
+        print("\nSample orders: ")
+        
+        for counter in 0..<3 {
+            print("\nOrder \(counter): ")
+            let order = rule.generateOrder()
+            for ingredient in order.ingredients {
+                print(type(of: ingredient))
+            }
+            print("Total actions to prepare: \(order.ingredients.reduce(0, {$0 + $1.numberOfActionsTilReady}))")
+        }
+        
+        // Play animation
+
+        // start game
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+            coordinator?.game(rule: rule, hosting: false)
+        }
     }
     
     func playerListSent(playersWithStatus: [MCPeerWithStatus]) {

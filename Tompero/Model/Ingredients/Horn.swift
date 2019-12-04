@@ -12,7 +12,7 @@ class Horn: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "Horn",
             currentOwner: currentOwner,
             actionCount: 3,
             finalState: .cooked

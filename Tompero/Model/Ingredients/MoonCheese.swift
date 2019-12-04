@@ -12,7 +12,7 @@ class MoonCheese: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "MoonCheese",
             currentOwner: currentOwner,
             actionCount: 2,
             finalState: .chopped

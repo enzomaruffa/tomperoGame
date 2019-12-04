@@ -12,7 +12,7 @@ class SaturnOnionRings: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "SaturnOnionRings",
             currentOwner: currentOwner,
             actionCount: 3,
             finalState: .raw

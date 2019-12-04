@@ -12,7 +12,7 @@ class Eyes: Ingredient {
     
     init(currentOwner: String) {
         super.init(
-            texturePrefix: "",
+            texturePrefix: "Eyes",
             currentOwner: currentOwner,
             actionCount: 2,
             finalState: .fried

@@ -18,10 +18,10 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        game(tables: [PlayerTable(type: .chopping, ingredient: nil),
-                      PlayerTable(type: .cooking, ingredient: nil),
-                      PlayerTable(type: .frying, ingredient: nil)], hosting: true)
-//        inicial()
+//        game(tables: [PlayerTable(type: .chopping, ingredient: nil),
+//                      PlayerTable(type: .cooking, ingredient: nil),
+//                      PlayerTable(type: .frying, ingredient: nil)], hosting: true)
+        inicial()
     }
     
     func inicial() {
@@ -50,6 +50,15 @@ class MainCoordinator: Coordinator {
         controller.coordinator = self
         controller.hosting = hosting
         controller.tables = tables
+        navigationController.pushViewController(controller, animated: false)
+    }
+    
+    
+    func game(rule: GameRule, hosting: Bool) {
+        let controller = GameViewController.instantiate()
+        controller.coordinator = self
+        controller.hosting = hosting
+        controller.rule = rule
         navigationController.pushViewController(controller, animated: false)
     }
 }
