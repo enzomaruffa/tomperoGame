@@ -39,47 +39,54 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var hatPurple: UIImageView!
     @IBOutlet weak var hatGreen: UIImageView!
     @IBOutlet weak var hatOrange: UIImageView!
-    @IBOutlet weak var inviteLBL: UILabel!
     @IBOutlet weak var level: UIButton!
     @IBOutlet weak var playOutlet: UIButton!
     @IBOutlet weak var painelHost: UIImageView!
     @IBOutlet weak var levelBackImage: UIImageView!
+    @IBOutlet weak var stackWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hatBlueLBL: UILabel!
+    @IBOutlet weak var hatPurpleLBL: UILabel!
+    @IBOutlet weak var hatGreenLBL: UILabel!
+    @IBOutlet weak var hatOrangeLBL: UILabel!
     
     // MARK: - View LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         level.setTitle("EASY", for: .normal)
         playerHats = [hatBlue, hatPurple, hatGreen, hatOrange]
-        setHatOrigin(hat: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
-        setHatOrigin(hat: hatPurple, xPosition: -1000, yPosition: +1200, xScale: 0.25, yScale: 0.25)
-        setHatOrigin(hat: hatGreen, xPosition: 3000, yPosition: 0, xScale: 0.25, yScale: 0.25)
-        setHatOrigin(hat: hatOrange, xPosition: -4000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
+//        setHatOrigin(hat: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
+//        setHatOrigin(hat: hatPurple, xPosition: -1000, yPosition: +1200, xScale: 0.25, yScale: 0.25)
+//        setHatOrigin(hat: hatGreen, xPosition: 3000, yPosition: 0, xScale: 0.25, yScale: 0.25)
+//        setHatOrigin(hat: hatOrange, xPosition: -4000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
         
-        //        caracterOrigin(caracater: hatPurple, xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
-        //        caracterOrigin(caracater: hatGreen, xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
-        //        caracterOrigin(caracater: hatOrange, xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
-        
-        //stackView.isHidden = false
-        inviteLBL.text = "WAITING FOR INVITE"
-        inviteLBL.isHidden = true
         level.isHidden = false
-        self.handleTapAnimations(hat: self.hatBlue)
-        self.handleTapAnimations(hat: self.hatPurple)
         if hosting {
-            level.isHidden = false
-            self.handleTapAnimations(hat: self.hatBlue)
-            self.handleTapAnimations(hat: self.hatPurple)
-            self.handleTapAnimations(hat: self.hatOrange)
-            self.handleTapAnimations(hat: self.hatGreen)
+//            stackWidthConstraint.setMultiplier(multiplier: 0.8)
+//            stackHeightConstraint.setMultiplier(multiplier: 0.8)
+         //   stackWidthConstraint.constant = 1.0
+//            stackView.frame.size.height = self.view.frame.size.height
         } else {
-            level.isHidden = false
-            playOutlet.isHidden = true
-            painelHost.isHidden = true
-            level.isHidden = true
+            stackWidthConstraint.setMultiplier(multiplier: 0.8)
+            stackHeightConstraint.setMultiplier(multiplier: 0.8)
+            stackCenterYConstraint.setMultiplier(multiplier: 1.0)
+
+            //stackHeightConstraint.multiplier = 2.0
+            stackView.frame.size.height = self.view.frame.size.height
+            stackView.frame.size.width = self.view.frame.size.width
+            stackView.frame.origin = self.view.frame.origin
+
             levelBackImage.isHidden = true
+            playOutlet.isHidden = true
+            level.isHidden = true
+            painelHost.isHidden = true
         }
+        stackView.layoutIfNeeded()
+        
     }
+    
     func zoomOut() {
-        if isZoomed{
+        if isZoomed {
             UIView.animate(withDuration: 0.7, animations: {
                 self.view.transform = self.viewOriginalTransform
                 
@@ -89,15 +96,43 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tapGestureRecognizerBlue = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizerPurple = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizerGreen = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizerOrange = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        
+        let scaleHat = CGFloat(1.1)
+        hatBlue.tag = 0
+        hatBlue.isUserInteractionEnabled = true
+        hatBlue.addGestureRecognizer(tapGestureRecognizerBlue)
+        hatBlue.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
+        hatBlueLBL.text = "PLAYER 1"
+        
+        hatPurple.tag = 1
+        hatPurple.isUserInteractionEnabled = true
+        hatPurple.addGestureRecognizer(tapGestureRecognizerPurple)
+        hatPurple.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
+        hatPurpleLBL.text = "PLAYER 2"
+        
+        hatGreen.tag = 2
+        hatGreen.isUserInteractionEnabled = true
+        hatGreen.addGestureRecognizer(tapGestureRecognizerGreen)
+        hatGreen.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
+        hatGreenLBL.text = "PLAYER 3"
+        
+        hatOrange.tag = 3
+        hatOrange.isUserInteractionEnabled = true
+        hatOrange.addGestureRecognizer(tapGestureRecognizerOrange)
+        hatOrange.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
+        hatOrangeLBL.text = "PLAYER 4"
+        
         // Array com lista de connected players
         //MCManager.shared.mcSession?.connectedPeers
-        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAnimations)))
+        
         if hosting {
-            self.level.isHidden = false
             print(" CURRENTLY HOSTING<<")
             playersWithStatus = [MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
@@ -117,16 +152,17 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         
     }
     @IBAction func menuPressed(_ sender: Any) {
-    
+        
         viewOriginalTransform = self.view.transform
         let scaleX = (view.frame.width/menuButton.frame.width)*1.1
         let scaleY = (view.frame.height/menuButton.frame.height)*1.1
+        
         let scaledTransform = viewOriginalTransform.scaledBy(x: scaleX, y: scaleY)
-        let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: (-2852)/scaleX, y: 888/scaleY)
+        let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: (-2400)/scaleX, y: 1225/scaleY)
         print("scale \(scaleX) \(scaleY)")
         isZoomed = true
-        UIView.animate(withDuration: 0.7, animations: {
-          self.view.transform = scaledAndTranslatedTransform
+        UIView.animate(withDuration: 1, animations: {
+            self.view.transform = scaledAndTranslatedTransform
             
         },completion:  { (_) in
             print("SCALE X", scaleX)
@@ -138,16 +174,12 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             vcd.modalTransitionStyle = .crossDissolve
             self.present(vcd, animated: true, completion: nil)
         })
-        
-       
-        
-       
         /*let vcd = UIStoryboard(name: "MenuStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MenuCollectionViewController") as! MenuCollectionViewController
-        vcd.modalPresentationStyle = .popover
-
-        //let vcd = storyboard!.instantiateViewController(withIdentifier: "MenuCollectionViewController") as! MenuCollectionViewController
-        //vcd.modalTransitionStyle = .coverVertical
-        self.present(vcd, animated: false, completion: nil)*/
+         vcd.modalPresentationStyle = .popover
+         
+         //let vcd = storyboard!.instantiateViewController(withIdentifier: "MenuCollectionViewController") as! MenuCollectionViewController
+         //vcd.modalTransitionStyle = .coverVertical
+         self.present(vcd, animated: false, completion: nil)*/
         //coordinator?.menu()
     }
     @IBAction func play(_ sender: Any) {
@@ -171,8 +203,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func levelButtom(_ sender: Any) {
-            hatBlue.alpha = 0.2
-        UIView.animate(withDuration: 1, delay: 0.0, options: [.curveLinear, .repeat, .autoreverse], animations: {self.hatBlue.alpha = 1.0}, completion: nil)
+        
         if countLevel == .easy {
             level.setTitle("MEDIUM", for: .normal)
             countLevel = .medium
@@ -199,6 +230,34 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             hat.transform = CGAffineTransform(translationX: 0, y: 0)
             
         })
+    }
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        imageViewOpacity(imageView: tappedImage)
+        if tappedImage.tag == 0{
+            
+            
+        } else if tappedImage.tag == 1 {
+            print("CHAPEU SELECIONADO", hatPurple)
+        } else if tappedImage.tag == 2 {
+            print("CHAPEU SELECIONADO", hatGreen)
+        } else if tappedImage.tag == 3 {
+            print("CHAPEU SELECIONADO", hatOrange)
+        }
+    }
+    func imageViewOpacity(imageView: UIImageView) {
+        imageView.alpha = 0.2
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {imageView.alpha = 1.0
+        }, completion: {(_) in
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
+                imageView.alpha = 0.2
+            }, completion: {(_) in
+                UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
+                    imageView.alpha = 1.0
+                })
+            })
+        })
+        
     }
     
     func animatedSpaceshipToUP(hat: UIImageView) {
@@ -234,13 +293,11 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
         //            return
         //        }
         
-        self.stackView.isHidden = false
-        self.inviteLBL.isHidden = true
         
         for index in 0..<self.playersWithStatus.count {
             print("Playing animation with index \(index)")
             print("\(self.playerHats[index].transform)")
-            self.setHatOrigin(hat: self.playerHats[index], xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
+           // self.setHatOrigin(hat: self.playerHats[index], xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
             print("\(self.playerHats[index].transform)")
         }
         
@@ -281,29 +338,36 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
                         // Sabemos qual chapeu pelo valor de index
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             if index == 0 {
-                                self.stackView.isHidden = false
-                                self.inviteLBL.isHidden = true
-                                self.handleTapAnimations(hat: self.hatBlue)
+                                playersWithStatus[index].status == .connected
+                                self.hatBlueLBL.text = playersWithStatus[index].name
+                                self.hatBlue.image = UIImage(named: "JERRY - Vazio")
+                                
                             } else if index == 1 {
                                 self.handleTapAnimations(hat: self.hatPurple)
+                                self.hatBlueLBL.text = playersWithStatus[index].name
+                                self.hatBlue.image = UIImage(named: "JERRY - Vazio")
                             } else if index == 2 {
                                 self.handleTapAnimations(hat: self.hatOrange)
+                                self.hatBlueLBL.text = playersWithStatus[index].name
+                                self.hatBlue.image = UIImage(named: "JERRY - Vazio")
                             } else if index == 3 {
                                 self.handleTapAnimations(hat: self.hatGreen)
+                                self.hatBlueLBL.text = playersWithStatus[index].name
+                                self.hatBlue.image = UIImage(named: "JERRY - Vazio")
                             }
                         }
                     }
                 }
             }
             
-//            // Mudança de estado
-//            for index in 0..<playersWithStatus.count {
-//                if playersWithStatus[index].status != oldList[index].status {
-//                    print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) mudou de estado")
-//                    // Achamos o jogador, faz o chapeu dele mudar.
-//                    // Sabemos qual chapeu pelo valor de i
-//                }
-//            }
+            //            // Mudança de estado
+            //            for index in 0..<playersWithStatus.count {
+            //                if playersWithStatus[index].status != oldList[index].status {
+            //                    print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) mudou de estado")
+            //                    // Achamos o jogador, faz o chapeu dele mudar.
+            //                    // Sabemos qual chapeu pelo valor de i
+            //                }
+            //            }
             
             // seta o da classe pro novo
             self.playersWithStatus = playersWithStatus
