@@ -55,27 +55,27 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         level.setTitle("EASY", for: .normal)
         playerHats = [hatBlue, hatPurple, hatGreen, hatOrange]
-//        setHatOrigin(hat: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
-//        setHatOrigin(hat: hatPurple, xPosition: -1000, yPosition: +1200, xScale: 0.25, yScale: 0.25)
-//        setHatOrigin(hat: hatGreen, xPosition: 3000, yPosition: 0, xScale: 0.25, yScale: 0.25)
-//        setHatOrigin(hat: hatOrange, xPosition: -4000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
+        //        setHatOrigin(hat: hatBlue, xPosition: 2000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
+        //        setHatOrigin(hat: hatPurple, xPosition: -1000, yPosition: +1200, xScale: 0.25, yScale: 0.25)
+        //        setHatOrigin(hat: hatGreen, xPosition: 3000, yPosition: 0, xScale: 0.25, yScale: 0.25)
+        //        setHatOrigin(hat: hatOrange, xPosition: -4000, yPosition: -1200, xScale: 0.25, yScale: 0.25)
         
         level.isHidden = false
         if hosting {
-//            stackWidthConstraint.setMultiplier(multiplier: 0.8)
-//            stackHeightConstraint.setMultiplier(multiplier: 0.8)
-         //   stackWidthConstraint.constant = 1.0
-//            stackView.frame.size.height = self.view.frame.size.height
+            //            stackWidthConstraint.setMultiplier(multiplier: 0.8)
+            //            stackHeightConstraint.setMultiplier(multiplier: 0.8)
+            //   stackWidthConstraint.constant = 1.0
+            //            stackView.frame.size.height = self.view.frame.size.height
         } else {
             stackWidthConstraint.setMultiplier(multiplier: 0.8)
             stackHeightConstraint.setMultiplier(multiplier: 0.8)
             stackCenterYConstraint.setMultiplier(multiplier: 1.0)
-
+            
             //stackHeightConstraint.multiplier = 2.0
             stackView.frame.size.height = self.view.frame.size.height
             stackView.frame.size.width = self.view.frame.size.width
             stackView.frame.origin = self.view.frame.origin
-
+            
             levelBackImage.isHidden = true
             playOutlet.isHidden = true
             level.isHidden = true
@@ -297,7 +297,7 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
         for index in 0..<self.playersWithStatus.count {
             print("Playing animation with index \(index)")
             print("\(self.playerHats[index].transform)")
-           // self.setHatOrigin(hat: self.playerHats[index], xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
+            // self.setHatOrigin(hat: self.playerHats[index], xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
             print("\(self.playerHats[index].transform)")
         }
         
@@ -329,46 +329,64 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
                 // rodar as animações para todos
                 return
             }
-            //verifica se o nome mudou pra considerar jogador entrando na sala
-            if playersWithStatus.map({$0.name}).sorted() != oldList.map({$0.name}).sorted() {
-                for index in 0..<playersWithStatus.count {
-                    if playersWithStatus[index].name != oldList[index].name {
-                        print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) entrou")
-                        // Achamos o jogador, faz o chapeu dele entrar.
-                        // Sabemos qual chapeu pelo valor de index
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            if index == 0 {
-                                playersWithStatus[index].status == .connected
-                                self.hatBlueLBL.text = playersWithStatus[index].name
-                                self.hatBlue.image = UIImage(named: "JERRY - Vazio")
-                                
-                            } else if index == 1 {
-                                self.handleTapAnimations(hat: self.hatPurple)
-                                self.hatBlueLBL.text = playersWithStatus[index].name
-                                self.hatBlue.image = UIImage(named: "JERRY - Vazio")
-                            } else if index == 2 {
-                                self.handleTapAnimations(hat: self.hatOrange)
-                                self.hatBlueLBL.text = playersWithStatus[index].name
-                                self.hatBlue.image = UIImage(named: "JERRY - Vazio")
-                            } else if index == 3 {
-                                self.handleTapAnimations(hat: self.hatGreen)
-                                self.hatBlueLBL.text = playersWithStatus[index].name
-                                self.hatBlue.image = UIImage(named: "JERRY - Vazio")
-                            }
+            for index in 0..<playersWithStatus.count {
+                // Esse loop, antes, só entrava se o usuário estivesse entnraod pela primeira vez na lista (pra não fazer animação  repetida. Como agora  não tem a animação doida, ele entra  sempre no loop
+                // if playersWithStatus[index].name != oldList[index].name {
+                print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) entrou")
+                
+                // Precisamos do dispatch queue pois estamos fazendo mudanças no UIKit e isso precisa do thread principal
+                DispatchQueue.main.async {
+                    
+                    // Achamos o jogador, faz o chapeu dele entrar.
+                    // Sabemos qual chapeu pelo valor de index
+                    if index == 0 {
+                        if playersWithStatus[index].status == .notConnected {
+                            self.hatBlueLBL.text = "?"
+                            self.hatBlue.image = UIImage(named: "VREX - Vazio")
+                        } else if playersWithStatus[index].status == .connecting {
+                            self.hatBlueLBL.text = "..."
+                            self.hatBlue.image = UIImage(named: "VREX - redline")
+                        } else {
+                            self.hatBlueLBL.text = playersWithStatus[index].name
+                            self.hatBlue.image = UIImage(named: "VREX - FULL")
+                        }
+                    } else if index == 1 {
+                        if playersWithStatus[index].status == .notConnected {
+                            self.hatPurpleLBL.text = "?"
+                            self.hatPurple.image = UIImage(named: "SW77 - Vazio")
+                        } else if playersWithStatus[index].status == .connecting {
+                            self.hatPurpleLBL.text = "..."
+                            self.hatPurple.image = UIImage(named: "SW77 - redline")
+                        } else {
+                            self.hatPurpleLBL.text = playersWithStatus[index].name
+                            self.hatPurple.image = UIImage(named: "SW77 - FULL")
+                        }
+                    } else if index == 2 {
+                        if playersWithStatus[index].status == .notConnected {
+                            self.hatGreenLBL.text = "?"
+                            self.hatGreen.image = UIImage(named: "MORGAN - Vazio")
+                        } else if playersWithStatus[index].status == .connecting {
+                            self.hatGreenLBL.text = "..."
+                            self.hatGreen.image = UIImage(named: "MORGAN - redline")
+                        } else {
+                            self.hatGreenLBL.text = playersWithStatus[index].name
+                            self.hatGreen.image = UIImage(named: "MORGAN - FULL")
+                        }
+                    } else if index == 3 {
+                        if playersWithStatus[index].status == .notConnected {
+                            self.hatOrangeLBL.text = "?"
+                            self.hatOrange.image = UIImage(named: "JERRY - Vazio")
+                        } else if playersWithStatus[index].status == .connecting {
+                            self.hatOrangeLBL.text = "..."
+                            self.hatOrange.image = UIImage(named: "JERRY - redline")
+                        } else {
+                            self.hatOrangeLBL.text = playersWithStatus[index].name
+                            self.hatOrange.image = UIImage(named: "JERRY - FULL")
                         }
                     }
                 }
+                
             }
-            
-            //            // Mudança de estado
-            //            for index in 0..<playersWithStatus.count {
-            //                if playersWithStatus[index].status != oldList[index].status {
-            //                    print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) mudou de estado")
-            //                    // Achamos o jogador, faz o chapeu dele mudar.
-            //                    // Sabemos qual chapeu pelo valor de i
-            //                }
-            //            }
-            
             // seta o da classe pro novo
             self.playersWithStatus = playersWithStatus
         } else {
