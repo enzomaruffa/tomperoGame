@@ -72,6 +72,7 @@ class InicialViewController: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         self.person.center = CGPoint(x: view.frame.width/2, y: view.frame.height/1.5)
+        MCManager.shared.resetSession()
     }
     
     // MARK: - Methods
