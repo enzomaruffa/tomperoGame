@@ -19,6 +19,10 @@ class CookableComponent: Component, Completable {
         cookProgress >= cookCap
     }
     
+    var burnt: Bool {
+        cookProgress >= burnCap
+    }
+    
     init(cookProgress: Float, cookIncrement: Float, cookCap: Float, burnCap: Float) {
         self.cookProgress = cookProgress
         self.cookIncrement = cookIncrement
@@ -29,7 +33,7 @@ class CookableComponent: Component, Completable {
     }
     
     convenience override init() {
-        self.init(cookProgress: 0, cookIncrement: 10, cookCap: 100, burnCap: 200)
+        self.init(cookProgress: 0, cookIncrement: 20/60, cookCap: 100, burnCap: 200)
     }
     
     convenience init(cookProgress: Float, cookIncrement: Float) {
@@ -41,8 +45,9 @@ class CookableComponent: Component, Completable {
     }
     
     func update() {
-        if !complete {
+        if !burnt {
             cookProgress += cookIncrement
+            print("Progress: \(cookProgress)")
         }
     }
 }

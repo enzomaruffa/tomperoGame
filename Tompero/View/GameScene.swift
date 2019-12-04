@@ -81,6 +81,9 @@ class GameScene: SKScene {
     }
     
     // MARK: - Game Logic
+    override func update(_ currentTime: TimeInterval) {
+        stations.forEach({ $0.update() })
+    }
 }
 
 // MARK: - GameConnectionManagerObserver Methods

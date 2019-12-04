@@ -19,6 +19,10 @@ class FryableComponent: Component, Completable {
         fryProgress >= fryCap
     }
     
+    var burnt: Bool {
+        fryProgress >= burnCap
+    }
+    
     init(fryProgress: Float, fryIncrement: Float, fryCap: Float, burnCap: Float) {
         self.fryProgress = fryProgress
         self.fryIncrement = fryIncrement
@@ -29,7 +33,7 @@ class FryableComponent: Component, Completable {
     }
     
     convenience override init() {
-        self.init(fryProgress: 0, fryIncrement: 10, fryCap: 100, burnCap: 200)
+        self.init(fryProgress: 0, fryIncrement: 20/60, fryCap: 100, burnCap: 200)
     }
     
     convenience init(fryProgress: Float, fryIncrement: Float) {

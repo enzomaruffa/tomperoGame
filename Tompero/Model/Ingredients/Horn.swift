@@ -23,7 +23,8 @@ class Horn: Ingredient {
             .chopping: [.raw, .chopping, .chopped],
             .chopped: [.cooking],
             .cooking: [.chopped, .cooking, .cooked],
-            .cooked: [.burnt]
+            .cooked: [.cooking, .burnt],
+            .burnt: []
         ]
         
         self.components = [

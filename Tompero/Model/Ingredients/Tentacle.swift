@@ -23,7 +23,8 @@ class Tentacle: Ingredient {
             .chopping: [.raw, .chopping, .chopped],
             .chopped: [.cooking],
             .cooking: [.chopped, .cooking, .cooked],
-            .cooked: [.burnt]
+            .cooked: [.burnt],
+            .burnt: []
         ]
         
         self.components = [

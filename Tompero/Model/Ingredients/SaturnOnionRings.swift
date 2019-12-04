@@ -23,7 +23,8 @@ class SaturnOnionRings: Ingredient {
             .chopping: [.raw, .chopping, .chopped],
             .chopped: [.frying],
             .frying: [.chopped, .frying, .fried],
-            .fried: [.burnt]
+            .fried: [.burnt],
+            .burnt: []
         ]
         
         self.components = [

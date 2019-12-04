@@ -40,6 +40,15 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         self.spriteNode.run(SKAction.fadeIn(withDuration: 0.2))
     }
     
+    private func setIngredientIn(_ station: StationNode) {
+        currentStation.ingredient = nil
+        currentStation.ingredientSlot = nil
+        
+        currentStation = station
+        currentStation.ingredient = self.ingredient
+        currentStation.ingredientSlot = self
+    }
+    
     // MARK: - MovableDelegate
     func attemptMove(to station: StationNode) -> Bool {
         
@@ -49,8 +58,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         case .board:
             let canMove = ingredient.attemptChangeState(to: .chopping)
             if canMove {
-                currentStation = station
-                currentStation.ingredient = self.ingredient
+                setIngredientIn(station)
                 spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
@@ -59,8 +67,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         case .stove:
             let canMove = ingredient.attemptChangeState(to: .cooking)
             if canMove {
-                currentStation = station
-                currentStation.ingredient = self.ingredient
+                setIngredientIn(station)
                 spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
@@ -69,16 +76,14 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         case .fryer:
             let canMove = ingredient.attemptChangeState(to: .frying)
             if canMove {
-                currentStation = station
-                currentStation.ingredient = self.ingredient
+                setIngredientIn(station)
                 spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
             return canMove
 
         case .shelf:
-            currentStation = station
-            currentStation.ingredient = self.ingredient
+        setIngredientIn(station)
             spriteNode.setScale(0.7)
             print("Result: \(true)")
             return true

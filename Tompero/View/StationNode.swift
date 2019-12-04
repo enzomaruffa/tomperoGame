@@ -73,8 +73,33 @@ class StationNode: TappableDelegate {
     func update() {
         if stationType == .stove {
             ingredient?.cookableComponent?.update()
+            
+            if ingredient?.cookableComponent?.burnt ?? false {
+                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.burnt) {
+                    ingredient?.currentState = .burnt
+                    ingredientSlot?.checkTextureChange()
+                }
+            } else if ingredient?.cookableComponent?.complete ?? false {
+                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.cooked) {
+                    ingredient?.currentState = .cooked
+                    ingredientSlot?.checkTextureChange()
+                }
+            }
+            
         } else if stationType == .fryer {
             ingredient?.fryableComponent?.update()
+            
+            if ingredient?.fryableComponent?.burnt ?? false {
+                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.burnt) {
+                    ingredient?.currentState = .burnt
+                    ingredientSlot?.checkTextureChange()
+                }
+            } else if ingredient?.fryableComponent?.complete ?? false {
+                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.fried) {
+                    ingredient?.currentState = .fried
+                    ingredientSlot?.checkTextureChange()
+                }
+            }
         }
     }
 }
