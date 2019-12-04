@@ -27,8 +27,6 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
                 
                 self.vcPai.zoomOut()
             })
-
-        
         
         //self.navigationController?.popViewController(animated: true)
         

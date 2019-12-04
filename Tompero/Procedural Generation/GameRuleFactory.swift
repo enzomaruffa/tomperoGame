@@ -60,7 +60,7 @@ class GameRuleFactory {
         
         // Pega só as mesas vazias. Filtra pelos jogadores e depois pelas mesas que possuem espaço vazio
         let players = playerTables.keys
-        let playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}))! })
+        let playerWithEmptyTablesList = players.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}))! })
         randomPlayer = playerWithEmptyTablesList.randomElement()!
         randomTable = playerTables[randomPlayer]?.filter({ $0.type == .empty }).randomElement()!
         randomTable?.type = .plate

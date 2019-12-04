@@ -33,7 +33,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     
     private func hideSpriteNode() {
         // We use a very low alpha value otherwise it's interaction is disabled
-        self.spriteNode.run(SKAction.fadeAlpha(to: 0.00001, duration: 0.1))
+        self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05))
     }
     
     private func showSpriteNode() {
@@ -67,6 +67,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         case .stove:
             let canMove = ingredient.attemptChangeState(to: .cooking)
             if canMove {
+                hideSpriteNode()
                 setIngredientIn(station)
                 spriteNode.setScale(1)
             }
@@ -76,6 +77,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         case .fryer:
             let canMove = ingredient.attemptChangeState(to: .frying)
             if canMove {
+                hideSpriteNode()
                 setIngredientIn(station)
                 spriteNode.setScale(1)
             }
@@ -98,9 +100,9 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func moving(currentPosition: CGPoint) {
-        if currentPosition.distanceTo(currentStation.spriteNode.position) > 60 && rotationTimer == nil {
+        if currentPosition.distanceTo(currentStation.spriteNode.position) > 80 && rotationTimer == nil {
             
-            print("moving cuz \(currentPosition.distanceTo(currentStation.spriteNode.position)) and \(rotationTimer)")
+//            print("moving cuz \(currentPosition.distanceTo(currentStation.spriteNode.position)) and \(rotationTimer)")
             
             self.spriteNode.run(SKAction.scale(to: 0.7, duration: 0.2))
             

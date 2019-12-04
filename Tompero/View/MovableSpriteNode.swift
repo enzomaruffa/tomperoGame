@@ -31,7 +31,7 @@ class MovableSpriteNode: SKSpriteNode {
         
         moveDelegate?.moveStarted(currentPosition: touch.location(in: scene!))
         
-        if let gameScene = scene as? GameScene {
+        if scene != nil {
             self.zPosition = 4
         }
         
@@ -57,7 +57,7 @@ class MovableSpriteNode: SKSpriteNode {
         if let initialTouchPosition = self.initialTouchPosition {
             let finalTouchPosition = touch.location(in: scene!)
             let distanceToOrigin = initialTouchPosition.distanceTo(finalTouchPosition)
-            if distanceToOrigin < 60 {
+            if distanceToOrigin < 80 {
                 tapDelegate?.tap()
             }
         }

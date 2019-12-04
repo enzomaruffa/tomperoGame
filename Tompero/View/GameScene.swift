@@ -23,7 +23,7 @@ class GameScene: SKScene {
     
     var stations: [StationNode] = []
     var shelves: [StationNode] {
-        stations.filter( {$0.stationType == .shelf} )
+        stations.filter({ $0.stationType == .shelf })
     }
     
     var ingredients: [IngredientNode] = []

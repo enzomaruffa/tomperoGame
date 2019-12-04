@@ -25,7 +25,6 @@ class GameConnectionManager {
     func subscribe(observer: GameConnectionManagerObserver) {
         observers.append(observer)
     }
-
     
     func sendAll(message: String) {
         do {

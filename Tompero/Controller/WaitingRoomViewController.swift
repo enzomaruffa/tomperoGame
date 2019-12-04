@@ -73,11 +73,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
     }
     func zoomOut() {
-        if isZoomed{
+        if isZoomed {
             UIView.animate(withDuration: 0.7, animations: {
                 self.view.transform = self.viewOriginalTransform
-                
-            },completion:  { (_) in
+            }, completion: { (_) in
                 self.view.layoutSubviews()
             })
         }
@@ -120,8 +119,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         isZoomed = true
         UIView.animate(withDuration: 0.7, animations: {
           self.view.transform = scaledAndTranslatedTransform
-            
-        },completion:  { (_) in
+        }, completion: { (_) in
             print("SCALE X", scaleX)
             print("SCALE Y", scaleY)
             let vcd = UIStoryboard(name: "MenuStoryboard", bundle: nil)
@@ -131,9 +129,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             vcd.modalTransitionStyle = .crossDissolve
             self.present(vcd, animated: true, completion: nil)
         })
-        
-       
-        
        
         /*let vcd = UIStoryboard(name: "MenuStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MenuCollectionViewController") as! MenuCollectionViewController
         vcd.modalPresentationStyle = .popover
@@ -291,7 +286,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
 
         // start game
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
-            coordinator?.game(rule: rule, hosting: false)
+            self.coordinator?.game(rule: rule, hosting: false)
         }
     }
     
