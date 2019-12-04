@@ -37,23 +37,25 @@ class GameConnectionManager {
         }
     }
     
-    func send(ingredient: Ingredient, to player: MCPeerID) {
+    func send(ingredient: Ingredient, to player: String) {
         do {
             print("[GameConnectionManager] Preparing ingredient")
             let ingredientData = try JSONEncoder().encode(ingredient)
             let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
-            MCManager.shared.send(dataWrapper: wrapped, to: [player])
+            let peer = MCManager.shared.connectedPeers?.filter({ $0.displayName == player })
+            MCManager.shared.send(dataWrapper: wrapped, to: peer!)
         } catch let error {
             print(error.localizedDescription)
         }
     }
     
-    func send(plate: Plate, to player: MCPeerID) {
+    func send(plate: Plate, to player: String) {
         do {
             print("[GameConnectionManager] Preparing plate")
             let plateData = try JSONEncoder().encode(plate)
             let wrapped = MCDataWrapper(object: plateData, type: .plate)
-            MCManager.shared.send(dataWrapper: wrapped, to: [player])
+            let peer = MCManager.shared.connectedPeers?.filter({ $0.displayName == player })
+            MCManager.shared.send(dataWrapper: wrapped, to: peer!)
         } catch let error {
             print(error.localizedDescription)
         }

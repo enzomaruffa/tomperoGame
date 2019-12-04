@@ -22,6 +22,10 @@ class MCManager: NSObject, MCSessionDelegate {
     var mcSession: MCSession?
     var mcAdvertiserAssistant: MCAdvertiserAssistant?
     
+    var connectedPeers: [MCPeerID]? {
+        self.mcSession?.connectedPeers ?? nil
+    }
+    
     var dataObservers: [MCManagerDataObserver] = []
     var matchmakingObservers: [MCManagerMatchmakingObserver] = []
     
