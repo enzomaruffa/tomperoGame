@@ -24,6 +24,8 @@ class StationNode: TappableDelegate {
         case .plateBox: return -200.0 // not final
         case .shelf: return -200.0 // not final
         case .delivery: return -200.0 // not final
+        case .pipe: return -200.0 // not final
+        case .hatch: return -200.0 // not final
         }
     }
     
@@ -62,7 +64,7 @@ class StationNode: TappableDelegate {
             ingredient?.choppableComponent?.update()
 
             if ingredient?.choppableComponent?.complete ?? false {
-                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.chopped) {
+                if (ingredient!.states[ingredient!.currentState] ?? []).contains(IngredientState.chopped) {
                     ingredient?.currentState = .chopped
                 }
             }
@@ -100,6 +102,8 @@ class StationNode: TappableDelegate {
                     ingredientSlot?.checkTextureChange()
                 }
             }
+        } else if stationType == .pipe {
+            
         }
     }
 }

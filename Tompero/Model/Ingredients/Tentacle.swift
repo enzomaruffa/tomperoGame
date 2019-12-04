@@ -10,10 +10,9 @@ import Foundation
 
 class Tentacle: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "Tentacle",
-            currentOwner: currentOwner,
             actionCount: 3,
             finalState: .cooked
         )

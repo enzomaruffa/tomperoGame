@@ -10,10 +10,9 @@ import Foundation
 
 class SpaceshipHull: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "SpaceshipHull",
-            currentOwner: currentOwner,
             actionCount: 1,
             finalState: .fried
         )

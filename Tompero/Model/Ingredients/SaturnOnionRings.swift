@@ -10,10 +10,9 @@ import Foundation
 
 class SaturnOnionRings: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "SaturnOnionRings",
-            currentOwner: currentOwner,
             actionCount: 3,
             finalState: .raw
         )

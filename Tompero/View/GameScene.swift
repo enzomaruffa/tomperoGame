@@ -13,17 +13,30 @@ import GameplayKit
 class GameScene: SKScene {
     
     // MARK: - Variables
-    //var tables: [PlayerTable]?
-    var tables: [PlayerTable] = [
-        PlayerTable(type: .chopping, ingredient: nil),
-        PlayerTable(type: .cooking, ingredient: nil),
-        PlayerTable(type: .frying, ingredient: nil)
-    ]
-    var player: String = ""
+    var player: String = "Enzo's Enzo's iPhone"
+    var rule: GameRule?
+    var tables: [PlayerTable] {
+        rule!.playerTables[player]!
+    }
+    var playerOrder: [String] {
+        rule!.playerOrder
+    }
+    var playerColor: String {
+        let colors = ["Blue", "Purple", "Green", "Orange"]
+        return colors[playerOrder.firstIndex(of: player)!]
+    }
+    var colors: [String] {
+        var colors = ["Blue", "Purple", "Green", "Orange"]
+        colors.remove(at: playerOrder.firstIndex(of: player)!)
+        return colors
+    }
     
     var stations: [StationNode] = []
     var shelves: [StationNode] {
         stations.filter({ $0.stationType == .shelf })
+    }
+    var pipes: [StationNode] {
+        stations.filter({ $0.stationType == .pipe })
     }
     
     var ingredients: [IngredientNode] = []
@@ -35,14 +48,26 @@ class GameScene: SKScene {
         
         setupStations()
         setupShelves()
-//        setupPipes()
-//        setupHatch()
-//        setupBackground()
+        setupPiping()
+        setupBackground()
         
         let tentacleNode = scene?.childNode(withName: "ingredient") as! MovableSpriteNode
-        let ingredient = IngredientNode(ingredient: Tentacle(currentOwner: player), movableNode: tentacleNode, currentLocation: shelves.first!)
+        let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
         tentacleNode.name = "denis"
-        ingredients.append(ingredient)
+        ingredients.append(tentacle)
+        
+        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
+        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
+        eyesNode.name = "paulo"
+        scene?.addChild(eyesNode)
+        ingredients.append(eyes)
+        
+        let moonCheeseNode = MovableSpriteNode(imageNamed: "MoonCheeseRaw")
+        let moonCheese = IngredientNode(ingredient: MoonCheese(), movableNode: moonCheeseNode, currentLocation: shelves[2])
+        moonCheeseNode.name = "nariana"
+        scene?.addChild(moonCheeseNode)
+        ingredients.append(moonCheese)
+        
     }
     
     func setupStations() {
@@ -78,6 +103,27 @@ class GameScene: SKScene {
         // change color
         stations.append(StationNode(stationType: .delivery, spriteNode: scene?.childNode(withName: "delivery") as! SKSpriteNode))
         
+        //stations[6].spriteNode.texture = SKTexture(imageNamed: "Target" + player)
+    }
+    
+    func setupPiping() {
+//
+//        stations.append(StationNode(stationType: .pipe, spriteNode: scene?.childNode(withName: "pipe1") as! SKSpriteNode))
+//        stations.append(StationNode(stationType: .pipe, spriteNode: scene?.childNode(withName: "pipe2") as! SKSpriteNode))
+//        stations.append(StationNode(stationType: .pipe, spriteNode: scene?.childNode(withName: "pipe3") as! SKSpriteNode))
+        
+        for (index, color) in colors.enumerated() {
+            let spriteNode = SKSpriteNode(imageNamed: "Pipe" + color)
+            spriteNode.position = self.childNode(withName: "pipe" + (index+1).description)!.position
+            spriteNode.zPosition = 1
+            self.addChild(spriteNode)
+            stations.append(StationNode(stationType: .pipe, spriteNode: spriteNode))
+        }
+    }
+    
+    func setupBackground() {
+        let background = scene?.childNode(withName: "background") as! SKSpriteNode
+        background.texture = SKTexture(imageNamed: "Background" + playerColor)
     }
     
     // MARK: - Game Logic

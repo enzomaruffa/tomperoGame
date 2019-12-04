@@ -10,10 +10,9 @@ import Foundation
 
 class Eyes: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "Eyes",
-            currentOwner: currentOwner,
             actionCount: 2,
             finalState: .fried
         )

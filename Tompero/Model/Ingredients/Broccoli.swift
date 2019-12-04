@@ -10,10 +10,9 @@ import Foundation
 
 class Broccoli: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "Broccoli",
-            currentOwner: currentOwner,
             actionCount: 2,
             finalState: .chopped
         )

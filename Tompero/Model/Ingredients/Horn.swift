@@ -10,10 +10,9 @@ import Foundation
 
 class Horn: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "Horn",
-            currentOwner: currentOwner,
             actionCount: 3,
             finalState: .cooked
         )

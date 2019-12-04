@@ -18,12 +18,18 @@ class GameRule: Codable {
     
     let difficulty: GameDifficulty
     var possibleIngredients: [Ingredient]
-    let playerTables: [String:  [PlayerTable]]
+    let playerTables: [String: [PlayerTable]]
     
-    internal init(difficulty: GameDifficulty, possibleIngredients: [Ingredient], playerTables: [String:  [PlayerTable]]) {
+    
+    var playerOrder: [String]
+    
+    
+    
+    internal init(difficulty: GameDifficulty, possibleIngredients: [Ingredient], playerTables: [String:  [PlayerTable]], playerOrder: [String]) {
         self.difficulty = difficulty
         self.possibleIngredients = possibleIngredients
         self.playerTables = playerTables
+        self.playerOrder = playerOrder
     }
     
     func generateOrder() -> Order {
@@ -38,7 +44,7 @@ class GameRule: Codable {
 //        print("Max actions: \(maxActions)")
 
         // Escolhemos um pão aleatório
-        let breadList = [SpaceshipHull(currentOwner: ""), DevilMashedBread(currentOwner: ""), Asteroid(currentOwner: "")]
+        let breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
         let possibleBreads = possibleIngredients.filter({ breadList.contains($0) })
         let orderBread = possibleBreads.randomElement()!
         currentActions += 1

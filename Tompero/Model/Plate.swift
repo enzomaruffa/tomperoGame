@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Plate: HasSprite, HasIngredients, Transferable, Codable {
+class Plate: HasSprite, HasIngredients, Codable {
     var textureName: String = "Plate"
     
     var ingredients: [Ingredient] = []

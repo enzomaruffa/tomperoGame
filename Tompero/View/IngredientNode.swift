@@ -85,9 +85,15 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
 
         case .shelf:
-        setIngredientIn(station)
+            setIngredientIn(station)
             spriteNode.setScale(0.7)
             print("Result: \(true)")
+            return true
+            
+        case .pipe:
+            return true
+            
+        case .hatch:
             return true
             
         default:

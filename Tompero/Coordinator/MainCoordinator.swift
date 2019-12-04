@@ -21,7 +21,41 @@ class MainCoordinator: Coordinator {
 //        game(tables: [PlayerTable(type: .chopping, ingredient: nil),
 //                      PlayerTable(type: .cooking, ingredient: nil),
 //                      PlayerTable(type: .frying, ingredient: nil)], hosting: true)
-        inicial()
+        //inicial()
+        testGameScene()
+        let tables: [String : [PlayerTable]] = [
+            "God" : [
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+            ],
+            "Enzo's Enzo's iPhone" : [
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+            ],
+            "CU" : [
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+            ],
+            "CU 2" : [
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+            ]
+        ]
+        game(rule: GameRule(difficulty: .easy,
+                            possibleIngredients: [Tentacle(), MoonCheese(), Eyes(), Asteroid(), Tardigrades()],
+                            playerTables: tables,
+                            playerOrder: ["God", "Enzo's Enzo's iPhone", "CU", "CU 2"]),
+             hosting: true)
+    }
+    
+    func testGameScene() {
+        let controller = GameViewController.instantiate()
+        controller.coordinator = self
+        navigationController.pushViewController(controller, animated: false)
     }
     
     func inicial() {
@@ -42,17 +76,6 @@ class MainCoordinator: Coordinator {
         controller.hosting = hosting
         navigationController.pushViewController(controller, animated: false)
     }
-    
-    func game(tables: [PlayerTable], hosting: Bool) {
-        guard tables.count == 3 else { return }
-        
-        let controller = GameViewController.instantiate()
-        controller.coordinator = self
-        controller.hosting = hosting
-        controller.tables = tables
-        navigationController.pushViewController(controller, animated: false)
-    }
-    
     
     func game(rule: GameRule, hosting: Bool) {
         let controller = GameViewController.instantiate()

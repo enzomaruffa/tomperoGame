@@ -16,4 +16,6 @@ enum StationType: String {
     case plateBox = "plateBox"
     case shelf = "shelf"
     case delivery = "delivery"
+    case pipe = "pipe"
+    case hatch = "hatch"
 }

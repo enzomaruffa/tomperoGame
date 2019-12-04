@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class Ingredient: HasSprite, Transferable, Equatable, Codable {
+class Ingredient: HasSprite, Equatable, Codable {
     
     var texturePrefix: String
     var textureName: String {
@@ -24,7 +24,6 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
         case .burnt: return "ashes"
         }
     }
-    var currentOwner: String
     
     var components: [Component] = []
     
@@ -37,9 +36,8 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
     
     var numberOfActionsTilReady: Int
     
-    init(texturePrefix: String, currentOwner: String, actionCount: Int, finalState: IngredientState) {
+    init(texturePrefix: String, actionCount: Int, finalState: IngredientState) {
         self.texturePrefix = texturePrefix
-        self.currentOwner = currentOwner
         self.numberOfActionsTilReady = actionCount
         self.finalState = finalState
     }
@@ -62,7 +60,7 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
     
     func attemptChangeState(to state: IngredientState) -> Bool {
         print("Attempting change from \(currentState) to \(state)")
-        if states[currentState]!.contains(state) {
+        if (states[currentState] ?? []).contains(state) {
             currentState = state
             return true
         }
@@ -71,47 +69,47 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
     
     func findDowncast() -> Ingredient {
         if texturePrefix == "Asteroid" {
-            return Asteroid(currentOwner: "")
+            return Asteroid()
         }
         
         if texturePrefix == "Broccoli" {
-            return Broccoli(currentOwner: "")
+            return Broccoli()
         }
         
         if texturePrefix == "DevilMashedBread" {
-            return DevilMashedBread(currentOwner: "")
+            return DevilMashedBread()
         }
         
         if texturePrefix == "Eyes" {
-            return Eyes(currentOwner: "")
+            return Eyes()
         }
         
         if texturePrefix == "Horn" {
-            return Horn(currentOwner: "")
+            return Horn()
         }
         
         if texturePrefix == "MarsSand" {
-            return MarsSand(currentOwner: "")
+            return MarsSand()
         }
         
         if texturePrefix == "MoonCheese" {
-            return MoonCheese(currentOwner: "")
+            return MoonCheese()
         }
         
         if texturePrefix == "SaturnOnionRings" {
-            return SaturnOnionRings(currentOwner: "")
+            return SaturnOnionRings()
         }
         
         if texturePrefix == "SpaceshipHull" {
-            return SpaceshipHull(currentOwner: "")
+            return SpaceshipHull()
         }
         
         if texturePrefix == "Tardigrades" {
-            return Tardigrades(currentOwner: "")
+            return Tardigrades()
         }
         
         if texturePrefix == "Tentacle" {
-            return Tentacle(currentOwner: "")
+            return Tentacle()
         }
         
         print("impossible to downcast")

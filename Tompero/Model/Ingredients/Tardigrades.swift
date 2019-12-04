@@ -10,10 +10,9 @@ import Foundation
 
 class Tardigrades: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "Tardigrades",
-            currentOwner: currentOwner,
             actionCount: 2,
             finalState: .fried
         )

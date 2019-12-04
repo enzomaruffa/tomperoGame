@@ -10,10 +10,9 @@ import Foundation
 
 class MoonCheese: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "MoonCheese",
-            currentOwner: currentOwner,
             actionCount: 2,
             finalState: .chopped
         )

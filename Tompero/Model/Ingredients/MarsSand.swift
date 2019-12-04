@@ -10,10 +10,9 @@ import Foundation
 
 class MarsSand: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "MarsSand",
-            currentOwner: currentOwner,
             actionCount: 2,
             finalState: .cooked
         )

@@ -10,10 +10,9 @@ import Foundation
 
 class DevilMashedBread: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
             texturePrefix: "DevilMashedBread",
-            currentOwner: currentOwner,
             actionCount: 1,
             finalState: .raw
         )
