@@ -1,18 +1,18 @@
 //
-//  IngredientNode.swift
+//  PlateNode.swift
 //  Tompero
 //
-//  Created by Vinícius Binder on 29/11/19.
+//  Created by Enzo Maruffa Moreira on 05/12/19.
 //  Copyright © 2019 Tompero. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
 
-class IngredientNode: TappableDelegate, MovableDelegate {
+class PlateNode: MovableDelegate {
     
     var currentStation: StationNode
-    var ingredient: Ingredient
+    var plate: Plate
     var spriteNode: SKSpriteNode
     
     var rotationTimer: Timer?
@@ -20,15 +20,14 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     var scaleBeforeMove: CGFloat = 1
     var alphaBeforeMove: CGFloat = 1
     
-    init(ingredient: Ingredient, movableNode: MovableSpriteNode, currentLocation: StationNode) {
-        self.ingredient = ingredient
+    init(plate: Plate, movableNode: MovableSpriteNode, currentLocation: StationNode) {
+        self.plate = plate
         self.currentStation = currentLocation
-        currentStation.ingredient = self.ingredient
+        currentStation.plate = self.plate
         
         spriteNode = movableNode
         
         movableNode.position = currentLocation.spriteNode.position
-        movableNode.tapDelegate = self
         movableNode.moveDelegate = self
     }
     
@@ -45,62 +44,38 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         
     }
     
-    private func setIngredientIn(_ station: StationNode) {
-        currentStation.ingredient = nil
-        currentStation.ingredientSlot = nil
+    private func setPlateIn(_ station: StationNode) {
+        currentStation.plate = nil
+
+        // Check if ingredient exists in station
         
-        // Check plate in station
         
         currentStation = station
-        currentStation.ingredient = self.ingredient
-        currentStation.ingredientSlot = self
+        currentStation.plate = self.plate
     }
     
     // MARK: - MovableDelegate
     func attemptMove(to station: StationNode) -> Bool {
         
-        print("Attempting move \(ingredient.texturePrefix) to \(station.stationType)")
+        print("Attempting move to \(station.stationType)")
         
         switch station.stationType {
         case .board:
-            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .chopping)
-            if canMove {
-                showSpriteNode()
-                setIngredientIn(station)
-                spriteNode.setScale(1)
-            }
-            print("Result: \(canMove)")
-            return canMove
+            return false
             
         case .stove:
-            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .cooking)
-            if canMove {
-                hideSpriteNode()
-                setIngredientIn(station)
-                spriteNode.setScale(1)
-            }
-            print("Result: \(canMove)")
-            return canMove
+            return false
             
         case .fryer:
-            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .frying)
-            if canMove {
-                hideSpriteNode()
-                setIngredientIn(station)
-                spriteNode.setScale(1)
-            }
-            print("Result: \(canMove)")
-            return canMove
+            return false
             
         case .shelf:
-            let canMove = station.ingredient == nil && ((station.plate != nil && ingredient.currentState == ingredient.finalState) || station.plate == nil)
+            let canMove = station.plate == nil && ((station.ingredient != nil && station.ingredient?.currentState == station.ingredient?.finalState) || station.ingredient == nil)
             if canMove {
-                // Adicionar no prato
                 showSpriteNode()
-                setIngredientIn(station)
-                spriteNode.setScale(0.6)
+                setPlateIn(station)
+                spriteNode.setScale(0.4)
             }
-            
             print("Result: \(canMove)")
             return canMove
             
@@ -115,7 +90,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             case "pipe3": playerToSendTo = scene.players[2]
             default: return false
             }
-            GameConnectionManager.shared.send(ingredient: self.ingredient, to: playerToSendTo)
+            
+            GameConnectionManager.shared.send(plate: self.plate, to: playerToSendTo)
             print(playerToSendTo)
             implodeSpriteNode()
             return true
@@ -125,7 +101,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return true
             
         default:
-            return ingredient.attemptChangeState(to: (ingredient.states[ingredient.currentState] ?? []).first!)
+            return true
         }
     }
     
@@ -169,24 +145,4 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         spriteNode.alpha = alphaBeforeMove
     }
     
-    // MARK: - TappableDelegate
-    func tap() {
-        print("Ingredient tapped")
-        currentStation.tap()
-        checkTextureChange()
-    }
-    
-    func checkTextureChange() {
-        if ingredient.textureName != spriteNode.texture?.name {
-            spriteNode.texture = SKTexture(imageNamed: ingredient.textureName)
-        }
-    }
-    
-}
-
-extension SKTexture {
-    var name: String? {
-        let comps = description.components(separatedBy: "'")
-        return comps.count > 1 ? comps[1] : nil
-    }
 }

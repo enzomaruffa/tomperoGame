@@ -13,6 +13,7 @@ class StationNode: TappableDelegate {
     
     var stationType: StationType
     var ingredient: Ingredient?
+    var plate: Plate?
     
     var spriteNode: SKSpriteNode
     var spriteYPos: CGFloat {

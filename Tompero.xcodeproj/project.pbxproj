@@ -20,6 +20,7 @@
 		4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47C238EB91F003D373C /* PlayerTable.swift */; };
 		4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47E238EB982003D373C /* PlayerTableType.swift */; };
 		4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D486238FFA93003D373C /* MCPeerWithStatus.swift */; };
+		472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F9F2723992FEA00DC7B9C /* PlateNode.swift */; };
 		4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733B6A52393597700D80AD0 /* MovableDelegate.swift */; };
 		476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */; };
 		476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */; };
@@ -88,6 +89,7 @@
 		4722D47C238EB91F003D373C /* PlayerTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTable.swift; sourceTree = "<group>"; };
 		4722D47E238EB982003D373C /* PlayerTableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableType.swift; sourceTree = "<group>"; };
 		4722D486238FFA93003D373C /* MCPeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPeerWithStatus.swift; sourceTree = "<group>"; };
+		472F9F2723992FEA00DC7B9C /* PlateNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateNode.swift; sourceTree = "<group>"; };
 		4733B6A52393597700D80AD0 /* MovableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableDelegate.swift; sourceTree = "<group>"; };
 		476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
 		476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				476F70A7239336490000465F /* TappableSpriteNode.swift */,
 				476F70AB23933A1C0000465F /* TappableDelegate.swift */,
 				4733B6A52393597700D80AD0 /* MovableDelegate.swift */,
+				472F9F2723992FEA00DC7B9C /* PlateNode.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */,
 				567A07B6238C805000D6399A /* Broccoli.swift in Sources */,
 				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
+				472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */,
 				567A07B0238C805000D6399A /* Horn.swift in Sources */,
 				4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */,
 				4722D47B238EB7C9003D373C /* GameRule.swift in Sources */,

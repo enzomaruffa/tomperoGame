@@ -45,7 +45,9 @@ class GameScene: SKScene {
         stations.filter({ $0.stationType == .pipe })
     }
     
+    // Remove later
     var ingredients: [IngredientNode] = []
+    var plates: [PlateNode] = []
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -68,11 +70,11 @@ class GameScene: SKScene {
         self.addChild(eyesNode)
         ingredients.append(eyes)
         
-        let moonCheeseNode = MovableSpriteNode(imageNamed: "MoonCheeseRaw")
-        let moonCheese = IngredientNode(ingredient: MoonCheese(), movableNode: moonCheeseNode, currentLocation: shelves[2])
-        moonCheeseNode.name = "nariana"
-        self.addChild(moonCheeseNode)
-        ingredients.append(moonCheese)
+        let plateNode = MovableSpriteNode(imageNamed: "Plate")
+        let plate = PlateNode(plate: Plate(), movableNode: plateNode, currentLocation: shelves[2])
+        plateNode.name = "plate"
+        self.addChild(plateNode)
+        plates.append(plate)
     }
     
     func setupStations() {

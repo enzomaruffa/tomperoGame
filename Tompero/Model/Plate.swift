@@ -12,9 +12,7 @@ class Plate: HasSprite, HasIngredients, Codable {
     var textureName: String = "Plate"
     
     var ingredients: [Ingredient] = []
-    var currentOwner: String
     
-    init(currentOwner: String) {
-        self.currentOwner = currentOwner
+    init() {
     }
 }
