@@ -26,11 +26,22 @@ class GameConnectionManager {
         observers.append(observer)
     }
     
-    func sendAll(message: String) {
+    func sendEveryone(message: String) {
         do {
             print("[GameConnectionManager] Preparing message")
             let messageData = try JSONEncoder().encode(message)
             let wrapped = MCDataWrapper(object: messageData, type: .string)
+            MCManager.shared.sendEveryone(dataWrapper: wrapped)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func sendEveryone(orderList: [Order]) {
+        do {
+            print("[GameConnectionManager] Preparing order list")
+            let messageData = try JSONEncoder().encode(orderList)
+            let wrapped = MCDataWrapper(object: messageData, type: .orders)
             MCManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
@@ -84,6 +95,17 @@ extension GameConnectionManager: MCManagerDataObserver {
             do {
                 let ingredient = try JSONDecoder().decode(Ingredient.self, from: wrapper.object)
                 observers.forEach({ $0.receiveIngredient(ingredient: ingredient) })
+            } catch let error {
+                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+            }
+            
+        case .orders:
+            do {
+                let orders = try JSONDecoder().decode([Order].self, from: wrapper.object)
+                print("[GameConnectionManager] Received orderList: \(orders)")
+                observers.forEach({ $0.receiveOrders(orders: orders) })
+                
+                // Chamar delegates que tem o receiveMessage
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }

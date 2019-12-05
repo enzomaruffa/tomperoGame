@@ -17,7 +17,7 @@ protocol HasIngredients {
 extension HasIngredients {
     
     func isEquivalent(to other: HasIngredients) -> Bool {
-        return self.ingredients.elementsEqual(other.ingredients)
+        return self.ingredients.sorted(by: {$0.texturePrefix < $1.texturePrefix}).elementsEqual(other.ingredients.sorted(by: {$0.texturePrefix < $1.texturePrefix}))
     }
     
 }

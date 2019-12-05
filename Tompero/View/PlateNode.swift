@@ -156,8 +156,23 @@ class PlateNode: MovableDelegate {
             implodeSpriteNode()
             return true
             
+        case .delivery:
+            
+            if let scene = spriteNode.scene as? GameScene {
+                setPlateIn(station)
+                
+                print("Attempting plate delviery")
+                let success = scene.makeDelivery(plate: self.plate)
+                
+                // implodeSpriteNode()
+                
+                return true
+            }
+            
+            return false
+            
         default:
-            return true
+            return false
         }
     }
     
