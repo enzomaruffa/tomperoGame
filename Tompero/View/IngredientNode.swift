@@ -47,13 +47,22 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     
     private func setIngredientIn(_ station: StationNode) {
         currentStation.ingredient = nil
-        currentStation.ingredientSlot = nil
+        currentStation.ingredientNode = nil
         
         // Check plate in station
         
-        currentStation = station
-        currentStation.ingredient = self.ingredient
-        currentStation.ingredientSlot = self
+        if let plateNode = station.plateNode {
+            plateNode.plate.ingredients.append(self.ingredient)
+            plateNode.updateTexture()
+            
+            //TODO: Remove ingredient node from scene destroy it whatever
+            self.spriteNode.removeFromParent()
+        } else {
+            currentStation = station
+            currentStation.ingredient = self.ingredient
+            currentStation.ingredientNode = self
+        }
+        
     }
     
     // MARK: - MovableDelegate
@@ -93,9 +102,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
             
         case .shelf:
-            let canMove = station.ingredient == nil && ((station.plate != nil && ingredient.currentState == ingredient.finalState) || station.plate == nil)
+            let canMove = station.ingredient == nil && ((station.plateNode != nil && ingredient.currentState == ingredient.finalState) || station.plateNode == nil)
             if canMove {
-                // Adicionar no prato
                 showSpriteNode()
                 setIngredientIn(station)
                 spriteNode.setScale(0.6)

@@ -23,9 +23,10 @@ class PlateNode: MovableDelegate {
     init(plate: Plate, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.plate = plate
         self.currentStation = currentLocation
-        currentStation.plate = self.plate
         
         spriteNode = movableNode
+        
+        currentStation.plateNode = self
         
         movableNode.position = currentLocation.spriteNode.position
         movableNode.moveDelegate = self
@@ -45,13 +46,36 @@ class PlateNode: MovableDelegate {
     }
     
     private func setPlateIn(_ station: StationNode) {
-        currentStation.plate = nil
-
+        currentStation.plateNode = nil
+        
         // Check if ingredient exists in station
         
-        
         currentStation = station
-        currentStation.plate = self.plate
+        currentStation.plateNode = self
+    }
+    
+    func updateTexture() {
+        self.spriteNode.removeAllChildren()
+        
+        let breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
+        var sortedIngredients = plate.ingredients.sorted(by: { $0.texturePrefix < $1.texturePrefix })
+        if let firstBread = sortedIngredients.filter({ breadList.contains($0) }).first {
+            sortedIngredients.removeAll(where: { $0 == firstBread })
+            // Render bread bottom
+            for (index, ingredient) in sortedIngredients.enumerated() {
+                let newNode = SKSpriteNode(imageNamed: ingredient.textureName)
+                self.spriteNode.addChild(newNode)
+                newNode.position = CGPoint(x: 0, y: 20 + index*2)
+            }
+            // Render bread top
+        } else {
+            // Render ingredients in plate
+            for (index, ingredient) in sortedIngredients.enumerated() {
+                let newNode = SKSpriteNode(imageNamed: ingredient.textureName)
+                self.spriteNode.addChild(newNode)
+                newNode.position = CGPoint(x: 0, y: 20 + index*2)
+            }
+        }
     }
     
     // MARK: - MovableDelegate
@@ -70,7 +94,7 @@ class PlateNode: MovableDelegate {
             return false
             
         case .shelf:
-            let canMove = station.plate == nil && ((station.ingredient != nil && station.ingredient?.currentState == station.ingredient?.finalState) || station.ingredient == nil)
+            let canMove = station.plateNode == nil && ((station.ingredient != nil && station.ingredient?.currentState == station.ingredient?.finalState) || station.ingredient == nil)
             if canMove {
                 showSpriteNode()
                 setPlateIn(station)

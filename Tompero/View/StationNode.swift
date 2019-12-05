@@ -13,7 +13,6 @@ class StationNode: TappableDelegate {
     
     var stationType: StationType
     var ingredient: Ingredient?
-    var plate: Plate?
     
     var spriteNode: SKSpriteNode
     var spriteYPos: CGFloat {
@@ -27,7 +26,8 @@ class StationNode: TappableDelegate {
         }
     }
     
-    var ingredientSlot: IngredientNode?
+    var ingredientNode: IngredientNode?
+    var plateNode: PlateNode?
     
     internal init(stationType: StationType, spriteNode: SKSpriteNode?, ingredient: Ingredient?) {
         self.stationType = stationType
@@ -75,12 +75,12 @@ class StationNode: TappableDelegate {
             if ingredient?.cookableComponent?.burnt ?? false {
                 if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.burnt) {
                     ingredient?.currentState = .burnt
-                    ingredientSlot?.checkTextureChange()
+                    ingredientNode?.checkTextureChange()
                 }
             } else if ingredient?.cookableComponent?.complete ?? false {
                 if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.cooked) {
                     ingredient?.currentState = .cooked
-                    ingredientSlot?.checkTextureChange()
+                    ingredientNode?.checkTextureChange()
                 }
             }
             
@@ -90,12 +90,12 @@ class StationNode: TappableDelegate {
             if ingredient?.fryableComponent?.burnt ?? false {
                 if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.burnt) {
                     ingredient?.currentState = .burnt
-                    ingredientSlot?.checkTextureChange()
+                    ingredientNode?.checkTextureChange()
                 }
             } else if ingredient?.fryableComponent?.complete ?? false {
                 if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.fried) {
                     ingredient?.currentState = .fried
-                    ingredientSlot?.checkTextureChange()
+                    ingredientNode?.checkTextureChange()
                 }
             }
         } else if stationType == .pipe {
