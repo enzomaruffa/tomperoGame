@@ -71,6 +71,7 @@ class MovableSpriteNode: SKSpriteNode {
                 }
             }
 
+            moveDelegate?.moveCancel(currentPosition: touch.location(in: scene!))
             print("Returning to previous position...")
             self.position = (moveDelegate?.currentStation.spriteNode.position)!
         }

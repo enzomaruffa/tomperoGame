@@ -27,6 +27,8 @@ class GameScene: SKScene {
     }
     var playerColor: String {
         let colors = ["Blue", "Purple", "Green", "Orange"]
+        print(playerOrder)
+        print(playerOrder.firstIndex(of: player)!)
         return colors[playerOrder.firstIndex(of: player)!]
     }
     var colors: [String] {
