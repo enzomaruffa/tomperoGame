@@ -15,4 +15,5 @@ enum MCDataType: Int, Codable {
     case playerData
     case gameRule
     case orders
+    case deliveryNotification
 }

@@ -29,6 +29,7 @@
 		476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70AB23933A1C0000465F /* TappableDelegate.swift */; };
 		47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */; };
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
+		47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
 		562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5923881CF900D5D51D /* GameScene.sks */; };
 		562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5D23881CF900D5D51D /* GameScene.swift */; };
@@ -98,6 +99,7 @@
 		476F70AB23933A1C0000465F /* TappableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TappableDelegate.swift; sourceTree = "<group>"; };
 		47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKActionExtensions.swift; sourceTree = "<group>"; };
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
+		47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryNotification.swift; sourceTree = "<group>"; };
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		562BCF5423881CF900D5D51D /* Tompero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tompero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562BCF5723881CF900D5D51D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			children = (
 				567A07AA238C805000D6399A /* Order.swift */,
 				567A07AE238C805000D6399A /* OrderList.swift */,
+				47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
+				47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */,
 				567A07BB238C805000D6399A /* Order.swift in Sources */,
 				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
 				476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */,

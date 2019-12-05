@@ -149,11 +149,12 @@ class GameScene: SKScene {
     }
     
     func makeDelivery(plate: Plate) -> Bool {
-        
         print("Existing orders: \(orders.map({$0.ingredients.map({ $0.texturePrefix })}))")
         
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
             print("Couldn't find any order")
+            let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
+            GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
             return false
         }
         
@@ -161,6 +162,9 @@ class GameScene: SKScene {
         let totalScore = targetOrder.score * difficultyBonus[rule!.difficulty]!
         
         print("Total score: \(totalScore)")
+
+        let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
+        GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
         
         orders.remove(at: orders.firstIndex { $0.isEquivalent(to: targetOrder) }!)
         
@@ -189,5 +193,10 @@ extension GameScene: GameConnectionManagerObserver {
     func receiveOrders(orders: [Order]) {
         print("[GameScene] Received new orderList")
         self.orders = orders
+    }
+    
+    func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
+        print("[GameScene] Received new notification")
+        
     }
 }

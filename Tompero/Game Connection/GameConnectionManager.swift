@@ -13,7 +13,7 @@ class GameConnectionManager {
     
     // MARK: - Static Variables
     static let shared = GameConnectionManager()
-     
+    
     // MARK: - Variables
     var observers: [GameConnectionManagerObserver] = []
     
@@ -40,8 +40,19 @@ class GameConnectionManager {
     func sendEveryone(orderList: [Order]) {
         do {
             print("[GameConnectionManager] Preparing order list")
-            let messageData = try JSONEncoder().encode(orderList)
-            let wrapped = MCDataWrapper(object: messageData, type: .orders)
+            let ordersData = try JSONEncoder().encode(orderList)
+            let wrapped = MCDataWrapper(object: ordersData, type: .orders)
+            MCManager.shared.sendEveryone(dataWrapper: wrapped)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func sendEveryone(deliveryNotification: OrderDeliveryNotification) {
+        do {
+            print("[GameConnectionManager] Preparing delivery notification")
+            let notificationData = try JSONEncoder().encode(deliveryNotification)
+            let wrapped = MCDataWrapper(object: notificationData, type: .deliveryNotification)
             MCManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
@@ -117,6 +128,17 @@ extension GameConnectionManager: MCManagerDataObserver {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }
             
+        case .deliveryNotification:
+            do {
+                let deliveryNotification = try JSONDecoder().decode(OrderDeliveryNotification.self, from: wrapper.object)
+                print("[GameConnectionManager] Received notification: \(deliveryNotification)")
+                observers.forEach({ $0.receiveDeliveryNotification(notification: deliveryNotification) })
+                
+                // Chamar delegates que tem o receiveMessage
+            } catch let error {
+                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+            }
+            
         case .string:
             do {
                 let message = try JSONDecoder().decode(String.self, from: wrapper.object)
@@ -131,5 +153,5 @@ extension GameConnectionManager: MCManagerDataObserver {
         }
         // TODO: Decodificar o ingrediente em outrostipos
     }
-
+    
 }

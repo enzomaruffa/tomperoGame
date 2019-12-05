@@ -14,6 +14,6 @@ protocol GameConnectionManagerObserver {
     func receivePlate(plate: Plate)
     func receiveIngredient(ingredient: Ingredient)
     func receiveOrders(orders: [Order])
-
+    func receiveDeliveryNotification(notification: OrderDeliveryNotification)
     
 }
