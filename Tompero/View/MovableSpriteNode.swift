@@ -16,6 +16,8 @@ class MovableSpriteNode: SKSpriteNode {
     weak var tapDelegate: TappableDelegate?
     weak var moveDelegate: MovableDelegate?
     
+    var previousPosition: CGPoint?
+    
     // MARK: - Initializers
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
@@ -39,6 +41,7 @@ class MovableSpriteNode: SKSpriteNode {
         }
         
         initialTouchPosition = touch.location(in: scene!)
+        previousPosition = self.position
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -76,7 +79,8 @@ class MovableSpriteNode: SKSpriteNode {
 
             moveDelegate?.moveCancel(currentPosition: touch.location(in: scene!))
             print("Returning to previous position...")
-            self.position = (moveDelegate?.currentStation.spriteNode.position)!
+            self.position = previousPosition!
+            previousPosition = .zero
         }
     }
 }

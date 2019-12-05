@@ -35,7 +35,7 @@ class StationNode: TappableDelegate {
         
         if stationType == .ingredientBox {
             let tappableNode = TappableSpriteNode(imageNamed: ingredient!.texturePrefix + "Box.png")
-            self.ingredient = nil
+            self.ingredient = ingredient
             self.spriteNode = tappableNode
             tappableNode.delegate = self
         } else if stationType == .shelf || stationType == .delivery ||  stationType == .pipe || stationType == .hatch {
@@ -69,6 +69,14 @@ class StationNode: TappableDelegate {
                     ingredient?.currentState = .chopped
                 }
             }
+        } else if stationType == .ingredientBox && self.ingredientNode == nil {
+            let newIngredient = ingredient!.findDowncast()
+            let ingredientMovableNode = MovableSpriteNode(imageNamed: newIngredient.textureName)
+            spriteNode.scene!.addChild(ingredientMovableNode)
+            ingredientMovableNode.zPosition = 4
+            let ingredientNode = IngredientNode(ingredient: newIngredient, movableNode: ingredientMovableNode, currentLocation: self)
+            ingredientMovableNode.position = CGPoint(x: spriteNode.position.x, y: spriteNode.position.y + 85)
+            self.ingredientNode = ingredientNode
         }
     }
     

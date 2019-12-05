@@ -49,7 +49,9 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     private func setIngredientIn(_ station: StationNode) {
-        currentStation.ingredient = nil
+        if currentStation.stationType != .ingredientBox {
+            currentStation.ingredient = nil
+        }
         currentStation.ingredientNode = nil
         
         // Check plate in station
