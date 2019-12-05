@@ -67,7 +67,7 @@ class GameRuleFactory {
         
         // Ingredientes possíveis ainda:
 //        var possibleIngredients: [Ingredient] = [Broccoli(), Eyes(), Horn(), MarsSand(), MoonCheese(), SaturnOnionRings(), Tardigrades(), Tentacle()]
-        var possibleIngredients: [Ingredient] = [Eyes(), Tentacle()]
+        var possibleIngredients: [Ingredient] = [Tentacle()]
         
         var actionsList: [Component.Type] = []
         

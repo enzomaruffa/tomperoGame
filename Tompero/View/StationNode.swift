@@ -20,8 +20,8 @@ class StationNode: TappableDelegate {
         case .board: return -237.5
         case .stove: return -348.5
         case .fryer: return -342.0
-        case .ingredientBox: return -200.0 // not final
-        case .plateBox: return -200.0 // not final
+        case .ingredientBox: return -362.0 // not final
+        case .plateBox: return -361.0 // not final
         default: return 0
         }
     }
@@ -34,11 +34,16 @@ class StationNode: TappableDelegate {
         self.ingredient = ingredient
         
         if stationType == .ingredientBox {
-            let tappableNode = TappableSpriteNode(imageNamed: NSStringFromClass(type(of: ingredient!)) + "Box.png")
+            let tappableNode = TappableSpriteNode(imageNamed: ingredient!.texturePrefix + "Box.png")
+            self.ingredient = nil
             self.spriteNode = tappableNode
             tappableNode.delegate = self
         } else if stationType == .shelf || stationType == .delivery ||  stationType == .pipe || stationType == .hatch {
             self.spriteNode = spriteNode!
+        } else if stationType == .empty {
+            let tappableNode = TappableSpriteNode()
+            self.spriteNode = tappableNode
+            tappableNode.delegate = self
         } else {
             let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")
             self.spriteNode = tappableNode

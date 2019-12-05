@@ -97,6 +97,7 @@ class GameScene: SKScene {
             case .frying: return .fryer
             case .plate: return .plateBox
             case .ingredient: return .ingredientBox
+            case .empty: return .empty
             default: return .board
             }
         }

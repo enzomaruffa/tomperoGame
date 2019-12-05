@@ -9,13 +9,14 @@
 import Foundation
 
 enum StationType: String {
-    case board = "board"
-    case stove = "stove"
-    case fryer = "fryer"
-    case ingredientBox = ""
-    case plateBox = "plateBox"
-    case shelf = "shelf"
-    case delivery = "delivery"
-    case pipe = "pipe"
-    case hatch = "hatch"
+    case board
+    case stove
+    case fryer
+    case ingredientBox
+    case plateBox
+    case shelf
+    case delivery
+    case pipe
+    case hatch
+    case empty
 }
