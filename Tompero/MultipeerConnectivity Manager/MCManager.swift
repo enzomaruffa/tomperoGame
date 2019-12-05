@@ -37,12 +37,12 @@ class MCManager: NSObject, MCSessionDelegate {
         let peerID = MCPeerID(displayName: UIDevice.current.name)
         self.peerID = peerID
         
-        createNewSession(peerID)
+        resetSession()
     }
     
     // MARK: - Session Methods
     func createNewSession(_ peerID: MCPeerID) {
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession!.delegate = self
     }
     
@@ -78,16 +78,18 @@ class MCManager: NSObject, MCSessionDelegate {
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        matchmakingObservers.forEach({ $0.playerUpdate(player: peerID.displayName, state: state) })
         switch state {
         case .connected:
-            print("[MCManager] Connected: \(peerID.displayName)")
+            print("\n[MCManager] Connected: \(peerID.displayName)")
         case .connecting:
-            print("[MCManager] Connecting: \(peerID.displayName)")
+            print("\n[MCManager] Connecting: \(peerID.displayName)")
         case .notConnected:
-            print("[MCManager] Not Connected: \(peerID.displayName)")
+            print("\n[MCManager] Not Connected: \(peerID.displayName)")
         @unknown default:
-            print("[MCManager] fatal error")
+            print("\n[MCManager] fatal error")
+        }
+        DispatchQueue.main.async {
+            self.matchmakingObservers.forEach({ $0.playerUpdate(player: peerID.displayName, state: state) })
         }
     }
     
@@ -144,7 +146,7 @@ class MCManager: NSObject, MCSessionDelegate {
     }
     
     func sendPeersStatus(playersWithStatus: [MCPeerWithStatus]) {
-        guard self.mcSession!.connectedPeers.count > 1 else {
+        guard !self.mcSession!.connectedPeers.isEmpty else {
             return
         }
         do {

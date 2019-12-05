@@ -67,6 +67,7 @@
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
 		FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */; };
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
+		FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */; };
 		FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF38E238E9CFA00437124 /* Coordinator.swift */; };
 		FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF390238E9D6A00437124 /* Storyboarded.swift */; };
 		FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF392238E9F4700437124 /* MainCoordinator.swift */; };
@@ -139,6 +140,7 @@
 		FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
 		FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuStoryboard.storyboard; sourceTree = "<group>"; };
+		FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtention.swift; sourceTree = "<group>"; };
 		FB9BF38E238E9CFA00437124 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FB9BF390238E9D6A00437124 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		FB9BF392238E9F4700437124 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */,
 				476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */,
 				47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */,
+				FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */,
 				4722D47B238EB7C9003D373C /* GameRule.swift in Sources */,
 				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
+				FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */,
 				47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */,
 				56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */,
 				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
@@ -682,7 +686,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = F6XL2RL8RU;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -701,7 +705,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = F6XL2RL8RU;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

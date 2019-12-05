@@ -27,22 +27,22 @@ class MainCoordinator: Coordinator {
             "God" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .cooking, ingredient: nil),
-                PlayerTable(type: .frying, ingredient: nil),
+                PlayerTable(type: .frying, ingredient: nil)
             ],
             "Enzo's Enzo's iPhone" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil)
             ],
             "CU" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil)
             ],
             "CU 2" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil)
             ]
         ]
         game(rule: GameRule(difficulty: .easy,
