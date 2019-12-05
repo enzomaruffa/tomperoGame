@@ -112,7 +112,7 @@ class Ingredient: HasSprite, Equatable, Codable {
             return Tentacle()
         }
         
-        print("impossible to downcast")
+        print("Impossible to downcast")
         return self
     }
     

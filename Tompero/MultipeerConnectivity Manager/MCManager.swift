@@ -16,7 +16,7 @@ class MCManager: NSObject, MCSessionDelegate {
     
     static let shared = MCManager()
     
-    let gameName = "cookios"
+    let gameName = "spacespice"
     
     var peerID: MCPeerID?
     var mcSession: MCSession?
@@ -30,6 +30,11 @@ class MCManager: NSObject, MCSessionDelegate {
     var matchmakingObservers: [MCManagerMatchmakingObserver] = []
     
     var hosting = false
+    
+    var selfName: String {
+        (peerID?.displayName)!
+    }
+    
     // MARK: - Initializers
     
     override private init() {

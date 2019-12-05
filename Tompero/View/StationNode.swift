@@ -55,9 +55,7 @@ class StationNode: TappableDelegate {
     
     // Tap interaction
     func tap() {
-        print("STATION with type \(stationType) TAPPED UHUUU")
         if stationType == .board {
-            print("Board tapped!")
             ingredient?.choppableComponent?.update()
 
             if ingredient?.choppableComponent?.complete ?? false {

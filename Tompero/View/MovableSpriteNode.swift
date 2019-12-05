@@ -66,7 +66,7 @@ class MovableSpriteNode: SKSpriteNode {
             for station in gameScene.stations {
                 if station.spriteNode.contains(touch.location(in: gameScene)) && (moveDelegate?.attemptMove(to: station) ?? false) {
                     self.position = station.spriteNode.position
-                    print("Success!")
+                    print("Move success!")
                     return
                 }
             }

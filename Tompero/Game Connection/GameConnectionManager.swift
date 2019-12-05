@@ -42,6 +42,8 @@ class GameConnectionManager {
             print("[GameConnectionManager] Preparing ingredient")
             let ingredientData = try JSONEncoder().encode(ingredient)
             let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
+            print(MCManager.shared.connectedPeers)
+            MCManager.shared.connectedPeers?.forEach({ print($0.displayName) })
             let peer = MCManager.shared.connectedPeers?.filter({ $0.displayName == player })
             MCManager.shared.send(dataWrapper: wrapped, to: peer!)
         } catch let error {
@@ -67,6 +69,8 @@ class GameConnectionManager {
 extension GameConnectionManager: MCManagerDataObserver {
     
     func receiveData(wrapper: MCDataWrapper) {
+        print("[GameConnectionManager] Received data with type: \(wrapper.type)")
+        
         switch wrapper.type {
         case .plate:
             do {

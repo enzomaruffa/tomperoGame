@@ -13,7 +13,7 @@ import GameplayKit
 class GameScene: SKScene {
     
     // MARK: - Variables
-    var player: String = "God"
+    var player: String = MCManager.shared.selfName
     var rule: GameRule?
     var tables: [PlayerTable] {
         rule!.playerTables[player]!
@@ -71,7 +71,6 @@ class GameScene: SKScene {
         moonCheeseNode.name = "nariana"
         self.addChild(moonCheeseNode)
         ingredients.append(moonCheese)
-        
     }
     
     func setupStations() {
@@ -114,7 +113,6 @@ class GameScene: SKScene {
         for (index, color) in colors.enumerated() {
             let pipeNode = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
             pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
-            print(pipeNode.texture?.name)
             pipeNode.name = "pipe" + (index+1).description
             pipeNode.zPosition = 2
             
@@ -138,10 +136,10 @@ class GameScene: SKScene {
 // MARK: - GameConnectionManagerObserver Methods
 extension GameScene: GameConnectionManagerObserver {
     func receivePlate(plate: Plate) {
-        
+        print("[GameScene] Received plate")
     }
     
     func receiveIngredient(ingredient: Ingredient) {
-        
+        print("[GameScene] Received ingredient with prefix \(ingredient.texturePrefix) and state as \(ingredient.currentState)")
     }
 }

@@ -210,6 +210,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         
         // Start game view with necessary information
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+            print("before segue peers are \(MCManager.shared.connectedPeers)")
+            print("coordinating game opening with rule \(rule)")
             self.coordinator?.game(rule: rule, hosting: true)
         }
     }
