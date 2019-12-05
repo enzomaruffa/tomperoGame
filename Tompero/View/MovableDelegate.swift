@@ -11,7 +11,7 @@ import CoreGraphics
 
 protocol MovableDelegate: class {
     // Moves and returns if the movement is possible
-    var currentStation: StationNode {get set}
+    var currentStation: StationNode { get set }
     func moveStarted(currentPosition: CGPoint)
     func moving(currentPosition: CGPoint)
     func moveEnded(currentPosition: CGPoint)

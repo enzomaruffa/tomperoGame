@@ -22,10 +22,7 @@ class StationNode: TappableDelegate {
         case .fryer: return -342.0
         case .ingredientBox: return -200.0 // not final
         case .plateBox: return -200.0 // not final
-        case .shelf: return -200.0 // not final
-        case .delivery: return -200.0 // not final
-        case .pipe: return -200.0 // not final
-        case .hatch: return -200.0 // not final
+        default: return 0
         }
     }
     

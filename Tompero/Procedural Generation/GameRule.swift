@@ -19,11 +19,8 @@ class GameRule: Codable {
     let difficulty: GameDifficulty
     var possibleIngredients: [Ingredient]
     let playerTables: [String: [PlayerTable]]
-    
-    
+
     var playerOrder: [String]
-    
-    
     
     internal init(difficulty: GameDifficulty, possibleIngredients: [Ingredient], playerTables: [String:  [PlayerTable]], playerOrder: [String]) {
         self.difficulty = difficulty

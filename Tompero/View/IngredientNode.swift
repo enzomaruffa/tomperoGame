@@ -32,12 +32,16 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     private func hideSpriteNode() {
-        // We use a very low alpha value otherwise it's interaction is disabled
+        // We use a very low alpha value otherwise its interaction is disabled
         self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05))
     }
     
     private func showSpriteNode() {
         self.spriteNode.run(SKAction.fadeIn(withDuration: 0.2))
+    }
+    
+    private func implodeSpriteNode() {
+        
     }
     
     private func setIngredientIn(_ station: StationNode) {
@@ -91,13 +95,27 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return true
             
         case .pipe:
+            // check if plate
+            
+            var playerToSendTo: String = ""
+            let scene = station.spriteNode.parent as! GameScene
+            switch station.spriteNode.name {
+            case "pipe1": playerToSendTo = scene.players[0]
+            case "pipe2": playerToSendTo = scene.players[1]
+            case "pipe3": playerToSendTo = scene.players[2]
+            default: return false
+            }
+            GameConnectionManager.shared.send(ingredient: self.ingredient, to: playerToSendTo)
+            print(playerToSendTo)
+            implodeSpriteNode()
             return true
             
         case .hatch:
+            implodeSpriteNode()
             return true
             
         default:
-            return ingredient.attemptChangeState(to: ingredient.states[ingredient.currentState]!.first!)
+            return ingredient.attemptChangeState(to: (ingredient.states[ingredient.currentState] ?? []).first!)
         }
     }
     

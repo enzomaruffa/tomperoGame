@@ -13,13 +13,17 @@ import GameplayKit
 class GameScene: SKScene {
     
     // MARK: - Variables
-    var player: String = "Enzo's Enzo's iPhone"
+    var player: String = "God"
     var rule: GameRule?
     var tables: [PlayerTable] {
         rule!.playerTables[player]!
     }
     var playerOrder: [String] {
         rule!.playerOrder
+    }
+    var players: [String] {
+        let players = rule!.playerOrder
+        return players.filter({ $0 != player })
     }
     var playerColor: String {
         let colors = ["Blue", "Purple", "Green", "Orange"]
@@ -51,7 +55,7 @@ class GameScene: SKScene {
         setupPiping()
         setupBackground()
         
-        let tentacleNode = scene?.childNode(withName: "ingredient") as! MovableSpriteNode
+        let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
         let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
         tentacleNode.name = "denis"
         ingredients.append(tentacle)
@@ -59,13 +63,13 @@ class GameScene: SKScene {
         let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
         let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
         eyesNode.name = "paulo"
-        scene?.addChild(eyesNode)
+        self.addChild(eyesNode)
         ingredients.append(eyes)
         
         let moonCheeseNode = MovableSpriteNode(imageNamed: "MoonCheeseRaw")
         let moonCheese = IngredientNode(ingredient: MoonCheese(), movableNode: moonCheeseNode, currentLocation: shelves[2])
         moonCheeseNode.name = "nariana"
-        scene?.addChild(moonCheeseNode)
+        self.addChild(moonCheeseNode)
         ingredients.append(moonCheese)
         
     }
@@ -84,8 +88,6 @@ class GameScene: SKScene {
         
         stations = tables.map({ StationNode(stationType: convertTableToStation(type: $0.type), ingredient: $0.ingredient) })
         
-        print(stations.map({$0.stationType}))
-        
         for (index, station) in stations.enumerated() {
             let node = station.spriteNode
             let pos = scene!.size.width/2-node.size.width/2
@@ -96,33 +98,37 @@ class GameScene: SKScene {
     }
     
     func setupShelves() {
-        stations.append(StationNode(stationType: .shelf, spriteNode: scene?.childNode(withName: "shelf1") as! SKSpriteNode))
-        stations.append(StationNode(stationType: .shelf, spriteNode: scene?.childNode(withName: "shelf2") as! SKSpriteNode))
-        stations.append(StationNode(stationType: .shelf, spriteNode: scene?.childNode(withName: "shelf3") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf1") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf2") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf3") as! SKSpriteNode))
         
-        // change color
-        stations.append(StationNode(stationType: .delivery, spriteNode: scene?.childNode(withName: "delivery") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .delivery, spriteNode: self.childNode(withName: "delivery") as! SKSpriteNode))
         
-        //stations[6].spriteNode.texture = SKTexture(imageNamed: "Target" + player)
+        (self.childNode(withName: "target") as! SKSpriteNode).texture = SKTexture(imageNamed: "Target" + playerColor)
+        
+        (self.childNode(withName: "teleporter") as! SKSpriteNode).texture = SKTexture(imageNamed: "Teleporter" + playerColor)
     }
     
     func setupPiping() {
-//
-//        stations.append(StationNode(stationType: .pipe, spriteNode: scene?.childNode(withName: "pipe1") as! SKSpriteNode))
-//        stations.append(StationNode(stationType: .pipe, spriteNode: scene?.childNode(withName: "pipe2") as! SKSpriteNode))
-//        stations.append(StationNode(stationType: .pipe, spriteNode: scene?.childNode(withName: "pipe3") as! SKSpriteNode))
         
         for (index, color) in colors.enumerated() {
-            let spriteNode = SKSpriteNode(imageNamed: "Pipe" + color)
-            spriteNode.position = self.childNode(withName: "pipe" + (index+1).description)!.position
-            spriteNode.zPosition = 1
-            self.addChild(spriteNode)
-            stations.append(StationNode(stationType: .pipe, spriteNode: spriteNode))
+            let stationNode = StationNode(stationType: .pipe, spriteNode: SKSpriteNode())
+            
+            stationNode.spriteNode.texture = SKTexture(imageNamed: "Pipe" + color)
+            stationNode.spriteNode.name = "pipe" + (index+1).description
+            stationNode.spriteNode.zPosition = 1
+            
+            stationNode.spriteNode.position = (self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode).position
+            
+            self.addChild(stationNode.spriteNode)
+            stations.append(stationNode)
         }
+        
+        //stations.append(StationNode(stationType: .hatch, spriteNode: self.childNode(withName: "hatch") as! SKSpriteNode))
     }
     
     func setupBackground() {
-        let background = scene?.childNode(withName: "background") as! SKSpriteNode
+        let background = self.childNode(withName: "background") as! SKSpriteNode
         background.texture = SKTexture(imageNamed: "Background" + playerColor)
     }
     
