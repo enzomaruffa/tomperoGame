@@ -86,7 +86,14 @@ extension GameConnectionManager: MCManagerDataObserver {
         case .plate:
             do {
                 let plate = try JSONDecoder().decode(Plate.self, from: wrapper.object)
-                observers.forEach({ $0.receivePlate(plate: plate) })
+                
+                // downcasting plate
+                let newIngredients = plate.ingredients.map({ $0.findDowncast() })
+                newIngredients.forEach({ $0.currentState = $0.finalState })
+                let newPlate = Plate()
+                newPlate.ingredients = newIngredients
+                
+                observers.forEach({ $0.receivePlate(plate: newPlate) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }

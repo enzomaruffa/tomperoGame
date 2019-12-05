@@ -179,7 +179,7 @@ class GameScene: SKScene {
 // MARK: - GameConnectionManagerObserver Methods
 extension GameScene: GameConnectionManagerObserver {
     func receivePlate(plate: Plate) {
-        print("[GameScene] Received plate")
+        print("[GameScene] Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
     }
     
     func receiveIngredient(ingredient: Ingredient) {
