@@ -11,6 +11,12 @@ import SpriteKit
 
 class MovableSpriteNode: SKSpriteNode {
     
+    // MARK: - Variables
+    var initialTouchPosition: CGPoint?
+    weak var tapDelegate: TappableDelegate?
+    weak var moveDelegate: MovableDelegate?
+    
+    // MARK: - Initializers
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.isUserInteractionEnabled = true
@@ -21,10 +27,7 @@ class MovableSpriteNode: SKSpriteNode {
         self.isUserInteractionEnabled = true
     }
     
-    var initialTouchPosition: CGPoint?
-    weak var tapDelegate: TappableDelegate?
-    weak var moveDelegate: MovableDelegate?
-    
+    // MARK: - Methods
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard touches.first != nil else { return }
         let touch = touches.first!

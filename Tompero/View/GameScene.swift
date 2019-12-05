@@ -64,11 +64,17 @@ class GameScene: SKScene {
         tentacleNode.name = "denis"
         ingredients.append(tentacle)
         
-        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
-        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
-        eyesNode.name = "paulo"
-        self.addChild(eyesNode)
-        ingredients.append(eyes)
+//        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
+//        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
+//        eyesNode.name = "paulo"
+//        self.addChild(eyesNode)
+//        ingredients.append(eyes)
+        
+        let asteroidNode = MovableSpriteNode(imageNamed: "AsteroidRaw")
+        let asteroid = IngredientNode(ingredient: Asteroid(), movableNode: asteroidNode, currentLocation: shelves[1])
+        asteroidNode.name = "paulo"
+        self.addChild(asteroidNode)
+        ingredients.append(asteroid)
         
         let plateNode = MovableSpriteNode(imageNamed: "Plate")
         let plate = PlateNode(plate: Plate(), movableNode: plateNode, currentLocation: shelves[2])

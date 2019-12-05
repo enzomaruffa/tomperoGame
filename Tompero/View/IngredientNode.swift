@@ -11,6 +11,7 @@ import SpriteKit
 
 class IngredientNode: TappableDelegate, MovableDelegate {
     
+    // MARK: - Variables
     var currentStation: StationNode
     var ingredient: Ingredient
     var spriteNode: SKSpriteNode
@@ -20,6 +21,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     var scaleBeforeMove: CGFloat = 1
     var alphaBeforeMove: CGFloat = 1
     
+    // MARK: - Initializers
     init(ingredient: Ingredient, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.ingredient = ingredient
         self.currentStation = currentLocation
@@ -32,6 +34,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         movableNode.moveDelegate = self
     }
     
+    // MARK: - Methods
     private func hideSpriteNode() {
         // We use a very low alpha value otherwise its interaction is disabled
         self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05))
@@ -50,7 +53,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         currentStation.ingredientNode = nil
         
         // Check plate in station
-        
         if let plateNode = station.plateNode {
             plateNode.plate.ingredients.append(self.ingredient)
             plateNode.updateTexture()

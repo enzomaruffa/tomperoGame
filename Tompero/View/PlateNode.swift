@@ -11,6 +11,7 @@ import SpriteKit
 
 class PlateNode: MovableDelegate {
     
+    // MARK: - Variables
     var currentStation: StationNode
     var plate: Plate
     var spriteNode: SKSpriteNode
@@ -20,6 +21,7 @@ class PlateNode: MovableDelegate {
     var scaleBeforeMove: CGFloat = 1
     var alphaBeforeMove: CGFloat = 1
     
+    // MARK: - Initializers
     init(plate: Plate, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.plate = plate
         self.currentStation = currentLocation
@@ -32,6 +34,7 @@ class PlateNode: MovableDelegate {
         movableNode.moveDelegate = self
     }
     
+    // MARK: - Methods
     private func hideSpriteNode() {
         // We use a very low alpha value otherwise its interaction is disabled
         self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05))
@@ -49,31 +52,60 @@ class PlateNode: MovableDelegate {
         currentStation.plateNode = nil
         
         // Check if ingredient exists in station
+        if let ingredientNode = station.ingredientNode {
+            self.plate.ingredients.append(ingredientNode.ingredient)
+            self.updateTexture()
+            
+            //TODO: Remove ingredient node from scene destroy it whatever
+            ingredientNode.spriteNode.removeFromParent()
+        } else {
+            currentStation = station
+            currentStation.plateNode = self
+        }
         
-        currentStation = station
-        currentStation.plateNode = self
     }
     
     func updateTexture() {
+        var zPos = CGFloat(3)
         self.spriteNode.removeAllChildren()
+        self.spriteNode.zPosition = zPos
         
         let breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
         var sortedIngredients = plate.ingredients.sorted(by: { $0.texturePrefix < $1.texturePrefix })
         if let firstBread = sortedIngredients.filter({ breadList.contains($0) }).first {
             sortedIngredients.removeAll(where: { $0 == firstBread })
+            
             // Render bread bottom
+            var newNode = SKSpriteNode(imageNamed: firstBread.texturePrefix + "Bottom")
+            newNode.position = CGPoint(x: 0, y: 35)
+            zPos += 1
+            newNode.zPosition = zPos
+            self.spriteNode.addChild(newNode)
+            
             for (index, ingredient) in sortedIngredients.enumerated() {
-                let newNode = SKSpriteNode(imageNamed: ingredient.textureName)
+                newNode = SKSpriteNode(imageNamed: ingredient.textureName)
+                newNode.position = CGPoint(x: 0, y: 45 + index * 3)
+                zPos += 1
+                newNode.zPosition = zPos
                 self.spriteNode.addChild(newNode)
-                newNode.position = CGPoint(x: 0, y: 20 + index*2)
             }
+            
             // Render bread top
+            newNode = SKSpriteNode(imageNamed: firstBread.texturePrefix + "Top")
+            newNode.position = CGPoint(x: 0, y: 175 + sortedIngredients.count * 4)
+            zPos += 1
+            newNode.zPosition = zPos
+            self.spriteNode.addChild(newNode)
+            
         } else {
             // Render ingredients in plate
+            var zPos = CGFloat(3)
             for (index, ingredient) in sortedIngredients.enumerated() {
                 let newNode = SKSpriteNode(imageNamed: ingredient.textureName)
+                newNode.position = CGPoint(x: 0, y: 30 + index * 3)
+                zPos += 1
+                newNode.zPosition = zPos
                 self.spriteNode.addChild(newNode)
-                newNode.position = CGPoint(x: 0, y: 20 + index*2)
             }
         }
     }
