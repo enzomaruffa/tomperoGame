@@ -135,7 +135,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return true
             
         default:
-            return ingredient.attemptChangeState(to: (ingredient.states[ingredient.currentState] ?? []).first!)
+            return false
         }
     }
     

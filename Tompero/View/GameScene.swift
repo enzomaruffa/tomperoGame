@@ -15,6 +15,7 @@ class GameScene: SKScene {
     // MARK: - Variables
     var player: String = MCManager.shared.selfName
     var rule: GameRule?
+    var orders: [Order] = []
     var tables: [PlayerTable] {
         rule!.playerTables[player]!
     }
@@ -59,6 +60,7 @@ class GameScene: SKScene {
         setupPiping()
         setupBackground()
         
+        // Remove later
         let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
         let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
         tentacleNode.name = "denis"
@@ -81,6 +83,10 @@ class GameScene: SKScene {
         plateNode.name = "plate"
         self.addChild(plateNode)
         plates.append(plate)
+        
+        let order = Order(timeLeft: 30)
+        order.ingredients = [Tentacle(), Asteroid()]
+        orders.append(order)
     }
     
     func setupStations() {
@@ -141,15 +147,56 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         stations.forEach({ $0.update() })
     }
+    
+    func makeDelivery(plate: Plate) -> Bool {
+        print("Existing orders: \(orders.map({$0.ingredients.map({ $0.texturePrefix })}))")
+        
+        guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
+            print("Couldn't find any order")
+            let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
+            GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
+            return false
+        }
+        
+        let difficultyBonus = [GameDifficulty.easy: 1, .medium: 2, .hard: 3]
+        let totalScore = targetOrder.score * difficultyBonus[rule!.difficulty]!
+        
+        print("Total score: \(totalScore)")
+
+        let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
+        GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
+        
+        orders.remove(at: orders.firstIndex { $0.isEquivalent(to: targetOrder) }!)
+        
+        if orders.isEmpty {
+            print("Orders are now empty! Generating a new one")
+            let newOrder = rule!.generateOrder()
+            orders.append(newOrder)
+            
+            GameConnectionManager.shared.sendEveryone(orderList: orders)
+        }
+        
+        return true
+    }
 }
 
 // MARK: - GameConnectionManagerObserver Methods
 extension GameScene: GameConnectionManagerObserver {
     func receivePlate(plate: Plate) {
-        print("[GameScene] Received plate")
+        print("[GameScene] Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
     }
     
     func receiveIngredient(ingredient: Ingredient) {
         print("[GameScene] Received ingredient with prefix \(ingredient.texturePrefix) and state as \(ingredient.currentState)")
+    }
+    
+    func receiveOrders(orders: [Order]) {
+        print("[GameScene] Received new orderList")
+        self.orders = orders
+    }
+    
+    func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
+        print("[GameScene] Received new notification")
+        
     }
 }
