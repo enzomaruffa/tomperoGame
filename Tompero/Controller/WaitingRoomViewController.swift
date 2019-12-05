@@ -187,6 +187,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         // Generate rules and send to other players
         let peers = playersWithStatus.map({ $0.name })
         let rule = GameRuleFactory.generateRule(difficulty: .easy, players: peers)
+        
         let ruleData = try! JSONEncoder().encode(rule)
         MCManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
         

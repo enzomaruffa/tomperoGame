@@ -37,7 +37,8 @@ class GameRuleFactory {
         
         //        print("Generating first ingredient")
         // Gera o primeiro ingrediente aleatório
-        var breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
+//        var breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
+        var breadList = [Asteroid()]
         let firstIngredient = breadList.randomElement()!
         breadList.removeAll(where: {$0 == firstIngredient})
         
@@ -65,14 +66,18 @@ class GameRuleFactory {
         randomTable?.type = .plate
         
         // Ingredientes possíveis ainda:
-        var possibleIngredients: [Ingredient] = [Broccoli(), Eyes(), Horn(), MarsSand(), MoonCheese(), SaturnOnionRings(), Tardigrades(), Tentacle()]
+//        var possibleIngredients: [Ingredient] = [Broccoli(), Eyes(), Horn(), MarsSand(), MoonCheese(), SaturnOnionRings(), Tardigrades(), Tentacle()]
+        var possibleIngredients: [Ingredient] = [Eyes(), Tentacle()]
         
         var actionsList: [Component.Type] = []
         
         //        print("Starting core loop")
         while occupiedSpaces < maxSpaces {
             // Escolhe um novo ingrediente
-            let newIngredient = possibleIngredients.randomElement()!
+            guard let newIngredient = possibleIngredients.randomElement() else {
+                break
+            }
+            
             possibleIngredients.removeAll(where: {$0 == newIngredient})
             
             // Se tem poucos, adiciona mais pães

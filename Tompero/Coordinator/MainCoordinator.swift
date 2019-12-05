@@ -19,21 +19,21 @@ class MainCoordinator: Coordinator {
 
     func start() {
         // Debug waiting room or whole game
-//        inicial()
+        inicial()
         
         // Debug game screen single
-        let tables: [String : [PlayerTable]] = [
-            MCManager.shared.selfName : [
-                PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .frying, ingredient: nil),
-                PlayerTable(type: .cooking, ingredient: nil)
-            ]
-        ]
-        game(rule: GameRule(difficulty: .easy,
-                            possibleIngredients: [Tentacle(), MoonCheese(), Eyes(), Asteroid(), Tardigrades()],
-                            playerTables: tables,
-                            playerOrder: [MCManager.shared.selfName]),
-             hosting: true)
+//        let tables: [String : [PlayerTable]] = [
+//            MCManager.shared.selfName : [
+//                PlayerTable(type: .chopping, ingredient: nil),
+//                PlayerTable(type: .frying, ingredient: nil),
+//                PlayerTable(type: .cooking, ingredient: nil)
+//            ]
+//        ]
+//        game(rule: GameRule(difficulty: .easy,
+//                            possibleIngredients: [Tentacle(), MoonCheese(), Eyes(), Asteroid(), Tardigrades()],
+//                            playerTables: tables,
+//                            playerOrder: [MCManager.shared.selfName]),
+//             hosting: true)
     }
     
     func inicial() {
