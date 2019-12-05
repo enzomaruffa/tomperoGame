@@ -90,7 +90,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
 
         case .shelf:
             setIngredientIn(station)
-            spriteNode.setScale(0.7)
+            spriteNode.setScale(0.6)
             print("Result: \(true)")
             return true
             

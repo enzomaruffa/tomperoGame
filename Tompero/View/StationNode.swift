@@ -36,7 +36,7 @@ class StationNode: TappableDelegate {
             let tappableNode = TappableSpriteNode(imageNamed: NSStringFromClass(type(of: ingredient!)) + "Box.png")
             self.spriteNode = tappableNode
             tappableNode.delegate = self
-        } else if stationType == .shelf || stationType == .delivery {
+        } else if stationType == .shelf || stationType == .delivery ||  stationType == .pipe || stationType == .hatch {
             self.spriteNode = spriteNode!
         } else {
             let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")

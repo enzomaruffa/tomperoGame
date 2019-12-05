@@ -112,19 +112,16 @@ class GameScene: SKScene {
     func setupPiping() {
         
         for (index, color) in colors.enumerated() {
-            let stationNode = StationNode(stationType: .pipe, spriteNode: SKSpriteNode())
+            let pipeNode = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
+            pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
+            print(pipeNode.texture?.name)
+            pipeNode.name = "pipe" + (index+1).description
+            pipeNode.zPosition = 2
             
-            stationNode.spriteNode.texture = SKTexture(imageNamed: "Pipe" + color)
-            stationNode.spriteNode.name = "pipe" + (index+1).description
-            stationNode.spriteNode.zPosition = 1
-            
-            stationNode.spriteNode.position = (self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode).position
-            
-            self.addChild(stationNode.spriteNode)
-            stations.append(stationNode)
+            stations.append(StationNode(stationType: .pipe, spriteNode: pipeNode))
         }
         
-        //stations.append(StationNode(stationType: .hatch, spriteNode: self.childNode(withName: "hatch") as! SKSpriteNode))
+        stations.append(StationNode(stationType: .hatch, spriteNode: self.childNode(withName: "hatch") as! SKSpriteNode))
     }
     
     func setupBackground() {
