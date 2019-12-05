@@ -48,6 +48,14 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         
     }
     
+    func addIngredientTo(_ plateNode: PlateNode) {
+        plateNode.plate.ingredients.append(self.ingredient)
+        plateNode.updateTexture()
+        
+        //TODO: Remove ingredient node from scene destroy it whatever
+        self.spriteNode.removeFromParent()
+    }
+    
     private func setIngredientIn(_ station: StationNode) {
         if currentStation.stationType != .ingredientBox {
             currentStation.ingredient = nil
@@ -56,11 +64,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         
         // Check plate in station
         if let plateNode = station.plateNode {
-            plateNode.plate.ingredients.append(self.ingredient)
-            plateNode.updateTexture()
-            
-            //TODO: Remove ingredient node from scene destroy it whatever
-            self.spriteNode.removeFromParent()
+            addIngredientTo(plateNode)
         } else {
             currentStation = station
             currentStation.ingredient = self.ingredient
@@ -70,6 +74,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     // MARK: - MovableDelegate
+    
     func attemptMove(to station: StationNode) -> Bool {
         
         print("Attempting move \(ingredient.texturePrefix) to \(station.stationType)")
@@ -135,6 +140,13 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         case .hatch:
             implodeSpriteNode()
             return true
+            
+        case .plateBox:
+            if ingredient.finalState == ingredient.currentState, let plateNode = station.plateNode {
+                addIngredientTo(plateNode)
+                return true
+            }
+            return false
             
         default:
             return false
