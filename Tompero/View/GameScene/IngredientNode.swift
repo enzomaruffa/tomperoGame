@@ -34,7 +34,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         movableNode.tapDelegate = self
         movableNode.moveDelegate = self
         
-        currentStation.ingredient = self.ingredient
         currentStation.ingredientNode = self
     }
     
@@ -61,9 +60,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func removeFromPreviousStation() {
-        if currentStation.stationType != .ingredientBox {
-            currentStation.ingredient = nil
-        }
         currentStation.ingredientNode = nil
     }
     
@@ -76,7 +72,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             plateNode.updateTexture()
         } else {
             currentStation = station
-            currentStation.ingredient = self.ingredient
             currentStation.ingredientNode = self
         }
         
@@ -90,7 +85,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         
         switch station.stationType {
         case .board:
-            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .chopping)
+            let canMove = station.ingredientNode?.ingredient == nil && ingredient.attemptChangeState(to: .chopping)
             if canMove {
                 showSpriteNode()
                 setIngredientIn(station)
@@ -99,7 +94,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
             
         case .stove:
-            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .cooking)
+            let canMove = station.ingredientNode?.ingredient == nil && ingredient.attemptChangeState(to: .cooking)
             if canMove {
                 hideSpriteNode()
                 setIngredientIn(station)
@@ -108,7 +103,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
             
         case .fryer:
-            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .frying)
+            let canMove = station.ingredientNode?.ingredient == nil && ingredient.attemptChangeState(to: .frying)
             if canMove {
                 hideSpriteNode()
                 setIngredientIn(station)
@@ -117,7 +112,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
             
         case .shelf:
-            let canMove = station.ingredient == nil && ((station.plateNode != nil && ingredient.currentState == ingredient.finalState) || station.plateNode == nil)
+            let canMove = station.ingredientNode?.ingredient == nil && ((station.plateNode != nil && ingredient.currentState == ingredient.finalState) || station.plateNode == nil)
             if canMove {
                 showSpriteNode()
                 setIngredientIn(station)

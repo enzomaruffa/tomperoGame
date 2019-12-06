@@ -130,7 +130,10 @@ class PlateNode: MovableDelegate {
             return false
             
         case .shelf:
-            let canMove = station.plateNode == nil && ((station.ingredient != nil && station.ingredient?.currentState == station.ingredient?.finalState) || station.ingredient == nil)
+            let canMove =
+                station.plateNode == nil &&
+                    ((station.ingredientNode?.ingredient != nil && station.ingredientNode?.ingredient.currentState == station.ingredientNode?.ingredient.finalState)
+                        || station.ingredientNode?.ingredient == nil)
             if canMove {
                 showSpriteNode()
                 setPlateIn(station)
