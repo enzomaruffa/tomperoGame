@@ -28,7 +28,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     let singleAnimationDuration = 0.35
     
     var isZoomed = false
-    
+    var closedBrowser = false
     var viewOriginalTransform:CGAffineTransform!
     
     // MARK: - Outlets
@@ -137,7 +137,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
-            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+//            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
         } else {
             MCManager.shared.joinSession()
         }
@@ -160,8 +160,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         let scaledAndTranslatedTransform = scaledTransform.translatedBy(x: (-2400)/scaleX, y: 1225/scaleY)
         print("scale \(scaleX) \(scaleY)")
         isZoomed = true
-        
-        UIView.animate(withDuration: 1, animations: {
+        let timeAnimation = 0.6
+        UIView.animate(withDuration: timeAnimation, delay: 0, options: .curveEaseIn, animations: {
             self.view.transform = scaledAndTranslatedTransform
             
             print("SCALE X", scaleX)
@@ -171,7 +171,9 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             //vcd.modalPresentationStyle = .overCurrentContext
             vcd.vcPai = self
             vcd.modalTransitionStyle = .crossDissolve
+            DispatchQueue.main.asyncAfter(deadline: .now() + timeAnimation) {
             self.present(vcd, animated: true, completion: nil)
+            }
         })
         
         /*let vcd = UIStoryboard(name: "MenuStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MenuCollectionViewController") as! MenuCollectionViewController
@@ -250,6 +252,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             
         } else if tappedImage.tag == 1 {
             print("CHAPEU SELECIONADO", hatPurple!)
+            
         } else if tappedImage.tag == 2 {
             print("CHAPEU SELECIONADO", hatGreen!)
         } else if tappedImage.tag == 3 {
@@ -269,6 +272,18 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             })
         })
         
+    }
+    func changeImageAnimated(image: String, viewChange: UIImageView) {
+        guard let currentImage = viewChange.image, let newImage = UIImage(named: image) else {
+            return
+        }
+        let crossFade: CABasicAnimation = CABasicAnimation(keyPath: "contents")
+        crossFade.duration = 0.3
+        crossFade.fromValue = currentImage.cgImage
+        crossFade.toValue = newImage.cgImage
+        crossFade.isRemovedOnCompletion = false
+        crossFade.fillMode = CAMediaTimingFillMode.forwards
+        viewChange.layer.add(crossFade, forKey: "animateContents")
     }
     
     func animatedSpaceshipToUP(hat: UIImageView) {
@@ -301,6 +316,74 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
     }
     
+    private func updatePlayers(_ playersWithStatus: [MCPeerWithStatus]) {
+        for index in 0..<playersWithStatus.count {
+            // Esse loop, antes, só entrava se o usuário estivesse entnraod pela primeira vez na lista (pra não fazer animação  repetida. Como agora  não tem a animação doida, ele entra  sempre no loop
+            // if playersWithStatus[index].name != oldList[index].name {
+            print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) entrou")
+            
+            // Precisamos do dispatch queue pois estamos fazendo mudanças no UIKit e isso precisa do thread principal
+            DispatchQueue.main.async {
+                
+                // Achamos o jogador, faz o chapeu dele entrar.
+                // Sabemos qual chapeu pelo valor de index
+                if index == 0 {
+                    let hat = self.hatBlue!
+                    if playersWithStatus[index].status == .notConnected {
+                        self.hatBlueLBL.text = "?"
+                        self.changeImageAnimated(image: "VREX - Vazio", viewChange: hat)
+                    } else if playersWithStatus[index].status == .connecting {
+                        self.hatBlueLBL.text = "..."
+                        
+                        self.changeImageAnimated(image: "VREX - redline", viewChange: hat)
+                    } else {
+                        self.hatBlueLBL.text = playersWithStatus[index].name
+                        self.changeImageAnimated(image: "VREX - FULL", viewChange: hat)
+                        
+                    }
+                } else if index == 1 {
+                    let hat = self.hatPurple!
+                    if playersWithStatus[index].status == .notConnected {
+                        self.hatPurpleLBL.text = "?"
+                        self.changeImageAnimated(image: "SW77 - Vazio", viewChange: hat)
+                    } else if playersWithStatus[index].status == .connecting {
+                        self.hatPurpleLBL.text = "..."
+                        self.changeImageAnimated(image: "SW77 - redline", viewChange: hat)
+                    } else {
+                        self.hatPurpleLBL.text = playersWithStatus[index].name
+                        self.changeImageAnimated(image: "SW77 - FULL", viewChange: hat)
+                    }
+                } else if index == 2 {
+                    let hat = self.hatGreen!
+                    if playersWithStatus[index].status == .notConnected {
+                        self.hatGreenLBL.text = "?"
+                        self.changeImageAnimated(image: "MORGAN - Vazio", viewChange: hat)
+                    } else if playersWithStatus[index].status == .connecting {
+                        self.hatGreenLBL.text = "..."
+                        self.changeImageAnimated(image: "MORGAN - redline", viewChange: hat)
+                    } else {
+                        self.hatGreenLBL.text = playersWithStatus[index].name
+                        self.changeImageAnimated(image: "MORGAN - FULL", viewChange: hat)
+                    }
+                } else if index == 3 {
+                    let hat = self.hatOrange!
+                    if playersWithStatus[index].status == .notConnected {
+                        self.hatOrangeLBL.text = "?"
+                        self.changeImageAnimated(image: "JERRY - Vazio", viewChange: hat)
+                    } else if playersWithStatus[index].status == .connecting {
+                        self.hatOrangeLBL.text = "..."
+                        self.changeImageAnimated(image: "JERRY - redline", viewChange: hat)
+                    } else {
+                        self.hatOrangeLBL.text = playersWithStatus[index].name
+                        self.changeImageAnimated(image: "JERRY - FULL", viewChange: hat)
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    
 }
 
 // MARK: - MCBrowserViewControllerDelegate Methods
@@ -308,19 +391,13 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
-        
+        closedBrowser = true
         //        guard playersWithStatus.count == 4 else {
         //            self.navigationController?.popViewController(animated: true)
         //            return
         //        }
         
-        for index in 0..<self.playersWithStatus.count {
-            print("Playing animation with index \(index)")
-            print("\(self.playerHats[index].transform)")
-            // self.setHatOrigin(hat: self.playerHats[index], xPosition: 0, yPosition: 0, xScale: 0.5, yScale: 0.5)
-            print("\(self.playerHats[index].transform)")
-        }
-        
+        updatePlayers(playersWithStatus)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
@@ -379,64 +456,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
                 // rodar as animações para todos
                 return
             }
-            for index in 0..<playersWithStatus.count {
-                // Esse loop, antes, só entrava se o usuário estivesse entnraod pela primeira vez na lista (pra não fazer animação  repetida. Como agora  não tem a animação doida, ele entra  sempre no loop
-                // if playersWithStatus[index].name != oldList[index].name {
-                print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) entrou")
-                
-                // Precisamos do dispatch queue pois estamos fazendo mudanças no UIKit e isso precisa do thread principal
-                DispatchQueue.main.async {
-                    
-                    // Achamos o jogador, faz o chapeu dele entrar.
-                    // Sabemos qual chapeu pelo valor de index
-                    if index == 0 {
-                        if playersWithStatus[index].status == .notConnected {
-                            self.hatBlueLBL.text = "?"
-                            self.hatBlue.image = UIImage(named: "VREX - Vazio")
-                        } else if playersWithStatus[index].status == .connecting {
-                            self.hatBlueLBL.text = "..."
-                            self.hatBlue.image = UIImage(named: "VREX - redline")
-                        } else {
-                            self.hatBlueLBL.text = playersWithStatus[index].name
-                            self.hatBlue.image = UIImage(named: "VREX - FULL")
-                        }
-                    } else if index == 1 {
-                        if playersWithStatus[index].status == .notConnected {
-                            self.hatPurpleLBL.text = "?"
-                            self.hatPurple.image = UIImage(named: "SW77 - Vazio")
-                        } else if playersWithStatus[index].status == .connecting {
-                            self.hatPurpleLBL.text = "..."
-                            self.hatPurple.image = UIImage(named: "SW77 - redline")
-                        } else {
-                            self.hatPurpleLBL.text = playersWithStatus[index].name
-                            self.hatPurple.image = UIImage(named: "SW77 - FULL")
-                        }
-                    } else if index == 2 {
-                        if playersWithStatus[index].status == .notConnected {
-                            self.hatGreenLBL.text = "?"
-                            self.hatGreen.image = UIImage(named: "MORGAN - Vazio")
-                        } else if playersWithStatus[index].status == .connecting {
-                            self.hatGreenLBL.text = "..."
-                            self.hatGreen.image = UIImage(named: "MORGAN - redline")
-                        } else {
-                            self.hatGreenLBL.text = playersWithStatus[index].name
-                            self.hatGreen.image = UIImage(named: "MORGAN - FULL")
-                        }
-                    } else if index == 3 {
-                        if playersWithStatus[index].status == .notConnected {
-                            self.hatOrangeLBL.text = "?"
-                            self.hatOrange.image = UIImage(named: "JERRY - Vazio")
-                        } else if playersWithStatus[index].status == .connecting {
-                            self.hatOrangeLBL.text = "..."
-                            self.hatOrange.image = UIImage(named: "JERRY - redline")
-                        } else {
-                            self.hatOrangeLBL.text = playersWithStatus[index].name
-                            self.hatOrange.image = UIImage(named: "JERRY - FULL")
-                        }
-                    }
-                }
-                
-            }
+            updatePlayers(playersWithStatus)
             // seta o da classe pro novo
             self.playersWithStatus = playersWithStatus
         } else {
@@ -477,6 +497,12 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
             print("[playerUpdate] Enviando lista pros Peers")
             MCManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
             self.playersWithStatus = newPlayerList
+            
+            if closedBrowser {
+                updatePlayers(newPlayerList)
+            }
+            
+            //  atualiza animacao
         }
     }
     

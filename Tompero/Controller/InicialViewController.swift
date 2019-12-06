@@ -13,14 +13,72 @@ class InicialViewController: UIViewController, Storyboarded {
     var animationTimer: Timer?
     
     // MARK: - Outlets
-    @IBOutlet weak var person: UIImageView!
     @IBOutlet weak var join: UIImageView!
     @IBOutlet weak var host: UIImageView!
-    @IBOutlet weak var airGIF: UIImageView!
+    @IBOutlet weak var frente: UIImageView!
+    @IBOutlet weak var traseira: UIImageView!
+    
+    var lightsOn = false
+    var countLightsOn = 0
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tapGestureRecognizerJoin = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizerHost = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        join.tag = 0
+        join.isUserInteractionEnabled = true
+        join.addGestureRecognizer(tapGestureRecognizerJoin)
+        host.tag = 1
+        host.isUserInteractionEnabled = true
+        host.addGestureRecognizer(tapGestureRecognizerHost)
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
+            print("Timer called")
+            
+            self.countLightsOn += 1
+            
+            if self.lightsOn && self.countLightsOn >= 2 {
+                UIView.transition(with: self.host,
+                                  duration: 0.05,
+                options: .transitionFlipFromRight,
+                    animations: { self.host.image = UIImage(named: "HOST - apagado") },
+                    completion: nil)
+                self.lightsOn = false
+                
+                UIView.transition(with: self.join,
+                                  duration: 0.05,
+                options: .transitionFlipFromRight,
+                    animations: { self.join.image = UIImage(named: "JOIN - apagado") },
+                    completion: nil)
+            } else if !self.lightsOn {
+                UIView.transition(with: self.host,
+                                  duration: 0.05,
+                    options: .transitionFlipFromRight,
+                    animations: { self.host.image = UIImage(named: "HOST - brilhando") },
+                    completion: nil)
+                
+                UIView.transition(with: self.join,
+                                  duration: 0.05,
+                    options: .transitionFlipFromRight,
+                    animations: { self.join.image = UIImage(named: "JOIN - brilhando") },
+                    completion: nil)
+                
+                self.countLightsOn = 0
+                self.lightsOn = true
+            }
+        }
+        timer.fire()
+        
+//
+//        UIView.animate(withDuration: 1, delay: 0.0, options: [.repeat], animations: {
+//            self.host.image =
+//            print("Setting host on")
+//        })
+//        UIView.animate(withDuration: 1, delay: 1, options: [.repeat], animations: {
+//            print("Setting host off")
+//            self.host.image = UIImage(named: "HOST - apagado")
+//        })
         
 //        for difficulty in [GameDifficulty.easy, .medium, .hard] {
 //            print("\n\n")
@@ -71,62 +129,18 @@ class InicialViewController: UIViewController, Storyboarded {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.person.center = CGPoint(x: view.frame.width/2, y: view.frame.height/1.5)
         MCManager.shared.resetSession()
     }
     
     // MARK: - Methods
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        let touch : UITouch! =  touches.first! as UITouch
-        
-        if animationTimer == nil {
-            animationTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (_) in
-                self.playAnimatedSpaceship()
-            })
-            animationTimer!.fire()
-        }
-    
-        if person.frame.contains(touch.location(in: self.view)) {
-            //touch.location(in: self.view) == person.center {
-            location = touch.location(in: self.view)
-            person.center = location
-        }
-    }
-    
-    func playAnimatedSpaceship() {
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveLinear , animations: {
-            self.person.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/8))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveLinear , animations: {
-                    self.person.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/8))
-                })
-            }
-        })
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.shapeLayer?.removeFromSuperlayer()
-        animationTimer?.invalidate()
-        self.person.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-        animationTimer = nil
-        //            let touch: UITouch! =  touches.first! as UITouch
-        if join.frame.intersects(person.frame) {
-            // Currently joining
-            join.layer.removeAllAnimations()
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        if tappedImage.tag == 0 {
+            print("CLICOU JOIN")
             coordinator?.waitingRoom(hosting: false)
-            person.center = join.center
-            host.layer.removeAllAnimations()
-        } else if host.frame.intersects(person.frame) {
-            // Currently hosting
-            host.layer.removeAllAnimations()
-            join.layer.removeAllAnimations()
+        } else if tappedImage.tag == 1 {
+            print("CLICOU HOST")
             coordinator?.waitingRoom(hosting: true)
-            person.center = host.center
-        } else {
-            person.center = CGPoint(x: view.frame.width/2, y: view.frame.height/1.5)
         }
     }
     

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5eH-78-dlc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5eH-78-dlc">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -157,9 +157,8 @@
                                     <action selector="play:" destination="5eH-78-dlc" eventType="touchUpInside" id="8Ir-gf-jh1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7F-M2-bfK">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7F-M2-bfK">
                                 <rect key="frame" x="694" y="10" width="127" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Menu-1"/>
                                 <connections>
                                     <action selector="menuPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="let-A7-PwI"/>
@@ -176,13 +175,17 @@
                             <constraint firstItem="itL-Jq-8zp" firstAttribute="centerX" secondItem="6Re-AI-gwg" secondAttribute="centerX" multiplier="0.612" id="3SK-AE-Y63"/>
                             <constraint firstItem="NUl-oa-Q0e" firstAttribute="leading" secondItem="hFz-sl-QJG" secondAttribute="leading" id="7U5-j5-vXi"/>
                             <constraint firstItem="itL-Jq-8zp" firstAttribute="width" secondItem="6Re-AI-gwg" secondAttribute="width" multiplier="0.302405" id="8Ee-8k-T7e"/>
+                            <constraint firstItem="k7F-M2-bfK" firstAttribute="leading" secondItem="SlI-Wy-dJf" secondAttribute="trailing" constant="-202" id="A9V-O9-AsR"/>
                             <constraint firstItem="NUl-oa-Q0e" firstAttribute="top" secondItem="hFz-sl-QJG" secondAttribute="top" id="AtR-am-chb"/>
                             <constraint firstItem="hGf-ed-cWw" firstAttribute="centerY" secondItem="itL-Jq-8zp" secondAttribute="centerY" multiplier="0.978" id="BaC-ou-wt5"/>
+                            <constraint firstItem="k7F-M2-bfK" firstAttribute="width" secondItem="SlI-Wy-dJf" secondAttribute="width" multiplier="0.141741" id="E0H-pr-KuH"/>
                             <constraint firstItem="7sx-QL-biX" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="Fga-7O-iyD"/>
                             <constraint firstItem="6Re-AI-gwg" firstAttribute="width" secondItem="hFz-sl-QJG" secondAttribute="width" multiplier="0.65" id="Mys-Ks-mvr"/>
+                            <constraint firstItem="SlI-Wy-dJf" firstAttribute="top" secondItem="k7F-M2-bfK" secondAttribute="bottom" constant="-71" id="OSq-kc-tCt"/>
                             <constraint firstItem="itL-Jq-8zp" firstAttribute="centerY" secondItem="6Re-AI-gwg" secondAttribute="centerY" multiplier="1.5" id="TUK-0w-mcn"/>
                             <constraint firstAttribute="bottom" secondItem="6Re-AI-gwg" secondAttribute="bottom" id="U94-s7-wJS"/>
                             <constraint firstItem="6Re-AI-gwg" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="V9M-vv-DLE"/>
+                            <constraint firstItem="k7F-M2-bfK" firstAttribute="height" secondItem="SlI-Wy-dJf" secondAttribute="height" multiplier="0.147343" id="VjQ-4Y-9cG"/>
                             <constraint firstItem="SlI-Wy-dJf" firstAttribute="leading" secondItem="hFz-sl-QJG" secondAttribute="leading" id="W0R-Oy-JsJ"/>
                             <constraint firstItem="7sx-QL-biX" firstAttribute="height" secondItem="9Vk-7s-UEu" secondAttribute="height" multiplier="0.4" id="WJX-em-IYR"/>
                             <constraint firstItem="itL-Jq-8zp" firstAttribute="height" secondItem="6Re-AI-gwg" secondAttribute="height" multiplier="0.222222" id="Xmw-l4-2nv"/>
