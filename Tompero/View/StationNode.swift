@@ -139,7 +139,9 @@ class StationNode: TappableDelegate {
                     ingredient?.currentState = .chopped
                 }
             }
+            
         } else if stationType == .ingredientBox && self.ingredientNode == nil {
+            
             let newIngredient = ingredient!.findDowncast()
             let ingredientMovableNode = MovableSpriteNode(imageNamed: newIngredient.textureName)
             spriteNode.scene!.addChild(ingredientMovableNode)
@@ -147,7 +149,9 @@ class StationNode: TappableDelegate {
             let ingredientNode = IngredientNode(ingredient: newIngredient, movableNode: ingredientMovableNode, currentLocation: self)
             ingredientMovableNode.position = CGPoint(x: spriteNode.position.x, y: spriteNode.position.y + 85)
             self.ingredientNode = ingredientNode
+            
         } else if stationType == .plateBox && self.plateNode == nil {
+            
             let newPlate = Plate()
             let plateMovableNode = MovableSpriteNode(imageNamed: newPlate.textureName)
             spriteNode.scene!.addChild(plateMovableNode)

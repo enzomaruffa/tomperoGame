@@ -49,8 +49,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func implodeSpriteNode() {
-        self.currentStation.ingredientNode = nil
-        self.currentStation.ingredient = nil
         self.spriteNode.removeFromParent()
     }
     
@@ -134,11 +132,22 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             }
             
             GameConnectionManager.shared.send(ingredient: self.ingredient, to: playerToSendTo)
+
+            self.currentStation.ingredientNode = nil
+            if currentStation.stationType != .ingredientBox {
+                self.currentStation.ingredient = nil
+            }
             
             implodeSpriteNode()
             return true
             
         case .hatch:
+
+            self.currentStation.ingredientNode = nil
+            if currentStation.stationType != .ingredientBox {
+                self.currentStation.ingredient = nil
+            }
+        
             implodeSpriteNode()
             return true
             
