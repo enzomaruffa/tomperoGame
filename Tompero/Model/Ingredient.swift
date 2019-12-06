@@ -68,6 +68,12 @@ class Ingredient: HasSprite, Equatable, Codable {
     }
     
     func findDowncast() -> Ingredient {
+        
+//        switch texturePrefix {
+//        case "Asteroid": return Asteroid()
+//        default: break
+//        }
+        
         if texturePrefix == "Asteroid" {
             return Asteroid()
         }
@@ -114,6 +120,32 @@ class Ingredient: HasSprite, Equatable, Codable {
         
         print("Impossible to downcast")
         return self
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+
+        texturePrefix = try values.decode(String.self, forKey: .texturePrefix)
+        states = try values.decode([IngredientState: [IngredientState]].self, forKey: .states)
+        currentState = try values.decode(IngredientState.self, forKey: .currentState)
+        finalState = try values.decode(IngredientState.self, forKey: .finalState)
+        numberOfActionsTilReady = try values.decode(Int.self, forKey: .numberOfActionsTilReady)
+
+        let components = try values.decode([Component].self, forKey: .components)
+
+        components.forEach({ print($0.componentType, type(of: $0)) })
+        
+//        for component in components {
+//            switch component.componentType {
+//            case .choppable:
+//                self.components.append(try ChoppableComponent(from: decoder))
+//            case .cookable:
+//                self.components.append(try CookableComponent(from: decoder))
+//            case .fryable:
+//                self.components.append(try FryableComponent(from: decoder))
+//            case .none: break
+//            }
+//        }
     }
     
 }

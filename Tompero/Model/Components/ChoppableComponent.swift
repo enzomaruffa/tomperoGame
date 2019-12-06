@@ -24,6 +24,8 @@ class ChoppableComponent: Component, Completable {
         self.chopCap = chopCap
         
         super.init()
+        
+        self.componentType = .choppable
     }
     
     convenience override init() {
@@ -34,14 +36,32 @@ class ChoppableComponent: Component, Completable {
         self.init(chopProgress: chopProgress, chopIncrement: chopIncrement, chopCap: 100)
     }
     
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
-    }
-    
     func update() {
         if !complete {
             chopProgress += chopIncrement
             print("\(chopProgress)")
         }
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case chopProgress
+        case chopIncrement
+        case chopCap
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.chopProgress = try container.decode(Float.self, forKey: .chopProgress)
+        self.chopIncrement = try container.decode(Float.self, forKey: .chopIncrement)
+        self.chopCap = try container.decode(Float.self, forKey: .chopCap)
+        try super.init(from: decoder)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.chopProgress, forKey: .chopProgress)
+        try container.encode(self.chopIncrement, forKey: .chopIncrement)
+        try container.encode(self.chopCap, forKey: .chopCap)
     }
 }

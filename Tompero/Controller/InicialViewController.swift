@@ -21,6 +21,8 @@ class InicialViewController: UIViewController, Storyboarded {
     var lightsOn = false
     var countLightsOn = 0
     
+    var kombiTimer: Timer?
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +35,7 @@ class InicialViewController: UIViewController, Storyboarded {
         host.isUserInteractionEnabled = true
         host.addGestureRecognizer(tapGestureRecognizerHost)
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
+        kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             print("Timer called")
             
             self.countLightsOn += 1
@@ -68,7 +70,7 @@ class InicialViewController: UIViewController, Storyboarded {
                 self.lightsOn = true
             }
         }
-        timer.fire()
+        kombiTimer?.fire()
         
 //
 //        UIView.animate(withDuration: 1, delay: 0.0, options: [.repeat], animations: {
@@ -130,6 +132,10 @@ class InicialViewController: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         MCManager.shared.resetSession()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        kombiTimer?.invalidate()
     }
     
     // MARK: - Methods

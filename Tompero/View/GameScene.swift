@@ -98,7 +98,6 @@ class GameScene: SKScene {
             case .plate: return .plateBox
             case .ingredient: return .ingredientBox
             case .empty: return .empty
-            default: return .board
             }
         }
         
@@ -183,12 +182,45 @@ class GameScene: SKScene {
 
 // MARK: - GameConnectionManagerObserver Methods
 extension GameScene: GameConnectionManagerObserver {
+    
+    var firstEmptyShelf: StationNode? {
+        shelves.filter({ $0.isEmpty }).first
+    }
+    
     func receivePlate(plate: Plate) {
         print("[GameScene] Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
+        
+        guard let shelf = firstEmptyShelf else {
+            return
+        }
+        
+        let node = MovableSpriteNode(imageNamed: "Plate")
+        shelf.plateNode = PlateNode(
+            plate: plate,
+            movableNode: node,
+            currentLocation: shelf
+        )
+        shelf.plateNode?.updateTexture()
+        node.zPosition = 2
+        self.addChild(node)
     }
     
     func receiveIngredient(ingredient: Ingredient) {
         print("[GameScene] Received ingredient with prefix \(ingredient.texturePrefix) and state as \(ingredient.currentState)")
+        
+        guard let shelf = firstEmptyShelf else {
+            return
+        }
+        
+        let node = MovableSpriteNode(imageNamed: ingredient.textureName)
+        shelf.ingredientNode = IngredientNode(
+            ingredient: ingredient,
+            movableNode: node,
+            currentLocation: shelf
+        )
+        shelf.ingredientNode?.checkTextureChange()
+        node.zPosition = 2
+        self.addChild(node)
     }
     
     func receiveOrders(orders: [Order]) {

@@ -63,6 +63,8 @@ class GameConnectionManager {
         do {
             print("[GameConnectionManager] Preparing ingredient")
             let ingredientData = try JSONEncoder().encode(ingredient)
+            let jsonString = String(data: ingredientData, encoding: .utf8)
+            print(jsonString)
             let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
             print(MCManager.shared.connectedPeers)
             MCManager.shared.connectedPeers?.forEach({ print($0.displayName) })
@@ -112,6 +114,11 @@ extension GameConnectionManager: MCManagerDataObserver {
         case .ingredient:
             do {
                 let ingredient = try JSONDecoder().decode(Ingredient.self, from: wrapper.object)
+                
+                for component in ingredient.components {
+                    print(component)
+                }
+                
                 observers.forEach({ $0.receiveIngredient(ingredient: ingredient) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")

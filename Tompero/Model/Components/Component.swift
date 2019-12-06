@@ -9,7 +9,7 @@
 import Foundation
 
 class Component: Codable {
-    
+    var componentType: ComponentType?
 }
 
 protocol Completable {

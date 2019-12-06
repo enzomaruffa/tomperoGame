@@ -46,8 +46,10 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         self.spriteNode.alpha = 1
     }
     
-    private func implodeSpriteNode() {
-        
+    func implodeSpriteNode() {
+        self.currentStation.ingredientNode = nil
+        self.currentStation.ingredient = nil
+        self.spriteNode.removeFromParent()
     }
     
     func addIngredientTo(_ plateNode: PlateNode) {
@@ -87,7 +89,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             if canMove {
                 showSpriteNode()
                 setIngredientIn(station)
-                spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
             return canMove
@@ -97,7 +98,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             if canMove {
                 hideSpriteNode()
                 setIngredientIn(station)
-                spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
             return canMove
@@ -107,7 +107,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             if canMove {
                 hideSpriteNode()
                 setIngredientIn(station)
-                spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
             return canMove
@@ -117,15 +116,12 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             if canMove {
                 showSpriteNode()
                 setIngredientIn(station)
-                spriteNode.setScale(0.6)
             }
             
             print("Result: \(canMove)")
             return canMove
             
         case .pipe:
-            // check if plate
-            
             var playerToSendTo: String = ""
             let scene = station.spriteNode.parent as! GameScene
             switch station.spriteNode.name {
@@ -134,8 +130,9 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             case "pipe3": playerToSendTo = scene.players[2]
             default: return false
             }
+            
             GameConnectionManager.shared.send(ingredient: self.ingredient, to: playerToSendTo)
-            print(playerToSendTo)
+            
             implodeSpriteNode()
             return true
             
