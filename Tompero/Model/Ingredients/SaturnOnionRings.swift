@@ -26,10 +26,8 @@ class SaturnOnionRings: Ingredient {
             .burnt: []
         ]
         
-        self.components = [
-            ChoppableComponent(),
-            FryableComponent()
-        ]
+        self.choppableComponent = ChoppableComponent()
+        self.fryableComponent = FryableComponent()
     }
     
     required init(from decoder: Decoder) throws {

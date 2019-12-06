@@ -114,11 +114,6 @@ extension GameConnectionManager: MCManagerDataObserver {
         case .ingredient:
             do {
                 let ingredient = try JSONDecoder().decode(Ingredient.self, from: wrapper.object)
-                
-                for component in ingredient.components {
-                    print(component)
-                }
-                
                 observers.forEach({ $0.receiveIngredient(ingredient: ingredient) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")

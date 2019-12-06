@@ -22,9 +22,7 @@ class Broccoli: Ingredient {
             .chopping: [.raw, .chopping, .chopped]
         ]
         
-        self.components = [
-            ChoppableComponent()
-        ]
+        self.choppableComponent = ChoppableComponent()
     }
     
     required init(from decoder: Decoder) throws {

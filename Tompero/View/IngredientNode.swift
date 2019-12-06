@@ -27,13 +27,15 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     init(ingredient: Ingredient, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.ingredient = ingredient
         self.currentStation = currentLocation
-        currentStation.ingredient = self.ingredient
         
         spriteNode = movableNode
         
         movableNode.position = currentLocation.spriteNode.position
         movableNode.tapDelegate = self
         movableNode.moveDelegate = self
+        
+        currentStation.ingredient = self.ingredient
+        currentStation.ingredientNode = self
     }
     
     // MARK: - Methods

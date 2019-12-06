@@ -26,10 +26,8 @@ class Horn: Ingredient {
             .burnt: []
         ]
         
-        self.components = [
-            ChoppableComponent(),
-            CookableComponent()
-        ]
+        self.choppableComponent = ChoppableComponent()
+        self.cookableComponent = CookableComponent()
     }
     
     required init(from decoder: Decoder) throws {

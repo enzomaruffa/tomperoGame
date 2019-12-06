@@ -60,29 +60,29 @@ class GameScene: SKScene {
         setupPiping()
         setupBackground()
         
-        // Remove later
-        let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
-        let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
-        tentacleNode.name = "denis"
-        ingredients.append(tentacle)
-        
-//        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
-//        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
-//        eyesNode.name = "paulo"
-//        self.addChild(eyesNode)
-//        ingredients.append(eyes)
-        
-        let asteroidNode = MovableSpriteNode(imageNamed: "AsteroidRaw")
-        let asteroid = IngredientNode(ingredient: Asteroid(), movableNode: asteroidNode, currentLocation: shelves[1])
-        asteroidNode.name = "paulo"
-        self.addChild(asteroidNode)
-        ingredients.append(asteroid)
-        
-        let plateNode = MovableSpriteNode(imageNamed: "Plate")
-        let plate = PlateNode(plate: Plate(), movableNode: plateNode, currentLocation: shelves[2])
-        plateNode.name = "plate"
-        self.addChild(plateNode)
-        plates.append(plate)
+//        // Remove later
+//        let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
+//        let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
+//        tentacleNode.name = "denis"
+//        ingredients.append(tentacle)
+//
+////        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
+////        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
+////        eyesNode.name = "paulo"
+////        self.addChild(eyesNode)
+////        ingredients.append(eyes)
+//
+//        let asteroidNode = MovableSpriteNode(imageNamed: "AsteroidRaw")
+//        let asteroid = IngredientNode(ingredient: Asteroid(), movableNode: asteroidNode, currentLocation: shelves[1])
+//        asteroidNode.name = "paulo"
+//        self.addChild(asteroidNode)
+//        ingredients.append(asteroid)
+//
+//        let plateNode = MovableSpriteNode(imageNamed: "Plate")
+//        let plate = PlateNode(plate: Plate(), movableNode: plateNode, currentLocation: shelves[2])
+//        plateNode.name = "plate"
+//        self.addChild(plateNode)
+//        plates.append(plate)
         
         let order = Order(timeLeft: 30)
         order.ingredients = [Tentacle(), Asteroid()]

@@ -24,9 +24,7 @@ class Tardigrades: Ingredient {
             .burnt: []
         ]
         
-        self.components = [
-            FryableComponent()
-        ]
+        self.fryableComponent = FryableComponent()
     }
     
     required init(from decoder: Decoder) throws {

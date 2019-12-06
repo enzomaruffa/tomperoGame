@@ -25,8 +25,6 @@ class Ingredient: HasSprite, Equatable, Codable {
         }
     }
     
-    var components: [Component] = []
-    
     var states: [IngredientState: [IngredientState]] = [:]
     var currentState: IngredientState = .raw
     var finalState: IngredientState
@@ -46,16 +44,16 @@ class Ingredient: HasSprite, Equatable, Codable {
         return type(of: lhs) == type(of: rhs)
     }
     
-    var choppableComponent: ChoppableComponent? {
-        components.first(where: { $0 is ChoppableComponent }) as? ChoppableComponent ?? nil
-    }
+    var choppableComponent: ChoppableComponent?
+    var cookableComponent: CookableComponent?
+    var fryableComponent: FryableComponent?
     
-    var cookableComponent: CookableComponent? {
-        components.first(where: { $0 is CookableComponent }) as? CookableComponent ?? nil
-    }
-
-    var fryableComponent: FryableComponent? {
-        components.first(where: { $0 is FryableComponent }) as? FryableComponent ?? nil
+    var components: [Component] {
+        var list: [Component] = []
+        if let choppableComponent = self.choppableComponent { list.append(choppableComponent) }
+        if let cookableComponent = self.cookableComponent { list.append(cookableComponent) }
+        if let fryableComponent = self.fryableComponent { list.append(fryableComponent) }
+        return list
     }
     
     func attemptChangeState(to state: IngredientState) -> Bool {
@@ -122,19 +120,19 @@ class Ingredient: HasSprite, Equatable, Codable {
         return self
     }
     
-    required init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-
-        texturePrefix = try values.decode(String.self, forKey: .texturePrefix)
-        states = try values.decode([IngredientState: [IngredientState]].self, forKey: .states)
-        currentState = try values.decode(IngredientState.self, forKey: .currentState)
-        finalState = try values.decode(IngredientState.self, forKey: .finalState)
-        numberOfActionsTilReady = try values.decode(Int.self, forKey: .numberOfActionsTilReady)
-
-        let components = try values.decode([Component].self, forKey: .components)
-
-        components.forEach({ print($0.componentType, type(of: $0)) })
-        
+//    required init(from decoder: Decoder) throws {
+//        let values = try decoder.container(keyedBy: CodingKeys.self)
+//
+//        texturePrefix = try values.decode(String.self, forKey: .texturePrefix)
+//        states = try values.decode([IngredientState: [IngredientState]].self, forKey: .states)
+//        currentState = try values.decode(IngredientState.self, forKey: .currentState)
+//        finalState = try values.decode(IngredientState.self, forKey: .finalState)
+//        numberOfActionsTilReady = try values.decode(Int.self, forKey: .numberOfActionsTilReady)
+//
+//        let components = try values.decode([Component].self, forKey: .components)
+//
+//        components.forEach({ print($0.componentType, type(of: $0)) })
+//
 //        for component in components {
 //            switch component.componentType {
 //            case .choppable:
@@ -146,6 +144,6 @@ class Ingredient: HasSprite, Equatable, Codable {
 //            case .none: break
 //            }
 //        }
-    }
+//   }
     
 }
