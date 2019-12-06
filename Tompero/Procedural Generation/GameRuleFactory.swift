@@ -60,7 +60,7 @@ class GameRuleFactory {
         occupiedSpaces += 1
         
         // Pega só as mesas vazias. Filtra pelos jogadores e depois pelas mesas que possuem espaço vazio
-        let playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}))! })
+        var playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}))! })
         randomPlayer = playerWithEmptyTablesList.randomElement()!
         randomTable = playerTables[randomPlayer]?.filter({ $0.type == .empty }).randomElement()!
         randomTable?.type = .plate
@@ -141,6 +141,40 @@ class GameRuleFactory {
                 }
             }
         }
+        
+        // Verificações adicionais
+        // Check user with empty spaces
+        playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}) ?? false) })
+        while !playerWithEmptyTablesList.isEmpty {
+            let randomPlayerWithEmpty = playerWithEmptyTablesList.randomElement()!
+            print("\(randomPlayerWithEmpty) has an empty space!")
+
+            // List of those with something
+            let playersWithSomethingList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type != .empty}) ?? false) })
+            
+            // Random player with something
+            let randomPlayerWithSomething = playersWithSomethingList.randomElement()!
+            
+            // Random table type from the player that has something
+            let randomTableToCopy = playerTables[randomPlayerWithSomething]!.filter({$0.type != .empty}).randomElement()!
+            
+            // Setting it in the player that has an empty space
+            randomTable = playerTables[randomPlayerWithEmpty]?.filter({ $0.type == .empty }).randomElement()!
+            randomTable?.type = randomTableToCopy.type
+            
+            if randomTableToCopy.type == .ingredient {
+                randomTable?.ingredient = randomTableToCopy.ingredient
+            }
+            
+            print("Filled with \(randomTableToCopy.type)")
+            
+            // repeating search
+            playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}) ?? false) })
+        }
+        
+        // Check user with 3 ingredients
+        
+        // Check user with no ingredients
         
         return GameRule(difficulty: difficulty, possibleIngredients: currentIngredients, playerTables: playerTables, playerOrder: players)
     }
