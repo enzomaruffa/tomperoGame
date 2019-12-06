@@ -25,9 +25,8 @@ class GameViewController: UIViewController, Storyboarded {
             // Load the SKScene from 'GameScene.sks'
             if let scene = GameScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
-                print("setting rule as \(self.rule)")
-                print("after setting peers are \(MCManager.shared.connectedPeers)")
                 scene.rule = self.rule
+                scene.hosting = self.hosting
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene

@@ -67,7 +67,7 @@ class GameRuleFactory {
         
         // Ingredientes possíveis ainda:
 //        var possibleIngredients: [Ingredient] = [Broccoli(), Eyes(), Horn(), MarsSand(), MoonCheese(), SaturnOnionRings(), Tardigrades(), Tentacle()]
-        var possibleIngredients: [Ingredient] = [Tentacle()]
+        var possibleIngredients: [Ingredient] = [Tentacle(), Eyes(), MoonCheese(), Tardigrades()]
         
         var actionsList: [Component.Type] = []
         
@@ -130,7 +130,7 @@ class GameRuleFactory {
                     randomTable?.type = componentToPlayerType(type: component)!
                     
                     // Se o ação já existe, pode ou não adicionar mais uma mesa que faz aquilo.
-                } else if Int.random(in: 0...100) < 65 && occupiedSpaces + 1 < maxSpaces { // 50% de chance de adicionar novamente
+                } else if Int.random(in: 0...100) < 70 && occupiedSpaces + 1 < maxSpaces { // 70% de chance de adicionar novamente
                     
                     // Adiciona a ação novamente
                     occupiedSpaces += 1

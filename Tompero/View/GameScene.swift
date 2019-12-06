@@ -13,6 +13,8 @@ import GameplayKit
 class GameScene: SKScene {
     
     // MARK: - Variables
+    var hosting = false
+    
     var player: String = MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
@@ -46,14 +48,16 @@ class GameScene: SKScene {
         stations.filter({ $0.stationType == .pipe })
     }
     
-    // Remove later
-    var ingredients: [IngredientNode] = []
-    var plates: [PlateNode] = []
+    var orderListNode: SKLabelNode!
+    var orderGenerationCounter = 400
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
+        
+        orderListNode = self.childNode(withName: "orderListNode") as! SKLabelNode
+        orderListNode.numberOfLines = 0
         
         setupStations()
         setupShelves()
@@ -84,9 +88,6 @@ class GameScene: SKScene {
 //        self.addChild(plateNode)
 //        plates.append(plate)
         
-        let order = Order(timeLeft: 30)
-        order.ingredients = [Tentacle(), Asteroid()]
-        orders.append(order)
     }
     
     func setupStations() {
@@ -144,8 +145,25 @@ class GameScene: SKScene {
     }
     
     // MARK: - Game Logic
+    
+    func generateRandomOrder() {
+        let order = rule?.generateOrder()
+        orders.append(order!)
+        
+        updateOrderUI(orders)
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         stations.forEach({ $0.update() })
+        
+        if hosting {
+            orderGenerationCounter += 1
+            
+            if orderGenerationCounter >= 1000 {
+                generateRandomOrder()
+                orderGenerationCounter = 0
+            }
+        }
     }
     
     func makeDelivery(plate: Plate) -> Bool {
@@ -155,6 +173,8 @@ class GameScene: SKScene {
             print("Couldn't find any order")
             let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
+
+            updateOrderUI(orders)
             return false
         }
         
@@ -170,13 +190,19 @@ class GameScene: SKScene {
         
         if orders.isEmpty {
             print("Orders are now empty! Generating a new one")
-            let newOrder = rule!.generateOrder()
-            orders.append(newOrder)
-            
-            GameConnectionManager.shared.sendEveryone(orderList: orders)
+            generateRandomOrder()
         }
         
+        GameConnectionManager.shared.sendEveryone(orderList: orders)
+        
+        orderGenerationCounter = 0
+        updateOrderUI(orders)
         return true
+    }
+    
+    func updateOrderUI(_ orders: [Order]) {
+        let ordersInString = orders.map({ $0.ingredients.map({ $0.texturePrefix }).joined(separator: ", ") })
+        orderListNode.text = ordersInString.joined(separator: "\n")
     }
 }
 
@@ -226,6 +252,8 @@ extension GameScene: GameConnectionManagerObserver {
     func receiveOrders(orders: [Order]) {
         print("[GameScene] Received new orderList")
         self.orders = orders
+        
+        updateOrderUI(orders)
     }
     
     func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
