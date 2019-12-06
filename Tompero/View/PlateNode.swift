@@ -45,6 +45,7 @@ class PlateNode: MovableDelegate {
     }
     
     private func implodeSpriteNode() {
+        self.currentStation.plateNode = nil
         spriteNode.removeFromParent()
     }
     
@@ -135,8 +136,6 @@ class PlateNode: MovableDelegate {
             return canMove
             
         case .pipe:
-            self.currentStation.plateNode = nil
-            
             var playerToSendTo: String = ""
             let scene = station.spriteNode.parent as! GameScene
             switch station.spriteNode.name {
