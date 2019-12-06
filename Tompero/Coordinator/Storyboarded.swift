@@ -13,6 +13,7 @@ protocol Storyboarded {
     static var storyboardName: String { get }
 }
 
+//swiftlint:disable force_cast
 extension Storyboarded where Self: UIViewController {
     static func instantiate() -> Self {
         // this pulls out "MyApp.MyViewController"

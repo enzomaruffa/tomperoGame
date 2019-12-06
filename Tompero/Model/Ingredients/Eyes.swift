@@ -10,18 +10,18 @@ import Foundation
 
 class Eyes: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
-            texturePrefix: "",
-            currentOwner: currentOwner,
+            texturePrefix: "Eyes",
             actionCount: 2,
             finalState: .fried
         )
         
         self.states = [
             .raw: [.frying],
-            .frying: [.raw, .fried],
-            .fried: [.burnt]
+            .frying: [.raw, .frying, .fried],
+            .fried: [.burnt],
+            .burnt: []
         ]
         
         self.components = [

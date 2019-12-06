@@ -10,20 +10,20 @@ import Foundation
 
 class SaturnOnionRings: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
-            texturePrefix: "",
-            currentOwner: currentOwner,
+            texturePrefix: "SaturnOnionRings",
             actionCount: 3,
             finalState: .raw
         )
         
         self.states = [
             .raw: [.chopping],
-            .chopping: [.raw, .chopped],
+            .chopping: [.raw, .chopping, .chopped],
             .chopped: [.frying],
-            .frying: [.chopped, .fried],
-            .fried: [.burnt]
+            .frying: [.chopped, .frying, .fried],
+            .fried: [.burnt],
+            .burnt: []
         ]
         
         self.components = [

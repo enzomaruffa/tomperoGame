@@ -7,15 +7,23 @@
 //
 
 import Foundation
+import SpriteKit
 
-class Ingredient: HasSprite, Transferable, Equatable, Codable {
+class Ingredient: HasSprite, Equatable, Codable {
     
     var texturePrefix: String
     var textureName: String {
-        texturePrefix + currentState.rawValue
-        // update sprite (how?)
+        switch currentState {
+        case .raw: return texturePrefix + "Raw"
+        case .chopping: return texturePrefix + "Raw"
+        case .chopped: return texturePrefix + "Chopped"
+        case .cooking: return texturePrefix + "Raw"
+        case .cooked: return texturePrefix + "Cooked"
+        case .frying: return texturePrefix + "Raw"
+        case .fried: return texturePrefix + "Fried"
+        case .burnt: return "ashes"
+        }
     }
-    var currentOwner: String
     
     var components: [Component] = []
     
@@ -28,9 +36,8 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
     
     var numberOfActionsTilReady: Int
     
-    init(texturePrefix: String, currentOwner: String, actionCount: Int, finalState: IngredientState) {
+    init(texturePrefix: String, actionCount: Int, finalState: IngredientState) {
         self.texturePrefix = texturePrefix
-        self.currentOwner = currentOwner
         self.numberOfActionsTilReady = actionCount
         self.finalState = finalState
     }
@@ -51,8 +58,62 @@ class Ingredient: HasSprite, Transferable, Equatable, Codable {
         components.first(where: { $0 is FryableComponent }) as? FryableComponent ?? nil
     }
     
-    func update() {
+    func attemptChangeState(to state: IngredientState) -> Bool {
+        print("Attempting change from \(currentState) to \(state)")
+        if (states[currentState] ?? []).contains(state) {
+            currentState = state
+            return true
+        }
+        return false
+    }
+    
+    func findDowncast() -> Ingredient {
+        if texturePrefix == "Asteroid" {
+            return Asteroid()
+        }
         
+        if texturePrefix == "Broccoli" {
+            return Broccoli()
+        }
+        
+        if texturePrefix == "DevilMashedBread" {
+            return DevilMashedBread()
+        }
+        
+        if texturePrefix == "Eyes" {
+            return Eyes()
+        }
+        
+        if texturePrefix == "Horn" {
+            return Horn()
+        }
+        
+        if texturePrefix == "MarsSand" {
+            return MarsSand()
+        }
+        
+        if texturePrefix == "MoonCheese" {
+            return MoonCheese()
+        }
+        
+        if texturePrefix == "SaturnOnionRings" {
+            return SaturnOnionRings()
+        }
+        
+        if texturePrefix == "SpaceshipHull" {
+            return SpaceshipHull()
+        }
+        
+        if texturePrefix == "Tardigrades" {
+            return Tardigrades()
+        }
+        
+        if texturePrefix == "Tentacle" {
+            return Tentacle()
+        }
+        
+        print("Impossible to downcast")
+        return self
     }
     
 }

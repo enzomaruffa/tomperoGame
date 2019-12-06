@@ -10,10 +10,9 @@ import Foundation
 
 class Asteroid: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
-            texturePrefix: "",
-            currentOwner: currentOwner,
+            texturePrefix: "Asteroid",
             actionCount: 1,
             finalState: .raw
         )

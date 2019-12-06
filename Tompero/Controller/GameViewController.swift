@@ -15,13 +15,19 @@ class GameViewController: UIViewController, Storyboarded {
     static var storyboardName = "Game"
     weak var coordinator: MainCoordinator?
     
+    var rule: GameRule?
+    var hosting: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = GameScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
+                print("setting rule as \(self.rule)")
+                print("after setting peers are \(MCManager.shared.connectedPeers)")
+                scene.rule = self.rule
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene

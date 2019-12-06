@@ -10,20 +10,20 @@ import Foundation
 
 class Tentacle: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
-            texturePrefix: "",
-            currentOwner: currentOwner,
+            texturePrefix: "Tentacle",
             actionCount: 3,
             finalState: .cooked
         )
         
         self.states = [
             .raw: [.chopping],
-            .chopping: [.raw, .chopped],
+            .chopping: [.raw, .chopping, .chopped],
             .chopped: [.cooking],
-            .cooking: [.chopped, .cooked],
-            .cooked: [.burnt]
+            .cooking: [.chopped, .cooking, .cooked],
+            .cooked: [.burnt],
+            .burnt: []
         ]
         
         self.components = [

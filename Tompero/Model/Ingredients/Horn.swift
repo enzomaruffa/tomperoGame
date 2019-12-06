@@ -10,20 +10,20 @@ import Foundation
 
 class Horn: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
-            texturePrefix: "",
-            currentOwner: currentOwner,
+            texturePrefix: "Horn",
             actionCount: 3,
             finalState: .cooked
         )
         
         self.states = [
             .raw: [.chopping],
-            .chopping: [.raw, .chopped],
+            .chopping: [.raw, .chopping, .chopped],
             .chopped: [.cooking],
-            .cooking: [.chopped, .cooked],
-            .cooked: [.burnt]
+            .cooking: [.chopped, .cooking, .cooked],
+            .cooked: [.cooking, .burnt],
+            .burnt: []
         ]
         
         self.components = [

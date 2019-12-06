@@ -9,10 +9,15 @@
 import Foundation
 
 class Order: HasIngredients, Codable {
-    var ingredients: [Ingredient] = []
-    var timeLeft: Int
     
-    init(timeLeft: Int) {
+    var ingredients: [Ingredient] = []
+    var timeLeft: Float
+    
+    var score: Int {
+        (8 + Int(ceil(timeLeft/10)) * 2)
+    }
+    
+    init(timeLeft: Float) {
         self.timeLeft = timeLeft
     }
     

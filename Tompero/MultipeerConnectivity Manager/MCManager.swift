@@ -16,16 +16,25 @@ class MCManager: NSObject, MCSessionDelegate {
     
     static let shared = MCManager()
     
-    let gameName = "cookios"
+    let gameName = "spacespice"
     
     var peerID: MCPeerID?
     var mcSession: MCSession?
     var mcAdvertiserAssistant: MCAdvertiserAssistant?
     
+    var connectedPeers: [MCPeerID]? {
+        self.mcSession?.connectedPeers ?? nil
+    }
+    
     var dataObservers: [MCManagerDataObserver] = []
     var matchmakingObservers: [MCManagerMatchmakingObserver] = []
     
     var hosting = false
+    
+    var selfName: String {
+        (peerID?.displayName)!
+    }
+    
     // MARK: - Initializers
     
     override private init() {
@@ -33,18 +42,20 @@ class MCManager: NSObject, MCSessionDelegate {
         let peerID = MCPeerID(displayName: UIDevice.current.name)
         self.peerID = peerID
         
-        createNewSession(peerID)
+        resetSession()
     }
     
-    // MARK: - Methods
-    
+    // MARK: - Session Methods
     func createNewSession(_ peerID: MCPeerID) {
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .none)
         mcSession!.delegate = self
     }
     
     func resetSession() {
         mcSession?.disconnect()
+        mcSession = nil
+        mcAdvertiserAssistant?.stop()
+        mcAdvertiserAssistant = nil
         if let peerID = self.peerID {
             createNewSession(peerID)
         } else {
@@ -54,15 +65,7 @@ class MCManager: NSObject, MCSessionDelegate {
         }
     }
     
-    func hostSession() {
-        if let mcSession = self.mcSession {
-            mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "cookios", discoveryInfo: nil, session: mcSession)
-            mcAdvertiserAssistant!.start()
-            self.hosting = true
-        }
-    }
-    
-    func joinSession(presentingFrom rootViewController: UIViewController, delegate: MCBrowserViewControllerDelegate) {
+    func hostSession(presentingFrom rootViewController: UIViewController, delegate: MCBrowserViewControllerDelegate) {
         if let mcSession = self.mcSession {
             let mcBrowser = MCBrowserViewController(serviceType: "cookios", session: mcSession)
             mcBrowser.delegate = delegate
@@ -71,31 +74,27 @@ class MCManager: NSObject, MCSessionDelegate {
         }
     }
     
-    func sendEveryone(dataWrapper: MCDataWrapper) {
-        print("[MCManager] Sending message to everyone")
-        send(dataWrapper: dataWrapper, to: self.mcSession!.connectedPeers)
-    }
-    
-    func send(dataWrapper: MCDataWrapper, to peers: [MCPeerID]) {
-        do {
-            let encodedData = try JSONEncoder().encode(dataWrapper)
-            try self.mcSession?.send(encodedData, toPeers: peers, with: .reliable)
-        } catch let error {
-            print("[MCManager] Error sending data: \(error.localizedDescription)")
+    func joinSession() {
+        if let mcSession = self.mcSession {
+            mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "cookios", discoveryInfo: nil, session: mcSession)
+            mcAdvertiserAssistant!.start()
+            self.hosting = true
         }
     }
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        matchmakingObservers.forEach({ $0.playerUpdate(player: peerID.displayName, state: state) })
         switch state {
         case .connected:
-            print("[MCManager] Connected: \(peerID.displayName)")
+            print("\n[MCManager] Connected: \(peerID.displayName)")
         case .connecting:
-            print("[MCManager] Connecting: \(peerID.displayName)")
+            print("\n[MCManager] Connecting: \(peerID.displayName)")
         case .notConnected:
-            print("[MCManager] Not Connected: \(peerID.displayName)")
+            print("\n[MCManager] Not Connected: \(peerID.displayName)")
         @unknown default:
-            print("[MCManager] fatal error")
+            print("\n[MCManager] fatal error")
+        }
+        DispatchQueue.main.async {
+            self.matchmakingObservers.forEach({ $0.playerUpdate(player: peerID.displayName, state: state) })
         }
     }
     
@@ -104,8 +103,21 @@ class MCManager: NSObject, MCSessionDelegate {
             print("[MCManager] Received data")
             let wrapper = try JSONDecoder().decode(MCDataWrapper.self, from: data)
             print("[MCManager] Wrapper: \(wrapper)")
-            print("[MCManager] Sending to dataObservers: \(dataObservers)")
-            dataObservers.forEach({ $0.receiveData(wrapper: wrapper) })
+            
+            if wrapper.type == .playerData {
+                print("[MCManager] Sending playerData to observers: \(wrapper)")
+                let peersWithStatus = try JSONDecoder().decode([MCPeerWithStatus].self, from: wrapper.object)
+                matchmakingObservers.forEach({ $0.playerListSent(playersWithStatus: peersWithStatus) })
+            } else if wrapper.type == .gameRule {
+                print("[MCManager] Sending gameRule to observers: \(wrapper)")
+                var rule = try JSONDecoder().decode(GameRule.self, from: wrapper.object)
+                rule.possibleIngredients = rule.possibleIngredients.map({ $0.findDowncast() })
+                matchmakingObservers.forEach({ $0.receiveGameRule(rule: rule) })
+            } else {
+                print("[MCManager] Sending to dataObservers: \(dataObservers)")
+                dataObservers.forEach({ $0.receiveData(wrapper: wrapper) })
+            }
+            
         } catch let error {
             print("[MCManager] Error decoding data: \(error.localizedDescription)")
         }
@@ -121,6 +133,35 @@ class MCManager: NSObject, MCSessionDelegate {
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         
+    }
+    
+    // MARK: - Data Transfering Methods
+    func sendEveryone(dataWrapper: MCDataWrapper) {
+        print("[MCManager] Sending message to everyone")
+        send(dataWrapper: dataWrapper, to: self.mcSession!.connectedPeers)
+    }
+    
+    func send(dataWrapper: MCDataWrapper, to peers: [MCPeerID]) {
+        do {
+            let encodedData = try JSONEncoder().encode(dataWrapper)
+            try self.mcSession?.send(encodedData, toPeers: peers, with: .reliable)
+        } catch let error {
+            print("[MCManager] Error sending data: \(error.localizedDescription)")
+        }
+    }
+    
+    func sendPeersStatus(playersWithStatus: [MCPeerWithStatus]) {
+        guard !self.mcSession!.connectedPeers.isEmpty else {
+            return
+        }
+        do {
+            print("[MCManager] Sending playersWithStatus to everyone")
+            let playersData = try JSONEncoder().encode(playersWithStatus)
+            let dataWrapper = MCDataWrapper(object: playersData, type: .playerData)
+            sendEveryone(dataWrapper: dataWrapper)
+        } catch let error {
+            print("[MCManager] Error sending data: \(error.localizedDescription)")
+        }
     }
     
     // MARK: - Observer Methods

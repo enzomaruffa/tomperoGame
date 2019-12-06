@@ -18,8 +18,26 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
+        // Debug waiting room or whole game
+        inicial()
+        
+        // Debug game screen single
+//        let tables: [String : [PlayerTable]] = [
+//            MCManager.shared.selfName : [
+//                PlayerTable(type: .chopping, ingredient: nil),
+//                PlayerTable(type: .frying, ingredient: nil),
+//                PlayerTable(type: .cooking, ingredient: nil)
+//            ]
+//        ]
+//        game(rule: GameRule(difficulty: .easy,
+//                            possibleIngredients: [Tentacle(), MoonCheese(), Eyes(), Asteroid(), Tardigrades()],
+//                            playerTables: tables,
+//                            playerOrder: [MCManager.shared.selfName]),
+//             hosting: true)
+    }
+    
+    func inicial() {
         let controller = InicialViewController.instantiate()
-        //let controller = InicialViewController.instantiate()
         controller.coordinator = self
         navigationController.pushViewController(controller, animated: false)
     }
@@ -34,6 +52,14 @@ class MainCoordinator: Coordinator {
         let controller = WaitingRoomViewController.instantiate()
         controller.coordinator = self
         controller.hosting = hosting
+        navigationController.pushViewController(controller, animated: false)
+    }
+    
+    func game(rule: GameRule, hosting: Bool) {
+        let controller = GameViewController.instantiate()
+        controller.coordinator = self
+        controller.hosting = hosting
+        controller.rule = rule
         navigationController.pushViewController(controller, animated: false)
     }
 }

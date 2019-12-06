@@ -8,17 +8,17 @@
 
 import Foundation
 
-enum IngredientState: String, Codable {
-    case raw = "Raw"
+enum IngredientState: Int, Codable {
+    case raw = 0
     
-    case chopping = "Kinda chopped"
-    case chopped = "Chopped"
+    case chopping
+    case chopped
     
-    case cooking = "Kinda Cooked"
-    case cooked = "Cooked"
+    case cooking
+    case cooked
     
-    case frying = "Kinda Fried"
-    case fried = "Fried"
+    case frying
+    case fried
     
-    case burnt = "Burnt"
+    case burnt
 }

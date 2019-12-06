@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum GameDifficulty {
+enum GameDifficulty: String, Codable {
     case easy
     case medium
     case hard

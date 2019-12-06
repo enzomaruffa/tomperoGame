@@ -10,18 +10,18 @@ import Foundation
 
 class MarsSand: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
-            texturePrefix: "",
-            currentOwner: currentOwner,
+            texturePrefix: "MarsSand",
             actionCount: 2,
             finalState: .cooked
         )
         
         self.states = [
             .raw: [.cooking],
-            .cooking: [.raw, .cooked],
-            .cooked: [.burnt]
+            .cooking: [.raw, .cooking, .cooked],
+            .cooked: [.burnt],
+            .burnt: []
         ]
         
         self.components = [

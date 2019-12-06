@@ -7,11 +7,11 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     @IBOutlet weak var pageControl: UIPageControl!
     
     // MARK: - Variables
-    let ingrediente: [UIImage] = [UIImage(named: "books")!, UIImage(named: "books")!]
+    let ingrediente: [UIImage] = [UIImage(named: "ingredientes 1")!, UIImage(named: "ingredientes 1")!]
     weak var coordinator: MainCoordinator?
     
     // MARK: - Storyboarded
-    static var storyboardName = "MenuStoryboard"
+    static var storyboardName = "MenuCollectionViewController"
     
     // MARK: - ViewLifecycle
     override func viewDidLoad() {
@@ -19,8 +19,16 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
         
     }
     
+    var vcPai:WaitingRoomViewController!
+    
     @IBAction func backPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+       
+            self.presentingViewController?.dismiss(animated: true, completion: { () in
+                
+                self.vcPai.zoomOut()
+            })
+        //self.navigationController?.popViewController(animated: true)
+        
     }
     // MARK: - Collection Methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -35,8 +43,7 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuCell", for: indexPath) as! MenuCollectionViewCell
-        cell.backgroundColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
-        cell.menuImage.image = UIImage(named: "books")!
+        cell.menuImage.image = ingrediente[indexPath.row]
         return cell
     }
 
@@ -57,7 +64,6 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(self.collectionView.contentOffset.x)/Int(self.collectionView.frame.width)
     }
-    
     
     /*
     // Uncomment this method to specify if the specified item should be selected

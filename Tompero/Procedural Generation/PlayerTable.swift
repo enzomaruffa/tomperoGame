@@ -8,12 +8,12 @@
 
 import Foundation
 
-class PlayerTable {
+class PlayerTable: Codable {
     
     var type: PlayerTableType
-    var ingredient: Ingredient.Type?
+    var ingredient: Ingredient?
     
-    internal init(type: PlayerTableType, ingredient: Ingredient.Type?) {
+    internal init(type: PlayerTableType, ingredient: Ingredient?) {
         self.type = type
         self.ingredient = ingredient
     }

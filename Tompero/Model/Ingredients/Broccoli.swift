@@ -10,17 +10,16 @@ import Foundation
 
 class Broccoli: Ingredient {
     
-    init(currentOwner: String) {
+    init() {
         super.init(
-            texturePrefix: "",
-            currentOwner: currentOwner,
+            texturePrefix: "Broccoli",
             actionCount: 2,
             finalState: .chopped
         )
         
         self.states = [
             .raw: [.chopping],
-            .chopping: [.raw, .chopped]
+            .chopping: [.raw, .chopping, .chopped]
         ]
         
         self.components = [

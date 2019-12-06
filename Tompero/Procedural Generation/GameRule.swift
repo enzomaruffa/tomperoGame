@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import MultipeerConnectivity
 
-class GameRule {
+class GameRule: Codable {
     
     //Probabilidades são na forma de "um pedido com i ações tem v[i] chance de ser gerado"
     static let difficultyProbabilityDict: [GameDifficulty : [Double]] =
@@ -18,13 +17,16 @@ class GameRule {
            .hard: [0, 0, 0, 3, 3, 10, 10, 10, 20, 30, 10, 3.4, 0.3, 0.2, 0.1]]
     
     let difficulty: GameDifficulty
-    let possibleIngredients: [Ingredient]
-    let playerTables: [MCPeerID:  [PlayerTable]]
+    var possibleIngredients: [Ingredient]
+    let playerTables: [String: [PlayerTable]]
+
+    var playerOrder: [String]
     
-    internal init(difficulty: GameDifficulty, possibleIngredients: [Ingredient], playerTables: [MCPeerID:  [PlayerTable]]) {
+    internal init(difficulty: GameDifficulty, possibleIngredients: [Ingredient], playerTables: [String:  [PlayerTable]], playerOrder: [String]) {
         self.difficulty = difficulty
         self.possibleIngredients = possibleIngredients
-        self.playerTables  = playerTables
+        self.playerTables = playerTables
+        self.playerOrder = playerOrder
     }
     
     func generateOrder() -> Order {
@@ -39,7 +41,7 @@ class GameRule {
 //        print("Max actions: \(maxActions)")
 
         // Escolhemos um pão aleatório
-        let breadList = [SpaceshipHull(currentOwner: ""), DevilMashedBread(currentOwner: ""), Asteroid(currentOwner: "")]
+        let breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
         let possibleBreads = possibleIngredients.filter({ breadList.contains($0) })
         let orderBread = possibleBreads.randomElement()!
         currentActions += 1
