@@ -137,7 +137,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
-//            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
         } else {
             MCManager.shared.joinSession()
         }
