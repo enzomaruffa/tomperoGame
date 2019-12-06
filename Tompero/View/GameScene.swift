@@ -63,6 +63,7 @@ class GameScene: SKScene {
         // Remove later
         let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
         let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
+        tentacle.ingredient.currentState = .chopped
         tentacleNode.name = "denis"
         ingredients.append(tentacle)
         

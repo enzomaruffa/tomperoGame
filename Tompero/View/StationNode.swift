@@ -26,7 +26,29 @@ class StationNode: TappableDelegate {
         }
     }
     
-    var ingredientNode: IngredientNode?
+    var ingredientNode: IngredientNode? {
+        didSet {
+            if stationType == .stove || stationType == .fryer {
+                var indicatorNode = spriteNode.children.first as? SKSpriteNode
+                if indicatorNode == nil {
+                    indicatorNode = SKSpriteNode(imageNamed: "IngredientIndicator")
+                    spriteNode.addChild(indicatorNode!)
+                    indicatorNode!.zPosition = 2
+                    indicatorNode!.scale(to: CGSize(width: 170, height: 170))
+                    indicatorNode!.position = CGPoint(x: -260, y: 170)
+                }
+                
+                if let ingredient = ingredientNode?.ingredient {
+                    let iconNode = SKSpriteNode(imageNamed: ingredient.texturePrefix + "Icon")
+                    iconNode.zPosition = 3
+                    iconNode.scale(to: CGSize(width: 125, height: 125))
+                    indicatorNode?.addChild(iconNode)
+                } else {
+                    indicatorNode?.removeAllChildren()
+                }
+            }
+        }
+    }
     var plateNode: PlateNode?
     
     internal init(stationType: StationType, spriteNode: SKSpriteNode?, ingredient: Ingredient?) {
