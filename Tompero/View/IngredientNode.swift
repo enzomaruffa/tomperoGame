@@ -21,6 +21,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     var scaleBeforeMove: CGFloat = 1
     var alphaBeforeMove: CGFloat = 1
     
+    var moving = false
+    
     // MARK: - Initializers
     init(ingredient: Ingredient, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.ingredient = ingredient
@@ -156,6 +158,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     func moveStarted(currentPosition: CGPoint) {
         scaleBeforeMove = spriteNode.yScale
         alphaBeforeMove = spriteNode.alpha
+        
+        moving = true
     }
     
     func moving(currentPosition: CGPoint) {
@@ -185,6 +189,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil
+        
+        moving = false
     }
     
     func moveCancel(currentPosition: CGPoint) {

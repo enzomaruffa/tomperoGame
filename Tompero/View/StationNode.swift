@@ -116,7 +116,7 @@ class StationNode: TappableDelegate {
     
     // Scene update intercation
     func update() {
-        if stationType == .stove {
+        if stationType == .stove && !(ingredientNode?.moving ?? true) {
             ingredient?.cookableComponent?.update()
             
             if ingredient?.cookableComponent?.burnt ?? false {
@@ -131,7 +131,7 @@ class StationNode: TappableDelegate {
                 }
             }
             
-        } else if stationType == .fryer {
+        } else if stationType == .fryer && !(ingredientNode?.moving ?? true) {
             ingredient?.fryableComponent?.update()
             
             if ingredient?.fryableComponent?.burnt ?? false {
