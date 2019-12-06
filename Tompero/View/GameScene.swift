@@ -60,29 +60,29 @@ class GameScene: SKScene {
         setupPiping()
         setupBackground()
         
-        // Remove later
-        let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
-        let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
-        tentacleNode.name = "denis"
-        ingredients.append(tentacle)
-        
-//        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
-//        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
-//        eyesNode.name = "paulo"
-//        self.addChild(eyesNode)
-//        ingredients.append(eyes)
-        
-        let asteroidNode = MovableSpriteNode(imageNamed: "AsteroidRaw")
-        let asteroid = IngredientNode(ingredient: Asteroid(), movableNode: asteroidNode, currentLocation: shelves[1])
-        asteroidNode.name = "paulo"
-        self.addChild(asteroidNode)
-        ingredients.append(asteroid)
-        
-        let plateNode = MovableSpriteNode(imageNamed: "Plate")
-        let plate = PlateNode(plate: Plate(), movableNode: plateNode, currentLocation: shelves[2])
-        plateNode.name = "plate"
-        self.addChild(plateNode)
-        plates.append(plate)
+//        // Remove later
+//        let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
+//        let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
+//        tentacleNode.name = "denis"
+//        ingredients.append(tentacle)
+//
+////        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
+////        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
+////        eyesNode.name = "paulo"
+////        self.addChild(eyesNode)
+////        ingredients.append(eyes)
+//
+//        let asteroidNode = MovableSpriteNode(imageNamed: "AsteroidRaw")
+//        let asteroid = IngredientNode(ingredient: Asteroid(), movableNode: asteroidNode, currentLocation: shelves[1])
+//        asteroidNode.name = "paulo"
+//        self.addChild(asteroidNode)
+//        ingredients.append(asteroid)
+//
+//        let plateNode = MovableSpriteNode(imageNamed: "Plate")
+//        let plate = PlateNode(plate: Plate(), movableNode: plateNode, currentLocation: shelves[2])
+//        plateNode.name = "plate"
+//        self.addChild(plateNode)
+//        plates.append(plate)
         
         let order = Order(timeLeft: 30)
         order.ingredients = [Tentacle(), Asteroid()]
@@ -98,7 +98,6 @@ class GameScene: SKScene {
             case .plate: return .plateBox
             case .ingredient: return .ingredientBox
             case .empty: return .empty
-            default: return .board
             }
         }
         
@@ -183,12 +182,45 @@ class GameScene: SKScene {
 
 // MARK: - GameConnectionManagerObserver Methods
 extension GameScene: GameConnectionManagerObserver {
+    
+    var firstEmptyShelf: StationNode? {
+        shelves.filter({ $0.isEmpty }).first
+    }
+    
     func receivePlate(plate: Plate) {
         print("[GameScene] Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
+        
+        guard let shelf = firstEmptyShelf else {
+            return
+        }
+        
+        let node = MovableSpriteNode(imageNamed: "Plate")
+        shelf.plateNode = PlateNode(
+            plate: plate,
+            movableNode: node,
+            currentLocation: shelf
+        )
+        shelf.plateNode?.updateTexture()
+        node.zPosition = 2
+        self.addChild(node)
     }
     
     func receiveIngredient(ingredient: Ingredient) {
         print("[GameScene] Received ingredient with prefix \(ingredient.texturePrefix) and state as \(ingredient.currentState)")
+        
+        guard let shelf = firstEmptyShelf else {
+            return
+        }
+        
+        let node = MovableSpriteNode(imageNamed: ingredient.textureName)
+        shelf.ingredientNode = IngredientNode(
+            ingredient: ingredient,
+            movableNode: node,
+            currentLocation: shelf
+        )
+        shelf.ingredientNode?.checkTextureChange()
+        node.zPosition = 2
+        self.addChild(node)
     }
     
     func receiveOrders(orders: [Order]) {

@@ -14,6 +14,10 @@ class StationNode: TappableDelegate {
     var stationType: StationType
     var ingredient: Ingredient?
     
+    var isEmpty: Bool {
+        ingredientNode == nil && plateNode == nil
+    }
+    
     var spriteNode: SKSpriteNode
     var spriteYPos: CGFloat {
         switch stationType {
@@ -26,8 +30,40 @@ class StationNode: TappableDelegate {
         }
     }
     
+    var ingredientNodeScale: CGFloat {
+        switch stationType {
+        case .board: return 1
+        case .stove: return 1
+        case .fryer: return 1
+        case .ingredientBox: return 1
+        case .plateBox: return 1
+        case .shelf: return 0.7
+        case .delivery: return 0.7
+        case .pipe: return 0.5
+        case .hatch: return 0.5
+        case .empty: return 1
+        }
+    }
+    
+    var plateNodeScale: CGFloat {
+        switch stationType {
+        case .board: return 1
+        case .stove: return 1
+        case .fryer: return 1
+        case .ingredientBox: return 1
+        case .plateBox: return 1
+        case .shelf: return 0.6
+        case .delivery: return 0.6
+        case .pipe: return 0.5
+        case .hatch: return 0.5
+        case .empty: return 1
+        }
+    }
+    
     var ingredientNode: IngredientNode? {
         didSet {
+            ingredientNode?.spriteNode.setScale(ingredientNodeScale)
+            
             if stationType == .stove || stationType == .fryer {
                 var indicatorNode = spriteNode.children.first as? SKSpriteNode
                 if indicatorNode == nil {
@@ -49,7 +85,11 @@ class StationNode: TappableDelegate {
             }
         }
     }
-    var plateNode: PlateNode?
+    var plateNode: PlateNode? {
+        didSet {
+            plateNode?.spriteNode.setScale(plateNodeScale)
+        }
+    }
     
     internal init(stationType: StationType, spriteNode: SKSpriteNode?, ingredient: Ingredient?) {
         self.stationType = stationType
@@ -87,15 +127,21 @@ class StationNode: TappableDelegate {
     
     // Tap interaction
     func tap() {
+        
+        print("Station tapped")
         if stationType == .board {
+            print("Board tapped with ingredient \(ingredient)")
             ingredient?.choppableComponent?.update()
+            print("Board tapped with ingredient \(ingredient?.choppableComponent)")
 
             if ingredient?.choppableComponent?.complete ?? false {
                 if (ingredient!.states[ingredient!.currentState] ?? []).contains(IngredientState.chopped) {
                     ingredient?.currentState = .chopped
                 }
             }
+            
         } else if stationType == .ingredientBox && self.ingredientNode == nil {
+            
             let newIngredient = ingredient!.findDowncast()
             let ingredientMovableNode = MovableSpriteNode(imageNamed: newIngredient.textureName)
             spriteNode.scene!.addChild(ingredientMovableNode)
@@ -103,7 +149,9 @@ class StationNode: TappableDelegate {
             let ingredientNode = IngredientNode(ingredient: newIngredient, movableNode: ingredientMovableNode, currentLocation: self)
             ingredientMovableNode.position = CGPoint(x: spriteNode.position.x, y: spriteNode.position.y + 85)
             self.ingredientNode = ingredientNode
+            
         } else if stationType == .plateBox && self.plateNode == nil {
+            
             let newPlate = Plate()
             let plateMovableNode = MovableSpriteNode(imageNamed: newPlate.textureName)
             spriteNode.scene!.addChild(plateMovableNode)

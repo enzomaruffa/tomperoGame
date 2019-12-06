@@ -27,13 +27,15 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     init(ingredient: Ingredient, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.ingredient = ingredient
         self.currentStation = currentLocation
-        currentStation.ingredient = self.ingredient
         
         spriteNode = movableNode
         
         movableNode.position = currentLocation.spriteNode.position
         movableNode.tapDelegate = self
         movableNode.moveDelegate = self
+        
+        currentStation.ingredient = self.ingredient
+        currentStation.ingredientNode = self
     }
     
     // MARK: - Methods
@@ -46,8 +48,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         self.spriteNode.alpha = 1
     }
     
-    private func implodeSpriteNode() {
-        
+    func implodeSpriteNode() {
+        self.spriteNode.removeFromParent()
     }
     
     func addIngredientTo(_ plateNode: PlateNode) {
@@ -87,7 +89,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             if canMove {
                 showSpriteNode()
                 setIngredientIn(station)
-                spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
             return canMove
@@ -97,7 +98,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             if canMove {
                 hideSpriteNode()
                 setIngredientIn(station)
-                spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
             return canMove
@@ -107,7 +107,6 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             if canMove {
                 hideSpriteNode()
                 setIngredientIn(station)
-                spriteNode.setScale(1)
             }
             print("Result: \(canMove)")
             return canMove
@@ -117,15 +116,12 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             if canMove {
                 showSpriteNode()
                 setIngredientIn(station)
-                spriteNode.setScale(0.6)
             }
             
             print("Result: \(canMove)")
             return canMove
             
         case .pipe:
-            // check if plate
-            
             var playerToSendTo: String = ""
             let scene = station.spriteNode.parent as! GameScene
             switch station.spriteNode.name {
@@ -134,12 +130,24 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             case "pipe3": playerToSendTo = scene.players[2]
             default: return false
             }
+            
             GameConnectionManager.shared.send(ingredient: self.ingredient, to: playerToSendTo)
-            print(playerToSendTo)
+
+            self.currentStation.ingredientNode = nil
+            if currentStation.stationType != .ingredientBox {
+                self.currentStation.ingredient = nil
+            }
+            
             implodeSpriteNode()
             return true
             
         case .hatch:
+
+            self.currentStation.ingredientNode = nil
+            if currentStation.stationType != .ingredientBox {
+                self.currentStation.ingredient = nil
+            }
+        
             implodeSpriteNode()
             return true
             

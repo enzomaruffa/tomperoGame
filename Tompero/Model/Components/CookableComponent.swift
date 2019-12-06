@@ -30,6 +30,8 @@ class CookableComponent: Component, Completable {
         self.burnCap = burnCap
         
         super.init()
+        
+        self.componentType = .cookable
     }
     
     convenience override init() {
@@ -40,13 +42,34 @@ class CookableComponent: Component, Completable {
         self.init(cookProgress: cookProgress, cookIncrement: cookIncrement, cookCap: 100, burnCap: 200)
     }
     
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
-    }
-    
     func update() {
         if !burnt {
             cookProgress += cookIncrement
         }
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case cookProgress
+        case cookIncrement
+        case cookCap
+        case burnCap
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.cookProgress = try container.decode(Float.self, forKey: .cookProgress)
+        self.cookIncrement = try container.decode(Float.self, forKey: .cookIncrement)
+        self.cookCap = try container.decode(Float.self, forKey: .cookCap)
+        self.burnCap = try container.decode(Float.self, forKey: .burnCap)
+        try super.init(from: decoder)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.cookProgress, forKey: .cookProgress)
+        try container.encode(self.cookIncrement, forKey: .cookIncrement)
+        try container.encode(self.cookCap, forKey: .cookCap)
+        try container.encode(self.burnCap, forKey: .burnCap)
     }
 }

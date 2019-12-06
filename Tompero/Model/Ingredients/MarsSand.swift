@@ -24,9 +24,7 @@ class MarsSand: Ingredient {
             .burnt: []
         ]
         
-        self.components = [
-            CookableComponent()
-        ]
+        self.cookableComponent = CookableComponent()
     }
     
     required init(from decoder: Decoder) throws {

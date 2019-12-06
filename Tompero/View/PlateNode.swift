@@ -45,7 +45,8 @@ class PlateNode: MovableDelegate {
     }
     
     private func implodeSpriteNode() {
-        
+        self.currentStation.plateNode = nil
+        spriteNode.removeFromParent()
     }
     
     private func setPlateIn(_ station: StationNode) {
@@ -130,14 +131,11 @@ class PlateNode: MovableDelegate {
             if canMove {
                 showSpriteNode()
                 setPlateIn(station)
-                spriteNode.setScale(0.4)
             }
             print("Result: \(canMove)")
             return canMove
             
         case .pipe:
-            // check if plate
-            
             var playerToSendTo: String = ""
             let scene = station.spriteNode.parent as! GameScene
             switch station.spriteNode.name {
@@ -148,7 +146,7 @@ class PlateNode: MovableDelegate {
             }
             
             GameConnectionManager.shared.send(plate: self.plate, to: playerToSendTo)
-            print(playerToSendTo)
+        
             implodeSpriteNode()
             return true
             
@@ -164,7 +162,7 @@ class PlateNode: MovableDelegate {
                 print("Attempting plate delviery")
                 let success = scene.makeDelivery(plate: self.plate)
                 
-                // implodeSpriteNode()
+                implodeSpriteNode()
                 
                 return true
             }
