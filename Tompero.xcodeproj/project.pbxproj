@@ -20,6 +20,7 @@
 		4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47C238EB91F003D373C /* PlayerTable.swift */; };
 		4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47E238EB982003D373C /* PlayerTableType.swift */; };
 		4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D486238FFA93003D373C /* MCPeerWithStatus.swift */; };
+		472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F9F2723992FEA00DC7B9C /* PlateNode.swift */; };
 		4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733B6A52393597700D80AD0 /* MovableDelegate.swift */; };
 		476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */; };
 		476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */; };
@@ -28,6 +29,7 @@
 		476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70AB23933A1C0000465F /* TappableDelegate.swift */; };
 		47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */; };
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
+		47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
 		562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5923881CF900D5D51D /* GameScene.sks */; };
 		562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5D23881CF900D5D51D /* GameScene.swift */; };
@@ -88,6 +90,7 @@
 		4722D47C238EB91F003D373C /* PlayerTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTable.swift; sourceTree = "<group>"; };
 		4722D47E238EB982003D373C /* PlayerTableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableType.swift; sourceTree = "<group>"; };
 		4722D486238FFA93003D373C /* MCPeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPeerWithStatus.swift; sourceTree = "<group>"; };
+		472F9F2723992FEA00DC7B9C /* PlateNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateNode.swift; sourceTree = "<group>"; };
 		4733B6A52393597700D80AD0 /* MovableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableDelegate.swift; sourceTree = "<group>"; };
 		476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
 		476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 		476F70AB23933A1C0000465F /* TappableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TappableDelegate.swift; sourceTree = "<group>"; };
 		47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKActionExtensions.swift; sourceTree = "<group>"; };
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
+		47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryNotification.swift; sourceTree = "<group>"; };
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		562BCF5423881CF900D5D51D /* Tompero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tompero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562BCF5723881CF900D5D51D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 			children = (
 				567A07AA238C805000D6399A /* Order.swift */,
 				567A07AE238C805000D6399A /* OrderList.swift */,
+				47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				476F70A7239336490000465F /* TappableSpriteNode.swift */,
 				476F70AB23933A1C0000465F /* TappableDelegate.swift */,
 				4733B6A52393597700D80AD0 /* MovableDelegate.swift */,
+				472F9F2723992FEA00DC7B9C /* PlateNode.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
+				47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */,
 				567A07BB238C805000D6399A /* Order.swift in Sources */,
 				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
 				476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */,
@@ -507,6 +514,7 @@
 				562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */,
 				567A07B6238C805000D6399A /* Broccoli.swift in Sources */,
 				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
+				472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */,
 				567A07B0238C805000D6399A /* Horn.swift in Sources */,
 				4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */,
 				4722D47B238EB7C9003D373C /* GameRule.swift in Sources */,

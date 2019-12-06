@@ -189,6 +189,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         // Generate rules and send to other players
         let peers = playersWithStatus.map({ $0.name })
         let rule = GameRuleFactory.generateRule(difficulty: .easy, players: peers)
+        
         let ruleData = try! JSONEncoder().encode(rule)
         MCManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
         
@@ -212,6 +213,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         
         // Start game view with necessary information
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+            print("before segue peers are \(MCManager.shared.connectedPeers)")
+            print("coordinating game opening with rule \(rule)")
             self.coordinator?.game(rule: rule, hosting: true)
         }
     }

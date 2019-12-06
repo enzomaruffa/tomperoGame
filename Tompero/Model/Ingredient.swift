@@ -17,9 +17,9 @@ class Ingredient: HasSprite, Equatable, Codable {
         case .raw: return texturePrefix + "Raw"
         case .chopping: return texturePrefix + "Raw"
         case .chopped: return texturePrefix + "Chopped"
-        case .cooking: return texturePrefix + "Chopped"
+        case .cooking: return texturePrefix + "Raw"
         case .cooked: return texturePrefix + "Cooked"
-        case .frying: return texturePrefix + "Chopped"
+        case .frying: return texturePrefix + "Raw"
         case .fried: return texturePrefix + "Fried"
         case .burnt: return "ashes"
         }
@@ -112,7 +112,7 @@ class Ingredient: HasSprite, Equatable, Codable {
             return Tentacle()
         }
         
-        print("impossible to downcast")
+        print("Impossible to downcast")
         return self
     }
     

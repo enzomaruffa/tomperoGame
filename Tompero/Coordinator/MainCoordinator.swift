@@ -22,7 +22,6 @@ class MainCoordinator: Coordinator {
 //                      PlayerTable(type: .cooking, ingredient: nil),
 //                      PlayerTable(type: .frying, ingredient: nil)], hosting: true)
         inicial()
-//        testGameScene()
 //        let tables: [String : [PlayerTable]] = [
 //            "God" : [
 //                PlayerTable(type: .chopping, ingredient: nil),
@@ -43,20 +42,9 @@ class MainCoordinator: Coordinator {
 //                PlayerTable(type: .chopping, ingredient: nil),
 //                PlayerTable(type: .chopping, ingredient: nil),
 //                PlayerTable(type: .chopping, ingredient: nil)
-//            ]
-//        ]
-//        game(rule: GameRule(difficulty: .easy,
-//                            possibleIngredients: [Tentacle(), MoonCheese(), Eyes(), Asteroid(), Tardigrades()],
-//                            playerTables: tables,
-//                            playerOrder: ["God", "Enzo's Enzo's iPhone", "CU", "CU 2"]),
-//             hosting: true)
+        
     }
     
-    func testGameScene() {
-        let controller = GameViewController.instantiate()
-        controller.coordinator = self
-        navigationController.pushViewController(controller, animated: false)
-    }
     
     func inicial() {
         let controller = InicialViewController.instantiate()

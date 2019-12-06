@@ -16,4 +16,5 @@ protocol MovableDelegate: class {
     func moving(currentPosition: CGPoint)
     func moveEnded(currentPosition: CGPoint)
     func attemptMove(to station: StationNode) -> Bool
+    func moveCancel(currentPosition: CGPoint)
 }

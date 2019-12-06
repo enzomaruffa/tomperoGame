@@ -11,6 +11,14 @@ import SpriteKit
 
 class MovableSpriteNode: SKSpriteNode {
     
+    // MARK: - Variables
+    var initialTouchPosition: CGPoint?
+    weak var tapDelegate: TappableDelegate?
+    weak var moveDelegate: MovableDelegate?
+    
+    var previousPosition: CGPoint?
+    
+    // MARK: - Initializers
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.isUserInteractionEnabled = true
@@ -21,10 +29,7 @@ class MovableSpriteNode: SKSpriteNode {
         self.isUserInteractionEnabled = true
     }
     
-    var initialTouchPosition: CGPoint?
-    weak var tapDelegate: TappableDelegate?
-    weak var moveDelegate: MovableDelegate?
-    
+    // MARK: - Methods
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard touches.first != nil else { return }
         let touch = touches.first!
@@ -36,6 +41,7 @@ class MovableSpriteNode: SKSpriteNode {
         }
         
         initialTouchPosition = touch.location(in: scene!)
+        previousPosition = self.position
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -64,16 +70,17 @@ class MovableSpriteNode: SKSpriteNode {
         
         if let gameScene = scene as? GameScene {
             for station in gameScene.stations {
-                print("Testing station: \(station.stationType)")
                 if station.spriteNode.contains(touch.location(in: gameScene)) && (moveDelegate?.attemptMove(to: station) ?? false) {
                     self.position = station.spriteNode.position
-                    print("Success!")
+                    print("Move success!")
                     return
                 }
             }
 
+            moveDelegate?.moveCancel(currentPosition: touch.location(in: scene!))
             print("Returning to previous position...")
-            self.position = (moveDelegate?.currentStation.spriteNode.position)!
+            self.position = previousPosition!
+            previousPosition = .zero
         }
     }
 }

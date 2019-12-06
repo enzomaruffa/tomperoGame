@@ -20,24 +20,56 @@ class StationNode: TappableDelegate {
         case .board: return -237.5
         case .stove: return -348.5
         case .fryer: return -342.0
-        case .ingredientBox: return -200.0 // not final
-        case .plateBox: return -200.0 // not final
+        case .ingredientBox: return -361.0 // not final
+        case .plateBox: return -361.0 // not final
         default: return 0
         }
     }
     
-    var ingredientSlot: IngredientNode?
+    var ingredientNode: IngredientNode? {
+        didSet {
+            if stationType == .stove || stationType == .fryer {
+                var indicatorNode = spriteNode.children.first as? SKSpriteNode
+                if indicatorNode == nil {
+                    indicatorNode = SKSpriteNode(imageNamed: "IngredientIndicator")
+                    spriteNode.addChild(indicatorNode!)
+                    indicatorNode!.zPosition = 2
+                    indicatorNode!.scale(to: CGSize(width: 170, height: 170))
+                    indicatorNode!.position = CGPoint(x: -260, y: 170)
+                }
+                
+                if let ingredient = ingredientNode?.ingredient {
+                    let iconNode = SKSpriteNode(imageNamed: ingredient.texturePrefix + "Icon")
+                    iconNode.zPosition = 3
+                    iconNode.scale(to: CGSize(width: 110, height: 110))
+                    indicatorNode?.addChild(iconNode)
+                } else {
+                    indicatorNode?.removeAllChildren()
+                }
+            }
+        }
+    }
+    var plateNode: PlateNode?
     
     internal init(stationType: StationType, spriteNode: SKSpriteNode?, ingredient: Ingredient?) {
         self.stationType = stationType
         self.ingredient = ingredient
         
         if stationType == .ingredientBox {
-            let tappableNode = TappableSpriteNode(imageNamed: NSStringFromClass(type(of: ingredient!)) + "Box.png")
+            let tappableNode = TappableSpriteNode(imageNamed: ingredient!.texturePrefix + "Box.png")
+            self.ingredient = ingredient
             self.spriteNode = tappableNode
             tappableNode.delegate = self
-        } else if stationType == .shelf || stationType == .delivery {
+        } else if stationType == .plateBox {
+            let tappableNode = TappableSpriteNode(imageNamed: "PlateBox.png")
+            self.spriteNode = tappableNode
+            tappableNode.delegate = self
+        } else if stationType == .shelf || stationType == .delivery ||  stationType == .pipe || stationType == .hatch {
             self.spriteNode = spriteNode!
+        } else if stationType == .empty {
+            let tappableNode = TappableSpriteNode()
+            self.spriteNode = tappableNode
+            tappableNode.delegate = self
         } else {
             let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")
             self.spriteNode = tappableNode
@@ -55,9 +87,7 @@ class StationNode: TappableDelegate {
     
     // Tap interaction
     func tap() {
-        print("STATION with type \(stationType) TAPPED UHUUU")
         if stationType == .board {
-            print("Board tapped!")
             ingredient?.choppableComponent?.update()
 
             if ingredient?.choppableComponent?.complete ?? false {
@@ -65,38 +95,54 @@ class StationNode: TappableDelegate {
                     ingredient?.currentState = .chopped
                 }
             }
+        } else if stationType == .ingredientBox && self.ingredientNode == nil {
+            let newIngredient = ingredient!.findDowncast()
+            let ingredientMovableNode = MovableSpriteNode(imageNamed: newIngredient.textureName)
+            spriteNode.scene!.addChild(ingredientMovableNode)
+            ingredientMovableNode.zPosition = 4
+            let ingredientNode = IngredientNode(ingredient: newIngredient, movableNode: ingredientMovableNode, currentLocation: self)
+            ingredientMovableNode.position = CGPoint(x: spriteNode.position.x, y: spriteNode.position.y + 85)
+            self.ingredientNode = ingredientNode
+        } else if stationType == .plateBox && self.plateNode == nil {
+            let newPlate = Plate()
+            let plateMovableNode = MovableSpriteNode(imageNamed: newPlate.textureName)
+            spriteNode.scene!.addChild(plateMovableNode)
+            plateMovableNode.zPosition = 4
+            let plateNode = PlateNode(plate: newPlate, movableNode: plateMovableNode, currentLocation: self)
+            plateMovableNode.position = CGPoint(x: spriteNode.position.x, y: spriteNode.position.y + 85)
+            self.plateNode = plateNode
         }
     }
     
     // Scene update intercation
     func update() {
-        if stationType == .stove {
+        if stationType == .stove && !(ingredientNode?.moving ?? true) {
             ingredient?.cookableComponent?.update()
             
             if ingredient?.cookableComponent?.burnt ?? false {
                 if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.burnt) {
                     ingredient?.currentState = .burnt
-                    ingredientSlot?.checkTextureChange()
+                    ingredientNode?.checkTextureChange()
                 }
             } else if ingredient?.cookableComponent?.complete ?? false {
                 if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.cooked) {
                     ingredient?.currentState = .cooked
-                    ingredientSlot?.checkTextureChange()
+                    ingredientNode?.checkTextureChange()
                 }
             }
             
-        } else if stationType == .fryer {
+        } else if stationType == .fryer && !(ingredientNode?.moving ?? true) {
             ingredient?.fryableComponent?.update()
             
             if ingredient?.fryableComponent?.burnt ?? false {
                 if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.burnt) {
                     ingredient?.currentState = .burnt
-                    ingredientSlot?.checkTextureChange()
+                    ingredientNode?.checkTextureChange()
                 }
             } else if ingredient?.fryableComponent?.complete ?? false {
                 if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.fried) {
                     ingredient?.currentState = .fried
-                    ingredientSlot?.checkTextureChange()
+                    ingredientNode?.checkTextureChange()
                 }
             }
         } else if stationType == .pipe {

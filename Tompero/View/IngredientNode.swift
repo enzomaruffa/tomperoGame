@@ -11,6 +11,7 @@ import SpriteKit
 
 class IngredientNode: TappableDelegate, MovableDelegate {
     
+    // MARK: - Variables
     var currentStation: StationNode
     var ingredient: Ingredient
     var spriteNode: SKSpriteNode
@@ -18,7 +19,11 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     var rotationTimer: Timer?
     
     var scaleBeforeMove: CGFloat = 1
+    var alphaBeforeMove: CGFloat = 1
     
+    var moving = false
+    
+    // MARK: - Initializers
     init(ingredient: Ingredient, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.ingredient = ingredient
         self.currentStation = currentLocation
@@ -31,37 +36,56 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         movableNode.moveDelegate = self
     }
     
+    // MARK: - Methods
     private func hideSpriteNode() {
         // We use a very low alpha value otherwise its interaction is disabled
         self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05))
     }
     
     private func showSpriteNode() {
-        self.spriteNode.run(SKAction.fadeIn(withDuration: 0.2))
+        self.spriteNode.alpha = 1
     }
     
     private func implodeSpriteNode() {
         
     }
     
-    private func setIngredientIn(_ station: StationNode) {
-        currentStation.ingredient = nil
-        currentStation.ingredientSlot = nil
+    func addIngredientTo(_ plateNode: PlateNode) {
+        plateNode.plate.ingredients.append(self.ingredient)
+        plateNode.updateTexture()
         
-        currentStation = station
-        currentStation.ingredient = self.ingredient
-        currentStation.ingredientSlot = self
+        //TODO: Remove ingredient node from scene destroy it whatever
+        self.spriteNode.removeFromParent()
+    }
+    
+    private func setIngredientIn(_ station: StationNode) {
+        if currentStation.stationType != .ingredientBox {
+            currentStation.ingredient = nil
+        }
+        currentStation.ingredientNode = nil
+        
+        // Check plate in station
+        if let plateNode = station.plateNode {
+            addIngredientTo(plateNode)
+        } else {
+            currentStation = station
+            currentStation.ingredient = self.ingredient
+            currentStation.ingredientNode = self
+        }
+        
     }
     
     // MARK: - MovableDelegate
+    
     func attemptMove(to station: StationNode) -> Bool {
         
-        print("Attempting move to \(station)")
+        print("Attempting move \(ingredient.texturePrefix) to \(station.stationType)")
         
         switch station.stationType {
         case .board:
-            let canMove = ingredient.attemptChangeState(to: .chopping)
+            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .chopping)
             if canMove {
+                showSpriteNode()
                 setIngredientIn(station)
                 spriteNode.setScale(1)
             }
@@ -69,7 +93,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
             
         case .stove:
-            let canMove = ingredient.attemptChangeState(to: .cooking)
+            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .cooking)
             if canMove {
                 hideSpriteNode()
                 setIngredientIn(station)
@@ -79,7 +103,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
             
         case .fryer:
-            let canMove = ingredient.attemptChangeState(to: .frying)
+            let canMove = station.ingredient == nil && ingredient.attemptChangeState(to: .frying)
             if canMove {
                 hideSpriteNode()
                 setIngredientIn(station)
@@ -87,12 +111,17 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             }
             print("Result: \(canMove)")
             return canMove
-
+            
         case .shelf:
-            setIngredientIn(station)
-            spriteNode.setScale(0.7)
-            print("Result: \(true)")
-            return true
+            let canMove = station.ingredient == nil && ((station.plateNode != nil && ingredient.currentState == ingredient.finalState) || station.plateNode == nil)
+            if canMove {
+                showSpriteNode()
+                setIngredientIn(station)
+                spriteNode.setScale(0.6)
+            }
+            
+            print("Result: \(canMove)")
+            return canMove
             
         case .pipe:
             // check if plate
@@ -114,21 +143,30 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             implodeSpriteNode()
             return true
             
+        case .plateBox:
+            if ingredient.finalState == ingredient.currentState, let plateNode = station.plateNode {
+                addIngredientTo(plateNode)
+                return true
+            }
+            return false
+            
         default:
-            return ingredient.attemptChangeState(to: (ingredient.states[ingredient.currentState] ?? []).first!)
+            return false
         }
     }
     
     func moveStarted(currentPosition: CGPoint) {
         scaleBeforeMove = spriteNode.yScale
+        alphaBeforeMove = spriteNode.alpha
+        
+        moving = true
     }
     
     func moving(currentPosition: CGPoint) {
         if currentPosition.distanceTo(currentStation.spriteNode.position) > 80 && rotationTimer == nil {
             
-//            print("moving cuz \(currentPosition.distanceTo(currentStation.spriteNode.position)) and \(rotationTimer)")
-            
             self.spriteNode.run(SKAction.scale(to: 0.7, duration: 0.2))
+            self.spriteNode.alpha = 1
             
             let duration = 0.2
             
@@ -145,20 +183,20 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             })
         }
     }
-
+    
     func moveEnded(currentPosition: CGPoint) {
-        if currentStation.stationType == .fryer || currentStation.stationType == .stove {
-            hideSpriteNode()
-        } else {
-            showSpriteNode()
-        }
-        
-        spriteNode.setScale(scaleBeforeMove)
-        
         spriteNode.zRotation = 0
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil
+        
+        moving = false
+    }
+    
+    func moveCancel(currentPosition: CGPoint) {
+        print("Move cancelled")
+        spriteNode.setScale(scaleBeforeMove)
+        spriteNode.alpha = alphaBeforeMove
     }
     
     // MARK: - TappableDelegate
