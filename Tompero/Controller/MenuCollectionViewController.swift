@@ -18,12 +18,14 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
         super.viewDidLoad()
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+    }
     
     var vcPai:WaitingRoomViewController!
     
     @IBAction func backPressed(_ sender: Any) {
        
-            self.presentingViewController?.dismiss(animated: true, completion: { () in
+            self.presentingViewController?.dismiss(animated: false, completion: { () in
                 
                 self.vcPai.zoomOut()
             })

@@ -34,7 +34,7 @@ class InicialViewController: UIViewController, Storyboarded {
         host.addGestureRecognizer(tapGestureRecognizerHost)
         
         let timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
-            print("Timer called")
+            //print("Timer called")
             
             self.countLightsOn += 1
             

@@ -42,5 +42,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>TitilliumWeb-Bold.ttf</string>
+		<string>TitilliumWeb-Light.ttf</string>
+	</array>
 </dict>
 </plist>
