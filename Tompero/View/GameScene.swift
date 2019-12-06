@@ -161,13 +161,19 @@ class GameScene: SKScene {
             
             if orderGenerationCounter >= 1000 {
                 generateRandomOrder()
+                GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
             }
+            
         }
     }
     
     func makeDelivery(plate: Plate) -> Bool {
         print("Existing orders: \(orders.map({$0.ingredients.map({ $0.texturePrefix })}))")
+        print("Existing orders types: \(orders.map({$0.ingredients.map({ type(of: $0) })}))")
+        
+        print("Plate: \((plate.ingredients.map({ $0.texturePrefix })))")
+        print("Plate types: \((plate.ingredients.map({ type(of: $0) })))")
         
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
             print("Couldn't find any order")

@@ -127,8 +127,16 @@ extension GameConnectionManager: MCManagerDataObserver {
         case .orders:
             do {
                 let orders = try JSONDecoder().decode([Order].self, from: wrapper.object)
-                print("[GameConnectionManager] Received orderList: \(orders)")
-                observers.forEach({ $0.receiveOrders(orders: orders) })
+                
+                var newOrders: [Order] = []
+                for order in orders {
+                    let newOrder = Order(timeLeft: order.timeLeft)
+                    newOrder.ingredients = order.ingredients.map({ $0.findDowncast() })
+                    newOrders.append(newOrder)
+                }
+                
+                print("[GameConnectionManager] Received orderList: \(newOrders)")
+                observers.forEach({ $0.receiveOrders(orders: newOrders) })
                 
                 // Chamar delegates que tem o receiveMessage
             } catch let error {
