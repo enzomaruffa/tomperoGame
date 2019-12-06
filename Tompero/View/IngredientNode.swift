@@ -60,15 +60,20 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         self.spriteNode.removeFromParent()
     }
     
-    private func setIngredientIn(_ station: StationNode) {
+    func removeFromPreviousStation() {
         if currentStation.stationType != .ingredientBox {
             currentStation.ingredient = nil
         }
         currentStation.ingredientNode = nil
+    }
+    
+    private func setIngredientIn(_ station: StationNode) {
+        removeFromPreviousStation()
         
         // Check plate in station
         if let plateNode = station.plateNode {
             addIngredientTo(plateNode)
+            plateNode.updateTexture()
         } else {
             currentStation = station
             currentStation.ingredient = self.ingredient
@@ -133,26 +138,19 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             
             GameConnectionManager.shared.send(ingredient: self.ingredient, to: playerToSendTo)
 
-            self.currentStation.ingredientNode = nil
-            if currentStation.stationType != .ingredientBox {
-                self.currentStation.ingredient = nil
-            }
-            
+            removeFromPreviousStation()
             implodeSpriteNode()
             return true
             
         case .hatch:
-
-            self.currentStation.ingredientNode = nil
-            if currentStation.stationType != .ingredientBox {
-                self.currentStation.ingredient = nil
-            }
-        
+            removeFromPreviousStation()
             implodeSpriteNode()
             return true
             
         case .plateBox:
             if ingredient.finalState == ingredient.currentState, let plateNode = station.plateNode {
+                
+                removeFromPreviousStation()
                 addIngredientTo(plateNode)
                 return true
             }

@@ -33,4 +33,8 @@ class SaturnOnionRings: Ingredient {
     required init(from decoder: Decoder) throws {
         fatalError("init(from:) has not been implemented")
     }
+    
+    override init(ingredient: Ingredient) {
+        super.init(ingredient: ingredient)
+    }
 }

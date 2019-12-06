@@ -40,6 +40,15 @@ class Ingredient: HasSprite, Equatable, Codable {
         self.finalState = finalState
     }
     
+     init(ingredient: Ingredient) {
+        self.texturePrefix = ingredient.texturePrefix
+        self.numberOfActionsTilReady = ingredient.numberOfActionsTilReady
+        self.finalState = ingredient.finalState
+        self.choppableComponent = ingredient.choppableComponent
+        self.cookableComponent = ingredient.cookableComponent
+        self.fryableComponent = ingredient.fryableComponent
+    }
+    
     static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
         return type(of: lhs) == type(of: rhs)
     }
@@ -73,77 +82,50 @@ class Ingredient: HasSprite, Equatable, Codable {
 //        }
         
         if texturePrefix == "Asteroid" {
-            return Asteroid()
+            return Asteroid(ingredient: self)
         }
-        
+        Asteroid()
         if texturePrefix == "Broccoli" {
-            return Broccoli()
+            return Broccoli(ingredient: self)
         }
         
         if texturePrefix == "DevilMashedBread" {
-            return DevilMashedBread()
+            return DevilMashedBread(ingredient: self)
         }
         
         if texturePrefix == "Eyes" {
-            return Eyes()
+            return Eyes(ingredient: self)
         }
         
         if texturePrefix == "Horn" {
-            return Horn()
+            return Horn(ingredient: self)
         }
         
         if texturePrefix == "MarsSand" {
-            return MarsSand()
+            return MarsSand(ingredient: self)
         }
         
         if texturePrefix == "MoonCheese" {
-            return MoonCheese()
+            return MoonCheese(ingredient: self)
         }
         
         if texturePrefix == "SaturnOnionRings" {
-            return SaturnOnionRings()
+            return SaturnOnionRings(ingredient: self)
         }
         
         if texturePrefix == "SpaceshipHull" {
-            return SpaceshipHull()
+            return SpaceshipHull(ingredient: self)
         }
         
         if texturePrefix == "Tardigrades" {
-            return Tardigrades()
+            return Tardigrades(ingredient: self)
         }
         
         if texturePrefix == "Tentacle" {
-            return Tentacle()
+            return Tentacle(ingredient: self)
         }
         
         print("Impossible to downcast")
         return self
     }
-    
-//    required init(from decoder: Decoder) throws {
-//        let values = try decoder.container(keyedBy: CodingKeys.self)
-//
-//        texturePrefix = try values.decode(String.self, forKey: .texturePrefix)
-//        states = try values.decode([IngredientState: [IngredientState]].self, forKey: .states)
-//        currentState = try values.decode(IngredientState.self, forKey: .currentState)
-//        finalState = try values.decode(IngredientState.self, forKey: .finalState)
-//        numberOfActionsTilReady = try values.decode(Int.self, forKey: .numberOfActionsTilReady)
-//
-//        let components = try values.decode([Component].self, forKey: .components)
-//
-//        components.forEach({ print($0.componentType, type(of: $0)) })
-//
-//        for component in components {
-//            switch component.componentType {
-//            case .choppable:
-//                self.components.append(try ChoppableComponent(from: decoder))
-//            case .cookable:
-//                self.components.append(try CookableComponent(from: decoder))
-//            case .fryable:
-//                self.components.append(try FryableComponent(from: decoder))
-//            case .none: break
-//            }
-//        }
-//   }
-    
 }

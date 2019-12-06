@@ -106,6 +106,8 @@ extension GameConnectionManager: MCManagerDataObserver {
                 let newPlate = Plate()
                 newPlate.ingredients = newIngredients
                 
+                newIngredients.forEach({ print($0.texturePrefix, type(of: $0)) })
+                
                 observers.forEach({ $0.receivePlate(plate: newPlate) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
@@ -114,7 +116,10 @@ extension GameConnectionManager: MCManagerDataObserver {
         case .ingredient:
             do {
                 let ingredient = try JSONDecoder().decode(Ingredient.self, from: wrapper.object)
-                observers.forEach({ $0.receiveIngredient(ingredient: ingredient) })
+                
+                let newIngredient = ingredient.findDowncast()
+                
+                observers.forEach({ $0.receiveIngredient(ingredient: newIngredient) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }

@@ -73,6 +73,9 @@ class PlateNode: MovableDelegate {
         
         let breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
         var sortedIngredients = plate.ingredients.sorted(by: { $0.texturePrefix < $1.texturePrefix })
+        
+        sortedIngredients.forEach { print($0.texturePrefix, type(of: $0)) }
+        
         if let firstBread = sortedIngredients.filter({ breadList.contains($0) }).first {
             sortedIngredients.removeAll(where: { $0 == firstBread })
             

@@ -132,8 +132,7 @@ class StationNode: TappableDelegate {
         if stationType == .board {
             print("Board tapped with ingredient \(ingredient)")
             ingredient?.choppableComponent?.update()
-            print("Board tapped with ingredient \(ingredient?.choppableComponent)")
-
+            
             if ingredient?.choppableComponent?.complete ?? false {
                 if (ingredient!.states[ingredient!.currentState] ?? []).contains(IngredientState.chopped) {
                     ingredient?.currentState = .chopped
