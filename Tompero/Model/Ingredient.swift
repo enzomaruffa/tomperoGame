@@ -44,6 +44,8 @@ class Ingredient: HasSprite, Equatable, Codable {
         self.texturePrefix = ingredient.texturePrefix
         self.numberOfActionsTilReady = ingredient.numberOfActionsTilReady
         self.finalState = ingredient.finalState
+        self.states = ingredient.states
+        self.currentState = ingredient.currentState
         self.choppableComponent = ingredient.choppableComponent
         self.cookableComponent = ingredient.cookableComponent
         self.fryableComponent = ingredient.fryableComponent
@@ -75,57 +77,21 @@ class Ingredient: HasSprite, Equatable, Codable {
     }
     
     func findDowncast() -> Ingredient {
-        
-//        switch texturePrefix {
-//        case "Asteroid": return Asteroid()
-//        default: break
-//        }
-        
-        if texturePrefix == "Asteroid" {
-            return Asteroid(ingredient: self)
+        switch texturePrefix {
+        case "Asteroid": return Asteroid(ingredient: self)
+        case "Broccoli": return Broccoli(ingredient: self)
+        case "DevilMashedBread": return DevilMashedBread(ingredient: self)
+        case "Eyes": return Eyes(ingredient: self)
+        case "Horn": return Horn(ingredient: self)
+        case "MarsSand": return MarsSand(ingredient: self)
+        case "MoonCheese": return MoonCheese(ingredient: self)
+        case "SaturnOnionRings": return SaturnOnionRings(ingredient: self)
+        case "SpaceshipHull": return SpaceshipHull(ingredient: self)
+        case "Tardigrades": return Tardigrades(ingredient: self)
+        case "Tentacle": return Tentacle(ingredient: self)
+        default:
+            print("Impossible to downcast")
+            return self
         }
-        Asteroid()
-        if texturePrefix == "Broccoli" {
-            return Broccoli(ingredient: self)
-        }
-        
-        if texturePrefix == "DevilMashedBread" {
-            return DevilMashedBread(ingredient: self)
-        }
-        
-        if texturePrefix == "Eyes" {
-            return Eyes(ingredient: self)
-        }
-        
-        if texturePrefix == "Horn" {
-            return Horn(ingredient: self)
-        }
-        
-        if texturePrefix == "MarsSand" {
-            return MarsSand(ingredient: self)
-        }
-        
-        if texturePrefix == "MoonCheese" {
-            return MoonCheese(ingredient: self)
-        }
-        
-        if texturePrefix == "SaturnOnionRings" {
-            return SaturnOnionRings(ingredient: self)
-        }
-        
-        if texturePrefix == "SpaceshipHull" {
-            return SpaceshipHull(ingredient: self)
-        }
-        
-        if texturePrefix == "Tardigrades" {
-            return Tardigrades(ingredient: self)
-        }
-        
-        if texturePrefix == "Tentacle" {
-            return Tentacle(ingredient: self)
-        }
-        
-        print("Impossible to downcast")
-        return self
     }
 }
