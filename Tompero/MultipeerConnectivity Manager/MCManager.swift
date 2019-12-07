@@ -54,8 +54,7 @@ class MCManager: NSObject, MCSessionDelegate {
     func resetSession() {
         mcSession?.disconnect()
         mcSession = nil
-        mcAdvertiserAssistant?.stop()
-        mcAdvertiserAssistant = nil
+        stopAdvertiser()
         if let peerID = self.peerID {
             createNewSession(peerID)
         } else {
@@ -63,6 +62,11 @@ class MCManager: NSObject, MCSessionDelegate {
             self.peerID = peerID
             createNewSession(peerID)
         }
+    }
+    
+    func stopAdvertiser() {
+        mcAdvertiserAssistant?.stop()
+        mcAdvertiserAssistant = nil
     }
     
     func hostSession(presentingFrom rootViewController: UIViewController, delegate: MCBrowserViewControllerDelegate) {
