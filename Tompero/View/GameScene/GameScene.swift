@@ -47,13 +47,20 @@ class GameScene: SKScene {
     var pipes: [StationNode] {
         stations.filter({ $0.stationType == .pipe })
     }
+    var hatch: StationNode {
+        stations.filter({ $0.stationType == .hatch }).first!
+    }
+    
+    var firstEmptyShelf: StationNode? {
+        shelves.filter({ $0.isEmpty }).first
+    }
     
     var orderListNode: SKLabelNode!
     var orderGenerationCounter = 400
     
     var teleportAnimationNode: SKSpriteNode!
     var teleportAnimationFrames: [SKTexture]!
-    let teleportDuration = 2.0
+    let teleportDuration = 1
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -130,7 +137,7 @@ class GameScene: SKScene {
         teleportAnimationNode = SKSpriteNode(texture: teleportAnimationFrames[0])
         self.addChild(teleportAnimationNode)
         
-        teleportAnimationNode.position = teleporterNode.position + CGPoint(x: 0, y: -(teleporterNode.size.height + 4))
+        teleportAnimationNode.position = teleporterNode.position + CGPoint(x: -8, y: -(teleporterNode.size.height + 8))
         teleportAnimationNode.zPosition = 60
     }
     
@@ -188,8 +195,8 @@ class GameScene: SKScene {
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
             }
-            
         }
+        
     }
     
     func makeDelivery(plate: Plate) -> Bool {
@@ -199,13 +206,12 @@ class GameScene: SKScene {
         print("Plate: \((plate.ingredients.map({ $0.texturePrefix })))")
         print("Plate types: \((plate.ingredients.map({ type(of: $0) })))")
         
-        print("Running animation on \(teleportAnimationNode) that is probably not hidden!")
+        let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(teleportAnimationFrames.count)
         teleportAnimationNode.run(SKAction.animate(
             with: teleportAnimationFrames,
-            timePerFrame: teleportDuration / TimeInterval(teleportAnimationFrames.count),
+            timePerFrame: timePerFrame,
             resize: false,
             restore: true))
-        
         
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
             print("Couldn't find any order")
@@ -246,10 +252,6 @@ class GameScene: SKScene {
 
 // MARK: - GameConnectionManagerObserver Methods
 extension GameScene: GameConnectionManagerObserver {
-    
-    var firstEmptyShelf: StationNode? {
-        shelves.filter({ $0.isEmpty }).first
-    }
     
     func receivePlate(plate: Plate) {
         print("[GameScene] Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")

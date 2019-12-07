@@ -44,6 +44,19 @@ class PlateNode: MovableDelegate {
         self.spriteNode.alpha = 1
     }
     
+    private func implodeSpriteNode(withDuration duration: TimeInterval) {
+        self.currentStation.plateNode = nil
+        
+        self.spriteNode.run(
+            SKAction.group([
+                SKAction.colorize(with: UIColor.white, colorBlendFactor: 1, duration: duration / 4),
+                SKAction.fadeOut(withDuration: duration)]))
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.spriteNode.removeFromParent()
+        }
+    }
+    
     private func implodeSpriteNode() {
         self.currentStation.plateNode = nil
         spriteNode.removeFromParent()
@@ -168,7 +181,7 @@ class PlateNode: MovableDelegate {
                 print("Attempting plate delviery")
                 let success = scene.makeDelivery(plate: self.plate)
                 
-                implodeSpriteNode()
+                implodeSpriteNode(withDuration: 1)
                 
                 return true
             }

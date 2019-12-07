@@ -53,7 +53,7 @@ class StationNode: TappableDelegate {
         case .ingredientBox: return 1
         case .plateBox: return 1
         case .shelf: return 0.6
-        case .delivery: return 0.6
+        case .delivery: return 0.45
         case .pipe: return 0.5
         case .hatch: return 0.5
         case .empty: return 1
@@ -85,9 +85,58 @@ class StationNode: TappableDelegate {
             }
         }
     }
+    
     var plateNode: PlateNode? {
         didSet {
             plateNode?.spriteNode.setScale(plateNodeScale)
+        }
+    }
+    
+    private var stationAnimationAtlasName: String? {
+        switch stationType {
+        case .stove: return "Cook"
+        case .fryer: return "Fry"
+        case .pipe: return "PipeVacuum"
+        case .hatch: return "HatchVacuum"
+        default: return nil
+        }
+    }
+    
+    private var stationAnimationDuration: Int {
+        switch stationType {
+        case .stove: return 2
+        case .fryer: return 2
+        case .pipe: return 2
+        case .hatch: return 2
+        default: return 0
+        }
+    }
+    
+    private var stationAnimationRepeats: Bool {
+        switch stationType {
+        case .board: return false
+        default: return true
+        }
+    }
+    
+    private var stationAnimationNode: SKSpriteNode?
+    private var stationAnimationFrames: [SKTexture]!
+    
+    func createAnimation(stationType: StationType) {
+        if let stationAnimationAtlasName = stationAnimationAtlasName {
+            let stationAtlas = SKTextureAtlas(named: stationAnimationAtlasName)
+            stationAnimationFrames = []
+            
+            for currentAnimation in 0..<stationAtlas.textureNames.count {
+                let stationFrameName = "stationAnimationAtlasName\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
+                stationAnimationFrames!.append(stationAtlas.textureNamed(stationFrameName))
+            }
+            
+            stationAnimationNode = SKSpriteNode(texture: stationAnimationFrames[0])
+            self.spriteNode.addChild(stationAnimationNode!)
+            
+            stationAnimationNode!.position = spriteNode.position + CGPoint(x: 0, y: (spriteNode.size.height + 0))
+            stationAnimationNode!.zPosition = 60
         }
     }
     
@@ -114,7 +163,8 @@ class StationNode: TappableDelegate {
             self.spriteNode = tappableNode
             tappableNode.delegate = self
         }
-
+        
+        createAnimation(stationType: stationType)
     }
     
     convenience init(stationType: StationType, spriteNode: SKSpriteNode) {
@@ -128,12 +178,11 @@ class StationNode: TappableDelegate {
     // Tap interaction
     func tap() {
         
-        print("Station tapped")
         if stationType == .board {
             let ingredient = ingredientNode?.ingredient
-            print("Board tapped with ingredient \(ingredient)")
-            
             ingredient?.choppableComponent?.update()
+            
+            playAnimation()
             
             if ingredient?.choppableComponent?.complete ?? false {
                 if (ingredient!.states[ingredient!.currentState] ?? []).contains(IngredientState.chopped) {
@@ -172,7 +221,7 @@ class StationNode: TappableDelegate {
     func update() {
         if stationType == .stove && !(ingredientNode?.moving ?? true) {
             let ingredient = ingredientNode?.ingredient
-
+            
             ingredient?.cookableComponent?.update()
             
             if ingredient?.cookableComponent?.burnt ?? false {
@@ -189,7 +238,7 @@ class StationNode: TappableDelegate {
             
         } else if stationType == .fryer && !(ingredientNode?.moving ?? true) {
             let ingredient = ingredientNode?.ingredient
-
+            
             ingredient?.fryableComponent?.update()
             
             if ingredient?.fryableComponent?.burnt ?? false {
@@ -204,5 +253,25 @@ class StationNode: TappableDelegate {
                 }
             }
         }
+    }
+    
+    func playAnimation() {
+        if let node = self.stationAnimationNode {
+            let timePerFrame = TimeInterval(stationAnimationDuration) / TimeInterval(stationAnimationFrames.count)
+            var animationAction = SKAction.animate(
+                                    with: stationAnimationFrames,
+                                    timePerFrame: timePerFrame,
+                                    resize: false,
+                                    restore: true)
+                
+            if stationAnimationRepeats {
+                animationAction = SKAction.repeatForever(animationAction)
+            }
+            node.run(animationAction)
+        }
+    }
+    
+    func stopAnimation() {
+        stationAnimationNode?.removeAllActions()
     }
 }
