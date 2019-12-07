@@ -48,7 +48,7 @@ class GameScene: SKScene {
         stations.filter({ $0.stationType == .pipe })
     }
     
-    var orderListNode: SKLabelNode!
+    var orderListNode: OrderListNode!
     var orderGenerationCounter = 400
     
     // MARK: - Scene Lifecycle
@@ -56,8 +56,7 @@ class GameScene: SKScene {
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
         
-        orderListNode = self.childNode(withName: "orderListNode") as! SKLabelNode
-        orderListNode.numberOfLines = 0
+        orderListNode = (childNode(withName: "orders") as! OrderListNode)
         
         setupStations()
         setupShelves()
@@ -182,8 +181,8 @@ class GameScene: SKScene {
     }
     
     func updateOrderUI(_ orders: [Order]) {
-        let ordersInString = orders.map({ $0.ingredients.map({ $0.texturePrefix }).joined(separator: ", ") })
-        orderListNode.text = ordersInString.joined(separator: "\n")
+        print(orders.count)
+        orderListNode.update(orders)
     }
 }
 

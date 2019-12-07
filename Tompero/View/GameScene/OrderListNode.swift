@@ -11,12 +11,11 @@ import SpriteKit
 
 class OrderListNode: SKSpriteNode {
     
+    var orderNodes: [OrderNode] = []
+    
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.isUserInteractionEnabled = true
-        physicsBody = SKPhysicsBody(rectangleOf: size)
-        physicsBody?.isDynamic = true
-        physicsBody?.affectedByGravity = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,7 +31,7 @@ class OrderListNode: SKSpriteNode {
     
     func open() {
         isOpen = true
-        boundary.position.x = 770
+        boundary.position.x = 780
         physicsBody?.applyImpulse(CGVector(dx: 30000, dy: 0))
         physicsBody?.velocity.dx = 9000
     }
@@ -61,18 +60,22 @@ class OrderListNode: SKSpriteNode {
         }
     }
     
-    func update(_ newOrderList: [Order]) {
-        let extraOrders = newOrderList.count - 4
-        for (index, order) in newOrderList.enumerated() {
+    func update(_ orderList: [Order]) {
+        orderNodes.forEach({ $0.removeFromParent() })
+        
+        let extraOrders = orderList.count - 4
+        for (index, order) in orderList.enumerated() {
             guard index < 4 else { break }
             let node = OrderNode()
             node.order = order
-            node.position = position(ofOrder: index)
+            node.position = position(ofOrder: -1)
+            node.zPosition = 6
             node.initOrder()
+            orderNodes.append(node)
             addChild(node)
         }
         
         let node = childNode(withName: "extraOrders") as! SKLabelNode
-        node.text = extraOrders <= 0 ? "" : "+" + extraOrders.description
+        node.text = extraOrders > 0 ? "+" + extraOrders.description : ""
     }
 }

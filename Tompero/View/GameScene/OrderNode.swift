@@ -15,12 +15,10 @@ class OrderNode: SKSpriteNode {
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0), size: CGSize(width: 350, height: 440))
-        self.isUserInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.isUserInteractionEnabled = true
     }
     
     func initOrder() {
@@ -46,11 +44,14 @@ class OrderNode: SKSpriteNode {
     private func spawnIngredientIcons() {
         for (index, ingredient) in order!.ingredients.enumerated() {
             
-            let circle = SKSpriteNode(imageNamed: "ingredientIndicator")
+            let circle = SKSpriteNode(imageNamed: "IngredientIndicator")
             circle.position = position(ofIngredient: index)
             circle.zPosition = 7
+            circle.size = CGSize(width: 17, height: 17)
             
             let node = SKSpriteNode(imageNamed: ingredient.texturePrefix + "Raw")
+            node.zPosition = 8
+            node.size = CGSize(width: 13, height: 13)
             
             circle.addChild(node)
         }
