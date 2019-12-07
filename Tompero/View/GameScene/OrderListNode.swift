@@ -33,14 +33,14 @@ class OrderListNode: SKSpriteNode {
         isOpen = true
         boundary.position.x = 780
         physicsBody?.applyImpulse(CGVector(dx: 30000, dy: 0))
-        physicsBody?.velocity.dx = 9000
+        physicsBody?.velocity.dx = 8000
     }
     
     func close() {
         isOpen = false
     
         physicsBody?.mass = 0.1
-        let action = SKAction.moveTo(x: -1062, duration: 0.13)
+        let action = SKAction.moveTo(x: -1041, duration: 0.13)
         boundary.run(action) {
             self.physicsBody?.mass = 50
         }
@@ -50,32 +50,24 @@ class OrderListNode: SKSpriteNode {
         isOpen ? close() : open()
     }
     
-    private func position(ofOrder index: Int) -> CGPoint {
-        switch index {
-        case 0: return CGPoint(x: 20.66, y: 0.571)
-        case 1: return CGPoint(x: 9.77, y: 0.571)
-        case 2: return CGPoint(x: -1.119, y: 0.571)
-        case 3: return CGPoint(x: -12.009, y: 0.571)
-        default: return CGPoint()
-        }
-    }
-    
     func update(_ orderList: [Order]) {
         orderNodes.forEach({ $0.removeFromParent() })
         
-        let extraOrders = orderList.count - 4
+        let xPos: [CGFloat] = [593.0, 0.0, -593.0]
+        //let extraOrders = orderList.count - 4
         for (index, order) in orderList.enumerated() {
-            guard index < 4 else { break }
+            guard index < 3 else { break }
+            
             let node = OrderNode()
             node.order = order
-            node.position = position(ofOrder: index)
+            node.position = CGPoint(x: xPos[index], y: 7)
             node.zPosition = 6
-            node.initOrder()
+            node.spawnIngredientIcons()
             orderNodes.append(node)
             addChild(node)
         }
         
-        let node = childNode(withName: "extraOrders") as! SKLabelNode
-        node.text = extraOrders > 0 ? "+" + extraOrders.description : ""
+        //let node = childNode(withName: "extraOrders") as! SKLabelNode
+        //node.text = extraOrders > 0 ? "+" + extraOrders.description : ""
     }
 }

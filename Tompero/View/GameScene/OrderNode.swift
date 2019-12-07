@@ -14,51 +14,51 @@ class OrderNode: SKSpriteNode {
     var order: Order?
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0), size: CGSize(width: 10.5, height: 36.0))
+        super.init(texture: texture, color: #colorLiteral(red: 1, green: 0.270588249, blue: 0.2274509817, alpha: 1) /*UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0)*/, size: CGSize(width: 518, height: 568))
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func initOrder() {
-        spawnIngredientIcons()
-        spawnFoodIcon()
-        updateTimer()
-    }
-    
-    private func position(ofIngredient index: Int) -> CGPoint {
-        switch index {
-        case 0: return CGPoint(x: -120, y: -90)
-        case 1: return CGPoint(x: -40, y: -90)
-        case 2: return CGPoint(x: 40, y: -90)
-        case 3: return CGPoint(x: 120, y: -90)
-        case 4: return CGPoint(x: -120, y: -170)
-        case 5: return CGPoint(x: -40, y: -170)
-        case 6: return CGPoint(x: 40, y: -170)
-        case 7: return CGPoint(x: 120, y: -170)
-        default: return CGPoint()
-        }
-    }
-    
-    private func spawnIngredientIcons() {
+    func spawnIngredientIcons() {
+        
+        let xPos: [CGFloat] = [-190.0, -62.5, 62.5, 190]
+        let yPos: [CGFloat] = [-4.0, -72.0, -140.0]
+        
         for (index, ingredient) in order!.ingredients.enumerated() {
-            
             let circle = SKSpriteNode(imageNamed: "IngredientIndicator")
             self.addChild(circle)
-            circle.position = position(ofIngredient: index)
+            circle.position = CGPoint(x: xPos[index], y: 120)
             circle.zPosition = 7
-            circle.size = CGSize(width: 60, height: 60)
+            circle.size = CGSize(width: 110, height: 110)
             
             let node = SKSpriteNode(imageNamed: ingredient.texturePrefix + "Raw")
             circle.addChild(node)
             node.zPosition = 8
-            node.size = CGSize(width: 25, height: 25)
+            node.size = CGSize(width: 100, height: 100)
+            
+            // order ingredient.states
+            // +1 ingredient; separate bread
+            
+            var jndex = 0
+            for state in ingredient.states {
+                var name = ""
+                switch state.key {
+                case .chopping: name = "Chop"
+                case .cooking: name = "Cook"
+                case .frying: name = "Fry"
+                default: continue // guard
+                }
+                
+                let actionNode = SKSpriteNode(imageNamed: name + "Icon")
+                actionNode.position = CGPoint(x: xPos[index], y: yPos[jndex])
+                jndex += 1
+                actionNode.zPosition = 9
+                actionNode.setScale(0.65)
+                self.addChild(actionNode)
+            }
         }
-    }
-    
-    private func spawnFoodIcon() {
-        
     }
     
     func updateTimer() {

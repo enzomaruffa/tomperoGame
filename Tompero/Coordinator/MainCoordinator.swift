@@ -46,7 +46,7 @@ class MainCoordinator: Coordinator {
             
             game(
                 rule: GameRule(
-                    difficulty: .easy,
+                    difficulty: .hard,
                     possibleIngredients: [
                         Asteroid(),
                         Tentacle(),

@@ -56,12 +56,16 @@ class GameScene: SKScene {
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
         
-        orderListNode = (childNode(withName: "orders") as! OrderListNode)
-        
+        setupOrderListNode()
         setupStations()
         setupShelves()
         setupPiping()
         setupBackground()
+    }
+    
+    func setupOrderListNode() {
+        orderListNode = (childNode(withName: "orders") as! OrderListNode)
+        orderListNode.texture = SKTexture(imageNamed: "OrderList" + playerColor)
     }
     
     func setupStations() {
