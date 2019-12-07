@@ -149,7 +149,7 @@
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 		47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryNotification.swift; sourceTree = "<group>"; };
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
-		562BCF5423881CF900D5D51D /* Tompero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tompero.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		562BCF5423881CF900D5D51D /* SpaceSpice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceSpice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562BCF5723881CF900D5D51D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		562BCF5923881CF900D5D51D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		562BCF5D23881CF900D5D51D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -376,7 +376,7 @@
 		562BCF5523881CF900D5D51D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				562BCF5423881CF900D5D51D /* Tompero.app */,
+				562BCF5423881CF900D5D51D /* SpaceSpice.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -565,7 +565,7 @@
 			);
 			name = Tompero;
 			productName = Tompero;
-			productReference = 562BCF5423881CF900D5D51D /* Tompero.app */;
+			productReference = 562BCF5423881CF900D5D51D /* SpaceSpice.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -924,8 +924,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tompero.Tompero;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.enzomaruffa.spacespice;
+				PRODUCT_NAME = SpaceSpice;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -943,8 +943,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tompero.Tompero;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.enzomaruffa.spacespice;
+				PRODUCT_NAME = SpaceSpice;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
