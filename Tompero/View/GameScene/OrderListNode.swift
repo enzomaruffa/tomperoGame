@@ -68,7 +68,7 @@ class OrderListNode: SKSpriteNode {
             guard index < 4 else { break }
             let node = OrderNode()
             node.order = order
-            node.position = position(ofOrder: -1)
+            node.position = position(ofOrder: index)
             node.zPosition = 6
             node.initOrder()
             orderNodes.append(node)

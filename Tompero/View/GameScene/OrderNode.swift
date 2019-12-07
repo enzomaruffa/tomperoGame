@@ -14,7 +14,7 @@ class OrderNode: SKSpriteNode {
     var order: Order?
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0), size: CGSize(width: 350, height: 440))
+        super.init(texture: texture, color: .red, size: CGSize(width: 10.5, height: 36.0))
     }
     
     required init?(coder aDecoder: NSCoder) {
