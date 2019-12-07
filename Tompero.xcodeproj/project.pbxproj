@@ -27,6 +27,15 @@
 		476925C72390AA0900FBAB1F /* SKSceneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */; };
 		476F70A8239336490000465F /* TappableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70A7239336490000465F /* TappableSpriteNode.swift */; };
 		476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70AB23933A1C0000465F /* TappableDelegate.swift */; };
+		47BE3ED6239C1F7200246F20 /* TeleportGreen.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECD239C1F7000246F20 /* TeleportGreen.atlas */; };
+		47BE3ED7239C1F7200246F20 /* TeleportOrange.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECE239C1F7000246F20 /* TeleportOrange.atlas */; };
+		47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECF239C1F7000246F20 /* TeleportPurple.atlas */; };
+		47BE3ED9239C1F7200246F20 /* Cook.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ED0239C1F7100246F20 /* Cook.atlas */; };
+		47BE3EDA239C1F7200246F20 /* CookBurnt.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ED1239C1F7100246F20 /* CookBurnt.atlas */; };
+		47BE3EDB239C1F7200246F20 /* HatchVacuum.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ED2239C1F7100246F20 /* HatchVacuum.atlas */; };
+		47BE3EDC239C1F7200246F20 /* TeleportBlue.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ED3239C1F7200246F20 /* TeleportBlue.atlas */; };
+		47BE3EDD239C1F7200246F20 /* Fry.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ED4239C1F7200246F20 /* Fry.atlas */; };
+		47BE3EDE239C1F7200246F20 /* PipeVacuum.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ED5239C1F7200246F20 /* PipeVacuum.atlas */; };
 		47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */; };
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
 		47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */; };
@@ -145,6 +154,15 @@
 		476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSceneExtensions.swift; sourceTree = "<group>"; };
 		476F70A7239336490000465F /* TappableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableSpriteNode.swift; sourceTree = "<group>"; };
 		476F70AB23933A1C0000465F /* TappableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TappableDelegate.swift; sourceTree = "<group>"; };
+		47BE3ECD239C1F7000246F20 /* TeleportGreen.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportGreen.atlas; sourceTree = "<group>"; };
+		47BE3ECE239C1F7000246F20 /* TeleportOrange.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportOrange.atlas; sourceTree = "<group>"; };
+		47BE3ECF239C1F7000246F20 /* TeleportPurple.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportPurple.atlas; sourceTree = "<group>"; };
+		47BE3ED0239C1F7100246F20 /* Cook.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Cook.atlas; sourceTree = "<group>"; };
+		47BE3ED1239C1F7100246F20 /* CookBurnt.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = CookBurnt.atlas; sourceTree = "<group>"; };
+		47BE3ED2239C1F7100246F20 /* HatchVacuum.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = HatchVacuum.atlas; sourceTree = "<group>"; };
+		47BE3ED3239C1F7200246F20 /* TeleportBlue.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportBlue.atlas; sourceTree = "<group>"; };
+		47BE3ED4239C1F7200246F20 /* Fry.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Fry.atlas; sourceTree = "<group>"; };
+		47BE3ED5239C1F7200246F20 /* PipeVacuum.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PipeVacuum.atlas; sourceTree = "<group>"; };
 		47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKActionExtensions.swift; sourceTree = "<group>"; };
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 		47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryNotification.swift; sourceTree = "<group>"; };
@@ -363,6 +381,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		47BE3ECB239C1DD600246F20 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				47BE3ED0239C1F7100246F20 /* Cook.atlas */,
+				47BE3ED1239C1F7100246F20 /* CookBurnt.atlas */,
+				47BE3ED4239C1F7200246F20 /* Fry.atlas */,
+				47BE3ED2239C1F7100246F20 /* HatchVacuum.atlas */,
+				47BE3ED5239C1F7200246F20 /* PipeVacuum.atlas */,
+				47BE3ED3239C1F7200246F20 /* TeleportBlue.atlas */,
+				47BE3ECD239C1F7000246F20 /* TeleportGreen.atlas */,
+				47BE3ECE239C1F7000246F20 /* TeleportOrange.atlas */,
+				47BE3ECF239C1F7000246F20 /* TeleportPurple.atlas */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		562BCF4B23881CF900D5D51D = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +545,7 @@
 		566A5BB4239ADE43006D96CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				47BE3ECB239C1DD600246F20 /* Animations */,
 				566A5BB3239ADE37006D96CF /* SFX */,
 				FB55FBE6239A9DB5002EBB89 /* Font */,
 				562BCF6423881CFC00D5D51D /* Assets.xcassets */,
@@ -608,24 +643,29 @@
 			files = (
 				566A5BEE239ADFDF006D96CF /* airBeingSucked3.wav in Resources */,
 				566A5BFB239ADFDF006D96CF /* foodBeingPut2.wav in Resources */,
+				47BE3EDE239C1F7200246F20 /* PipeVacuum.atlas in Resources */,
 				566A5BE3239ADFDF006D96CF /* roundStarted4.wav in Resources */,
 				566A5BF6239ADFDF006D96CF /* timer15Secs1.wav in Resources */,
 				566A5BE4239ADFDF006D96CF /* cooking2.wav in Resources */,
 				FB55FBE5239A9DAE002EBB89 /* TitilliumWeb-Light.ttf in Resources */,
 				FB9BF395238EA67500437124 /* Game.storyboard in Resources */,
+				47BE3ED7239C1F7200246F20 /* TeleportOrange.atlas in Resources */,
 				562BCF6323881CF900D5D51D /* Main.storyboard in Resources */,
 				566A5BEF239ADFDF006D96CF /* fry1.wav in Resources */,
 				566A5C06239ADFDF006D96CF /* roundStarted2.wav in Resources */,
 				566A5C00239ADFDF006D96CF /* foodBeingPut3.wav in Resources */,
 				566A5BF3239ADFDF006D96CF /* hatch1.wav in Resources */,
 				566A5C05239ADFDF006D96CF /* coin3.wav in Resources */,
+				47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */,
 				566A5BE6239ADFDF006D96CF /* teleport1.wav in Resources */,
 				566A5C04239ADFDF006D96CF /* hatch2.wav in Resources */,
 				566A5BE1239ADFDF006D96CF /* airBeingSucked2.wav in Resources */,
 				566A5BE8239ADFDF006D96CF /* orderDone2.wav in Resources */,
 				566A5BFD239ADFDF006D96CF /* newOrder2.wav in Resources */,
 				566A5C08239ADFDF006D96CF /* newOrder1.wav in Resources */,
+				47BE3EDA239C1F7200246F20 /* CookBurnt.atlas in Resources */,
 				566A5C07239ADFDF006D96CF /* coin4.wav in Resources */,
+				47BE3ED6239C1F7200246F20 /* TeleportGreen.atlas in Resources */,
 				566A5BFC239ADFDF006D96CF /* cooking3.wav in Resources */,
 				566A5BED239ADFDF006D96CF /* cutelo.wav in Resources */,
 				566A5BE7239ADFDF006D96CF /* foodBeingPut4.wav in Resources */,
@@ -635,6 +675,8 @@
 				566A5BEB239ADFDF006D96CF /* airBeingSucked4.wav in Resources */,
 				566A5BEC239ADFDF006D96CF /* fry2.wav in Resources */,
 				566A5BEA239ADFDF006D96CF /* burned2.wav in Resources */,
+				47BE3ED9239C1F7200246F20 /* Cook.atlas in Resources */,
+				47BE3EDD239C1F7200246F20 /* Fry.atlas in Resources */,
 				566A5BF0239ADFDF006D96CF /* burned1.wav in Resources */,
 				FB55FBE4239A9DAE002EBB89 /* TitilliumWeb-Bold.ttf in Resources */,
 				566A5BF1239ADFDF006D96CF /* orderDone1.wav in Resources */,
@@ -645,10 +687,12 @@
 				566A5C02239ADFDF006D96CF /* foodBeingPut1.wav in Resources */,
 				566A5BF4239ADFDF006D96CF /* teleport4.wav in Resources */,
 				566A5C0C239ADFDF006D96CF /* timesUp3.wav in Resources */,
+				47BE3EDC239C1F7200246F20 /* TeleportBlue.atlas in Resources */,
 				566A5C0A239ADFDF006D96CF /* hatch3.wav in Resources */,
 				566A5C0B239ADFDF006D96CF /* cooking1.wav in Resources */,
 				566A5BE5239ADFDF006D96CF /* coin1.wav in Resources */,
 				566A5BFF239ADFDF006D96CF /* cutelo2.wav in Resources */,
+				47BE3EDB239C1F7200246F20 /* HatchVacuum.atlas in Resources */,
 				562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */,
 				562BCF6523881CFC00D5D51D /* Assets.xcassets in Resources */,
 				566A5BFA239ADFDF006D96CF /* timesUp1.wav in Resources */,
@@ -918,7 +962,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -937,7 +981,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

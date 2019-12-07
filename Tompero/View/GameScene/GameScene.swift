@@ -51,6 +51,10 @@ class GameScene: SKScene {
     var orderListNode: SKLabelNode!
     var orderGenerationCounter = 400
     
+    var teleportAnimationNode: SKSpriteNode!
+    var teleportAnimationFrames: [SKTexture]!
+    let teleportDuration = 2.0
+    
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
         // Adds itself as a GameConnection observer
@@ -64,29 +68,29 @@ class GameScene: SKScene {
         setupPiping()
         setupBackground()
         
-//        // Remove later
-//        let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
-//        let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
-//        tentacleNode.name = "denis"
-//        ingredients.append(tentacle)
-//
-//        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
-//        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
-//        eyesNode.name = "paulo"
-//        self.addChild(eyesNode)
-//        ingredients.append(eyes)
-//
-//        let asteroidNode = MovableSpriteNode(imageNamed: "AsteroidRaw")
-//        let asteroid = IngredientNode(ingredient: Asteroid(), movableNode: asteroidNode, currentLocation: shelves[1])
-//        asteroidNode.name = "paulo"
-//        self.addChild(asteroidNode)
-//        ingredients.append(asteroid)
-//
-//        let plateNode = MovableSpriteNode(imageNamed: "Plate")
-//        let plate = PlateNode(plate: Plate(), movableNode: plateNode, currentLocation: shelves[2])
-//        plateNode.name = "plate"
-//        self.addChild(plateNode)
-//        plates.append(plate)
+        //        // Remove later
+        //        let tentacleNode = self.childNode(withName: "ingredient") as! MovableSpriteNode
+        //        let tentacle = IngredientNode(ingredient: Tentacle(), movableNode: tentacleNode, currentLocation: shelves.first!)
+        //        tentacleNode.name = "denis"
+        //        ingredients.append(tentacle)
+        //
+        //        let eyesNode = MovableSpriteNode(imageNamed: "EyesRaw")
+        //        let eyes = IngredientNode(ingredient: Eyes(), movableNode: eyesNode, currentLocation: shelves[1])
+        //        eyesNode.name = "paulo"
+        //        self.addChild(eyesNode)
+        //        ingredients.append(eyes)
+        //
+        //        let asteroidNode = MovableSpriteNode(imageNamed: "AsteroidRaw")
+        //        let asteroid = IngredientNode(ingredient: Asteroid(), movableNode: asteroidNode, currentLocation: shelves[1])
+        //        asteroidNode.name = "paulo"
+        //        self.addChild(asteroidNode)
+        //        ingredients.append(asteroid)
+        //
+        //        let plateNode = MovableSpriteNode(imageNamed: "Plate")
+        //        let plate = PlateNode(plate: Plate(), movableNode: plateNode, currentLocation: shelves[2])
+        //        plateNode.name = "plate"
+        //        self.addChild(plateNode)
+        //        plates.append(plate)
         
     }
     
@@ -113,6 +117,23 @@ class GameScene: SKScene {
         }
     }
     
+    func createTeleporterAnimation(_ teleporterNode: (SKSpriteNode)) {
+        print("Creating \(teleportAnimationNode) with textures \(teleportAnimationFrames)")
+        
+        let teleportAtlas = SKTextureAtlas(named: "Teleport" + playerColor)
+        teleportAnimationFrames = []
+        for currentAnimation in 0..<teleportAtlas.textureNames.count {
+            let teleportFrameName = "teleport\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
+            teleportAnimationFrames.append(teleportAtlas.textureNamed(teleportFrameName))
+        }
+        
+        teleportAnimationNode = SKSpriteNode(texture: teleportAnimationFrames[0])
+        self.addChild(teleportAnimationNode)
+        
+        teleportAnimationNode.position = teleporterNode.position + CGPoint(x: 0, y: -(teleporterNode.size.height + 4))
+        teleportAnimationNode.zPosition = 60
+    }
+    
     func setupShelves() {
         stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf1") as! SKSpriteNode))
         stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf2") as! SKSpriteNode))
@@ -122,7 +143,10 @@ class GameScene: SKScene {
         
         (self.childNode(withName: "target") as! SKSpriteNode).texture = SKTexture(imageNamed: "Target" + playerColor)
         
-        (self.childNode(withName: "teleporter") as! SKSpriteNode).texture = SKTexture(imageNamed: "Teleporter" + playerColor)
+        let teleporterNode = (self.childNode(withName: "teleporter") as! SKSpriteNode)
+        teleporterNode.texture = SKTexture(imageNamed: "Teleporter" + playerColor)
+        
+        createTeleporterAnimation(teleporterNode)
     }
     
     func setupPiping() {
@@ -175,11 +199,19 @@ class GameScene: SKScene {
         print("Plate: \((plate.ingredients.map({ $0.texturePrefix })))")
         print("Plate types: \((plate.ingredients.map({ type(of: $0) })))")
         
+        print("Running animation on \(teleportAnimationNode) that is probably not hidden!")
+        teleportAnimationNode.run(SKAction.animate(
+            with: teleportAnimationFrames,
+            timePerFrame: teleportDuration / TimeInterval(teleportAnimationFrames.count),
+            resize: false,
+            restore: true))
+        
+        
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
             print("Couldn't find any order")
             let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
-
+            
             updateOrderUI(orders)
             return false
         }
@@ -188,7 +220,7 @@ class GameScene: SKScene {
         let totalScore = targetOrder.score * difficultyBonus[rule!.difficulty]!
         
         print("Total score: \(totalScore)")
-
+        
         let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
         
