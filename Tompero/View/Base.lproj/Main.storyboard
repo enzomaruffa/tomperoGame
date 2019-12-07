@@ -10,7 +10,7 @@
         <!--Inicial View Controller-->
         <scene sceneID="T7K-uR-KAe">
             <objects>
-                <viewController storyboardIdentifier="InicialViewController" id="1qB-Oy-VQR" customClass="InicialViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InicialViewController" id="1qB-Oy-VQR" customClass="InicialViewController" customModule="SpaceSpice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QNp-EB-RWz">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="SpaceSpice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

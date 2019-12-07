@@ -41,7 +41,7 @@ class OrderListNode: SKSpriteNode {
         isOpen = false
     
         physicsBody?.mass = 0.1
-        let action = SKAction.moveTo(x: -1090, duration: 0.13)
+        let action = SKAction.moveTo(x: -1062, duration: 0.13)
         boundary.run(action) {
             self.physicsBody?.mass = 50
         }
@@ -51,4 +51,28 @@ class OrderListNode: SKSpriteNode {
         isOpen ? close() : open()
     }
     
+    private func position(ofOrder index: Int) -> CGPoint {
+        switch index {
+        case 0: return CGPoint(x: 20.66, y: 0.571)
+        case 1: return CGPoint(x: 9.77, y: 0.571)
+        case 2: return CGPoint(x: -1.119, y: 0.571)
+        case 3: return CGPoint(x: -12.009, y: 0.571)
+        default: return CGPoint()
+        }
+    }
+    
+    func update(_ newOrderList: [Order]) {
+        let extraOrders = newOrderList.count - 4
+        for (index, order) in newOrderList.enumerated() {
+            guard index < 4 else { break }
+            let node = OrderNode()
+            node.order = order
+            node.position = position(ofOrder: index)
+            node.initOrder()
+            addChild(node)
+        }
+        
+        let node = childNode(withName: "extraOrders") as! SKLabelNode
+        node.text = extraOrders <= 0 ? "" : "+" + extraOrders.description
+    }
 }

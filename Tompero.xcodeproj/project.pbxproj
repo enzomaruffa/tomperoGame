@@ -111,6 +111,7 @@
 		56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C5238DC97D000F8A3F /* IngredientState.swift */; };
 		56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C7238DC992000F8A3F /* CookableComponent.swift */; };
 		56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */; };
+		56EDA92A239B48B7004BFC2C /* OrderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EDA929239B48B7004BFC2C /* OrderNode.swift */; };
 		FB25C2A9239455E8001FEAE6 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB25C2A8239455E8001FEAE6 /* UIImage+Gif.swift */; };
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
 		FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */; };
@@ -232,6 +233,7 @@
 		56E2D7C5238DC97D000F8A3F /* IngredientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientState.swift; sourceTree = "<group>"; };
 		56E2D7C7238DC992000F8A3F /* CookableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookableComponent.swift; sourceTree = "<group>"; };
 		56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
+		56EDA929239B48B7004BFC2C /* OrderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNode.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		B688C2DD78186CF812918984 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB25C2A8239455E8001FEAE6 /* UIImage+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				562BCF5923881CF900D5D51D /* GameScene.sks */,
 				562BCF5D23881CF900D5D51D /* GameScene.swift */,
 				566A5BB1239AD3AF006D96CF /* OrderListNode.swift */,
+				56EDA929239B48B7004BFC2C /* OrderNode.swift */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				566A5BB2239AD3AF006D96CF /* OrderListNode.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
 				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
+				56EDA92A239B48B7004BFC2C /* OrderNode.swift in Sources */,
 				565AEFE223915E6400E3E15F /* MovableSpriteNode.swift in Sources */,
 				FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */,
 				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,

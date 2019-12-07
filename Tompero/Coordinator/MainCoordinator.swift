@@ -18,39 +18,55 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        //inicial()
-        let tables: [String : [PlayerTable]] = [
-            "God" : [
-                PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .cooking, ingredient: nil),
-                PlayerTable(type: .frying, ingredient: nil)
-            ],
-            "Enzo's Enzo's iPhone" : [
-                PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil)
-            ],
-            "CU" : [
-                PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil)
-            ],
-            "CU 2" : [
-                PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .chopping, ingredient: nil)
-            ]
-        ]
+        let gameSceneTest: Bool = true
         
-        game(
-            rule: GameRule(
-                difficulty: .easy,
-                possibleIngredients: [Asteroid()],
-                playerTables: tables,
-                playerOrder: ["God", "Enzo's Enzo's iPhone", "CU", "CU 2"]
-            ),
-            hosting: true
-        )
+        if gameSceneTest {
+            let tables: [String : [PlayerTable]] = [
+                "God" : [
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .cooking, ingredient: nil),
+                    PlayerTable(type: .frying, ingredient: nil)
+                ],
+                "Enzo's Enzo's iPhone" : [
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil)
+                ],
+                "CU" : [
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil)
+                ],
+                "CU 2" : [
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil)
+                ]
+            ]
+            
+            game(
+                rule: GameRule(
+                    difficulty: .easy,
+                    possibleIngredients: [
+                        Asteroid(),
+                        Tentacle(),
+                        MoonCheese(),
+                        Eyes(),
+                        Tardigrades()
+                    ],
+                    playerTables: tables,
+                    playerOrder: [
+                        "God",
+                        "Enzo's Enzo's iPhone",
+                        "CU",
+                        "CU 2"]
+                ),
+                hosting: true
+            )
+            return
+        }
+        
+        inicial()
     }
     
     
