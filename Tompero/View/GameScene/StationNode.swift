@@ -69,14 +69,14 @@ class StationNode: TappableDelegate {
                 if indicatorNode == nil {
                     indicatorNode = SKSpriteNode(imageNamed: "IngredientIndicator")
                     spriteNode.addChild(indicatorNode!)
-                    indicatorNode!.zPosition = 2
+                    indicatorNode!.zPosition = 3
                     indicatorNode!.scale(to: CGSize(width: 170, height: 170))
                     indicatorNode!.position = CGPoint(x: -260, y: 170)
                 }
                 
                 if let ingredient = ingredientNode?.ingredient {
                     let iconNode = SKSpriteNode(imageNamed: ingredient.texturePrefix + "Icon")
-                    iconNode.zPosition = 3
+                    iconNode.zPosition = 4
                     iconNode.scale(to: CGSize(width: 110, height: 110))
                     indicatorNode?.addChild(iconNode)
                 } else {
@@ -112,6 +112,16 @@ class StationNode: TappableDelegate {
         }
     }
     
+    private var stationAnimationOffset: CGPoint {
+        switch stationType {
+        case .stove: return CGPoint(x: 0, y: 30)
+        case .fryer: return CGPoint(x: 0, y: 77)
+        case .pipe: return CGPoint(x: 0, y: 30)
+        case .hatch: return CGPoint(x: 0, y: 30)
+        default: return .zero
+        }
+    }
+    
     private var stationAnimationRepeats: Bool {
         switch stationType {
         case .board: return false
@@ -121,6 +131,7 @@ class StationNode: TappableDelegate {
     
     private var stationAnimationNode: SKSpriteNode?
     private var stationAnimationFrames: [SKTexture]!
+    var animationRunning = false
     
     func createAnimation(stationType: StationType) {
         if let stationAnimationAtlasName = stationAnimationAtlasName {
@@ -128,15 +139,18 @@ class StationNode: TappableDelegate {
             stationAnimationFrames = []
             
             for currentAnimation in 0..<stationAtlas.textureNames.count {
-                let stationFrameName = "stationAnimationAtlasName\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
+                let stationFrameName = stationAnimationAtlasName + "\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
+                print(stationFrameName)
                 stationAnimationFrames!.append(stationAtlas.textureNamed(stationFrameName))
             }
             
             stationAnimationNode = SKSpriteNode(texture: stationAnimationFrames[0])
             self.spriteNode.addChild(stationAnimationNode!)
             
-            stationAnimationNode!.position = spriteNode.position + CGPoint(x: 0, y: (spriteNode.size.height + 0))
-            stationAnimationNode!.zPosition = 60
+            stationAnimationNode!.position = spriteNode.position + stationAnimationOffset
+            stationAnimationNode!.zPosition = 2
+
+            print("Creating \(stationAnimationNode) with textures \(stationAnimationFrames)")
         }
     }
     
@@ -219,44 +233,60 @@ class StationNode: TappableDelegate {
     
     // Scene update intercation
     func update() {
-        if stationType == .stove && !(ingredientNode?.moving ?? true) {
-            let ingredient = ingredientNode?.ingredient
+        
+        
+        if stationType == .stove && !(ingredientNode?.moving ?? true),
+            let ingredient = ingredientNode?.ingredient {
             
-            ingredient?.cookableComponent?.update()
+            ingredient.cookableComponent?.update()
             
-            if ingredient?.cookableComponent?.burnt ?? false {
-                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.burnt) {
-                    ingredient?.currentState = .burnt
+            if !animationRunning {
+                playAnimation()
+            }
+            
+            if ingredient.cookableComponent?.burnt ?? false {
+                if ingredient.states[ingredient.currentState]!.contains(IngredientState.burnt) {
+                    ingredient.currentState = .burnt
                     ingredientNode?.checkTextureChange()
                 }
-            } else if ingredient?.cookableComponent?.complete ?? false {
-                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.cooked) {
-                    ingredient?.currentState = .cooked
+            } else if ingredient.cookableComponent?.complete ?? false {
+                if ingredient.states[ingredient.currentState]!.contains(IngredientState.cooked) {
+                    ingredient.currentState = .cooked
                     ingredientNode?.checkTextureChange()
                 }
             }
             
-        } else if stationType == .fryer && !(ingredientNode?.moving ?? true) {
-            let ingredient = ingredientNode?.ingredient
+        } else if stationType == .fryer && !(ingredientNode?.moving ?? true),
+        let ingredient = ingredientNode?.ingredient  {
             
-            ingredient?.fryableComponent?.update()
+            ingredient.fryableComponent?.update()
             
-            if ingredient?.fryableComponent?.burnt ?? false {
-                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.burnt) {
-                    ingredient?.currentState = .burnt
+            if !animationRunning {
+                playAnimation()
+            }
+            
+            if ingredient.fryableComponent?.burnt ?? false {
+                if ingredient.states[ingredient.currentState]!.contains(IngredientState.burnt) {
+                    ingredient.currentState = .burnt
                     ingredientNode?.checkTextureChange()
                 }
-            } else if ingredient?.fryableComponent?.complete ?? false {
-                if ingredient!.states[ingredient!.currentState]!.contains(IngredientState.fried) {
-                    ingredient?.currentState = .fried
+            } else if ingredient.fryableComponent?.complete ?? false {
+                if ingredient.states[ingredient.currentState]!.contains(IngredientState.fried) {
+                    ingredient.currentState = .fried
                     ingredientNode?.checkTextureChange()
                 }
+            }
+        } else {
+            if animationRunning {
+                stopAnimation()
             }
         }
     }
     
     func playAnimation() {
+        print("Playing station animation")
         if let node = self.stationAnimationNode {
+            animationRunning = true
             let timePerFrame = TimeInterval(stationAnimationDuration) / TimeInterval(stationAnimationFrames.count)
             var animationAction = SKAction.animate(
                                     with: stationAnimationFrames,
@@ -272,6 +302,8 @@ class StationNode: TappableDelegate {
     }
     
     func stopAnimation() {
+        print("Stopping station animation")
+        animationRunning = false
         stationAnimationNode?.removeAllActions()
     }
 }

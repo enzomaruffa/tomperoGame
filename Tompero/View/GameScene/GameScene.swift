@@ -125,7 +125,6 @@ class GameScene: SKScene {
     }
     
     func createTeleporterAnimation(_ teleporterNode: (SKSpriteNode)) {
-        print("Creating \(teleportAnimationNode) with textures \(teleportAnimationFrames)")
         
         let teleportAtlas = SKTextureAtlas(named: "Teleport" + playerColor)
         teleportAnimationFrames = []
@@ -139,6 +138,8 @@ class GameScene: SKScene {
         
         teleportAnimationNode.position = teleporterNode.position + CGPoint(x: -8, y: -(teleporterNode.size.height + 8))
         teleportAnimationNode.zPosition = 60
+        
+        print("Creating \(teleportAnimationNode) with textures \(teleportAnimationFrames)")
     }
     
     func setupShelves() {

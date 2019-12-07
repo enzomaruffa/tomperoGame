@@ -159,7 +159,7 @@ class GameRuleFactory {
             let randomTableToCopy = playerTables[randomPlayerWithSomething]!.filter({$0.type != .empty}).randomElement()!
             
             // Setting it in the player that has an empty space
-            randomTable = playerTables[randomPlayerWithSomething]?.filter({ $0.type == .empty }).randomElement()!
+            randomTable = playerTables[randomPlayerWithEmpty]?.filter({ $0.type == .empty }).randomElement()!
             randomTable?.type = randomTableToCopy.type
             
             if randomTableToCopy.type == .ingredient {
