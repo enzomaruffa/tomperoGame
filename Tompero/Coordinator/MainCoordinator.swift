@@ -68,8 +68,7 @@ class MainCoordinator: Coordinator {
         
         inicial()
     }
-    
-    
+        
     func inicial() {
         let controller = InicialViewController.instantiate()
         controller.coordinator = self

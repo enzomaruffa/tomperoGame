@@ -55,4 +55,13 @@ class GameViewController: UIViewController, Storyboarded {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    override var prefersHomeIndicatorAutoHidden: Bool {
+      return false
+    }
+    
+    override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
+        return UIRectEdge.all
+    }
+    
 }

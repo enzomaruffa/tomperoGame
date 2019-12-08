@@ -150,7 +150,7 @@ class GameRuleFactory {
             print("\(randomPlayerWithEmpty) has an empty space!")
 
             // List of those with something
-            let playersWithSomethingList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type != .empty}) ?? false) })
+            let playersWithSomethingList = playerTables.keys.filter({ !(playerTables[$0]?.contains(where: {$0.type == .empty}) ?? true) })
             
             // Random player with something
             let randomPlayerWithSomething = playersWithSomethingList.randomElement()!

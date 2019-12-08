@@ -47,9 +47,22 @@ class GameScene: SKScene {
     var pipes: [StationNode] {
         stations.filter({ $0.stationType == .pipe })
     }
+    var hatch: StationNode {
+        stations.filter({ $0.stationType == .hatch }).first!
+    }
+    
+    var firstEmptyShelf: StationNode? {
+        shelves.filter({ $0.isEmpty }).first
+    }
     
     var orderListNode: OrderListNode!
     var orderGenerationCounter = 400
+    
+    var stationsAnimationsRunning = false
+    
+    private var teleportAnimationNode: SKSpriteNode!
+    private var teleportAnimationFrames: [SKTexture]!
+    private let teleportDuration = 1
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -91,6 +104,24 @@ class GameScene: SKScene {
         }
     }
     
+    func createTeleporterAnimation(_ teleporterNode: (SKSpriteNode)) {
+        
+        let teleportAtlas = SKTextureAtlas(named: "Teleport" + playerColor)
+        teleportAnimationFrames = []
+        for currentAnimation in 0..<teleportAtlas.textureNames.count {
+            let teleportFrameName = "teleport\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
+            teleportAnimationFrames.append(teleportAtlas.textureNamed(teleportFrameName))
+        }
+        
+        teleportAnimationNode = SKSpriteNode(texture: teleportAnimationFrames[0])
+        self.addChild(teleportAnimationNode)
+        
+        teleportAnimationNode.position = teleporterNode.position + CGPoint(x: -8, y: -(teleporterNode.size.height + 8))
+        teleportAnimationNode.zPosition = 60
+        
+        print("Creating \(teleportAnimationNode) with textures \(teleportAnimationFrames)")
+    }
+    
     func setupShelves() {
         stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf1") as! SKSpriteNode))
         stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf2") as! SKSpriteNode))
@@ -100,7 +131,10 @@ class GameScene: SKScene {
         
         (self.childNode(withName: "target") as! SKSpriteNode).texture = SKTexture(imageNamed: "Target" + playerColor)
         
-        (self.childNode(withName: "teleporter") as! SKSpriteNode).texture = SKTexture(imageNamed: "Teleporter" + playerColor)
+        let teleporterNode = (self.childNode(withName: "teleporter") as! SKSpriteNode)
+        teleporterNode.texture = SKTexture(imageNamed: "Teleporter" + playerColor)
+        
+        createTeleporterAnimation(teleporterNode)
     }
     
     func setupPiping() {
@@ -134,6 +168,22 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         stations.forEach({ $0.update() })
         
+        let isMoving = !stations.filter({ ($0.ingredientNode?.moving ?? false || $0.plateNode?.moving ?? false) }).isEmpty
+        
+        print("\(isMoving), \(stationsAnimationsRunning)")
+        
+        if isMoving && !stationsAnimationsRunning {
+            print("Should play animation!")
+            pipes.forEach({ $0.playAnimation() })
+            hatch.playAnimation()
+            stationsAnimationsRunning = true
+        } else if !isMoving && stationsAnimationsRunning {
+            print("Should stop animation!")
+            pipes.forEach({ $0.stopAnimation() })
+            hatch.stopAnimation()
+            stationsAnimationsRunning = false
+        }
+        
         if hosting {
             orderGenerationCounter += 1
             
@@ -142,8 +192,8 @@ class GameScene: SKScene {
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
             }
-            
         }
+        
     }
     
     func makeDelivery(plate: Plate) -> Bool {
@@ -153,11 +203,18 @@ class GameScene: SKScene {
         print("Plate: \((plate.ingredients.map({ $0.texturePrefix })))")
         print("Plate types: \((plate.ingredients.map({ type(of: $0) })))")
         
+        let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(teleportAnimationFrames.count)
+        teleportAnimationNode.run(SKAction.animate(
+            with: teleportAnimationFrames,
+            timePerFrame: timePerFrame,
+            resize: false,
+            restore: true))
+        
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
             print("Couldn't find any order")
             let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
-
+            
             updateOrderUI(orders)
             return false
         }
@@ -166,7 +223,7 @@ class GameScene: SKScene {
         let totalScore = targetOrder.score * difficultyBonus[rule!.difficulty]!
         
         print("Total score: \(totalScore)")
-
+        
         let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
         
@@ -192,10 +249,6 @@ class GameScene: SKScene {
 
 // MARK: - GameConnectionManagerObserver Methods
 extension GameScene: GameConnectionManagerObserver {
-    
-    var firstEmptyShelf: StationNode? {
-        shelves.filter({ $0.isEmpty }).first
-    }
     
     func receivePlate(plate: Plate) {
         print("[GameScene] Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
