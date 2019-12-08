@@ -15,9 +15,8 @@ class MusicPlayer {
     private var score = [TrackNumber: Track]()
     
     private init() {
-        score[.dance] = Track(fileName: "dance-elevation.mp3")
-        score[.club] = Track(fileName: "night-at-the-club.mp3")
-        score[.intro] = TrackWithIntro(introFileName: "intro.mp3", loopFileName: "loop.mp3")
+        score[.menu] = Track(fileName: "menuMusic.mp3")
+        score[.game] = Track(fileName: "gameMusic.mp3")
     }
     
     func play(_ trackToPlay: TrackNumber) {
@@ -29,10 +28,19 @@ class MusicPlayer {
             }
         }
     }
+    
+    func stop(_ trackToPlay: TrackNumber) {
+        for (trackNumber, track) in score {
+            if trackNumber != trackToPlay {
+                track.play()
+            } else {
+                track.stop()
+            }
+        }
+    }
 }
 
 enum TrackNumber {
-    case dance
-    case club
-    case intro
+    case menu
+    case game
 }
