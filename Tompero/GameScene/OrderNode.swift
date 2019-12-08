@@ -13,6 +13,8 @@ class OrderNode: SKSpriteNode {
     
     var order: Order?
     var progressNode = ProgressBar()
+    var yellow = false
+    var red = false
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         //super.init(texture: texture, color: #colorLiteral(red: 1, green: 0.270588249, blue: 0.2274509817, alpha: 1), size: CGSize(width: 600, height: 568))
@@ -104,5 +106,15 @@ class OrderNode: SKSpriteNode {
     
     func updateBar() {
         progressNode.progress += CGFloat(1/(60*order!.totalTime))
+        
+        if progressNode.progress > 0.35 && progressNode.progress <= 0.7 && !yellow {
+            yellow = true
+            progressNode.bar?.run(.colorize(with: .yellow, colorBlendFactor: 1, duration: 0.5))
+        }
+        
+        if progressNode.progress > 0.7 && !red {
+            red = true
+            progressNode.bar?.run(.colorize(with: .red, colorBlendFactor: 1, duration: 0.5))
+        }
     }
 }

@@ -231,6 +231,7 @@ class GameScene: SKScene {
                 // timer only starts when the first order is generated
                 if !timerStarted {
                     timerStarted = true
+                    
                 }
             }
             
@@ -264,7 +265,6 @@ class GameScene: SKScene {
             timerUpdateCounter = 0
         }
         
-
         if matchTimer < 0 {
             if !timesUpPlayed {
                 timesUpPlayed = true
@@ -336,7 +336,6 @@ class GameScene: SKScene {
         
         return true
     }
-    
     
     // MARK: - UI Updates
     func updateOrderUI(_ orders: [Order]) {
