@@ -655,7 +655,6 @@
 				FB55FBE5239A9DAE002EBB89 /* TitilliumWeb-Light.ttf in Resources */,
 				476B7C95239C3276004D4116 /* PipeVacuum.atlas in Resources */,
 				FB9BF395238EA67500437124 /* Game.storyboard in Resources */,
-				562BCF6323881CF900D5D51D /* Main.storyboard in Resources */,
 				566A5BEF239ADFDF006D96CF /* cooking1.wav in Resources */,
 				47BE3ED7239C1F7200246F20 /* TeleportOrange.atlas in Resources */,
 				566A5C06239ADFDF006D96CF /* roundStarted2.wav in Resources */,
@@ -971,7 +970,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D9FBK2WPJX;
+				DEVELOPMENT_TEAM = 5MSP4455P9;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -990,7 +989,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D9FBK2WPJX;
+				DEVELOPMENT_TEAM = 5MSP4455P9;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
