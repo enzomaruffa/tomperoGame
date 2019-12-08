@@ -252,6 +252,7 @@ class StationNode: TappableDelegate {
             let ingredient = ingredientNode?.ingredient,
             let choppableComponent = ingredient.choppableComponent {
             choppableComponent.update()
+			SFX.shared.chop.play()
             
             playAnimation()
 

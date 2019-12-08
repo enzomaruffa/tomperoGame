@@ -183,7 +183,7 @@ extension GameConnectionManager: MCManagerDataObserver {
                 // Chamar delegates que tem o receiveMessage
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
-            }
+            } 
         default:
             print("[GameConnectionManager] Unknown type received")
         }

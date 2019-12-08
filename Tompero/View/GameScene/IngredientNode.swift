@@ -158,6 +158,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func moveStarted(currentPosition: CGPoint) {
+        SFX.shared.takeFood.play()
+        
         scaleBeforeMove = spriteNode.yScale
         alphaBeforeMove = spriteNode.alpha
         
@@ -187,6 +189,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func moveEnded(currentPosition: CGPoint) {
+        SFX.shared.putFoodDown.play()
+        
         spriteNode.zRotation = 0
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
