@@ -59,7 +59,7 @@ class GameScene: SKScene {
     }
     
     var orderListNode: OrderListNode!
-    var orderGenerationCounter = 400
+    var orderGenerationCounter = 900
     var orderCount = 0
     let maxOrders = 3
     var firstOrder = false
@@ -218,7 +218,7 @@ class GameScene: SKScene {
         orderListNode.update()
         
         if hosting {
-            orderGenerationCounter += 500
+            orderGenerationCounter += 1
             
             if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
                 generateRandomOrder()
@@ -231,6 +231,7 @@ class GameScene: SKScene {
                 // timer only starts when the first order is generated
                 if !timerStarted {
                     timerStarted = true
+                    
                 }
             }
             
@@ -264,7 +265,6 @@ class GameScene: SKScene {
             timerUpdateCounter = 0
         }
         
-
         if matchTimer < 0 {
             if !timesUpPlayed {
                 timesUpPlayed = true
@@ -336,7 +336,6 @@ class GameScene: SKScene {
         
         return true
     }
-    
     
     // MARK: - UI Updates
     func updateOrderUI(_ orders: [Order]) {
