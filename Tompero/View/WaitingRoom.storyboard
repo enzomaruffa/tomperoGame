@@ -58,7 +58,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="inviteButtomBlue:" destination="5eH-78-dlc" eventType="touchUpInside" id="LFO-K2-8FV"/>
+                                                    <action selector="player1InviteButtonPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="LFO-K2-8FV"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYt-ew-BO8">
@@ -97,7 +97,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="inviteButtomPurple:" destination="5eH-78-dlc" eventType="touchUpInside" id="6ec-2p-dwL"/>
+                                                    <action selector="player2InviteButtonPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="6ec-2p-dwL"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgL-7I-Cff">
@@ -136,7 +136,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="inviteButtomGreen:" destination="5eH-78-dlc" eventType="touchUpInside" id="gl0-E0-R4g"/>
+                                                    <action selector="player3InviteButtonPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="gl0-E0-R4g"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YX2-DQ-TW8">
@@ -175,7 +175,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="inviteButtomOrange:" destination="5eH-78-dlc" eventType="touchUpInside" id="UeX-js-LkR"/>
+                                                    <action selector="player4InviteButtonPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="UeX-js-LkR"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kF7-KV-oN0">
@@ -268,27 +268,27 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="pu5-td-27G" id="hB6-Cy-aZ1"/>
-                        <outlet property="hatBlue" destination="qhh-Hh-gEM" id="ruu-AZ-rLp"/>
-                        <outlet property="hatBlueLBL" destination="nYt-ew-BO8" id="vf5-Mc-p9r"/>
-                        <outlet property="hatBlueLBLCenterY" destination="sTX-me-GIJ" id="OoV-Pd-VeE"/>
-                        <outlet property="hatGreen" destination="Q8q-cl-OZX" id="MxU-Fq-1Gh"/>
-                        <outlet property="hatGreenCenterY" destination="qv7-HE-j7z" id="xS1-84-M1X"/>
-                        <outlet property="hatGreenLBL" destination="YX2-DQ-TW8" id="awl-xw-qkw"/>
-                        <outlet property="hatOrange" destination="5Ai-vN-q3g" id="L5y-1u-Kgh"/>
-                        <outlet property="hatOrangeLBL" destination="kF7-KV-oN0" id="Tx7-99-cCc"/>
-                        <outlet property="hatOrangeLBLCenterY" destination="N4o-ZV-fos" id="Df2-Oa-rmN"/>
-                        <outlet property="hatPurple" destination="9lt-MA-eNd" id="5tP-2p-BNE"/>
-                        <outlet property="hatPurpleLBL" destination="AgL-7I-Cff" id="ea0-aY-xAH"/>
-                        <outlet property="hatPurpleLBLCenterY" destination="L5r-Mf-aNr" id="BbT-iq-0hF"/>
-                        <outlet property="inviteBlue" destination="iYl-rx-fYK" id="YQR-t8-Jad"/>
-                        <outlet property="inviteGreen" destination="e3B-7h-VjE" id="Qmt-Rf-umf"/>
-                        <outlet property="inviteOrange" destination="G1Z-hp-98l" id="eG4-4E-nwN"/>
-                        <outlet property="invitePurple" destination="HPl-Dm-nz7" id="ms3-lv-GwT"/>
+                        <outlet property="goButton" destination="pyA-2k-fAU" id="29G-cc-eZp"/>
                         <outlet property="level" destination="hGf-ed-cWw" id="b17-Bm-feP"/>
                         <outlet property="levelBackImage" destination="itL-Jq-8zp" id="k7x-6K-gF6"/>
                         <outlet property="menuButton" destination="k7F-M2-bfK" id="5vm-yx-zh5"/>
                         <outlet property="painelHost" destination="6Re-AI-gwg" id="uNX-Jp-UyQ"/>
-                        <outlet property="playOutlet" destination="pyA-2k-fAU" id="29G-cc-eZp"/>
+                        <outlet property="player1Image" destination="qhh-Hh-gEM" id="ruu-AZ-rLp"/>
+                        <outlet property="player1InviteButton" destination="iYl-rx-fYK" id="YQR-t8-Jad"/>
+                        <outlet property="player1Label" destination="nYt-ew-BO8" id="vf5-Mc-p9r"/>
+                        <outlet property="player1LabelCenterYConstraint" destination="sTX-me-GIJ" id="OoV-Pd-VeE"/>
+                        <outlet property="player2Image" destination="9lt-MA-eNd" id="5tP-2p-BNE"/>
+                        <outlet property="player2InviteButton" destination="HPl-Dm-nz7" id="ms3-lv-GwT"/>
+                        <outlet property="player2Label" destination="AgL-7I-Cff" id="ea0-aY-xAH"/>
+                        <outlet property="player2LabelCenterYConstraint" destination="L5r-Mf-aNr" id="BbT-iq-0hF"/>
+                        <outlet property="player3Image" destination="Q8q-cl-OZX" id="MxU-Fq-1Gh"/>
+                        <outlet property="player3InviteButton" destination="e3B-7h-VjE" id="Qmt-Rf-umf"/>
+                        <outlet property="player3Label" destination="YX2-DQ-TW8" id="awl-xw-qkw"/>
+                        <outlet property="player3LabelCenterYConstraint" destination="qv7-HE-j7z" id="xS1-84-M1X"/>
+                        <outlet property="player4Image" destination="5Ai-vN-q3g" id="L5y-1u-Kgh"/>
+                        <outlet property="player4InviteButton" destination="G1Z-hp-98l" id="eG4-4E-nwN"/>
+                        <outlet property="player4Label" destination="kF7-KV-oN0" id="Tx7-99-cCc"/>
+                        <outlet property="player4LabelCenterYConstraint" destination="N4o-ZV-fos" id="Df2-Oa-rmN"/>
                         <outlet property="stackCenterYConstraint" destination="0ce-zv-1M4" id="EmW-xX-cKO"/>
                         <outlet property="stackHeightConstraint" destination="WJX-em-IYR" id="vee-Fz-sPm"/>
                         <outlet property="stackView" destination="7sx-QL-biX" id="Mxr-3c-cPN"/>
