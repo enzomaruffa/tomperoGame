@@ -31,7 +31,7 @@ class OrderListNode: SKSpriteNode {
     
     func open() {
         isOpen = true
-        boundary.position.x = 780
+        boundary.position.x = 982
         physicsBody?.applyImpulse(CGVector(dx: 30000, dy: 0))
         physicsBody?.velocity.dx = 8000
     }
@@ -53,7 +53,7 @@ class OrderListNode: SKSpriteNode {
     func update(_ orderList: [Order]) {
         orderNodes.forEach({ $0.removeFromParent() })
         
-        let xPos: [CGFloat] = [593.0, 0.0, -593.0]
+        let xPos: [CGFloat] = [658, 8, -652]
         //let extraOrders = orderList.count - 4
         for (index, order) in orderList.enumerated() {
             guard index < 3 else { break }

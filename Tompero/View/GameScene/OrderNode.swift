@@ -14,7 +14,8 @@ class OrderNode: SKSpriteNode {
     var order: Order?
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: #colorLiteral(red: 1, green: 0.270588249, blue: 0.2274509817, alpha: 1) /*UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0)*/, size: CGSize(width: 518, height: 568))
+        //super.init(texture: texture, color: #colorLiteral(red: 1, green: 0.270588249, blue: 0.2274509817, alpha: 1), size: CGSize(width: 600, height: 568))
+        super.init(texture: texture, color: UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0), size: CGSize(width: 600, height: 568))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -23,8 +24,10 @@ class OrderNode: SKSpriteNode {
     
     func spawnIngredientIcons() {
         
-        let xPos: [CGFloat] = [-190.0, -62.5, 62.5, 190]
+//        let xPos: [CGFloat] = [-190.0, -62.5, 62.5, 190]
         let yPos: [CGFloat] = [-4.0, -72.0, -140.0]
+        
+        let xPos: [CGFloat] = [-230.0, -115.0, 0.0, 115.0, 230.0]
         
         for (index, ingredient) in order!.ingredients.enumerated() {
             let circle = SKSpriteNode(imageNamed: "IngredientIndicator")
