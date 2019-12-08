@@ -28,4 +28,18 @@ class Order: HasIngredients, Codable {
     convenience init() {
         self.init(timeLeft: 30)
     }
+    
+    func calculateScore() -> Float {
+        let baseScore = Float(8)
+            
+        var score = baseScore
+        
+        if timeLeft > 10 && timeLeft <= 20 {
+            score += 3
+        } else if timeLeft > 20 {
+            score += 5
+        }
+        
+        return score
+    }
 }
