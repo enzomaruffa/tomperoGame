@@ -63,6 +63,8 @@ class GameConnectionManager {
         do {
             print("[GameConnectionManager] Preparing ingredient")
             let ingredientData = try JSONEncoder().encode(ingredient)
+            let jsonString = String(data: ingredientData, encoding: .utf8)
+            print(jsonString)
             let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
             print(MCManager.shared.connectedPeers)
             MCManager.shared.connectedPeers?.forEach({ print($0.displayName) })
@@ -104,6 +106,8 @@ extension GameConnectionManager: MCManagerDataObserver {
                 let newPlate = Plate()
                 newPlate.ingredients = newIngredients
                 
+                newIngredients.forEach({ print($0.texturePrefix, type(of: $0)) })
+                
                 observers.forEach({ $0.receivePlate(plate: newPlate) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
@@ -112,7 +116,10 @@ extension GameConnectionManager: MCManagerDataObserver {
         case .ingredient:
             do {
                 let ingredient = try JSONDecoder().decode(Ingredient.self, from: wrapper.object)
-                observers.forEach({ $0.receiveIngredient(ingredient: ingredient) })
+                
+                let newIngredient = ingredient.findDowncast()
+                
+                observers.forEach({ $0.receiveIngredient(ingredient: newIngredient) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }
@@ -120,8 +127,18 @@ extension GameConnectionManager: MCManagerDataObserver {
         case .orders:
             do {
                 let orders = try JSONDecoder().decode([Order].self, from: wrapper.object)
-                print("[GameConnectionManager] Received orderList: \(orders)")
-                observers.forEach({ $0.receiveOrders(orders: orders) })
+                
+                var newOrders: [Order] = []
+                for order in orders {
+                    let newOrder = Order(timeLeft: order.timeLeft)
+                    newOrder.totalTime = order.totalTime
+                    newOrder.number = order.number
+                    newOrder.ingredients = order.ingredients.map({ $0.findDowncast() })
+                    newOrders.append(newOrder)
+                }
+                
+                print("[GameConnectionManager] Received orderList: \(newOrders)")
+                observers.forEach({ $0.receiveOrders(orders: newOrders) })
                 
                 // Chamar delegates que tem o receiveMessage
             } catch let error {

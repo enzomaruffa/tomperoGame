@@ -17,15 +17,13 @@ class Ingredient: HasSprite, Equatable, Codable {
         case .raw: return texturePrefix + "Raw"
         case .chopping: return texturePrefix + "Raw"
         case .chopped: return texturePrefix + "Chopped"
-        case .cooking: return texturePrefix + "Raw"
+        case .cooking: return texturePrefix + "Chopped"
         case .cooked: return texturePrefix + "Cooked"
-        case .frying: return texturePrefix + "Raw"
+        case .frying: return texturePrefix + "Chopped"
         case .fried: return texturePrefix + "Fried"
         case .burnt: return "ashes"
         }
     }
-    
-    var components: [Component] = []
     
     var states: [IngredientState: [IngredientState]] = [:]
     var currentState: IngredientState = .raw
@@ -42,20 +40,31 @@ class Ingredient: HasSprite, Equatable, Codable {
         self.finalState = finalState
     }
     
+     init(ingredient: Ingredient) {
+        self.texturePrefix = ingredient.texturePrefix
+        self.numberOfActionsTilReady = ingredient.numberOfActionsTilReady
+        self.finalState = ingredient.finalState
+        self.states = ingredient.states
+        self.currentState = ingredient.currentState
+        self.choppableComponent = ingredient.choppableComponent
+        self.cookableComponent = ingredient.cookableComponent
+        self.fryableComponent = ingredient.fryableComponent
+    }
+    
     static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
         return type(of: lhs) == type(of: rhs)
     }
     
-    var choppableComponent: ChoppableComponent? {
-        components.first(where: { $0 is ChoppableComponent }) as? ChoppableComponent ?? nil
-    }
+    var choppableComponent: ChoppableComponent?
+    var cookableComponent: CookableComponent?
+    var fryableComponent: FryableComponent?
     
-    var cookableComponent: CookableComponent? {
-        components.first(where: { $0 is CookableComponent }) as? CookableComponent ?? nil
-    }
-
-    var fryableComponent: FryableComponent? {
-        components.first(where: { $0 is FryableComponent }) as? FryableComponent ?? nil
+    var components: [Component] {
+        var list: [Component] = []
+        if let choppableComponent = self.choppableComponent { list.append(choppableComponent) }
+        if let cookableComponent = self.cookableComponent { list.append(cookableComponent) }
+        if let fryableComponent = self.fryableComponent { list.append(fryableComponent) }
+        return list
     }
     
     func attemptChangeState(to state: IngredientState) -> Bool {
@@ -68,52 +77,21 @@ class Ingredient: HasSprite, Equatable, Codable {
     }
     
     func findDowncast() -> Ingredient {
-        if texturePrefix == "Asteroid" {
-            return Asteroid()
+        switch texturePrefix {
+        case "Asteroid": return Asteroid(ingredient: self)
+        case "Broccoli": return Broccoli(ingredient: self)
+        case "DevilMashedBread": return DevilMashedBread(ingredient: self)
+        case "Eyes": return Eyes(ingredient: self)
+        case "Horn": return Horn(ingredient: self)
+        case "MarsSand": return MarsSand(ingredient: self)
+        case "MoonCheese": return MoonCheese(ingredient: self)
+        case "SaturnOnionRings": return SaturnOnionRings(ingredient: self)
+        case "SpaceshipHull": return SpaceshipHull(ingredient: self)
+        case "Tardigrades": return Tardigrades(ingredient: self)
+        case "Tentacle": return Tentacle(ingredient: self)
+        default:
+            print("Impossible to downcast")
+            return self
         }
-        
-        if texturePrefix == "Broccoli" {
-            return Broccoli()
-        }
-        
-        if texturePrefix == "DevilMashedBread" {
-            return DevilMashedBread()
-        }
-        
-        if texturePrefix == "Eyes" {
-            return Eyes()
-        }
-        
-        if texturePrefix == "Horn" {
-            return Horn()
-        }
-        
-        if texturePrefix == "MarsSand" {
-            return MarsSand()
-        }
-        
-        if texturePrefix == "MoonCheese" {
-            return MoonCheese()
-        }
-        
-        if texturePrefix == "SaturnOnionRings" {
-            return SaturnOnionRings()
-        }
-        
-        if texturePrefix == "SpaceshipHull" {
-            return SpaceshipHull()
-        }
-        
-        if texturePrefix == "Tardigrades" {
-            return Tardigrades()
-        }
-        
-        if texturePrefix == "Tentacle" {
-            return Tentacle()
-        }
-        
-        print("Impossible to downcast")
-        return self
     }
-    
 }

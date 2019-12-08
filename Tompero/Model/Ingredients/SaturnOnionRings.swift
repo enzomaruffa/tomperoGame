@@ -26,13 +26,15 @@ class SaturnOnionRings: Ingredient {
             .burnt: []
         ]
         
-        self.components = [
-            ChoppableComponent(),
-            FryableComponent()
-        ]
+        self.choppableComponent = ChoppableComponent()
+        self.fryableComponent = FryableComponent()
     }
     
     required init(from decoder: Decoder) throws {
         fatalError("init(from:) has not been implemented")
+    }
+    
+    override init(ingredient: Ingredient) {
+        super.init(ingredient: ingredient)
     }
 }

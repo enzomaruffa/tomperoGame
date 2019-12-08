@@ -30,6 +30,8 @@ class FryableComponent: Component, Completable {
         self.burnCap = burnCap
         
         super.init()
+        
+        self.componentType = .fryable
     }
     
     convenience override init() {
@@ -40,13 +42,34 @@ class FryableComponent: Component, Completable {
         self.init(fryProgress: fryProgress, fryIncrement: fryIncrement, fryCap: 100, burnCap: 200)
     }
     
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
-    }
-    
     func update() {
         if !complete {
             fryProgress += fryIncrement
         }
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case fryProgress
+        case fryIncrement
+        case fryCap
+        case burnCap
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.fryProgress = try container.decode(Float.self, forKey: .fryProgress)
+        self.fryIncrement = try container.decode(Float.self, forKey: .fryIncrement)
+        self.fryCap = try container.decode(Float.self, forKey: .fryCap)
+        self.burnCap = try container.decode(Float.self, forKey: .burnCap)
+        try super.init(from: decoder)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.fryProgress, forKey: .fryProgress)
+        try container.encode(self.fryIncrement, forKey: .fryIncrement)
+        try container.encode(self.fryCap, forKey: .fryCap)
+        try container.encode(self.burnCap, forKey: .burnCap)
     }
 }

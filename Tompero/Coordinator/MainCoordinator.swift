@@ -18,24 +18,57 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        // Debug waiting room or whole game
-        inicial()
+        let gameSceneTest: Bool = false
         
-        // Debug game screen single
-//        let tables: [String : [PlayerTable]] = [
-//            MCManager.shared.selfName : [
-//                PlayerTable(type: .chopping, ingredient: nil),
-//                PlayerTable(type: .frying, ingredient: nil),
-//                PlayerTable(type: .cooking, ingredient: nil)
-//            ]
-//        ]
-//        game(rule: GameRule(difficulty: .easy,
-//                            possibleIngredients: [Tentacle(), MoonCheese(), Eyes(), Asteroid(), Tardigrades()],
-//                            playerTables: tables,
-//                            playerOrder: [MCManager.shared.selfName]),
-//             hosting: true)
+        if gameSceneTest {
+            let tables: [String : [PlayerTable]] = [
+                "God" : [
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .frying, ingredient: nil),
+                    PlayerTable(type: .ingredient, ingredient: Eyes())
+                ],
+                "Enzo's Enzo's iPhone" : [
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil)
+                ],
+                "CU" : [
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil)
+                ],
+                "CU 2" : [
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil),
+                    PlayerTable(type: .chopping, ingredient: nil)
+                ]
+            ]
+            
+            game(
+                rule: GameRule(
+                    difficulty: .hard,
+                    possibleIngredients: [
+                        Asteroid(),
+                        Tentacle(),
+                        MoonCheese(),
+                        Eyes(),
+                        Tardigrades()
+                    ],
+                    playerTables: tables,
+                    playerOrder: [
+                        "God",
+                        "Enzo's Enzo's iPhone",
+                        "CU",
+                        "CU 2"]
+                ),
+                hosting: true
+            )
+            return
+        }
+        
+        inicial()
     }
-    
+        
     func inicial() {
         let controller = InicialViewController.instantiate()
         controller.coordinator = self
@@ -62,4 +95,5 @@ class MainCoordinator: Coordinator {
         controller.rule = rule
         navigationController.pushViewController(controller, animated: false)
     }
+    
 }
