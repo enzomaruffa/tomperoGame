@@ -35,11 +35,7 @@ class GameRule: Codable {
         let order = Order(timeLeft: 30)
 
         var currentActions = 0
-//
-//        print("\nCurrent ingredients: \(order.ingredients)")
-//        print("Current actions: \(currentActions)")
-//        print("Max actions: \(maxActions)")
-
+        
         // Escolhemos um pão aleatório
         let breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
         let possibleBreads = possibleIngredients.filter({ breadList.contains($0) })
@@ -48,8 +44,8 @@ class GameRule: Codable {
 
         order.ingredients.append(orderBread)
 
-        // Enquanto não atingimos nosso alvo de ações, geramos novos ingredientes
-        while currentActions < maxActions {
+        // Enquanto não atingimos nosso alvo de ações, geramos novos ingredientes ou estourou 4
+        while currentActions < maxActions && order.ingredients.count < 5 {
 
             // Filtramos os possíveis: não é pão, não foi escolhido e não vai estourar o máximo
             let currentPossibleIngredients = possibleIngredients
