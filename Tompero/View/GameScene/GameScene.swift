@@ -170,15 +170,11 @@ class GameScene: SKScene {
         
         let isMoving = !stations.filter({ ($0.ingredientNode?.moving ?? false || $0.plateNode?.moving ?? false) }).isEmpty
         
-        print("\(isMoving), \(stationsAnimationsRunning)")
-        
         if isMoving && !stationsAnimationsRunning {
-            print("Should play animation!")
             pipes.forEach({ $0.playAnimation() })
             hatch.playAnimation()
             stationsAnimationsRunning = true
         } else if !isMoving && stationsAnimationsRunning {
-            print("Should stop animation!")
             pipes.forEach({ $0.stopAnimation() })
             hatch.stopAnimation()
             stationsAnimationsRunning = false

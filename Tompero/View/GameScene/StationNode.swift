@@ -107,7 +107,7 @@ class StationNode: TappableDelegate {
         case .stove: return 2
         case .fryer: return 2
         case .pipe: return 0.3
-        case .hatch: return 0.3
+        case .hatch: return 0.8
         default: return 0
         }
     }
@@ -117,7 +117,7 @@ class StationNode: TappableDelegate {
         case .stove: return CGPoint(x: 0, y: 0)
         case .fryer: return CGPoint(x: 0, y: 68)
         case .pipe: return CGPoint(x: 3.5, y: 0)
-        case .hatch: return CGPoint(x: 5, y: 0)
+        case .hatch: return CGPoint(x: 48, y: 0)
         default: return .zero
         }
     }
@@ -127,7 +127,7 @@ class StationNode: TappableDelegate {
         case .stove: return 1
         case .fryer: return 1
         case .pipe: return 0.05
-        case .hatch: return 0.08
+        case .hatch: return 0.8
         default: return .zero
         }
     }
