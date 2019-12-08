@@ -161,13 +161,13 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         scaleBeforeMove = spriteNode.yScale
         alphaBeforeMove = spriteNode.alpha
         
-        moving = true
     }
     
     func moving(currentPosition: CGPoint) {
         if currentPosition.distanceTo(currentStation.spriteNode.position) > 80 && rotationTimer == nil {
             
             SFX.shared.takeFood.play()
+            moving = true
             
             self.spriteNode.run(SKAction.scale(to: 0.7, duration: 0.2))
             self.spriteNode.alpha = 1
