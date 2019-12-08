@@ -21,6 +21,8 @@ class PlateNode: MovableDelegate {
     var scaleBeforeMove: CGFloat = 1
     var alphaBeforeMove: CGFloat = 1
     
+    var moving = false
+    
     // MARK: - Initializers
     init(plate: Plate, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.plate = plate
@@ -42,6 +44,19 @@ class PlateNode: MovableDelegate {
     
     private func showSpriteNode() {
         self.spriteNode.alpha = 1
+    }
+    
+    private func implodeSpriteNode(withDuration duration: TimeInterval) {
+        self.currentStation.plateNode = nil
+        
+        self.spriteNode.run(
+            SKAction.group([
+                SKAction.colorize(with: UIColor.white, colorBlendFactor: 1, duration: duration / 4),
+                SKAction.fadeOut(withDuration: duration)]))
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            self.spriteNode.removeFromParent()
+        }
     }
     
     private func implodeSpriteNode() {
@@ -168,7 +183,7 @@ class PlateNode: MovableDelegate {
                 print("Attempting plate delviery")
                 let success = scene.makeDelivery(plate: self.plate)
                 
-                implodeSpriteNode()
+                implodeSpriteNode(withDuration: 1)
                 
                 return true
             }
@@ -183,6 +198,7 @@ class PlateNode: MovableDelegate {
     func moveStarted(currentPosition: CGPoint) {
         scaleBeforeMove = spriteNode.yScale
         alphaBeforeMove = spriteNode.alpha
+        moving = true
     }
     
     func moving(currentPosition: CGPoint) {
@@ -212,6 +228,8 @@ class PlateNode: MovableDelegate {
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil
+         
+        moving = false
     }
     
     func moveCancel(currentPosition: CGPoint) {
