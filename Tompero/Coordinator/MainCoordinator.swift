@@ -18,11 +18,11 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = true
+        let gameSceneTest: Bool = false
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [
-                "iPhone 11 [Enzo]" : [
+                "God" : [
                     PlayerTable(type: .chopping, ingredient: nil),
                     PlayerTable(type: .frying, ingredient: nil),
                     PlayerTable(type: .ingredient, ingredient: Eyes())
@@ -56,7 +56,7 @@ class MainCoordinator: Coordinator {
                     ],
                     playerTables: tables,
                     playerOrder: [
-                        "iPhone 11 [Enzo]",
+                        "God",
                         "Enzo's Enzo's iPhone",
                         "CU",
                         "CU 2"]

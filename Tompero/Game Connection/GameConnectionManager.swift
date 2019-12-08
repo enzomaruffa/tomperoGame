@@ -131,6 +131,8 @@ extension GameConnectionManager: MCManagerDataObserver {
                 var newOrders: [Order] = []
                 for order in orders {
                     let newOrder = Order(timeLeft: order.timeLeft)
+                    newOrder.totalTime = order.totalTime
+                    newOrder.number = order.number
                     newOrder.ingredients = order.ingredients.map({ $0.findDowncast() })
                     newOrders.append(newOrder)
                 }

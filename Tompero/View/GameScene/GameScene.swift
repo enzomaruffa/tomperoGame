@@ -56,7 +56,8 @@ class GameScene: SKScene {
     }
     
     var orderListNode: OrderListNode!
-    var orderGenerationCounter = 400
+    var orderGenerationCounter = 900
+    var orderCount = 0
     
     var stationsAnimationsRunning = false
     
@@ -119,7 +120,7 @@ class GameScene: SKScene {
         teleportAnimationNode.position = teleporterNode.position + CGPoint(x: -8, y: -(teleporterNode.size.height + 8))
         teleportAnimationNode.zPosition = 60
         
-        print("Creating \(teleportAnimationNode) with textures \(teleportAnimationFrames)")
+        print("Creating \(String(describing: teleportAnimationNode)) with textures \(String(describing: teleportAnimationFrames))")
     }
     
     func setupShelves() {
@@ -160,6 +161,8 @@ class GameScene: SKScene {
     
     func generateRandomOrder() {
         let order = rule?.generateOrder()
+        orderCount += 1
+        order!.number = orderCount
         orders.append(order!)
         
         updateOrderUI(orders)
@@ -180,16 +183,30 @@ class GameScene: SKScene {
             stationsAnimationsRunning = false
         }
         
+        for (index, order) in orders.enumerated() {
+            order.timeLeft -= 1/60
+            
+            if hosting {
+                if order.timeLeft <= 0.0 {
+                    orders.remove(at: index)
+                    GameConnectionManager.shared.sendEveryone(orderList: orders)
+                    updateOrderUI(orders)
+                }
+            }
+        }
+        orderListNode.update()
+        
         if hosting {
             orderGenerationCounter += 1
             
-            if orderGenerationCounter >= 1000 {
-                generateRandomOrder()
-                GameConnectionManager.shared.sendEveryone(orderList: orders)
+            if orderGenerationCounter >= 200 {
+                if orders.count < 3 {
+                    generateRandomOrder()
+                    GameConnectionManager.shared.sendEveryone(orderList: orders)
+                }
                 orderGenerationCounter = 0
             }
         }
-        
     }
     
     func makeDelivery(plate: Plate) -> Bool {
@@ -204,7 +221,8 @@ class GameScene: SKScene {
             with: teleportAnimationFrames,
             timePerFrame: timePerFrame,
             resize: false,
-            restore: true))
+            restore: true)
+        )
         
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
             print("Couldn't find any order")
@@ -238,8 +256,7 @@ class GameScene: SKScene {
     }
     
     func updateOrderUI(_ orders: [Order]) {
-        print(orders.count)
-        orderListNode.update(orders)
+        orderListNode.updateList(orders)
     }
 }
 

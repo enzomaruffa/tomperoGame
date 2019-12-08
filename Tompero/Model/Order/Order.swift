@@ -10,8 +10,11 @@ import Foundation
 
 class Order: HasIngredients, Codable {
     
+    var number: Int = 0
+    
     var ingredients: [Ingredient] = []
-    var timeLeft: Float
+    var timeLeft: Float // in seconds
+    var totalTime: Float
     
     var score: Int {
         (8 + Int(ceil(timeLeft/10)) * 2)
@@ -19,6 +22,7 @@ class Order: HasIngredients, Codable {
     
     init(timeLeft: Float) {
         self.timeLeft = timeLeft
+        self.totalTime = timeLeft
     }
     
     convenience init() {

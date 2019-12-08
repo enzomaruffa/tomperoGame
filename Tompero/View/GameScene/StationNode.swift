@@ -164,7 +164,7 @@ class StationNode: TappableDelegate {
             stationAnimationNode!.position = stationAnimationOffset
             stationAnimationNode!.zPosition = 3
 
-            print("Creating \(stationAnimationNode) with textures \(stationAnimationFrames)")
+            print("Creating \(String(describing: stationAnimationNode)) with textures \(String(describing: stationAnimationFrames))")
         }
     }
     

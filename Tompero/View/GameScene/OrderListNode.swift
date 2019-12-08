@@ -50,24 +50,24 @@ class OrderListNode: SKSpriteNode {
         isOpen ? close() : open()
     }
     
-    func update(_ orderList: [Order]) {
+    func updateList(_ orderList: [Order]) {
         orderNodes.forEach({ $0.removeFromParent() })
         
         let xPos: [CGFloat] = [658, 8, -652]
-        //let extraOrders = orderList.count - 4
+        
         for (index, order) in orderList.enumerated() {
             guard index < 3 else { break }
             
             let node = OrderNode()
-            node.order = order
             node.position = CGPoint(x: xPos[index], y: 7)
             node.zPosition = 6
-            node.spawnIngredientIcons()
+            node.initOrder(order)
             orderNodes.append(node)
             addChild(node)
         }
-        
-        //let node = childNode(withName: "extraOrders") as! SKLabelNode
-        //node.text = extraOrders > 0 ? "+" + extraOrders.description : ""
+    }
+    
+    func update() {
+        orderNodes.forEach({ $0.updateBar() })
     }
 }
