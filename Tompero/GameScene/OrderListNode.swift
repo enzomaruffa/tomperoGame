@@ -13,6 +13,10 @@ class OrderListNode: SKSpriteNode {
     
     var orderNodes: [OrderNode] = []
     
+    var gameScene: GameScene {
+        self.parent as! GameScene
+    }
+    
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.isUserInteractionEnabled = true
@@ -44,6 +48,27 @@ class OrderListNode: SKSpriteNode {
         boundary.run(action) {
             self.physicsBody?.mass = 50
         }
+    }
+    
+    func jump() {
+        guard !isOpen else { return }
+        
+        boundary.run(SKAction.sequence([
+            .run {
+                self.physicsBody?.mass = 0.1
+                self.gameScene.physicsWorld.gravity.dx = -self.gameScene.physicsWorld.gravity.dx
+                self.children.forEach({ $0.alpha = 0 })
+                self.boundary.position.x = -850
+                self.physicsBody?.applyImpulse(CGVector(dx: 120, dy: 0))
+            },
+            .wait(forDuration: 1),
+            .moveTo(x: -1041, duration: 0.5),
+            .run {
+                self.gameScene.physicsWorld.gravity.dx = -self.gameScene.physicsWorld.gravity.dx
+                self.children.forEach({ $0.alpha = 1 })
+                self.physicsBody?.mass = 50
+            }
+        ]))
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
