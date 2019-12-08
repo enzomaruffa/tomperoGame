@@ -58,8 +58,17 @@ class GameScene: SKScene {
     var orderListNode: OrderListNode!
     var orderGenerationCounter = 400
     
+    var matchStatistics: MatchStatistics?
+    
+    var matchTimer = 180.0
+    var timerStarted = false
+    var timerUpdateCounter = 0
+    
+    var totalPoints = 0
+    
     var stationsAnimationsRunning = false
     
+    // Teleport variables
     private var teleportAnimationNode: SKSpriteNode!
     private var teleportAnimationFrames: [SKTexture]!
     private let teleportDuration = 1
@@ -69,10 +78,15 @@ class GameScene: SKScene {
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
         
+        if hosting {
+            matchStatistics = MatchStatistics(ruleUsed: rule!)
+        }
+        
         setupOrderListNode()
         setupStations()
         setupShelves()
         setupPiping()
+        setupHUD()
         setupBackground()
     }
     
@@ -155,6 +169,14 @@ class GameScene: SKScene {
         let background = self.childNode(withName: "background") as! SKSpriteNode
         background.texture = SKTexture(imageNamed: "Background" + playerColor)
     }
+
+    func setupHUD() {
+        let timerContainer = self.childNode(withName: "timerContainer") as! SKSpriteNode
+        timerContainer.texture = SKTexture(imageNamed: "Timer" + playerColor)
+        
+        updateTimerUI()
+        updateCoinsUI()
+    }
     
     // MARK: - Game Logic
     
@@ -163,6 +185,8 @@ class GameScene: SKScene {
         orders.append(order!)
         
         updateOrderUI(orders)
+        
+        matchStatistics?.totalGeneratedOrders += 1
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -187,17 +211,25 @@ class GameScene: SKScene {
                 generateRandomOrder()
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
+                
+                // timer only starts when the first order is generated
+                if !timerStarted {
+                    timerStarted = true
+                }
             }
+            
+        }
+        
+        timerUpdateCounter += 1
+        if timerStarted && timerUpdateCounter >= 60 {
+            matchTimer -= 1
+            updateTimerUI()
+            timerUpdateCounter = 0
         }
         
     }
     
     func makeDelivery(plate: Plate) -> Bool {
-        print("Existing orders: \(orders.map({$0.ingredients.map({ $0.texturePrefix })}))")
-        print("Existing orders types: \(orders.map({$0.ingredients.map({ type(of: $0) })}))")
-        
-        print("Plate: \((plate.ingredients.map({ $0.texturePrefix })))")
-        print("Plate types: \((plate.ingredients.map({ type(of: $0) })))")
         
         let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(teleportAnimationFrames.count)
         teleportAnimationNode.run(SKAction.animate(
@@ -234,12 +266,38 @@ class GameScene: SKScene {
         
         orderGenerationCounter = 0
         updateOrderUI(orders)
+
+        matchStatistics?.totalDeliveredOrders += 1
+        matchStatistics?.totalPoints += notification.coinsAdded
+        totalPoints += notification.coinsAdded
+        
+        updateCoinsUI()
+        
         return true
     }
     
     func updateOrderUI(_ orders: [Order]) {
         print(orders.count)
         orderListNode.update(orders)
+    }
+    
+    func updateTimerUI() {
+        let timerLabel = self.childNode(withName: "timerLabel") as! SKLabelNode
+        
+        var currentSeconds = Int(ceil(matchTimer))
+    
+        let currentMinutes = currentSeconds / 60
+        currentSeconds -= (currentMinutes * 60)
+        
+        timerLabel.text = "\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)"
+        
+        
+        print("\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)")
+    }
+    
+    func updateCoinsUI() {
+        let coinsLabel = self.childNode(withName: "coinsLabel") as! SKLabelNode
+        coinsLabel.text = "\(totalPoints)"
     }
 }
 
@@ -286,11 +344,21 @@ extension GameScene: GameConnectionManagerObserver {
         print("[GameScene] Received new orderList")
         self.orders = orders
         
+        if !timerStarted {
+            timerStarted = true
+        }
+        
         updateOrderUI(orders)
     }
     
     func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
         print("[GameScene] Received new notification")
         
+        if notification.success {
+            matchStatistics?.totalDeliveredOrders += 1
+            matchStatistics?.totalPoints += notification.coinsAdded
+            totalPoints += notification.coinsAdded
+            updateCoinsUI()
+        }
     }
 }
