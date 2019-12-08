@@ -52,51 +52,22 @@
 		565AEFE4239164E300E3E15F /* StationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565AEFE3239164E300E3E15F /* StationNode.swift */; };
 		566A5BAF239A8564006D96CF /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A5BAE239A8564006D96CF /* ComponentType.swift */; };
 		566A5BB2239AD3AF006D96CF /* OrderListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A5BB1239AD3AF006D96CF /* OrderListNode.swift */; };
-		566A5BE1239ADFDF006D96CF /* airBeingSucked2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BB5239ADFD0006D96CF /* airBeingSucked2.wav */; };
-		566A5BE2239ADFDF006D96CF /* roundStarted1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BB6239ADFD0006D96CF /* roundStarted1.wav */; };
-		566A5BE3239ADFDF006D96CF /* roundStarted4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BB7239ADFD0006D96CF /* roundStarted4.wav */; };
-		566A5BE4239ADFDF006D96CF /* frying2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BB8239ADFD0006D96CF /* frying2.wav */; };
-		566A5BE5239ADFDF006D96CF /* coin1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BB9239ADFD1006D96CF /* coin1.wav */; };
-		566A5BE6239ADFDF006D96CF /* teleport1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BBA239ADFD1006D96CF /* teleport1.wav */; };
-		566A5BE7239ADFDF006D96CF /* foodBeingPut4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BBB239ADFD1006D96CF /* foodBeingPut4.wav */; };
-		566A5BE8239ADFDF006D96CF /* orderDone2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BBC239ADFD1006D96CF /* orderDone2.wav */; };
-		566A5BE9239ADFDF006D96CF /* airBeingSucked1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BBD239ADFD1006D96CF /* airBeingSucked1.wav */; };
-		566A5BEA239ADFDF006D96CF /* burned2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BBE239ADFD1006D96CF /* burned2.wav */; };
-		566A5BEB239ADFDF006D96CF /* airBeingSucked4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BBF239ADFD1006D96CF /* airBeingSucked4.wav */; };
-		566A5BEC239ADFDF006D96CF /* cooking2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC0239ADFD2006D96CF /* cooking2.wav */; };
-		566A5BED239ADFDF006D96CF /* cutelo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC1239ADFD2006D96CF /* cutelo.wav */; };
-		566A5BEE239ADFDF006D96CF /* airBeingSucked3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC2239ADFD2006D96CF /* airBeingSucked3.wav */; };
-		566A5BEF239ADFDF006D96CF /* cooking1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC3239ADFD3006D96CF /* cooking1.wav */; };
-		566A5BF0239ADFDF006D96CF /* burned1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC4239ADFD3006D96CF /* burned1.wav */; };
-		566A5BF1239ADFDF006D96CF /* orderDone1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC5239ADFD3006D96CF /* orderDone1.wav */; };
-		566A5BF2239ADFDF006D96CF /* cooking3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC6239ADFD4006D96CF /* cooking3.wav */; };
-		566A5BF3239ADFDF006D96CF /* hatch1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC7239ADFD4006D96CF /* hatch1.wav */; };
-		566A5BF4239ADFDF006D96CF /* teleport4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC8239ADFD4006D96CF /* teleport4.wav */; };
-		566A5BF5239ADFDF006D96CF /* timesUp2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BC9239ADFD4006D96CF /* timesUp2.wav */; };
-		566A5BF6239ADFDF006D96CF /* timer15Secs1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BCA239ADFD5006D96CF /* timer15Secs1.wav */; };
-		566A5BF7239ADFDF006D96CF /* roundStarted3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BCB239ADFD5006D96CF /* roundStarted3.wav */; };
-		566A5BF8239ADFDF006D96CF /* coin2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BCC239ADFD6006D96CF /* coin2.wav */; };
-		566A5BF9239ADFDF006D96CF /* timer15Secs2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BCD239ADFD6006D96CF /* timer15Secs2.wav */; };
-		566A5BFA239ADFDF006D96CF /* timesUp1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BCE239ADFD7006D96CF /* timesUp1.wav */; };
-		566A5BFB239ADFDF006D96CF /* foodBeingPut2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BCF239ADFD7006D96CF /* foodBeingPut2.wav */; };
-		566A5BFC239ADFDF006D96CF /* frying3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD0239ADFD8006D96CF /* frying3.wav */; };
-		566A5BFD239ADFDF006D96CF /* newOrder2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD1239ADFD8006D96CF /* newOrder2.wav */; };
-		566A5BFE239ADFDF006D96CF /* timer15Secs3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD2239ADFD9006D96CF /* timer15Secs3.wav */; };
-		566A5BFF239ADFDF006D96CF /* cutelo2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD3239ADFD9006D96CF /* cutelo2.wav */; };
-		566A5C00239ADFDF006D96CF /* foodBeingPut3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD4239ADFDA006D96CF /* foodBeingPut3.wav */; };
-		566A5C01239ADFDF006D96CF /* teleport2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD5239ADFDA006D96CF /* teleport2.wav */; };
-		566A5C02239ADFDF006D96CF /* foodBeingPut1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD6239ADFDB006D96CF /* foodBeingPut1.wav */; };
-		566A5C03239ADFDF006D96CF /* teleport3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD7239ADFDB006D96CF /* teleport3.wav */; };
-		566A5C04239ADFDF006D96CF /* hatch2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD8239ADFDC006D96CF /* hatch2.wav */; };
-		566A5C05239ADFDF006D96CF /* coin3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BD9239ADFDC006D96CF /* coin3.wav */; };
-		566A5C06239ADFDF006D96CF /* roundStarted2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BDA239ADFDC006D96CF /* roundStarted2.wav */; };
-		566A5C07239ADFDF006D96CF /* coin4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BDB239ADFDD006D96CF /* coin4.wav */; };
-		566A5C08239ADFDF006D96CF /* newOrder1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BDC239ADFDD006D96CF /* newOrder1.wav */; };
-		566A5C09239ADFDF006D96CF /* hatch4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BDD239ADFDD006D96CF /* hatch4.wav */; };
-		566A5C0A239ADFDF006D96CF /* hatch3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BDE239ADFDE006D96CF /* hatch3.wav */; };
-		566A5C0B239ADFDF006D96CF /* frying1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BDF239ADFDF006D96CF /* frying1.wav */; };
-		566A5C0C239ADFDF006D96CF /* timesUp3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566A5BE0239ADFDF006D96CF /* timesUp3.wav */; };
 		566E9BD3239D391400787210 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9BD2239D391400787210 /* ProgressBar.swift */; };
+		566E9C28239D7C8A00787210 /* newTeleport4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C19239D7C8A00787210 /* newTeleport4.wav */; };
+		566E9C29239D7C8A00787210 /* timer15Secs1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C1A239D7C8A00787210 /* timer15Secs1.wav */; };
+		566E9C2A239D7C8A00787210 /* orderDone2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C1B239D7C8A00787210 /* orderDone2.wav */; };
+		566E9C2B239D7C8A00787210 /* newOrder1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C1C239D7C8A00787210 /* newOrder1.wav */; };
+		566E9C2C239D7C8A00787210 /* burned2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C1D239D7C8A00787210 /* burned2.wav */; };
+		566E9C2D239D7C8A00787210 /* roundStarted3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C1E239D7C8A00787210 /* roundStarted3.wav */; };
+		566E9C2E239D7C8A00787210 /* newCooking2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C1F239D7C8A00787210 /* newCooking2.wav */; };
+		566E9C2F239D7C8A00787210 /* foodBeingPut4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C20239D7C8A00787210 /* foodBeingPut4.wav */; };
+		566E9C30239D7C8A00787210 /* cashRegister2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C21239D7C8A00787210 /* cashRegister2.wav */; };
+		566E9C31239D7C8A00787210 /* timesUp1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C22239D7C8A00787210 /* timesUp1.wav */; };
+		566E9C32239D7C8A00787210 /* cooking1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C23239D7C8A00787210 /* cooking1.wav */; };
+		566E9C33239D7C8A00787210 /* airBeingSucked2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C24239D7C8A00787210 /* airBeingSucked2.wav */; };
+		566E9C34239D7C8A00787210 /* new hatch1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C25239D7C8A00787210 /* new hatch1.wav */; };
+		566E9C35239D7C8A00787210 /* foodBeingPut1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C26239D7C8A00787210 /* foodBeingPut1.wav */; };
+		566E9C36239D7C8A00787210 /* cutelo2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C27239D7C8A00787210 /* cutelo2.wav */; };
 		567A07B0238C805000D6399A /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A079F238C805000D6399A /* Horn.swift */; };
 		567A07B1238C805000D6399A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A0238C805000D6399A /* Eyes.swift */; };
 		567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A1238C805000D6399A /* DevilMashedBread.swift */; };
@@ -185,51 +156,22 @@
 		565AEFE3239164E300E3E15F /* StationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNode.swift; sourceTree = "<group>"; };
 		566A5BAE239A8564006D96CF /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		566A5BB1239AD3AF006D96CF /* OrderListNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListNode.swift; sourceTree = "<group>"; };
-		566A5BB5239ADFD0006D96CF /* airBeingSucked2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airBeingSucked2.wav; sourceTree = "<group>"; };
-		566A5BB6239ADFD0006D96CF /* roundStarted1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roundStarted1.wav; sourceTree = "<group>"; };
-		566A5BB7239ADFD0006D96CF /* roundStarted4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roundStarted4.wav; sourceTree = "<group>"; };
-		566A5BB8239ADFD0006D96CF /* frying2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = frying2.wav; sourceTree = "<group>"; };
-		566A5BB9239ADFD1006D96CF /* coin1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin1.wav; sourceTree = "<group>"; };
-		566A5BBA239ADFD1006D96CF /* teleport1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = teleport1.wav; sourceTree = "<group>"; };
-		566A5BBB239ADFD1006D96CF /* foodBeingPut4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = foodBeingPut4.wav; sourceTree = "<group>"; };
-		566A5BBC239ADFD1006D96CF /* orderDone2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = orderDone2.wav; sourceTree = "<group>"; };
-		566A5BBD239ADFD1006D96CF /* airBeingSucked1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airBeingSucked1.wav; sourceTree = "<group>"; };
-		566A5BBE239ADFD1006D96CF /* burned2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = burned2.wav; sourceTree = "<group>"; };
-		566A5BBF239ADFD1006D96CF /* airBeingSucked4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airBeingSucked4.wav; sourceTree = "<group>"; };
-		566A5BC0239ADFD2006D96CF /* cooking2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cooking2.wav; sourceTree = "<group>"; };
-		566A5BC1239ADFD2006D96CF /* cutelo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cutelo.wav; sourceTree = "<group>"; };
-		566A5BC2239ADFD2006D96CF /* airBeingSucked3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airBeingSucked3.wav; sourceTree = "<group>"; };
-		566A5BC3239ADFD3006D96CF /* cooking1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cooking1.wav; sourceTree = "<group>"; };
-		566A5BC4239ADFD3006D96CF /* burned1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = burned1.wav; sourceTree = "<group>"; };
-		566A5BC5239ADFD3006D96CF /* orderDone1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = orderDone1.wav; sourceTree = "<group>"; };
-		566A5BC6239ADFD4006D96CF /* cooking3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cooking3.wav; sourceTree = "<group>"; };
-		566A5BC7239ADFD4006D96CF /* hatch1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hatch1.wav; sourceTree = "<group>"; };
-		566A5BC8239ADFD4006D96CF /* teleport4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = teleport4.wav; sourceTree = "<group>"; };
-		566A5BC9239ADFD4006D96CF /* timesUp2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp2.wav; sourceTree = "<group>"; };
-		566A5BCA239ADFD5006D96CF /* timer15Secs1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timer15Secs1.wav; sourceTree = "<group>"; };
-		566A5BCB239ADFD5006D96CF /* roundStarted3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roundStarted3.wav; sourceTree = "<group>"; };
-		566A5BCC239ADFD6006D96CF /* coin2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin2.wav; sourceTree = "<group>"; };
-		566A5BCD239ADFD6006D96CF /* timer15Secs2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timer15Secs2.wav; sourceTree = "<group>"; };
-		566A5BCE239ADFD7006D96CF /* timesUp1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp1.wav; sourceTree = "<group>"; };
-		566A5BCF239ADFD7006D96CF /* foodBeingPut2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = foodBeingPut2.wav; sourceTree = "<group>"; };
-		566A5BD0239ADFD8006D96CF /* frying3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = frying3.wav; sourceTree = "<group>"; };
-		566A5BD1239ADFD8006D96CF /* newOrder2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newOrder2.wav; sourceTree = "<group>"; };
-		566A5BD2239ADFD9006D96CF /* timer15Secs3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timer15Secs3.wav; sourceTree = "<group>"; };
-		566A5BD3239ADFD9006D96CF /* cutelo2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cutelo2.wav; sourceTree = "<group>"; };
-		566A5BD4239ADFDA006D96CF /* foodBeingPut3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = foodBeingPut3.wav; sourceTree = "<group>"; };
-		566A5BD5239ADFDA006D96CF /* teleport2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = teleport2.wav; sourceTree = "<group>"; };
-		566A5BD6239ADFDB006D96CF /* foodBeingPut1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = foodBeingPut1.wav; sourceTree = "<group>"; };
-		566A5BD7239ADFDB006D96CF /* teleport3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = teleport3.wav; sourceTree = "<group>"; };
-		566A5BD8239ADFDC006D96CF /* hatch2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hatch2.wav; sourceTree = "<group>"; };
-		566A5BD9239ADFDC006D96CF /* coin3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin3.wav; sourceTree = "<group>"; };
-		566A5BDA239ADFDC006D96CF /* roundStarted2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roundStarted2.wav; sourceTree = "<group>"; };
-		566A5BDB239ADFDD006D96CF /* coin4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin4.wav; sourceTree = "<group>"; };
-		566A5BDC239ADFDD006D96CF /* newOrder1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newOrder1.wav; sourceTree = "<group>"; };
-		566A5BDD239ADFDD006D96CF /* hatch4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hatch4.wav; sourceTree = "<group>"; };
-		566A5BDE239ADFDE006D96CF /* hatch3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hatch3.wav; sourceTree = "<group>"; };
-		566A5BDF239ADFDF006D96CF /* frying1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = frying1.wav; sourceTree = "<group>"; };
-		566A5BE0239ADFDF006D96CF /* timesUp3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp3.wav; sourceTree = "<group>"; };
 		566E9BD2239D391400787210 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		566E9C19239D7C8A00787210 /* newTeleport4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newTeleport4.wav; sourceTree = "<group>"; };
+		566E9C1A239D7C8A00787210 /* timer15Secs1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timer15Secs1.wav; sourceTree = "<group>"; };
+		566E9C1B239D7C8A00787210 /* orderDone2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = orderDone2.wav; sourceTree = "<group>"; };
+		566E9C1C239D7C8A00787210 /* newOrder1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newOrder1.wav; sourceTree = "<group>"; };
+		566E9C1D239D7C8A00787210 /* burned2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = burned2.wav; sourceTree = "<group>"; };
+		566E9C1E239D7C8A00787210 /* roundStarted3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roundStarted3.wav; sourceTree = "<group>"; };
+		566E9C1F239D7C8A00787210 /* newCooking2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = newCooking2.wav; sourceTree = "<group>"; };
+		566E9C20239D7C8A00787210 /* foodBeingPut4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = foodBeingPut4.wav; sourceTree = "<group>"; };
+		566E9C21239D7C8A00787210 /* cashRegister2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cashRegister2.wav; sourceTree = "<group>"; };
+		566E9C22239D7C8A00787210 /* timesUp1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp1.wav; sourceTree = "<group>"; };
+		566E9C23239D7C8A00787210 /* cooking1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cooking1.wav; sourceTree = "<group>"; };
+		566E9C24239D7C8A00787210 /* airBeingSucked2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airBeingSucked2.wav; sourceTree = "<group>"; };
+		566E9C25239D7C8A00787210 /* new hatch1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "new hatch1.wav"; sourceTree = "<group>"; };
+		566E9C26239D7C8A00787210 /* foodBeingPut1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = foodBeingPut1.wav; sourceTree = "<group>"; };
+		566E9C27239D7C8A00787210 /* cutelo2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cutelo2.wav; sourceTree = "<group>"; };
 		567A079F238C805000D6399A /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		567A07A0238C805000D6399A /* Eyes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
 		567A07A1238C805000D6399A /* DevilMashedBread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
@@ -440,6 +382,7 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				566E9BD8239D7BB800787210 /* Sound */,
 				4722D484238FF317003D373C /* Components */,
 				56E2D7C5238DC97D000F8A3F /* IngredientState.swift */,
 				567A07A4238C805000D6399A /* Ingredient.swift */,
@@ -500,66 +443,45 @@
 			path = GameScene;
 			sourceTree = "<group>";
 		};
-		566A5BB3239ADE37006D96CF /* SFX */ = {
-			isa = PBXGroup;
-			children = (
-				566A5BBD239ADFD1006D96CF /* airBeingSucked1.wav */,
-				566A5BB5239ADFD0006D96CF /* airBeingSucked2.wav */,
-				566A5BC2239ADFD2006D96CF /* airBeingSucked3.wav */,
-				566A5BBF239ADFD1006D96CF /* airBeingSucked4.wav */,
-				566A5BC4239ADFD3006D96CF /* burned1.wav */,
-				566A5BBE239ADFD1006D96CF /* burned2.wav */,
-				566A5BB9239ADFD1006D96CF /* coin1.wav */,
-				566A5BCC239ADFD6006D96CF /* coin2.wav */,
-				566A5BD9239ADFDC006D96CF /* coin3.wav */,
-				566A5BDB239ADFDD006D96CF /* coin4.wav */,
-				566A5BDF239ADFDF006D96CF /* frying1.wav */,
-				566A5BB8239ADFD0006D96CF /* frying2.wav */,
-				566A5BD0239ADFD8006D96CF /* frying3.wav */,
-				566A5BC1239ADFD2006D96CF /* cutelo.wav */,
-				566A5BD3239ADFD9006D96CF /* cutelo2.wav */,
-				566A5BD6239ADFDB006D96CF /* foodBeingPut1.wav */,
-				566A5BCF239ADFD7006D96CF /* foodBeingPut2.wav */,
-				566A5BD4239ADFDA006D96CF /* foodBeingPut3.wav */,
-				566A5BBB239ADFD1006D96CF /* foodBeingPut4.wav */,
-				566A5BC3239ADFD3006D96CF /* cooking1.wav */,
-				566A5BC0239ADFD2006D96CF /* cooking2.wav */,
-				566A5BC6239ADFD4006D96CF /* cooking3.wav */,
-				566A5BC7239ADFD4006D96CF /* hatch1.wav */,
-				566A5BD8239ADFDC006D96CF /* hatch2.wav */,
-				566A5BDE239ADFDE006D96CF /* hatch3.wav */,
-				566A5BDD239ADFDD006D96CF /* hatch4.wav */,
-				566A5BDC239ADFDD006D96CF /* newOrder1.wav */,
-				566A5BD1239ADFD8006D96CF /* newOrder2.wav */,
-				566A5BC5239ADFD3006D96CF /* orderDone1.wav */,
-				566A5BBC239ADFD1006D96CF /* orderDone2.wav */,
-				566A5BB6239ADFD0006D96CF /* roundStarted1.wav */,
-				566A5BDA239ADFDC006D96CF /* roundStarted2.wav */,
-				566A5BCB239ADFD5006D96CF /* roundStarted3.wav */,
-				566A5BB7239ADFD0006D96CF /* roundStarted4.wav */,
-				566A5BBA239ADFD1006D96CF /* teleport1.wav */,
-				566A5BD5239ADFDA006D96CF /* teleport2.wav */,
-				566A5BD7239ADFDB006D96CF /* teleport3.wav */,
-				566A5BC8239ADFD4006D96CF /* teleport4.wav */,
-				566A5BCA239ADFD5006D96CF /* timer15Secs1.wav */,
-				566A5BCD239ADFD6006D96CF /* timer15Secs2.wav */,
-				566A5BD2239ADFD9006D96CF /* timer15Secs3.wav */,
-				566A5BCE239ADFD7006D96CF /* timesUp1.wav */,
-				566A5BC9239ADFD4006D96CF /* timesUp2.wav */,
-				566A5BE0239ADFDF006D96CF /* timesUp3.wav */,
-			);
-			path = SFX;
-			sourceTree = "<group>";
-		};
 		566A5BB4239ADE43006D96CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				47BE3ECB239C1DD600246F20 /* Animations */,
-				566A5BB3239ADE37006D96CF /* SFX */,
+				566E9BFA239D7C4400787210 /* SFX */,
 				FB55FBE6239A9DB5002EBB89 /* Font */,
 				562BCF6423881CFC00D5D51D /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		566E9BD8239D7BB800787210 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		566E9BFA239D7C4400787210 /* SFX */ = {
+			isa = PBXGroup;
+			children = (
+				566E9C24239D7C8A00787210 /* airBeingSucked2.wav */,
+				566E9C1D239D7C8A00787210 /* burned2.wav */,
+				566E9C21239D7C8A00787210 /* cashRegister2.wav */,
+				566E9C23239D7C8A00787210 /* cooking1.wav */,
+				566E9C27239D7C8A00787210 /* cutelo2.wav */,
+				566E9C26239D7C8A00787210 /* foodBeingPut1.wav */,
+				566E9C20239D7C8A00787210 /* foodBeingPut4.wav */,
+				566E9C25239D7C8A00787210 /* new hatch1.wav */,
+				566E9C1F239D7C8A00787210 /* newCooking2.wav */,
+				566E9C1C239D7C8A00787210 /* newOrder1.wav */,
+				566E9C19239D7C8A00787210 /* newTeleport4.wav */,
+				566E9C1B239D7C8A00787210 /* orderDone2.wav */,
+				566E9C1E239D7C8A00787210 /* roundStarted3.wav */,
+				566E9C1A239D7C8A00787210 /* timer15Secs1.wav */,
+				566E9C22239D7C8A00787210 /* timesUp1.wav */,
+			);
+			name = SFX;
+			path = ../../../../../../Downloads/SFX;
 			sourceTree = "<group>";
 		};
 		56D9BB225FBAE3D038F75D05 /* Pods */ = {
@@ -650,68 +572,39 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				566A5BEE239ADFDF006D96CF /* airBeingSucked3.wav in Resources */,
-				566A5BFB239ADFDF006D96CF /* foodBeingPut2.wav in Resources */,
-				566A5BE3239ADFDF006D96CF /* roundStarted4.wav in Resources */,
-				566A5BF6239ADFDF006D96CF /* timer15Secs1.wav in Resources */,
-				566A5BE4239ADFDF006D96CF /* frying2.wav in Resources */,
+				566E9C30239D7C8A00787210 /* cashRegister2.wav in Resources */,
 				FB55FBE5239A9DAE002EBB89 /* TitilliumWeb-Light.ttf in Resources */,
 				476B7C95239C3276004D4116 /* PipeVacuum.atlas in Resources */,
+				566E9C29239D7C8A00787210 /* timer15Secs1.wav in Resources */,
+				566E9C35239D7C8A00787210 /* foodBeingPut1.wav in Resources */,
 				FB9BF395238EA67500437124 /* Game.storyboard in Resources */,
-				566A5BEF239ADFDF006D96CF /* cooking1.wav in Resources */,
 				47BE3ED7239C1F7200246F20 /* TeleportOrange.atlas in Resources */,
-				566A5C06239ADFDF006D96CF /* roundStarted2.wav in Resources */,
-				566A5C00239ADFDF006D96CF /* foodBeingPut3.wav in Resources */,
-				566A5BF3239ADFDF006D96CF /* hatch1.wav in Resources */,
 				476B7C96239C3276004D4116 /* CookBurnt.atlas in Resources */,
+				566E9C2A239D7C8A00787210 /* orderDone2.wav in Resources */,
+				566E9C2E239D7C8A00787210 /* newCooking2.wav in Resources */,
 				476B7C97239C3276004D4116 /* Fry.atlas in Resources */,
-				566A5C05239ADFDF006D96CF /* coin3.wav in Resources */,
 				47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */,
-				566A5BE6239ADFDF006D96CF /* teleport1.wav in Resources */,
-				566A5C04239ADFDF006D96CF /* hatch2.wav in Resources */,
-				566A5BE1239ADFDF006D96CF /* airBeingSucked2.wav in Resources */,
-				566A5BE8239ADFDF006D96CF /* orderDone2.wav in Resources */,
-				566A5BFD239ADFDF006D96CF /* newOrder2.wav in Resources */,
-				566A5C08239ADFDF006D96CF /* newOrder1.wav in Resources */,
-				566A5C07239ADFDF006D96CF /* coin4.wav in Resources */,
 				47BE3ED6239C1F7200246F20 /* TeleportGreen.atlas in Resources */,
-				566A5BFC239ADFDF006D96CF /* frying3.wav in Resources */,
-				566A5BED239ADFDF006D96CF /* cutelo.wav in Resources */,
-				566A5BE7239ADFDF006D96CF /* foodBeingPut4.wav in Resources */,
-				566A5BE2239ADFDF006D96CF /* roundStarted1.wav in Resources */,
-				566A5C03239ADFDF006D96CF /* teleport3.wav in Resources */,
-				566A5BE9239ADFDF006D96CF /* airBeingSucked1.wav in Resources */,
-				566A5BEB239ADFDF006D96CF /* airBeingSucked4.wav in Resources */,
-				566A5BEC239ADFDF006D96CF /* cooking2.wav in Resources */,
-				566A5BEA239ADFDF006D96CF /* burned2.wav in Resources */,
-				566A5BF0239ADFDF006D96CF /* burned1.wav in Resources */,
+				566E9C2B239D7C8A00787210 /* newOrder1.wav in Resources */,
+				566E9C33239D7C8A00787210 /* airBeingSucked2.wav in Resources */,
 				476B7C93239C3276004D4116 /* Cook.atlas in Resources */,
+				566E9C32239D7C8A00787210 /* cooking1.wav in Resources */,
 				FB55FBE4239A9DAE002EBB89 /* TitilliumWeb-Bold.ttf in Resources */,
-				566A5BF1239ADFDF006D96CF /* orderDone1.wav in Resources */,
-				566A5C09239ADFDF006D96CF /* hatch4.wav in Resources */,
-				566A5C01239ADFDF006D96CF /* teleport2.wav in Resources */,
+				566E9C2C239D7C8A00787210 /* burned2.wav in Resources */,
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
-				566A5BFE239ADFDF006D96CF /* timer15Secs3.wav in Resources */,
-				566A5C02239ADFDF006D96CF /* foodBeingPut1.wav in Resources */,
-				566A5BF4239ADFDF006D96CF /* teleport4.wav in Resources */,
-				566A5C0C239ADFDF006D96CF /* timesUp3.wav in Resources */,
+				566E9C2D239D7C8A00787210 /* roundStarted3.wav in Resources */,
 				47BE3EDC239C1F7200246F20 /* TeleportBlue.atlas in Resources */,
-				566A5C0A239ADFDF006D96CF /* hatch3.wav in Resources */,
-				566A5C0B239ADFDF006D96CF /* frying1.wav in Resources */,
-				566A5BE5239ADFDF006D96CF /* coin1.wav in Resources */,
-				566A5BFF239ADFDF006D96CF /* cutelo2.wav in Resources */,
+				566E9C36239D7C8A00787210 /* cutelo2.wav in Resources */,
+				566E9C28239D7C8A00787210 /* newTeleport4.wav in Resources */,
+				566E9C31239D7C8A00787210 /* timesUp1.wav in Resources */,
 				476B7C94239C3276004D4116 /* HatchVacuum.atlas in Resources */,
 				562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */,
 				562BCF6523881CFC00D5D51D /* Assets.xcassets in Resources */,
-				566A5BFA239ADFDF006D96CF /* timesUp1.wav in Resources */,
-				566A5BF8239ADFDF006D96CF /* coin2.wav in Resources */,
-				566A5BF2239ADFDF006D96CF /* cooking3.wav in Resources */,
-				566A5BF5239ADFDF006D96CF /* timesUp2.wav in Resources */,
+				566E9C34239D7C8A00787210 /* new hatch1.wav in Resources */,
 				FB55FBEB239C33D0002EBB89 /* Main.storyboard in Resources */,
+				566E9C2F239D7C8A00787210 /* foodBeingPut4.wav in Resources */,
 				562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */,
-				566A5BF9239ADFDF006D96CF /* timer15Secs2.wav in Resources */,
 				FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */,
-				566A5BF7239ADFDF006D96CF /* roundStarted3.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
