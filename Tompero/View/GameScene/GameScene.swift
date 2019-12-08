@@ -58,7 +58,6 @@ class GameScene: SKScene {
     var orderListNode: OrderListNode!
     var orderGenerationCounter = 900
     var orderCount = 0
-    var orderGenerationCounter = 400
     let maxOrders = 3
     
     var matchStatistics: MatchStatistics?
