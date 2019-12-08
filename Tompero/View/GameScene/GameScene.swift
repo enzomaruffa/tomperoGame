@@ -224,7 +224,7 @@ class GameScene: SKScene {
         if hosting {
             orderGenerationCounter += 1
             
-            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || orders.count == 0 {
+            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || orders.isEmpty {
                 generateRandomOrder()
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
