@@ -56,17 +56,19 @@ class OrderListNode: SKSpriteNode {
         boundary.run(SKAction.sequence([
             .run {
                 self.physicsBody?.mass = 0.1
+                self.physicsBody?.restitution = 0.3
                 self.gameScene.physicsWorld.gravity.dx = -self.gameScene.physicsWorld.gravity.dx
                 self.children.forEach({ $0.alpha = 0 })
                 self.boundary.position.x = -850
-                self.physicsBody?.applyImpulse(CGVector(dx: 120, dy: 0))
+                self.physicsBody?.applyImpulse(CGVector(dx: 170, dy: 0))
             },
-            .wait(forDuration: 1),
-            .moveTo(x: -1041, duration: 0.5),
+            .wait(forDuration: 0.5),
+            .moveTo(x: -1041, duration: 0.8),
             .run {
                 self.gameScene.physicsWorld.gravity.dx = -self.gameScene.physicsWorld.gravity.dx
                 self.children.forEach({ $0.alpha = 1 })
                 self.physicsBody?.mass = 50
+                self.physicsBody?.restitution = 0.2
             }
         ]))
     }

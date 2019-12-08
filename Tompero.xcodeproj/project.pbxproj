@@ -35,6 +35,7 @@
 		476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70AB23933A1C0000465F /* TappableDelegate.swift */; };
 		479B784A239D8BAC003BC9DE /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479B7849239D8BAC003BC9DE /* Statistics.storyboard */; };
 		479B784C239D8BCB003BC9DE /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B784B239D8BCB003BC9DE /* StatisticsViewController.swift */; };
+		47AA058F239DBFEF004AB8BE /* gameMusic2.mpeg in Resources */ = {isa = PBXBuildFile; fileRef = 47AA058E239DBFEF004AB8BE /* gameMusic2.mpeg */; };
 		47BE3ED6239C1F7200246F20 /* TeleportGreen.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECD239C1F7000246F20 /* TeleportGreen.atlas */; };
 		47BE3ED7239C1F7200246F20 /* TeleportOrange.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECE239C1F7000246F20 /* TeleportOrange.atlas */; };
 		47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECF239C1F7000246F20 /* TeleportPurple.atlas */; };
@@ -144,6 +145,7 @@
 		476F70AB23933A1C0000465F /* TappableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TappableDelegate.swift; sourceTree = "<group>"; };
 		479B7849239D8BAC003BC9DE /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
 		479B784B239D8BCB003BC9DE /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		47AA058E239DBFEF004AB8BE /* gameMusic2.mpeg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = gameMusic2.mpeg; sourceTree = "<group>"; };
 		47BE3ECD239C1F7000246F20 /* TeleportGreen.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportGreen.atlas; sourceTree = "<group>"; };
 		47BE3ECE239C1F7000246F20 /* TeleportOrange.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportOrange.atlas; sourceTree = "<group>"; };
 		47BE3ECF239C1F7000246F20 /* TeleportPurple.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportPurple.atlas; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 		566E9C73239D7E9000787210 /* SFX */ = {
 			isa = PBXGroup;
 			children = (
+				47AA058E239DBFEF004AB8BE /* gameMusic2.mpeg */,
 				566E9C79239D7EBF00787210 /* takeFood.wav */,
 				566E9C81239D7EC000787210 /* putFoodDown.wav */,
 				566E9C7D239D7EBF00787210 /* chopping.wav */,
@@ -617,6 +620,7 @@
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
 				566E9C8F239D7EC100787210 /* orderDone.wav in Resources */,
 				47BE3EDC239C1F7200246F20 /* TeleportBlue.atlas in Resources */,
+				47AA058F239DBFEF004AB8BE /* gameMusic2.mpeg in Resources */,
 				476B7C94239C3276004D4116 /* HatchVacuum.atlas in Resources */,
 				562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */,
 				566E9C89239D7EC100787210 /* orderUp.wav in Resources */,
