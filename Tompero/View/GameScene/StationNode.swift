@@ -90,6 +90,10 @@ class StationNode: TappableDelegate {
                     indicatorNode?.removeAllChildren()
                 }
             }
+            
+            if stationType == .board, let component = ingredientNode?.ingredient.choppableComponent {
+                progressBarNode?.progress = CGFloat(component.chopProgress / component.chopCap)
+            }
         }
     }
     
@@ -103,9 +107,9 @@ class StationNode: TappableDelegate {
     
     private var progressBarNodeOffset: CGPoint {
         switch stationType {
-        case .stove: return CGPoint(x: -100, y: 200)
-        case .fryer: return CGPoint(x: -100, y: 200)
-        case .board: return CGPoint(x: 90, y: -150)
+        case .stove: return CGPoint(x: 0, y: -220)
+        case .fryer: return CGPoint(x: 0, y: -220)
+        case .board: return CGPoint(x: 0, y: -180)
         default: return .zero
         }
     }
@@ -251,7 +255,6 @@ class StationNode: TappableDelegate {
             
             playAnimation()
 
-            progressBarNode?.alpha = 1
             progressBarNode?.progress = CGFloat(choppableComponent.chopProgress / choppableComponent.chopCap)
             
             if choppableComponent.complete {
@@ -319,6 +322,7 @@ class StationNode: TappableDelegate {
                     ingredientNode?.checkTextureChange()
                 }
             } else {
+                progressBarNode?.bar?.color = .green
                 progressBarNode?.progress = CGFloat(cookableComponent.cookProgress / cookableComponent.cookCap)
             }
             
