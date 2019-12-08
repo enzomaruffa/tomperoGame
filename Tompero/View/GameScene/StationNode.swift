@@ -66,6 +66,12 @@ class StationNode: TappableDelegate {
         didSet {
             ingredientNode?.spriteNode.setScale(ingredientNodeScale)
             
+            if ingredientNode != nil {
+                progressBarNode?.alpha = 1
+            } else {
+                progressBarNode?.alpha = 0
+            }
+            
             if stationType == .stove || stationType == .fryer {
                 if indicatorNode == nil {
                     indicatorNode = SKSpriteNode(imageNamed: "IngredientIndicator")
@@ -90,6 +96,17 @@ class StationNode: TappableDelegate {
     var plateNode: PlateNode? {
         didSet {
             plateNode?.spriteNode.setScale(plateNodeScale)
+        }
+    }
+    
+    var progressBarNode: ProgressBar?
+    
+    private var progressBarNodeOffset: CGPoint {
+        switch stationType {
+        case .stove: return CGPoint(x: -100, y: 200)
+        case .fryer: return CGPoint(x: -100, y: 200)
+        case .board: return CGPoint(x: 90, y: -150)
+        default: return .zero
         }
     }
     
@@ -171,24 +188,46 @@ class StationNode: TappableDelegate {
         self.stationType = stationType
         self.ingredient = ingredient
         
+        // 
         if stationType == .ingredientBox {
+            
             let tappableNode = TappableSpriteNode(imageNamed: ingredient!.texturePrefix + "Box.png")
             self.spriteNode = tappableNode
             tappableNode.delegate = self
+            
         } else if stationType == .plateBox {
+            
             let tappableNode = TappableSpriteNode(imageNamed: "PlateBox.png")
             self.spriteNode = tappableNode
             tappableNode.delegate = self
-        } else if stationType == .shelf || stationType == .delivery ||  stationType == .pipe || stationType == .hatch {
+            
+        } else if stationType == .shelf
+                || stationType == .delivery
+                ||  stationType == .pipe
+                || stationType == .hatch {
+            
             self.spriteNode = spriteNode!
+            
         } else if stationType == .empty {
+            
             let tappableNode = TappableSpriteNode()
             self.spriteNode = tappableNode
             tappableNode.delegate = self
+            
         } else {
+            
             let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")
             self.spriteNode = tappableNode
             tappableNode.delegate = self
+            
+            let progressBarNode = ProgressBar(color: .green, size: CGSize(width: tappableNode.size.width * 0.5, height: 18))
+            self.spriteNode.addChild(progressBarNode)
+            progressBarNode.zPosition = 8
+            progressBarNode.position = progressBarNodeOffset
+            
+            self.progressBarNode = progressBarNode
+            progressBarNode.alpha = 0
+            
         }
         
         createAnimation(stationType: stationType)
@@ -205,16 +244,21 @@ class StationNode: TappableDelegate {
     // Tap interaction
     func tap() {
         
-        if stationType == .board {
-            let ingredient = ingredientNode?.ingredient
-            ingredient?.choppableComponent?.update()
+        if stationType == .board,
+            let ingredient = ingredientNode?.ingredient,
+            let choppableComponent = ingredient.choppableComponent {
+            choppableComponent.update()
             
             playAnimation()
+
+            progressBarNode?.alpha = 1
+            progressBarNode?.progress = CGFloat(choppableComponent.chopProgress / choppableComponent.chopCap)
             
-            if ingredient?.choppableComponent?.complete ?? false {
-                if (ingredient!.states[ingredient!.currentState] ?? []).contains(IngredientState.chopped) {
-                    ingredient?.currentState = .chopped
+            if choppableComponent.complete {
+                if (ingredient.states[ingredient.currentState] ?? []).contains(IngredientState.chopped) {
+                    ingredient.currentState = .chopped
                 }
+                progressBarNode?.alpha = 0
             }
             
         } else if stationType == .ingredientBox && self.ingredientNode == nil {
@@ -241,6 +285,8 @@ class StationNode: TappableDelegate {
             plateMovableNode.position = CGPoint(x: spriteNode.position.x, y: spriteNode.position.y + 85)
             
             self.plateNode = plateNode
+        } else {
+            progressBarNode?.alpha = 0
         }
     }
     
@@ -248,41 +294,53 @@ class StationNode: TappableDelegate {
     func update() {
         
         if stationType == .stove && !(ingredientNode?.moving ?? true),
-            let ingredient = ingredientNode?.ingredient {
+            let ingredient = ingredientNode?.ingredient,
+            let cookableComponent = ingredient.cookableComponent {
             
-            ingredient.cookableComponent?.update()
+            cookableComponent.update()
             
             if !animationRunning {
                 playAnimation()
             }
+
+            progressBarNode?.alpha = 1
             
-            if ingredient.cookableComponent?.burnt ?? false {
+            if cookableComponent.burnt {
                 if ingredient.states[ingredient.currentState]!.contains(IngredientState.burnt) {
                     ingredient.currentState = .burnt
                     ingredientNode?.checkTextureChange()
                 }
-            } else if ingredient.cookableComponent?.complete ?? false {
+            } else if cookableComponent.complete {
+                progressBarNode?.progress = CGFloat(cookableComponent.cookProgress / cookableComponent.burnCap)
+                progressBarNode?.bar?.color = .red
+                
                 if ingredient.states[ingredient.currentState]!.contains(IngredientState.cooked) {
                     ingredient.currentState = .cooked
                     ingredientNode?.checkTextureChange()
                 }
+            } else {
+                progressBarNode?.progress = CGFloat(cookableComponent.cookProgress / cookableComponent.cookCap)
             }
             
         } else if stationType == .fryer && !(ingredientNode?.moving ?? true),
-        let ingredient = ingredientNode?.ingredient {
+            let ingredient = ingredientNode?.ingredient,
+            let fryableComponent = ingredient.fryableComponent {
             
-            ingredient.fryableComponent?.update()
+            fryableComponent.update()
             
             if !animationRunning {
                 playAnimation()
             }
+
+            progressBarNode?.alpha = 1
+            progressBarNode?.progress = CGFloat(fryableComponent.fryProgress / fryableComponent.fryCap)
             
-            if ingredient.fryableComponent?.burnt ?? false {
+            if fryableComponent.burnt ?? false {
                 if ingredient.states[ingredient.currentState]!.contains(IngredientState.burnt) {
                     ingredient.currentState = .burnt
                     ingredientNode?.checkTextureChange()
                 }
-            } else if ingredient.fryableComponent?.complete ?? false {
+            } else if fryableComponent.complete ?? false {
                 if ingredient.states[ingredient.currentState]!.contains(IngredientState.fried) {
                     ingredient.currentState = .fried
                     ingredientNode?.checkTextureChange()
@@ -291,6 +349,7 @@ class StationNode: TappableDelegate {
         } else if stationType == .stove || stationType == .fryer { //Stops only on these stations
             if animationRunning {
                 stopAnimation()
+                progressBarNode?.alpha = 0
             }
         }
     }

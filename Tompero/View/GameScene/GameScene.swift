@@ -15,7 +15,7 @@ class GameScene: SKScene {
     // MARK: - Variables
     var hosting = false
     
-    var player: String = MCManager.shared.selfName
+    var player: String = "God"//MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -176,8 +176,6 @@ class GameScene: SKScene {
         let timerContainer = self.childNode(withName: "timerContainer") as! SKSpriteNode
         timerContainer.texture = SKTexture(imageNamed: "Timer" + playerColor)
         
-        (self.childNode(withName: "timerLabel") as! SKLabelNode).horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
-        
         updateTimerUI()
         updateCoinsUI()
     }
@@ -303,7 +301,6 @@ class GameScene: SKScene {
         currentSeconds -= (currentMinutes * 60)
         
         timerLabel.text = "\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)"
-        
         
         print("\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)")
     }
