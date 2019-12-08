@@ -63,11 +63,16 @@
 		566E9C8A239D7EC100787210 /* frying.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C7B239D7EBF00787210 /* frying.wav */; };
 		566E9C8B239D7EC100787210 /* hatch.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C7C239D7EBF00787210 /* hatch.wav */; };
 		566E9C8C239D7EC100787210 /* chopping.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C7D239D7EBF00787210 /* chopping.wav */; };
-		566E9C8D239D7EC100787210 /* airBeingSucked.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C7E239D7EC000787210 /* airBeingSucked.wav */; };
+		566E9C8D239D7EC100787210 /* airSuction.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C7E239D7EC000787210 /* airSuction.wav */; };
 		566E9C8E239D7EC100787210 /* timesUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C7F239D7EC000787210 /* timesUp.wav */; };
 		566E9C8F239D7EC100787210 /* orderDone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C80239D7EC000787210 /* orderDone.wav */; };
 		566E9C90239D7EC100787210 /* putFoodDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C81239D7EC000787210 /* putFoodDown.wav */; };
 		566E9C91239D7EC100787210 /* teleporter.wav in Resources */ = {isa = PBXBuildFile; fileRef = 566E9C82239D7EC100787210 /* teleporter.wav */; };
+		566E9C96239D823400787210 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C92239D823300787210 /* Track.swift */; };
+		566E9C97239D823400787210 /* TrackWithIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C93239D823300787210 /* TrackWithIntro.swift */; };
+		566E9C98239D823400787210 /* CustomAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C94239D823300787210 /* CustomAudioPlayer.swift */; };
+		566E9C99239D823400787210 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C95239D823300787210 /* MusicPlayer.swift */; };
+		566E9C9B239D82E200787210 /* SFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C9A239D82E200787210 /* SFX.swift */; };
 		567A07B0238C805000D6399A /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A079F238C805000D6399A /* Horn.swift */; };
 		567A07B1238C805000D6399A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A0238C805000D6399A /* Eyes.swift */; };
 		567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A1238C805000D6399A /* DevilMashedBread.swift */; };
@@ -167,11 +172,16 @@
 		566E9C7B239D7EBF00787210 /* frying.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = frying.wav; sourceTree = "<group>"; };
 		566E9C7C239D7EBF00787210 /* hatch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hatch.wav; sourceTree = "<group>"; };
 		566E9C7D239D7EBF00787210 /* chopping.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chopping.wav; sourceTree = "<group>"; };
-		566E9C7E239D7EC000787210 /* airBeingSucked.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airBeingSucked.wav; sourceTree = "<group>"; };
+		566E9C7E239D7EC000787210 /* airSuction.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airSuction.wav; sourceTree = "<group>"; };
 		566E9C7F239D7EC000787210 /* timesUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp.wav; sourceTree = "<group>"; };
 		566E9C80239D7EC000787210 /* orderDone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = orderDone.wav; sourceTree = "<group>"; };
 		566E9C81239D7EC000787210 /* putFoodDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = putFoodDown.wav; sourceTree = "<group>"; };
 		566E9C82239D7EC100787210 /* teleporter.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = teleporter.wav; sourceTree = "<group>"; };
+		566E9C92239D823300787210 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		566E9C93239D823300787210 /* TrackWithIntro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWithIntro.swift; sourceTree = "<group>"; };
+		566E9C94239D823300787210 /* CustomAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAudioPlayer.swift; sourceTree = "<group>"; };
+		566E9C95239D823300787210 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		566E9C9A239D82E200787210 /* SFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFX.swift; sourceTree = "<group>"; };
 		567A079F238C805000D6399A /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		567A07A0238C805000D6399A /* Eyes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
 		567A07A1238C805000D6399A /* DevilMashedBread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
@@ -457,6 +467,11 @@
 		566E9BD8239D7BB800787210 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				566E9C9A239D82E200787210 /* SFX.swift */,
+				566E9C94239D823300787210 /* CustomAudioPlayer.swift */,
+				566E9C95239D823300787210 /* MusicPlayer.swift */,
+				566E9C92239D823300787210 /* Track.swift */,
+				566E9C93239D823300787210 /* TrackWithIntro.swift */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -464,20 +479,20 @@
 		566E9C73239D7E9000787210 /* SFX */ = {
 			isa = PBXGroup;
 			children = (
-				566E9C7E239D7EC000787210 /* airBeingSucked.wav */,
-				566E9C76239D7EBE00787210 /* burn.wav */,
-				566E9C78239D7EBE00787210 /* cashRegister.wav */,
+				566E9C81239D7EC000787210 /* putFoodDown.wav */,
+				566E9C79239D7EBF00787210 /* takeFood.wav */,
 				566E9C7D239D7EBF00787210 /* chopping.wav */,
 				566E9C74239D7EBE00787210 /* cooking.wav */,
-				566E9C75239D7EBE00787210 /* endTimer.wav */,
 				566E9C7B239D7EBF00787210 /* frying.wav */,
+				566E9C76239D7EBE00787210 /* burn.wav */,
 				566E9C7C239D7EBF00787210 /* hatch.wav */,
-				566E9C80239D7EC000787210 /* orderDone.wav */,
+				566E9C7E239D7EC000787210 /* airSuction.wav */,
 				566E9C7A239D7EBF00787210 /* orderUp.wav */,
-				566E9C81239D7EC000787210 /* putFoodDown.wav */,
-				566E9C77239D7EBE00787210 /* roundStarted.wav */,
-				566E9C79239D7EBF00787210 /* takeFood.wav */,
+				566E9C80239D7EC000787210 /* orderDone.wav */,
 				566E9C82239D7EC100787210 /* teleporter.wav */,
+				566E9C78239D7EBE00787210 /* cashRegister.wav */,
+				566E9C77239D7EBE00787210 /* roundStarted.wav */,
+				566E9C75239D7EBE00787210 /* endTimer.wav */,
 				566E9C7F239D7EC000787210 /* timesUp.wav */,
 			);
 			path = SFX;
@@ -585,7 +600,7 @@
 				566E9C8A239D7EC100787210 /* frying.wav in Resources */,
 				47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */,
 				47BE3ED6239C1F7200246F20 /* TeleportGreen.atlas in Resources */,
-				566E9C8D239D7EC100787210 /* airBeingSucked.wav in Resources */,
+				566E9C8D239D7EC100787210 /* airSuction.wav in Resources */,
 				476B7C93239C3276004D4116 /* Cook.atlas in Resources */,
 				FB55FBE4239A9DAE002EBB89 /* TitilliumWeb-Bold.ttf in Resources */,
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
@@ -660,6 +675,8 @@
 				471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */,
 				FB25C2A9239455E8001FEAE6 /* UIImage+Gif.swift in Sources */,
 				471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */,
+				566E9C98239D823400787210 /* CustomAudioPlayer.swift in Sources */,
+				566E9C99239D823400787210 /* MusicPlayer.swift in Sources */,
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
 				FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */,
@@ -675,10 +692,12 @@
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
 				47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */,
+				566E9C9B239D82E200787210 /* SFX.swift in Sources */,
 				567A07BB238C805000D6399A /* Order.swift in Sources */,
 				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
 				476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */,
 				FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */,
+				566E9C96239D823400787210 /* Track.swift in Sources */,
 				566E9BD3239D391400787210 /* ProgressBar.swift in Sources */,
 				562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */,
 				567A07B6238C805000D6399A /* Broccoli.swift in Sources */,
@@ -696,6 +715,7 @@
 				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,
 				476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */,
 				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
+				566E9C97239D823400787210 /* TrackWithIntro.swift in Sources */,
 				FB55FBE8239C2824002EBB89 /* DialogView.swift in Sources */,
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
 				56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */,
