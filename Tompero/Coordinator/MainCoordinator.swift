@@ -19,52 +19,52 @@ class MainCoordinator: Coordinator {
 
     func start() {
         let gameSceneTest: Bool = true
-        
-        if gameSceneTest {
-            let tables: [String : [PlayerTable]] = [
-                "iPhone 11 [Enzo]" : [
-                    PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .frying, ingredient: nil),
-                    PlayerTable(type: .ingredient, ingredient: Eyes())
-                ],
-                "Enzo's Enzo's iPhone" : [
-                    PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .chopping, ingredient: nil)
-                ],
-                "CU" : [
-                    PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .chopping, ingredient: nil)
-                ],
-                "CU 2" : [
-                    PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .chopping, ingredient: nil)
-                ]
-            ]
-            
-            game(
-                rule: GameRule(
-                    difficulty: .hard,
-                    possibleIngredients: [
-                        Asteroid(),
-                        Tentacle(),
-                        MoonCheese(),
-                        Eyes(),
-                        Tardigrades()
-                    ],
-                    playerTables: tables,
-                    playerOrder: [
-                        "iPhone 11 [Enzo]",
-                        "Enzo's Enzo's iPhone",
-                        "CU",
-                        "CU 2"]
-                ),
-                hosting: true
-            )
-            return
-        }
+//        
+//        if gameSceneTest {
+//            let tables: [String : [PlayerTable]] = [
+//                "iPhone 11 [Enzo]" : [
+//                    PlayerTable(type: .chopping, ingredient: nil),
+//                    PlayerTable(type: .frying, ingredient: nil),
+//                    PlayerTable(type: .ingredient, ingredient: Eyes())
+//                ],
+//                "Enzo's Enzo's iPhone" : [
+//                    PlayerTable(type: .chopping, ingredient: nil),
+//                    PlayerTable(type: .chopping, ingredient: nil),
+//                    PlayerTable(type: .chopping, ingredient: nil)
+//                ],
+//                "CU" : [
+//                    PlayerTable(type: .chopping, ingredient: nil),
+//                    PlayerTable(type: .chopping, ingredient: nil),
+//                    PlayerTable(type: .chopping, ingredient: nil)
+//                ],
+//                "CU 2" : [
+//                    PlayerTable(type: .chopping, ingredient: nil),
+//                    PlayerTable(type: .chopping, ingredient: nil),
+//                    PlayerTable(type: .chopping, ingredient: nil)
+//                ]
+//            ]
+//            
+//            game(
+//                rule: GameRule(
+//                    difficulty: .hard,
+//                    possibleIngredients: [
+//                        Asteroid(),
+//                        Tentacle(),
+//                        MoonCheese(),
+//                        Eyes(),
+//                        Tardigrades()
+//                    ],
+//                    playerTables: tables,
+//                    playerOrder: [
+//                        "iPhone 11 [Enzo]",
+//                        "Enzo's Enzo's iPhone",
+//                        "CU",
+//                        "CU 2"]
+//                ),
+//                hosting: true
+//            )
+//            return
+//        }
         
         inicial()
     }
