@@ -22,7 +22,7 @@ class StationNode: TappableDelegate {
     var spriteYPos: CGFloat {
         switch stationType {
         case .board: return -237.5
-        case .stove: return -348.5
+        case .stove: return -226.5
         case .fryer: return -342.0
         case .ingredientBox: return -361.0 // not final
         case .plateBox: return -361.0 // not final
@@ -114,7 +114,7 @@ class StationNode: TappableDelegate {
     
     private var stationAnimationOffset: CGPoint {
         switch stationType {
-        case .stove: return CGPoint(x: 0, y: 122)
+        case .stove: return CGPoint(x: 0, y: 0)
         case .fryer: return CGPoint(x: 0, y: 68)
         case .pipe: return CGPoint(x: 3.5, y: 0)
         case .hatch: return CGPoint(x: 5, y: 0)
