@@ -22,6 +22,7 @@
 		4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D486238FFA93003D373C /* MCPeerWithStatus.swift */; };
 		472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F9F2723992FEA00DC7B9C /* PlateNode.swift */; };
 		4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733B6A52393597700D80AD0 /* MovableDelegate.swift */; };
+		47632784239D49C4006BA9C5 /* MatchStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47632783239D49C4006BA9C5 /* MatchStatistics.swift */; };
 		476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */; };
 		476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */; };
 		476925C72390AA0900FBAB1F /* SKSceneExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */; };
@@ -151,6 +152,7 @@
 		4722D486238FFA93003D373C /* MCPeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPeerWithStatus.swift; sourceTree = "<group>"; };
 		472F9F2723992FEA00DC7B9C /* PlateNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateNode.swift; sourceTree = "<group>"; };
 		4733B6A52393597700D80AD0 /* MovableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableDelegate.swift; sourceTree = "<group>"; };
+		47632783239D49C4006BA9C5 /* MatchStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatistics.swift; sourceTree = "<group>"; };
 		476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
 		476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
 		476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKSceneExtensions.swift; sourceTree = "<group>"; };
@@ -431,7 +433,6 @@
 				562BCF712388234800D5D51D /* Controller */,
 				471795ED238C692D000575B0 /* MultipeerConnectivity Manager */,
 				471795EE238C694B000575B0 /* Game Connection */,
-				4722D481238F42E1003D373C /* Procedural Generation */,
 			);
 			path = Tompero;
 			sourceTree = "<group>";
@@ -444,8 +445,10 @@
 				567A07A4238C805000D6399A /* Ingredient.swift */,
 				4722D482238FF2FE003D373C /* Ingredients */,
 				567A07A3238C805000D6399A /* Plate.swift */,
+				4722D481238F42E1003D373C /* Procedural Generation */,
 				4722D483238FF311003D373C /* Protocols */,
 				4722D485238FF320003D373C /* Order */,
+				47632783239D49C4006BA9C5 /* MatchStatistics.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -805,6 +808,7 @@
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
 				56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */,
 				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,
+				47632784239D49C4006BA9C5 /* MatchStatistics.swift in Sources */,
 				567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */,
 				4722D47D238EB91F003D373C /* PlayerTable.swift in Sources */,
 				565AEFE4239164E300E3E15F /* StationNode.swift in Sources */,

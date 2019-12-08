@@ -426,7 +426,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
         
         // start game
         MCManager.shared.stopAdvertiser()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.coordinator?.game(rule: rule, hosting: false)
         }
     }
