@@ -15,5 +15,6 @@ protocol GameConnectionManagerObserver {
     func receiveIngredient(ingredient: Ingredient)
     func receiveOrders(orders: [Order])
     func receiveDeliveryNotification(notification: OrderDeliveryNotification)
+    func receiveStatistics(statistics: MatchStatistics)
     
 }

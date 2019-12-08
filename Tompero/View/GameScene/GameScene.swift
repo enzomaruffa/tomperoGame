@@ -193,21 +193,7 @@ class GameScene: SKScene {
         matchStatistics?.totalGeneratedOrders += 1
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        stations.forEach({ $0.update() })
-        
-        let isMoving = !stations.filter({ ($0.ingredientNode?.moving ?? false || $0.plateNode?.moving ?? false) }).isEmpty
-        
-        if isMoving && !stationsAnimationsRunning {
-            pipes.forEach({ $0.playAnimation() })
-            hatch.playAnimation()
-            stationsAnimationsRunning = true
-        } else if !isMoving && stationsAnimationsRunning {
-            pipes.forEach({ $0.stopAnimation() })
-            hatch.stopAnimation()
-            stationsAnimationsRunning = false
-        }
-        
+    fileprivate func updateOrders() {
         for (index, order) in orders.enumerated() {
             order.timeLeft -= 1/60
             
@@ -236,13 +222,41 @@ class GameScene: SKScene {
             }
             
         }
+    }
+    
+    fileprivate func checkAnimations() {
+        let isMoving = !stations.filter({ ($0.ingredientNode?.moving ?? false || $0.plateNode?.moving ?? false) }).isEmpty
         
+        if isMoving && !stationsAnimationsRunning {
+            pipes.forEach({ $0.playAnimation() })
+            hatch.playAnimation()
+            stationsAnimationsRunning = true
+        } else if !isMoving && stationsAnimationsRunning {
+            pipes.forEach({ $0.stopAnimation() })
+            hatch.stopAnimation()
+            stationsAnimationsRunning = false
+        }
+    }
+    
+    fileprivate func updateTimer() {
         timerUpdateCounter += 1
         if timerStarted && timerUpdateCounter >= 60 {
             matchTimer -= 1
             updateTimerUI()
             timerUpdateCounter = 0
         }
+        
+        if hosting && matchTimer < 0 {
+            GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        stations.forEach({ $0.update() })
+        
+        checkAnimations()
+        updateOrders()
+        updateTimer()
     }
     
     func makeDelivery(plate: Plate) -> Bool {
@@ -371,4 +385,9 @@ extension GameScene: GameConnectionManagerObserver {
             updateCoinsUI()
         }
     }
+    
+    func receiveStatistics(statistics: MatchStatistics) {
+        self.isPaused = true
+    }
+    
 }
