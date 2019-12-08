@@ -17,12 +17,12 @@ class SFX {
     let putFoodDown     = CustomAudioPlayer(fileName: "putFoodDown.wav")
     
     let chop            = CustomAudioPlayer(fileName: "chopping.wav")
-    let cooking         = CustomAudioPlayer(fileName: "cooking.wav")
-    let frying          = CustomAudioPlayer(fileName: "frying.wav")
+    let cooking                     = Track(fileName: "cooking.wav")
+    let frying                      = Track(fileName: "frying.wav")
     let burn            = CustomAudioPlayer(fileName: "burn.wav")
     
     let hatch           = CustomAudioPlayer(fileName: "hatch.wav")
-    let airSuction      = CustomAudioPlayer(fileName: "airSuction.wav")
+    let airSuction                  = Track(fileName: "airSuction.wav")
     
     let orderUp         = CustomAudioPlayer(fileName: "orderUp.wav")
     let orderDone       = CustomAudioPlayer(fileName: "orderDone.wav")

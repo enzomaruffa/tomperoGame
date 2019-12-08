@@ -26,7 +26,13 @@ class Ingredient: HasSprite, Equatable, Codable {
     }
     
     var states: [IngredientState: [IngredientState]] = [:]
-    var currentState: IngredientState = .raw
+    var currentState: IngredientState = .raw {
+        willSet(value) {
+            if value == .burnt {
+                SFX.shared.burn.play()
+            }
+        }
+    }
     var finalState: IngredientState
     var isReady: Bool {
         currentState == finalState

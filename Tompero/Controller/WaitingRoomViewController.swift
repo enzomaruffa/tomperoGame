@@ -87,6 +87,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        MusicPlayer.shared.play(.menu)
+        
         //ZOOM do menu
         let viewTransform = self.view.transform
         let scaleX = (view.frame.width/menuButton.frame.width)
@@ -147,6 +149,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     // MARK: - ActionsButtons
     @IBAction func backPressed(_ sender: Any) {
+        MusicPlayer.shared.stop(.menu)
         self.navigationController?.popViewController(animated: true)
         
     }
@@ -171,6 +174,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         let ruleData = try! JSONEncoder().encode(rule)
         MCManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
         animatedSpaceshipToUP()
+        
+        MusicPlayer.shared.stop(.menu)
         
         // Start game view with necessary information
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

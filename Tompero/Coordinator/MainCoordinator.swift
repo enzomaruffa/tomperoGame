@@ -18,7 +18,7 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = true
+        let gameSceneTest: Bool = false
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [
