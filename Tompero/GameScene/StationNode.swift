@@ -170,10 +170,8 @@ class StationNode: TappableDelegate {
             let stationAtlas = SKTextureAtlas(named: stationAnimationAtlasName)
             stationAnimationFrames = []
 
-            print("node size: ", spriteNode.size)
             for currentAnimation in 0..<stationAtlas.textureNames.count {
                 let stationFrameName = stationAnimationAtlasName + "\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
-                print("texutre size: ", stationAtlas.textureNamed(stationFrameName).size())
                 stationAnimationFrames!.append(stationAtlas.textureNamed(stationFrameName))
             }
             
@@ -368,8 +366,6 @@ class StationNode: TappableDelegate {
             SFX.shared.airSuction.play()
         default: break
         }
-        
-        print("Playing station animation")
         if let node = self.stationAnimationNode {
 
             animationRunning = true
@@ -396,7 +392,6 @@ class StationNode: TappableDelegate {
         default: break
         }
         
-        print("Stopping station animation")
         animationRunning = false
         stationAnimationNode?.removeAllActions()
     }

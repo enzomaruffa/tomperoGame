@@ -12,7 +12,10 @@ import GameplayKit
 // swiftlint:disable force_cast
 class GameScene: SKScene {
     
-    // MARK: - Variables
+    // MARK: - Coordinator
+    weak var coordinator: MainCoordinator?
+    
+    // MARK: - Game Variables
     var hosting = false
     
     var player: String = MCManager.shared.selfName
@@ -63,12 +66,13 @@ class GameScene: SKScene {
     
     var matchStatistics: MatchStatistics?
     
-    var matchTimer = 180.0
+    var matchTimer = Float(120)
     var timerStarted = false
     var timerUpdateCounter = 0
     
     var totalPoints = 0
     
+    // MARK: - Animation Variables
     var stationsAnimationsRunning = false
     
     var timesUpPlayed = false
@@ -214,9 +218,9 @@ class GameScene: SKScene {
         orderListNode.update()
         
         if hosting {
-            orderGenerationCounter += 1
+            orderGenerationCounter += 500
             
-            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || orders.isEmpty {
+            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
                 generateRandomOrder()
                 if firstOrder {
                     SFX.shared.orderUp.play()
@@ -260,17 +264,19 @@ class GameScene: SKScene {
             timerUpdateCounter = 0
         }
         
+
         if matchTimer < 0 {
-            if hosting {
-                GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
-            }
             if !timesUpPlayed {
                 timesUpPlayed = true
                 SFX.shared.timesUp.play()
                 MusicPlayer.shared.stop(.game)
             }
-            matchTimer = 0
-            // transition to statistics screen
+           	
+            if hosting {
+				self.isPaused = true
+                GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
+				coordinator?.statistics(statistics: matchStatistics!)
+            }
         }
         
         if matchTimer < 15 && !endTimerPlayed {
@@ -331,6 +337,8 @@ class GameScene: SKScene {
         return true
     }
     
+    
+    // MARK: - UI Updates
     func updateOrderUI(_ orders: [Order]) {
         orderListNode.updateList(orders)
     }
@@ -406,7 +414,7 @@ extension GameScene: GameConnectionManagerObserver {
             MusicPlayer.shared.play(.game)
         }
         
-        if !timerStarted {
+        if !timerStarted && !orders.isEmpty {
             timerStarted = true
         }
         
@@ -428,6 +436,9 @@ extension GameScene: GameConnectionManagerObserver {
     
     func receiveStatistics(statistics: MatchStatistics) {
         self.isPaused = true
+        DispatchQueue.main.async {
+            self.coordinator?.statistics(statistics: statistics)
+        }
     }
     
 }

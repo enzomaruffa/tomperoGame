@@ -33,6 +33,8 @@
 		476B7C97239C3276004D4116 /* Fry.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 476B7C92239C3276004D4116 /* Fry.atlas */; };
 		476F70A8239336490000465F /* TappableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70A7239336490000465F /* TappableSpriteNode.swift */; };
 		476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70AB23933A1C0000465F /* TappableDelegate.swift */; };
+		479B784A239D8BAC003BC9DE /* Statistics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479B7849239D8BAC003BC9DE /* Statistics.storyboard */; };
+		479B784C239D8BCB003BC9DE /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B784B239D8BCB003BC9DE /* StatisticsViewController.swift */; };
 		47BE3ED6239C1F7200246F20 /* TeleportGreen.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECD239C1F7000246F20 /* TeleportGreen.atlas */; };
 		47BE3ED7239C1F7200246F20 /* TeleportOrange.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECE239C1F7000246F20 /* TeleportOrange.atlas */; };
 		47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ECF239C1F7000246F20 /* TeleportPurple.atlas */; };
@@ -140,6 +142,8 @@
 		476B7C92239C3276004D4116 /* Fry.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Fry.atlas; sourceTree = "<group>"; };
 		476F70A7239336490000465F /* TappableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableSpriteNode.swift; sourceTree = "<group>"; };
 		476F70AB23933A1C0000465F /* TappableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TappableDelegate.swift; sourceTree = "<group>"; };
+		479B7849239D8BAC003BC9DE /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
+		479B784B239D8BCB003BC9DE /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		47BE3ECD239C1F7000246F20 /* TeleportGreen.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportGreen.atlas; sourceTree = "<group>"; };
 		47BE3ECE239C1F7000246F20 /* TeleportOrange.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportOrange.atlas; sourceTree = "<group>"; };
 		47BE3ECF239C1F7000246F20 /* TeleportPurple.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportPurple.atlas; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
+				479B7849239D8BAC003BC9DE /* Statistics.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
 				562BCF5F23881CF900D5D51D /* GameViewController.swift */,
 				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
+				479B784B239D8BCB003BC9DE /* StatisticsViewController.swift */,
 				FB25C2A8239455E8001FEAE6 /* UIImage+Gif.swift */,
 			);
 			path = Controller;
@@ -605,6 +611,7 @@
 				47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */,
 				47BE3ED6239C1F7200246F20 /* TeleportGreen.atlas in Resources */,
 				566E9C8D239D7EC100787210 /* airSuction.wav in Resources */,
+				479B784A239D8BAC003BC9DE /* Statistics.storyboard in Resources */,
 				476B7C93239C3276004D4116 /* Cook.atlas in Resources */,
 				FB55FBE4239A9DAE002EBB89 /* TitilliumWeb-Bold.ttf in Resources */,
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
@@ -683,6 +690,7 @@
 				566E9C98239D823400787210 /* CustomAudioPlayer.swift in Sources */,
 				566E9C99239D823400787210 /* MusicPlayer.swift in Sources */,
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
+				479B784C239D8BCB003BC9DE /* StatisticsViewController.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
 				FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */,
 				566A5BAF239A8564006D96CF /* ComponentType.swift in Sources */,
@@ -890,7 +898,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -909,7 +917,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

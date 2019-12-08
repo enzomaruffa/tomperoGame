@@ -5,12 +5,12 @@ class InicialViewController: UIViewController, Storyboarded {
     
     // MARK: - Storyboarded
     static var storyboardName = "Main"
-    weak var shapeLayer: CAShapeLayer?
     
     // MARK: - Variables
-    var location = CGPoint(x: 0, y: 0)
     weak var coordinator: MainCoordinator?
+    var location = CGPoint(x: 0, y: 0)
     var animationTimer: Timer?
+    weak var shapeLayer: CAShapeLayer?
     
     // MARK: - Outlets
     @IBOutlet weak var join: UIImageView!

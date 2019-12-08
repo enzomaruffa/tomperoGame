@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Statistics View Controller-->
+        <scene sceneID="u7p-wd-bXP">
+            <objects>
+                <viewController storyboardIdentifier="StatisticsViewController" id="nh9-NX-o6y" customClass="StatisticsViewController" customModule="SpaceSpice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0mH-vg-ysg">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lataria" translatesAutoresizingMaskIntoConstraints="NO" id="Fuu-O0-8wV">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVr-Z2-Eoq">
+                                <rect key="frame" x="426" y="192" width="44" height="30"/>
+                                <state key="normal" title="MENU"/>
+                                <connections>
+                                    <action selector="menuPressed:" destination="nh9-NX-o6y" eventType="touchUpInside" id="ebi-xs-jqh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Fuu-O0-8wV" firstAttribute="leading" secondItem="0mH-vg-ysg" secondAttribute="leading" id="2jW-74-xBr"/>
+                            <constraint firstItem="FVr-Z2-Eoq" firstAttribute="centerX" secondItem="Fuu-O0-8wV" secondAttribute="centerX" id="E4F-YS-YgU"/>
+                            <constraint firstItem="FVr-Z2-Eoq" firstAttribute="centerY" secondItem="Fuu-O0-8wV" secondAttribute="centerY" id="f7p-ci-1Vf"/>
+                            <constraint firstAttribute="trailing" secondItem="Fuu-O0-8wV" secondAttribute="trailing" id="k0T-N6-KzE"/>
+                            <constraint firstItem="Fuu-O0-8wV" firstAttribute="top" secondItem="0mH-vg-ysg" secondAttribute="top" id="plg-tl-0IN"/>
+                            <constraint firstAttribute="bottom" secondItem="Fuu-O0-8wV" secondAttribute="bottom" id="vnf-1x-fgS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9ES-aO-VER"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FAp-AG-uVq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-147" y="48"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="lataria" width="2436" height="1154"/>
+    </resources>
+</document>
