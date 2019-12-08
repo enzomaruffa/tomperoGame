@@ -59,7 +59,7 @@ class GameScene: SKScene {
     }
     
     var orderListNode: OrderListNode!
-    var orderGenerationCounter = 400
+    var orderGenerationCounter = 900
     var orderCount = 0
     let maxOrders = 3
     var firstOrder = false
@@ -218,7 +218,7 @@ class GameScene: SKScene {
         orderListNode.update()
         
         if hosting {
-            orderGenerationCounter += 500
+            orderGenerationCounter += 1
             
             if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
                 generateRandomOrder()
