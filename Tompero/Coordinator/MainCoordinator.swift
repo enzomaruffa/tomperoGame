@@ -78,6 +78,7 @@ class MainCoordinator: Coordinator {
     func menu() {
         let controller = MenuCollectionViewController.instantiate()
         controller.coordinator = self
+        controller.modalTransitionStyle = .crossDissolve
         navigationController.pushViewController(controller, animated: false)
     }
     

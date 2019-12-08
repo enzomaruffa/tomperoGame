@@ -158,11 +158,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }, completion: {(_)in
             self.isZoomed = true
             self.view.transform = .identity
-            let vcd = UIStoryboard(name: "MenuStoryboard", bundle: nil)
-                .instantiateViewController(withIdentifier: "MenuCollectionViewController") as! MenuCollectionViewController
-            vcd.vcPai = self
-            vcd.modalTransitionStyle = .crossDissolve
-            self.present(vcd, animated: false, completion: nil)
+            self.coordinator?.menu()
         })
         
     }

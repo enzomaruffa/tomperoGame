@@ -148,10 +148,11 @@ class StationNode: TappableDelegate {
         if let stationAnimationAtlasName = stationAnimationAtlasName {
             let stationAtlas = SKTextureAtlas(named: stationAnimationAtlasName)
             stationAnimationFrames = []
-            
+
+            print("node size: ", spriteNode.size)
             for currentAnimation in 0..<stationAtlas.textureNames.count {
                 let stationFrameName = stationAnimationAtlasName + "\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
-                print(stationFrameName)
+                print("texutre size: ", stationAtlas.textureNamed(stationFrameName).size())
                 stationAnimationFrames!.append(stationAtlas.textureNamed(stationFrameName))
             }
             
@@ -163,8 +164,6 @@ class StationNode: TappableDelegate {
             
             stationAnimationNode!.position = stationAnimationOffset
             stationAnimationNode!.zPosition = 3
-
-            print("Creating \(String(describing: stationAnimationNode)) with textures \(String(describing: stationAnimationFrames))")
         }
     }
     
@@ -248,7 +247,6 @@ class StationNode: TappableDelegate {
     // Scene update intercation
     func update() {
         
-        
         if stationType == .stove && !(ingredientNode?.moving ?? true),
             let ingredient = ingredientNode?.ingredient {
             
@@ -271,7 +269,7 @@ class StationNode: TappableDelegate {
             }
             
         } else if stationType == .fryer && !(ingredientNode?.moving ?? true),
-        let ingredient = ingredientNode?.ingredient  {
+        let ingredient = ingredientNode?.ingredient {
             
             ingredient.fryableComponent?.update()
             
@@ -300,8 +298,6 @@ class StationNode: TappableDelegate {
     func playAnimation() {
         print("Playing station animation")
         if let node = self.stationAnimationNode {
-            print("     Node found, yay!")
-            print("     My z \(node.zPosition) papa z\(spriteNode.zPosition)")
 
             animationRunning = true
             let timePerFrame = TimeInterval(stationAnimationDuration) / TimeInterval(stationAnimationFrames.count)
@@ -312,11 +308,9 @@ class StationNode: TappableDelegate {
                                     restore: true)
                 
             if stationAnimationRepeats {
-                print("     This one loops!")
                 animationAction = SKAction.repeatForever(animationAction)
             }
 
-            print("     Ranning!")
             node.run(animationAction)
         }
     }

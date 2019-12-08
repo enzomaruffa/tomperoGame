@@ -178,7 +178,7 @@ class InicialViewController: UIViewController, Storyboarded {
         let maxRepetitions = text.count
         var dialogText = text
         
-        textTimer = Timer.scheduledTimer(withTimeInterval: charDelay, repeats: true, block: { (timer) in
+        textTimer = Timer.scheduledTimer(withTimeInterval: charDelay, repeats: true, block: { (_) in
             let currentIndex = text.startIndex
             
             let text = (self.textLabel.text)!
