@@ -57,6 +57,7 @@ class GameScene: SKScene {
     
     var orderListNode: OrderListNode!
     var orderGenerationCounter = 400
+    let maxOrders = 3
     
     var matchStatistics: MatchStatistics?
     
@@ -207,7 +208,7 @@ class GameScene: SKScene {
         if hosting {
             orderGenerationCounter += 1
             
-            if orderGenerationCounter >= 1000 {
+            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || orders.count == 0 {
                 generateRandomOrder()
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
@@ -256,11 +257,6 @@ class GameScene: SKScene {
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
         
         orders.remove(at: orders.firstIndex { $0.isEquivalent(to: targetOrder) }!)
-        
-        if orders.isEmpty {
-            print("Orders are now empty! Generating a new one")
-            generateRandomOrder()
-        }
         
         GameConnectionManager.shared.sendEveryone(orderList: orders)
         
