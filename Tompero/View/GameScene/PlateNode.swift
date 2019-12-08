@@ -21,6 +21,8 @@ class PlateNode: MovableDelegate {
     var scaleBeforeMove: CGFloat = 1
     var alphaBeforeMove: CGFloat = 1
     
+    var moving = false
+    
     // MARK: - Initializers
     init(plate: Plate, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.plate = plate
@@ -196,6 +198,7 @@ class PlateNode: MovableDelegate {
     func moveStarted(currentPosition: CGPoint) {
         scaleBeforeMove = spriteNode.yScale
         alphaBeforeMove = spriteNode.alpha
+        moving = true
     }
     
     func moving(currentPosition: CGPoint) {
@@ -225,6 +228,8 @@ class PlateNode: MovableDelegate {
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil
+         
+        moving = false
     }
     
     func moveCancel(currentPosition: CGPoint) {

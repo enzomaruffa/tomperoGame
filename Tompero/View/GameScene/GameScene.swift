@@ -15,7 +15,7 @@ class GameScene: SKScene {
     // MARK: - Variables
     var hosting = false
     
-    var player: String = MCManager.shared.selfName
+    var player: String = "God"//MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -58,9 +58,11 @@ class GameScene: SKScene {
     var orderListNode: SKLabelNode!
     var orderGenerationCounter = 400
     
-    var teleportAnimationNode: SKSpriteNode!
-    var teleportAnimationFrames: [SKTexture]!
-    let teleportDuration = 1
+    var stationsAnimationsRunning = false
+    
+    private var teleportAnimationNode: SKSpriteNode!
+    private var teleportAnimationFrames: [SKTexture]!
+    private let teleportDuration = 1
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -187,6 +189,22 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         stations.forEach({ $0.update() })
+        
+        let isMoving = !stations.filter({ ($0.ingredientNode?.moving ?? false || $0.plateNode?.moving ?? false) }).isEmpty
+        
+        print("\(isMoving), \(stationsAnimationsRunning)")
+        
+        if isMoving && !stationsAnimationsRunning {
+            print("Should play animation!")
+            pipes.forEach({ $0.playAnimation() })
+            hatch.playAnimation()
+            stationsAnimationsRunning = true
+        } else if !isMoving && stationsAnimationsRunning {
+            print("Should stop animation!")
+            pipes.forEach({ $0.stopAnimation() })
+            hatch.stopAnimation()
+            stationsAnimationsRunning = false
+        }
         
         if hosting {
             orderGenerationCounter += 1

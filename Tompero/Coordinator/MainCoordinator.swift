@@ -21,31 +21,31 @@ class MainCoordinator: Coordinator {
 //        game(tables: [PlayerTable(type: .chopping, ingredient: nil),
 //                      PlayerTable(type: .cooking, ingredient: nil),
 //                      PlayerTable(type: .frying, ingredient: nil)], hosting: true)
-        inicial()
-//        let tables: [String : [PlayerTable]] = [
-//            "God" : [
-//                PlayerTable(type: .chopping, ingredient: nil),
-//                PlayerTable(type: .cooking, ingredient: nil),
-//                PlayerTable(type: .frying, ingredient: nil)
-//            ],
-//            "Enzo's Enzo's iPhone" : [
-//                PlayerTable(type: .chopping, ingredient: nil),
-//                PlayerTable(type: .chopping, ingredient: nil),
-//                PlayerTable(type: .chopping, ingredient: nil)
-//            ],
-//            "CU" : [
-//                PlayerTable(type: .chopping, ingredient: nil),
-//                PlayerTable(type: .chopping, ingredient: nil),
-//                PlayerTable(type: .chopping, ingredient: nil)
-//            ],
-//            "CU 2" : [
-//                PlayerTable(type: .chopping, ingredient: nil),
-//                PlayerTable(type: .chopping, ingredient: nil),
-//                PlayerTable(type: .chopping, ingredient: nil)
+//        inicial()
+        let tables: [String : [PlayerTable]] = [
+            "God" : [
+                PlayerTable(type: .plate, ingredient: nil),
+                PlayerTable(type: .cooking, ingredient: nil),
+                PlayerTable(type: .frying, ingredient: nil)
+            ],
+            "Enzo's Enzo's iPhone" : [
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil)
+            ],
+            "CU" : [
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil)
+            ],
+            "CU 2" : [
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
+            PlayerTable(type: .chopping, ingredient: nil)]]
         
+        game(rule: GameRule(difficulty: .easy, possibleIngredients: [Asteroid(), Eyes()], playerTables: tables, playerOrder: ["God", "Enzo's Enzo's iPhone", "CU", "CU 2"]), hosting: true)
     }
-    
-    
+        
     func inicial() {
         let controller = InicialViewController.instantiate()
         controller.coordinator = self
