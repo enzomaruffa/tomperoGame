@@ -7,6 +7,11 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="TitilliumWeb-Bold.ttf">
+            <string>TitilliumWeb-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Menu Collection View Controller-->
         <scene sceneID="jnH-9M-1Rh">
@@ -22,20 +27,28 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo" translatesAutoresizingMaskIntoConstraints="NO" id="I8d-xm-UVo">
                                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tela" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-Hz-46C">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundoMenu" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-Hz-46C">
                                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contorno branco" translatesAutoresizingMaskIntoConstraints="NO" id="zXq-KK-S5c">
                                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6t-DM-S8B">
-                                        <rect key="frame" x="52" y="20" width="34" height="33"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6t-DM-S8B">
+                                        <rect key="frame" x="59" y="29.5" width="61" height="59"/>
                                         <state key="normal" image="btn"/>
                                         <connections>
                                             <action selector="backPressed:" destination="ngM-n1-4Tf" eventType="touchUpInside" id="L7T-3t-7Hd"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How To:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wn7-en-ksw">
+                                        <rect key="frame" x="377" y="13.5" width="142" height="63"/>
+                                        <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="41"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="legendaMenu" translatesAutoresizingMaskIntoConstraints="NO" id="8sY-Rw-sd3">
+                                        <rect key="frame" x="700" y="30.5" width="150" height="37"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -103,16 +116,28 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.0941476" constant="1" id="0nM-Ke-jBf"/>
+                            <constraint firstItem="8sY-Rw-sd3" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" multiplier="0.25" id="2dY-zG-sad"/>
                             <constraint firstAttribute="bottom" secondItem="CL2-7B-5oQ" secondAttribute="bottom" id="CqO-CM-U7l"/>
                             <constraint firstAttribute="bottom" secondItem="0xh-LO-8NS" secondAttribute="bottom" constant="21" id="DSy-Dw-kj1"/>
+                            <constraint firstItem="wn7-en-ksw" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.175743" id="Gf7-RM-3D4"/>
                             <constraint firstItem="0xh-LO-8NS" firstAttribute="top" secondItem="JNb-eM-qbf" secondAttribute="top" constant="70" id="Mdb-03-mig"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.0482673" constant="1" id="PmO-6p-de6"/>
                             <constraint firstItem="CL2-7B-5oQ" firstAttribute="leading" secondItem="HsO-25-kPV" secondAttribute="leading" id="R0m-ic-LMV"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" constant="175" id="VYi-VC-rai"/>
                             <constraint firstItem="JNb-eM-qbf" firstAttribute="trailing" secondItem="0xh-LO-8NS" secondAttribute="trailing" id="XmM-No-mxd"/>
+                            <constraint firstItem="t6t-DM-S8B" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.075495" id="ang-Ni-eq5"/>
                             <constraint firstItem="CL2-7B-5oQ" firstAttribute="top" secondItem="HsO-25-kPV" secondAttribute="top" id="arc-dA-xBk"/>
                             <constraint firstAttribute="trailing" secondItem="CL2-7B-5oQ" secondAttribute="trailing" id="cSf-ks-sGt"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" id="ett-wh-ZJT"/>
+                            <constraint firstItem="wn7-en-ksw" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" id="f5U-6p-elr"/>
+                            <constraint firstItem="wn7-en-ksw" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" multiplier="0.23" id="f8S-EM-tlq"/>
+                            <constraint firstItem="8sY-Rw-sd3" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" multiplier="1.73" id="fmj-I0-ckm"/>
+                            <constraint firstItem="t6t-DM-S8B" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" multiplier="0.3" id="hAe-ML-6Qz"/>
+                            <constraint firstItem="8sY-Rw-sd3" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.185644" id="iLm-sO-TcZ"/>
+                            <constraint firstItem="8sY-Rw-sd3" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.0941476" id="kbH-MI-nE9"/>
+                            <constraint firstItem="t6t-DM-S8B" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" multiplier="0.2" id="uEU-uj-RmQ"/>
+                            <constraint firstItem="t6t-DM-S8B" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.150127" id="uSp-7a-SZj"/>
+                            <constraint firstItem="wn7-en-ksw" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.160305" id="wMQ-3m-x6S"/>
                             <constraint firstItem="0xh-LO-8NS" firstAttribute="leading" secondItem="JNb-eM-qbf" secondAttribute="leading" id="xrE-Hd-InD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JNb-eM-qbf"/>
@@ -131,6 +156,7 @@
         <image name="btn" width="95" height="87"/>
         <image name="contorno branco" width="2436" height="1154"/>
         <image name="fundo" width="2436" height="1154"/>
-        <image name="tela" width="2341" height="1066"/>
+        <image name="fundoMenu" width="2439" height="1155"/>
+        <image name="legendaMenu" width="377" height="85"/>
     </resources>
 </document>

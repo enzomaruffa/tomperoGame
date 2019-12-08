@@ -17,10 +17,16 @@ class InicialViewController: UIViewController, Storyboarded {
     @IBOutlet weak var host: UIImageView!
     @IBOutlet weak var frente: UIImageView!
     @IBOutlet weak var traseira: UIImageView!
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var textBox: UIImageView!
+    @IBOutlet weak var sapao: UIImageView!
+    @IBOutlet weak var viewDialog: UIView!
     
     var lightsOn = false
     var countLightsOn = 0
-    
+    var textTimer: Timer?
+    var textSapao1 = "Olá, meu nome é Sapão e eu ainda não tenho fala definida \nPor favor, me ajude!"
+    var textSapao2 = "Ainda não escolheu oque vai ser meu filho? Decide logo!"
     var kombiTimer: Timer?
     
     // MARK: - View Lifecycle
@@ -28,15 +34,17 @@ class InicialViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         let tapGestureRecognizerJoin = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         let tapGestureRecognizerHost = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizerText = UITapGestureRecognizer(target: self, action: #selector(screenTapped(tapGestureRecognizer:)))
         join.tag = 0
         join.isUserInteractionEnabled = true
         join.addGestureRecognizer(tapGestureRecognizerJoin)
         host.tag = 1
         host.isUserInteractionEnabled = true
         host.addGestureRecognizer(tapGestureRecognizerHost)
-        
+        viewDialog.addGestureRecognizer(tapGestureRecognizerText)
+        viewDialog.isUserInteractionEnabled = true
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
-            print("Timer called")
+            //print("Timer called")
             
             self.countLightsOn += 1
             
@@ -128,6 +136,8 @@ class InicialViewController: UIViewController, Storyboarded {
 //        }
         
         //airGIF.loadGif(name: "airR1")
+        animateDialog(text: textSapao1)
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,13 +151,51 @@ class InicialViewController: UIViewController, Storyboarded {
     // MARK: - Methods
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
+        //viewDialog.isHidden = true
+        
+        animateDialog(text: textSapao2)
         if tappedImage.tag == 0 {
             print("CLICOU JOIN")
             coordinator?.waitingRoom(hosting: false)
+            
         } else if tappedImage.tag == 1 {
             print("CLICOU HOST")
             coordinator?.waitingRoom(hosting: true)
         }
+    }
+    @objc func screenTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        textTimer?.invalidate()
+        textLabel.text = textSapao1
+    }
+    func animateDialog(text: String) {
+        self.textLabel.text = ""
+        if textTimer != nil {
+            textTimer!.invalidate()
+            textTimer = nil
+        }
+        let charDelay = 0.1
+        var timerRepetitions = 0
+        let maxRepetitions = text.count
+        var dialogText = text
+        
+        textTimer = Timer.scheduledTimer(withTimeInterval: charDelay, repeats: true, block: { (timer) in
+            let currentIndex = text.startIndex
+            
+            let text = (self.textLabel.text)!
+            let addedText = String(dialogText.remove(at: currentIndex))
+            
+            self.textLabel.text = text + addedText
+            
+            timerRepetitions += 1
+            if timerRepetitions >= maxRepetitions {
+                
+                self.textTimer?.invalidate()
+                self.textTimer = nil
+            }
+            
+        })
+        
+        textTimer?.fire()
     }
     
 }

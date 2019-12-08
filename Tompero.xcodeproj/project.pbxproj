@@ -34,7 +34,6 @@
 		562BCF5A23881CF900D5D51D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF5923881CF900D5D51D /* GameScene.sks */; };
 		562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5D23881CF900D5D51D /* GameScene.swift */; };
 		562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5F23881CF900D5D51D /* GameViewController.swift */; };
-		562BCF6323881CF900D5D51D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF6123881CF900D5D51D /* Main.storyboard */; };
 		562BCF6523881CFC00D5D51D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF6423881CFC00D5D51D /* Assets.xcassets */; };
 		562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */; };
 		562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF732388249E00D5D51D /* WaitingRoom.storyboard */; };
@@ -117,6 +116,8 @@
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
 		FB55FBE4239A9DAE002EBB89 /* TitilliumWeb-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB55FBE2239A9DAD002EBB89 /* TitilliumWeb-Bold.ttf */; };
 		FB55FBE5239A9DAE002EBB89 /* TitilliumWeb-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB55FBE3239A9DAD002EBB89 /* TitilliumWeb-Light.ttf */; };
+		FB55FBE8239C2824002EBB89 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB55FBE7239C2824002EBB89 /* DialogView.swift */; };
+		FB55FBEB239C33D0002EBB89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB55FBE9239C33D0002EBB89 /* Main.storyboard */; };
 		FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */; };
 		FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF38E238E9CFA00437124 /* Coordinator.swift */; };
 		FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF390238E9D6A00437124 /* Storyboarded.swift */; };
@@ -154,7 +155,6 @@
 		562BCF5923881CF900D5D51D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		562BCF5D23881CF900D5D51D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		562BCF5F23881CF900D5D51D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		562BCF6223881CF900D5D51D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		562BCF6423881CFC00D5D51D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		562BCF6723881CFC00D5D51D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		562BCF6923881CFC00D5D51D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,6 +240,8 @@
 		FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuStoryboard.storyboard; sourceTree = "<group>"; };
 		FB55FBE2239A9DAD002EBB89 /* TitilliumWeb-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Bold.ttf"; sourceTree = "<group>"; };
 		FB55FBE3239A9DAD002EBB89 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
+		FB55FBE7239C2824002EBB89 /* DialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
+		FB55FBEA239C33D0002EBB89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtention.swift; sourceTree = "<group>"; };
 		FB9BF38E238E9CFA00437124 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FB9BF390238E9D6A00437124 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -417,10 +419,11 @@
 			isa = PBXGroup;
 			children = (
 				566A5BB0239ACE77006D96CF /* GameScene */,
+				FB55FBE9239C33D0002EBB89 /* Main.storyboard */,
+				FB55FBE7239C2824002EBB89 /* DialogView.swift */,
 				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
 				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
-				562BCF6123881CF900D5D51D /* Main.storyboard */,
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 			);
@@ -613,7 +616,6 @@
 				566A5BE4239ADFDF006D96CF /* cooking2.wav in Resources */,
 				FB55FBE5239A9DAE002EBB89 /* TitilliumWeb-Light.ttf in Resources */,
 				FB9BF395238EA67500437124 /* Game.storyboard in Resources */,
-				562BCF6323881CF900D5D51D /* Main.storyboard in Resources */,
 				566A5BEF239ADFDF006D96CF /* fry1.wav in Resources */,
 				566A5C06239ADFDF006D96CF /* roundStarted2.wav in Resources */,
 				566A5C00239ADFDF006D96CF /* foodBeingPut3.wav in Resources */,
@@ -655,6 +657,7 @@
 				566A5BF8239ADFDF006D96CF /* coin2.wav in Resources */,
 				566A5BF2239ADFDF006D96CF /* fry3.wav in Resources */,
 				566A5BF5239ADFDF006D96CF /* timesUp2.wav in Resources */,
+				FB55FBEB239C33D0002EBB89 /* Main.storyboard in Resources */,
 				562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */,
 				566A5BF9239ADFDF006D96CF /* timer15Secs2.wav in Resources */,
 				FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */,
@@ -751,6 +754,7 @@
 				476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */,
 				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
 				567A07BF238C805000D6399A /* OrderList.swift in Sources */,
+				FB55FBE8239C2824002EBB89 /* DialogView.swift in Sources */,
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
 				56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */,
 				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,
@@ -779,20 +783,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		562BCF6123881CF900D5D51D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				562BCF6223881CF900D5D51D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				562BCF6723881CFC00D5D51D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FB55FBE9239C33D0002EBB89 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB55FBEA239C33D0002EBB89 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -918,7 +922,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -937,7 +941,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MSP4455P9;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

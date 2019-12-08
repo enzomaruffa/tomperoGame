@@ -46,9 +46,12 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var hatOrangeLBL: UILabel!
     @IBOutlet weak var inviteBlue: UIButton!
     @IBOutlet weak var invitePurple: UIButton!
-    @IBOutlet weak var inviteGreen: UIImageView!
+    @IBOutlet weak var inviteGreen: UIButton!
     @IBOutlet weak var inviteOrange: UIButton!
-    
+    @IBOutlet weak var hatPurpleLBLCenterY: NSLayoutConstraint!
+    @IBOutlet weak var hatGreenCenterY: NSLayoutConstraint!
+    @IBOutlet weak var hatOrangeLBLCenterY: NSLayoutConstraint!
+    @IBOutlet weak var hatBlueLBLCenterY: NSLayoutConstraint!
     // MARK: - View LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         level.setTitle("EASY", for: .normal)
@@ -62,13 +65,15 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         if hosting {
             
         } else {
+            // Images
             stackWidthConstraint.setMultiplier(multiplier: 0.8)
             stackHeightConstraint.setMultiplier(multiplier: 0.8)
-            stackCenterYConstraint.setMultiplier(multiplier: 1.0)
-            
-            stackView.frame.size.height = self.view.frame.size.height
-            stackView.frame.size.width = self.view.frame.size.width
-            stackView.frame.origin = self.view.frame.origin
+            stackCenterYConstraint.setMultiplier(multiplier: 1.15)
+            // Names
+            hatBlueLBLCenterY.setMultiplier(multiplier: 1.5)
+            hatPurpleLBLCenterY.setMultiplier(multiplier: 1.5)
+            hatOrangeLBLCenterY.setMultiplier(multiplier: 1.5)
+            hatGreenCenterY.setMultiplier(multiplier: 1.5)
             
             levelBackImage.isHidden = true
             playOutlet.isHidden = true
@@ -89,7 +94,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         let translatedTransform = viewTransform.scaledBy(x: scaleX, y: scaleY)
         let translatedAndScaledTransform = translatedTransform.translatedBy(x: (-menuButton.frame.midX + self.view.frame.midX), y: -menuButton.frame.midY + self.view.frame.midY)
         self.zoomedAndTransformed = translatedAndScaledTransform
-        
         
         let tapGestureRecognizerBlue = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         let tapGestureRecognizerPurple = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
@@ -130,12 +134,15 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
-            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+//            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
         } else {
             MCManager.shared.joinSession()
         }
         
         MCManager.shared.subscribeMatchmakingObserver(observer: self)
+        print("STATUS DO PLAYER GREEN: ", playersWithStatus[2].status.rawValue)
+        
+        print("STATUS DO PLAYER ORANGE: ", playersWithStatus[3].status.rawValue)
     }
     
     // MARK: - ActionsButtons
@@ -259,17 +266,32 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
     
     func animatedSpaceshipToUP() {
-        let positionFinal = (painelHost.frame.size.height * (917/1017))/2
+        let positionFinal = ((painelHost.frame.size.height)/2) * (917/1117)
         print(positionFinal)
         let originalTransform = CGAffineTransform.identity
         let translatedTransform = originalTransform.translatedBy(x: (0), y: positionFinal)
-        let scaledTransformAndTransform = translatedTransform.scaledBy(x: 0.1, y: 0.1)
+        let scaledTransformAndTransform = translatedTransform.scaledBy(x: 0.001, y: 0.001)
         
         UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-            //self.stackView.transform = CGAffineTransform(translationX: 0, y: -400)
             self.stackView.transform = scaledTransformAndTransform
         })
     }
+    
+//    func playAnimatedSpaceshipLeftAndRight() {
+//        let hats = [hatBlue, hatPurple, hatGreen, hatOrange]
+//        hats.forEach { (hat) in
+//            let hatAngle = atan2f(Float(hat!.transform.b), Float(hat!.transform.a))
+//            if hatAngle < 0 {
+//                UIView.animate(withDuration: self.singleAnimationDuration, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
+//                    hat!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/(1 * 14)))
+//                })
+//            } else {
+//                UIView.animate(withDuration: self.singleAnimationDuration, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
+//                    hat!.transform = CGAffineTransform(rotationAngle: CGFloat(-1 * Double.pi/14))
+//                })
+//            }
+//        }
+//    }
     
     private func updatePlayers(_ playersWithStatus: [MCPeerWithStatus]) {
         for index in 0..<playersWithStatus.count {
