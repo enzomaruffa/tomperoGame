@@ -40,6 +40,10 @@ class GameViewController: UIViewController, Storyboarded {
             view.showsNodeCount = true
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        GameConnectionManager.shared.removeAllObservers()
+    }
 
     override var shouldAutorotate: Bool {
         return true

@@ -300,12 +300,14 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
 //    }
     
     func checkGoButton(playersWithStatus: [MCPeerWithStatus]) {
-        if playersWithStatus.filter({ $0.status == .connected }).count <= 1 {
-            goButton.isEnabled = false
-            goButton.imageView?.image = UIImage(named: "go_disabled")
-        } else {
-            goButton.isEnabled = true
-            goButton.imageView?.image = UIImage(named: "go_")
+        DispatchQueue.main.async {
+            if playersWithStatus.filter({ $0.status == .connected }).count <= 1 {
+                self.goButton.isEnabled = false
+                self.goButton.imageView?.image = UIImage(named: "go_disabled")
+            } else {
+                self.goButton.isEnabled = true
+                self.goButton.imageView?.image = UIImage(named: "go_")
+            }
         }
     }
     

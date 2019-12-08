@@ -345,7 +345,7 @@ class GameScene: SKScene {
     func updateTimerUI() {
         let timerLabel = self.childNode(withName: "timerLabel") as! SKLabelNode
         
-        var currentSeconds = Int(ceil(matchTimer))
+        var currentSeconds = max(Int(ceil(matchTimer)), 0)
     
         let currentMinutes = currentSeconds / 60
         currentSeconds -= (currentMinutes * 60)
@@ -424,9 +424,15 @@ extension GameScene: GameConnectionManagerObserver {
         print("[GameScene] Received new notification")
         
         if notification.success {
+            print("[GameScene] Notification was a success! Yay!")
+            
+            print("[GameScene] Notification points are \(notification.coinsAdded)")
+            
             matchStatistics?.totalDeliveredOrders += 1
             matchStatistics?.totalPoints += notification.coinsAdded
             totalPoints += notification.coinsAdded
+            
+            print("[GameScene] Total points now are \(totalPoints)")
             
             SFX.shared.cashRegister.play()
             updateCoinsUI()
