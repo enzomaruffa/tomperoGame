@@ -59,7 +59,7 @@ class GameScene: SKScene {
     }
     
     var orderListNode: OrderListNode!
-    var orderGenerationCounter = 900
+    var orderGenerationCounter = 800
     var orderCount = 0
     let maxOrders = 3
     var firstOrder = false
@@ -72,11 +72,10 @@ class GameScene: SKScene {
     
     var totalPoints = 0
     
+    var endTimerPlayed = false
+    
     // MARK: - Animation Variables
     var stationsAnimationsRunning = false
-    
-    var timesUpPlayed = false
-    var endTimerPlayed = false
     
     // Teleport variables
     private var teleportAnimationNode: SKSpriteNode!
@@ -218,13 +217,14 @@ class GameScene: SKScene {
         orderListNode.update()
         
         if hosting {
-            orderGenerationCounter += 1
+            orderGenerationCounter += 2
             
             if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
                 generateRandomOrder()
                 if firstOrder {
                     SFX.shared.orderUp.play()
                 }
+                orderListNode.jump()
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
                 
@@ -237,7 +237,7 @@ class GameScene: SKScene {
             
             if self.orders.count == 1 && !firstOrder {
                 firstOrder = true
-                // music starts playing
+                MusicPlayer.shared.play(.game)
             }
             
         }
@@ -266,11 +266,8 @@ class GameScene: SKScene {
         }
         
         if matchTimer < 0 {
-            if !timesUpPlayed {
-                timesUpPlayed = true
-                SFX.shared.timesUp.play()
-                MusicPlayer.shared.stop(.game)
-            }
+            SFX.shared.timesUp.play()
+            MusicPlayer.shared.stop(.game)
            	
             if hosting {
 				self.isPaused = true
@@ -407,6 +404,8 @@ extension GameScene: GameConnectionManagerObserver {
         if firstOrder {
             SFX.shared.orderUp.play()
         }
+        
+        orderListNode.jump()
         
         if self.orders.count == 1 && !firstOrder {
             firstOrder = true
