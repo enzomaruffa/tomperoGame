@@ -60,24 +60,25 @@ class StationNode: TappableDelegate {
         }
     }
     
+    var indicatorNode: SKSpriteNode?
+    
     var ingredientNode: IngredientNode? {
         didSet {
             ingredientNode?.spriteNode.setScale(ingredientNodeScale)
             
             if stationType == .stove || stationType == .fryer {
-                var indicatorNode = spriteNode.children.first as? SKSpriteNode
                 if indicatorNode == nil {
                     indicatorNode = SKSpriteNode(imageNamed: "IngredientIndicator")
                     spriteNode.addChild(indicatorNode!)
                     indicatorNode!.zPosition = 5
                     indicatorNode!.scale(to: CGSize(width: 170, height: 170))
-                    indicatorNode!.position = CGPoint(x: -260, y: 170)
+                    indicatorNode!.position = CGPoint(x: 240, y: 150)
                 }
                 
                 if let ingredient = ingredientNode?.ingredient {
                     let iconNode = SKSpriteNode(imageNamed: ingredient.texturePrefix + "Icon")
                     iconNode.zPosition = 6
-                    iconNode.scale(to: CGSize(width: 110, height: 110))
+                    iconNode.scale(to: CGSize(width: 100, height: 100))
                     indicatorNode?.addChild(iconNode)
                 } else {
                     indicatorNode?.removeAllChildren()

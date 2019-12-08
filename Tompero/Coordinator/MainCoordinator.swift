@@ -24,8 +24,8 @@ class MainCoordinator: Coordinator {
             let tables: [String : [PlayerTable]] = [
                 "iPhone 11 [Enzo]" : [
                     PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .cooking, ingredient: nil),
-                    PlayerTable(type: .plate, ingredient: nil)
+                    PlayerTable(type: .frying, ingredient: nil),
+                    PlayerTable(type: .ingredient, ingredient: Eyes())
                 ],
                 "Enzo's Enzo's iPhone" : [
                     PlayerTable(type: .chopping, ingredient: nil),
