@@ -18,7 +18,7 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = true
+        let gameSceneTest: Bool = false
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [
@@ -68,6 +68,10 @@ class MainCoordinator: Coordinator {
         
         inicial()
     }
+    
+    func popToRoot() {
+        navigationController.popToRootViewController(animated: true)
+    }
         
     func inicial() {
         let controller = InicialViewController.instantiate()
@@ -94,6 +98,13 @@ class MainCoordinator: Coordinator {
         controller.coordinator = self
         controller.hosting = hosting
         controller.rule = rule
+        navigationController.pushViewController(controller, animated: false)
+    }
+    
+    func statistics(statistics: MatchStatistics) {
+        let controller = StatisticsViewController.instantiate()
+        controller.coordinator = self
+        controller.statistics = statistics
         navigationController.pushViewController(controller, animated: false)
     }
     

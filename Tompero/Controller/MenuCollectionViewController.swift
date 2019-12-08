@@ -11,7 +11,7 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     weak var coordinator: MainCoordinator?
     
     // MARK: - Storyboarded
-    static var storyboardName = "MenuCollectionViewController"
+    static var storyboardName = "MenuStoryboard"
     
     // MARK: - ViewLifecycle
     override func viewDidLoad() {

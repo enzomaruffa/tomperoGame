@@ -12,10 +12,13 @@ import GameplayKit
 // swiftlint:disable force_cast
 class GameScene: SKScene {
     
-    // MARK: - Variables
+    // MARK: - Coordinator
+    weak var coordinator: MainCoordinator?
+    
+    // MARK: - Game Variables
     var hosting = false
     
-    var player: String = "God"//MCManager.shared.selfName
+    var player: String = MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -56,18 +59,19 @@ class GameScene: SKScene {
     }
     
     var orderListNode: OrderListNode!
-    var orderGenerationCounter = 900
+    var orderGenerationCounter = 500
     var orderCount = 0
     let maxOrders = 3
     
     var matchStatistics: MatchStatistics?
     
-    var matchTimer = 180.0
+    var matchTimer = Float(120)
     var timerStarted = false
     var timerUpdateCounter = 0
     
     var totalPoints = 0
     
+    // MARK: - Animation Variables
     var stationsAnimationsRunning = false
     
     // Teleport variables
@@ -208,9 +212,9 @@ class GameScene: SKScene {
         orderListNode.update()
         
         if hosting {
-            orderGenerationCounter += 1
+            orderGenerationCounter += 500
             
-            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || orders.isEmpty {
+            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
                 generateRandomOrder()
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
@@ -247,7 +251,9 @@ class GameScene: SKScene {
         }
         
         if hosting && matchTimer < 0 {
+            self.isPaused = true
             GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
+            coordinator?.statistics(statistics: matchStatistics!)
         }
     }
     
@@ -302,6 +308,8 @@ class GameScene: SKScene {
         return true
     }
     
+    
+    // MARK: - UI Updates
     func updateOrderUI(_ orders: [Order]) {
         orderListNode.updateList(orders)
     }
@@ -368,7 +376,7 @@ extension GameScene: GameConnectionManagerObserver {
         print("[GameScene] Received new orderList")
         self.orders = orders
         
-        if !timerStarted {
+        if !timerStarted && !orders.isEmpty {
             timerStarted = true
         }
         
@@ -388,6 +396,9 @@ extension GameScene: GameConnectionManagerObserver {
     
     func receiveStatistics(statistics: MatchStatistics) {
         self.isPaused = true
+        DispatchQueue.main.async {
+            self.coordinator?.statistics(statistics: statistics)
+        }
     }
     
 }

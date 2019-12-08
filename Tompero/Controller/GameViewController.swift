@@ -27,6 +27,7 @@ class GameViewController: UIViewController, Storyboarded {
                 // Set the scale mode to scale to fit the window
                 scene.rule = self.rule
                 scene.hosting = self.hosting
+                scene.coordinator = self.coordinator
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene
