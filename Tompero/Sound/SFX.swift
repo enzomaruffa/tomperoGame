@@ -13,8 +13,8 @@ class SFX {
     
     static let shared = SFX()
     
-    let putFoodDown     = CustomAudioPlayer(fileName: "putFoodDown.wav")
     let takeFood        = CustomAudioPlayer(fileName: "takeFood.wav")
+    let putFoodDown     = CustomAudioPlayer(fileName: "putFoodDown.wav")
     
     let chop            = CustomAudioPlayer(fileName: "chopping.wav")
     let cooking         = CustomAudioPlayer(fileName: "cooking.wav")

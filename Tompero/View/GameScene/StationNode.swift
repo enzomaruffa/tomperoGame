@@ -207,6 +207,8 @@ class StationNode: TappableDelegate {
     func tap() {
         
         if stationType == .board {
+            SFX.shared.chop.play()
+            
             let ingredient = ingredientNode?.ingredient
             ingredient?.choppableComponent?.update()
             
@@ -247,7 +249,6 @@ class StationNode: TappableDelegate {
     
     // Scene update intercation
     func update() {
-        
         
         if stationType == .stove && !(ingredientNode?.moving ?? true),
             let ingredient = ingredientNode?.ingredient {

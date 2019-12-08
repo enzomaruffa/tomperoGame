@@ -380,6 +380,7 @@
 				562BCF6923881CFC00D5D51D /* Info.plist */,
 				FB9BF38D238E9CDB00437124 /* Coordinator */,
 				476925C82390AA1200FBAB1F /* Extensions */,
+				566E9BD8239D7BB800787210 /* Sound */,
 				562BCF6F2388232700D5D51D /* Model */,
 				562BCF702388233700D5D51D /* View */,
 				562BCF712388234800D5D51D /* Controller */,
@@ -392,7 +393,6 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				566E9BD8239D7BB800787210 /* Sound */,
 				4722D484238FF317003D373C /* Components */,
 				56E2D7C5238DC97D000F8A3F /* IngredientState.swift */,
 				567A07A4238C805000D6399A /* Ingredient.swift */,
@@ -479,8 +479,8 @@
 		566E9C73239D7E9000787210 /* SFX */ = {
 			isa = PBXGroup;
 			children = (
-				566E9C81239D7EC000787210 /* putFoodDown.wav */,
 				566E9C79239D7EBF00787210 /* takeFood.wav */,
+				566E9C81239D7EC000787210 /* putFoodDown.wav */,
 				566E9C7D239D7EBF00787210 /* chopping.wav */,
 				566E9C74239D7EBE00787210 /* cooking.wav */,
 				566E9C7B239D7EBF00787210 /* frying.wav */,
