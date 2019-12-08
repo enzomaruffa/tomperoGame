@@ -15,7 +15,7 @@ class GameScene: SKScene {
     // MARK: - Variables
     var hosting = false
     
-    var player: String = "God"//MCManager.shared.selfName
+    var player: String = MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
