@@ -176,6 +176,8 @@ class GameScene: SKScene {
         let timerContainer = self.childNode(withName: "timerContainer") as! SKSpriteNode
         timerContainer.texture = SKTexture(imageNamed: "Timer" + playerColor)
         
+        (self.childNode(withName: "timerLabel") as! SKLabelNode).horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        
         updateTimerUI()
         updateCoinsUI()
     }
