@@ -90,6 +90,8 @@
 		567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AC238C805000D6399A /* SpaceshipHull.swift */; };
 		567A07C0238C805000D6399A /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AF238C805000D6399A /* MarsSand.swift */; };
 		569B4D2A239E67E20057C7CC /* TrackWithIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4D29239E67E20057C7CC /* TrackWithIntro.swift */; };
+		569B4D35239E6D610057C7CC /* gameMusicIntro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */; };
+		569B4D36239E6D610057C7CC /* gameMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 569B4D34239E6D610057C7CC /* gameMusic.m4a */; };
 		56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B52391B93B005E0807 /* IngredientNode.swift */; };
 		56B3A7BA2391CDC7005E0807 /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B92391CDC7005E0807 /* StationType.swift */; };
 		56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */; };
@@ -201,8 +203,8 @@
 		567A07AC238C805000D6399A /* SpaceshipHull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHull.swift; sourceTree = "<group>"; };
 		567A07AF238C805000D6399A /* MarsSand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
 		569B4D29239E67E20057C7CC /* TrackWithIntro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWithIntro.swift; sourceTree = "<group>"; };
-		569B4D30239E68DC0057C7CC /* gameMusicIntro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusicIntro.m4a; sourceTree = "<group>"; };
-		569B4D31239E68DC0057C7CC /* gameMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusic.m4a; sourceTree = "<group>"; };
+		569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusicIntro.m4a; sourceTree = "<group>"; };
+		569B4D34239E6D610057C7CC /* gameMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusic.m4a; sourceTree = "<group>"; };
 		56B3A7B52391B93B005E0807 /* IngredientNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientNode.swift; sourceTree = "<group>"; };
 		56B3A7B92391CDC7005E0807 /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
 		56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoppableComponent.swift; sourceTree = "<group>"; };
@@ -464,7 +466,7 @@
 		566A5BB4239ADE43006D96CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				569B4D2B239E68090057C7CC /* Music */,
+				569B4D32239E6D610057C7CC /* Music */,
 				566E9C73239D7E9000787210 /* SFX */,
 				47BE3ECB239C1DD600246F20 /* Animations */,
 				FB55FBE6239A9DB5002EBB89 /* Font */,
@@ -507,11 +509,11 @@
 			path = SFX;
 			sourceTree = "<group>";
 		};
-		569B4D2B239E68090057C7CC /* Music */ = {
+		569B4D32239E6D610057C7CC /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				569B4D31239E68DC0057C7CC /* gameMusic.m4a */,
-				569B4D30239E68DC0057C7CC /* gameMusicIntro.m4a */,
+				569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */,
+				569B4D34239E6D610057C7CC /* gameMusic.m4a */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -608,6 +610,7 @@
 				FB55FBE5239A9DAE002EBB89 /* TitilliumWeb-Light.ttf in Resources */,
 				476B7C95239C3276004D4116 /* PipeVacuum.atlas in Resources */,
 				566E9C87239D7EC100787210 /* cashRegister.wav in Resources */,
+				569B4D36239E6D610057C7CC /* gameMusic.m4a in Resources */,
 				566E9C90239D7EC100787210 /* putFoodDown.wav in Resources */,
 				FB9BF395238EA67500437124 /* Game.storyboard in Resources */,
 				566E9C91239D7EC100787210 /* teleporter.wav in Resources */,
@@ -634,6 +637,7 @@
 				566E9C84239D7EC100787210 /* endTimer.wav in Resources */,
 				566E9C8E239D7EC100787210 /* timesUp.wav in Resources */,
 				FB55FBEB239C33D0002EBB89 /* Main.storyboard in Resources */,
+				569B4D35239E6D610057C7CC /* gameMusicIntro.m4a in Resources */,
 				566E9C88239D7EC100787210 /* takeFood.wav in Resources */,
 				562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */,
 				FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */,
