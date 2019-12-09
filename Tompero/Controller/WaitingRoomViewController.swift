@@ -94,7 +94,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MusicPlayer.shared.play(.menu)
+        //MusicPlayer.shared.play(.menu)
         
         //ZOOM do menu
         let viewTransform = self.view.transform
