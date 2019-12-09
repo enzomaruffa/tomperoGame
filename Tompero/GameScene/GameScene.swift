@@ -18,7 +18,7 @@ class GameScene: SKScene {
     // MARK: - Game Variables
     var hosting = false
     
-    var player: String = MCManager.shared.selfName
+    var player: String = "God"//MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -84,6 +84,25 @@ class GameScene: SKScene {
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
+        
+        // Scale view size to device
+        let desiredWidth = CGFloat(2436)
+        let desiredHeight = CGFloat(1154)
+        
+        var currentViewSize = self.viewSizeInLocalCoordinates()
+        
+        let requiredScale = max(desiredWidth / currentViewSize.width, desiredHeight / currentViewSize.height)
+        
+        let cameraNode = SKCameraNode()
+        self.camera = cameraNode
+        self.scene?.addChild(cameraNode)
+        
+        self.camera?.setScale(requiredScale)
+        
+        currentViewSize = self.viewSizeInLocalCoordinates(ignoreCameraScale: false)
+        let offset = (desiredHeight - currentViewSize.height) / 2
+        cameraNode.position = CGPoint(x: 0, y: -offset)
+        
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
         
@@ -178,9 +197,9 @@ class GameScene: SKScene {
     
     func setupBackground() {
         let background = self.childNode(withName: "background") as! SKSpriteNode
-        background.texture = SKTexture(imageNamed: "Background" + playerColor)
+        background.texture = SKTexture(imageNamed: "BackgroundX" + playerColor)
     }
-
+    
     func setupHUD() {
         let timerContainer = self.childNode(withName: "timerContainer") as! SKSpriteNode
         timerContainer.texture = SKTexture(imageNamed: "Timer" + playerColor)
@@ -268,11 +287,11 @@ class GameScene: SKScene {
         if matchTimer < 0 {
             SFX.shared.timesUp.play()
             MusicPlayer.shared.stop(.game)
-           	
+            
             if hosting {
-				self.isPaused = true
+                self.isPaused = true
                 GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
-				coordinator?.statistics(statistics: matchStatistics!)
+                coordinator?.statistics(statistics: matchStatistics!)
             }
         }
         
@@ -324,7 +343,7 @@ class GameScene: SKScene {
         
         orderGenerationCounter = 0
         updateOrderUI(orders)
-
+        
         matchStatistics?.totalDeliveredOrders += 1
         matchStatistics?.totalPoints += notification.coinsAdded
         totalPoints += notification.coinsAdded
@@ -343,7 +362,7 @@ class GameScene: SKScene {
         let timerLabel = self.childNode(withName: "timerLabel") as! SKLabelNode
         
         var currentSeconds = max(Int(ceil(matchTimer)), 0)
-    
+        
         let currentMinutes = currentSeconds / 60
         currentSeconds -= (currentMinutes * 60)
         
