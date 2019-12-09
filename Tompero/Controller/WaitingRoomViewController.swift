@@ -36,29 +36,29 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var levelBackImage: UIImageView!
     
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var stackWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var stackHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var stackCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet var stackWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var stackHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var stackCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player1Image: UIImageView!
     @IBOutlet weak var player1Label: UILabel!
     @IBOutlet weak var player1InviteButton: UIButton!
-    @IBOutlet weak var player1LabelCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet var player1LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player2Image: UIImageView!
     @IBOutlet weak var player2Label: UILabel!
     @IBOutlet weak var player2InviteButton: UIButton!
-    @IBOutlet weak var player2LabelCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet var player2LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player3Image: UIImageView!
     @IBOutlet weak var player3Label: UILabel!
     @IBOutlet weak var player3InviteButton: UIButton!
-    @IBOutlet weak var player3LabelCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet var player3LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player4Image: UIImageView!
     @IBOutlet weak var player4Label: UILabel!
     @IBOutlet weak var player4InviteButton: UIButton!
-    @IBOutlet weak var player4LabelCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet var player4LabelCenterYConstraint: NSLayoutConstraint!
     
     // MARK: - View LifeCycle
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +89,12 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         
         stackView.layoutIfNeeded()
         updatePlayers(playersWithStatus)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if isZoomed {
+            zoomOut()
+        }
     }
     
     override func viewDidLoad() {
@@ -226,6 +232,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             }, completion: { (_) in
                 self.view.layoutSubviews()
             })
+            self.isZoomed = false
         }
     }
     
