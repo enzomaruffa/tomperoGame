@@ -198,7 +198,7 @@ class GameScene: SKScene {
     
     func setupBackground() {
         let background = self.childNode(withName: "background") as! SKSpriteNode
-        background.texture = SKTexture(imageNamed: "BackgroundX" + playerColor)
+        background.texture = SKTexture(imageNamed: "BackgroundXL" + playerColor)
     }
     
     func setupHUD() {
