@@ -15,8 +15,6 @@ class InicialViewController: UIViewController, Storyboarded {
     // MARK: - Outlets
     @IBOutlet weak var join: UIImageView!
     @IBOutlet weak var host: UIImageView!
-    @IBOutlet weak var frente: UIImageView!
-    @IBOutlet weak var traseira: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var textBox: UIImageView!
     @IBOutlet weak var sapao: UIImageView!
