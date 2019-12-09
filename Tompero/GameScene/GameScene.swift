@@ -231,7 +231,6 @@ class GameScene: SKScene {
                     orderListNode.open()
                 }
                 
-                orderListNode.jump()
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
                 
