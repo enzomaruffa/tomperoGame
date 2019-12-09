@@ -205,7 +205,7 @@ class StationNode: TappableDelegate {
             
         } else if stationType == .shelf
                 || stationType == .delivery
-                ||  stationType == .pipe
+                || stationType == .pipe
                 || stationType == .hatch {
             
             self.spriteNode = spriteNode!
@@ -375,9 +375,10 @@ class StationNode: TappableDelegate {
             var animationAction = SKAction.animate(
                                     with: stationAnimationFrames,
                                     timePerFrame: timePerFrame,
-                                    resize: false,
-                                    restore: true)
-                
+                                    resize: stationType == .hatch ? true : false,
+                                    restore: true
+            )
+            
             if stationAnimationRepeats {
                 animationAction = SKAction.repeatForever(animationAction)
             }
@@ -392,6 +393,10 @@ class StationNode: TappableDelegate {
         case .fryer: SFXPlayer.shared.frying.stop()
         case .hatch: SFXPlayer.shared.airSuction.stop()
         default: break
+        }
+        
+        if stationType == .hatch {
+            stationAnimationNode?.size = CGSize(width: 792*0.8, height: 668*0.8)
         }
         
         animationRunning = false

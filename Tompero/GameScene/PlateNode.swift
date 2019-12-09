@@ -84,6 +84,10 @@ class PlateNode: MovableDelegate {
             self.plate.ingredients.append(ingredientNode.ingredient)
             self.updateTexture()
             
+            currentStation = station
+            currentStation.plateNode = self
+            
+            currentStation.ingredientNode = nil
             //TODO: Remove ingredient node from scene destroy it whatever
             ingredientNode.spriteNode.removeFromParent()
         } else {

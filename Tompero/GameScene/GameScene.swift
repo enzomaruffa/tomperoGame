@@ -243,8 +243,10 @@ class GameScene: SKScene {
                 generateRandomOrder()
                 if firstOrder {
                     SFXPlayer.shared.orderUp.play()
+                    orderListNode.jump()
+                } else {
+                    orderListNode.open()
                 }
-                orderListNode.jump()
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
                 
@@ -289,8 +291,8 @@ class GameScene: SKScene {
             if !timesUpPlayed {
                 timesUpPlayed = true
                 SFXPlayer.shared.timesUp.play()
+                MusicPlayer.shared.stop(.game)
             }
-            MusicPlayer.shared.stop(.game)
             
             if hosting {
                 self.isPaused = true
@@ -426,9 +428,10 @@ extension GameScene: GameConnectionManagerObserver {
         
         if firstOrder {
             SFXPlayer.shared.orderUp.play()
+            orderListNode.jump()
+        } else {
+            orderListNode.open()
         }
-        
-        orderListNode.jump()
         
         if self.orders.count == 1 && !firstOrder {
             firstOrder = true

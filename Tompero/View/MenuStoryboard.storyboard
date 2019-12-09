@@ -16,7 +16,7 @@
         <!--Menu Collection View Controller-->
         <scene sceneID="jnH-9M-1Rh">
             <objects>
-                <viewController storyboardIdentifier="MenuCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ngM-n1-4Tf" customClass="MenuCollectionViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ngM-n1-4Tf" customClass="MenuCollectionViewController" customModule="SpaceSpice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HsO-25-kPV">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo" translatesAutoresizingMaskIntoConstraints="NO" id="I8d-xm-UVo">
                                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundoMenu" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-Hz-46C">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-Hz-46C">
                                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contorno branco" translatesAutoresizingMaskIntoConstraints="NO" id="zXq-KK-S5c">
@@ -46,9 +46,6 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="legendaMenu" translatesAutoresizingMaskIntoConstraints="NO" id="8sY-Rw-sd3">
-                                        <rect key="frame" x="700" y="30.5" width="150" height="37"/>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -76,14 +73,14 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="menuCell" id="9aL-i4-lbq" customClass="MenuCollectionViewCell" customModule="Tompero" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="menuCell" id="9aL-i4-lbq" customClass="MenuCollectionViewCell" customModule="SpaceSpice" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="-1.5" width="808" height="326"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dlA-IM-DaQ">
                                             <rect key="frame" x="0.0" y="0.0" width="808" height="326"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tlH-Zh-DEs">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ingredientes 1" translatesAutoresizingMaskIntoConstraints="NO" id="tlH-Zh-DEs">
                                                     <rect key="frame" x="0.0" y="0.0" width="808" height="326"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
@@ -116,10 +113,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.0941476" constant="1" id="0nM-Ke-jBf"/>
-                            <constraint firstItem="8sY-Rw-sd3" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" multiplier="0.25" id="2dY-zG-sad"/>
                             <constraint firstAttribute="bottom" secondItem="CL2-7B-5oQ" secondAttribute="bottom" id="CqO-CM-U7l"/>
                             <constraint firstAttribute="bottom" secondItem="0xh-LO-8NS" secondAttribute="bottom" constant="21" id="DSy-Dw-kj1"/>
-                            <constraint firstItem="wn7-en-ksw" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.175743" id="Gf7-RM-3D4"/>
                             <constraint firstItem="0xh-LO-8NS" firstAttribute="top" secondItem="JNb-eM-qbf" secondAttribute="top" constant="70" id="Mdb-03-mig"/>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.0482673" constant="1" id="PmO-6p-de6"/>
                             <constraint firstItem="CL2-7B-5oQ" firstAttribute="leading" secondItem="HsO-25-kPV" secondAttribute="leading" id="R0m-ic-LMV"/>
@@ -131,10 +126,7 @@
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" id="ett-wh-ZJT"/>
                             <constraint firstItem="wn7-en-ksw" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" id="f5U-6p-elr"/>
                             <constraint firstItem="wn7-en-ksw" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" multiplier="0.23" id="f8S-EM-tlq"/>
-                            <constraint firstItem="8sY-Rw-sd3" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" multiplier="1.73" id="fmj-I0-ckm"/>
                             <constraint firstItem="t6t-DM-S8B" firstAttribute="centerY" secondItem="JNb-eM-qbf" secondAttribute="centerY" multiplier="0.3" id="hAe-ML-6Qz"/>
-                            <constraint firstItem="8sY-Rw-sd3" firstAttribute="width" secondItem="JNb-eM-qbf" secondAttribute="width" multiplier="0.185644" id="iLm-sO-TcZ"/>
-                            <constraint firstItem="8sY-Rw-sd3" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.0941476" id="kbH-MI-nE9"/>
                             <constraint firstItem="t6t-DM-S8B" firstAttribute="centerX" secondItem="JNb-eM-qbf" secondAttribute="centerX" multiplier="0.2" id="uEU-uj-RmQ"/>
                             <constraint firstItem="t6t-DM-S8B" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.150127" id="uSp-7a-SZj"/>
                             <constraint firstItem="wn7-en-ksw" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.160305" id="wMQ-3m-x6S"/>
@@ -156,7 +148,6 @@
         <image name="btn" width="95" height="87"/>
         <image name="contorno branco" width="2436" height="1154"/>
         <image name="fundo" width="2436" height="1154"/>
-        <image name="fundoMenu" width="2439" height="1155"/>
-        <image name="legendaMenu" width="377" height="85"/>
+        <image name="ingredientes 1" width="2053" height="684"/>
     </resources>
 </document>
