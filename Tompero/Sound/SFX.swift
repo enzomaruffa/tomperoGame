@@ -9,6 +9,7 @@
 import Foundation
 import AVFoundation
 
+// swiftlint:disable type_name
 class SFX {
     
     static let shared = SFX()
