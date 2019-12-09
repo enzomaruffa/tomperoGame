@@ -31,7 +31,7 @@
                                         <rect key="frame" x="266" y="154" width="59" height="39"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frente da nave" translatesAutoresizingMaskIntoConstraints="NO" id="YnC-Lw-Xi6" userLabel="Frente">
-                                        <rect key="frame" x="332.99999999999994" y="108.5" width="525.50000000000011" height="223"/>
+                                        <rect key="frame" x="333" y="108.5" width="525.5" height="223"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HOST - apagado" translatesAutoresizingMaskIntoConstraints="NO" id="Epk-JO-UC2">
                                         <rect key="frame" x="564" y="146" width="98" height="55"/>
