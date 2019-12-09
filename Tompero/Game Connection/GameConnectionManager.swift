@@ -26,6 +26,10 @@ class GameConnectionManager {
         observers.append(observer)
     }
     
+    func removeAllObservers() {
+        observers.removeAll()
+    }
+    
     func sendEveryone(message: String) {
         do {
             print("[GameConnectionManager] Preparing message")

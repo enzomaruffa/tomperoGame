@@ -15,12 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo" translatesAutoresizingMaskIntoConstraints="NO" id="aWv-b4-g28">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lataria" translatesAutoresizingMaskIntoConstraints="NO" id="Fuu-O0-8wV">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVr-Z2-Eoq">
                                 <rect key="frame" x="426" y="192" width="44" height="30"/>
-                                <state key="normal" title="MENU"/>
+                                <state key="normal" title="MENU">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="menuPressed:" destination="nh9-NX-o6y" eventType="touchUpInside" id="ebi-xs-jqh"/>
                                 </connections>
@@ -28,12 +33,16 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="aWv-b4-g28" firstAttribute="width" secondItem="Fuu-O0-8wV" secondAttribute="width" id="0Qi-Kk-Ji9"/>
                             <constraint firstItem="Fuu-O0-8wV" firstAttribute="leading" secondItem="0mH-vg-ysg" secondAttribute="leading" id="2jW-74-xBr"/>
                             <constraint firstItem="FVr-Z2-Eoq" firstAttribute="centerX" secondItem="Fuu-O0-8wV" secondAttribute="centerX" id="E4F-YS-YgU"/>
+                            <constraint firstItem="aWv-b4-g28" firstAttribute="centerY" secondItem="Fuu-O0-8wV" secondAttribute="centerY" id="NH7-Aa-0fL"/>
                             <constraint firstItem="FVr-Z2-Eoq" firstAttribute="centerY" secondItem="Fuu-O0-8wV" secondAttribute="centerY" id="f7p-ci-1Vf"/>
                             <constraint firstAttribute="trailing" secondItem="Fuu-O0-8wV" secondAttribute="trailing" id="k0T-N6-KzE"/>
                             <constraint firstItem="Fuu-O0-8wV" firstAttribute="top" secondItem="0mH-vg-ysg" secondAttribute="top" id="plg-tl-0IN"/>
+                            <constraint firstItem="aWv-b4-g28" firstAttribute="height" secondItem="Fuu-O0-8wV" secondAttribute="height" id="qco-Fu-AIR"/>
                             <constraint firstAttribute="bottom" secondItem="Fuu-O0-8wV" secondAttribute="bottom" id="vnf-1x-fgS"/>
+                            <constraint firstItem="aWv-b4-g28" firstAttribute="centerX" secondItem="Fuu-O0-8wV" secondAttribute="centerX" id="ypQ-Ia-ksz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9ES-aO-VER"/>
                     </view>
@@ -44,6 +53,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fundo" width="2436" height="1154"/>
         <image name="lataria" width="2436" height="1154"/>
     </resources>
 </document>
