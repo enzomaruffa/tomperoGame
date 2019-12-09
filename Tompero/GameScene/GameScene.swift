@@ -124,6 +124,8 @@ class GameScene: SKScene {
     func setupOrderListNode() {
         orderListNode = (childNode(withName: "orders") as! OrderListNode)
         orderListNode.texture = SKTexture(imageNamed: "OrderList" + playerColor)
+        orderListNode.normalSetup()
+        orderListNode.close()
     }
     
     func setupStations() {
@@ -243,8 +245,11 @@ class GameScene: SKScene {
                 generateRandomOrder()
                 if firstOrder {
                     SFXPlayer.shared.orderUp.play()
+                    orderListNode.jump()
+                } else {
+                    orderListNode.open()
                 }
-                orderListNode.jump()
+                
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
                 
@@ -426,9 +431,10 @@ extension GameScene: GameConnectionManagerObserver {
         
         if firstOrder {
             SFXPlayer.shared.orderUp.play()
+            orderListNode.jump()
+        } else {
+            orderListNode.open()
         }
-        
-        orderListNode.jump()
         
         if self.orders.count == 1 && !firstOrder {
             firstOrder = true
