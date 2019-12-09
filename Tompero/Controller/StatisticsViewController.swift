@@ -27,7 +27,6 @@ class StatisticsViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Do any additional setup after loading the view.
         deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) delivered orders!"
         
@@ -40,6 +39,5 @@ class StatisticsViewController: UIViewController, Storyboarded {
     @IBAction func menuPressed(_ sender: Any) {
         coordinator?.popToRoot()
     }
-    
     
 }

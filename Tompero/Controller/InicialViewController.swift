@@ -27,7 +27,7 @@ class InicialViewController: UIViewController, Storyboarded {
     Okay, okay…. I know this Food-Ship doesn’t look like the best investment in the galaxy, but you'll see. This lil' baby is gonna make it rain!
     Oh! To begin working you need to go to the central food supply station. Who wants to drive? You can go in the front. The rest can sit in the back!
     """
-    var textSapao2 = "C'mon, just go!"
+    var textSapao2 = "C'mon! Just GO!"
     var kombiTimer: Timer?
     
     // MARK: - View Lifecycle
