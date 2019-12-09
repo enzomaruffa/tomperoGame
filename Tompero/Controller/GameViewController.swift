@@ -35,9 +35,6 @@ class GameViewController: UIViewController, Storyboarded {
             }
             
             view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
         }
     }
     
