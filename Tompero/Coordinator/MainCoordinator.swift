@@ -18,14 +18,14 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = false
+        let gameSceneTest: Bool = true
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [
                 "God" : [
                     PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .frying, ingredient: nil),
-                    PlayerTable(type: .ingredient, ingredient: Eyes())
+                    PlayerTable(type: .cooking, ingredient: nil),
+                    PlayerTable(type: .ingredient, ingredient: Tentacle())
                 ],
                 "Enzo's Enzo's iPhone" : [
                     PlayerTable(type: .chopping, ingredient: nil),
@@ -68,6 +68,10 @@ class MainCoordinator: Coordinator {
         
         inicial()
     }
+    
+    func popToRoot() {
+        navigationController.popToRootViewController(animated: true)
+    }
         
     func inicial() {
         let controller = InicialViewController.instantiate()
@@ -78,6 +82,7 @@ class MainCoordinator: Coordinator {
     func menu() {
         let controller = MenuCollectionViewController.instantiate()
         controller.coordinator = self
+        controller.modalTransitionStyle = .crossDissolve
         navigationController.pushViewController(controller, animated: false)
     }
     
@@ -93,6 +98,13 @@ class MainCoordinator: Coordinator {
         controller.coordinator = self
         controller.hosting = hosting
         controller.rule = rule
+        navigationController.pushViewController(controller, animated: false)
+    }
+    
+    func statistics(statistics: MatchStatistics) {
+        let controller = StatisticsViewController.instantiate()
+        controller.coordinator = self
+        controller.statistics = statistics
         navigationController.pushViewController(controller, animated: false)
     }
     

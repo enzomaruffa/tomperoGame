@@ -27,6 +27,7 @@ class GameViewController: UIViewController, Storyboarded {
                 // Set the scale mode to scale to fit the window
                 scene.rule = self.rule
                 scene.hosting = self.hosting
+                scene.coordinator = self.coordinator
                 scene.scaleMode = .aspectFill
                 
                 // Present the scene
@@ -38,6 +39,10 @@ class GameViewController: UIViewController, Storyboarded {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        GameConnectionManager.shared.removeAllObservers()
     }
 
     override var shouldAutorotate: Bool {

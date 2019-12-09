@@ -26,7 +26,13 @@ class Ingredient: HasSprite, Equatable, Codable {
     }
     
     var states: [IngredientState: [IngredientState]] = [:]
-    var currentState: IngredientState = .raw
+    var currentState: IngredientState = .raw {
+        willSet(value) {
+            if value == .burnt {
+                SFX.shared.burn.play()
+            }
+        }
+    }
     var finalState: IngredientState
     var isReady: Bool {
         currentState == finalState
@@ -46,9 +52,29 @@ class Ingredient: HasSprite, Equatable, Codable {
         self.finalState = ingredient.finalState
         self.states = ingredient.states
         self.currentState = ingredient.currentState
-        self.choppableComponent = ingredient.choppableComponent
-        self.cookableComponent = ingredient.cookableComponent
-        self.fryableComponent = ingredient.fryableComponent
+        
+        if let choppableComponent = ingredient.choppableComponent {
+            self.choppableComponent = ChoppableComponent(
+                chopProgress: choppableComponent.chopProgress,
+                chopIncrement: choppableComponent.chopIncrement,
+                chopCap: choppableComponent.chopCap)
+        }
+        
+        if let cookableComponent = ingredient.cookableComponent {
+            self.cookableComponent = CookableComponent(
+                cookProgress: cookableComponent.cookProgress,
+                cookIncrement: cookableComponent.cookIncrement,
+                cookCap: cookableComponent.cookCap,
+                burnCap: cookableComponent.burnCap)
+        }
+        
+        if let fryableComponent = ingredient.fryableComponent {
+            self.fryableComponent = FryableComponent(
+                fryProgress: fryableComponent.fryProgress,
+                fryIncrement: fryableComponent.fryIncrement,
+                fryCap: fryableComponent.fryCap,
+                burnCap: fryableComponent.burnCap)
+        }
     }
     
     static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {

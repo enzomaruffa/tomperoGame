@@ -26,6 +26,10 @@ class GameConnectionManager {
         observers.append(observer)
     }
     
+    func removeAllObservers() {
+        observers.removeAll()
+    }
+    
     func sendEveryone(message: String) {
         do {
             print("[GameConnectionManager] Preparing message")
@@ -59,14 +63,23 @@ class GameConnectionManager {
         }
     }
     
+    func sendEveryone(statistics: MatchStatistics) {
+        do {
+            print("[GameConnectionManager] Preparing statistics list")
+            let statisticsData = try JSONEncoder().encode(statistics)
+            let wrapped = MCDataWrapper(object: statisticsData, type: .statistics)
+            MCManager.shared.sendEveryone(dataWrapper: wrapped)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
     func send(ingredient: Ingredient, to player: String) {
         do {
             print("[GameConnectionManager] Preparing ingredient")
             let ingredientData = try JSONEncoder().encode(ingredient)
             let jsonString = String(data: ingredientData, encoding: .utf8)
-            print(jsonString)
             let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
-            print(MCManager.shared.connectedPeers)
             MCManager.shared.connectedPeers?.forEach({ print($0.displayName) })
             let peer = MCManager.shared.connectedPeers?.filter({ $0.displayName == player })
             MCManager.shared.send(dataWrapper: wrapped, to: peer!)
@@ -152,6 +165,16 @@ extension GameConnectionManager: MCManagerDataObserver {
                 observers.forEach({ $0.receiveDeliveryNotification(notification: deliveryNotification) })
                 
                 // Chamar delegates que tem o receiveMessage
+            } catch let error {
+                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+            }
+            
+        case .statistics:
+            do {
+                let statistics = try JSONDecoder().decode(MatchStatistics.self, from: wrapper.object)
+                print("[GameConnectionManager] Received statistics: \(statistics)")
+                
+                observers.forEach({ $0.receiveStatistics(statistics: statistics) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }

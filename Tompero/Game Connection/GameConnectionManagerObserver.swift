@@ -8,12 +8,13 @@
 
 import Foundation
 
-protocol GameConnectionManagerObserver {
+protocol GameConnectionManagerObserver: class {
     
     // funcoes para receber ingredientes etc
     func receivePlate(plate: Plate)
     func receiveIngredient(ingredient: Ingredient)
     func receiveOrders(orders: [Order])
     func receiveDeliveryNotification(notification: OrderDeliveryNotification)
+    func receiveStatistics(statistics: MatchStatistics)
     
 }

@@ -5,12 +5,12 @@ class InicialViewController: UIViewController, Storyboarded {
     
     // MARK: - Storyboarded
     static var storyboardName = "Main"
-    weak var shapeLayer: CAShapeLayer?
     
     // MARK: - Variables
-    var location = CGPoint(x: 0, y: 0)
     weak var coordinator: MainCoordinator?
+    var location = CGPoint(x: 0, y: 0)
     var animationTimer: Timer?
+    weak var shapeLayer: CAShapeLayer?
     
     // MARK: - Outlets
     @IBOutlet weak var join: UIImageView!
@@ -178,7 +178,7 @@ class InicialViewController: UIViewController, Storyboarded {
         let maxRepetitions = text.count
         var dialogText = text
         
-        textTimer = Timer.scheduledTimer(withTimeInterval: charDelay, repeats: true, block: { (timer) in
+        textTimer = Timer.scheduledTimer(withTimeInterval: charDelay, repeats: true, block: { (_) in
             let currentIndex = text.startIndex
             
             let text = (self.textLabel.text)!

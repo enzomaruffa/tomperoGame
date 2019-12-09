@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MatchStatistics {
+class MatchStatistics: Codable {
 
     var ruleUsed: GameRule
     var totalGeneratedOrders = 0

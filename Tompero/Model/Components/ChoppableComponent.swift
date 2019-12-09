@@ -39,7 +39,6 @@ class ChoppableComponent: Component, Completable {
     func update() {
         if !complete {
             chopProgress += chopIncrement
-            print("\(chopProgress)")
         }
     }
     
