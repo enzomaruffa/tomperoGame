@@ -71,7 +71,7 @@ class MovableSpriteNode: SKSpriteNode {
         if let gameScene = scene as? GameScene {
             for station in gameScene.stations {
                 if station.spriteNode.contains(touch.location(in: gameScene)) && (moveDelegate?.attemptMove(to: station) ?? false) {
-                    SFX.shared.putFoodDown.play()
+                    SFXPlayer.shared.putFoodDown.play()
                     
                     self.position = station.spriteNode.position
                     print("Move success!")

@@ -29,7 +29,7 @@ class Ingredient: HasSprite, Equatable, Codable {
     var currentState: IngredientState = .raw {
         willSet(value) {
             if value == .burnt {
-                SFX.shared.burn.play()
+                SFXPlayer.shared.burn.play()
             }
         }
     }

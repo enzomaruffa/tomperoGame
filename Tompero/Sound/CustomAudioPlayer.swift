@@ -13,9 +13,12 @@ class CustomAudioPlayer {
     private var players = [AVAudioPlayer]()
     private var url: URL!
     
+    var volume: Float = 1.0
+    
     fileprivate func load() {
         do {
             let player = try AVAudioPlayer(contentsOf: url)
+            player.volume = volume
             player.prepareToPlay()
             players.append(player)
         } catch {
@@ -23,10 +26,15 @@ class CustomAudioPlayer {
         }
     }
     
-    init(fileName: String) {
+    init(fileName: String, volume: Float) {
         let path = Bundle.main.path(forResource: fileName, ofType:nil)!
         url = URL(fileURLWithPath: path)
+        self.volume = volume
         load()
+    }
+    
+    convenience init(fileName: String) {
+        self.init(fileName: fileName, volume: 1.0)
     }
     
     func play() {

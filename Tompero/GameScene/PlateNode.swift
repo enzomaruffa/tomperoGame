@@ -58,7 +58,7 @@ class PlateNode: MovableDelegate {
                 ]),
                 .run {
                     if self.successfulDelivery {
-                        SFX.shared.cashRegister.play()
+                        SFXPlayer.shared.cashRegister.play()
                     } else {
                         
                     }
