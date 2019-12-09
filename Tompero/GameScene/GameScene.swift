@@ -124,8 +124,6 @@ class GameScene: SKScene {
     func setupOrderListNode() {
         orderListNode = (childNode(withName: "orders") as! OrderListNode)
         orderListNode.texture = SKTexture(imageNamed: "OrderList" + playerColor)
-        orderListNode.normalSetup()
-        orderListNode.close()
     }
     
     func setupStations() {
@@ -200,7 +198,7 @@ class GameScene: SKScene {
     
     func setupBackground() {
         let background = self.childNode(withName: "background") as! SKSpriteNode
-        background.texture = SKTexture(imageNamed: "BackgroundX" + playerColor)
+        background.texture = SKTexture(imageNamed: "BackgroundXL" + playerColor)
     }
     
     func setupHUD() {
@@ -249,7 +247,6 @@ class GameScene: SKScene {
                 } else {
                     orderListNode.open()
                 }
-                
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
                 
@@ -294,8 +291,8 @@ class GameScene: SKScene {
             if !timesUpPlayed {
                 timesUpPlayed = true
                 SFXPlayer.shared.timesUp.play()
+                MusicPlayer.shared.stop(.game)
             }
-            MusicPlayer.shared.stop(.game)
             
             if hosting {
                 self.isPaused = true

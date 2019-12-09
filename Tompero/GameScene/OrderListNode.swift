@@ -35,6 +35,7 @@ class OrderListNode: SKSpriteNode {
     
     func open() {
         isOpen = true
+        self.children.forEach({ $0.alpha = 1 })
         boundary.removeAllActions()
         normalSetup()
         boundary.position.x = 982
@@ -48,12 +49,12 @@ class OrderListNode: SKSpriteNode {
         let action = SKAction.moveTo(x: -1041, duration: 0.13)
         boundary.run(action) {
             self.physicsBody?.mass = 50
+            self.children.forEach({ $0.alpha = 0 })
         }
     }
     
     func normalSetup() {
         self.gameScene.physicsWorld.gravity.dx = 30
-        self.children.forEach({ $0.alpha = 1 })
         self.physicsBody?.mass = 50
         self.physicsBody?.restitution = 0.1
     }
