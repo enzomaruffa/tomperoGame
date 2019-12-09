@@ -6,6 +6,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="TitilliumWeb-Bold.ttf">
+            <string>TitilliumWeb-Bold</string>
+        </array>
+        <array key="TitilliumWeb-Light.ttf">
+            <string>TitilliumWeb-Light</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Statistics View Controller-->
         <scene sceneID="u7p-wd-bXP">
@@ -22,30 +30,59 @@
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVr-Z2-Eoq">
-                                <rect key="frame" x="426" y="192" width="44" height="30"/>
-                                <state key="normal" title="MENU">
+                                <rect key="frame" x="415" y="324" width="66" height="30"/>
+                                <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="GO BACK">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="menuPressed:" destination="nh9-NX-o6y" eventType="touchUpInside" id="ebi-xs-jqh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLz-qk-tMt">
+                                <rect key="frame" x="353" y="20" width="190.5" height="71.5"/>
+                                <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="47"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 delivered orders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQE-hm-2cD">
+                                <rect key="frame" x="373.5" y="111.5" width="149.5" height="30.5"/>
+                                <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 coins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S67-lx-u7S">
+                                <rect key="frame" x="418.5" y="149.5" width="59" height="30.5"/>
+                                <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="aWv-b4-g28" firstAttribute="width" secondItem="Fuu-O0-8wV" secondAttribute="width" id="0Qi-Kk-Ji9"/>
                             <constraint firstItem="Fuu-O0-8wV" firstAttribute="leading" secondItem="0mH-vg-ysg" secondAttribute="leading" id="2jW-74-xBr"/>
+                            <constraint firstItem="Fuu-O0-8wV" firstAttribute="top" secondItem="jLz-qk-tMt" secondAttribute="top" constant="-20" id="5DZ-Ie-Rl0"/>
+                            <constraint firstItem="FVr-Z2-Eoq" firstAttribute="bottom" secondItem="Fuu-O0-8wV" secondAttribute="bottom" constant="-60" id="6qs-7G-0fA"/>
                             <constraint firstItem="FVr-Z2-Eoq" firstAttribute="centerX" secondItem="Fuu-O0-8wV" secondAttribute="centerX" id="E4F-YS-YgU"/>
+                            <constraint firstItem="JQE-hm-2cD" firstAttribute="top" secondItem="jLz-qk-tMt" secondAttribute="bottom" constant="20" id="Gko-aZ-a3f"/>
                             <constraint firstItem="aWv-b4-g28" firstAttribute="centerY" secondItem="Fuu-O0-8wV" secondAttribute="centerY" id="NH7-Aa-0fL"/>
-                            <constraint firstItem="FVr-Z2-Eoq" firstAttribute="centerY" secondItem="Fuu-O0-8wV" secondAttribute="centerY" id="f7p-ci-1Vf"/>
+                            <constraint firstItem="S67-lx-u7S" firstAttribute="top" secondItem="JQE-hm-2cD" secondAttribute="bottom" constant="7.5" id="aJ5-jT-4JM"/>
+                            <constraint firstItem="JQE-hm-2cD" firstAttribute="centerX" secondItem="jLz-qk-tMt" secondAttribute="centerX" id="eMV-Lf-9Nx"/>
                             <constraint firstAttribute="trailing" secondItem="Fuu-O0-8wV" secondAttribute="trailing" id="k0T-N6-KzE"/>
+                            <constraint firstItem="S67-lx-u7S" firstAttribute="centerX" secondItem="JQE-hm-2cD" secondAttribute="centerX" id="msO-Jo-Xj0"/>
                             <constraint firstItem="Fuu-O0-8wV" firstAttribute="top" secondItem="0mH-vg-ysg" secondAttribute="top" id="plg-tl-0IN"/>
                             <constraint firstItem="aWv-b4-g28" firstAttribute="height" secondItem="Fuu-O0-8wV" secondAttribute="height" id="qco-Fu-AIR"/>
                             <constraint firstAttribute="bottom" secondItem="Fuu-O0-8wV" secondAttribute="bottom" id="vnf-1x-fgS"/>
+                            <constraint firstItem="jLz-qk-tMt" firstAttribute="centerX" secondItem="Fuu-O0-8wV" secondAttribute="centerX" id="wqd-tb-JZK"/>
                             <constraint firstItem="aWv-b4-g28" firstAttribute="centerX" secondItem="Fuu-O0-8wV" secondAttribute="centerX" id="ypQ-Ia-ksz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9ES-aO-VER"/>
                     </view>
+                    <connections>
+                        <outlet property="deliveredOrdersLabel" destination="JQE-hm-2cD" id="be8-07-0cD"/>
+                        <outlet property="pointsLabel" destination="S67-lx-u7S" id="wR2-7J-bbL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FAp-AG-uVq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

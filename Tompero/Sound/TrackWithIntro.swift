@@ -12,11 +12,15 @@ class TrackWithIntro: Track, AVAudioPlayerDelegate {
     
     private var intro: AVAudioPlayer!
     
-    init(introFileName: String, loopFileName: String) {
-        super.init(fileName: loopFileName)
-        self.intro = super.load(introFileName)
+    init(introFileName: String, loopFileName: String, volume: Float) {
+        super.init(fileName: loopFileName, volume: volume)
+        self.intro = super.load(introFileName, volume)
         intro.numberOfLoops = 0
         intro.delegate = self
+    }
+    
+    convenience init(introFileName: String, loopFileName: String) {
+        self.init(introFileName: introFileName, loopFileName: loopFileName, volume: 1.0)
     }
     
     override func play() {
@@ -33,4 +37,3 @@ class TrackWithIntro: Track, AVAudioPlayerDelegate {
         super.play()
     }
 }
-
