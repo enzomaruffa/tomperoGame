@@ -16,7 +16,7 @@ class MusicPlayer {
     
     private init() {
         score[.menu] = Track(fileName: "menuMusic.mp3")
-        score[.game] = Track(fileName: "gameMusic2.mpeg")
+        score[.game] = TrackWithIntro(introFileName: "gameMusicIntro.wav", loopFileName: "gameMusic.wav")
     }
     
     func play(_ trackToPlay: TrackNumber) {
