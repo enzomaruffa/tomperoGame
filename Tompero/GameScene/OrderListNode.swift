@@ -11,7 +11,27 @@ import SpriteKit
 
 class OrderListNode: SKSpriteNode {
     
+    enum State {
+        case closed
+        case open
+        case closing
+        case jumping
+    }
+    
+    var states: [State: [State]] = [
+        .closed : [.open, .jumping],
+        .open : [.closing],
+        .closing : [.closed],
+        .jumping : [.closing]
+    ]
+    var currentState: State = .closed
+    
     var orderNodes: [OrderNode] = []
+    
+    var boundary: SKSpriteNode {
+        let scene = self.parent as! GameScene
+        return scene.childNode(withName: "boundary") as! SKSpriteNode
+    }
     
     var gameScene: GameScene {
         self.parent as! GameScene
@@ -27,65 +47,84 @@ class OrderListNode: SKSpriteNode {
         self.isUserInteractionEnabled = true
     }
     
-    var isOpen: Bool = false
-    var boundary: SKSpriteNode {
-        let scene = self.parent as! GameScene
-        return scene.childNode(withName: "boundary") as! SKSpriteNode
+    func canChangeCurrentState(to state: State) -> Bool {
+        if states[currentState]!.contains(state) {
+            return true
+        }
+        return false
     }
     
     func open() {
-        isOpen = true
+        guard canChangeCurrentState(to: .open) else { return }
+        
+        currentState = .open
+        
         self.children.forEach({ $0.alpha = 1 })
-        boundary.removeAllActions()
-        normalSetup()
+        self.gameScene.physicsWorld.gravity.dx = 30
+        self.physicsBody?.restitution = 0.07
+        boundary.physicsBody?.restitution = 0.07
+        
         boundary.position.x = 982
-        physicsBody?.applyImpulse(CGVector(dx: 40000, dy: 0))
-        physicsBody?.velocity.dx = 8100
+        
+        physicsBody?.applyImpulse(CGVector(dx: 10000, dy: 0))
     }
     
     func close() {
-        isOpen = false
-        physicsBody?.mass = 0.1
+        guard canChangeCurrentState(to: .closing) else { return }
+        
+        currentState = .closing
+        
+        self.gameScene.physicsWorld.gravity.dx = 30
+        self.physicsBody?.restitution = 0.1
+        
         let action = SKAction.moveTo(x: -1041, duration: 0.13)
         boundary.run(action) {
-            self.physicsBody?.mass = 50
+            self.currentState = .closed
             self.children.forEach({ $0.alpha = 0 })
         }
     }
     
-    func normalSetup() {
-        self.gameScene.physicsWorld.gravity.dx = 30
-        self.physicsBody?.mass = 50
-        self.physicsBody?.restitution = 0.1
-    }
-    
     func jump() {
-        guard !isOpen else { return }
+        guard canChangeCurrentState(to: .jumping) else { return }
         
+        currentState = .jumping
+        
+        self.children.forEach({ $0.alpha = 0 })
         boundary.run(SKAction.sequence([
             .run {
-                self.physicsBody?.mass = 0.1
+                self.gameScene.physicsWorld.gravity.dx = -30
                 self.physicsBody?.restitution = 0.3
-                self.gameScene.physicsWorld.gravity.dx = -self.gameScene.physicsWorld.gravity.dx
-                self.children.forEach({ $0.alpha = 0 })
+                
                 self.boundary.position.x = -850
-                self.physicsBody?.applyImpulse(CGVector(dx: 170, dy: 0))
+                
+                self.physicsBody?.applyImpulse(CGVector(dx: 3000, dy: 0))
             },
-            .moveTo(x: -1041, duration: 0.8),
             .run {
-                self.normalSetup()
+                self.close()
             }
         ]))
     }
     
+    func checkAction() {
+        if canChangeCurrentState(to: .open) {
+            open()
+        } else if canChangeCurrentState(to: .closing) {
+            close()
+        }
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        isOpen ? close() : open()
+        if canChangeCurrentState(to: .open) {
+            open()
+        } else if canChangeCurrentState(to: .closing) {
+            close()
+        }
     }
     
     func updateList(_ orderList: [Order]) {
         orderNodes.forEach({ $0.removeFromParent() })
         
-        let xPos: [CGFloat] = [658, 8, -652]
+        let xPos: [CGFloat] = [753, 103, -557]
         
         for (index, order) in orderList.enumerated() {
             guard index < 3 else { break }
