@@ -250,7 +250,7 @@ class StationNode: TappableDelegate {
             let ingredient = ingredientNode?.ingredient,
             let choppableComponent = ingredient.choppableComponent {
             choppableComponent.update()
-			SFX.shared.chop.play()
+			SFXPlayer.shared.chop.play()
             
             playAnimation()
 
@@ -264,6 +264,8 @@ class StationNode: TappableDelegate {
             }
             
         } else if stationType == .ingredientBox && self.ingredientNode == nil {
+            
+            SFXPlayer.shared.takeFood.play()
             
             let newIngredient = ingredient!.findDowncast()
             
@@ -359,11 +361,11 @@ class StationNode: TappableDelegate {
     
     func playAnimation() {
         switch stationType {
-        case .stove: SFX.shared.cooking.play()
-        case .fryer: SFX.shared.frying.play()
+        case .stove: SFXPlayer.shared.cooking.play()
+        case .fryer: SFXPlayer.shared.frying.play()
         case .hatch:
-            SFX.shared.hatch.play()
-            SFX.shared.airSuction.play()
+            SFXPlayer.shared.hatch.play()
+            SFXPlayer.shared.airSuction.play()
         default: break
         }
         if let node = self.stationAnimationNode {
@@ -386,9 +388,9 @@ class StationNode: TappableDelegate {
     
     func stopAnimation() {
         switch stationType {
-        case .stove: SFX.shared.cooking.stop()
-        case .fryer: SFX.shared.frying.stop()
-        case .hatch: SFX.shared.airSuction.stop()
+        case .stove: SFXPlayer.shared.cooking.stop()
+        case .fryer: SFXPlayer.shared.frying.stop()
+        case .hatch: SFXPlayer.shared.airSuction.stop()
         default: break
         }
         

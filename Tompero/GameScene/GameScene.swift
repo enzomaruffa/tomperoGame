@@ -73,6 +73,7 @@ class GameScene: SKScene {
     var totalPoints = 0
     
     var endTimerPlayed = false
+    var timesUpPlayed = false
     
     // MARK: - Animation Variables
     var stationsAnimationsRunning = false
@@ -117,7 +118,7 @@ class GameScene: SKScene {
         setupHUD()
         setupBackground()
         
-        SFX.shared.roundStarted.play()
+        SFXPlayer.shared.roundStarted.play()
     }
     
     func setupOrderListNode() {
@@ -241,7 +242,7 @@ class GameScene: SKScene {
             if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
                 generateRandomOrder()
                 if firstOrder {
-                    SFX.shared.orderUp.play()
+                    SFXPlayer.shared.orderUp.play()
                 }
                 orderListNode.jump()
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
@@ -285,7 +286,10 @@ class GameScene: SKScene {
         }
         
         if matchTimer < 0 {
-            SFX.shared.timesUp.play()
+            if !timesUpPlayed {
+                timesUpPlayed = true
+                SFXPlayer.shared.timesUp.play()
+            }
             MusicPlayer.shared.stop(.game)
             
             if hosting {
@@ -297,7 +301,7 @@ class GameScene: SKScene {
         
         if matchTimer < 15 && !endTimerPlayed {
             endTimerPlayed = true
-            SFX.shared.endTimer.play()
+            SFXPlayer.shared.endTimer.play()
         }
     }
     
@@ -312,7 +316,7 @@ class GameScene: SKScene {
     func makeDelivery(plate: Plate) -> Bool {
         
         let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(teleportAnimationFrames.count)
-        SFX.shared.teleporter.play()
+        SFXPlayer.shared.teleporter.play()
         teleportAnimationNode.run(SKAction.animate(
             with: teleportAnimationFrames,
             timePerFrame: timePerFrame,
@@ -421,7 +425,7 @@ extension GameScene: GameConnectionManagerObserver {
         self.orders = orders
         
         if firstOrder {
-            SFX.shared.orderUp.play()
+            SFXPlayer.shared.orderUp.play()
         }
         
         orderListNode.jump()
@@ -452,7 +456,7 @@ extension GameScene: GameConnectionManagerObserver {
             
             print("[GameScene] Total points now are \(totalPoints)")
             
-            SFX.shared.cashRegister.play()
+            SFXPlayer.shared.cashRegister.play()
             updateCoinsUI()
         }
     }
