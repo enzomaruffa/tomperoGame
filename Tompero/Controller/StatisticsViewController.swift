@@ -31,7 +31,7 @@ class StatisticsViewController: UIViewController, Storyboarded {
         // Do any additional setup after loading the view.
         deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) delivered orders!"
         
-        pointsLabel.text = "\(statistics.totalPoints) delivered orders!"
+        pointsLabel.text = "\(statistics.totalPoints) points!"
     }
     
     // MARK: - Methods

@@ -22,6 +22,17 @@ class GameRule: Codable {
 
     var playerOrder: [String]
     
+    var baseTime: Float {
+        switch difficulty {
+        case .medium:
+            return 28
+        case .hard:
+            return 33
+        default:
+            return 25
+        }
+    }
+    
     internal init(difficulty: GameDifficulty, possibleIngredients: [Ingredient], playerTables: [String:  [PlayerTable]], playerOrder: [String]) {
         self.difficulty = difficulty
         self.possibleIngredients = possibleIngredients
@@ -32,7 +43,7 @@ class GameRule: Codable {
     func generateOrder() -> Order {
         // Escolhemos um número aleatório de ações
         let maxActions = randomNumber(probabilities: GameRule.difficultyProbabilityDict[difficulty]!)
-        let order = Order(timeLeft: 30)
+        let order = Order(timeLeft: baseTime)
 
         var currentActions = 0
         
@@ -65,6 +76,8 @@ class GameRule: Codable {
             order.ingredients.append(newIngredient)
             currentActions += newIngredient.numberOfActionsTilReady
         }
+        
+        order.timeLeft = baseTime + Float(currentActions) * Float.random(in: 1...1.5)
 
         return order
     }
