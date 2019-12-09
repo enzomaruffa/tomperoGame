@@ -32,7 +32,7 @@ class OrderNode: SKSpriteNode {
         spawnTimeBar()
     }
     
-    func sortActions(_ states: [IngredientState: [IngredientState]]) -> [IngredientState] {
+    private func sortActions(_ states: [IngredientState: [IngredientState]]) -> [IngredientState] {
         var ordered: [IngredientState] = []
         
         let actions: [IngredientState] = [.chopping, .cooking, .frying]
@@ -48,16 +48,16 @@ class OrderNode: SKSpriteNode {
         return ordered
     }
     
-    func spawnIngredientIcons() {
+    private func spawnIngredientIcons() {
         
-        let yPos: [CGFloat] = [-4.0, -72.0, -140.0]
-        
-        let xPos: [CGFloat] = [-230.0, -115.0, 0.0, 115.0, 230.0]
+        let xPos: [CGFloat] = [-230, -115, 0, 115, 230]
+        let yPos: [CGFloat] = [12, -56, -124]
+        let arrowSize: [CGFloat] = [110, 180, 240]
         
         for (index, ingredient) in order!.ingredients.enumerated() {
             let circle = SKSpriteNode(imageNamed: "IngredientIndicator")
             self.addChild(circle)
-            circle.position = CGPoint(x: xPos[index], y: 120)
+            circle.position = CGPoint(x: xPos[index], y: 118)
             circle.zPosition = 7
             circle.size = CGSize(width: 110, height: 110)
             
@@ -85,10 +85,28 @@ class OrderNode: SKSpriteNode {
                 actionNode.setScale(0.65)
                 self.addChild(actionNode)
             }
+            
+            if !actions.isEmpty {
+                let height = arrowSize[actions.count-1]
+                spawnArrow(at: CGPoint(x: xPos[index], y: 62 - height), of: height)
+            }
         }
     }
     
-    func spawnOrderNumber() {
+    private func spawnArrow(at position: CGPoint, of height: CGFloat) {
+        let node = SKShapeNode(rect: CGRect(origin: position, size: CGSize(width: 1, height: height)))
+        node.fillColor = .white
+        node.strokeColor = node.fillColor
+        addChild(node)
+        
+        let end = SKSpriteNode(imageNamed: "arrowEnd")
+        end.zRotation = CGFloat(Double.pi)
+        end.size = CGSize(width: 20, height: 20)
+        end.position = CGPoint(x: position.x+1, y: 70-height-11)
+        addChild(end)
+    }
+    
+    private func spawnOrderNumber() {
         let node = SKLabelNode(text: "Order #" + order!.number.description)
         node.position = CGPoint(x: 0, y: 200)
         node.fontName = "TitilliumWeb-Light"
@@ -96,9 +114,9 @@ class OrderNode: SKSpriteNode {
         addChild(node)
     }
     
-    func spawnTimeBar() {
+    private func spawnTimeBar() {
         progressNode = ProgressBar(color: .green, size: CGSize(width: 480, height: 20))
-        progressNode.position = CGPoint(x: 0, y: -220)
+        progressNode.position = CGPoint(x: 0, y: -232.5)
         print(order!.timeLeft, order!.totalTime)
         progressNode.progress = CGFloat(1 - order!.timeLeft/order!.totalTime)
         addChild(progressNode)

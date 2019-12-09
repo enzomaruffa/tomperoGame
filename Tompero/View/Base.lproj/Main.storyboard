@@ -16,34 +16,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo" translatesAutoresizingMaskIntoConstraints="NO" id="kUb-PW-wCr" userLabel="Fundo">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <rect key="frame" x="0.0" y="-10" width="896" height="434"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H4T-P9-M7q">
-                                <rect key="frame" x="0.0" y="-62" width="896" height="414"/>
+                                <rect key="frame" x="0.0" y="-72" width="896" height="434"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="traseira da nave" translatesAutoresizingMaskIntoConstraints="NO" id="8V5-Pg-WIr" userLabel="Traseira">
-                                        <rect key="frame" x="167" y="41" width="397" height="332"/>
+                                        <rect key="frame" x="166.5" y="43" width="397.5" height="348"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="8V5-Pg-WIr" secondAttribute="height" multiplier="397:348" id="H38-5v-J0p"/>
+                                        </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JOIN - apagado" translatesAutoresizingMaskIntoConstraints="NO" id="A6F-hc-s4t">
-                                        <rect key="frame" x="266" y="147" width="59" height="37"/>
+                                        <rect key="frame" x="266" y="154" width="59" height="39"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frente da nave" translatesAutoresizingMaskIntoConstraints="NO" id="YnC-Lw-Xi6" userLabel="Frente">
-                                        <rect key="frame" x="460" y="98" width="272" height="224"/>
+                                        <rect key="frame" x="332.99999999999994" y="108.5" width="525.50000000000011" height="223"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HOST - apagado" translatesAutoresizingMaskIntoConstraints="NO" id="Epk-JO-UC2">
-                                        <rect key="frame" x="564" y="139.5" width="98" height="52"/>
+                                        <rect key="frame" x="564" y="146" width="98" height="55"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="8V5-Pg-WIr" firstAttribute="centerY" secondItem="H4T-P9-M7q" secondAttribute="centerY" id="1tr-7d-vyp"/>
-                                    <constraint firstItem="YnC-Lw-Xi6" firstAttribute="height" secondItem="H4T-P9-M7q" secondAttribute="height" multiplier="0.541063" id="3YG-go-RgH"/>
                                     <constraint firstItem="8V5-Pg-WIr" firstAttribute="centerX" secondItem="H4T-P9-M7q" secondAttribute="centerX" multiplier="0.8153" id="41t-vS-uMG"/>
                                     <constraint firstItem="A6F-hc-s4t" firstAttribute="centerX" secondItem="H4T-P9-M7q" secondAttribute="centerX" multiplier="0.66" id="4HD-57-gBV"/>
                                     <constraint firstItem="YnC-Lw-Xi6" firstAttribute="centerX" secondItem="H4T-P9-M7q" secondAttribute="centerX" multiplier="1.33" id="4tk-Dl-cRn"/>
-                                    <constraint firstItem="YnC-Lw-Xi6" firstAttribute="width" secondItem="H4T-P9-M7q" secondAttribute="width" multiplier="0.303571" id="6PM-2E-0Jo"/>
-                                    <constraint firstItem="8V5-Pg-WIr" firstAttribute="width" secondItem="H4T-P9-M7q" secondAttribute="width" multiplier="0.44308" id="QYm-Qj-BVk"/>
                                     <constraint firstItem="YnC-Lw-Xi6" firstAttribute="centerY" secondItem="H4T-P9-M7q" secondAttribute="centerY" multiplier="1.014" id="UVM-4n-Hut"/>
+                                    <constraint firstItem="YnC-Lw-Xi6" firstAttribute="height" secondItem="8V5-Pg-WIr" secondAttribute="height" multiplier="0.64" id="Vuh-bD-BpX"/>
+                                    <constraint firstItem="YnC-Lw-Xi6" firstAttribute="width" secondItem="8V5-Pg-WIr" secondAttribute="height" multiplier="501:332" id="WOP-QX-5z2"/>
                                     <constraint firstItem="A6F-hc-s4t" firstAttribute="height" secondItem="H4T-P9-M7q" secondAttribute="height" multiplier="0.089372" id="ZOU-O3-p1B"/>
                                     <constraint firstItem="8V5-Pg-WIr" firstAttribute="height" secondItem="H4T-P9-M7q" secondAttribute="height" multiplier="0.801932" id="bCN-1d-f70"/>
                                     <constraint firstItem="A6F-hc-s4t" firstAttribute="centerY" secondItem="H4T-P9-M7q" secondAttribute="centerY" multiplier="0.8" id="c3p-mN-x6a"/>
@@ -96,11 +98,11 @@ Oh! To begin working you need to go to the central food supply station. Who want
                             <constraint firstItem="kUb-PW-wCr" firstAttribute="leading" secondItem="QNp-EB-RWz" secondAttribute="leading" id="IXZ-sR-mnr"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="centerY" secondItem="7E9-WB-dTq" secondAttribute="centerY" multiplier="1.7" id="MSN-8l-wMP"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="width" secondItem="7E9-WB-dTq" secondAttribute="width" id="NRb-cV-4cq"/>
-                            <constraint firstAttribute="bottom" secondItem="kUb-PW-wCr" secondAttribute="bottom" id="aXG-22-cPg"/>
+                            <constraint firstAttribute="bottom" secondItem="kUb-PW-wCr" secondAttribute="bottom" constant="-10" id="aXG-22-cPg"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="height" secondItem="kUb-PW-wCr" secondAttribute="height" id="cAD-AB-Qt3"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="width" secondItem="kUb-PW-wCr" secondAttribute="width" id="ldU-1U-BdP"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="centerX" secondItem="7E9-WB-dTq" secondAttribute="centerX" id="qFf-6u-8QD"/>
-                            <constraint firstItem="kUb-PW-wCr" firstAttribute="top" secondItem="QNp-EB-RWz" secondAttribute="top" id="zIh-Nl-2gw"/>
+                            <constraint firstItem="kUb-PW-wCr" firstAttribute="top" secondItem="QNp-EB-RWz" secondAttribute="top" constant="-10" id="zIh-Nl-2gw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7E9-WB-dTq"/>
                     </view>

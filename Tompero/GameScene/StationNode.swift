@@ -108,7 +108,7 @@ class StationNode: TappableDelegate {
     private var progressBarNodeOffset: CGPoint {
         switch stationType {
         case .stove: return CGPoint(x: 0, y: -220)
-        case .fryer: return CGPoint(x: 0, y: -220)
+        case .fryer: return CGPoint(x: 0, y: -200)
         case .board: return CGPoint(x: 0, y: -180)
         default: return .zero
         }

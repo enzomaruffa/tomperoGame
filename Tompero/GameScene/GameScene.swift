@@ -85,6 +85,25 @@ class GameScene: SKScene {
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
+        
+        // Scale view size to device
+        let desiredWidth = CGFloat(2436)
+        let desiredHeight = CGFloat(1154)
+        
+        var currentViewSize = self.viewSizeInLocalCoordinates()
+        
+        let requiredScale = max(desiredWidth / currentViewSize.width, desiredHeight / currentViewSize.height)
+        
+        let cameraNode = SKCameraNode()
+        self.camera = cameraNode
+        self.scene?.addChild(cameraNode)
+        
+        self.camera?.setScale(requiredScale)
+        
+        currentViewSize = self.viewSizeInLocalCoordinates(ignoreCameraScale: false)
+        let offset = (desiredHeight - currentViewSize.height) / 2
+        cameraNode.position = CGPoint(x: 0, y: -offset)
+        
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
         
@@ -105,6 +124,8 @@ class GameScene: SKScene {
     func setupOrderListNode() {
         orderListNode = (childNode(withName: "orders") as! OrderListNode)
         orderListNode.texture = SKTexture(imageNamed: "OrderList" + playerColor)
+        orderListNode.normalSetup()
+        orderListNode.close()
     }
     
     func setupStations() {
@@ -179,9 +200,9 @@ class GameScene: SKScene {
     
     func setupBackground() {
         let background = self.childNode(withName: "background") as! SKSpriteNode
-        background.texture = SKTexture(imageNamed: "Background" + playerColor)
+        background.texture = SKTexture(imageNamed: "BackgroundX" + playerColor)
     }
-
+    
     func setupHUD() {
         let timerContainer = self.childNode(withName: "timerContainer") as! SKSpriteNode
         timerContainer.texture = SKTexture(imageNamed: "Timer" + playerColor)
@@ -224,8 +245,11 @@ class GameScene: SKScene {
                 generateRandomOrder()
                 if firstOrder {
                     SFXPlayer.shared.orderUp.play()
+                    orderListNode.jump()
+                } else {
+                    orderListNode.open()
                 }
-                orderListNode.jump()
+                
                 GameConnectionManager.shared.sendEveryone(orderList: orders)
                 orderGenerationCounter = 0
                 
@@ -272,11 +296,11 @@ class GameScene: SKScene {
                 SFXPlayer.shared.timesUp.play()
             }
             MusicPlayer.shared.stop(.game)
-           	
+            
             if hosting {
-				self.isPaused = true
+                self.isPaused = true
                 GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
-				coordinator?.statistics(statistics: matchStatistics!)
+                coordinator?.statistics(statistics: matchStatistics!)
             }
         }
         
@@ -328,7 +352,7 @@ class GameScene: SKScene {
         
         orderGenerationCounter = 0
         updateOrderUI(orders)
-
+        
         matchStatistics?.totalDeliveredOrders += 1
         matchStatistics?.totalPoints += notification.coinsAdded
         totalPoints += notification.coinsAdded
@@ -347,7 +371,7 @@ class GameScene: SKScene {
         let timerLabel = self.childNode(withName: "timerLabel") as! SKLabelNode
         
         var currentSeconds = max(Int(ceil(matchTimer)), 0)
-    
+        
         let currentMinutes = currentSeconds / 60
         currentSeconds -= (currentMinutes * 60)
         
@@ -407,9 +431,10 @@ extension GameScene: GameConnectionManagerObserver {
         
         if firstOrder {
             SFXPlayer.shared.orderUp.play()
+            orderListNode.jump()
+        } else {
+            orderListNode.open()
         }
-        
-        orderListNode.jump()
         
         if self.orders.count == 1 && !firstOrder {
             firstOrder = true
