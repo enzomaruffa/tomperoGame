@@ -35,19 +35,27 @@ class OrderListNode: SKSpriteNode {
     
     func open() {
         isOpen = true
+        boundary.removeAllActions()
+        normalSetup()
         boundary.position.x = 982
-        physicsBody?.applyImpulse(CGVector(dx: 30000, dy: 0))
-        physicsBody?.velocity.dx = 8000
+        physicsBody?.applyImpulse(CGVector(dx: 40000, dy: 0))
+        physicsBody?.velocity.dx = 8100
     }
     
     func close() {
         isOpen = false
-    
         physicsBody?.mass = 0.1
         let action = SKAction.moveTo(x: -1041, duration: 0.13)
         boundary.run(action) {
             self.physicsBody?.mass = 50
         }
+    }
+    
+    func normalSetup() {
+        self.gameScene.physicsWorld.gravity.dx = 30
+        self.children.forEach({ $0.alpha = 1 })
+        self.physicsBody?.mass = 50
+        self.physicsBody?.restitution = 0.1
     }
     
     func jump() {
@@ -62,13 +70,9 @@ class OrderListNode: SKSpriteNode {
                 self.boundary.position.x = -850
                 self.physicsBody?.applyImpulse(CGVector(dx: 170, dy: 0))
             },
-            .wait(forDuration: 0.5),
             .moveTo(x: -1041, duration: 0.8),
             .run {
-                self.gameScene.physicsWorld.gravity.dx = -self.gameScene.physicsWorld.gravity.dx
-                self.children.forEach({ $0.alpha = 1 })
-                self.physicsBody?.mass = 50
-                self.physicsBody?.restitution = 0.2
+                self.normalSetup()
             }
         ]))
     }
