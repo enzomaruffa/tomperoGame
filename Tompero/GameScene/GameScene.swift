@@ -291,8 +291,8 @@ class GameScene: SKScene {
             if !timesUpPlayed {
                 timesUpPlayed = true
                 SFXPlayer.shared.timesUp.play()
+                MusicPlayer.shared.stop(.game)
             }
-            MusicPlayer.shared.stop(.game)
             
             if hosting {
                 self.isPaused = true

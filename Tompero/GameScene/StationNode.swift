@@ -395,6 +395,10 @@ class StationNode: TappableDelegate {
         default: break
         }
         
+        if stationType == .hatch {
+            stationAnimationNode?.size = CGSize(width: 792*0.8, height: 668*0.8)
+        }
+        
         animationRunning = false
         stationAnimationNode?.removeAllActions()
     }
