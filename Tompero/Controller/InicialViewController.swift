@@ -25,8 +25,11 @@ class InicialViewController: UIViewController, Storyboarded {
     var lightsOn = false
     var countLightsOn = 0
     var textTimer: Timer?
-    var textSapao1 = "Olá, meu nome é Sapão e eu ainda não tenho fala definida \nPor favor, me ajude!"
-    var textSapao2 = "Ainda não escolheu oque vai ser meu filho? Decide logo!"
+    var textSapao1 = """
+    Okay, okay…. I know this Food-Ship doesn’t look like the best investment in the galaxy, but you'll see. This lil' baby is gonna make it rain!
+    Oh! To begin working you need to go to the central food supply station. Who wants to drive? You can go in the front. The rest can sit in the back!
+    """
+    var textSapao2 = "C'mon, just go!"
     var kombiTimer: Timer?
     
     // MARK: - View Lifecycle
@@ -173,7 +176,7 @@ class InicialViewController: UIViewController, Storyboarded {
             textTimer!.invalidate()
             textTimer = nil
         }
-        let charDelay = 0.1
+        let charDelay = 0.03
         var timerRepetitions = 0
         let maxRepetitions = text.count
         var dialogText = text

@@ -19,11 +19,19 @@ class StatisticsViewController: UIViewController, Storyboarded {
     // MARK: - Variables
     var statistics: MatchStatistics!
     
+    // MARK: - Outlets
+    @IBOutlet weak var deliveredOrdersLabel: UILabel!
+    @IBOutlet weak var pointsLabel: UILabel!
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         // Do any additional setup after loading the view.
+        deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) delivered orders!"
+        
+        pointsLabel.text = "\(statistics.totalPoints) delivered orders!"
     }
     
     // MARK: - Methods
