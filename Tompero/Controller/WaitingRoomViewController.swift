@@ -333,7 +333,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                 if index == 0 {
                     let hat = self.player1Image!
                     if playersWithStatus[index].status == .notConnected {
-                        self.player1Label.text = "?"
+                        self.player1Label.text = ""
                         self.changeImageAnimated(image: "VREX - Vazio", viewChange: hat)
                         if self.hosting {
                             self.player1InviteButton.isHidden = false
@@ -350,7 +350,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                 } else if index == 1 {
                     let hat = self.player2Image!
                     if playersWithStatus[index].status == .notConnected {
-                        self.player2Label.text = "?"
+                        self.player2Label.text = ""
                         self.changeImageAnimated(image: "SW77 - Vazio", viewChange: hat)
                         if self.hosting {
                             self.player2InviteButton.isHidden = false
@@ -365,7 +365,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                 } else if index == 2 {
                     let hat = self.player3Image!
                     if playersWithStatus[index].status == .notConnected {
-                        self.player3Label.text = "?"
+                        self.player3Label.text = ""
                         self.changeImageAnimated(image: "MORGAN - Vazio", viewChange: hat)
                         if self.hosting {
                             self.player3InviteButton.isHidden = false
@@ -380,7 +380,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                 } else if index == 3 {
                     let hat = self.player4Image!
                     if playersWithStatus[index].status == .notConnected {
-                        self.player4Label.text = "?"
+                        self.player4Label.text = ""
                         self.changeImageAnimated(image: "JERRY - Vazio", viewChange: hat)
                         if self.hosting {
                             self.player4InviteButton.isHidden = false
