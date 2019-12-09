@@ -18,14 +18,14 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = false
+        let gameSceneTest: Bool = true
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [
                 "God" : [
                     PlayerTable(type: .chopping, ingredient: nil),
-                    PlayerTable(type: .cooking, ingredient: nil),
-                    PlayerTable(type: .ingredient, ingredient: Tentacle())
+                    PlayerTable(type: .frying, ingredient: nil),
+                    PlayerTable(type: .ingredient, ingredient: Eyes())
                 ],
                 "Enzo's Enzo's iPhone" : [
                     PlayerTable(type: .chopping, ingredient: nil),

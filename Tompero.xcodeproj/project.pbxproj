@@ -73,7 +73,7 @@
 		566E9C96239D823400787210 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C92239D823300787210 /* Track.swift */; };
 		566E9C98239D823400787210 /* CustomAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C94239D823300787210 /* CustomAudioPlayer.swift */; };
 		566E9C99239D823400787210 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C95239D823300787210 /* MusicPlayer.swift */; };
-		566E9C9B239D82E200787210 /* SFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C9A239D82E200787210 /* SFX.swift */; };
+		566E9C9B239D82E200787210 /* SFXPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9C9A239D82E200787210 /* SFXPlayer.swift */; };
 		567A07B0238C805000D6399A /* Horn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A079F238C805000D6399A /* Horn.swift */; };
 		567A07B1238C805000D6399A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A0238C805000D6399A /* Eyes.swift */; };
 		567A07B2238C805000D6399A /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07A1238C805000D6399A /* DevilMashedBread.swift */; };
@@ -186,7 +186,7 @@
 		566E9C92239D823300787210 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		566E9C94239D823300787210 /* CustomAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAudioPlayer.swift; sourceTree = "<group>"; };
 		566E9C95239D823300787210 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
-		566E9C9A239D82E200787210 /* SFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFX.swift; sourceTree = "<group>"; };
+		566E9C9A239D82E200787210 /* SFXPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFXPlayer.swift; sourceTree = "<group>"; };
 		567A079F238C805000D6399A /* Horn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		567A07A0238C805000D6399A /* Eyes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
 		567A07A1238C805000D6399A /* DevilMashedBread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
@@ -478,7 +478,7 @@
 		566E9BD8239D7BB800787210 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
-				566E9C9A239D82E200787210 /* SFX.swift */,
+				566E9C9A239D82E200787210 /* SFXPlayer.swift */,
 				566E9C94239D823300787210 /* CustomAudioPlayer.swift */,
 				566E9C95239D823300787210 /* MusicPlayer.swift */,
 				566E9C92239D823300787210 /* Track.swift */,
@@ -716,7 +716,7 @@
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
 				47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */,
-				566E9C9B239D82E200787210 /* SFX.swift in Sources */,
+				566E9C9B239D82E200787210 /* SFXPlayer.swift in Sources */,
 				567A07BB238C805000D6399A /* Order.swift in Sources */,
 				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
 				476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */,
