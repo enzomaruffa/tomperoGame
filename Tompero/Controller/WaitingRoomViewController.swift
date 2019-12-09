@@ -415,8 +415,6 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
-        
-        self.navigationController?.popViewController(animated: true)
     }
     
 }
