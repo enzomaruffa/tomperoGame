@@ -265,6 +265,8 @@ class StationNode: TappableDelegate {
             
         } else if stationType == .ingredientBox && self.ingredientNode == nil {
             
+            SFXPlayer.shared.takeFood.play()
+            
             let newIngredient = ingredient!.findDowncast()
             
             let ingredientMovableNode = MovableSpriteNode(imageNamed: newIngredient.textureName)
