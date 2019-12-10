@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,8 @@
 		4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D486238FFA93003D373C /* MCPeerWithStatus.swift */; };
 		472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F9F2723992FEA00DC7B9C /* PlateNode.swift */; };
 		4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733B6A52393597700D80AD0 /* MovableDelegate.swift */; };
+		475A4B5323A0379F000016B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475A4B5223A0379F000016B3 /* GoogleService-Info.plist */; };
+		475A4B5523A0469E000016B3 /* EventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475A4B5423A0469E000016B3 /* EventLogger.swift */; };
 		47632784239D49C4006BA9C5 /* MatchStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47632783239D49C4006BA9C5 /* MatchStatistics.swift */; };
 		476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */; };
 		476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */; };
@@ -134,6 +136,8 @@
 		4722D486238FFA93003D373C /* MCPeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPeerWithStatus.swift; sourceTree = "<group>"; };
 		472F9F2723992FEA00DC7B9C /* PlateNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateNode.swift; sourceTree = "<group>"; };
 		4733B6A52393597700D80AD0 /* MovableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableDelegate.swift; sourceTree = "<group>"; };
+		475A4B5223A0379F000016B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		475A4B5423A0469E000016B3 /* EventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
 		47632783239D49C4006BA9C5 /* MatchStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatistics.swift; sourceTree = "<group>"; };
 		476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
 		476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
@@ -387,6 +391,7 @@
 		562BCF5623881CF900D5D51D /* Tompero */ = {
 			isa = PBXGroup;
 			children = (
+				475A4B5223A0379F000016B3 /* GoogleService-Info.plist */,
 				566A5BB4239ADE43006D96CF /* Resources */,
 				562BCF5723881CF900D5D51D /* AppDelegate.swift */,
 				562BCF6923881CFC00D5D51D /* Info.plist */,
@@ -399,6 +404,7 @@
 				562BCF712388234800D5D51D /* Controller */,
 				471795ED238C692D000575B0 /* MultipeerConnectivity Manager */,
 				471795EE238C694B000575B0 /* Game Connection */,
+				475A4B5423A0469E000016B3 /* EventLogger.swift */,
 			);
 			path = Tompero;
 			sourceTree = "<group>";
@@ -564,6 +570,7 @@
 				562BCF5123881CF900D5D51D /* Frameworks */,
 				562BCF5223881CF900D5D51D /* Resources */,
 				471795EC238C6520000575B0 /* ShellScript */,
+				F3D5CBDD8BA7DEE5F313A028 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -629,6 +636,7 @@
 				47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */,
 				56A0F1F8239F4A5A003EEF2D /* menuMusicClean.wav in Resources */,
 				47BE3ED6239C1F7200246F20 /* TeleportGreen.atlas in Resources */,
+				475A4B5323A0379F000016B3 /* GoogleService-Info.plist in Resources */,
 				566E9C8D239D7EC100787210 /* airSuction.wav in Resources */,
 				56219D87239EAFA6001CE5DB /* GameScene.sks in Resources */,
 				479B784A239D8BAC003BC9DE /* Statistics.storyboard in Resources */,
@@ -696,6 +704,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F3D5CBDD8BA7DEE5F313A028 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -738,6 +763,7 @@
 				567A07B0238C805000D6399A /* Horn.swift in Sources */,
 				569B4D2A239E67E20057C7CC /* TrackWithIntro.swift in Sources */,
 				4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */,
+				475A4B5523A0469E000016B3 /* EventLogger.swift in Sources */,
 				4722D47B238EB7C9003D373C /* GameRule.swift in Sources */,
 				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
 				FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */,

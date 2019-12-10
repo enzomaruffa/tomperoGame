@@ -7,5 +7,7 @@ target 'Tompero' do
 
   # Pods for Tompero
   pod 'SwiftLint'
+  pod 'Firebase/Analytics'
+  
 
 end

@@ -27,6 +27,8 @@ class StatisticsViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
+        
         // Do any additional setup after loading the view.
         deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) delivered orders!"
         
@@ -37,6 +39,8 @@ class StatisticsViewController: UIViewController, Storyboarded {
     
     // MARK: - Actions
     @IBAction func menuPressed(_ sender: Any) {
+        EventLogger.shared.logButtonPress(buttonName: "statistics-menu")
+        
         coordinator?.popToRoot()
     }
     

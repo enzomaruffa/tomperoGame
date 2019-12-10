@@ -109,6 +109,7 @@ class GameScene: SKScene {
         
         if hosting {
             matchStatistics = MatchStatistics(ruleUsed: rule!)
+            EventLogger.shared.logMatchStart(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
         }
         
         setupOrderListNode()
@@ -279,6 +280,15 @@ class GameScene: SKScene {
         }
     }
     
+    func endMatch() {
+        self.isPaused = true
+        GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
+        
+        EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+        
+        coordinator?.statistics(statistics: matchStatistics!)
+    }
+    
     fileprivate func updateTimer() {
         timerUpdateCounter += 1
         if timerStarted && timerUpdateCounter >= 60 {
@@ -295,10 +305,8 @@ class GameScene: SKScene {
             }
             
             if hosting {
-                self.isPaused = true
                 stations.forEach({ $0.stopAnimation() })
-                GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
-                coordinator?.statistics(statistics: matchStatistics!)
+                endMatch()
             }
         }
         
