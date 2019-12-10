@@ -296,6 +296,7 @@ class GameScene: SKScene {
             
             if hosting {
                 self.isPaused = true
+                stations.forEach({ $0.stopAnimation() })
                 GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
                 coordinator?.statistics(statistics: matchStatistics!)
             }
@@ -466,6 +467,7 @@ extension GameScene: GameConnectionManagerObserver {
     
     func receiveStatistics(statistics: MatchStatistics) {
         self.isPaused = true
+        stations.forEach({ $0.stopAnimation() })
         DispatchQueue.main.async {
             self.coordinator?.statistics(statistics: statistics)
         }

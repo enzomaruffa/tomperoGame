@@ -44,25 +44,42 @@ class MainCoordinator: Coordinator {
                 ]
             ]
             
-            game(
-                rule: GameRule(
-                    difficulty: .hard,
-                    possibleIngredients: [
-                        Asteroid(),
-                        Tentacle(),
-                        MoonCheese(),
-                        Eyes(),
-                        Tardigrades()
-                    ],
-                    playerTables: tables,
-                    playerOrder: [
-                        "God",
-                        "Enzo's Enzo's iPhone",
-                        "CU",
-                        "CU 2"]
-                ),
-                hosting: true
-            )
+            statistics(statistics: MatchStatistics(ruleUsed: GameRule(
+                difficulty: .hard,
+                possibleIngredients: [
+                    Asteroid(),
+                    Tentacle(),
+                    MoonCheese(),
+                    Eyes(),
+                    Tardigrades()
+                ],
+                playerTables: tables,
+                playerOrder: [
+                    "God",
+                    "Enzo's Enzo's iPhone",
+                    "CU",
+                    "CU 2"]
+            )))
+            
+//            game(
+//                rule: GameRule(
+//                    difficulty: .hard,
+//                    possibleIngredients: [
+//                        Asteroid(),
+//                        Tentacle(),
+//                        MoonCheese(),
+//                        Eyes(),
+//                        Tardigrades()
+//                    ],
+//                    playerTables: tables,
+//                    playerOrder: [
+//                        "God",
+//                        "Enzo's Enzo's iPhone",
+//                        "CU",
+//                        "CU 2"]
+//                ),
+//                hosting: true
+//            )
             return
         }
         
