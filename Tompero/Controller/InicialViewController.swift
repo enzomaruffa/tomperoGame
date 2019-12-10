@@ -138,7 +138,8 @@ class InicialViewController: UIViewController, Storyboarded {
         
         //airGIF.loadGif(name: "airR1")
         animateDialog(text: textSapao1)
-       
+        
+        MusicPlayer.shared.play(.menu)
     }
     
     override func viewWillAppear(_ animated: Bool) {
