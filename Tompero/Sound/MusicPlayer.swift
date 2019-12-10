@@ -15,7 +15,7 @@ class MusicPlayer {
     private var score = [TrackNumber: Track]()
     
     private init() {
-        score[.menu] = Track(fileName: "gameMusic.m4a")
+        score[.menu] = Track(fileName: "menuMusicAmbiance.wav")
         score[.game] = TrackWithIntro(introFileName: "gameMusicIntro.m4a", loopFileName: "gameMusic.m4a")
     }
     

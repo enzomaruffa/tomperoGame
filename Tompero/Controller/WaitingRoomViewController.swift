@@ -100,8 +100,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //MusicPlayer.shared.play(.menu)
-        
         //ZOOM do menu
         let viewTransform = self.view.transform
         let scaleX = (view.frame.width/menuButton.frame.width)
@@ -162,7 +160,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     // MARK: - ActionsButtons
     @IBAction func backPressed(_ sender: Any) {
-        MusicPlayer.shared.stop(.menu)
         self.navigationController?.popViewController(animated: true)
         
     }
