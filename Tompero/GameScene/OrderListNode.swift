@@ -59,6 +59,8 @@ class OrderListNode: SKSpriteNode {
         
         currentState = .open
         
+        self.physicsBody?.velocity = .zero
+        
         self.children.forEach({ $0.alpha = 1 })
         self.gameScene.physicsWorld.gravity.dx = 30
         self.physicsBody?.restitution = 0.07
@@ -72,15 +74,21 @@ class OrderListNode: SKSpriteNode {
     func close() {
         guard canChangeCurrentState(to: .closing) else { return }
         
+        self.physicsBody?.velocity = .zero
         currentState = .closing
         
         self.gameScene.physicsWorld.gravity.dx = 30
         self.physicsBody?.restitution = 0.1
         
-        let action = SKAction.moveTo(x: -1041, duration: 0.13)
+        let animationDuration = 0.13
+        
+        let action = SKAction.moveTo(x: -1041, duration: animationDuration)
         boundary.run(action) {
-            self.currentState = .closed
             self.children.forEach({ $0.alpha = 0 })
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
+            self.currentState = .closed
         }
     }
     
