@@ -82,7 +82,7 @@ class StationNode: TappableDelegate {
                 }
                 
                 if let ingredient = ingredientNode?.ingredient {
-                    let iconNode = SKSpriteNode(imageNamed: ingredient.texturePrefix + "Icon")
+                    let iconNode = SKSpriteNode(imageNamed: ingredient.texturePrefix + "Raw")
                     iconNode.zPosition = 6
                     iconNode.scale(to: CGSize(width: 100, height: 100))
                     indicatorNode?.addChild(iconNode)
