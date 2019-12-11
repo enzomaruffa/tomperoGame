@@ -18,7 +18,7 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = true
+        let gameSceneTest: Bool = false
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [
@@ -100,6 +100,7 @@ class MainCoordinator: Coordinator {
         let controller = MenuCollectionViewController.instantiate()
         controller.coordinator = self
         controller.modalTransitionStyle = .crossDissolve
+//        navigationController.present(controller, animated: true, completion: nil)
         navigationController.pushViewController(controller, animated: false)
     }
     
