@@ -44,6 +44,16 @@ class InicialViewController: UIViewController, Storyboarded {
         host.addGestureRecognizer(tapGestureRecognizerHost)
         viewDialog.addGestureRecognizer(tapGestureRecognizerText)
         viewDialog.isUserInteractionEnabled = true
+        
+        
+        animateDialog(text: textSapao1)
+        
+        MusicPlayer.shared.play(.menu)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        MCManager.shared.resetSession()
+        
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             //print("Timer called")
             
@@ -80,14 +90,6 @@ class InicialViewController: UIViewController, Storyboarded {
             }
         }
         kombiTimer?.fire()
-        
-        animateDialog(text: textSapao1)
-        
-        MusicPlayer.shared.play(.menu)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        MCManager.shared.resetSession()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
