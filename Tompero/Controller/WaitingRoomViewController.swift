@@ -160,10 +160,12 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     // MARK: - ActionsButtons
     @IBAction func backPressed(_ sender: Any) {
+        EventLogger.shared.logButtonPress(buttonName: "waiting-back")
         self.navigationController?.popViewController(animated: true)
         
     }
     @IBAction func menuPressed(_ sender: Any) {
+        EventLogger.shared.logButtonPress(buttonName: "waiting-recipeMenu")
         
         let timeAnimation = 0.3
         UIView.animate(withDuration: timeAnimation, delay: 0, options: .curveEaseIn, animations: {
@@ -178,6 +180,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     @IBAction func play(_ sender: Any) {
         // Generate rules and send to other players
+        EventLogger.shared.logButtonPress(buttonName: "waiting-play")
+        
         let peers = playersWithStatus.map({ $0.name })
         let rule = GameRuleFactory.generateRule(difficulty: countLevel, players: peers)
         
@@ -194,6 +198,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func levelButtom(_ sender: Any) {
+        EventLogger.shared.logButtonPress(buttonName: "waiting-difficulty")
         
         if countLevel == .easy {
             level.setTitle("MEDIUM", for: .normal)
@@ -207,15 +212,19 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
     }
     @IBAction func player1InviteButtonPressed(_ sender: Any) {
+        EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
         MCManager.shared.hostSession(presentingFrom: self, delegate: self)
     }
     @IBAction func player2InviteButtonPressed(_ sender: Any) {
+        EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
         MCManager.shared.hostSession(presentingFrom: self, delegate: self)
     }
     @IBAction func player3InviteButtonPressed(_ sender: Any) {
+        EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
         MCManager.shared.hostSession(presentingFrom: self, delegate: self)
     }
     @IBAction func player4InviteButtonPressed(_ sender: Any) {
+        EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
         MCManager.shared.hostSession(presentingFrom: self, delegate: self)
     }
     
