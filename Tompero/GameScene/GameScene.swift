@@ -120,6 +120,27 @@ class GameScene: SKScene {
         setupBackground()
         
         SFXPlayer.shared.roundStarted.play()
+        
+        // Debugging attempts
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//            self.orderListNode.jump()
+//            self.orderListNode.close()
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+//            self.orderListNode.jump()
+//            self.orderListNode.open()
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+//            self.orderListNode.open()
+//            self.orderListNode.jump()
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 13) {
+//            self.orderListNode.close()
+//            self.orderListNode.jump()
+//        }
     }
     
     func setupOrderListNode() {
