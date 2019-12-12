@@ -10,6 +10,19 @@ import Foundation
 
 class SaturnOnionRings: Ingredient {
     
+    override var textureName: String {
+        switch currentState {
+        case .raw: return texturePrefix + "Raw"
+        case .chopping: return texturePrefix + "Raw"
+        case .chopped: return texturePrefix + "Chopped"
+        case .cooking: return texturePrefix + "Raw"
+        case .cooked: return texturePrefix + "Raw"
+        case .frying: return texturePrefix + "Chopped"
+        case .fried: return texturePrefix + "Fried"
+        case .burnt: return "ashes"
+        }
+    }
+    
     init() {
         super.init(
             texturePrefix: "SaturnOnionRings",
