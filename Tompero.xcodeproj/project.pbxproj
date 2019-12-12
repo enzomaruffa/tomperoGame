@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B688C2DD78186CF812918984 /* Pods_Tompero.framework */; };
+		4709B27423A2CBC8004B8F51 /* BoardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27323A2CBC8004B8F51 /* BoardNode.swift */; };
 		471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E0238C1349000575B0 /* MCDataWrapper.swift */; };
 		471795E5238C14E7000575B0 /* MCDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E4238C14E7000575B0 /* MCDataType.swift */; };
 		471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */; };
@@ -136,6 +137,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4709B27323A2CBC8004B8F51 /* BoardNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardNode.swift; sourceTree = "<group>"; };
 		471795E0238C1349000575B0 /* MCDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCDataWrapper.swift; sourceTree = "<group>"; };
 		471795E4238C14E7000575B0 /* MCDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDataType.swift; sourceTree = "<group>"; };
 		471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerDataObserver.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 			children = (
 				56B3A7B92391CDC7005E0807 /* StationType.swift */,
 				565AEFE3239164E300E3E15F /* StationNode.swift */,
+				4709B27323A2CBC8004B8F51 /* BoardNode.swift */,
 				565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */,
 				56B3A7B52391B93B005E0807 /* IngredientNode.swift */,
 				476F70A7239336490000465F /* TappableSpriteNode.swift */,
@@ -818,6 +821,7 @@
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
 				479B784C239D8BCB003BC9DE /* StatisticsViewController.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
+				4709B27423A2CBC8004B8F51 /* BoardNode.swift in Sources */,
 				FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */,
 				566A5BAF239A8564006D96CF /* ComponentType.swift in Sources */,
 				4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */,

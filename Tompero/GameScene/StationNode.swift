@@ -12,7 +12,7 @@ import SpriteKit
 class StationNode: TappableDelegate {
     
     var stationType: StationType
-    private let ingredient: Ingredient?
+    let ingredient: Ingredient?
     
     var isEmpty: Bool {
         ingredientNode == nil && plateNode == nil
@@ -105,7 +105,7 @@ class StationNode: TappableDelegate {
     
     var progressBarNode: ProgressBar?
     
-    private var progressBarNodeOffset: CGPoint {
+    var progressBarNodeOffset: CGPoint {
         switch stationType {
         case .stove: return CGPoint(x: 0, y: -220)
         case .fryer: return CGPoint(x: 0, y: -200)
@@ -114,7 +114,7 @@ class StationNode: TappableDelegate {
         }
     }
     
-    private var stationAnimationAtlasName: String? {
+    var stationAnimationAtlasName: String? {
         switch stationType {
         case .stove: return "Cook"
         case .fryer: return "Fry"
@@ -124,7 +124,7 @@ class StationNode: TappableDelegate {
         }
     }
     
-    private var stationAnimationDuration: Double {
+    var stationAnimationDuration: Double {
         switch stationType {
         case .stove: return 2
         case .fryer: return 2
@@ -134,7 +134,7 @@ class StationNode: TappableDelegate {
         }
     }
     
-    private var stationAnimationOffset: CGPoint {
+    var stationAnimationOffset: CGPoint {
         switch stationType {
         case .stove: return CGPoint(x: 0, y: 0)
         case .fryer: return CGPoint(x: 0, y: 68)
@@ -144,7 +144,7 @@ class StationNode: TappableDelegate {
         }
     }
     
-    private var stationAnimationScale: CGFloat {
+    var stationAnimationScale: CGFloat {
         switch stationType {
         case .stove: return 1
         case .fryer: return 1
@@ -154,15 +154,15 @@ class StationNode: TappableDelegate {
         }
     }
     
-    private var stationAnimationRepeats: Bool {
+    var stationAnimationRepeats: Bool {
         switch stationType {
         case .board: return false
         default: return true
         }
     }
     
-    private var stationAnimationNode: SKSpriteNode?
-    private var stationAnimationFrames: [SKTexture]!
+    var stationAnimationNode: SKSpriteNode?
+    var stationAnimationFrames: [SKTexture]!
     var animationRunning = false
     
     func createAnimation(stationType: StationType) {
