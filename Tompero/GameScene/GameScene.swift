@@ -305,7 +305,9 @@ class GameScene: SKScene {
         self.isPaused = true
         GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
         
-        EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+        if hosting {
+            EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+        }
         
         coordinator?.statistics(statistics: matchStatistics!)
     }
