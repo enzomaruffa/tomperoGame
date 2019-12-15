@@ -14,10 +14,6 @@ class BoardNode: StationNode {
         -237.5
     }
     
-    override var ingredientNodeScale: CGFloat {
-        1
-    }
-    
     override var ingredientNode: IngredientNode? {
         didSet {
             ingredientNode?.spriteNode.setScale(ingredientNodeScale)
@@ -38,16 +34,8 @@ class BoardNode: StationNode {
         CGPoint(x: 0, y: -180)
     }
     
-    override var stationAnimationAtlasName: String? {
-        nil
-    }
-    
     override var stationAnimationDuration: Double {
         0
-    }
-    
-    override var stationAnimationOffset: CGPoint {
-        .zero
     }
     
     override var stationAnimationScale: CGFloat {

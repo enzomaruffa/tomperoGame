@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B688C2DD78186CF812918984 /* Pods_Tompero.framework */; };
 		4709B27423A2CBC8004B8F51 /* BoardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27323A2CBC8004B8F51 /* BoardNode.swift */; };
+		4709B27623A6F060004B8F51 /* StoveNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27523A6F060004B8F51 /* StoveNode.swift */; };
+		4709B27823A6F2AC004B8F51 /* FryerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27723A6F2AC004B8F51 /* FryerNode.swift */; };
+		4709B27A23A6F3C8004B8F51 /* ShelfNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27923A6F3C8004B8F51 /* ShelfNode.swift */; };
 		471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E0238C1349000575B0 /* MCDataWrapper.swift */; };
 		471795E5238C14E7000575B0 /* MCDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E4238C14E7000575B0 /* MCDataType.swift */; };
 		471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */; };
@@ -138,6 +141,9 @@
 
 /* Begin PBXFileReference section */
 		4709B27323A2CBC8004B8F51 /* BoardNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardNode.swift; sourceTree = "<group>"; };
+		4709B27523A6F060004B8F51 /* StoveNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoveNode.swift; sourceTree = "<group>"; };
+		4709B27723A6F2AC004B8F51 /* FryerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryerNode.swift; sourceTree = "<group>"; };
+		4709B27923A6F3C8004B8F51 /* ShelfNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfNode.swift; sourceTree = "<group>"; };
 		471795E0238C1349000575B0 /* MCDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCDataWrapper.swift; sourceTree = "<group>"; };
 		471795E4238C14E7000575B0 /* MCDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDataType.swift; sourceTree = "<group>"; };
 		471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerDataObserver.swift; sourceTree = "<group>"; };
@@ -499,6 +505,9 @@
 				566A5BB1239AD3AF006D96CF /* OrderListNode.swift */,
 				56EDA929239B48B7004BFC2C /* OrderNode.swift */,
 				566E9BD2239D391400787210 /* ProgressBar.swift */,
+				4709B27523A6F060004B8F51 /* StoveNode.swift */,
+				4709B27723A6F2AC004B8F51 /* FryerNode.swift */,
+				4709B27923A6F3C8004B8F51 /* ShelfNode.swift */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -827,6 +836,7 @@
 				4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */,
 				476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */,
 				471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */,
+				4709B27A23A6F3C8004B8F51 /* ShelfNode.swift in Sources */,
 				FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */,
 				471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */,
 				4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */,
@@ -835,6 +845,7 @@
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
 				47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */,
+				4709B27823A6F2AC004B8F51 /* FryerNode.swift in Sources */,
 				566E9C9B239D82E200787210 /* SFXPlayer.swift in Sources */,
 				567A07BB238C805000D6399A /* Order.swift in Sources */,
 				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
@@ -874,6 +885,7 @@
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				566A5BB2239AD3AF006D96CF /* OrderListNode.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
+				4709B27623A6F060004B8F51 /* StoveNode.swift in Sources */,
 				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
 				56EDA92A239B48B7004BFC2C /* OrderNode.swift in Sources */,
 				565AEFE223915E6400E3E15F /* MovableSpriteNode.swift in Sources */,

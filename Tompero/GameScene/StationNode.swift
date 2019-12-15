@@ -19,6 +19,8 @@ class StationNode: TappableDelegate {
     }
     
     var spriteNode: SKSpriteNode
+    
+    // default to 0
     var spriteYPos: CGFloat {
         switch stationType {
         case .board: return -237.5
@@ -30,6 +32,7 @@ class StationNode: TappableDelegate {
         }
     }
     
+    // set to default 1
     var ingredientNodeScale: CGFloat {
         switch stationType {
         case .board: return 1
@@ -45,6 +48,7 @@ class StationNode: TappableDelegate {
         }
     }
     
+    // set to deafult  1
     var plateNodeScale: CGFloat {
         switch stationType {
         case .board: return 1
@@ -105,6 +109,7 @@ class StationNode: TappableDelegate {
     
     var progressBarNode: ProgressBar?
     
+    // default to zero
     var progressBarNodeOffset: CGPoint {
         switch stationType {
         case .stove: return CGPoint(x: 0, y: -220)
@@ -114,6 +119,7 @@ class StationNode: TappableDelegate {
         }
     }
     
+    // default to nil
     var stationAnimationAtlasName: String? {
         switch stationType {
         case .stove: return "Cook"
@@ -124,6 +130,7 @@ class StationNode: TappableDelegate {
         }
     }
     
+    // default to zero
     var stationAnimationDuration: Double {
         switch stationType {
         case .stove: return 2
@@ -134,6 +141,7 @@ class StationNode: TappableDelegate {
         }
     }
     
+    // set to default 0 0
     var stationAnimationOffset: CGPoint {
         switch stationType {
         case .stove: return CGPoint(x: 0, y: 0)
@@ -144,6 +152,7 @@ class StationNode: TappableDelegate {
         }
     }
     
+    // set to default 1
     var stationAnimationScale: CGFloat {
         switch stationType {
         case .stove: return 1
@@ -154,6 +163,7 @@ class StationNode: TappableDelegate {
         }
     }
     
+    // set to default true
     var stationAnimationRepeats: Bool {
         switch stationType {
         case .board: return false
@@ -244,6 +254,7 @@ class StationNode: TappableDelegate {
     }
     
     // Tap interaction
+    // Default to empty
     func tap() {
         
         if stationType == .board,
@@ -294,7 +305,7 @@ class StationNode: TappableDelegate {
         }
     }
     
-    // Scene update intercation
+    // Default to empty
     func update() {
         
         if stationType == .stove && !(ingredientNode?.moving ?? true),
@@ -360,6 +371,7 @@ class StationNode: TappableDelegate {
     }
     
     func playAnimation() {
+        // remove
         switch stationType {
         case .stove: SFXPlayer.shared.cooking.play()
         case .fryer: SFXPlayer.shared.frying.play()
@@ -368,6 +380,8 @@ class StationNode: TappableDelegate {
             SFXPlayer.shared.airSuction.play()
         default: break
         }
+        
+        // ===
         if let node = self.stationAnimationNode {
 
             animationRunning = true
@@ -388,6 +402,7 @@ class StationNode: TappableDelegate {
     }
     
     func stopAnimation() {
+        // remove later
         switch stationType {
         case .stove: SFXPlayer.shared.cooking.stop()
         case .fryer: SFXPlayer.shared.frying.stop()
@@ -395,6 +410,7 @@ class StationNode: TappableDelegate {
         default: break
         }
         
+        //
         if stationType == .hatch {
             stationAnimationNode?.size = CGSize(width: 792*0.8, height: 668*0.8)
         }
