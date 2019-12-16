@@ -121,7 +121,6 @@ class OrderListNode: SKSpriteNode {
                 self.physicsBody?.applyImpulse(CGVector(dx: 3000, dy: 0))
             },
             .run {
-                // TODO: Possible bug. Close should only happen after the duration ends
                 self.close()
             }
         ]))

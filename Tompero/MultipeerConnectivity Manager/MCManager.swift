@@ -114,7 +114,7 @@ class MCManager: NSObject, MCSessionDelegate {
                 matchmakingObservers.forEach({ $0.playerListSent(playersWithStatus: peersWithStatus) })
             } else if wrapper.type == .gameRule {
                 print("[MCManager] Sending gameRule to observers: \(wrapper)")
-                var rule = try JSONDecoder().decode(GameRule.self, from: wrapper.object)
+                let rule = try JSONDecoder().decode(GameRule.self, from: wrapper.object)
                 rule.possibleIngredients = rule.possibleIngredients.map({ $0.findDowncast() })
                 matchmakingObservers.forEach({ $0.receiveGameRule(rule: rule) })
             } else {

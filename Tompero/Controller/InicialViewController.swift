@@ -45,7 +45,6 @@ class InicialViewController: UIViewController, Storyboarded {
         viewDialog.addGestureRecognizer(tapGestureRecognizerText)
         viewDialog.isUserInteractionEnabled = true
         
-        
         animateDialog(text: textSapao1)
         
         MusicPlayer.shared.play(.menu)
