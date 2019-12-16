@@ -171,6 +171,10 @@ class StationNode: TappableDelegate {
         }
     }
     
+    var stationAnimationResize: Bool {
+        true
+    }
+    
     var stationAnimationNode: SKSpriteNode?
     var stationAnimationFrames: [SKTexture]!
     var animationRunning = false
@@ -389,7 +393,7 @@ class StationNode: TappableDelegate {
             var animationAction = SKAction.animate(
                                     with: stationAnimationFrames,
                                     timePerFrame: timePerFrame,
-                                    resize: stationType == .hatch ? true : false,
+                                    resize: stationAnimationResize,
                                     restore: true
             )
             

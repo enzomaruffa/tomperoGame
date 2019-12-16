@@ -81,8 +81,5 @@ class BoardNode: StationNode {
             }
         }
     }
-
-    override func playAnimation() {}
-    override func stopAnimation() {}
     
 }

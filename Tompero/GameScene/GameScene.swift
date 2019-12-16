@@ -160,7 +160,23 @@ class GameScene: SKScene {
             }
         }
         
-        stations = tables.map({ StationNode(stationType: convertTableToStation(type: $0.type), ingredient: $0.ingredient) })
+        var nodes: [StationNode] = []
+        for table in tables {
+            if table.type == .chopping {
+                nodes.append(BoardNode())
+            } else if table.type == .cooking {
+                nodes.append(StoveNode())
+            } else if table.type == .frying {
+                nodes.append(FryerNode())
+            } else if table.type == .plate {
+                nodes.append(PlateBoxNode())
+            } else if table.type == .ingredient {
+                nodes.append(IngredientBoxNode(ingredient: table.ingredient!))
+            } else if table.type == .empty {
+                nodes.append(StationNode(stationType: .empty, ingredient: nil))
+            }
+        }
+        stations = nodes
         
         for (index, station) in stations.enumerated() {
             let node = station.spriteNode
@@ -190,11 +206,11 @@ class GameScene: SKScene {
     }
     
     func setupShelves() {
-        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf1") as! SKSpriteNode))
-        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf2") as! SKSpriteNode))
-        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf3") as! SKSpriteNode))
+        stations.append(ShelfNode(node: self.childNode(withName: "shelf1") as! SKSpriteNode))
+        stations.append(ShelfNode(node: self.childNode(withName: "shelf2") as! SKSpriteNode))
+        stations.append(ShelfNode(node: self.childNode(withName: "shelf3") as! SKSpriteNode))
         
-        stations.append(StationNode(stationType: .delivery, spriteNode: self.childNode(withName: "delivery") as! SKSpriteNode))
+        stations.append(DeliveryNode(node: self.childNode(withName: "delivery") as! SKSpriteNode))
         
         (self.childNode(withName: "target") as! SKSpriteNode).texture = SKTexture(imageNamed: "Target" + playerColor)
         
@@ -212,10 +228,10 @@ class GameScene: SKScene {
             pipeNode.name = "pipe" + (index+1).description
             pipeNode.zPosition = 2
             
-            stations.append(StationNode(stationType: .pipe, spriteNode: pipeNode))
+            stations.append(PipeNode(node: pipeNode))
         }
         
-        stations.append(StationNode(stationType: .hatch, spriteNode: self.childNode(withName: "hatch") as! SKSpriteNode))
+        stations.append(HatchNode(node: self.childNode(withName: "hatch") as! SKSpriteNode))
     }
     
     func setupBackground() {
