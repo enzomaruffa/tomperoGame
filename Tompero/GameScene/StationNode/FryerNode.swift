@@ -57,7 +57,7 @@ class FryerNode: StationNode {
     }
     
     init() {
-        super.init(stationType: .stove, spriteNode: nil, ingredient: nil)
+        super.init(stationType: .fryer, spriteNode: nil, ingredient: nil)
         
         let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")
         self.spriteNode = tappableNode
@@ -106,10 +106,12 @@ class FryerNode: StationNode {
         }
     }
     
-    override func playAnimation() { SFXPlayer.shared.frying.play()
+    override func playAnimation() {
+        SFXPlayer.shared.frying.play()
         super.playAnimation()
     }
-    override func stopAnimation() { SFXPlayer.shared.frying.stop()
+    override func stopAnimation() {
+        SFXPlayer.shared.frying.stop()
         super.stopAnimation()
     }
     

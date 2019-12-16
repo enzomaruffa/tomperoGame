@@ -40,7 +40,7 @@ class HatchNode: StationNode {
     }
     
     init(node: SKSpriteNode) {
-        super.init(stationType: .pipe, spriteNode: node, ingredient: nil)
+        super.init(stationType: .hatch, spriteNode: node, ingredient: nil)
     }
     
     override func playAnimation() {
@@ -51,6 +51,7 @@ class HatchNode: StationNode {
     
     override func stopAnimation() {
         super.stopAnimation()
+        SFXPlayer.shared.airSuction.stop()
         stationAnimationNode?.size = CGSize(width: 792*0.8, height: 668*0.8)
     }
 }

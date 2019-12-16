@@ -112,10 +112,12 @@ class StoveNode: StationNode {
         }
     }
     
-    override func playAnimation() { SFXPlayer.shared.cooking.play()
+    override func playAnimation() {
+        SFXPlayer.shared.cooking.play()
         super.playAnimation()
     }
-    override func stopAnimation() { SFXPlayer.shared.cooking.stop()
+    override func stopAnimation() {
+        SFXPlayer.shared.cooking.stop()
         super.stopAnimation()
     }
     

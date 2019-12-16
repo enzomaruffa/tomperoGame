@@ -79,6 +79,8 @@ class BoardNode: StationNode {
                 }
                 progressBarNode?.alpha = 0
             }
+        } else {
+            progressBarNode?.alpha = 0
         }
     }
     
