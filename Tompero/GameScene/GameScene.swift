@@ -342,6 +342,8 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         stations.forEach({ $0.update() })
         
+        print(orderListNode.position)
+        
         checkAnimations()
         updateOrders()
         updateTimer()
@@ -405,8 +407,6 @@ class GameScene: SKScene {
         currentSeconds -= (currentMinutes * 60)
         
         timerLabel.text = "\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)"
-        
-        print("\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)")
     }
     
     func updateCoinsUI() {

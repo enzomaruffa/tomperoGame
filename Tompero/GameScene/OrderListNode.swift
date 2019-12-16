@@ -47,15 +47,21 @@ class OrderListNode: SKSpriteNode {
         self.isUserInteractionEnabled = true
     }
     
-    func canChangeCurrentState(to state: State) -> Bool {
+    private func canChangeCurrentState(to state: State) -> Bool {
+        print("[orderList.canchangecurrentState] attempt change to \(state) from \(currentState)")
         if states[currentState]!.contains(state) {
+            print("[orderList.canchangecurrentState] returning true")
             return true
         }
+        
+        print("[orderList.canchangecurrentState] returning false")
         return false
     }
     
     func open() {
+        print("[orderList] open called")
         guard canChangeCurrentState(to: .open) else { return }
+        print("[orderList] opening...")
         
         currentState = .open
         
@@ -72,7 +78,9 @@ class OrderListNode: SKSpriteNode {
     }
     
     func close() {
+        print("[orderList.close] close called...")
         guard canChangeCurrentState(to: .closing) else { return }
+        print("[orderList.close] closing...")
         
         self.physicsBody?.velocity = .zero
         currentState = .closing
@@ -81,7 +89,9 @@ class OrderListNode: SKSpriteNode {
         self.physicsBody?.restitution = 0.1
         
         let animationDuration = 0.13
-        
+
+        print("[orderList.close] running move...")
+        self.removeAllActions()
         let action = SKAction.moveTo(x: -1041, duration: animationDuration)
         boundary.run(action) {
             self.children.forEach({ $0.alpha = 0 })
@@ -89,11 +99,14 @@ class OrderListNode: SKSpriteNode {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
             self.currentState = .closed
+            print("[orderList.close] state: closed...")
         }
     }
     
     func jump() {
+        print("[orderList] jump called...")
         guard canChangeCurrentState(to: .jumping) else { return }
+        print("[orderList] jumping...")
         
         currentState = .jumping
         
@@ -115,6 +128,7 @@ class OrderListNode: SKSpriteNode {
     }
 
     func checkAction() {
+        print("[orderList] check aciton called")
         if canChangeCurrentState(to: .open) {
             open()
         } else if canChangeCurrentState(to: .closing) {
@@ -123,9 +137,12 @@ class OrderListNode: SKSpriteNode {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("[orderList.touchesended] touchesEnded...")
         if canChangeCurrentState(to: .open) {
+            print("[orderList.touchesended] calling open...")
             open()
         } else if canChangeCurrentState(to: .closing) {
+            print("[orderList.touchesended] calling close...")
             close()
         }
     }
