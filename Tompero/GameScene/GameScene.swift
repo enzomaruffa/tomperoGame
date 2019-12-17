@@ -173,7 +173,7 @@ class GameScene: SKScene {
             } else if table.type == .ingredient {
                 nodes.append(IngredientBoxNode(ingredient: table.ingredient!))
             } else if table.type == .empty {
-                nodes.append(StationNode(stationType: .empty, ingredient: nil))
+                nodes.append(StationNode(stationType: .empty))
             }
         }
         stations = nodes

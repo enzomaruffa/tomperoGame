@@ -20,6 +20,7 @@ class ShelfNode: StationNode {
     }
     
     init(node: SKSpriteNode) {
-        super.init(stationType: .shelf, spriteNode: node, ingredient: nil)
+        super.init(stationType: .shelf)
+        self.spriteNode = node
     }
 }

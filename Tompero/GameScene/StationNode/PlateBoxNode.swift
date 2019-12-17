@@ -16,7 +16,11 @@ class PlateBoxNode: StationNode {
     }
     
     init() {
-        super.init(stationType: .plateBox, spriteNode: nil, ingredient: nil)
+        super.init(stationType: .plateBox)
+
+        let tappableNode = TappableSpriteNode(imageNamed: "PlateBox.png")
+        self.spriteNode = tappableNode
+        tappableNode.delegate = self
     }
     
     override func tap() {

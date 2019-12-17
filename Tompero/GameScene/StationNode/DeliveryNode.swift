@@ -20,6 +20,7 @@ class DeliveryNode: StationNode {
     }
     
     init(node: SKSpriteNode) {
-        super.init(stationType: .delivery, spriteNode: node, ingredient: nil)
+        super.init(stationType: .delivery)
+        self.spriteNode = node
     }
 }

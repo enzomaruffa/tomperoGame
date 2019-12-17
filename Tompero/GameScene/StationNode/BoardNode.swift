@@ -47,7 +47,7 @@ class BoardNode: StationNode {
     }
     
     init() {
-        super.init(stationType: .board, spriteNode: nil, ingredient: nil)
+        super.init(stationType: .board)
         
         let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")
         self.spriteNode = tappableNode

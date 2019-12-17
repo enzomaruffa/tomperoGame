@@ -12,7 +12,7 @@ import SpriteKit
 class StationNode: TappableDelegate {
     
     var stationType: StationType
-    let ingredient: Ingredient?
+    internal var ingredient: Ingredient?
     
     var isEmpty: Bool {
         ingredientNode == nil && plateNode == nil
@@ -110,61 +110,11 @@ class StationNode: TappableDelegate {
         }
     }
     
-    internal init(stationType: StationType, spriteNode: SKSpriteNode?, ingredient: Ingredient?) {
+    internal init(stationType: StationType) {
         self.stationType = stationType
-        self.ingredient = ingredient
-        
-        // 
-        if stationType == .ingredientBox {
-            
-            let tappableNode = TappableSpriteNode(imageNamed: ingredient!.texturePrefix + "Box.png")
-            self.spriteNode = tappableNode
-            tappableNode.delegate = self
-            
-        } else if stationType == .plateBox {
-            
-            let tappableNode = TappableSpriteNode(imageNamed: "PlateBox.png")
-            self.spriteNode = tappableNode
-            tappableNode.delegate = self
-            
-        } else if stationType == .shelf
-                || stationType == .delivery
-                || stationType == .pipe
-                || stationType == .hatch {
-            
-            self.spriteNode = spriteNode!
-            
-        } else if stationType == .empty {
-            
-            let tappableNode = TappableSpriteNode()
-            self.spriteNode = tappableNode
-            tappableNode.delegate = self
-            
-        } else {
-            
-            let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")
-            self.spriteNode = tappableNode
-            tappableNode.delegate = self
-            
-            let progressBarNode = ProgressBar(color: .green, size: CGSize(width: tappableNode.size.width * 0.5, height: 18))
-            self.spriteNode.addChild(progressBarNode)
-            progressBarNode.zPosition = 8
-            progressBarNode.position = progressBarNodeOffset
-            
-            self.progressBarNode = progressBarNode
-            progressBarNode.alpha = 0
-            
-        }
+        self.spriteNode = SKSpriteNode()
         
         createAnimation(stationType: stationType)
-    }
-    
-    convenience init(stationType: StationType, spriteNode: SKSpriteNode) {
-        self.init(stationType: stationType, spriteNode: spriteNode, ingredient: nil)
-    }
-    
-    convenience init(stationType: StationType, ingredient: Ingredient?) {
-        self.init(stationType: stationType, spriteNode: nil, ingredient: ingredient)
     }
     
     // Tap interaction

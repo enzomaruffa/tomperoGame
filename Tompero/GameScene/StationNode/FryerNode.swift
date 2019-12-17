@@ -57,7 +57,7 @@ class FryerNode: StationNode {
     }
     
     init() {
-        super.init(stationType: .fryer, spriteNode: nil, ingredient: nil)
+        super.init(stationType: .fryer)
         
         let tappableNode = TappableSpriteNode(imageNamed: stationType.rawValue + ".png")
         self.spriteNode = tappableNode

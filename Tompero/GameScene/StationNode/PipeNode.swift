@@ -36,6 +36,7 @@ class PipeNode: StationNode {
     }
     
     init(node: SKSpriteNode) {
-        super.init(stationType: .pipe, spriteNode: node, ingredient: nil)
+        super.init(stationType: .pipe)
+        self.spriteNode = node
     }
 }

@@ -40,7 +40,8 @@ class HatchNode: StationNode {
     }
     
     init(node: SKSpriteNode) {
-        super.init(stationType: .hatch, spriteNode: node, ingredient: nil)
+        super.init(stationType: .hatch)
+        self.spriteNode = node
     }
     
     override func playAnimation() {
