@@ -32,6 +32,8 @@ class MovableSpriteNode: SKSpriteNode {
     // MARK: - Methods
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard touches.first != nil else { return }
+        print("[MovableNode.touchesBegan] Started")
+        
         let touch = touches.first!
         
         moveDelegate?.moveStarted(currentPosition: touch.location(in: scene!))
@@ -47,9 +49,11 @@ class MovableSpriteNode: SKSpriteNode {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
+        print("[MovableNode.touchesMoved] Start moving")
         moveDelegate?.moving(currentPosition: touch.location(in: scene!))
         
         // calculate offset
+        print("[MovableNode.touchesMoved] Setting position")
         self.position = touch.location(in: scene!)
         
         // TODO: how indicator nodes for placeable spaces
@@ -57,6 +61,7 @@ class MovableSpriteNode: SKSpriteNode {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+        print("[MovableNode.touchesEnded] Start")
         
         moveDelegate?.moveEnded(currentPosition: touch.location(in: scene!))
         

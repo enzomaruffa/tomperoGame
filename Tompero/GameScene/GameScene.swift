@@ -339,16 +339,6 @@ class GameScene: SKScene {
         }
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        stations.forEach({ $0.update() })
-        
-        print(orderListNode.position)
-        
-        checkAnimations()
-        updateOrders()
-        updateTimer()
-    }
-    
     func makeDelivery(plate: Plate) -> Bool {
         
         let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(teleportAnimationFrames.count)
@@ -391,6 +381,17 @@ class GameScene: SKScene {
         updateCoinsUI()
         
         return true
+    }
+    
+    // MARK: - Update
+    override func update(_ currentTime: TimeInterval) {
+        stations.forEach({ $0.update() })
+        
+        print("[GameScene.update] Node position:", orderListNode.position)
+        
+        checkAnimations()
+        updateOrders()
+        updateTimer()
     }
     
     // MARK: - UI Updates

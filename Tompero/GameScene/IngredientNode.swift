@@ -113,6 +113,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
             
         case .shelf:
+            print("[IngredientNode.attemptMove] Shelf case started")
             let canMove = station.ingredientNode?.ingredient == nil && ((station.plateNode != nil && ingredient.currentState == ingredient.finalState) || station.plateNode == nil)
             if canMove {
                 showSpriteNode()
@@ -120,6 +121,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
             }
             
             print("Result: \(canMove)")
+            print("[IngredientNode.attemptMove] Shelf case end")
             return canMove
             
         case .pipe:
@@ -158,14 +160,17 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func moveStarted(currentPosition: CGPoint) {
+        print("[IngredientNode.moveStarted] Start")
         scaleBeforeMove = spriteNode.yScale
         alphaBeforeMove = spriteNode.alpha
         
     }
     
     func moving(currentPosition: CGPoint) {
+        print("[IngredientNode.moving] Start moving")
         if currentPosition.distanceTo(currentStation.spriteNode.position) > 80 && rotationTimer == nil {
             
+            print("[IngredientNode.moving] Creating timer")
             SFXPlayer.shared.takeFood.play()
             moving = true
             

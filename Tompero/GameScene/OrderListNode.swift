@@ -37,7 +37,10 @@ class OrderListNode: SKSpriteNode {
         self.parent as! GameScene
     }
     
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+    var boundaryStart: CGPoint = CGPoint(x: -3501, y: 250)
+    var boundaryEnd: CGPoint = CGPoint(x: 780, y: 250)
+    
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {  
         super.init(texture: texture, color: color, size: size)
         self.isUserInteractionEnabled = true
     }
@@ -72,7 +75,7 @@ class OrderListNode: SKSpriteNode {
         self.physicsBody?.restitution = 0.07
         boundary.physicsBody?.restitution = 0.07
         
-        boundary.position.x = 982
+        boundary.position = boundaryEnd
         
         physicsBody?.applyImpulse(CGVector(dx: 10000, dy: 0))
     }
@@ -85,22 +88,19 @@ class OrderListNode: SKSpriteNode {
         self.physicsBody?.velocity = .zero
         currentState = .closing
         
-        self.gameScene.physicsWorld.gravity.dx = 30
+        self.gameScene.physicsWorld.gravity.dx = -30
         self.physicsBody?.restitution = 0.1
         
-        let animationDuration = 0.13
-
-        print("[orderList.close] running move...")
-        self.removeAllActions()
-        let action = SKAction.moveTo(x: -1041, duration: animationDuration)
-        boundary.run(action) {
-            self.children.forEach({ $0.alpha = 0 })
-        }
+        print("[orderList.close] Current position in scene: \(self.positionInScene!)")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
-            self.currentState = .closed
-            print("[orderList.close] state: closed...")
-        }
+        boundary.position = boundaryStart
+        
+        print("[orderList.close] running boundary move to \(boundaryStart)...")
+        
+        let animationDuration = 0.13
+    
+        self.currentState = .closed
+        print("[orderList.close] state: closed...")
     }
     
     func jump() {
