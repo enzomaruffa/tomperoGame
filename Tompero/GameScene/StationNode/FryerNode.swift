@@ -48,6 +48,10 @@ class FryerNode: StationNode {
         CGPoint(x: 0, y: -200)
     }
     
+    override var stationAnimationOffset: CGPoint {
+        CGPoint(x: 0, y: 65)
+    }
+    
     override var stationAnimationAtlasName: String? {
         "Fry"
     }
@@ -70,6 +74,8 @@ class FryerNode: StationNode {
         
         self.progressBarNode = progressBarNode
         progressBarNode.alpha = 0
+        
+        createAnimation()
     }
 
     override func update() {

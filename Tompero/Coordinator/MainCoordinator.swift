@@ -25,7 +25,7 @@ class MainCoordinator: Coordinator {
                 "God" : [
                     PlayerTable(type: .frying, ingredient: nil),
                     PlayerTable(type: .cooking, ingredient: nil),
-                    PlayerTable(type: .plate, ingredient: nil)
+                    PlayerTable(type: .ingredient, ingredient: Eyes())
                 ],
                 "Enzo's Enzo's iPhone" : [
                     PlayerTable(type: .chopping, ingredient: nil),

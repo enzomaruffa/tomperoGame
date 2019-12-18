@@ -70,6 +70,8 @@ class StoveNode: StationNode {
         
         self.progressBarNode = progressBarNode
         progressBarNode.alpha = 0
+        
+        createAnimation()
     }
 
     override func update() {

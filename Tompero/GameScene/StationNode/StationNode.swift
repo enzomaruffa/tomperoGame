@@ -89,7 +89,8 @@ class StationNode: TappableDelegate {
     var stationAnimationFrames: [SKTexture]!
     var animationRunning = false
     
-    func createAnimation(stationType: StationType) {
+    func createAnimation() {
+        print("Creating animation for type \(stationType) with atlas name \(stationAnimationAtlasName)")
         if let stationAnimationAtlasName = stationAnimationAtlasName {
             let stationAtlas = SKTextureAtlas(named: stationAnimationAtlasName)
             stationAnimationFrames = []
@@ -106,15 +107,13 @@ class StationNode: TappableDelegate {
             stationAnimationNode?.setScale(stationAnimationScale)
             
             stationAnimationNode!.position = stationAnimationOffset
-            stationAnimationNode!.zPosition = 3
+            stationAnimationNode!.zPosition = 4
         }
     }
     
     internal init(stationType: StationType) {
         self.stationType = stationType
         self.spriteNode = SKSpriteNode()
-        
-        createAnimation(stationType: stationType)
     }
     
     // Tap interaction
@@ -126,6 +125,7 @@ class StationNode: TappableDelegate {
     
     func playAnimation() {
         // ===
+        print("Playing animation with node \(self.stationAnimationNode)")
         if let node = self.stationAnimationNode {
 
             animationRunning = true

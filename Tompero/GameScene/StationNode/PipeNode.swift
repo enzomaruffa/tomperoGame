@@ -38,5 +38,6 @@ class PipeNode: StationNode {
     init(node: SKSpriteNode) {
         super.init(stationType: .pipe)
         self.spriteNode = node
+        createAnimation()
     }
 }
