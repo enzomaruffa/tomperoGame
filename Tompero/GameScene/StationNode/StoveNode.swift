@@ -94,7 +94,7 @@ class StoveNode: StationNode {
                     ingredientNode?.checkTextureChange()
                 }
             } else if cookableComponent.complete {
-                progressBarNode?.progress = CGFloat(cookableComponent.cookProgress / cookableComponent.burnCap)
+                progressBarNode?.progress =  CGFloat((cookableComponent.cookProgress - cookableComponent.cookCap) / (cookableComponent.burnCap - cookableComponent.cookCap))
                 progressBarNode?.bar?.color = .red
                 
                 if ingredient.states[ingredient.currentState]!.contains(IngredientState.cooked) {

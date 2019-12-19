@@ -35,7 +35,7 @@ class FryableComponent: Component, Completable {
     }
     
     convenience override init() {
-        self.init(fryProgress: 0, fryIncrement: 20/60, fryCap: 100, burnCap: 200)
+        self.init(fryProgress: 0, fryIncrement: 25/60, fryCap: 100, burnCap: 250)
     }
     
     convenience init(fryProgress: Float, fryIncrement: Float) {
@@ -43,7 +43,7 @@ class FryableComponent: Component, Completable {
     }
     
     func update() {
-        if !complete {
+        if !burnt {
             fryProgress += fryIncrement
         }
     }

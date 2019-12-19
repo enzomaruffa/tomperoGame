@@ -33,7 +33,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         movableNode.position = currentLocation.spriteNode.position
         movableNode.tapDelegate = self
         movableNode.moveDelegate = self
-        movableNode.zPosition = 7
+        movableNode.zPosition = 8
         
         currentStation.ingredientNode = self
     }

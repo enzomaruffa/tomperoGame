@@ -91,7 +91,6 @@ class FryerNode: StationNode {
             }
 
             progressBarNode?.alpha = 1
-            progressBarNode?.progress = CGFloat(fryableComponent.fryProgress / fryableComponent.fryCap)
             
             if fryableComponent.burnt {
                 if ingredient.states[ingredient.currentState]!.contains(IngredientState.burnt) {
@@ -99,10 +98,17 @@ class FryerNode: StationNode {
                     ingredientNode?.checkTextureChange()
                 }
             } else if fryableComponent.complete {
+                progressBarNode?.progress = CGFloat((fryableComponent.fryProgress - fryableComponent.fryCap) / (fryableComponent.burnCap - fryableComponent.fryCap))
+                
+                progressBarNode?.bar?.color = .red
+                
                 if ingredient.states[ingredient.currentState]!.contains(IngredientState.fried) {
                     ingredient.currentState = .fried
                     ingredientNode?.checkTextureChange()
                 }
+            } else {
+                progressBarNode?.bar?.color = .green
+                progressBarNode?.progress = CGFloat(fryableComponent.fryProgress / fryableComponent.fryCap)
             }
         } else { //Stops only on these stations
             if animationRunning {
