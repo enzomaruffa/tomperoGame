@@ -226,12 +226,12 @@ class GameScene: SKScene {
             let pipeNode = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
             pipeNode.zPosition = 2
             pipeNode.name = "pipe" + (index+1).description
-//            if playerOrder[index+1] != "__empty__" {
+            if playerOrder[index+1] != "__empty__" {
                 pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
                 stations.append(PipeNode(node: pipeNode))
-//            } else {
-//                pipeNode.texture = SKTexture(imageNamed: "PipeClosed" + color)
-//            }
+            } else {
+                pipeNode.texture = SKTexture(imageNamed: "PipeClosed" + color)
+            }
         }
         
         stations.append(HatchNode(node: self.childNode(withName: "hatch") as! SKSpriteNode))
