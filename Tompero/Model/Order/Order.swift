@@ -25,10 +25,6 @@ class Order: HasIngredients, Codable {
         self.totalTime = timeLeft
     }
     
-    convenience init() {
-        self.init(timeLeft: 30)
-    }
-    
     func calculateScore() -> Float {
         let baseScore = Float(8)
             

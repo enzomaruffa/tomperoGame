@@ -78,6 +78,7 @@ class GameRule: Codable {
         }
                 
         order.timeLeft = baseTime + Float(currentActions) * Float.random(in: 4.5...5.5)
+        order.totalTime = order.timeLeft
         
         return order
     }
