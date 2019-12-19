@@ -37,7 +37,10 @@ class OrderListNode: SKSpriteNode {
         self.parent as! GameScene
     }
     
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
+    var boundaryStart: CGPoint = CGPoint(x: -3501, y: 250)
+    var boundaryEnd: CGPoint = CGPoint(x: 780, y: 250) 
+    
+    override init(texture: SKTexture?, color: UIColor, size: CGSize) {  
         super.init(texture: texture, color: color, size: size)
         self.isUserInteractionEnabled = true
     }
@@ -47,7 +50,7 @@ class OrderListNode: SKSpriteNode {
         self.isUserInteractionEnabled = true
     }
     
-    func canChangeCurrentState(to state: State) -> Bool {
+    private func canChangeCurrentState(to state: State) -> Bool {
         if states[currentState]!.contains(state) {
             return true
         }
@@ -59,12 +62,14 @@ class OrderListNode: SKSpriteNode {
         
         currentState = .open
         
+        self.physicsBody?.velocity = .zero
+        
         self.children.forEach({ $0.alpha = 1 })
         self.gameScene.physicsWorld.gravity.dx = 30
         self.physicsBody?.restitution = 0.07
         boundary.physicsBody?.restitution = 0.07
         
-        boundary.position.x = 982
+        boundary.position = boundaryEnd
         
         physicsBody?.applyImpulse(CGVector(dx: 10000, dy: 0))
     }
@@ -72,16 +77,17 @@ class OrderListNode: SKSpriteNode {
     func close() {
         guard canChangeCurrentState(to: .closing) else { return }
         
+        self.physicsBody?.velocity = .zero
         currentState = .closing
         
-        self.gameScene.physicsWorld.gravity.dx = 30
+        self.gameScene.physicsWorld.gravity.dx = -30
         self.physicsBody?.restitution = 0.1
         
-        let action = SKAction.moveTo(x: -1041, duration: 0.13)
-        boundary.run(action) {
-            self.currentState = .closed
-            self.children.forEach({ $0.alpha = 0 })
-        }
+        boundary.position = boundaryStart
+        
+        physicsBody?.applyImpulse(CGVector(dx: -8000, dy: 0))
+    
+        self.currentState = .closed
     }
     
     func jump() {
@@ -104,7 +110,7 @@ class OrderListNode: SKSpriteNode {
             }
         ]))
     }
-    
+
     func checkAction() {
         if canChangeCurrentState(to: .open) {
             open()

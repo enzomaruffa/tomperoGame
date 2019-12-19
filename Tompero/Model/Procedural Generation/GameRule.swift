@@ -61,7 +61,7 @@ class GameRule: Codable {
             // Filtramos os possíveis: não é pão, não foi escolhido e não vai estourar o máximo
             let currentPossibleIngredients = possibleIngredients
                 .filter({ !breadList.contains($0) })
-                .filter({ !order.ingredients.contains($0) })
+//                .filter({ !order.ingredients.contains($0) })
                 .filter({ $0.numberOfActionsTilReady + currentActions <= maxActions })
 
             // Se esgotamos, saímos do loop
@@ -77,7 +77,7 @@ class GameRule: Codable {
             currentActions += newIngredient.numberOfActionsTilReady
         }
         
-        order.timeLeft = baseTime + Float(currentActions) * Float.random(in: 1...1.5)
+        order.timeLeft = baseTime + Float(currentActions) * Float.random(in: 1.3...1.8)
 
         return order
     }

@@ -18,13 +18,13 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = false
+        let gameSceneTest: Bool = true
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [
                 "God" : [
-                    PlayerTable(type: .chopping, ingredient: nil),
                     PlayerTable(type: .frying, ingredient: nil),
+                    PlayerTable(type: .cooking, ingredient: nil),
                     PlayerTable(type: .ingredient, ingredient: Eyes())
                 ],
                 "Enzo's Enzo's iPhone" : [
@@ -44,42 +44,42 @@ class MainCoordinator: Coordinator {
                 ]
             ]
             
-            statistics(statistics: MatchStatistics(ruleUsed: GameRule(
-                difficulty: .hard,
-                possibleIngredients: [
-                    Asteroid(),
-                    Tentacle(),
-                    MoonCheese(),
-                    Eyes(),
-                    Tardigrades()
-                ],
-                playerTables: tables,
-                playerOrder: [
-                    "God",
-                    "Enzo's Enzo's iPhone",
-                    "CU",
-                    "CU 2"]
-            )))
+//            statistics(statistics: MatchStatistics(ruleUsed: GameRule(
+//                difficulty: .hard,
+//                possibleIngredients: [
+//                    Asteroid(),
+//                    Tentacle(),
+//                    MoonCheese(),
+//                    Eyes(),
+//                    Tardigrades()
+//                ],
+//                playerTables: tables,
+//                playerOrder: [
+//                    "God",
+//                    "Enzo's Enzo's iPhone",
+//                    "CU",
+//                    "CU 2"]
+//            )))
             
-//            game(
-//                rule: GameRule(
-//                    difficulty: .hard,
-//                    possibleIngredients: [
-//                        Asteroid(),
-//                        Tentacle(),
-//                        MoonCheese(),
-//                        Eyes(),
-//                        Tardigrades()
-//                    ],
-//                    playerTables: tables,
-//                    playerOrder: [
-//                        "God",
-//                        "Enzo's Enzo's iPhone",
-//                        "CU",
-//                        "CU 2"]
-//                ),
-//                hosting: true
-//            )
+            game(
+                rule: GameRule(
+                    difficulty: .hard,
+                    possibleIngredients: [
+                        Asteroid(),
+                        Tentacle(),
+                        MoonCheese(),
+                        Eyes(),
+                        Tardigrades()
+                    ],
+                    playerTables: tables,
+                    playerOrder: [
+                        "God",
+                        "Enzo's Enzo's iPhone",
+                        "__empty__",
+                        "__empty__"]
+                ),
+                hosting: true
+            )
             return
         }
         
@@ -100,6 +100,7 @@ class MainCoordinator: Coordinator {
         let controller = MenuCollectionViewController.instantiate()
         controller.coordinator = self
         controller.modalTransitionStyle = .crossDissolve
+//        navigationController.present(controller, animated: true, completion: nil)
         navigationController.pushViewController(controller, animated: false)
     }
     

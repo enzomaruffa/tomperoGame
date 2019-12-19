@@ -32,6 +32,7 @@ class MovableSpriteNode: SKSpriteNode {
     // MARK: - Methods
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard touches.first != nil else { return }
+        
         let touch = touches.first!
         
         moveDelegate?.moveStarted(currentPosition: touch.location(in: scene!))

@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B688C2DD78186CF812918984 /* Pods_Tompero.framework */; };
+		4709B27423A2CBC8004B8F51 /* BoardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27323A2CBC8004B8F51 /* BoardNode.swift */; };
+		4709B27623A6F060004B8F51 /* StoveNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27523A6F060004B8F51 /* StoveNode.swift */; };
+		4709B27823A6F2AC004B8F51 /* FryerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27723A6F2AC004B8F51 /* FryerNode.swift */; };
+		4709B27A23A6F3C8004B8F51 /* ShelfNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27923A6F3C8004B8F51 /* ShelfNode.swift */; };
+		4709B27C23A8116F004B8F51 /* PlateBoxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27B23A8116F004B8F51 /* PlateBoxNode.swift */; };
+		4709B27E23A81246004B8F51 /* IngredientBoxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27D23A81246004B8F51 /* IngredientBoxNode.swift */; };
+		4709B28123A8141A004B8F51 /* PipeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B28023A8141A004B8F51 /* PipeNode.swift */; };
+		4709B28323A814B5004B8F51 /* HatchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B28223A814B5004B8F51 /* HatchNode.swift */; };
+		4709B28523A81609004B8F51 /* DeliveryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B28423A81609004B8F51 /* DeliveryNode.swift */; };
 		471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E0238C1349000575B0 /* MCDataWrapper.swift */; };
 		471795E5238C14E7000575B0 /* MCDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E4238C14E7000575B0 /* MCDataType.swift */; };
 		471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */; };
@@ -136,6 +145,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4709B27323A2CBC8004B8F51 /* BoardNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardNode.swift; sourceTree = "<group>"; };
+		4709B27523A6F060004B8F51 /* StoveNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoveNode.swift; sourceTree = "<group>"; };
+		4709B27723A6F2AC004B8F51 /* FryerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryerNode.swift; sourceTree = "<group>"; };
+		4709B27923A6F3C8004B8F51 /* ShelfNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfNode.swift; sourceTree = "<group>"; };
+		4709B27B23A8116F004B8F51 /* PlateBoxNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateBoxNode.swift; sourceTree = "<group>"; };
+		4709B27D23A81246004B8F51 /* IngredientBoxNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBoxNode.swift; sourceTree = "<group>"; };
+		4709B28023A8141A004B8F51 /* PipeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipeNode.swift; sourceTree = "<group>"; };
+		4709B28223A814B5004B8F51 /* HatchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HatchNode.swift; sourceTree = "<group>"; };
+		4709B28423A81609004B8F51 /* DeliveryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryNode.swift; sourceTree = "<group>"; };
 		471795E0238C1349000575B0 /* MCDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCDataWrapper.swift; sourceTree = "<group>"; };
 		471795E4238C14E7000575B0 /* MCDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDataType.swift; sourceTree = "<group>"; };
 		471795E6238C1CB6000575B0 /* MCManagerDataObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerDataObserver.swift; sourceTree = "<group>"; };
@@ -286,6 +304,23 @@
 				B688C2DD78186CF812918984 /* Pods_Tompero.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4709B27F23A81405004B8F51 /* StationNode */ = {
+			isa = PBXGroup;
+			children = (
+				565AEFE3239164E300E3E15F /* StationNode.swift */,
+				4709B27323A2CBC8004B8F51 /* BoardNode.swift */,
+				4709B27523A6F060004B8F51 /* StoveNode.swift */,
+				4709B27723A6F2AC004B8F51 /* FryerNode.swift */,
+				4709B27923A6F3C8004B8F51 /* ShelfNode.swift */,
+				4709B27B23A8116F004B8F51 /* PlateBoxNode.swift */,
+				4709B27D23A81246004B8F51 /* IngredientBoxNode.swift */,
+				4709B28023A8141A004B8F51 /* PipeNode.swift */,
+				4709B28223A814B5004B8F51 /* HatchNode.swift */,
+				4709B28423A81609004B8F51 /* DeliveryNode.swift */,
+			);
+			path = StationNode;
 			sourceTree = "<group>";
 		};
 		471795ED238C692D000575B0 /* MultipeerConnectivity Manager */ = {
@@ -484,7 +519,6 @@
 			isa = PBXGroup;
 			children = (
 				56B3A7B92391CDC7005E0807 /* StationType.swift */,
-				565AEFE3239164E300E3E15F /* StationNode.swift */,
 				565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */,
 				56B3A7B52391B93B005E0807 /* IngredientNode.swift */,
 				476F70A7239336490000465F /* TappableSpriteNode.swift */,
@@ -496,6 +530,7 @@
 				566A5BB1239AD3AF006D96CF /* OrderListNode.swift */,
 				56EDA929239B48B7004BFC2C /* OrderNode.swift */,
 				566E9BD2239D391400787210 /* ProgressBar.swift */,
+				4709B27F23A81405004B8F51 /* StationNode */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -817,12 +852,16 @@
 				566E9C99239D823400787210 /* MusicPlayer.swift in Sources */,
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
 				479B784C239D8BCB003BC9DE /* StatisticsViewController.swift in Sources */,
+				4709B28523A81609004B8F51 /* DeliveryNode.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
+				4709B27423A2CBC8004B8F51 /* BoardNode.swift in Sources */,
 				FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */,
 				566A5BAF239A8564006D96CF /* ComponentType.swift in Sources */,
 				4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */,
+				4709B28323A814B5004B8F51 /* HatchNode.swift in Sources */,
 				476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */,
 				471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */,
+				4709B27A23A6F3C8004B8F51 /* ShelfNode.swift in Sources */,
 				FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */,
 				471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */,
 				4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */,
@@ -831,6 +870,7 @@
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
 				47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */,
+				4709B27823A6F2AC004B8F51 /* FryerNode.swift in Sources */,
 				566E9C9B239D82E200787210 /* SFXPlayer.swift in Sources */,
 				567A07BB238C805000D6399A /* Order.swift in Sources */,
 				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
@@ -854,6 +894,7 @@
 				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
 				567A07B1238C805000D6399A /* Eyes.swift in Sources */,
 				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,
+				4709B27E23A81246004B8F51 /* IngredientBoxNode.swift in Sources */,
 				476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */,
 				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
 				FB55FBE8239C2824002EBB89 /* DialogView.swift in Sources */,
@@ -870,13 +911,16 @@
 				56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */,
 				566A5BB2239AD3AF006D96CF /* OrderListNode.swift in Sources */,
 				56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */,
+				4709B27623A6F060004B8F51 /* StoveNode.swift in Sources */,
 				56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */,
 				56EDA92A239B48B7004BFC2C /* OrderNode.swift in Sources */,
 				565AEFE223915E6400E3E15F /* MovableSpriteNode.swift in Sources */,
 				FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */,
 				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
 				567A07C0238C805000D6399A /* MarsSand.swift in Sources */,
+				4709B27C23A8116F004B8F51 /* PlateBoxNode.swift in Sources */,
 				567A07B8238C805000D6399A /* HasIngredients.swift in Sources */,
+				4709B28123A8141A004B8F51 /* PipeNode.swift in Sources */,
 				567A07B3238C805000D6399A /* Tentacle.swift in Sources */,
 				FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */,
 				476925C72390AA0900FBAB1F /* SKSceneExtensions.swift in Sources */,
@@ -1026,7 +1070,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1046,7 +1091,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

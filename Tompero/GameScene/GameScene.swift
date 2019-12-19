@@ -18,7 +18,7 @@ class GameScene: SKScene {
     // MARK: - Game Variables
     var hosting = false
     
-    var player: String = MCManager.shared.selfName
+    var player: String = "God" //MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -120,6 +120,27 @@ class GameScene: SKScene {
         setupBackground()
         
         SFXPlayer.shared.roundStarted.play()
+        
+        // Debugging attempts
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+//            self.orderListNode.jump()
+//            self.orderListNode.close()
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+//            self.orderListNode.jump()
+//            self.orderListNode.open()
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+//            self.orderListNode.open()
+//            self.orderListNode.jump()
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 13) {
+//            self.orderListNode.close()
+//            self.orderListNode.jump()
+//        }
     }
     
     func setupOrderListNode() {
@@ -139,7 +160,23 @@ class GameScene: SKScene {
             }
         }
         
-        stations = tables.map({ StationNode(stationType: convertTableToStation(type: $0.type), ingredient: $0.ingredient) })
+        var nodes: [StationNode] = []
+        for table in tables {
+            if table.type == .chopping {
+                nodes.append(BoardNode())
+            } else if table.type == .cooking {
+                nodes.append(StoveNode())
+            } else if table.type == .frying {
+                nodes.append(FryerNode())
+            } else if table.type == .plate {
+                nodes.append(PlateBoxNode())
+            } else if table.type == .ingredient {
+                nodes.append(IngredientBoxNode(ingredient: table.ingredient!))
+            } else if table.type == .empty {
+                nodes.append(StationNode(stationType: .empty))
+            }
+        }
+        stations = nodes
         
         for (index, station) in stations.enumerated() {
             let node = station.spriteNode
@@ -169,11 +206,11 @@ class GameScene: SKScene {
     }
     
     func setupShelves() {
-        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf1") as! SKSpriteNode))
-        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf2") as! SKSpriteNode))
-        stations.append(StationNode(stationType: .shelf, spriteNode: self.childNode(withName: "shelf3") as! SKSpriteNode))
+        stations.append(ShelfNode(node: self.childNode(withName: "shelf1") as! SKSpriteNode))
+        stations.append(ShelfNode(node: self.childNode(withName: "shelf2") as! SKSpriteNode))
+        stations.append(ShelfNode(node: self.childNode(withName: "shelf3") as! SKSpriteNode))
         
-        stations.append(StationNode(stationType: .delivery, spriteNode: self.childNode(withName: "delivery") as! SKSpriteNode))
+        stations.append(DeliveryNode(node: self.childNode(withName: "delivery") as! SKSpriteNode))
         
         (self.childNode(withName: "target") as! SKSpriteNode).texture = SKTexture(imageNamed: "Target" + playerColor)
         
@@ -187,14 +224,17 @@ class GameScene: SKScene {
         
         for (index, color) in colors.enumerated() {
             let pipeNode = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
-            pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
-            pipeNode.name = "pipe" + (index+1).description
             pipeNode.zPosition = 2
-            
-            stations.append(StationNode(stationType: .pipe, spriteNode: pipeNode))
+            pipeNode.name = "pipe" + (index+1).description
+//            if playerOrder[index+1] != "__empty__" {
+                pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
+                stations.append(PipeNode(node: pipeNode))
+//            } else {
+//                pipeNode.texture = SKTexture(imageNamed: "PipeClosed" + color)
+//            }
         }
         
-        stations.append(StationNode(stationType: .hatch, spriteNode: self.childNode(withName: "hatch") as! SKSpriteNode))
+        stations.append(HatchNode(node: self.childNode(withName: "hatch") as! SKSpriteNode))
     }
     
     func setupBackground() {
@@ -284,7 +324,9 @@ class GameScene: SKScene {
         self.isPaused = true
         GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
         
-        EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+        if hosting {
+            EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+        }
         
         coordinator?.statistics(statistics: matchStatistics!)
     }
@@ -314,14 +356,6 @@ class GameScene: SKScene {
             endTimerPlayed = true
             SFXPlayer.shared.endTimer.play()
         }
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        stations.forEach({ $0.update() })
-        
-        checkAnimations()
-        updateOrders()
-        updateTimer()
     }
     
     func makeDelivery(plate: Plate) -> Bool {
@@ -368,6 +402,15 @@ class GameScene: SKScene {
         return true
     }
     
+    // MARK: - Update
+    override func update(_ currentTime: TimeInterval) {
+        stations.forEach({ $0.update() })
+        
+        checkAnimations()
+        updateOrders()
+        updateTimer()
+    }
+    
     // MARK: - UI Updates
     func updateOrderUI(_ orders: [Order]) {
         orderListNode.updateList(orders)
@@ -382,8 +425,6 @@ class GameScene: SKScene {
         currentSeconds -= (currentMinutes * 60)
         
         timerLabel.text = "\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)"
-        
-        print("\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)")
     }
     
     func updateCoinsUI() {

@@ -167,7 +167,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBAction func menuPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-recipeMenu")
         
-        let timeAnimation = 0.3
+        let timeAnimation = 0.6
         UIView.animate(withDuration: timeAnimation, delay: 0, options: .curveEaseIn, animations: {
             self.view.transform = self.zoomedAndTransformed
         }, completion: {(_)in

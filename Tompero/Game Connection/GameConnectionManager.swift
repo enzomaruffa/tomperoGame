@@ -78,7 +78,6 @@ class GameConnectionManager {
         do {
             print("[GameConnectionManager] Preparing ingredient")
             let ingredientData = try JSONEncoder().encode(ingredient)
-            let jsonString = String(data: ingredientData, encoding: .utf8)
             let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
             MCManager.shared.connectedPeers?.forEach({ print($0.displayName) })
             let peer = MCManager.shared.connectedPeers?.filter({ $0.displayName == player })

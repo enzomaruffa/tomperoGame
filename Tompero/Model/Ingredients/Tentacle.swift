@@ -10,6 +10,19 @@ import Foundation
 
 class Tentacle: Ingredient {
     
+    override var textureName: String {
+        switch currentState {
+        case .raw: return texturePrefix + "Raw"
+        case .chopping: return texturePrefix + "Raw"
+        case .chopped: return texturePrefix + "Chopped"
+        case .cooking: return texturePrefix + "Chopped"
+        case .cooked: return texturePrefix + "Cooked"
+        case .frying: return texturePrefix + "Raw"
+        case .fried: return texturePrefix + "Raw"
+        case .burnt: return "ashes"
+        }
+    }
+    
     init() {
         super.init(
             texturePrefix: "Tentacle",
