@@ -41,7 +41,7 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
         pointsLabel.text = "\(statistics.totalPoints) points!"
         
         authenticateLocalPlayer()
-        submitScoreToGameCenter()
+        submitScoreToGameCenter(self)
     }
     
     // MARK: - Methods
@@ -85,7 +85,7 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
         coordinator?.popToRoot()
     }
     
-    func submitScoreToGameCenter() {
+    func submitScoreToGameCenter(_ sender: AnyObject) {
         let score = GKScore(leaderboardIdentifier: LEADERBOARD_ID)
         score.value = Int64(statistics.totalPoints)
         GKScore.report([score]) { (error) in
