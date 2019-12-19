@@ -38,7 +38,7 @@ class OrderListNode: SKSpriteNode {
     }
     
     var boundaryStart: CGPoint = CGPoint(x: -3501, y: 250)
-    var boundaryEnd: CGPoint = CGPoint(x: 780, y: 250) 
+    var boundaryEnd: CGPoint = CGPoint(x: 850, y: 250) 
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {  
         super.init(texture: texture, color: color, size: size)
