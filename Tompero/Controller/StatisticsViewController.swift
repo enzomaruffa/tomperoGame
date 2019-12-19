@@ -46,7 +46,7 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
     
     // MARK: - Methods
     func authenticateLocalPlayer() {
-        let localPlayer: GKLocalPlayer = GKLocalPlayer.localPlayer()
+        let localPlayer: GKLocalPlayer = GKLocalPlayer.local
         
         localPlayer.authenticateHandler = { (viewController, error) -> Void in
             if viewController != nil {
@@ -87,7 +87,7 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
     
     func submitScoreToGameCenter() {
         let score = GKScore(leaderboardIdentifier: LEADERBOARD_ID)
-        score.value = statistics.totalPoints
+        score.value = Int64(statistics.totalPoints)
         GKScore.report([score]) { (error) in
             if error != nil {
                 print(error!.localizedDescription)
