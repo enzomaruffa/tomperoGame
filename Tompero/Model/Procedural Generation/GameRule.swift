@@ -25,9 +25,9 @@ class GameRule: Codable {
     var baseTime: Float {
         switch difficulty {
         case .medium:
-            return 28
+            return 22
         case .hard:
-            return 33
+            return 20
         default:
             return 25
         }
@@ -76,9 +76,9 @@ class GameRule: Codable {
             order.ingredients.append(newIngredient)
             currentActions += newIngredient.numberOfActionsTilReady
         }
+                
+        order.timeLeft = baseTime + Float(currentActions) * Float.random(in: 4.5...5.5)
         
-        order.timeLeft = baseTime + Float(currentActions) * Float.random(in: 1.3...1.8)
-
         return order
     }
     

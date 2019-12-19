@@ -30,6 +30,7 @@ class OrderNode: SKSpriteNode {
         spawnIngredientIcons()
         spawnOrderNumber()
         spawnTimeBar()
+        updateBar()
     }
     
     private func sortActions(_ states: [IngredientState: [IngredientState]]) -> [IngredientState] {
