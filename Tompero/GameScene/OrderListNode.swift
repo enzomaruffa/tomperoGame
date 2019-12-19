@@ -85,7 +85,7 @@ class OrderListNode: SKSpriteNode {
         
         boundary.position = boundaryStart
         
-        let animationDuration = 0.13
+        physicsBody?.applyImpulse(CGVector(dx: -8000, dy: 0))
     
         self.currentState = .closed
     }

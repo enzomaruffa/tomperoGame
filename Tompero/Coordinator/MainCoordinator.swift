@@ -75,8 +75,8 @@ class MainCoordinator: Coordinator {
                     playerOrder: [
                         "God",
                         "Enzo's Enzo's iPhone",
-                        "CU",
-                        "CU 2"]
+                        "__empty__",
+                        "__empty__"]
                 ),
                 hosting: true
             )

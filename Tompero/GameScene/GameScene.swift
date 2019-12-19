@@ -224,11 +224,14 @@ class GameScene: SKScene {
         
         for (index, color) in colors.enumerated() {
             let pipeNode = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
-            pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
-            pipeNode.name = "pipe" + (index+1).description
             pipeNode.zPosition = 2
-            
-            stations.append(PipeNode(node: pipeNode))
+            pipeNode.name = "pipe" + (index+1).description
+//            if playerOrder[index+1] != "__empty__" {
+                pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
+                stations.append(PipeNode(node: pipeNode))
+//            } else {
+//                pipeNode.texture = SKTexture(imageNamed: "PipeClosed" + color)
+//            }
         }
         
         stations.append(HatchNode(node: self.childNode(withName: "hatch") as! SKSpriteNode))
