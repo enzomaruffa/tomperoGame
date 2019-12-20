@@ -266,7 +266,6 @@ class GameScene: SKScene {
     fileprivate func updateOrders() {
         for (index, order) in orders.enumerated() {
             order.timeLeft -= 1/60
-            print("from update: \(order.timeLeft)")
             
             if hosting {
                 if order.timeLeft <= 0.0 {

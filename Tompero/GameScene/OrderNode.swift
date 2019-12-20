@@ -118,14 +118,12 @@ class OrderNode: SKSpriteNode {
     private func spawnTimeBar() {
         progressNode = ProgressBar(color: .green, size: CGSize(width: 480, height: 20))
         progressNode.position = CGPoint(x: 0, y: -232.5)
-        print(order!.timeLeft, order!.totalTime)
         progressNode.progress = CGFloat(1 - order!.timeLeft/order!.totalTime)
         addChild(progressNode)
     }
     
     func updateBar() {
         progressNode.progress = CGFloat(1 - order!.timeLeft/order!.totalTime)
-        print(progressNode.progress, order!.timeLeft/order!.totalTime, order!.totalTime)
         
         if progressNode.progress > 0.35 && progressNode.progress <= 0.7 && !yellow {
             yellow = true
