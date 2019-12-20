@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1qB-Oy-VQR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1qB-Oy-VQR">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,6 +56,17 @@
                                     <constraint firstItem="Epk-JO-UC2" firstAttribute="centerX" secondItem="aGT-i2-1uU" secondAttribute="centerX" multiplier="1.44" id="yu5-FG-NYQ"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1U3-D3-GHq">
+                                <rect key="frame" x="796" y="19" width="65" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="C4v-am-Ha6"/>
+                                    <constraint firstAttribute="width" constant="65" id="RCm-8C-dMk"/>
+                                </constraints>
+                                <state key="normal" image="arrowEnd"/>
+                                <connections>
+                                    <action selector="openLeaderboard:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="jF5-I8-WR3"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxF-wq-pZV">
                                 <rect key="frame" x="44" y="270" width="808" height="128"/>
                                 <subviews>
@@ -99,6 +110,7 @@ Oh! To begin working you need to go to the central food supply station. Who want
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="centerY" secondItem="kUb-PW-wCr" secondAttribute="centerY" multiplier="0.7" id="0GT-AO-2VZ"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.3257" id="6jO-17-epS"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="centerX" secondItem="kUb-PW-wCr" secondAttribute="centerX" id="7ap-e1-eYK"/>
+                            <constraint firstItem="1U3-D3-GHq" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="19" id="9tu-rh-GwS"/>
                             <constraint firstAttribute="trailing" secondItem="kUb-PW-wCr" secondAttribute="trailing" id="D9x-n5-ZDZ"/>
                             <constraint firstItem="kUb-PW-wCr" firstAttribute="leading" secondItem="QNp-EB-RWz" secondAttribute="leading" id="IXZ-sR-mnr"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="centerY" secondItem="7E9-WB-dTq" secondAttribute="centerY" multiplier="1.7" id="MSN-8l-wMP"/>
@@ -106,6 +118,7 @@ Oh! To begin working you need to go to the central food supply station. Who want
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="width" secondItem="7E9-WB-dTq" secondAttribute="width" id="NRb-cV-4cq"/>
                             <constraint firstAttribute="bottom" secondItem="kUb-PW-wCr" secondAttribute="bottom" constant="-10" id="aXG-22-cPg"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="height" secondItem="kUb-PW-wCr" secondAttribute="height" id="cAD-AB-Qt3"/>
+                            <constraint firstItem="1U3-D3-GHq" firstAttribute="trailing" secondItem="7E9-WB-dTq" secondAttribute="trailing" constant="9" id="d4i-Gj-2KD"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="width" secondItem="kUb-PW-wCr" secondAttribute="width" id="ldU-1U-BdP"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="centerX" secondItem="7E9-WB-dTq" secondAttribute="centerX" id="qFf-6u-8QD"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="top" secondItem="aGT-i2-1uU" secondAttribute="bottom" constant="-30" id="t6v-61-48G"/>
@@ -145,6 +158,7 @@ Oh! To begin working you need to go to the central food supply station. Who want
     <resources>
         <image name="HOST - apagado" width="255" height="66"/>
         <image name="JOIN - apagado" width="155" height="68"/>
+        <image name="arrowEnd" width="230" height="230"/>
         <image name="caixa de texto" width="1199" height="335"/>
         <image name="fundo" width="2436" height="1154"/>
         <image name="nave" width="4355" height="2211"/>

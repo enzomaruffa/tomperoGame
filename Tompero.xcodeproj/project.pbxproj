@@ -53,6 +53,7 @@
 		47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */; };
 		47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CC66CB238C056B00EB25C1 /* MCManager.swift */; };
 		47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */; };
+		561DC2E723AC030D005584F8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 561DC2E623AC030D005584F8 /* GameKit.framework */; };
 		56219D87239EAFA6001CE5DB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56219D86239EAFA6001CE5DB /* GameScene.sks */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
 		562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5D23881CF900D5D51D /* GameScene.swift */; };
@@ -191,6 +192,7 @@
 		47CC66CB238C056B00EB25C1 /* MCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManager.swift; sourceTree = "<group>"; };
 		47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryNotification.swift; sourceTree = "<group>"; };
 		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
+		561DC2E623AC030D005584F8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		56219D86239EAFA6001CE5DB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		562BCF5423881CF900D5D51D /* SpaceSpice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceSpice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562BCF5723881CF900D5D51D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */,
+				561DC2E723AC030D005584F8 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +304,7 @@
 		07F4238B08A3D100EFB608C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				561DC2E623AC030D005584F8 /* GameKit.framework */,
 				B688C2DD78186CF812918984 /* Pods_Tompero.framework */,
 			);
 			name = Frameworks;

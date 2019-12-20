@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GameKit
 
-class StatisticsViewController: UIViewController, Storyboarded {
+class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterControllerDelegate {
     
     // MARK: - Storyboarded
     static var storyboardName: String = "Statistics"
@@ -18,6 +19,11 @@ class StatisticsViewController: UIViewController, Storyboarded {
     
     // MARK: - Variables
     var statistics: MatchStatistics!
+    
+    // MARK: - Game Center
+    var isGameCenterEnabled: Bool! // check if Game Center enabled
+    var defaultLeaderboard = "" // check default leaderboard ID
+    let leaderboardID = "com.score.spacespice"
     
     // MARK: - Outlets
     @IBOutlet weak var deliveredOrdersLabel: UILabel!
@@ -30,12 +36,29 @@ class StatisticsViewController: UIViewController, Storyboarded {
         EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
         
         // Do any additional setup after loading the view.
-        deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) delivered orders!"
+        deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) orders delivered!"
         
-        pointsLabel.text = "\(statistics.totalPoints) points!"
+        pointsLabel.text = "\(statistics.totalPoints) points earned!"
+        
+        submitScoreToGameCenter()
     }
     
     // MARK: - Methods
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func submitScoreToGameCenter() {
+        let score = GKScore(leaderboardIdentifier: leaderboardID)
+        score.value = Int64(statistics.totalPoints)
+        GKScore.report([score]) { (error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print("Best Score submitted to leaderboard!")
+            }
+        }
+    }
     
     // MARK: - Actions
     @IBAction func menuPressed(_ sender: Any) {
@@ -43,5 +66,4 @@ class StatisticsViewController: UIViewController, Storyboarded {
         
         coordinator?.popToRoot()
     }
-    
 }

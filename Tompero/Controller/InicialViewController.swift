@@ -1,7 +1,8 @@
 import UIKit
 import MultipeerConnectivity
+import GameKit
 
-class InicialViewController: UIViewController, Storyboarded {
+class InicialViewController: UIViewController, Storyboarded, GKGameCenterControllerDelegate {
     
     // MARK: - Storyboarded
     static var storyboardName = "Main"
@@ -11,6 +12,11 @@ class InicialViewController: UIViewController, Storyboarded {
     var location = CGPoint(x: 0, y: 0)
     var animationTimer: Timer?
     weak var shapeLayer: CAShapeLayer?
+    
+    // MARK: - Game Center
+    var isGameCenterEnabled: Bool! // check if Game Center enabled
+    var defaultLeaderboard = "" // check default leaderboard ID
+    let leaderboardID = "com.score.spacespice"
     
     // MARK: - Outlets
     @IBOutlet weak var join: UIImageView!
@@ -33,6 +39,8 @@ class InicialViewController: UIViewController, Storyboarded {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        authenticateLocalPlayer()
+        
         let tapGestureRecognizerJoin = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         let tapGestureRecognizerHost = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         let tapGestureRecognizerText = UITapGestureRecognizer(target: self, action: #selector(screenTapped(tapGestureRecognizer:)))
@@ -145,6 +153,47 @@ class InicialViewController: UIViewController, Storyboarded {
         })
         
         textTimer?.fire()
+    }
+    
+    func authenticateLocalPlayer() {
+        let localPlayer: GKLocalPlayer = GKLocalPlayer.local
+        
+        localPlayer.authenticateHandler = { (viewController, error) -> Void in
+            if viewController != nil {
+                // 1. show login if player is not logged in
+                self.present(viewController!, animated: true, completion: nil)
+            } else if localPlayer.isAuthenticated {
+                // 2. player is already authenticated & logged in, load game center
+                self.isGameCenterEnabled = true
+                
+                // get default leaderboard ID
+                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
+                    if error != nil {
+                        print(error)
+                    } else {
+                        self.defaultLeaderboard = leaderboardIdentifer!
+                    }
+                })
+                
+            } else {
+                // 3. game center is not enabled on the users device
+                self.isGameCenterEnabled = false
+                print("Local player could not be authenticated!")
+                print(error)
+            }
+        }
+    }
+    
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func openLeaderboard(_ sender: Any) {
+        let newVC = GKGameCenterViewController()
+        newVC.gameCenterDelegate = self
+        newVC.viewState = .leaderboards
+        newVC.leaderboardIdentifier = leaderboardID
+        present(newVC, animated: true, completion: nil)
     }
     
 }
