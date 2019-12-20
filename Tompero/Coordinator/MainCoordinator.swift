@@ -18,7 +18,11 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = true
+        var gameSceneTest: Bool = false
+        
+        #if !DEBUG
+            gameSceneTest = false
+        #endif
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [

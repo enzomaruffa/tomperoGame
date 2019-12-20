@@ -15,6 +15,29 @@ class EventLogger {
     
     private init() {}
     
+    func logPlateDeliver(success: Bool, actionCount: Int, ingredientCount: Int) {
+        #if !DEBUG
+        print("Loggin plate deliver \(success) \(actionCount),\(ingredientCount)")
+        Analytics.logEvent("plate_deliver", parameters: [
+            "success": success,
+            "action_count": success,
+            "ingredient_count": success
+        ])
+        #endif
+    }
+    
+    func logOrderResult(success: Bool, actionCount: Int, ingredientCount: Int, difficulty: GameDifficulty) {
+        #if !DEBUG
+        print("Loggin order resu;lt \(success) \(actionCount),\(ingredientCount) \(difficulty)")
+        Analytics.logEvent("order_result", parameters: [
+            "success": success,
+            "action_count": success,
+            "ingredient_count": success,
+            "difficulty": difficulty
+        ])
+        #endif
+    }
+    
     func logCoinsInMatch(coins: Int) {
         #if !DEBUG
         Analytics.logEvent(AnalyticsEventEarnVirtualCurrency, parameters: [

@@ -18,7 +18,7 @@ class GameScene: SKScene {
     // MARK: - Game Variables
     var hosting = false
     
-    var player: String = "God" //MCManager.shared.selfName
+    var player: String = MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -270,6 +270,10 @@ class GameScene: SKScene {
             
             if hosting {
                 if order.timeLeft <= 0.0 {
+
+                    let totalActions = order.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
+                    EventLogger.shared.logOrderResult(success: false, actionCount: totalActions, ingredientCount: order.ingredients.count, difficulty: rule!.difficulty)
+                    
                     orders.remove(at: index)
                     GameConnectionManager.shared.sendEveryone(orderList: orders)
                     updateOrderUI(orders)
@@ -370,14 +374,21 @@ class GameScene: SKScene {
             restore: true)
         )
         
+        let totalActions = plate.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
+        
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
             print("Couldn't find any order")
             let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
             
+            EventLogger.shared.logPlateDeliver(success: false, actionCount: totalActions, ingredientCount: plate.ingredients.count)
+            
             updateOrderUI(orders)
             return false
         }
+        
+        EventLogger.shared.logPlateDeliver(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count)
+        EventLogger.shared.logOrderResult(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count, difficulty: rule!.difficulty)
         
         let difficultyBonus = [GameDifficulty.easy: 1, .medium: 2, .hard: 3]
         let totalScore = targetOrder.score * difficultyBonus[rule!.difficulty]!
@@ -386,6 +397,7 @@ class GameScene: SKScene {
         
         let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
+
         
         orders.remove(at: orders.firstIndex { $0.isEquivalent(to: targetOrder) }!)
         
