@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import MultipeerConnectivity
 
 // swiftlint:disable force_cast
 class GameScene: SKScene {
@@ -106,6 +107,8 @@ class GameScene: SKScene {
         
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
+        MCManager.shared.subscribeMatchmakingObserver(observer: self)
+
         
         if hosting {
             matchStatistics = MatchStatistics(ruleUsed: rule!)
@@ -324,15 +327,21 @@ class GameScene: SKScene {
         }
     }
     
-    func endMatch() {
+    func endMatch(error: Bool = false) {
         self.isPaused = true
-        GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
         
-        if hosting {
+        if hosting && !error {
             EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+            
+            GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
+            coordinator?.statistics(statistics: matchStatistics!)
+        } else if hosting && error {
+            // TODO: Log error event
         }
         
-        coordinator?.statistics(statistics: matchStatistics!)
+        if error {
+            coordinator?.popToRoot()
+        }
     }
     
     fileprivate func updateTimer() {
@@ -534,4 +543,14 @@ extension GameScene: GameConnectionManagerObserver {
         }
     }
     
+}
+
+extension GameScene: MCManagerMatchmakingObserver {
+    func playerUpdate(player: String, state: MCSessionState) {
+        // end game if disconnect received
+        
+        if state == .notConnected {
+            endMatch(error: true)
+        }
+    }
 }
