@@ -18,7 +18,11 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let gameSceneTest: Bool = false
+        var gameSceneTest: Bool = false
+        
+        #if !DEBUG
+            gameSceneTest = false
+        #endif
         
         if gameSceneTest {
             let tables: [String : [PlayerTable]] = [
@@ -63,7 +67,7 @@ class MainCoordinator: Coordinator {
             
             game(
                 rule: GameRule(
-                    difficulty: .hard,
+                    difficulty: .easy,
                     possibleIngredients: [
                         Asteroid(),
                         Tentacle(),

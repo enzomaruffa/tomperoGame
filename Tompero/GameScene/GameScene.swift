@@ -221,17 +221,16 @@ class GameScene: SKScene {
     }
     
     func setupPiping() {
-        
         for (index, color) in colors.enumerated() {
-            let pipeNode = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
-            pipeNode.zPosition = 2
+            let pipeNode = self.childNode(withName: "pipeArea" + (index+1).description) as! SKSpriteNode
+            let pipeImage = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
             pipeNode.name = "pipe" + (index+1).description
-//            if playerOrder[index+1] != "__empty__" {
-                pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
+            if playerOrder[index+1] != "__empty__" {
+                pipeImage.texture = SKTexture(imageNamed: "Pipe" + color)
                 stations.append(PipeNode(node: pipeNode))
-//            } else {
-//                pipeNode.texture = SKTexture(imageNamed: "PipeClosed" + color)
-//            }
+            } else {
+                pipeImage.texture = SKTexture(imageNamed: "PipeClosed" + color)
+            }
         }
         
         stations.append(HatchNode(node: self.childNode(withName: "hatch") as! SKSpriteNode))
@@ -266,9 +265,14 @@ class GameScene: SKScene {
     fileprivate func updateOrders() {
         for (index, order) in orders.enumerated() {
             order.timeLeft -= 1/60
+            print("from update: \(order.timeLeft)")
             
             if hosting {
                 if order.timeLeft <= 0.0 {
+
+                    let totalActions = order.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
+                    EventLogger.shared.logOrderResult(success: false, actionCount: totalActions, ingredientCount: order.ingredients.count, difficulty: rule!.difficulty)
+                    
                     orders.remove(at: index)
                     GameConnectionManager.shared.sendEveryone(orderList: orders)
                     updateOrderUI(orders)
@@ -369,14 +373,21 @@ class GameScene: SKScene {
             restore: true)
         )
         
+        let totalActions = plate.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
+        
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
             print("Couldn't find any order")
             let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
             
+            EventLogger.shared.logPlateDeliver(success: false, actionCount: totalActions, ingredientCount: plate.ingredients.count)
+            
             updateOrderUI(orders)
             return false
         }
+        
+        EventLogger.shared.logPlateDeliver(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count)
+        EventLogger.shared.logOrderResult(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count, difficulty: rule!.difficulty)
         
         let difficultyBonus = [GameDifficulty.easy: 1, .medium: 2, .hard: 3]
         let totalScore = targetOrder.score * difficultyBonus[rule!.difficulty]!
@@ -385,7 +396,7 @@ class GameScene: SKScene {
         
         let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
-        
+
         orders.remove(at: orders.firstIndex { $0.isEquivalent(to: targetOrder) }!)
         
         GameConnectionManager.shared.sendEveryone(orderList: orders)
