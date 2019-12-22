@@ -221,16 +221,15 @@ class GameScene: SKScene {
     }
     
     func setupPiping() {
-        
         for (index, color) in colors.enumerated() {
-            let pipeNode = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
-            pipeNode.zPosition = 2
+            let pipeNode = self.childNode(withName: "pipeArea" + (index+1).description) as! SKSpriteNode
+            let pipeImage = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
             pipeNode.name = "pipe" + (index+1).description
             if playerOrder[index+1] != "__empty__" {
-                pipeNode.texture = SKTexture(imageNamed: "Pipe" + color)
+                pipeImage.texture = SKTexture(imageNamed: "Pipe" + color)
                 stations.append(PipeNode(node: pipeNode))
             } else {
-                pipeNode.texture = SKTexture(imageNamed: "PipeClosed" + color)
+                pipeImage.texture = SKTexture(imageNamed: "PipeClosed" + color)
             }
         }
         
@@ -398,7 +397,6 @@ class GameScene: SKScene {
         let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
 
-        
         orders.remove(at: orders.firstIndex { $0.isEquivalent(to: targetOrder) }!)
         
         GameConnectionManager.shared.sendEveryone(orderList: orders)
