@@ -29,7 +29,7 @@ class OrderListNode: SKSpriteNode {
     var orderNodes: [OrderNode] = []
     
     var boundary: SKSpriteNode {
-        let scene = self.parent as! GameScene
+        let scene = parent as! GameScene
         return scene.childNode(withName: "boundary") as! SKSpriteNode
     }
     
@@ -51,6 +51,7 @@ class OrderListNode: SKSpriteNode {
     }
     
     private func canChangeCurrentState(to state: State) -> Bool {
+//        print("[OrderListNode.canChangeCurrentState] current state: \(currentState)")
         if states[currentState]!.contains(state) {
             return true
         }
@@ -58,57 +59,52 @@ class OrderListNode: SKSpriteNode {
     }
     
     func open() {
+//        print("[OrderListNode.open] entry")
         guard canChangeCurrentState(to: .open) else { return }
         
-        currentState = .open
+        physicsBody?.velocity = .zero
         
-        self.physicsBody?.velocity = .zero
+        children.forEach({ $0.alpha = 1 })
+        gameScene.physicsWorld.gravity.dx = 30
         
-        self.children.forEach({ $0.alpha = 1 })
-        self.gameScene.physicsWorld.gravity.dx = 30
-        self.physicsBody?.restitution = 0.07
-        boundary.physicsBody?.restitution = 0.07
-        
-        boundary.position = boundaryEnd
+//        print("[OrderListNode.open] applying impulse on \(physicsBody)")
         
         physicsBody?.applyImpulse(CGVector(dx: 10000, dy: 0))
+        currentState = .open
     }
     
     func close() {
+//        print("[OrderListNode.close] entry")
         guard canChangeCurrentState(to: .closing) else { return }
         
-        self.physicsBody?.velocity = .zero
+        physicsBody?.velocity = .zero
         currentState = .closing
         
-        self.gameScene.physicsWorld.gravity.dx = -30
-        self.physicsBody?.restitution = 0.1
+        gameScene.physicsWorld.gravity.dx = -30
         
-        boundary.position = boundaryStart
+//        print("[OrderListNode.close] applying impulse on \(physicsBody)")
         
         physicsBody?.applyImpulse(CGVector(dx: -8000, dy: 0))
-    
-        self.currentState = .closed
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.currentState = .closed
+        }
     }
     
     func jump() {
+//        print("[OrderListNode.jump] entry")
         guard canChangeCurrentState(to: .jumping) else { return }
         
         currentState = .jumping
         
-        self.children.forEach({ $0.alpha = 0 })
-        boundary.run(SKAction.sequence([
-            .run {
-                self.gameScene.physicsWorld.gravity.dx = -30
-                self.physicsBody?.restitution = 0.3
-                
-                self.boundary.position.x = -850
-                
-                self.physicsBody?.applyImpulse(CGVector(dx: 3000, dy: 0))
-            },
-            .run {
-                self.close()
-            }
-        ]))
+//        print("[OrderListNode.jump] gravity is  \(gameScene.physicsWorld.gravity)")
+        
+        children.forEach({ $0.alpha = 0 })
+        
+//        print("[OrderListNode.jump] applying impulse on \(physicsBody)")
+        physicsBody?.applyImpulse(CGVector(dx: 1000, dy: 0))
+        
+        currentState = .closed
     }
 
     func checkAction() {

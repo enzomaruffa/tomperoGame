@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class IngredientNode: TappableDelegate, MovableDelegate {
+final class IngredientNode: TappableDelegate, MovableDelegate {
     
     // MARK: - Variables
     var currentStation: StationNode
@@ -23,6 +23,8 @@ class IngredientNode: TappableDelegate, MovableDelegate {
     
     var moving = false
     
+    static let baseZPos = CGFloat(8)
+    
     // MARK: - Initializers
     init(ingredient: Ingredient, movableNode: MovableSpriteNode, currentLocation: StationNode) {
         self.ingredient = ingredient
@@ -33,7 +35,7 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         movableNode.position = currentLocation.spriteNode.position
         movableNode.tapDelegate = self
         movableNode.moveDelegate = self
-        movableNode.zPosition = 8
+        movableNode.zPosition = IngredientNode.baseZPos
         
         currentStation.ingredientNode = self
     }
@@ -74,6 +76,12 @@ class IngredientNode: TappableDelegate, MovableDelegate {
         } else {
             currentStation = station
             currentStation.ingredientNode = self
+        }
+        
+        if station.stationType == .shelf {
+            spriteNode.zPosition = IngredientNode.baseZPos * 2
+        } else {
+            spriteNode.zPosition = IngredientNode.baseZPos
         }
         
     }
