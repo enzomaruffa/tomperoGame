@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class PlateNode: MovableDelegate {
+final class PlateNode: MovableDelegate {
     
     // MARK: - Variables
     var currentStation: StationNode
@@ -23,6 +23,8 @@ class PlateNode: MovableDelegate {
     
     var moving = false
     var successfulDelivery = false
+    
+    static let baseZPos: CGFloat = 3
     
     // MARK: - Initializers
     init(plate: Plate, movableNode: MovableSpriteNode, currentLocation: StationNode) {
@@ -82,6 +84,8 @@ class PlateNode: MovableDelegate {
         // Check if ingredient exists in station
         if let ingredientNode = station.ingredientNode {
             self.plate.ingredients.append(ingredientNode.ingredient)
+            
+            self.spriteNode.zPosition = PlateNode.baseZPos
             self.updateTexture()
             
             currentStation = station
@@ -91,6 +95,9 @@ class PlateNode: MovableDelegate {
             //TODO: Remove ingredient node from scene destroy it whatever
             ingredientNode.spriteNode.removeFromParent()
         } else {
+            self.spriteNode.zPosition = PlateNode.baseZPos + 10
+            self.updateTexture()
+            
             currentStation = station
             currentStation.plateNode = self
         }
@@ -98,7 +105,7 @@ class PlateNode: MovableDelegate {
     }
     
     func updateTexture() {
-        var zPos = CGFloat(3)
+        var zPos = self.spriteNode.zPosition + 1
         self.spriteNode.removeAllChildren()
         self.spriteNode.zPosition = zPos
         
