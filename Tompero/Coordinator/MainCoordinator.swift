@@ -18,7 +18,7 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        var gameSceneTest: Bool = false
+        var gameSceneTest: Bool = true
         
         #if !DEBUG
             gameSceneTest = false
@@ -28,8 +28,8 @@ class MainCoordinator: Coordinator {
             let tables: [String : [PlayerTable]] = [
                 "God" : [
                     PlayerTable(type: .frying, ingredient: nil),
-                    PlayerTable(type: .cooking, ingredient: nil),
-                    PlayerTable(type: .ingredient, ingredient: Eyes())
+                    PlayerTable(type: .plate, ingredient: nil),
+                    PlayerTable(type: .ingredient, ingredient: Asteroid())
                 ],
                 "Enzo's Enzo's iPhone" : [
                     PlayerTable(type: .chopping, ingredient: nil),

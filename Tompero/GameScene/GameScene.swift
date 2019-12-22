@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import MultipeerConnectivity
 
 // swiftlint:disable force_cast
 class GameScene: SKScene {
@@ -18,7 +19,7 @@ class GameScene: SKScene {
     // MARK: - Game Variables
     var hosting = false
     
-    var player: String = MCManager.shared.selfName
+    var player: String = "God" //MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -106,6 +107,8 @@ class GameScene: SKScene {
         
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
+        MCManager.shared.subscribeMatchmakingObserver(observer: self)
+
         
         if hosting {
             matchStatistics = MatchStatistics(ruleUsed: rule!)
@@ -265,7 +268,6 @@ class GameScene: SKScene {
     fileprivate func updateOrders() {
         for (index, order) in orders.enumerated() {
             order.timeLeft -= 1/60
-            print("from update: \(order.timeLeft)")
             
             if hosting {
                 if order.timeLeft <= 0.0 {
@@ -324,15 +326,21 @@ class GameScene: SKScene {
         }
     }
     
-    func endMatch() {
+    func endMatch(error: Bool = false) {
         self.isPaused = true
-        GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
         
-        if hosting {
+        if hosting && !error {
             EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+            
+            GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
+            coordinator?.statistics(statistics: matchStatistics!)
+        } else if hosting && error {
+            // TODO: Log error event
         }
         
-        coordinator?.statistics(statistics: matchStatistics!)
+        if error {
+            coordinator?.popToRoot()
+        }
     }
     
     fileprivate func updateTimer() {
@@ -533,4 +541,14 @@ extension GameScene: GameConnectionManagerObserver {
         }
     }
     
+}
+
+extension GameScene: MCManagerMatchmakingObserver {
+    func playerUpdate(player: String, state: MCSessionState) {
+        // end game if disconnect received
+        
+        if state == .notConnected {
+            endMatch(error: true)
+        }
+    }
 }

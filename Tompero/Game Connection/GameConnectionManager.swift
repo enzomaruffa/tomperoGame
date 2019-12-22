@@ -190,7 +190,6 @@ extension GameConnectionManager: MCManagerDataObserver {
         default:
             print("[GameConnectionManager] Unknown type received")
         }
-        // TODO: Decodificar o ingrediente em outrostipos
     }
     
 }
