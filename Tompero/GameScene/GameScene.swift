@@ -60,7 +60,8 @@ class GameScene: SKScene {
     }
     
     var orderListNode: OrderListNode!
-    var orderGenerationCounter = 800
+    var orderGenerationCounter = 3 * 60
+    let timeBetweenOrders = 10 * 60
     var orderCount = 0
     let maxOrders = 3
     var firstOrder = false
@@ -124,26 +125,6 @@ class GameScene: SKScene {
         
         SFXPlayer.shared.roundStarted.play()
         
-        // Debugging attempts
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-//            self.orderListNode.jump()
-//            self.orderListNode.close()
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
-//            self.orderListNode.jump()
-//            self.orderListNode.open()
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-//            self.orderListNode.open()
-//            self.orderListNode.jump()
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 13) {
-//            self.orderListNode.close()
-//            self.orderListNode.jump()
-//        }
     }
     
     func setupOrderListNode() {
@@ -284,9 +265,9 @@ class GameScene: SKScene {
         orderListNode.update()
         
         if hosting {
-            orderGenerationCounter += 2
+            orderGenerationCounter += 1
             
-            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
+            if (orderGenerationCounter >= timeBetweenOrders && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
                 generateRandomOrder()
                 if firstOrder {
                     SFXPlayer.shared.orderUp.play()
