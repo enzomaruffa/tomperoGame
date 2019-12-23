@@ -62,7 +62,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     // MARK: - View LifeCycle
     override func viewWillAppear(_ animated: Bool) {
-        level.setTitle("EASY", for: .normal)
+        updateLevelUI(difficulty: countLevel)
+        
         playersImages = [player1Image, player2Image, player3Image, player4Image]
         
         player1InviteButton.isHidden = true
@@ -201,16 +202,32 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         EventLogger.shared.logButtonPress(buttonName: "waiting-difficulty")
         
         if countLevel == .easy {
-            level.setTitle("MEDIUM", for: .normal)
             countLevel = .medium
         } else if countLevel == .medium {
-            level.setTitle("HARD", for: .normal)
             countLevel = .hard
         } else if countLevel == .hard {
-            level.setTitle("EASY", for: .normal)
             countLevel = .easy
         }
+        
+        updateLevelUI(difficulty: countLevel)
     }
+    
+    func updateLevelUI(difficulty: GameDifficulty) {
+        switch difficulty {
+        case .easy:
+            level.setTitle("EASY", for: .normal)
+            break
+        case .medium:
+            level.setTitle("MEDIUM", for: .normal)
+            break
+        case .hard:
+            level.setTitle("HARD", for: .normal)
+            break
+        default:
+            level.setTitle("EASY", for: .normal)
+        }
+    }
+    
     @IBAction func player1InviteButtonPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
         MCManager.shared.hostSession(presentingFrom: self, delegate: self)
