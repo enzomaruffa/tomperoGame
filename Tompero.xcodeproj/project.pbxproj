@@ -24,6 +24,8 @@
 		471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795EA238C1E87000575B0 /* GameConnectionManagerObserver.swift */; };
 		471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */; };
 		471C60CD23B2C194004590D3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 471C60CC23B2C194004590D3 /* CloudKit.framework */; };
+		471C60CF23B2C69C004590D3 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60CE23B2C69C004590D3 /* CloudKitManager.swift */; };
+		471C60D123B2C6B0004590D3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60D023B2C6B0004590D3 /* DatabaseManager.swift */; };
 		4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D476238EB750003D373C /* GameRuleFactory.swift */; };
 		4722D479238EB762003D373C /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D478238EB762003D373C /* GameDifficulty.swift */; };
 		4722D47B238EB7C9003D373C /* GameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47A238EB7C9003D373C /* GameRule.swift */; };
@@ -163,6 +165,8 @@
 		471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerMatchmakingObserver.swift; sourceTree = "<group>"; };
 		471C60CB23B2C08F004590D3 /* SpaceSpice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceSpice.entitlements; sourceTree = "<group>"; };
 		471C60CC23B2C194004590D3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		471C60CE23B2C69C004590D3 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		471C60D023B2C6B0004590D3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		4722D476238EB750003D373C /* GameRuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRuleFactory.swift; sourceTree = "<group>"; };
 		4722D478238EB762003D373C /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
 		4722D47A238EB7C9003D373C /* GameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRule.swift; sourceTree = "<group>"; };
@@ -474,6 +478,8 @@
 				471795ED238C692D000575B0 /* MultipeerConnectivity Manager */,
 				471795EE238C694B000575B0 /* Game Connection */,
 				475A4B5423A0469E000016B3 /* EventLogger.swift */,
+				471C60CE23B2C69C004590D3 /* CloudKitManager.swift */,
+				471C60D023B2C6B0004590D3 /* DatabaseManager.swift */,
 			);
 			path = Tompero;
 			sourceTree = "<group>";
@@ -889,6 +895,7 @@
 				562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */,
 				472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */,
 				567A07B0238C805000D6399A /* Horn.swift in Sources */,
+				471C60D123B2C6B0004590D3 /* DatabaseManager.swift in Sources */,
 				569B4D2A239E67E20057C7CC /* TrackWithIntro.swift in Sources */,
 				4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */,
 				475A4B5523A0469E000016B3 /* EventLogger.swift in Sources */,
@@ -931,6 +938,7 @@
 				FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */,
 				476925C72390AA0900FBAB1F /* SKSceneExtensions.swift in Sources */,
 				562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */,
+				471C60CF23B2C69C004590D3 /* CloudKitManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
