@@ -110,7 +110,6 @@ class GameScene: SKScene {
         GameConnectionManager.shared.subscribe(observer: self)
         MCManager.shared.subscribeMatchmakingObserver(observer: self)
 
-        
         if hosting {
             matchStatistics = MatchStatistics(ruleUsed: rule!)
             EventLogger.shared.logMatchStart(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)

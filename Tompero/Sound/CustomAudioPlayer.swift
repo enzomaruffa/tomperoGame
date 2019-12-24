@@ -39,11 +39,9 @@ class CustomAudioPlayer {
     
     func play() {
         DispatchQueue.global(qos: .background).async {
-            for player in self.players {
-                if !player.isPlaying {
-                    player.play()
-                    return
-                }
+            for player in self.players where !player.isPlaying {
+                player.play()
+                return
             }
             
             self.load()

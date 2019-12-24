@@ -240,9 +240,13 @@ extension SKAction {
                     finalValue = finalValue ?? initialValue! + initialDistance
                     
                     var magicNumber: CGFloat! // picked manually to visually match the behavior of UIKit
-                    if dampingRatio < 1 { magicNumber = 8 / dampingRatio }
-                    else if dampingRatio == 1 { magicNumber = 10 }
-                    else { magicNumber = 12 * dampingRatio }
+                    if dampingRatio < 1 {
+                        magicNumber = 8 / dampingRatio
+                    } else if dampingRatio == 1 {
+                        magicNumber = 10
+                    } else {
+                        magicNumber = 12 * dampingRatio
+                    }
                     
                     naturalFrequency = magicNumber / CGFloat(duration)
                     dampedFrequency = naturalFrequency * sqrt(1 - pow(dampingRatio, 2))
