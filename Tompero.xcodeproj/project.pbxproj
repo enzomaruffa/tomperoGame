@@ -23,6 +23,7 @@
 		471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795E8238C1E54000575B0 /* GameConnectionManager.swift */; };
 		471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795EA238C1E87000575B0 /* GameConnectionManagerObserver.swift */; };
 		471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */; };
+		471C60CD23B2C194004590D3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 471C60CC23B2C194004590D3 /* CloudKit.framework */; };
 		4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D476238EB750003D373C /* GameRuleFactory.swift */; };
 		4722D479238EB762003D373C /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D478238EB762003D373C /* GameDifficulty.swift */; };
 		4722D47B238EB7C9003D373C /* GameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47A238EB7C9003D373C /* GameRule.swift */; };
@@ -160,6 +161,8 @@
 		471795E8238C1E54000575B0 /* GameConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConnectionManager.swift; sourceTree = "<group>"; };
 		471795EA238C1E87000575B0 /* GameConnectionManagerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConnectionManagerObserver.swift; sourceTree = "<group>"; };
 		471795EF238C75CF000575B0 /* MCManagerMatchmakingObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCManagerMatchmakingObserver.swift; sourceTree = "<group>"; };
+		471C60CB23B2C08F004590D3 /* SpaceSpice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpaceSpice.entitlements; sourceTree = "<group>"; };
+		471C60CC23B2C194004590D3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4722D476238EB750003D373C /* GameRuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRuleFactory.swift; sourceTree = "<group>"; };
 		4722D478238EB762003D373C /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
 		4722D47A238EB7C9003D373C /* GameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRule.swift; sourceTree = "<group>"; };
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */,
+				471C60CD23B2C194004590D3 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +305,7 @@
 		07F4238B08A3D100EFB608C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				471C60CC23B2C194004590D3 /* CloudKit.framework */,
 				B688C2DD78186CF812918984 /* Pods_Tompero.framework */,
 			);
 			name = Frameworks;
@@ -454,6 +459,7 @@
 		562BCF5623881CF900D5D51D /* Tompero */ = {
 			isa = PBXGroup;
 			children = (
+				471C60CB23B2C08F004590D3 /* SpaceSpice.entitlements */,
 				475A4B5223A0379F000016B3 /* GoogleService-Info.plist */,
 				566A5BB4239ADE43006D96CF /* Resources */,
 				562BCF5723881CF900D5D51D /* AppDelegate.swift */,
@@ -1070,6 +1076,7 @@
 			baseConfigurationReference = 8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1093,6 +1100,7 @@
 			baseConfigurationReference = 4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = D9FBK2WPJX;
