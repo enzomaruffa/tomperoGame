@@ -309,6 +309,7 @@ class GameScene: SKScene {
     
     func endMatch(error: Bool = false) {
         self.isPaused = true
+        stations.forEach({ $0.stopAnimation() })
         
         if hosting && !error {
             EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
@@ -515,8 +516,7 @@ extension GameScene: GameConnectionManagerObserver {
     }
     
     func receiveStatistics(statistics: MatchStatistics) {
-        self.isPaused = true
-        stations.forEach({ $0.stopAnimation() })
+        endMatch()
         DispatchQueue.main.async {
             self.coordinator?.statistics(statistics: statistics)
         }
