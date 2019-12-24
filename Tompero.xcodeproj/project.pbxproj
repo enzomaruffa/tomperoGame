@@ -1072,7 +1072,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 12;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1080,6 +1080,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=200 -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.enzomaruffa.spacespice;
 				PRODUCT_NAME = SpaceSpice;
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = DEBUG;
@@ -1102,6 +1103,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=200 -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.enzomaruffa.spacespice;
 				PRODUCT_NAME = SpaceSpice;
 				SWIFT_VERSION = 5.0;
