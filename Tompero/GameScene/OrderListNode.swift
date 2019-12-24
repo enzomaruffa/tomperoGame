@@ -37,8 +37,8 @@ class OrderListNode: SKSpriteNode {
         self.parent as! GameScene
     }
     
-    var boundaryStart: CGPoint = CGPoint(x: -3501, y: 250)
-    var boundaryEnd: CGPoint = CGPoint(x: 850, y: 250) 
+    var boundaryStart: CGPoint = CGPoint(x: -2272, y: 250)
+    var boundaryEnd: CGPoint = CGPoint(x: -313, y: 250)
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {  
         super.init(texture: texture, color: color, size: size)
@@ -62,32 +62,22 @@ class OrderListNode: SKSpriteNode {
 //        print("[OrderListNode.open] entry")
         guard canChangeCurrentState(to: .open) else { return }
         
-        physicsBody?.velocity = .zero
+        run(SKAction.move(to: boundaryEnd, duration: 0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1)) {
+            self.currentState = .open
+            self.children.forEach({ $0.alpha = 1 })
+        }
         
-        children.forEach({ $0.alpha = 1 })
-        gameScene.physicsWorld.gravity.dx = 30
-        
-//        print("[OrderListNode.open] applying impulse on \(physicsBody)")
-        
-        physicsBody?.applyImpulse(CGVector(dx: 10000, dy: 0))
-        currentState = .open
     }
     
     func close() {
 //        print("[OrderListNode.close] entry")
         guard canChangeCurrentState(to: .closing) else { return }
         
-        physicsBody?.velocity = .zero
         currentState = .closing
         
-        gameScene.physicsWorld.gravity.dx = -30
-        
-//        print("[OrderListNode.close] applying impulse on \(physicsBody)")
-        
-        physicsBody?.applyImpulse(CGVector(dx: -8000, dy: 0))
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        run(SKAction.move(to: boundaryStart, duration: 0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1)) {
             self.currentState = .closed
+            self.children.forEach({ $0.alpha = 0 })
         }
     }
     
@@ -97,14 +87,18 @@ class OrderListNode: SKSpriteNode {
         
         currentState = .jumping
         
-//        print("[OrderListNode.jump] gravity is  \(gameScene.physicsWorld.gravity)")
+        let offset = 150
+        let duration = 0.2
         
-        children.forEach({ $0.alpha = 0 })
+        run(SKAction.move(by: CGVector(dx: offset, dy: 0), duration: duration, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1)) {
+            self.currentState = .closed
+            self.children.forEach({ $0.alpha = 0 })
+        }
         
-//        print("[OrderListNode.jump] applying impulse on \(physicsBody)")
-        physicsBody?.applyImpulse(CGVector(dx: 1000, dy: 0))
-        
-        currentState = .closed
+        run(SKAction.move(by: CGVector(dx: -offset, dy: 0), duration: duration, delay: duration, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1)) {
+            self.currentState = .closed
+            self.children.forEach({ $0.alpha = 0 })
+        }
     }
 
     func checkAction() {
