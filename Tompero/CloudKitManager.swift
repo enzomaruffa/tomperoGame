@@ -81,11 +81,62 @@ class CloudKitManager: DatabaseManager {
         }
     }
     
+    fileprivate func createMatchHistoryRecord(hash: String, coinsAwarded: Int) {
+        
+        let record = CKRecord(recordType: "MatchHistory")
+        record.setValue(coinsAwarded, forKey: "coinsAwarded")
+        record.setValue(hash, forKey: "matchHash")
+        
+        print("[CloudKitManager.createMatchHistoryRecord] Persisting \(record)")
+        
+        persistRecord(record)
+    }
+    
+    private func retrieveMatchHistoryRecord(withHash hash: String, _ callback: @escaping (CKRecord?) -> Void) {
+        let predicate = NSPredicate(format: "matchHash == %@", hash)
+        let query = CKQuery(recordType: "MatchHistory", predicate: predicate)
+        
+        var firstResult: CKRecord?
+        
+        print("[CloudKitManager.retrieveMatchHistoryRecord] Performing query...")
+        privateDB.perform(query,
+                          inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
+                            print("[CloudKitManager.retrieveMatchHistoryRecord] Query in progress")
+                            guard let self = self else {
+                                print("[CloudKitManager.retrieveMatchHistoryRecord] Self is nil, oops")
+                                return }
+                            
+                            if let error = error {
+                                print("[CloudKitManager.retrieveMatchHistoryRecord] Error found!")
+                                return
+                            }
+                            
+                            // Check if it exists in the remote container
+                            guard let results = results else {
+                                print("[CloudKitManager.retrieveMatchHistoryRecord] Returning nil!")
+                                callback(nil)
+                                return
+                            }
+                            print("[CloudKitManager.retrieveMatchHistoryRecord] First result found :)")
+                            firstResult = results.first
+                            callback(firstResult)
+        }
+    }
+    
     // MARK: DatabaseManager Methods
     func checkMatchExists(hash: String, _ callback: @escaping (Bool) -> Void) {
         // Check if it exists in the remote container
-        // If it does, return true
-        // If it doesn't, return false
+        retrieveMatchHistoryRecord(withHash: hash) { (matchRecord) in
+            if matchRecord != nil {
+                // If it does, return true
+                print("[CloudKitManager.checkMatchExists] Match found!")
+                callback(true)
+            } else {
+                // If it doesn't, return false
+                print("[CloudKitManager.checkMatchExists] Match not found :(")
+                callback(false)
+            }
+        }
         
     }
     
@@ -94,6 +145,7 @@ class CloudKitManager: DatabaseManager {
             // doesn't exists
             if !result {
                 // Add to database
+                self.createMatchHistoryRecord(hash: hash, coinsAwarded: coinCount)
                 
                 // update coin count
                 self.getPlayerCoinCount {
