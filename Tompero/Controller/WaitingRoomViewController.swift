@@ -216,13 +216,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         switch difficulty {
         case .easy:
             level.setTitle("EASY", for: .normal)
-            break
         case .medium:
             level.setTitle("MEDIUM", for: .normal)
-            break
         case .hard:
             level.setTitle("HARD", for: .normal)
-            break
         default:
             level.setTitle("EASY", for: .normal)
         }
