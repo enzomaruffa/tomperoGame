@@ -9,8 +9,9 @@
 import Foundation
 
 protocol DatabaseManager {
-    var playerCoinCount: Int {get set}
+    func getPlayerCoinCount(_ callback:  @escaping (Int) -> Void)
+    func setPlayerCoinCount(toValue value: Int)
     
-    func checkMatchExists(hash: String) -> Bool
+    func checkMatchExists(hash: String, _ callback: @escaping (Bool) -> Void)
     func addNewMatch(withHash hash: String, coinCount: Int)
 }

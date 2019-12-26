@@ -26,6 +26,7 @@
 		471C60CD23B2C194004590D3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 471C60CC23B2C194004590D3 /* CloudKit.framework */; };
 		471C60CF23B2C69C004590D3 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60CE23B2C69C004590D3 /* CloudKitManager.swift */; };
 		471C60D123B2C6B0004590D3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60D023B2C6B0004590D3 /* DatabaseManager.swift */; };
+		471C60D323B45ACC004590D3 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60D223B45ACC004590D3 /* StringExtensions.swift */; };
 		4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D476238EB750003D373C /* GameRuleFactory.swift */; };
 		4722D479238EB762003D373C /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D478238EB762003D373C /* GameDifficulty.swift */; };
 		4722D47B238EB7C9003D373C /* GameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47A238EB7C9003D373C /* GameRule.swift */; };
@@ -167,6 +168,7 @@
 		471C60CC23B2C194004590D3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		471C60CE23B2C69C004590D3 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		471C60D023B2C6B0004590D3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		471C60D223B45ACC004590D3 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		4722D476238EB750003D373C /* GameRuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRuleFactory.swift; sourceTree = "<group>"; };
 		4722D478238EB762003D373C /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
 		4722D47A238EB7C9003D373C /* GameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRule.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				476925C42390AA0900FBAB1F /* SKSceneExtensions.swift */,
 				47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */,
 				FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */,
+				471C60D223B45ACC004590D3 /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -935,6 +938,7 @@
 				567A07B8238C805000D6399A /* HasIngredients.swift in Sources */,
 				4709B28123A8141A004B8F51 /* PipeNode.swift in Sources */,
 				567A07B3238C805000D6399A /* Tentacle.swift in Sources */,
+				471C60D323B45ACC004590D3 /* StringExtensions.swift in Sources */,
 				FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */,
 				476925C72390AA0900FBAB1F /* SKSceneExtensions.swift in Sources */,
 				562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */,

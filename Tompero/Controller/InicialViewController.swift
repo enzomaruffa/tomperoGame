@@ -8,6 +8,8 @@ class InicialViewController: UIViewController, Storyboarded {
     
     // MARK: - Variables
     weak var coordinator: MainCoordinator?
+    let databaseManager: DatabaseManager = CloudKitManager.shared
+    
     var location = CGPoint(x: 0, y: 0)
     var animationTimer: Timer?
     weak var shapeLayer: CAShapeLayer?
@@ -53,6 +55,8 @@ class InicialViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         MCManager.shared.resetSession()
         
+        setCoinsValue()
+        
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             //print("Timer called")
             
@@ -96,6 +100,15 @@ class InicialViewController: UIViewController, Storyboarded {
     }
     
     // MARK: - Methods
+    func setCoinsValue() {
+        databaseManager.getPlayerCoinCount {
+            print("Current coin count: \($0)")
+            print("Setting coin count to: \($0 + 10)")
+            self.databaseManager.setPlayerCoinCount(toValue: $0 + 10)
+        }
+        
+    }
+    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         //viewDialog.isHidden = true
