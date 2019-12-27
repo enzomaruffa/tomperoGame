@@ -11,12 +11,12 @@ import UIKit
 class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
+    
     fileprivate func gameSceneTest() {
         let tables: [String : [PlayerTable]] = [
             "God" : [
@@ -104,54 +104,58 @@ class MainCoordinator: Coordinator {
         ))
         
         
-               let stats2 = MatchStatistics(ruleUsed: GameRule(
-                   difficulty: .easy,
-                   possibleIngredients: [
-                       Asteroid(),
-                       Tentacle(),
-                       MoonCheese(),
-                       Eyes(),
-                       Tardigrades()
-                   ],
-                   playerTables: tables,
-                   playerOrder: [
-                       "God",
-                       "Enzo's Enzo's iPhone",
-                       "CU",
-                       "CU 2"]
-               ))
         
-        print(stats.matchHash)
+        statistics(statistics: stats)
         
-        let dbManager = CloudKitManager.shared
-        dbManager.addNewMatch(withHash: stats.matchHash, coinCount: stats.totalPoints)
+        //         let stats2 = MatchStatistics(ruleUsed: GameRule(
+        //                           difficulty: .easy,
+        //                           possibleIngredients: [
+        //                               Asteroid(),
+        //                               Tentacle(),
+        //                               MoonCheese(),
+        //                               Eyes(),
+        //                               Tardigrades()
+        //                           ],
+        //                           playerTables: tables,
+        //                           playerOrder: [
+        //                               "God",
+        //                               "Enzo's Enzo's iPhone",
+        //                               "CU",
+        //                               "CU 2"]
+        //                       ))
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            dbManager.checkMatchExists(hash: stats.matchHash) { (result) in
-                print("Match with hash \(stats.matchHash) exists? \(result)")
-            }
-            
-            dbManager.checkMatchExists(hash: "2143123213") { (result) in
-                print("Match with hash 2143123213 exists? \(result)")
-            }
-            
-            dbManager.checkMatchExists(hash: stats2.matchHash) { (result) in
-                print("Match with hash \(stats2.matchHash) exists? \(result)")
-            }
-        }
+        //        print(stats.matchHash)
+        
+        //        let dbManager = CloudKitManager.shared
+        //        dbManager.addNewMatch(withHash: stats.matchHash, coinCount: stats.totalPoints)
+        //
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        //            dbManager.checkMatchExists(hash: stats.matchHash) { (result) in
+        //                print("Match with hash \(stats.matchHash) exists? \(result)")
+        //            }
+        //
+        //            dbManager.checkMatchExists(hash: "2143123213") { (result) in
+        //                print("Match with hash 2143123213 exists? \(result)")
+        //            }
+        //
+        //            dbManager.checkMatchExists(hash: stats2.matchHash) { (result) in
+        //                print("Match with hash \(stats2.matchHash) exists? \(result)")
+        //            }
+        
+        
     }
     
     func start() {
         var gameSceneTest: Bool = true
         
         #if !DEBUG
-            gameSceneTest = false
+        gameSceneTest = false
         #endif
         
         if gameSceneTest {
             statisticsTest()
-//            gameSceneTest()
-//            return
+            //            gameSceneTest()
+            //            return
         }
         
         inicial()
@@ -160,7 +164,7 @@ class MainCoordinator: Coordinator {
     func popToRoot() {
         navigationController.popToRootViewController(animated: true)
     }
-        
+    
     func inicial() {
         let controller = InicialViewController.instantiate()
         controller.coordinator = self
@@ -171,7 +175,7 @@ class MainCoordinator: Coordinator {
         let controller = MenuCollectionViewController.instantiate()
         controller.coordinator = self
         controller.modalTransitionStyle = .crossDissolve
-//        navigationController.present(controller, animated: true, completion: nil)
+        //        navigationController.present(controller, animated: true, completion: nil)
         navigationController.pushViewController(controller, animated: false)
     }
     
