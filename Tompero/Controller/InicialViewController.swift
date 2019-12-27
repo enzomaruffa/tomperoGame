@@ -54,6 +54,9 @@ class InicialViewController: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         MCManager.shared.resetSession()
+    
+        // TODO: Make update in UI with coin count
+        setCoinsValue()
         
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             //print("Timer called")
@@ -101,10 +104,7 @@ class InicialViewController: UIViewController, Storyboarded {
     func setCoinsValue() {
         databaseManager.getPlayerCoinCount {
             print("Current coin count: \($0)")
-            print("Setting coin count to: \($0 + 10)")
-            self.databaseManager.setPlayerCoinCount(toValue: $0 + 10)
         }
-        
     }
     
     
