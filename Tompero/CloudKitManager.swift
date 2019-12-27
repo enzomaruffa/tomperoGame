@@ -129,11 +129,11 @@ class CloudKitManager: DatabaseManager {
         retrieveMatchHistoryRecord(withHash: hash) { (matchRecord) in
             if matchRecord != nil {
                 // If it does, return true
-                print("[CloudKitManager.checkMatchExists] Match found!")
+                print("[CloudKitManager.checkMatchExists] Match \(hash) found!")
                 callback(true)
             } else {
                 // If it doesn't, return false
-                print("[CloudKitManager.checkMatchExists] Match not found :(")
+                print("[CloudKitManager.checkMatchExists] Match \(hash) not found")
                 callback(false)
             }
         }
@@ -141,13 +141,16 @@ class CloudKitManager: DatabaseManager {
     }
     
     func addNewMatch(withHash hash: String, coinCount: Int) {
+        print("[CloudKitManager.addNewMatch] Attempting to add match with hash \(hash)")
         checkMatchExists(hash: hash, { (result) in
             // doesn't exists
             if !result {
                 // Add to database
+                print("[CloudKitManager.addNewMatch] Match doesn't exist! Great :). Creating record...")
                 self.createMatchHistoryRecord(hash: hash, coinsAwarded: coinCount)
                 
                 // update coin count
+                print("[CloudKitManager.addNewMatch] Updating coin count.")
                 self.getPlayerCoinCount {
                     self.setPlayerCoinCount(toValue: $0 + coinCount)
                 }

@@ -55,8 +55,6 @@ class InicialViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         MCManager.shared.resetSession()
         
-        setCoinsValue()
-        
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             //print("Timer called")
             
@@ -108,6 +106,7 @@ class InicialViewController: UIViewController, Storyboarded {
         }
         
     }
+    
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
