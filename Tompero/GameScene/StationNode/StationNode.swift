@@ -90,7 +90,6 @@ class StationNode: TappableDelegate {
     var animationRunning = false
     
     func createAnimation() {
-        print("Creating animation for type \(stationType) with atlas name \(stationAnimationAtlasName)")
         if let stationAnimationAtlasName = stationAnimationAtlasName {
             let stationAtlas = SKTextureAtlas(named: stationAnimationAtlasName)
             stationAnimationFrames = []
@@ -125,7 +124,6 @@ class StationNode: TappableDelegate {
     
     func playAnimation() {
         // ===
-        print("Playing animation with node \(self.stationAnimationNode)")
         if let node = self.stationAnimationNode {
 
             animationRunning = true

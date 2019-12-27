@@ -17,7 +17,6 @@ protocol MCManagerMatchmakingObserver {
     func receiveGameRule(rule: GameRule)
 }
 
-
 extension MCManagerMatchmakingObserver {
     func playerUpdate(player: String, state: MCSessionState) {}
     func playerListSent(playersWithStatus: [MCPeerWithStatus]) {}

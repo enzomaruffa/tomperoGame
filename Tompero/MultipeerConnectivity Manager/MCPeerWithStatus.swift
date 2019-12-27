@@ -8,7 +8,7 @@
 
 import Foundation
 import MultipeerConnectivity
-
+ 
 class MCPeerWithStatus: Codable, Equatable {
     
     var name: String

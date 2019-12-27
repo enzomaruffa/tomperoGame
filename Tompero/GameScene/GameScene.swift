@@ -60,7 +60,8 @@ class GameScene: SKScene {
     }
     
     var orderListNode: OrderListNode!
-    var orderGenerationCounter = 800
+    var orderGenerationCounter = 3 * 60
+    let timeBetweenOrders = 10 * 60
     var orderCount = 0
     let maxOrders = 3
     var firstOrder = false
@@ -109,7 +110,6 @@ class GameScene: SKScene {
         GameConnectionManager.shared.subscribe(observer: self)
         MCManager.shared.subscribeMatchmakingObserver(observer: self)
 
-        
         if hosting {
             matchStatistics = MatchStatistics(ruleUsed: rule!)
             EventLogger.shared.logMatchStart(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
@@ -124,26 +124,6 @@ class GameScene: SKScene {
         
         SFXPlayer.shared.roundStarted.play()
         
-        // Debugging attempts
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-//            self.orderListNode.jump()
-//            self.orderListNode.close()
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
-//            self.orderListNode.jump()
-//            self.orderListNode.open()
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-//            self.orderListNode.open()
-//            self.orderListNode.jump()
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 13) {
-//            self.orderListNode.close()
-//            self.orderListNode.jump()
-//        }
     }
     
     func setupOrderListNode() {
@@ -284,9 +264,9 @@ class GameScene: SKScene {
         orderListNode.update()
         
         if hosting {
-            orderGenerationCounter += 2
+            orderGenerationCounter += 1
             
-            if (orderGenerationCounter >= 1000 && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
+            if (orderGenerationCounter >= timeBetweenOrders && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
                 generateRandomOrder()
                 if firstOrder {
                     SFXPlayer.shared.orderUp.play()
@@ -328,6 +308,7 @@ class GameScene: SKScene {
     
     func endMatch(error: Bool = false) {
         self.isPaused = true
+        stations.forEach({ $0.stopAnimation() })
         
         if hosting && !error {
             EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
@@ -534,8 +515,7 @@ extension GameScene: GameConnectionManagerObserver {
     }
     
     func receiveStatistics(statistics: MatchStatistics) {
-        self.isPaused = true
-        stations.forEach({ $0.stopAnimation() })
+        endMatch()
         DispatchQueue.main.async {
             self.coordinator?.statistics(statistics: statistics)
         }

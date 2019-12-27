@@ -9,6 +9,8 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     
     // MARK: - Variables
     weak var coordinator: MainCoordinator?
+    let databaseManager: DatabaseManager = CloudKitManager.shared
+    let logger: ConsoleDebugLogger = ConsoleDebugLogger.shared
     var location = CGPoint(x: 0, y: 0)
     var animationTimer: Timer?
     weak var shapeLayer: CAShapeLayer?
@@ -60,6 +62,9 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     
     override func viewWillAppear(_ animated: Bool) {
         MCManager.shared.resetSession()
+    
+        // TODO: Make update in UI with coin count
+        setCoinsValue()
         
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             //print("Timer called")
@@ -104,18 +109,25 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     }
     
     // MARK: - Methods
+    func setCoinsValue() {
+        databaseManager.getPlayerCoinCount {
+            print("Current coin count: \($0)")
+        }
+    }
+    
+    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         //viewDialog.isHidden = true
         
         animateDialog(text: textSapao2)
         if tappedImage.tag == 0 {
-            print("CLICOU JOIN")
+            logger.log(message: "Join pressed!")
             EventLogger.shared.logButtonPress(buttonName: "inicial-join")
             coordinator?.waitingRoom(hosting: false)
             
         } else if tappedImage.tag == 1 {
-            print("CLICOU HOST")
+            logger.log(message: "Host pressed!")
             EventLogger.shared.logButtonPress(buttonName: "inicial-host")
             coordinator?.waitingRoom(hosting: true)
         }
