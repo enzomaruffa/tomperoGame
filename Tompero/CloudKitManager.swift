@@ -66,7 +66,7 @@ class CloudKitManager: DatabaseManager {
                             guard let self = self else { return }
                             
                             if let error = error {
-                                self.logger.log(message: "Error found!")
+                                self.logger.log(message: "Error: \(error.localizedDescription)")
                                 return
                             }
                             
@@ -106,7 +106,7 @@ class CloudKitManager: DatabaseManager {
                             guard let self = self else { return }
                             
                             if let error = error {
-                                self.logger.log(message: "Error found!")
+                                self.logger.log(message: "Error: \(error.localizedDescription)")
                                 return
                             }
                             

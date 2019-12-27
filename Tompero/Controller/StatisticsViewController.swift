@@ -18,6 +18,7 @@ class StatisticsViewController: UIViewController, Storyboarded {
     
     // MARK: - Variables
     var statistics: MatchStatistics!
+    let databaseManager: DatabaseManager = CloudKitManager.shared
     
     // MARK: - Outlets
     @IBOutlet weak var deliveredOrdersLabel: UILabel!
@@ -28,6 +29,7 @@ class StatisticsViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
+        databaseManager.addNewMatch(withHash: statistics.matchHash, coinCount: statistics.totalPoints)
         
         // Do any additional setup after loading the view.
         deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) delivered orders!"
