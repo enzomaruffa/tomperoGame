@@ -27,6 +27,8 @@
 		471C60CF23B2C69C004590D3 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60CE23B2C69C004590D3 /* CloudKitManager.swift */; };
 		471C60D123B2C6B0004590D3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60D023B2C6B0004590D3 /* DatabaseManager.swift */; };
 		471C60D323B45ACC004590D3 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60D223B45ACC004590D3 /* StringExtensions.swift */; };
+		471C60D523B58848004590D3 /* DebugLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60D423B58848004590D3 /* DebugLogger.swift */; };
+		471C60D723B588B3004590D3 /* ConsoleDebugLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471C60D623B588B3004590D3 /* ConsoleDebugLogger.swift */; };
 		4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D476238EB750003D373C /* GameRuleFactory.swift */; };
 		4722D479238EB762003D373C /* GameDifficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D478238EB762003D373C /* GameDifficulty.swift */; };
 		4722D47B238EB7C9003D373C /* GameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722D47A238EB7C9003D373C /* GameRule.swift */; };
@@ -36,7 +38,7 @@
 		472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F9F2723992FEA00DC7B9C /* PlateNode.swift */; };
 		4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733B6A52393597700D80AD0 /* MovableDelegate.swift */; };
 		475A4B5323A0379F000016B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475A4B5223A0379F000016B3 /* GoogleService-Info.plist */; };
-		475A4B5523A0469E000016B3 /* EventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475A4B5423A0469E000016B3 /* EventLogger.swift */; };
+		475A4B5523A0469E000016B3 /* AnalyticsEventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475A4B5423A0469E000016B3 /* AnalyticsEventLogger.swift */; };
 		47632784239D49C4006BA9C5 /* MatchStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47632783239D49C4006BA9C5 /* MatchStatistics.swift */; };
 		476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */; };
 		476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */; };
@@ -169,6 +171,8 @@
 		471C60CE23B2C69C004590D3 /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		471C60D023B2C6B0004590D3 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		471C60D223B45ACC004590D3 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		471C60D423B58848004590D3 /* DebugLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogger.swift; sourceTree = "<group>"; };
+		471C60D623B588B3004590D3 /* ConsoleDebugLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleDebugLogger.swift; sourceTree = "<group>"; };
 		4722D476238EB750003D373C /* GameRuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRuleFactory.swift; sourceTree = "<group>"; };
 		4722D478238EB762003D373C /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
 		4722D47A238EB7C9003D373C /* GameRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRule.swift; sourceTree = "<group>"; };
@@ -178,7 +182,7 @@
 		472F9F2723992FEA00DC7B9C /* PlateNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateNode.swift; sourceTree = "<group>"; };
 		4733B6A52393597700D80AD0 /* MovableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableDelegate.swift; sourceTree = "<group>"; };
 		475A4B5223A0379F000016B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		475A4B5423A0469E000016B3 /* EventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLogger.swift; sourceTree = "<group>"; };
+		475A4B5423A0469E000016B3 /* AnalyticsEventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventLogger.swift; sourceTree = "<group>"; };
 		47632783239D49C4006BA9C5 /* MatchStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatistics.swift; sourceTree = "<group>"; };
 		476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
 		476925C32390AA0900FBAB1F /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
@@ -356,6 +360,15 @@
 			path = "Game Connection";
 			sourceTree = "<group>";
 		};
+		471C60D823B588BA004590D3 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				471C60D423B58848004590D3 /* DebugLogger.swift */,
+				471C60D623B588B3004590D3 /* ConsoleDebugLogger.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 		4722D481238F42E1003D373C /* Procedural Generation */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +496,8 @@
 				475A4B5423A0469E000016B3 /* EventLogger.swift */,
 				471C60CE23B2C69C004590D3 /* CloudKitManager.swift */,
 				471C60D023B2C6B0004590D3 /* DatabaseManager.swift */,
+				475A4B5423A0469E000016B3 /* AnalyticsEventLogger.swift */,
+				471C60D823B588BA004590D3 /* Logger */,
 			);
 			path = Tompero;
 			sourceTree = "<group>";
@@ -864,6 +879,7 @@
 				471795E1238C1349000575B0 /* MCDataWrapper.swift in Sources */,
 				471795EB238C1E87000575B0 /* GameConnectionManagerObserver.swift in Sources */,
 				566E9C98239D823400787210 /* CustomAudioPlayer.swift in Sources */,
+				471C60D523B58848004590D3 /* DebugLogger.swift in Sources */,
 				566E9C99239D823400787210 /* MusicPlayer.swift in Sources */,
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
 				479B784C239D8BCB003BC9DE /* StatisticsViewController.swift in Sources */,
@@ -901,12 +917,13 @@
 				471C60D123B2C6B0004590D3 /* DatabaseManager.swift in Sources */,
 				569B4D2A239E67E20057C7CC /* TrackWithIntro.swift in Sources */,
 				4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */,
-				475A4B5523A0469E000016B3 /* EventLogger.swift in Sources */,
+				475A4B5523A0469E000016B3 /* AnalyticsEventLogger.swift in Sources */,
 				4722D47B238EB7C9003D373C /* GameRule.swift in Sources */,
 				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
 				FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */,
 				47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */,
 				56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */,
+				471C60D723B588B3004590D3 /* ConsoleDebugLogger.swift in Sources */,
 				562BCF6023881CF900D5D51D /* GameViewController.swift in Sources */,
 				567A07B1238C805000D6399A /* Eyes.swift in Sources */,
 				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,

@@ -146,7 +146,7 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        var gameSceneTest: Bool = true
+        var gameSceneTest: Bool = false
         
         #if !DEBUG
         gameSceneTest = false

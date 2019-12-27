@@ -14,6 +14,9 @@ class CloudKitManager: DatabaseManager {
     // MARK: Singleton
     static let shared = CloudKitManager()
     
+    // MARK: Variables
+    let logger = ConsoleDebugLogger.shared
+    
     // MARK: iCloud Variables
     let container: CKContainer
     let publicDB: CKDatabase
@@ -31,9 +34,9 @@ class CloudKitManager: DatabaseManager {
     fileprivate func persistRecord(_ record: CKRecord) {
         privateDB.save(record) { (savedRecord, error) in
             if error == nil {
-                print("[CloudKitManager.persistRecord] Record Saved")
+                self.logger.log(message: "Record saved")
             } else {
-                print("[CloudKitManager.persistRecord] Record Not Saved")
+                self.logger.log(message: "Record not  saved")
             }
         }
     }
@@ -44,8 +47,8 @@ class CloudKitManager: DatabaseManager {
         
         let record = CKRecord(recordType: "Coin")
         record.setValue(coinCount, forKey: "amount")
-        
-        print("[CloudKitManager.createCoinRecord] Persisting \(record)")
+
+        logger.log(message: "Persisting \(record)")
         
         persistRecord(record)
     }
@@ -56,26 +59,24 @@ class CloudKitManager: DatabaseManager {
         
         var firstResult: CKRecord?
         
-        print("[CloudKitManager.retrieveCoinRecord] Performing query...")
+        logger.log(message: " Performing query...")
         privateDB.perform(query,
                           inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
-                            print("[CloudKitManager.retrieveCoinRecord] Query in progress")
-                            guard let self = self else {
-                                print("[CloudKitManager.retrieveCoinRecord] Self is nil, oops")
-                                return }
+                            self?.logger.log(message: "Query in progress")
+                            guard let self = self else { return }
                             
                             if let error = error {
-                                print("[CloudKitManager.retrieveCoinRecord] Error found!")
+                                self.logger.log(message: "Error found!")
                                 return
                             }
                             
                             // Check if it exists in the remote container
                             guard let results = results else {
-                                print("[CloudKitManager.retrieveCoinRecord] Returning nil!")
+                                self.logger.log(message: "Returning nil!")
                                 callback(nil)
                                 return
                             }
-                            print("[CloudKitManager.retrieveCoinRecord] First result found :)")
+                            self.logger.log(message: "First result found :)")
                             firstResult = results.first
                             callback(firstResult)
         }
@@ -87,7 +88,7 @@ class CloudKitManager: DatabaseManager {
         record.setValue(coinsAwarded, forKey: "coinsAwarded")
         record.setValue(hash, forKey: "matchHash")
         
-        print("[CloudKitManager.createMatchHistoryRecord] Persisting \(record)")
+        logger.log(message: "Persisting \(record)")
         
         persistRecord(record)
     }
@@ -98,26 +99,24 @@ class CloudKitManager: DatabaseManager {
         
         var firstResult: CKRecord?
         
-        print("[CloudKitManager.retrieveMatchHistoryRecord] Performing query...")
+        logger.log(message: "Performing query...")
         privateDB.perform(query,
                           inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
-                            print("[CloudKitManager.retrieveMatchHistoryRecord] Query in progress")
-                            guard let self = self else {
-                                print("[CloudKitManager.retrieveMatchHistoryRecord] Self is nil, oops")
-                                return }
+                            self?.logger.log(message: "Query in progress")
+                            guard let self = self else { return }
                             
                             if let error = error {
-                                print("[CloudKitManager.retrieveMatchHistoryRecord] Error found!")
+                                self.logger.log(message: "Error found!")
                                 return
                             }
                             
                             // Check if it exists in the remote container
                             guard let results = results else {
-                                print("[CloudKitManager.retrieveMatchHistoryRecord] Returning nil!")
+                                self.logger.log(message: "Returning nil!")
                                 callback(nil)
                                 return
                             }
-                            print("[CloudKitManager.retrieveMatchHistoryRecord] First result found :)")
+                            self.logger.log(message: "First result found :)")
                             firstResult = results.first
                             callback(firstResult)
         }
@@ -129,11 +128,11 @@ class CloudKitManager: DatabaseManager {
         retrieveMatchHistoryRecord(withHash: hash) { (matchRecord) in
             if matchRecord != nil {
                 // If it does, return true
-                print("[CloudKitManager.checkMatchExists] Match \(hash) found!")
+                self.logger.log(message: "Match \(hash) found!")
                 callback(true)
             } else {
                 // If it doesn't, return false
-                print("[CloudKitManager.checkMatchExists] Match \(hash) not found")
+                self.logger.log(message: "Match \(hash) not found")
                 callback(false)
             }
         }
@@ -141,16 +140,16 @@ class CloudKitManager: DatabaseManager {
     }
     
     func addNewMatch(withHash hash: String, coinCount: Int) {
-        print("[CloudKitManager.addNewMatch] Attempting to add match with hash \(hash)")
+        logger.log(message: "Attempting to add match with hash \(hash)")
         checkMatchExists(hash: hash, { (result) in
             // doesn't exists
             if !result {
                 // Add to database
-                print("[CloudKitManager.addNewMatch] Match doesn't exist! Great :). Creating record...")
+                self.logger.log(message: "Match doesn't exist! Great :). Creating record...")
                 self.createMatchHistoryRecord(hash: hash, coinsAwarded: coinCount)
                 
                 // update coin count
-                print("[CloudKitManager.addNewMatch] Updating coin count.")
+                self.logger.log(message: "Updating coin count.")
                 self.getPlayerCoinCount {
                     self.setPlayerCoinCount(toValue: $0 + coinCount)
                 }
@@ -166,13 +165,13 @@ class CloudKitManager: DatabaseManager {
         // Fetch first record and see if it exists
         retrieveCoinRecord { coinRecord in
             if let record = coinRecord {
-                print("[CloudKitManager.playerCoinCount.get] Fetch success")
+                self.logger.log(message: "Fetch success")
                 let amount = record["amount"] as! Int
                 
-                print("[CloudKitManager.playerCoinCount.get] Returning amount as \(amount)")
+                self.logger.log(message: "Returning amount as \(amount)")
                 callback(amount)
             } else {
-                print("[CloudKitManager.playerCoinCount.get] Creating coin record")
+                self.logger.log(message: "Creating coin record")
                 self.createCoinRecord()
                 callback(0)
             }
