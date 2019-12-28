@@ -62,10 +62,10 @@ class OrderListNode: SKSpriteNode {
 //        print("[OrderListNode.open] entry")
         guard canChangeCurrentState(to: .open) else { return }
         
-        run(SKAction.move(to: boundaryEnd, duration: 0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1)) {
-            self.currentState = .open
-            self.children.forEach({ $0.alpha = 1 })
-        }
+        self.children.forEach({ $0.alpha = 1 })
+        self.currentState = .open
+        
+        run(SKAction.move(to: boundaryEnd, duration: 0.8, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
         
     }
     

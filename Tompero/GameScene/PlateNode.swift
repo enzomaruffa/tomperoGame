@@ -95,11 +95,16 @@ final class PlateNode: MovableDelegate {
             //TODO: Remove ingredient node from scene destroy it whatever
             ingredientNode.spriteNode.removeFromParent()
         } else {
-            self.spriteNode.zPosition = PlateNode.baseZPos + 10
+            self.spriteNode.zPosition = PlateNode.baseZPos
             self.updateTexture()
             
             currentStation = station
             currentStation.plateNode = self
+        }
+        
+        if station.stationType == .shelf {
+            self.spriteNode.zPosition = PlateNode.baseZPos + 10
+            self.updateTexture()
         }
         
     }

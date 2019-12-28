@@ -18,6 +18,7 @@ class GameScene: SKScene {
     
     // MARK: - Game Variables
     var hosting = false
+    weak var controller: UIViewController?
     
     var player: String = "God" //MCManager.shared.selfName
     var rule: GameRule?
@@ -527,7 +528,7 @@ extension GameScene: MCManagerMatchmakingObserver {
     func playerUpdate(player: String, state: MCSessionState) {
         // end game if disconnect received
         
-        if state == .notConnected {
+        if state == .notConnected && coordinator?.isOnTop(controller: controller) ?? false {
             endMatch(error: true)
         }
     }

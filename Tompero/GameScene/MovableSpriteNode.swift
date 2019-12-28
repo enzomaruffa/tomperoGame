@@ -37,10 +37,6 @@ class MovableSpriteNode: SKSpriteNode {
         
         moveDelegate?.moveStarted(currentPosition: touch.location(in: scene!))
         
-        if scene != nil {
-            self.zPosition = 4
-        }
-        
         initialTouchPosition = touch.location(in: scene!)
         previousPosition = self.position
     }

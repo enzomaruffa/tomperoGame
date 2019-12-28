@@ -28,10 +28,10 @@ class GameViewController: UIViewController, Storyboarded {
                 scene.rule = self.rule
                 scene.hosting = self.hosting
                 scene.coordinator = self.coordinator
+                scene.controller = self
+                
                 scene.scaleMode = .aspectFill
                 
-                view.showsPhysics = true
-                view.showsFields = true
                 // Present the scene
                 view.presentScene(scene)
             }
