@@ -20,7 +20,7 @@ class GameScene: SKScene {
     var hosting = false
     weak var controller: UIViewController?
     
-    var player: String = "God" //MCManager.shared.selfName
+    var player: String = MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -69,7 +69,7 @@ class GameScene: SKScene {
     
     var matchStatistics: MatchStatistics?
     
-    var matchTimer = Float(30)
+    var matchTimer = Float(180)
     var timerStarted = false
     var timerUpdateCounter = 0
     
