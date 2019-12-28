@@ -497,7 +497,6 @@
 				562BCF712388234800D5D51D /* Controller */,
 				471795ED238C692D000575B0 /* MultipeerConnectivity Manager */,
 				471795EE238C694B000575B0 /* Game Connection */,
-				475A4B5423A0469E000016B3 /* EventLogger.swift */,
 				471C60CE23B2C69C004590D3 /* CloudKitManager.swift */,
 				471C60D023B2C6B0004590D3 /* DatabaseManager.swift */,
 				475A4B5423A0469E000016B3 /* AnalyticsEventLogger.swift */,
@@ -1111,7 +1110,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
@@ -1136,7 +1135,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = D9FBK2WPJX;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
