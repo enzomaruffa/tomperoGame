@@ -27,6 +27,7 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     @IBOutlet weak var textBox: UIImageView!
     @IBOutlet weak var sapao: UIImageView!
     @IBOutlet weak var viewDialog: UIView!
+    @IBOutlet weak var coinLabel: UILabel!
     
     var lightsOn = false
     var countLightsOn = 0
@@ -60,12 +61,7 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         MusicPlayer.shared.play(.menu)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        MCManager.shared.resetSession()
-    
-        // TODO: Make update in UI with coin count
-        setCoinsValue()
-        
+    fileprivate func createKombiTimer() {
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             //print("Timer called")
             
@@ -74,33 +70,42 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
             if self.lightsOn && self.countLightsOn >= 2 {
                 UIView.transition(with: self.host,
                                   duration: 0.05,
-                options: .transitionFlipFromRight,
-                    animations: { self.host.image = UIImage(named: "HOST - apagado") },
-                    completion: nil)
+                                  options: .transitionFlipFromRight,
+                                  animations: { self.host.image = UIImage(named: "HOST - apagado") },
+                                  completion: nil)
                 self.lightsOn = false
                 
                 UIView.transition(with: self.join,
                                   duration: 0.05,
-                options: .transitionFlipFromRight,
-                    animations: { self.join.image = UIImage(named: "JOIN - apagado") },
-                    completion: nil)
+                                  options: .transitionFlipFromRight,
+                                  animations: { self.join.image = UIImage(named: "JOIN - apagado") },
+                                  completion: nil)
             } else if !self.lightsOn {
                 UIView.transition(with: self.host,
                                   duration: 0.05,
-                    options: .transitionFlipFromRight,
-                    animations: { self.host.image = UIImage(named: "HOST - brilhando") },
-                    completion: nil)
+                                  options: .transitionFlipFromRight,
+                                  animations: { self.host.image = UIImage(named: "HOST - brilhando") },
+                                  completion: nil)
                 
                 UIView.transition(with: self.join,
                                   duration: 0.05,
-                    options: .transitionFlipFromRight,
-                    animations: { self.join.image = UIImage(named: "JOIN - brilhando") },
-                    completion: nil)
+                                  options: .transitionFlipFromRight,
+                                  animations: { self.join.image = UIImage(named: "JOIN - brilhando") },
+                                  completion: nil)
                 
                 self.countLightsOn = 0
                 self.lightsOn = true
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        MCManager.shared.resetSession()
+    
+        // TODO: Make update in UI with coin count
+        setCoinsValue()
+        
+        createKombiTimer()
         kombiTimer?.fire()
     }
     
@@ -110,11 +115,13 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     
     // MARK: - Methods
     func setCoinsValue() {
-        databaseManager.getPlayerCoinCount {
-            print("Current coin count: \($0)")
+        databaseManager.getPlayerCoinCount { count in
+            print("Current coin count: \(count)")
+            DispatchQueue.main.async {
+                self.coinLabel.text = count.description
+            }
         }
     }
-    
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView

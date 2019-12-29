@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1qB-Oy-VQR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1qB-Oy-VQR">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,11 +45,27 @@
                                             <constraint firstAttribute="width" secondItem="Epk-JO-UC2" secondAttribute="height" multiplier="4:3" id="1AK-Uj-MgX"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Coin" translatesAutoresizingMaskIntoConstraints="NO" id="E0N-yL-dCX">
+                                        <rect key="frame" x="74" y="102" width="59.5" height="59.500000000000057"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="E0N-yL-dCX" secondAttribute="height" multiplier="1:1" id="AGy-aj-KJD"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzb-mj-gsY">
+                                        <rect key="frame" x="143.5" y="102" width="23.5" height="59.5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="A6F-hc-s4t" firstAttribute="centerY" secondItem="aGT-i2-1uU" secondAttribute="centerY" multiplier="0.82" id="0dd-Rb-tIL"/>
                                     <constraint firstItem="A6F-hc-s4t" firstAttribute="centerX" secondItem="aGT-i2-1uU" secondAttribute="centerX" multiplier="0.69" id="4CU-Gr-3CW"/>
+                                    <constraint firstItem="vzb-mj-gsY" firstAttribute="leading" secondItem="E0N-yL-dCX" secondAttribute="trailing" constant="10" id="770-pM-mlH"/>
+                                    <constraint firstItem="vzb-mj-gsY" firstAttribute="height" secondItem="E0N-yL-dCX" secondAttribute="height" id="Fv2-IO-R4g"/>
+                                    <constraint firstItem="vzb-mj-gsY" firstAttribute="centerY" secondItem="E0N-yL-dCX" secondAttribute="centerY" id="KL0-to-fyo"/>
                                     <constraint firstItem="Epk-JO-UC2" firstAttribute="centerY" secondItem="aGT-i2-1uU" secondAttribute="centerY" multiplier="0.82" id="Q7J-ga-yhP"/>
                                     <constraint firstItem="Epk-JO-UC2" firstAttribute="height" secondItem="aGT-i2-1uU" secondAttribute="height" multiplier="0.25" id="UnO-0s-MOa"/>
                                     <constraint firstItem="aGT-i2-1uU" firstAttribute="centerX" secondItem="H4T-P9-M7q" secondAttribute="centerX" id="kCr-t3-Gr5"/>
@@ -110,12 +127,15 @@ Oh! To begin working you need to go to the central food supply station. Who want
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="centerY" secondItem="kUb-PW-wCr" secondAttribute="centerY" multiplier="0.7" id="0GT-AO-2VZ"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.3257" id="6jO-17-epS"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="centerX" secondItem="kUb-PW-wCr" secondAttribute="centerX" id="7ap-e1-eYK"/>
+                            <constraint firstItem="E0N-yL-dCX" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="30" id="8NW-pH-u1v"/>
                             <constraint firstItem="1U3-D3-GHq" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="19" id="9tu-rh-GwS"/>
                             <constraint firstAttribute="trailing" secondItem="kUb-PW-wCr" secondAttribute="trailing" id="D9x-n5-ZDZ"/>
                             <constraint firstItem="kUb-PW-wCr" firstAttribute="leading" secondItem="QNp-EB-RWz" secondAttribute="leading" id="IXZ-sR-mnr"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="centerY" secondItem="7E9-WB-dTq" secondAttribute="centerY" multiplier="1.7" id="MSN-8l-wMP"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="top" secondItem="aGT-i2-1uU" secondAttribute="top" constant="-20" id="Mkx-bA-2ay"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="width" secondItem="7E9-WB-dTq" secondAttribute="width" id="NRb-cV-4cq"/>
+                            <constraint firstItem="E0N-yL-dCX" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.05" constant="40" id="TCc-Sv-bpN"/>
+                            <constraint firstItem="E0N-yL-dCX" firstAttribute="leading" secondItem="7E9-WB-dTq" secondAttribute="leading" constant="30" id="aIM-oh-9yR"/>
                             <constraint firstAttribute="bottom" secondItem="kUb-PW-wCr" secondAttribute="bottom" constant="-10" id="aXG-22-cPg"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="height" secondItem="kUb-PW-wCr" secondAttribute="height" id="cAD-AB-Qt3"/>
                             <constraint firstItem="1U3-D3-GHq" firstAttribute="trailing" secondItem="7E9-WB-dTq" secondAttribute="trailing" constant="9" id="d4i-Gj-2KD"/>
@@ -127,6 +147,7 @@ Oh! To begin working you need to go to the central food supply station. Who want
                         <viewLayoutGuide key="safeArea" id="7E9-WB-dTq"/>
                     </view>
                     <connections>
+                        <outlet property="coinLabel" destination="vzb-mj-gsY" id="jQM-vB-osQ"/>
                         <outlet property="host" destination="Epk-JO-UC2" id="FFv-eh-czV"/>
                         <outlet property="join" destination="A6F-hc-s4t" id="WE3-Y8-SXN"/>
                         <outlet property="sapao" destination="kvu-2L-o1z" id="sNr-vF-GYP"/>
@@ -156,6 +177,7 @@ Oh! To begin working you need to go to the central food supply station. Who want
         </scene>
     </scenes>
     <resources>
+        <image name="Coin" width="242" height="239"/>
         <image name="HOST - apagado" width="255" height="66"/>
         <image name="JOIN - apagado" width="155" height="68"/>
         <image name="arrowEnd" width="230" height="230"/>
