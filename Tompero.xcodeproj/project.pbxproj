@@ -128,6 +128,11 @@
 		FB55FBE8239C2824002EBB89 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB55FBE7239C2824002EBB89 /* DialogView.swift */; };
 		FB55FBEB239C33D0002EBB89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB55FBE9239C33D0002EBB89 /* Main.storyboard */; };
 		FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */; };
+		FB82E8D923A271410032F6B5 /* CutsceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB82E8D823A271410032F6B5 /* CutsceneViewController.swift */; };
+		FB82E8DB23A271680032F6B5 /* Cutscene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */; };
+		FB82E8DD23A2722E0032F6B5 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */; };
+		FB82E8DF23A272440032F6B5 /* Cutscene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FB82E8DE23A272440032F6B5 /* Cutscene.sks */; };
+		FB82E8E123A2773F0032F6B5 /* videoIntro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FB82E8E023A277310032F6B5 /* videoIntro.mp4 */; };
 		FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF38E238E9CFA00437124 /* Coordinator.swift */; };
 		FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF390238E9D6A00437124 /* Storyboarded.swift */; };
 		FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF392238E9F4700437124 /* MainCoordinator.swift */; };
@@ -261,6 +266,11 @@
 		FB55FBE7239C2824002EBB89 /* DialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		FB55FBEA239C33D0002EBB89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtention.swift; sourceTree = "<group>"; };
+		FB82E8D823A271410032F6B5 /* CutsceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutsceneViewController.swift; sourceTree = "<group>"; };
+		FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cutscene.storyboard; sourceTree = "<group>"; };
+		FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
+		FB82E8DE23A272440032F6B5 /* Cutscene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Cutscene.sks; sourceTree = "<group>"; };
+		FB82E8E023A277310032F6B5 /* videoIntro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoIntro.mp4; sourceTree = "<group>"; };
 		FB9BF38E238E9CFA00437124 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FB9BF390238E9D6A00437124 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		FB9BF392238E9F4700437124 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -401,6 +411,7 @@
 		562BCF4B23881CF900D5D51D = {
 			isa = PBXGroup;
 			children = (
+				FB82E8E023A277310032F6B5 /* videoIntro.mp4 */,
 				562BCF5623881CF900D5D51D /* Tompero */,
 				562BCF5523881CF900D5D51D /* Products */,
 				56D9BB225FBAE3D038F75D05 /* Pods */,
@@ -433,6 +444,8 @@
 				471795ED238C692D000575B0 /* MultipeerConnectivity Manager */,
 				471795EE238C694B000575B0 /* Game Connection */,
 				475A4B5423A0469E000016B3 /* EventLogger.swift */,
+				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
+				FB82E8DE23A272440032F6B5 /* Cutscene.sks */,
 			);
 			path = Tompero;
 			sourceTree = "<group>";
@@ -464,6 +477,7 @@
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 				479B7849239D8BAC003BC9DE /* Statistics.storyboard */,
+				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -476,6 +490,7 @@
 				562BCF5F23881CF900D5D51D /* GameViewController.swift */,
 				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
 				479B784B239D8BCB003BC9DE /* StatisticsViewController.swift */,
+				FB82E8D823A271410032F6B5 /* CutsceneViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -670,6 +685,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB82E8E123A2773F0032F6B5 /* videoIntro.mp4 in Resources */,
 				566E9C83239D7EC100787210 /* cooking.wav in Resources */,
 				FB55FBE5239A9DAE002EBB89 /* TitilliumWeb-Light.ttf in Resources */,
 				476B7C95239C3276004D4116 /* PipeVacuum.atlas in Resources */,
@@ -686,6 +702,7 @@
 				47BE3ED7239C1F7200246F20 /* TeleportOrange.atlas in Resources */,
 				476B7C96239C3276004D4116 /* CookBurnt.atlas in Resources */,
 				476B7C97239C3276004D4116 /* Fry.atlas in Resources */,
+				FB82E8DB23A271680032F6B5 /* Cutscene.storyboard in Resources */,
 				566E9C86239D7EC100787210 /* roundStarted.wav in Resources */,
 				566FC92D23A0205F0044AFA4 /* sfx - angryCustomer4.wav in Resources */,
 				566E9C8A239D7EC100787210 /* frying.wav in Resources */,
@@ -698,6 +715,7 @@
 				56219D87239EAFA6001CE5DB /* GameScene.sks in Resources */,
 				479B784A239D8BAC003BC9DE /* Statistics.storyboard in Resources */,
 				476B7C93239C3276004D4116 /* Cook.atlas in Resources */,
+				FB82E8DF23A272440032F6B5 /* Cutscene.sks in Resources */,
 				FB55FBE4239A9DAE002EBB89 /* TitilliumWeb-Bold.ttf in Resources */,
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
 				566FC92723A0205F0044AFA4 /* sfx - fireAlarm1.wav in Resources */,
@@ -826,6 +844,7 @@
 				FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */,
 				471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */,
 				4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */,
+				FB82E8D923A271410032F6B5 /* CutsceneViewController.swift in Sources */,
 				56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */,
 				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
@@ -858,6 +877,7 @@
 				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
 				FB55FBE8239C2824002EBB89 /* DialogView.swift in Sources */,
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
+				FB82E8DD23A2722E0032F6B5 /* Cutscene.swift in Sources */,
 				56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */,
 				56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */,
 				47632784239D49C4006BA9C5 /* MatchStatistics.swift in Sources */,
@@ -1027,7 +1047,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = D9FBK2WPJX;
+				DEVELOPMENT_TEAM = F6XL2RL8RU;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1047,7 +1067,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = D9FBK2WPJX;
+				DEVELOPMENT_TEAM = F6XL2RL8RU;
 				INFOPLIST_FILE = Tompero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
