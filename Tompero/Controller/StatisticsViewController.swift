@@ -24,7 +24,9 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
     // MARK: - Game Center
     var isGameCenterEnabled: Bool! // check if Game Center enabled
     var defaultLeaderboard = "" // check default leaderboard ID
-    let leaderboardID = "com.score.spacespice"
+    let easyID = "com.spacespice.easy"
+    let mediumID = "com.spacespice.medium"
+    let hardID = "com.spacespice.hard"
     
     // MARK: - Outlets
     @IBOutlet weak var deliveredOrdersLabel: UILabel!
@@ -51,6 +53,12 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
     }
     
     func submitScoreToGameCenter() {
+        var leaderboardID = ""
+        switch statistics.ruleUsed.difficulty {
+        case .easy: leaderboardID = easyID
+        case .medium: leaderboardID = mediumID
+        case .hard: leaderboardID = hardID
+        }
         let score = GKScore(leaderboardIdentifier: leaderboardID)
         score.value = Int64(statistics.totalPoints)
         GKScore.report([score]) { (error) in
