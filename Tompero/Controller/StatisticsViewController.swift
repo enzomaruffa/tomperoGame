@@ -20,6 +20,7 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
     // MARK: - Variables
     var statistics: MatchStatistics!
     let databaseManager: DatabaseManager = CloudKitManager.shared
+    let debugLogger = ConsoleDebugLogger.shared
     
     // MARK: - Game Center
     var isGameCenterEnabled: Bool! // check if Game Center enabled
@@ -35,6 +36,7 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
         super.viewDidLoad()
         
         EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
+        
         databaseManager.addNewMatch(withHash: statistics.matchHash, coinCount: statistics.totalPoints)
         
         // Do any additional setup after loading the view.
