@@ -18,7 +18,6 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     // MARK: - Game Center
     var isGameCenterEnabled: Bool! // check if Game Center enabled
     var defaultLeaderboard = "" // check default leaderboard ID
-    let leaderboardID = "com.score.spacespice"
     
     // MARK: - Outlets
     @IBOutlet weak var join: UIImageView!
@@ -210,8 +209,7 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     @IBAction func openLeaderboard(_ sender: Any) {
         let newVC = GKGameCenterViewController()
         newVC.gameCenterDelegate = self
-        newVC.viewState = .leaderboards
-        newVC.leaderboardIdentifier = leaderboardID
+        newVC.viewState = .default
         present(newVC, animated: true, completion: nil)
     }
     

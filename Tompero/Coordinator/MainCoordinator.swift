@@ -18,17 +18,9 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        var shouldTestGameScene: Bool = false
-        
-        #if !DEBUG
-        shouldTestGameScene = false
+        #if DEBUG
+        gameSceneTest()
         #endif
-        
-        if shouldTestGameScene {
-//            statisticsTest()
-            gameSceneTest()
-            return
-        }
         
         inicial()
     }

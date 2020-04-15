@@ -12,10 +12,12 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     var animationTimer: Timer?
     var countLevel = GameDifficulty.easy
     
-    var playersWithStatus: [MCPeerWithStatus] = [MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
+    var playersWithStatus: [MCPeerWithStatus] = [
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected)
+    ]
     
     var playersImages: [UIImageView]!
     let singleAnimationDuration = 0.35
@@ -220,8 +222,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             level.setTitle("MEDIUM", for: .normal)
         case .hard:
             level.setTitle("HARD", for: .normal)
-        default:
-            level.setTitle("EASY", for: .normal)
         }
     }
     
