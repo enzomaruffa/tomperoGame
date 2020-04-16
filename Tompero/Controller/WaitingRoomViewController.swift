@@ -22,7 +22,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     var playersImages: [UIImageView]!
     let singleAnimationDuration = 0.35
     
-    var isZoomed = false
+//    var isZoomed = false
     var closedBrowser = false
     var viewOriginalTransform:CGAffineTransform!
     var zoomedAndTransformed: CGAffineTransform!
@@ -32,37 +32,104 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var goButton: UIButton!
     
-    @IBOutlet weak var painelHost: UIImageView!
+//    @IBOutlet weak var painelHost: UIImageView!
     
     @IBOutlet weak var level: UIButton!
     @IBOutlet weak var levelBackImage: UIImageView!
     
     @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet var stackWidthConstraint: NSLayoutConstraint!
+//    @IBOutlet var stackWidthConstraint: NSLayoutConstraint!
     @IBOutlet var stackHeightConstraint: NSLayoutConstraint!
     @IBOutlet var stackCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player1Image: UIImageView!
     @IBOutlet weak var player1Label: UILabel!
     @IBOutlet weak var player1InviteButton: UIButton!
-    @IBOutlet var player1LabelCenterYConstraint: NSLayoutConstraint!
+//    @IBOutlet var player1LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player2Image: UIImageView!
     @IBOutlet weak var player2Label: UILabel!
     @IBOutlet weak var player2InviteButton: UIButton!
-    @IBOutlet var player2LabelCenterYConstraint: NSLayoutConstraint!
+//    @IBOutlet var player2LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player3Image: UIImageView!
     @IBOutlet weak var player3Label: UILabel!
     @IBOutlet weak var player3InviteButton: UIButton!
-    @IBOutlet var player3LabelCenterYConstraint: NSLayoutConstraint!
+//    @IBOutlet var player3LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player4Image: UIImageView!
     @IBOutlet weak var player4Label: UILabel!
     @IBOutlet weak var player4InviteButton: UIButton!
-    @IBOutlet var player4LabelCenterYConstraint: NSLayoutConstraint!
+//    @IBOutlet var player4LabelCenterYConstraint: NSLayoutConstraint!
     
     // MARK: - View LifeCycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let levelLabel = level.titleLabel {
+            levelLabel.numberOfLines = 1
+            levelLabel.adjustsFontSizeToFitWidth = true
+            levelLabel.lineBreakMode = .byClipping
+        }
+        
+//        //ZOOM do menu
+//        let viewTransform = self.view.transform
+//        let scaleX = (view.frame.width/menuButton.frame.width)
+//        let scaleY = (view.frame.height/menuButton.frame.height)
+//        let translatedTransform = viewTransform.scaledBy(x: scaleX, y: scaleY)
+//        let translatedAndScaledTransform = translatedTransform.translatedBy(x: (-menuButton.frame.midX + self.view.frame.midX), y: -menuButton.frame.midY + self.view.frame.midY)
+//        self.zoomedAndTransformed = translatedAndScaledTransform
+//
+//        let tapGestureRecognizerBlue = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//        let tapGestureRecognizerPurple = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//        let tapGestureRecognizerGreen = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//        let tapGestureRecognizerOrange = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//
+//        let scaleHat = CGFloat(1.1)
+//        player1Image.tag = 0
+//        player1Image.isUserInteractionEnabled = true
+//        player1Image.addGestureRecognizer(tapGestureRecognizerBlue)
+//        player1Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
+//        player1Label.text = "PLAYER 1"
+//
+//        player2Image.tag = 1
+//        player2Image.isUserInteractionEnabled = true
+//        player2Image.addGestureRecognizer(tapGestureRecognizerPurple)
+//        player2Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
+//        player2Label.text = "PLAYER 2"
+//
+//        player3Image.tag = 2
+//        player3Image.isUserInteractionEnabled = true
+//        player3Image.addGestureRecognizer(tapGestureRecognizerGreen)
+//        player3Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
+//        player3Label.text = "PLAYER 3"
+//
+//        player4Image.tag = 3
+//        player4Image.isUserInteractionEnabled = true
+//        player4Image.addGestureRecognizer(tapGestureRecognizerOrange)
+//        player4Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
+//        player4Label.text = "PLAYER 4"
+        
+        // Array com lista de connected players
+        //MCManager.shared.mcSession?.connectedPeers
+        
+        if hosting {
+            print(" CURRENTLY HOSTING<<")
+            playersWithStatus = [MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected),
+                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
+            //            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+        } else {
+            MCManager.shared.joinSession()
+        }
+        
+        MCManager.shared.subscribeMatchmakingObserver(observer: self)
+        print("STATUS DO PLAYER GREEN: ", playersWithStatus[2].status.rawValue)
+        
+        print("STATUS DO PLAYER ORANGE: ", playersWithStatus[3].status.rawValue)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         updateLevelUI(difficulty: countLevel)
         
@@ -75,19 +142,19 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         
         if !hosting {
             // Images
-            stackWidthConstraint.setMultiplier(multiplier: 0.8)
-            stackHeightConstraint.setMultiplier(multiplier: 0.8)
-            stackCenterYConstraint.setMultiplier(multiplier: 1.15)
-            // Names
-            player1LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
-            player2LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
-            player4LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
-            player3LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
+//            stackWidthConstraint.setMultiplier(multiplier: 0.8)
+//            stackHeightConstraint.setMultiplier(multiplier: 0.8)
+//            stackCenterYConstraint.setMultiplier(multiplier: 1.15)
+//            // Names
+//            player1LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
+//            player2LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
+//            player4LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
+//            player3LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
             
             levelBackImage.isHidden = true
             goButton.isHidden = true
             level.isHidden = true
-            painelHost.isHidden = true
+//            painelHost.isHidden = true
         }
         
         stackView.layoutIfNeeded()
@@ -95,70 +162,9 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if isZoomed {
-            zoomOut()
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //ZOOM do menu
-        let viewTransform = self.view.transform
-        let scaleX = (view.frame.width/menuButton.frame.width)
-        let scaleY = (view.frame.height/menuButton.frame.height)
-        let translatedTransform = viewTransform.scaledBy(x: scaleX, y: scaleY)
-        let translatedAndScaledTransform = translatedTransform.translatedBy(x: (-menuButton.frame.midX + self.view.frame.midX), y: -menuButton.frame.midY + self.view.frame.midY)
-        self.zoomedAndTransformed = translatedAndScaledTransform
-        
-        let tapGestureRecognizerBlue = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        let tapGestureRecognizerPurple = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        let tapGestureRecognizerGreen = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        let tapGestureRecognizerOrange = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        
-        let scaleHat = CGFloat(1.1)
-        player1Image.tag = 0
-        player1Image.isUserInteractionEnabled = true
-        player1Image.addGestureRecognizer(tapGestureRecognizerBlue)
-        player1Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
-        player1Label.text = "PLAYER 1"
-        
-        player2Image.tag = 1
-        player2Image.isUserInteractionEnabled = true
-        player2Image.addGestureRecognizer(tapGestureRecognizerPurple)
-        player2Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
-        player2Label.text = "PLAYER 2"
-        
-        player3Image.tag = 2
-        player3Image.isUserInteractionEnabled = true
-        player3Image.addGestureRecognizer(tapGestureRecognizerGreen)
-        player3Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
-        player3Label.text = "PLAYER 3"
-        
-        player4Image.tag = 3
-        player4Image.isUserInteractionEnabled = true
-        player4Image.addGestureRecognizer(tapGestureRecognizerOrange)
-        player4Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
-        player4Label.text = "PLAYER 4"
-        
-        // Array com lista de connected players
-        //MCManager.shared.mcSession?.connectedPeers
-        
-        if hosting {
-            print(" CURRENTLY HOSTING<<")
-            playersWithStatus = [MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected),
-                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
-//            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
-        } else {
-            MCManager.shared.joinSession()
-        }
-        
-        MCManager.shared.subscribeMatchmakingObserver(observer: self)
-        print("STATUS DO PLAYER GREEN: ", playersWithStatus[2].status.rawValue)
-        
-        print("STATUS DO PLAYER ORANGE: ", playersWithStatus[3].status.rawValue)
+//        if isZoomed {
+//            zoomOut()
+//        }
     }
     
     // MARK: - ActionsButtons
@@ -170,15 +176,15 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBAction func menuPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-recipeMenu")
         
-        let timeAnimation = 0.6
-        UIView.animate(withDuration: timeAnimation, delay: 0, options: .curveEaseIn, animations: {
-            self.view.transform = self.zoomedAndTransformed
-        }, completion: {(_)in
-            self.isZoomed = true
-            self.view.transform = .identity
-            self.coordinator?.menu()
-        })
-        
+//        let timeAnimation = 0.6
+//        UIView.animate(withDuration: timeAnimation, delay: 0, options: .curveEaseIn, animations: {
+//            self.view.transform = self.zoomedAndTransformed
+//        }, completion: {(_)in
+//            self.isZoomed = true
+//            self.view.transform = .identity
+//            self.coordinator?.menu()
+//        })
+        self.coordinator?.menu()
     }
     
     @IBAction func play(_ sender: Any) {
@@ -190,7 +196,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         
         let ruleData = try! JSONEncoder().encode(rule)
         MCManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
-        animatedSpaceshipToUP()
+//        animatedSpaceshipToUP()
         
         MusicPlayer.shared.stop(.menu)
         
@@ -243,18 +249,18 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
     
     // MARK: - Methods
-    func zoomOut() {
-        print(self)
-        if self.isZoomed {
-            self.view.transform = zoomedAndTransformed
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.transform = .identity //viewOriginalTransform
-            }, completion: { (_) in
-                self.view.layoutSubviews()
-            })
-            self.isZoomed = false
-        }
-    }
+//    func zoomOut() {
+//        print(self)
+//        if self.isZoomed {
+//            self.view.transform = zoomedAndTransformed
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.view.transform = .identity //viewOriginalTransform
+//            }, completion: { (_) in
+//                self.view.layoutSubviews()
+//            })
+//            self.isZoomed = false
+//        }
+//    }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
@@ -298,33 +304,32 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         viewChange.layer.add(crossFade, forKey: "animateContents")
     }
     
-    func animatedSpaceshipToUP() {
-        let positionFinal = ((painelHost.frame.size.height)/2) * (917/1117)
-        print(positionFinal)
-        let originalTransform = CGAffineTransform.identity
-        let translatedTransform = originalTransform.translatedBy(x: (0), y: positionFinal)
-        let scaledTransformAndTransform = translatedTransform.scaledBy(x: 0.001, y: 0.001)
-        
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-            self.stackView.transform = scaledTransformAndTransform
-        })
-    }
-    
-//    func playAnimatedSpaceshipLeftAndRight() {
-//        let hats = [hatBlue, hatPurple, hatGreen, hatOrange]
-//        hats.forEach { (hat) in
-//            let hatAngle = atan2f(Float(hat!.transform.b), Float(hat!.transform.a))
-//            if hatAngle < 0 {
-//                UIView.animate(withDuration: self.singleAnimationDuration, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
-//                    hat!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/(1 * 14)))
-//                })
-//            } else {
-//                UIView.animate(withDuration: self.singleAnimationDuration, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
-//                    hat!.transform = CGAffineTransform(rotationAngle: CGFloat(-1 * Double.pi/14))
-//                })
-//            }
-//        }
+//    func animatedSpaceshipToUP() {
+//        let positionFinal = ((painelHost.frame.size.height)/2) * (917/1117)
+//        let originalTransform = CGAffineTransform.identity
+//        let translatedTransform = originalTransform.translatedBy(x: (0), y: positionFinal)
+//        let scaledTransformAndTransform = translatedTransform.scaledBy(x: 0.001, y: 0.001)
+//
+//        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+//            self.stackView.transform = scaledTransformAndTransform
+//        })
 //    }
+    
+    //    func playAnimatedSpaceshipLeftAndRight() {
+    //        let hats = [hatBlue, hatPurple, hatGreen, hatOrange]
+    //        hats.forEach { (hat) in
+    //            let hatAngle = atan2f(Float(hat!.transform.b), Float(hat!.transform.a))
+    //            if hatAngle < 0 {
+    //                UIView.animate(withDuration: self.singleAnimationDuration, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
+    //                    hat!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/(1 * 14)))
+    //                })
+    //            } else {
+    //                UIView.animate(withDuration: self.singleAnimationDuration, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
+    //                    hat!.transform = CGAffineTransform(rotationAngle: CGFloat(-1 * Double.pi/14))
+    //                })
+    //            }
+    //        }
+    //    }
     
     func checkGoButton(playersWithStatus: [MCPeerWithStatus]) {
         DispatchQueue.main.async {
