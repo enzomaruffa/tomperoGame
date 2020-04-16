@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,70 +40,120 @@
                                             <action selector="backPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="9HI-Yw-IhU"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAITING..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bu9-WS-vVT">
-                                        <rect key="frame" x="242.5" y="20" width="323" height="53"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAITING..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bu9-WS-vVT" userLabel="HeaderLabel">
+                                        <rect key="frame" x="283" y="20" width="242" height="53"/>
+                                        <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="34"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="70"/>
+                                        </variation>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_menuUI" translatesAutoresizingMaskIntoConstraints="NO" id="Jg8-4l-seY">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMm-QI-Jd5" userLabel="MenuView">
                                         <rect key="frame" x="606" y="0.0" width="192" height="79.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_menuUI" translatesAutoresizingMaskIntoConstraints="NO" id="Jg8-4l-seY">
+                                                <rect key="frame" x="0.0" y="0.0" width="192" height="79.5"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7F-M2-bfK">
+                                                <rect key="frame" x="26.5" y="38" width="96.5" height="26.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="k7F-M2-bfK" secondAttribute="height" multiplier="47:13" id="P1Z-iH-YsS"/>
+                                                </constraints>
+                                                <state key="normal" image="WR_menuButton"/>
+                                                <connections>
+                                                    <action selector="menuPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="let-A7-PwI"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="Jg8-4l-seY" secondAttribute="height" multiplier="94:39" id="2Wh-mo-Nkq"/>
+                                            <constraint firstItem="Jg8-4l-seY" firstAttribute="top" secondItem="pMm-QI-Jd5" secondAttribute="top" id="Hai-cp-DBR"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jg8-4l-seY" secondAttribute="trailing" id="JeG-f4-WUt"/>
+                                            <constraint firstItem="k7F-M2-bfK" firstAttribute="top" secondItem="Jg8-4l-seY" secondAttribute="centerY" multiplier="0.95" id="RRP-Gv-d7r"/>
+                                            <constraint firstItem="Jg8-4l-seY" firstAttribute="leading" secondItem="pMm-QI-Jd5" secondAttribute="leading" id="UIO-Fk-jI5"/>
+                                            <constraint firstAttribute="width" secondItem="pMm-QI-Jd5" secondAttribute="height" multiplier="94:39" id="Yma-IU-sE0"/>
+                                            <constraint firstItem="k7F-M2-bfK" firstAttribute="bottom" secondItem="Jg8-4l-seY" secondAttribute="bottom" multiplier="0.81" id="dQs-Rl-w7i"/>
+                                            <constraint firstAttribute="bottom" secondItem="Jg8-4l-seY" secondAttribute="bottom" id="f8Y-yx-coW"/>
+                                            <constraint firstItem="k7F-M2-bfK" firstAttribute="trailing" secondItem="Jg8-4l-seY" secondAttribute="trailing" multiplier="0.64" id="obM-9d-USL"/>
                                         </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="pMm-QI-Jd5" secondAttribute="trailing" constant="10" id="5hL-dK-nSY"/>
+                                    <constraint firstItem="Bu9-WS-vVT" firstAttribute="centerX" secondItem="OQD-B7-pkr" secondAttribute="centerX" id="GxY-WO-EYm"/>
+                                    <constraint firstItem="Bu9-WS-vVT" firstAttribute="width" secondItem="OQD-B7-pkr" secondAttribute="width" multiplier="0.3" id="I46-Pb-wJd"/>
+                                    <constraint firstItem="pMm-QI-Jd5" firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" id="Mmz-PX-Byq"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bu9-WS-vVT" secondAttribute="bottom" id="bxh-1v-3ug"/>
+                                    <constraint firstItem="Bu9-WS-vVT" firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" constant="20" id="f0y-Zo-NcN"/>
+                                    <constraint firstAttribute="centerX" secondItem="pu5-td-27G" secondAttribute="trailing" multiplier="6" id="jPx-n0-6AV"/>
+                                    <constraint firstItem="pMm-QI-Jd5" firstAttribute="leading" secondItem="OQD-B7-pkr" secondAttribute="centerX" multiplier="1.5" id="jl0-3l-ICp"/>
+                                    <constraint firstItem="pu5-td-27G" firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" constant="16" id="kl5-Lp-62K"/>
+                                    <constraint firstItem="pu5-td-27G" firstAttribute="leading" secondItem="OQD-B7-pkr" secondAttribute="leading" constant="4" id="naA-b4-Tct"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Inv-jQ-Eo8" userLabel="DifficultyView">
+                                <rect key="frame" x="44" y="160" width="161.5" height="233"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_difficultyUI" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp">
+                                        <rect key="frame" x="0.0" y="0.0" width="161.5" height="233"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7F-M2-bfK">
-                                        <rect key="frame" x="631" y="38" width="95" height="25.5"/>
-                                        <state key="normal" image="WR_menuButton"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ed-cWw">
+                                        <rect key="frame" x="86" y="168" width="54" height="21"/>
+                                        <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="24"/>
+                                        <state key="normal" title="EASY">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="40"/>
+                                        </variation>
                                         <connections>
-                                            <action selector="menuPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="let-A7-PwI"/>
+                                            <action selector="levelButtom:" destination="5eH-78-dlc" eventType="touchUpInside" id="pWV-Ks-8tE"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Jg8-4l-seY" firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" id="CzI-Ba-WPQ"/>
-                                    <constraint firstItem="k7F-M2-bfK" firstAttribute="top" secondItem="Jg8-4l-seY" secondAttribute="centerY" multiplier="0.96" id="D19-4e-9pj"/>
-                                    <constraint firstItem="k7F-M2-bfK" firstAttribute="bottom" secondItem="Jg8-4l-seY" secondAttribute="bottom" multiplier="0.8" id="DET-C8-OO7"/>
-                                    <constraint firstAttribute="trailing" secondItem="Jg8-4l-seY" secondAttribute="trailing" constant="10" id="DOH-Rc-xTd"/>
-                                    <constraint firstItem="Bu9-WS-vVT" firstAttribute="centerX" secondItem="OQD-B7-pkr" secondAttribute="centerX" id="GxY-WO-EYm"/>
-                                    <constraint firstItem="Bu9-WS-vVT" firstAttribute="width" secondItem="OQD-B7-pkr" secondAttribute="width" multiplier="0.4" id="I46-Pb-wJd"/>
-                                    <constraint firstItem="Jg8-4l-seY" firstAttribute="leading" secondItem="OQD-B7-pkr" secondAttribute="centerX" multiplier="1.5" id="TWW-Ga-kDf"/>
-                                    <constraint firstAttribute="bottom" secondItem="Bu9-WS-vVT" secondAttribute="bottom" id="bxh-1v-3ug"/>
-                                    <constraint firstItem="Bu9-WS-vVT" firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" constant="20" id="f0y-Zo-NcN"/>
-                                    <constraint firstItem="k7F-M2-bfK" firstAttribute="trailing" secondItem="Jg8-4l-seY" secondAttribute="trailing" multiplier="0.91" id="isL-0h-eL0"/>
-                                    <constraint firstAttribute="centerX" secondItem="pu5-td-27G" secondAttribute="trailing" multiplier="6" id="jPx-n0-6AV"/>
-                                    <constraint firstItem="pu5-td-27G" firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" constant="16" id="kl5-Lp-62K"/>
-                                    <constraint firstItem="pu5-td-27G" firstAttribute="leading" secondItem="OQD-B7-pkr" secondAttribute="leading" constant="4" id="naA-b4-Tct"/>
-                                    <constraint firstItem="k7F-M2-bfK" firstAttribute="leading" secondItem="Jg8-4l-seY" secondAttribute="leading" multiplier="1.041" id="qfd-Nq-hc4"/>
+                                    <constraint firstItem="itL-Jq-8zp" firstAttribute="leading" secondItem="Inv-jQ-Eo8" secondAttribute="leading" id="8eS-aJ-MTv"/>
+                                    <constraint firstItem="hGf-ed-cWw" firstAttribute="trailing" secondItem="itL-Jq-8zp" secondAttribute="trailing" multiplier="0.865" id="FxN-Ui-Qwh"/>
+                                    <constraint firstAttribute="width" secondItem="Inv-jQ-Eo8" secondAttribute="height" multiplier="320:461" id="Q4M-DN-MeN"/>
+                                    <constraint firstAttribute="bottom" secondItem="itL-Jq-8zp" secondAttribute="bottom" id="QM4-XQ-WTf"/>
+                                    <constraint firstItem="hGf-ed-cWw" firstAttribute="bottom" secondItem="itL-Jq-8zp" secondAttribute="bottom" multiplier="0.81" id="QQo-03-vUl"/>
+                                    <constraint firstItem="hGf-ed-cWw" firstAttribute="top" secondItem="itL-Jq-8zp" secondAttribute="centerY" multiplier="1.44" id="e2g-VK-Iu4"/>
+                                    <constraint firstItem="itL-Jq-8zp" firstAttribute="top" secondItem="Inv-jQ-Eo8" secondAttribute="top" id="uin-mu-U49"/>
+                                    <constraint firstItem="hGf-ed-cWw" firstAttribute="leading" secondItem="itL-Jq-8zp" secondAttribute="centerX" multiplier="1.065" id="xfn-KP-aSd"/>
+                                    <constraint firstAttribute="trailing" secondItem="itL-Jq-8zp" secondAttribute="trailing" id="zk2-qR-F1h"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_difficultyUI" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp">
-                                <rect key="frame" x="44" y="160" width="161.5" height="233"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rh0-y4-Ug1" userLabel="GoView">
+                                <rect key="frame" x="549" y="266.5" width="303" height="126.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_goUI" translatesAutoresizingMaskIntoConstraints="NO" id="lau-UZ-6Cy">
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="126.5"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-2k-fAU">
+                                        <rect key="frame" x="186.5" y="21.5" width="65" height="65"/>
+                                        <state key="normal" image="WR_goButton"/>
+                                        <connections>
+                                            <action selector="play:" destination="5eH-78-dlc" eventType="touchUpInside" id="8Ir-gf-jh1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="itL-Jq-8zp" secondAttribute="height" multiplier="320:461" id="YPr-0R-EsE"/>
+                                    <constraint firstAttribute="bottom" secondItem="lau-UZ-6Cy" secondAttribute="bottom" id="7T5-GO-iOW"/>
+                                    <constraint firstItem="pyA-2k-fAU" firstAttribute="top" secondItem="lau-UZ-6Cy" secondAttribute="centerY" multiplier="0.34" id="AIc-mb-BSu"/>
+                                    <constraint firstItem="pyA-2k-fAU" firstAttribute="trailing" secondItem="lau-UZ-6Cy" secondAttribute="trailing" multiplier="0.83" id="HE3-zX-DEw"/>
+                                    <constraint firstAttribute="trailing" secondItem="lau-UZ-6Cy" secondAttribute="trailing" id="SzZ-1T-guY"/>
+                                    <constraint firstItem="pyA-2k-fAU" firstAttribute="bottom" secondItem="lau-UZ-6Cy" secondAttribute="bottom" multiplier="0.685" id="XGH-H6-JGe"/>
+                                    <constraint firstItem="lau-UZ-6Cy" firstAttribute="leading" secondItem="Rh0-y4-Ug1" secondAttribute="leading" id="XaV-7G-krm"/>
+                                    <constraint firstAttribute="width" secondItem="Rh0-y4-Ug1" secondAttribute="height" multiplier="242:101" id="Z6l-x7-9cY"/>
+                                    <constraint firstItem="lau-UZ-6Cy" firstAttribute="top" secondItem="Rh0-y4-Ug1" secondAttribute="top" id="a23-US-a8I"/>
+                                    <constraint firstItem="pyA-2k-fAU" firstAttribute="leading" secondItem="lau-UZ-6Cy" secondAttribute="centerX" multiplier="1.23" id="wEb-Gw-J11"/>
                                 </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ed-cWw">
-                                <rect key="frame" x="117.5" y="326" width="78" height="24"/>
-                                <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="24"/>
-                                <state key="normal" title="EASY">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="levelButtom:" destination="5eH-78-dlc" eventType="touchUpInside" id="pWV-Ks-8tE"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_goUI" translatesAutoresizingMaskIntoConstraints="NO" id="lau-UZ-6Cy">
-                                <rect key="frame" x="573" y="276.5" width="279" height="116.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="lau-UZ-6Cy" secondAttribute="height" multiplier="242:101" id="c4G-x4-gPN"/>
-                                </constraints>
-                            </imageView>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7sx-QL-biX">
-                                <rect key="frame" x="125" y="118" width="646" height="157"/>
+                                <rect key="frame" x="125" y="108" width="646" height="157.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q1a-RN-XSk" userLabel="Player1">
-                                        <rect key="frame" x="0.0" y="0.0" width="154" height="157"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="154" height="157.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VREX - Vazio" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-Hh-gEM">
                                                 <rect key="frame" x="0.0" y="0.0" width="154" height="133.5"/>
@@ -114,15 +164,21 @@
                                                 <state key="normal" title="INVITE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="38"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="player1InviteButtonPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="LFO-K2-8FV"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="God" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYt-ew-BO8">
-                                                <rect key="frame" x="10" y="133.5" width="134" height="23.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="God" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYt-ew-BO8">
+                                                <rect key="frame" x="10" y="133.5" width="134" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -142,7 +198,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJS-AV-d3N" userLabel="Player2">
-                                        <rect key="frame" x="164" y="0.0" width="154" height="157"/>
+                                        <rect key="frame" x="164" y="0.0" width="154" height="157.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SW77 - Vazio" translatesAutoresizingMaskIntoConstraints="NO" id="9lt-MA-eNd">
                                                 <rect key="frame" x="0.0" y="0.0" width="154" height="133.5"/>
@@ -153,35 +209,41 @@
                                                 <state key="normal" title="INVITE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="38"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="player2InviteButtonPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="6ec-2p-dwL"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enzo's Enzo's iPhone" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgL-7I-Cff">
-                                                <rect key="frame" x="10" y="133.5" width="134" height="23.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enzo's Enzo's iPhone" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AgL-7I-Cff">
+                                                <rect key="frame" x="10" y="133.5" width="134" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9lt-MA-eNd" secondAttribute="trailing" id="5U5-Cs-kZi"/>
                                             <constraint firstItem="AgL-7I-Cff" firstAttribute="leading" secondItem="eJS-AV-d3N" secondAttribute="leading" constant="10" id="8EA-Sc-s6A"/>
-                                            <constraint firstItem="HPl-Dm-nz7" firstAttribute="trailing" secondItem="9lt-MA-eNd" secondAttribute="trailing" id="CNv-np-C1c"/>
                                             <constraint firstItem="9lt-MA-eNd" firstAttribute="leading" secondItem="eJS-AV-d3N" secondAttribute="leading" id="Jdu-t8-l2n"/>
-                                            <constraint firstItem="HPl-Dm-nz7" firstAttribute="leading" secondItem="9lt-MA-eNd" secondAttribute="leading" id="LHA-ez-nGk"/>
+                                            <constraint firstItem="HPl-Dm-nz7" firstAttribute="leading" secondItem="eJS-AV-d3N" secondAttribute="leading" id="R6X-HH-QT8"/>
                                             <constraint firstItem="HPl-Dm-nz7" firstAttribute="top" secondItem="9lt-MA-eNd" secondAttribute="top" id="SJI-NV-R4y"/>
                                             <constraint firstAttribute="bottom" secondItem="AgL-7I-Cff" secondAttribute="bottom" id="UAK-MP-13w"/>
                                             <constraint firstItem="9lt-MA-eNd" firstAttribute="height" secondItem="eJS-AV-d3N" secondAttribute="height" multiplier="0.85" id="VDv-0H-ecQ"/>
                                             <constraint firstItem="HPl-Dm-nz7" firstAttribute="bottom" secondItem="9lt-MA-eNd" secondAttribute="bottom" id="Wne-3s-CIq"/>
+                                            <constraint firstAttribute="trailing" secondItem="HPl-Dm-nz7" secondAttribute="trailing" id="YVf-32-Mbz"/>
                                             <constraint firstAttribute="trailing" secondItem="AgL-7I-Cff" secondAttribute="trailing" constant="10" id="aea-Rq-ZaQ"/>
                                             <constraint firstItem="9lt-MA-eNd" firstAttribute="top" secondItem="eJS-AV-d3N" secondAttribute="top" id="fjN-UU-nuM"/>
                                             <constraint firstItem="AgL-7I-Cff" firstAttribute="top" secondItem="9lt-MA-eNd" secondAttribute="bottom" id="jy9-R6-aSb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fb2-RT-1ED" userLabel="Player3">
-                                        <rect key="frame" x="328" y="0.0" width="154" height="157"/>
+                                        <rect key="frame" x="328" y="0.0" width="154" height="157.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MORGAN - Vazio" translatesAutoresizingMaskIntoConstraints="NO" id="Q8q-cl-OZX">
                                                 <rect key="frame" x="0.0" y="0.0" width="154" height="133.5"/>
@@ -192,15 +254,21 @@
                                                 <state key="normal" title="INVITE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="38"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="player3InviteButtonPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="gl0-E0-R4g"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="God" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YX2-DQ-TW8">
-                                                <rect key="frame" x="10" y="133.5" width="134" height="23.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="God" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YX2-DQ-TW8">
+                                                <rect key="frame" x="10" y="133.5" width="134" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -220,26 +288,32 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJk-HM-U3T" userLabel="Player4">
-                                        <rect key="frame" x="492" y="0.0" width="154" height="157"/>
+                                        <rect key="frame" x="492" y="0.0" width="154" height="157.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JERRY - Vazio" translatesAutoresizingMaskIntoConstraints="NO" id="5Ai-vN-q3g">
                                                 <rect key="frame" x="0.0" y="0.0" width="154" height="133.5"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1Z-hp-98l">
                                                 <rect key="frame" x="0.0" y="0.0" width="154" height="133.5"/>
-                                                <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="INVITE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="38"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="player4InviteButtonPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="UeX-js-LkR"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="God" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kF7-KV-oN0">
-                                                <rect key="frame" x="10" y="133.5" width="134" height="23.5"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="God" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kF7-KV-oN0">
+                                                <rect key="frame" x="10" y="133.5" width="134" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -260,52 +334,39 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyA-2k-fAU">
-                                <rect key="frame" x="742" y="293" width="65" height="65"/>
-                                <state key="normal" image="WR_goButton"/>
-                                <connections>
-                                    <action selector="play:" destination="5eH-78-dlc" eventType="touchUpInside" id="8Ir-gf-jh1"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="7sx-QL-biX" firstAttribute="centerY" secondItem="9Vk-7s-UEu" secondAttribute="centerY" id="0ce-zv-1M4"/>
+                            <constraint firstItem="7sx-QL-biX" firstAttribute="centerY" secondItem="9Vk-7s-UEu" secondAttribute="centerY" multiplier="0.95" id="0ce-zv-1M4"/>
                             <constraint firstAttribute="trailing" secondItem="NUl-oa-Q0e" secondAttribute="trailing" id="19b-JC-Xqb"/>
-                            <constraint firstItem="pyA-2k-fAU" firstAttribute="top" secondItem="lau-UZ-6Cy" secondAttribute="top" multiplier="1.06" id="1ve-FE-h1J"/>
                             <constraint firstItem="7sx-QL-biX" firstAttribute="centerX" secondItem="9Vk-7s-UEu" secondAttribute="centerX" id="1yR-z5-6z3"/>
                             <constraint firstAttribute="bottom" secondItem="SlI-Wy-dJf" secondAttribute="bottom" id="3AE-yq-evg"/>
-                            <constraint firstItem="itL-Jq-8zp" firstAttribute="centerX" secondItem="7sx-QL-biX" secondAttribute="leading" id="42n-oX-hDE"/>
                             <constraint firstItem="NUl-oa-Q0e" firstAttribute="leading" secondItem="hFz-sl-QJG" secondAttribute="leading" id="7U5-j5-vXi"/>
                             <constraint firstItem="NUl-oa-Q0e" firstAttribute="top" secondItem="hFz-sl-QJG" secondAttribute="top" id="AtR-am-chb"/>
-                            <constraint firstItem="pyA-2k-fAU" firstAttribute="bottom" secondItem="lau-UZ-6Cy" secondAttribute="bottom" multiplier="0.911" id="Fls-JA-fuj"/>
+                            <constraint firstItem="Inv-jQ-Eo8" firstAttribute="centerX" secondItem="7sx-QL-biX" secondAttribute="leading" id="Chp-Mn-UfA"/>
                             <constraint firstItem="9Vk-7s-UEu" firstAttribute="centerY" secondItem="OQD-B7-pkr" secondAttribute="bottom" multiplier="2.7" id="KO1-5w-LzA"/>
-                            <constraint firstItem="itL-Jq-8zp" firstAttribute="leading" secondItem="9Vk-7s-UEu" secondAttribute="leading" id="KxN-Qn-Biu"/>
-                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="bottom" secondItem="lau-UZ-6Cy" secondAttribute="bottom" id="Mkc-ZG-zaD"/>
-                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" id="Odb-FF-1Bq"/>
+                            <constraint firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" id="Odb-FF-1Bq"/>
+                            <constraint firstItem="Rh0-y4-Ug1" firstAttribute="leading" secondItem="7sx-QL-biX" secondAttribute="centerX" multiplier="1.225" id="PEb-xY-YJb"/>
                             <constraint firstItem="9Vk-7s-UEu" firstAttribute="leading" secondItem="OQD-B7-pkr" secondAttribute="leading" id="PN1-13-ytI"/>
-                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="trailing" secondItem="lau-UZ-6Cy" secondAttribute="trailing" id="S5p-Q9-iwv"/>
                             <constraint firstItem="7sx-QL-biX" firstAttribute="width" secondItem="9Vk-7s-UEu" secondAttribute="width" multiplier="0.8" id="UD8-LA-4r6"/>
+                            <constraint firstItem="Inv-jQ-Eo8" firstAttribute="bottom" secondItem="9Vk-7s-UEu" secondAttribute="bottom" id="UE0-To-Fdp"/>
                             <constraint firstItem="SlI-Wy-dJf" firstAttribute="leading" secondItem="hFz-sl-QJG" secondAttribute="leading" id="W0R-Oy-JsJ"/>
-                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="bottom" secondItem="itL-Jq-8zp" secondAttribute="bottom" id="W35-7n-2SZ"/>
-                            <constraint firstItem="hGf-ed-cWw" firstAttribute="bottom" secondItem="itL-Jq-8zp" secondAttribute="bottom" multiplier="0.89" id="WIh-j7-Oz6"/>
                             <constraint firstItem="7sx-QL-biX" firstAttribute="height" secondItem="9Vk-7s-UEu" secondAttribute="height" multiplier="0.4" id="WJX-em-IYR"/>
-                            <constraint firstItem="pyA-2k-fAU" firstAttribute="trailing" secondItem="lau-UZ-6Cy" secondAttribute="trailing" multiplier="0.947" id="XOz-xe-Erv"/>
-                            <constraint firstItem="hGf-ed-cWw" firstAttribute="height" secondItem="itL-Jq-8zp" secondAttribute="height" multiplier="0.103004" id="YV2-n5-x9B"/>
-                            <constraint firstItem="hGf-ed-cWw" firstAttribute="leading" secondItem="itL-Jq-8zp" secondAttribute="centerX" multiplier="0.94" id="ZPA-DZ-xUa"/>
-                            <constraint firstItem="hGf-ed-cWw" firstAttribute="trailing" secondItem="itL-Jq-8zp" secondAttribute="trailing" multiplier="0.95" id="beZ-SG-7vf"/>
-                            <constraint firstItem="pyA-2k-fAU" firstAttribute="leading" secondItem="lau-UZ-6Cy" secondAttribute="leading" multiplier="1.295" id="gqc-WT-Mkt"/>
-                            <constraint firstItem="lau-UZ-6Cy" firstAttribute="top" secondItem="itL-Jq-8zp" secondAttribute="centerY" id="gro-YO-dO1"/>
+                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="bottom" secondItem="Rh0-y4-Ug1" secondAttribute="bottom" id="YFq-mD-JLI"/>
+                            <constraint firstItem="9Vk-7s-UEu" firstAttribute="leading" secondItem="Inv-jQ-Eo8" secondAttribute="leading" id="hBT-ja-26t"/>
                             <constraint firstAttribute="bottom" secondItem="NUl-oa-Q0e" secondAttribute="bottom" id="hK5-Q2-t9N"/>
                             <constraint firstAttribute="trailing" secondItem="SlI-Wy-dJf" secondAttribute="trailing" id="i8F-uT-oXw"/>
                             <constraint firstItem="SlI-Wy-dJf" firstAttribute="top" secondItem="hFz-sl-QJG" secondAttribute="top" id="qWq-pl-4Vt"/>
                             <constraint firstItem="OQD-B7-pkr" firstAttribute="trailing" secondItem="9Vk-7s-UEu" secondAttribute="trailing" id="x6M-AA-qBq"/>
+                            <constraint firstItem="Rh0-y4-Ug1" firstAttribute="trailing" secondItem="9Vk-7s-UEu" secondAttribute="trailing" id="yss-jM-mJb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Vk-7s-UEu"/>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="pu5-td-27G" id="hB6-Cy-aZ1"/>
+                        <outlet property="goBackImage" destination="lau-UZ-6Cy" id="f0Y-0F-Ker"/>
                         <outlet property="goButton" destination="pyA-2k-fAU" id="29G-cc-eZp"/>
+                        <outlet property="headerTitle" destination="Bu9-WS-vVT" id="12w-64-Blm"/>
                         <outlet property="level" destination="hGf-ed-cWw" id="b17-Bm-feP"/>
                         <outlet property="levelBackImage" destination="itL-Jq-8zp" id="k7x-6K-gF6"/>
                         <outlet property="menuButton" destination="k7F-M2-bfK" id="5vm-yx-zh5"/>
@@ -321,14 +382,12 @@
                         <outlet property="player4Image" destination="5Ai-vN-q3g" id="L5y-1u-Kgh"/>
                         <outlet property="player4InviteButton" destination="G1Z-hp-98l" id="eG4-4E-nwN"/>
                         <outlet property="player4Label" destination="kF7-KV-oN0" id="Tx7-99-cCc"/>
-                        <outlet property="stackCenterYConstraint" destination="0ce-zv-1M4" id="EmW-xX-cKO"/>
-                        <outlet property="stackHeightConstraint" destination="WJX-em-IYR" id="vee-Fz-sPm"/>
-                        <outlet property="stackView" destination="7sx-QL-biX" id="Mxr-3c-cPN"/>
+                        <outlet property="stackViewCenterYConstraint" destination="0ce-zv-1M4" id="mJf-xa-M57"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LJp-Ry-wMS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.232142857142854" y="147.82608695652175"/>
+            <point key="canvasLocation" x="51.5625" y="146.37681159420291"/>
         </scene>
     </scenes>
     <resources>
