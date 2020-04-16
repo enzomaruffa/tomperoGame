@@ -526,8 +526,8 @@
 			children = (
 				FB55FBE9239C33D0002EBB89 /* Main.storyboard */,
 				FB55FBE7239C2824002EBB89 /* DialogView.swift */,
-				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
+				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
 				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
@@ -540,9 +540,9 @@
 			isa = PBXGroup;
 			children = (
 				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
+				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
 				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
 				562BCF5F23881CF900D5D51D /* GameViewController.swift */,
-				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
 				479B784B239D8BCB003BC9DE /* StatisticsViewController.swift */,
 			);
 			path = Controller;
