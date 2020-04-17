@@ -58,6 +58,16 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMM-s2-UEt">
+                                        <rect key="frame" x="66.5" y="96.5" width="46" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Video">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="videoButtom:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="7nU-di-LRV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -125,11 +135,15 @@ Oh! To begin working you need to go to the central food supply station. Who want
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="centerY" secondItem="kUb-PW-wCr" secondAttribute="centerY" multiplier="0.7" id="0GT-AO-2VZ"/>
+                            <constraint firstItem="MMM-s2-UEt" firstAttribute="width" secondItem="7E9-WB-dTq" secondAttribute="width" multiplier="0.0569307" id="3jn-Q0-czK"/>
+                            <constraint firstItem="MMM-s2-UEt" firstAttribute="centerY" secondItem="7E9-WB-dTq" secondAttribute="centerY" multiplier="0.2" id="5gj-Or-eKG"/>
+                            <constraint firstItem="MMM-s2-UEt" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.0763359" id="6EC-kK-eoL"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.3257" id="6jO-17-epS"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="centerX" secondItem="kUb-PW-wCr" secondAttribute="centerX" id="7ap-e1-eYK"/>
                             <constraint firstItem="E0N-yL-dCX" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="30" id="8NW-pH-u1v"/>
                             <constraint firstItem="1U3-D3-GHq" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="19" id="9tu-rh-GwS"/>
                             <constraint firstAttribute="trailing" secondItem="kUb-PW-wCr" secondAttribute="trailing" id="D9x-n5-ZDZ"/>
+                            <constraint firstItem="MMM-s2-UEt" firstAttribute="centerX" secondItem="7E9-WB-dTq" secondAttribute="centerX" multiplier="0.2" id="HK4-I1-4oJ"/>
                             <constraint firstItem="kUb-PW-wCr" firstAttribute="leading" secondItem="QNp-EB-RWz" secondAttribute="leading" id="IXZ-sR-mnr"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="centerY" secondItem="7E9-WB-dTq" secondAttribute="centerY" multiplier="1.7" id="MSN-8l-wMP"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="top" secondItem="aGT-i2-1uU" secondAttribute="top" constant="-20" id="Mkx-bA-2ay"/>

@@ -112,9 +112,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         
         updatePlayers(playersWithStatus)
     }
-    
-    
-    
+     
     // MARK: - Buttons
     
     @IBAction func backPressed(_ sender: Any) {
