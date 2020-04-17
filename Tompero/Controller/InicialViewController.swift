@@ -112,6 +112,13 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         kombiTimer?.invalidate()
     }
     
+    @IBAction func videoButtom(_ sender: Any) {
+        MusicPlayer.shared.stop(.menu)
+        MusicPlayer.shared.stop(.game)
+        coordinator?.video()
+    }
+
+    
     // MARK: - Methods
     func setCoinsValue() {
         databaseManager.getPlayerCoinCount { count in
@@ -138,10 +145,12 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
             coordinator?.waitingRoom(hosting: true)
         }
     }
+    
     @objc func screenTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         textTimer?.invalidate()
         textLabel.text = textSapao1
     }
+    
     func animateDialog(text: String) {
         self.textLabel.text = ""
         if textTimer != nil {

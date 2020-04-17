@@ -22,7 +22,7 @@ class MainCoordinator: Coordinator {
         gameSceneTest()
         #endif
         
-        inicial()
+            inicial()
     }
     
     func popToRoot() {
@@ -200,4 +200,11 @@ class MainCoordinator: Coordinator {
         
     }
     
+    func video() {
+        
+        let controller = CutsceneViewController.instantiate()
+        controller.coordinator = self
+        navigationController.pushViewController(controller, animated: false)
+        
+    }
 }
