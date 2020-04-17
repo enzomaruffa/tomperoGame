@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1qB-Oy-VQR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1qB-Oy-VQR">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,6 +44,16 @@
                                             <constraint firstAttribute="width" secondItem="Epk-JO-UC2" secondAttribute="height" multiplier="4:3" id="1AK-Uj-MgX"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMM-s2-UEt">
+                                        <rect key="frame" x="66.5" y="96.5" width="46" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Video">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="videoButtom:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="7nU-di-LRV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -97,9 +107,13 @@ Oh! To begin working you need to go to the central food supply station. Who want
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="centerY" secondItem="kUb-PW-wCr" secondAttribute="centerY" multiplier="0.7" id="0GT-AO-2VZ"/>
+                            <constraint firstItem="MMM-s2-UEt" firstAttribute="width" secondItem="7E9-WB-dTq" secondAttribute="width" multiplier="0.0569307" id="3jn-Q0-czK"/>
+                            <constraint firstItem="MMM-s2-UEt" firstAttribute="centerY" secondItem="7E9-WB-dTq" secondAttribute="centerY" multiplier="0.2" id="5gj-Or-eKG"/>
+                            <constraint firstItem="MMM-s2-UEt" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.0763359" id="6EC-kK-eoL"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.3257" id="6jO-17-epS"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="centerX" secondItem="kUb-PW-wCr" secondAttribute="centerX" id="7ap-e1-eYK"/>
                             <constraint firstAttribute="trailing" secondItem="kUb-PW-wCr" secondAttribute="trailing" id="D9x-n5-ZDZ"/>
+                            <constraint firstItem="MMM-s2-UEt" firstAttribute="centerX" secondItem="7E9-WB-dTq" secondAttribute="centerX" multiplier="0.2" id="HK4-I1-4oJ"/>
                             <constraint firstItem="kUb-PW-wCr" firstAttribute="leading" secondItem="QNp-EB-RWz" secondAttribute="leading" id="IXZ-sR-mnr"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="centerY" secondItem="7E9-WB-dTq" secondAttribute="centerY" multiplier="1.7" id="MSN-8l-wMP"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="top" secondItem="aGT-i2-1uU" secondAttribute="top" constant="-20" id="Mkx-bA-2ay"/>

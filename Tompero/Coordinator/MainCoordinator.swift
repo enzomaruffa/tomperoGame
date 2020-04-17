@@ -11,12 +11,13 @@ import UIKit
 class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         navigationController.setNavigationBarHidden(true, animated: false)
     }
-
+    
     private func testGameScene() {
         let tables: [String : [PlayerTable]] = [
             "God" : [
@@ -80,23 +81,24 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let gameSceneTest: Bool = false
         
-        if gameSceneTest {
+        if !appDelegate.hasAlreadyLaunched {
+            inicial()
+            appDelegate.hasAlreadyLaunched = true
+        } else {
             testGameScene()
-            return
+            
         }
         
-        video()
         return
         
-//        inicial()
+        //        inicial()
     }
     
     func popToRoot() {
         navigationController.popToRootViewController(animated: true)
     }
-        
+    
     func inicial() {
         let controller = InicialViewController.instantiate()
         controller.coordinator = self
@@ -107,7 +109,7 @@ class MainCoordinator: Coordinator {
         let controller = MenuCollectionViewController.instantiate()
         controller.coordinator = self
         controller.modalTransitionStyle = .crossDissolve
-//        navigationController.present(controller, animated: true, completion: nil)
+        //        navigationController.present(controller, animated: true, completion: nil)
         navigationController.pushViewController(controller, animated: false)
     }
     
@@ -134,10 +136,10 @@ class MainCoordinator: Coordinator {
     }
     
     func video() {
+        
         let controller = CutsceneViewController.instantiate()
         controller.coordinator = self
         navigationController.pushViewController(controller, animated: false)
+        
     }
-    
 }
-

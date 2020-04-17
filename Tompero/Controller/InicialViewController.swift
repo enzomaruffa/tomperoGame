@@ -45,7 +45,6 @@ class InicialViewController: UIViewController, Storyboarded {
         viewDialog.addGestureRecognizer(tapGestureRecognizerText)
         viewDialog.isUserInteractionEnabled = true
         
-        
         animateDialog(text: textSapao1)
         
         MusicPlayer.shared.play(.menu)
@@ -96,6 +95,13 @@ class InicialViewController: UIViewController, Storyboarded {
         kombiTimer?.invalidate()
     }
     
+    @IBAction func videoButtom(_ sender: Any) {
+        MusicPlayer.shared.stop(.menu)
+        MusicPlayer.shared.stop(.game)
+        coordinator?.video()
+    }
+
+    
     // MARK: - Methods
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
@@ -113,10 +119,12 @@ class InicialViewController: UIViewController, Storyboarded {
             coordinator?.waitingRoom(hosting: true)
         }
     }
+    
     @objc func screenTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         textTimer?.invalidate()
         textLabel.text = textSapao1
     }
+    
     func animateDialog(text: String) {
         self.textLabel.text = ""
         if textTimer != nil {
