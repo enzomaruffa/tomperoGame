@@ -158,8 +158,6 @@ class MainCoordinator: Coordinator {
                 "CU 2"]
         ))
         
-        
-        
         statistics(statistics: stats)
         
         //         let stats2 = MatchStatistics(ruleUsed: GameRule(
@@ -195,9 +193,7 @@ class MainCoordinator: Coordinator {
         //
         //            dbManager.checkMatchExists(hash: stats2.matchHash) { (result) in
         //                print("Match with hash \(stats2.matchHash) exists? \(result)")
-        //            }
-        
-        
+        //            } 
     }
     
     func video() {

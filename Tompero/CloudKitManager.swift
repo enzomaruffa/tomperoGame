@@ -29,7 +29,6 @@ class CloudKitManager: DatabaseManager {
         privateDB = container.privateCloudDatabase
     }
     
-    
     // MARK: - CloudKit Record Manipulations
     fileprivate func persistRecord(_ record: CKRecord) {
         privateDB.save(record) { (savedRecord, error) in

@@ -475,7 +475,6 @@
 		562BCF4B23881CF900D5D51D = {
 			isa = PBXGroup;
 			children = (
-				FB82E8E023A277310032F6B5 /* videoIntro.mp4 */,
 				562BCF5623881CF900D5D51D /* Tompero */,
 				562BCF5523881CF900D5D51D /* Products */,
 				56D9BB225FBAE3D038F75D05 /* Pods */,
@@ -510,11 +509,8 @@
 				471795EE238C694B000575B0 /* Game Connection */,
 				471C60CE23B2C69C004590D3 /* CloudKitManager.swift */,
 				471C60D023B2C6B0004590D3 /* DatabaseManager.swift */,
-				475A4B5423A0469E000016B3 /* AnalyticsEventLogger.swift */,
 				471C60D823B588BA004590D3 /* Logger */,
-				475A4B5423A0469E000016B3 /* EventLogger.swift */,
-				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
-				FB82E8DE23A272440032F6B5 /* Cutscene.sks */,
+				475A4B5423A0469E000016B3 /* AnalyticsEventLogger.swift */,
 			);
 			path = Tompero;
 			sourceTree = "<group>";
@@ -547,6 +543,8 @@
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 				479B7849239D8BAC003BC9DE /* Statistics.storyboard */,
 				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
+				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
+				FB82E8DE23A272440032F6B5 /* Cutscene.sks */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -587,6 +585,7 @@
 		566A5BB4239ADE43006D96CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FB82E8E023A277310032F6B5 /* videoIntro.mp4 */,
 				569B4D32239E6D610057C7CC /* Music */,
 				566E9C73239D7E9000787210 /* SFX */,
 				47BE3ECB239C1DD600246F20 /* Animations */,

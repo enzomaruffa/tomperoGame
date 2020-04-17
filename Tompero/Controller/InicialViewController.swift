@@ -117,7 +117,6 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         MusicPlayer.shared.stop(.game)
         coordinator?.video()
     }
-
     
     // MARK: - Methods
     func setCoinsValue() {
@@ -196,7 +195,7 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
                 // get default leaderboard ID
                 localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
                     if error != nil {
-                        print(error)
+                        print(error!)
                     } else {
                         self.defaultLeaderboard = leaderboardIdentifer!
                     }
@@ -206,7 +205,7 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
                 // 3. game center is not enabled on the users device
                 self.isGameCenterEnabled = false
                 print("Local player could not be authenticated!")
-                print(error)
+                print(error!)
             }
         }
     }
