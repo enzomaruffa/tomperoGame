@@ -49,40 +49,31 @@ class CustomTransition: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animatePush(using transitionContext: UIViewControllerContextTransitioning) {
-        let fromView = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
-        let toView = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
-
-        let finalFrame = transitionContext.finalFrame(for: toView)
-
-        let fOff = finalFrame.offsetBy(dx: finalFrame.width, dy: 55)
-        toView.view.frame = fOff
-
-        transitionContext.containerView.insertSubview(toView.view, aboveSubview: fromView.view)
-
-        UIView.animate(
-            withDuration: transitionDuration(using: transitionContext),
-            animations: {
-                toView.view.frame = finalFrame
-        }, completion: {_ in
-                transitionContext.completeTransition(true)
+        guard let toVC = transitionContext.viewController(forKey: .to) else { return }
+        
+        transitionContext.containerView.addSubview(toVC.view)
+        toVC.view.alpha = 0
+        
+        UIView.animate(withDuration: duration, animations: {
+            toVC.view.alpha = 1
+        }, completion: { _ in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
     
     func animatePop(using transitionContext: UIViewControllerContextTransitioning) {
-        let fromView = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
-        let toView = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
-        
-        let initialFrame = transitionContext.initialFrame(for: fromView)
-        let fOffPop = initialFrame.offsetBy(dx: initialFrame.width, dy: 55)
+        guard
+            let fromVC = transitionContext.viewController(forKey: .from),
+            let toVC = transitionContext.viewController(forKey: .to)
+        else { return }
 
-        transitionContext.containerView.insertSubview(toView.view, belowSubview: fromView.view)
+        transitionContext.containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
 
-        UIView.animate(
-            withDuration: transitionDuration(using: transitionContext),
-            animations: {
-                fromView.view.frame = fOffPop
-        }, completion: {_ in
-                transitionContext.completeTransition(true)
+        let duration = self.transitionDuration(using: transitionContext)
+        UIView.animate(withDuration: duration, animations: {
+            fromVC.view.alpha = 0
+        }, completion: { _ in
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
 

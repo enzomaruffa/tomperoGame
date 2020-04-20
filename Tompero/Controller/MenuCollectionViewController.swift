@@ -24,7 +24,7 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     var parentVC: WaitingRoomViewController!
     
     @IBAction func backPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     // MARK: - Collection Methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {

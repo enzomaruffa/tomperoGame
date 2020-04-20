@@ -40,7 +40,7 @@ class MainCoordinator: Coordinator {
     func menu() {
         let controller = MenuCollectionViewController.instantiate()
         controller.coordinator = self
-        navigationController.pushViewController(controller, animated: false)
+        navigationController.pushViewController(controller, animated: true)
     }
     
     func waitingRoom(hosting: Bool) {
@@ -55,7 +55,7 @@ class MainCoordinator: Coordinator {
         controller.coordinator = self
         controller.hosting = hosting
         controller.rule = rule
-        navigationController.pushViewController(controller, animated: false)
+        navigationController.pushViewController(controller, animated: true)
     }
     
     func statistics(statistics: MatchStatistics) {
