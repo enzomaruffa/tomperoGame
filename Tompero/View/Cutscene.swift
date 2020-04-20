@@ -72,7 +72,7 @@ class Cutscene: SKScene {
         
         if button.contains(touchLocation) && !buttonAcativated {
             videoSprite.pause()
-            coordinator?.inicial()
+            coordinator?.initial()
         }
     }
     
@@ -109,7 +109,7 @@ class Cutscene: SKScene {
         if ticks == videoDuration * 60 {
             videoSprite.removeFromParent()
             videoSprite.pause()
-            coordinator?.inicial()
+            coordinator?.initial()
         }
     }
 }

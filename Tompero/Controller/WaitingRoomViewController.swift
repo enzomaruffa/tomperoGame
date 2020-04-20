@@ -118,7 +118,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBAction func backPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-back")
         self.navigationController?.popViewController(animated: true)
-        
     }
     
     @IBAction func menuPressed(_ sender: Any) {

@@ -68,6 +68,7 @@
 		562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */; };
 		562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 562BCF732388249E00D5D51D /* WaitingRoom.storyboard */; };
 		562BCF76238824FE00D5D51D /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */; };
+		562C4D9A244E411A00AB2B74 /* StarsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C4D99244E411A00AB2B74 /* StarsOverlay.swift */; };
 		565AEFE223915E6400E3E15F /* MovableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */; };
 		565AEFE4239164E300E3E15F /* StationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565AEFE3239164E300E3E15F /* StationNode.swift */; };
 		566A5BAF239A8564006D96CF /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A5BAE239A8564006D96CF /* ComponentType.swift */; };
@@ -129,6 +130,7 @@
 		56A0F1FA239F4A5A003EEF2D /* menuMusicVintage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56A0F1F7239F4A5A003EEF2D /* menuMusicVintage.wav */; };
 		56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B52391B93B005E0807 /* IngredientNode.swift */; };
 		56B3A7BA2391CDC7005E0807 /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B92391CDC7005E0807 /* StationType.swift */; };
+		56D50AEC244E26DF00527234 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D50AEB244E26DF00527234 /* NavigationController.swift */; };
 		56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */; };
 		56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C1238DA2B8000F8A3F /* Component.swift */; };
 		56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */; };
@@ -221,6 +223,7 @@
 		562BCF6923881CFC00D5D51D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		562BCF732388249E00D5D51D /* WaitingRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WaitingRoom.storyboard; sourceTree = "<group>"; };
 		562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomViewController.swift; sourceTree = "<group>"; };
+		562C4D99244E411A00AB2B74 /* StarsOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarsOverlay.swift; sourceTree = "<group>"; };
 		565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableSpriteNode.swift; sourceTree = "<group>"; };
 		565AEFE3239164E300E3E15F /* StationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNode.swift; sourceTree = "<group>"; };
 		566A5BAE239A8564006D96CF /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
@@ -282,6 +285,7 @@
 		56A0F1F7239F4A5A003EEF2D /* menuMusicVintage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menuMusicVintage.wav; sourceTree = "<group>"; };
 		56B3A7B52391B93B005E0807 /* IngredientNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientNode.swift; sourceTree = "<group>"; };
 		56B3A7B92391CDC7005E0807 /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
+		56D50AEB244E26DF00527234 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoppableComponent.swift; sourceTree = "<group>"; };
 		56E2D7C1238DA2B8000F8A3F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryableComponent.swift; sourceTree = "<group>"; };
@@ -500,7 +504,6 @@
 				562BCF6923881CFC00D5D51D /* Info.plist */,
 				FB9BF38D238E9CDB00437124 /* Coordinator */,
 				476925C82390AA1200FBAB1F /* Extensions */,
-				566E9BD8239D7BB800787210 /* Sound */,
 				562BCF6F2388232700D5D51D /* Model */,
 				566A5BB0239ACE77006D96CF /* GameScene */,
 				562BCF702388233700D5D51D /* View */,
@@ -518,6 +521,7 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				566E9BD8239D7BB800787210 /* Sound */,
 				4722D484238FF317003D373C /* Components */,
 				56E2D7C5238DC97D000F8A3F /* IngredientState.swift */,
 				567A07A4238C805000D6399A /* Ingredient.swift */,
@@ -534,6 +538,7 @@
 		562BCF702388233700D5D51D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				562C4D99244E411A00AB2B74 /* StarsOverlay.swift */,
 				FB55FBE9239C33D0002EBB89 /* Main.storyboard */,
 				FB55FBE7239C2824002EBB89 /* DialogView.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
@@ -604,7 +609,8 @@
 				566E9C92239D823300787210 /* Track.swift */,
 				569B4D29239E67E20057C7CC /* TrackWithIntro.swift */,
 			);
-			path = Sound;
+			name = Sound;
+			path = ../Sound;
 			sourceTree = "<group>";
 		};
 		566E9C73239D7E9000787210 /* SFX */ = {
@@ -684,6 +690,7 @@
 		FB9BF38D238E9CDB00437124 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				56D50AEB244E26DF00527234 /* NavigationController.swift */,
 				FB9BF38E238E9CFA00437124 /* Coordinator.swift */,
 				FB9BF390238E9D6A00437124 /* Storyboarded.swift */,
 				FB9BF392238E9F4700437124 /* MainCoordinator.swift */,
@@ -937,6 +944,7 @@
 				472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */,
 				567A07B0238C805000D6399A /* Horn.swift in Sources */,
 				471C60D123B2C6B0004590D3 /* DatabaseManager.swift in Sources */,
+				562C4D9A244E411A00AB2B74 /* StarsOverlay.swift in Sources */,
 				569B4D2A239E67E20057C7CC /* TrackWithIntro.swift in Sources */,
 				4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */,
 				475A4B5523A0469E000016B3 /* AnalyticsEventLogger.swift in Sources */,
@@ -975,6 +983,7 @@
 				567A07BC238C805000D6399A /* Tardigrades.swift in Sources */,
 				567A07C0238C805000D6399A /* MarsSand.swift in Sources */,
 				4709B27C23A8116F004B8F51 /* PlateBoxNode.swift in Sources */,
+				56D50AEC244E26DF00527234 /* NavigationController.swift in Sources */,
 				567A07B8238C805000D6399A /* HasIngredients.swift in Sources */,
 				4709B28123A8141A004B8F51 /* PipeNode.swift in Sources */,
 				567A07B3238C805000D6399A /* Tentacle.swift in Sources */,

@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
        // create the main navigation controller to be used for our app
-        let navController = UINavigationController()
+        let navController = NavigationController()
 
         // send that into our coordinator so that it can display view controllers
         coordinator = MainCoordinator(navigationController: navController)
