@@ -109,7 +109,7 @@ class Cutscene: SKScene {
         if ticks == videoDuration * 60 {
             videoSprite.removeFromParent()
             videoSprite.pause()
-            coordinator?.initial()
+            coordinator?.popToRoot()
         }
     }
 }
