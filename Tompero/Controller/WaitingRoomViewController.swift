@@ -233,10 +233,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         DispatchQueue.main.async {
             if playersWithStatus.filter({ $0.status == .connected }).count <= 1 {
                 self.goButton.isEnabled = false
-                self.goButton.imageView?.image = UIImage(named: "go_disabled")
+                //self.goButton.imageView?.image = UIImage(named: "go_disabled")
             } else {
                 self.goButton.isEnabled = true
-                self.goButton.imageView?.image = UIImage(named: "go_")
+                //self.goButton.imageView?.image = UIImage(named: "go_")
             }
         }
     }

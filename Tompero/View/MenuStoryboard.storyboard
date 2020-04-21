@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngM-n1-4Tf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngM-n1-4Tf">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,19 +18,13 @@
         <scene sceneID="jnH-9M-1Rh">
             <objects>
                 <viewController storyboardIdentifier="MenuCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ngM-n1-4Tf" customClass="MenuCollectionViewController" customModule="SpaceSpice" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HsO-25-kPV">
+                    <view key="view" contentMode="scaleToFill" id="HsO-25-kPV" customClass="StarsOverlay" customModule="SpaceSpice" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CL2-7B-5oQ" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo" translatesAutoresizingMaskIntoConstraints="NO" id="I8d-xm-UVo">
-                                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fundo" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-Hz-46C">
-                                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                                    </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contorno branco" translatesAutoresizingMaskIntoConstraints="NO" id="zXq-KK-S5c">
                                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                                     </imageView>
@@ -47,20 +42,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="zXq-KK-S5c" secondAttribute="bottom" id="3co-gk-pM9"/>
-                                    <constraint firstItem="Jz1-Hz-46C" firstAttribute="top" secondItem="CL2-7B-5oQ" secondAttribute="top" id="7Lm-sE-hwv"/>
                                     <constraint firstAttribute="trailing" secondItem="zXq-KK-S5c" secondAttribute="trailing" id="Fga-jJ-z4t"/>
-                                    <constraint firstItem="Jz1-Hz-46C" firstAttribute="leading" secondItem="CL2-7B-5oQ" secondAttribute="leading" id="LOj-0R-dSm"/>
                                     <constraint firstItem="zXq-KK-S5c" firstAttribute="leading" secondItem="CL2-7B-5oQ" secondAttribute="leading" id="WN0-j1-Ful"/>
-                                    <constraint firstAttribute="bottom" secondItem="Jz1-Hz-46C" secondAttribute="bottom" id="XwX-mS-bWE"/>
-                                    <constraint firstAttribute="trailing" secondItem="I8d-xm-UVo" secondAttribute="trailing" id="Zcq-F4-8Y4"/>
-                                    <constraint firstAttribute="bottom" secondItem="I8d-xm-UVo" secondAttribute="bottom" id="fJx-hA-JHc"/>
-                                    <constraint firstItem="I8d-xm-UVo" firstAttribute="top" secondItem="CL2-7B-5oQ" secondAttribute="top" id="fOG-kP-IvS"/>
                                     <constraint firstItem="zXq-KK-S5c" firstAttribute="top" secondItem="CL2-7B-5oQ" secondAttribute="top" id="fc8-iG-R4D"/>
-                                    <constraint firstItem="I8d-xm-UVo" firstAttribute="leading" secondItem="CL2-7B-5oQ" secondAttribute="leading" id="pGh-ZO-ryV"/>
-                                    <constraint firstAttribute="trailing" secondItem="Jz1-Hz-46C" secondAttribute="trailing" id="qb2-fk-lng"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0xh-LO-8NS" userLabel="CollectionView">
@@ -110,7 +96,7 @@
                                 <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pageControl>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="VuZ-S0-Uqf" firstAttribute="height" secondItem="JNb-eM-qbf" secondAttribute="height" multiplier="0.0941476" constant="1" id="0nM-Ke-jBf"/>
                             <constraint firstAttribute="bottom" secondItem="CL2-7B-5oQ" secondAttribute="bottom" id="CqO-CM-U7l"/>
@@ -147,7 +133,6 @@
     <resources>
         <image name="btn" width="95" height="87"/>
         <image name="contorno branco" width="2436" height="1154"/>
-        <image name="fundo" width="2436" height="1154"/>
         <image name="ingredientes 1" width="2053" height="684"/>
     </resources>
 </document>
