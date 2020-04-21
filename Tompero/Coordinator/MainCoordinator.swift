@@ -194,6 +194,6 @@ class MainCoordinator: Coordinator {
     func video() {
         let controller = CutsceneViewController.instantiate()
         controller.coordinator = self
-        navigationController.pushViewController(controller, animated: false)
+        navigationController.pushViewController(controller, animated: true)
     }
 }
