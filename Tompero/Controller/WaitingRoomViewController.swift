@@ -190,15 +190,11 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         imageViewOpacity(imageView: tappedImage)
-        if tappedImage.tag == 0 {
-            
-        } else if tappedImage.tag == 1 {
-            print("CHAPEU SELECIONADO", player2Image!)
-            
-        } else if tappedImage.tag == 2 {
-            print("CHAPEU SELECIONADO", player3Image!)
-        } else if tappedImage.tag == 3 {
-            print("CHAPEU SELECIONADO", player4Image!)
+        switch tappedImage.tag {
+        case 1: print("Player 2 ", player2Image!)
+        case 2: print("Player 3 ", player3Image!)
+        case 3: print("Player 4 ", player4Image!)
+        default: print("Player 1 ", player1Image!)
         }
     }
     
@@ -216,6 +212,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         })
         
     }
+    
     func changeImageAnimated(image: String, viewChange: UIImageView) {
         guard let currentImage = viewChange.image, let newImage = UIImage(named: image) else {
             return
@@ -233,10 +230,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         DispatchQueue.main.async {
             if playersWithStatus.filter({ $0.status == .connected }).count <= 1 {
                 self.goButton.isEnabled = false
-                //self.goButton.imageView?.image = UIImage(named: "go_disabled")
             } else {
                 self.goButton.isEnabled = true
-                //self.goButton.imageView?.image = UIImage(named: "go_")
             }
         }
     }
