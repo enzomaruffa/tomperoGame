@@ -21,17 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1U3-D3-GHq">
-                                <rect key="frame" x="796" y="19" width="65" height="65"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="C4v-am-Ha6"/>
-                                    <constraint firstAttribute="width" constant="65" id="RCm-8C-dMk"/>
-                                </constraints>
-                                <state key="normal" image="arrowEnd"/>
-                                <connections>
-                                    <action selector="openLeaderboard:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="jF5-I8-WR3"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H4T-P9-M7q">
                                 <rect key="frame" x="44" y="0.0" width="808" height="393"/>
                                 <subviews>
@@ -128,6 +117,17 @@ Oh! To begin working you need to go to the central food supply station. Who want
                                     <constraint firstItem="kvu-2L-o1z" firstAttribute="centerY" secondItem="07h-SX-LdR" secondAttribute="centerY" id="tyA-YZ-Zp9"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1U3-D3-GHq">
+                                <rect key="frame" x="796" y="19" width="65" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="C4v-am-Ha6"/>
+                                    <constraint firstAttribute="width" constant="65" id="RCm-8C-dMk"/>
+                                </constraints>
+                                <state key="normal" image="arrowEnd"/>
+                                <connections>
+                                    <action selector="openLeaderboard:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="jF5-I8-WR3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
