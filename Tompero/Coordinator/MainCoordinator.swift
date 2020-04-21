@@ -18,11 +18,8 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        #if DEBUG
-        gameSceneTest()
-        #endif
-        
-            inicial()
+        let gameTest = false
+        gameTest ? gameSceneTest() : initial()
     }
     
     func popToRoot() {
@@ -34,7 +31,7 @@ class MainCoordinator: Coordinator {
         return navigationController.viewControllers.last == controller
     }
     
-    func inicial() {
+    func initial() {
         let controller = InicialViewController.instantiate()
         controller.coordinator = self
         navigationController.pushViewController(controller, animated: false)
@@ -43,16 +40,14 @@ class MainCoordinator: Coordinator {
     func menu() {
         let controller = MenuCollectionViewController.instantiate()
         controller.coordinator = self
-        controller.modalTransitionStyle = .crossDissolve
-        //        navigationController.present(controller, animated: true, completion: nil)
-        navigationController.pushViewController(controller, animated: false)
+        navigationController.pushViewController(controller, animated: true)
     }
     
     func waitingRoom(hosting: Bool) {
         let controller = WaitingRoomViewController.instantiate()
         controller.coordinator = self
         controller.hosting = hosting
-        navigationController.pushViewController(controller, animated: false)
+        navigationController.pushViewController(controller, animated: true)
     }
     
     func game(rule: GameRule, hosting: Bool) {
@@ -60,7 +55,7 @@ class MainCoordinator: Coordinator {
         controller.coordinator = self
         controller.hosting = hosting
         controller.rule = rule
-        navigationController.pushViewController(controller, animated: false)
+        navigationController.pushViewController(controller, animated: true)
     }
     
     func statistics(statistics: MatchStatistics) {
@@ -197,10 +192,8 @@ class MainCoordinator: Coordinator {
     }
     
     func video() {
-        
         let controller = CutsceneViewController.instantiate()
         controller.coordinator = self
         navigationController.pushViewController(controller, animated: false)
-        
     }
 }

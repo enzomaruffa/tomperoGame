@@ -7,7 +7,7 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     @IBOutlet weak var pageControl: UIPageControl!
     
     // MARK: - Variables
-    let ingrediente: [UIImage] = [UIImage(named: "ingredientes 1")!, UIImage(named: "ingredientes 1")!]
+    let ingredient: [UIImage] = [UIImage(named: "ingredientes 1")!, UIImage(named: "ingredientes 1")!]
     weak var coordinator: MainCoordinator?
     
     // MARK: - Storyboarded
@@ -21,12 +21,10 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     override func viewDidAppear(_ animated: Bool) {
     }
     
-    var vcPai:WaitingRoomViewController!
+    var parentVC: WaitingRoomViewController!
     
     @IBAction func backPressed(_ sender: Any) {
-       
-        self.navigationController?.popViewController(animated: false)
-        
+        self.navigationController?.popViewController(animated: true)
     }
     // MARK: - Collection Methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -36,12 +34,12 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return ingrediente.count
+        return ingredient.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuCell", for: indexPath) as! MenuCollectionViewCell
-        cell.menuImage.image = ingrediente[indexPath.row]
+        cell.menuImage.image = ingredient[indexPath.row]
         return cell
     }
 
