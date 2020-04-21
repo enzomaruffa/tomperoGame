@@ -128,6 +128,8 @@
 		56A0F1F8239F4A5A003EEF2D /* menuMusicClean.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56A0F1F5239F4A59003EEF2D /* menuMusicClean.wav */; };
 		56A0F1F9239F4A5A003EEF2D /* menuMusicAmbiance.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56A0F1F6239F4A59003EEF2D /* menuMusicAmbiance.wav */; };
 		56A0F1FA239F4A5A003EEF2D /* menuMusicVintage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56A0F1F7239F4A5A003EEF2D /* menuMusicVintage.wav */; };
+		56A6B732244F69CA009933C7 /* AnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6B731244F69C9009933C7 /* AnimationDelegate.swift */; };
+		56A6B735244F7AB2009933C7 /* WipeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6B734244F7AB2009933C7 /* WipeTransition.swift */; };
 		56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B52391B93B005E0807 /* IngredientNode.swift */; };
 		56B3A7BA2391CDC7005E0807 /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B92391CDC7005E0807 /* StationType.swift */; };
 		56D50AEC244E26DF00527234 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D50AEB244E26DF00527234 /* NavigationController.swift */; };
@@ -283,6 +285,8 @@
 		56A0F1F5239F4A59003EEF2D /* menuMusicClean.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menuMusicClean.wav; sourceTree = "<group>"; };
 		56A0F1F6239F4A59003EEF2D /* menuMusicAmbiance.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menuMusicAmbiance.wav; sourceTree = "<group>"; };
 		56A0F1F7239F4A5A003EEF2D /* menuMusicVintage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menuMusicVintage.wav; sourceTree = "<group>"; };
+		56A6B731244F69C9009933C7 /* AnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationDelegate.swift; sourceTree = "<group>"; };
+		56A6B734244F7AB2009933C7 /* WipeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeTransition.swift; sourceTree = "<group>"; };
 		56B3A7B52391B93B005E0807 /* IngredientNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientNode.swift; sourceTree = "<group>"; };
 		56B3A7B92391CDC7005E0807 /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
 		56D50AEB244E26DF00527234 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -521,6 +525,7 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				56A6B733244F7A9A009933C7 /* WipeAnimation */,
 				566E9BD8239D7BB800787210 /* Sound */,
 				4722D484238FF317003D373C /* Components */,
 				56E2D7C5238DC97D000F8A3F /* IngredientState.swift */,
@@ -667,6 +672,15 @@
 				56A0F1F7239F4A5A003EEF2D /* menuMusicVintage.wav */,
 			);
 			path = Music;
+			sourceTree = "<group>";
+		};
+		56A6B733244F7A9A009933C7 /* WipeAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				56A6B731244F69C9009933C7 /* AnimationDelegate.swift */,
+				56A6B734244F7AB2009933C7 /* WipeTransition.swift */,
+			);
+			path = WipeAnimation;
 			sourceTree = "<group>";
 		};
 		56D9BB225FBAE3D038F75D05 /* Pods */ = {
@@ -926,6 +940,7 @@
 				4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */,
 				FB82E8D923A271410032F6B5 /* CutsceneViewController.swift in Sources */,
 				56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */,
+				56A6B732244F69CA009933C7 /* AnimationDelegate.swift in Sources */,
 				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
@@ -950,6 +965,7 @@
 				475A4B5523A0469E000016B3 /* AnalyticsEventLogger.swift in Sources */,
 				4722D47B238EB7C9003D373C /* GameRule.swift in Sources */,
 				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
+				56A6B735244F7AB2009933C7 /* WipeTransition.swift in Sources */,
 				FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */,
 				47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */,
 				56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */,
