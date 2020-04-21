@@ -104,7 +104,7 @@
                                             <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="48"/>
                                         </variation>
                                         <connections>
-                                            <action selector="levelButtom:" destination="5eH-78-dlc" eventType="touchUpInside" id="pWV-Ks-8tE"/>
+                                            <action selector="levelButton:" destination="5eH-78-dlc" eventType="touchUpInside" id="mDS-iq-bgN"/>
                                         </connections>
                                     </button>
                                 </subviews>

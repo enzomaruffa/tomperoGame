@@ -30,10 +30,9 @@ class MusicPlayer {
     }
     
     func stop(_ trackToStop: TrackNumber) {
-        for (trackNumber, track) in score where trackNumber == trackToStop {
+        if let track = score[trackToStop] {
             track.stop()
         }
-        
     }
 }
 

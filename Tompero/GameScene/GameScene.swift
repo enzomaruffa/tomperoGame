@@ -321,6 +321,7 @@ class GameScene: SKScene {
         }
         
         if error {
+            MusicPlayer.shared.stop(.game)
             coordinator?.popToRoot()
         }
     }

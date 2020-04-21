@@ -62,7 +62,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="videoButtom:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="7nU-di-LRV"/>
+                                            <action selector="playVideo:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="lYF-Vg-d4o"/>
                                         </connections>
                                     </button>
                                 </subviews>

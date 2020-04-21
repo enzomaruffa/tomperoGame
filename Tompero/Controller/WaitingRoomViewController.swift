@@ -143,7 +143,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
     }
     
-    @IBAction func levelButtom(_ sender: Any) {
+    @IBAction func levelButton(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-difficulty")
         
         if countLevel == .easy {
@@ -346,6 +346,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
         // start game
         MCManager.shared.stopAdvertiser()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            MusicPlayer.shared.stop(.menu)
             self.coordinator?.game(rule: rule, hosting: false)
         }
     }

@@ -54,10 +54,6 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         host.addGestureRecognizer(tapGestureRecognizerHost)
         viewDialog.addGestureRecognizer(tapGestureRecognizerText)
         viewDialog.isUserInteractionEnabled = true
-        
-        animateDialog(text: textSapao1)
-        
-        MusicPlayer.shared.play(.menu)
     }
     
     fileprivate func createKombiTimer() {
@@ -99,6 +95,8 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        MusicPlayer.shared.play(.menu)
+        
         MCManager.shared.resetSession()
     
         // TODO: Make update in UI with coin count
@@ -106,13 +104,15 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         
         createKombiTimer()
         kombiTimer?.fire()
+        
+        animateDialog(text: textSapao1)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         kombiTimer?.invalidate()
     }
     
-    @IBAction func videoButtom(_ sender: Any) {
+    @IBAction func playVideo(_ sender: Any) {
         MusicPlayer.shared.stop(.menu)
         MusicPlayer.shared.stop(.game)
         coordinator?.video()
