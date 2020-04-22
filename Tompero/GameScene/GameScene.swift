@@ -124,7 +124,6 @@ class GameScene: SKScene {
         setupBackground()
         
         SFXPlayer.shared.roundStarted.play()
-        
     }
     
     func setupOrderListNode() {
