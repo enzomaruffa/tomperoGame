@@ -18,7 +18,7 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let gameTest = false
+        let gameTest = true
         gameTest ? gameSceneTest() : initial()
     }
     
@@ -69,7 +69,7 @@ class MainCoordinator: Coordinator {
     
     fileprivate func gameSceneTest() {
         let tables: [String : [PlayerTable]] = [
-            "God" : [
+            MCManager.shared.selfName : [
                 PlayerTable(type: .frying, ingredient: nil),
                 PlayerTable(type: .plate, ingredient: nil),
                 PlayerTable(type: .ingredient, ingredient: Asteroid())
@@ -79,12 +79,12 @@ class MainCoordinator: Coordinator {
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil)
             ],
-            "CU" : [
+            "God" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil)
             ],
-            "CU 2" : [
+            "__empty__" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil)
@@ -103,9 +103,9 @@ class MainCoordinator: Coordinator {
                 ],
                 playerTables: tables,
                 playerOrder: [
-                    "God",
+                    MCManager.shared.selfName,
                     "Enzo's Enzo's iPhone",
-                    "__empty__",
+                    "God",
                     "__empty__"]
             ),
             hosting: true
