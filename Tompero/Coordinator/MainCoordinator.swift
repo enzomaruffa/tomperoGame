@@ -18,8 +18,7 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let gameTest = true
-        gameTest ? gameSceneTest() : initial()
+        false ? gameSceneTest() : initial()
     }
     
     func popToRoot() {
