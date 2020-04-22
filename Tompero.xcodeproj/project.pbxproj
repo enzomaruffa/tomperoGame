@@ -525,6 +525,7 @@
 		562BCF6F2388232700D5D51D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				562C4D99244E411A00AB2B74 /* StarsOverlay.swift */,
 				56A6B733244F7A9A009933C7 /* WipeAnimation */,
 				566E9BD8239D7BB800787210 /* Sound */,
 				4722D484238FF317003D373C /* Components */,
@@ -543,7 +544,6 @@
 		562BCF702388233700D5D51D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				562C4D99244E411A00AB2B74 /* StarsOverlay.swift */,
 				FB55FBE9239C33D0002EBB89 /* Main.storyboard */,
 				FB55FBE7239C2824002EBB89 /* DialogView.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
