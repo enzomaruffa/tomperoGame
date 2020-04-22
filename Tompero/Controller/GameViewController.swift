@@ -18,13 +18,13 @@ class GameViewController: UIViewController, Storyboarded {
     var rule: GameRule?
     var hosting: Bool = false
     
+    @IBOutlet weak var skView: SKView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
+        if let view = skView {
             if let scene = GameScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
                 scene.rule = self.rule
                 scene.hosting = self.hosting
                 scene.coordinator = self.coordinator
@@ -32,7 +32,10 @@ class GameViewController: UIViewController, Storyboarded {
                 
                 scene.scaleMode = .aspectFill
                 
-                // Present the scene
+                scene.backgroundColor = .clear
+                view.allowsTransparency = true
+                view.backgroundColor = .clear
+                
                 view.presentScene(scene)
             }
             
