@@ -19,16 +19,12 @@ class CutsceneViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            if let scene = Cutscene(fileNamed: "Cutscene") {
-                scene.coordinator = self.coordinator
+            let scene = Cutscene(size: view.frame.size)
+            scene.coordinator = coordinator
+            scene.scaleMode = .aspectFit
+            scene.backgroundColor = .black
                 
-                scene.scaleMode = .aspectFit
-                
-                scene.backgroundColor = .black
-                
-                view.presentScene(scene)
-            }
-            
+            view.presentScene(scene)
             view.ignoresSiblingOrder = true
         }
 
