@@ -12,11 +12,6 @@ import GameplayKit
 import UIKit
 import AVFoundation
 
-enum State {
-    case hide
-    case show
-}
-
 // swiftlint:disable force_cast
 class Cutscene: SKScene {
     
@@ -24,92 +19,93 @@ class Cutscene: SKScene {
     weak var coordinator: MainCoordinator?
     
     var player: AVPlayer!
-    var videoSprite: SKVideoNode!
-    //var videoNode: SKVideoNode
-    let videoDuration = 106
     
-    var button: SKNode! = nil
-    var buttonAcativated: Bool = true
+    var videoNode: SKVideoNode!
+    var videoDuration: Double! //seconds
     
-    var ticks = 0
-    var ticksButton = 0
+    var backButton: SKNode!
+    var backActive: Bool = true
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
-        let videoURL: NSURL = Bundle.main.url(forResource: "videoIntro", withExtension: "mp4")! as NSURL
-        videoSprite = SKVideoNode(url: videoURL as URL)
-        self.addChild(videoSprite)
+        let videoURL = Bundle.main.url(forResource: "videoIntro", withExtension: "mp4")!
+        let videoAsset = AVURLAsset(url: videoURL)
+        videoDuration = videoAsset.duration.seconds
         
-        let videoSize = CGSize(width: 3840, height: 2160)
+        let video = videoAsset.tracks(withMediaType: AVMediaType.video).first!
+        let videoSize = video.naturalSize.applying(video.preferredTransform)
         
-        let currentViewSize = self.viewSizeInLocalCoordinates()
+        let currentViewSize = viewSizeInLocalCoordinates()
         
         let requiredScale = max(videoSize.width / currentViewSize.width, videoSize.height / currentViewSize.height)
         
-        createExitButton()
-        
         let cameraNode = SKCameraNode()
-        self.camera = cameraNode
-        self.scene?.addChild(cameraNode)
+        camera = cameraNode
+        scene!.addChild(cameraNode)
+        camera!.setScale(requiredScale)
         
-        self.camera?.setScale(requiredScale)
+        setupBackButton()
         
-        videoSprite.play()
+        videoNode = SKVideoNode(url: videoURL)
+        addChild(videoNode)
+        videoNode.play()
+    }
+    
+    func setupBackButton() {
+        backButton = SKSpriteNode(texture: SKTexture(imageNamed: "WR_backButton"), size: CGSize(width: 300, height: 300))
+        backButton.position = CGPoint(x: -0.4 * self.frame.width, y: 0.4 * self.frame.height)
+        addChild(backButton)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         let touchLocation = touch!.location(in: self)
-        print(button.zPosition)
-        // Check if the location of the touch is within the button's bounds
-        if (self.scene?.contains(touchLocation))! {
-            if buttonAcativated {
-                hideOrShowCloseButton(state: .hide)
-            } else {
-                hideOrShowCloseButton(state: .show)
-            }
+        
+        if backButton.contains(touchLocation) && backActive {
+            endPlayback()
         }
         
-        if button.contains(touchLocation) && !buttonAcativated {
-            videoSprite.pause()
-            coordinator?.initial()
+        updateBackButton()
+    }
+    
+    func updateBackButton() {
+        if backActive {
+            backActive.toggle()
+            backButton.run(SKAction.fadeOut(withDuration: 0.5), withKey: "fadeOut")
+        } else {
+            backActive.toggle()
+            backButton.removeAction(forKey: "fadeOut")
+            backButton.alpha = 1
+            backTime = 0
         }
     }
     
-    func createExitButton() {
-        // Create a simple red rectangle that's 100x44
-        button = SKSpriteNode(color: SKColor.red, size: CGSize(width: 300, height: 300))
-        // Put it in the center of the scene
-        button.position = CGPoint(x:-self.frame.width/2.5, y:+self.frame.height/2.5)
-        self.addChild(button)
+    func endPlayback() {
+        playbackEnded = true
+        videoNode.removeFromParent()
+        videoNode.pause()
+        coordinator?.popToRoot()
     }
     
-    func hideOrShowCloseButton(state: State) {
-        if state == .hide {
-            button.run(SKAction.fadeOut(withDuration: 0.5))
-            buttonAcativated = false
-            ticksButton = 0
-        } else if state == .show {
-            button.alpha = 1
-            buttonAcativated = true
-            
-        }
-    }
+    var lastUpdateTime: TimeInterval = 0
+    var deltaTime: TimeInterval = 0 //seconds
+    var totalTime: Double = 0 //seconds
+    var backTime: Double = 0 //seconds
+    var playbackEnded = false
     
     override func update(_ currentTime: TimeInterval) {
-        ticks += 1
         
-        if buttonAcativated {
-            ticksButton += 1
-            if ticksButton == 3*60 {
-                hideOrShowCloseButton(state: .hide)
-            }
+        deltaTime = lastUpdateTime == 0 ? 0 : currentTime - lastUpdateTime
+        lastUpdateTime = currentTime
+        totalTime += Double(deltaTime)
+        backTime += Double(deltaTime)
+        
+        if backTime >= 3 && backActive {
+            updateBackButton()
         }
         
-        if ticks == videoDuration * 60 {
-            videoSprite.removeFromParent()
-            videoSprite.pause()
-            coordinator?.popToRoot()
+        if totalTime >= videoDuration && !playbackEnded {
+            endPlayback()
         }
     }
 }

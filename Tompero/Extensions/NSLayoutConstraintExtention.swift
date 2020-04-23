@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import UIKit
+
 extension NSLayoutConstraint {
     /**
      Change multiplier constraint
@@ -21,14 +21,15 @@ extension NSLayoutConstraint {
         NSLayoutConstraint.deactivate([self])
 
         let newConstraint = NSLayoutConstraint(
-            item: firstItem,
+            item: firstItem!,
             attribute: firstAttribute,
             relatedBy: relation,
             toItem: secondItem,
             attribute: secondAttribute,
             multiplier: multiplier,
-            constant: constant)
-
+            constant: constant
+        )
+        
         newConstraint.priority = priority
         newConstraint.shouldBeArchived = self.shouldBeArchived
         newConstraint.identifier = self.identifier
