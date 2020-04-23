@@ -19,13 +19,13 @@ class CutsceneViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
             if let scene = Cutscene(fileNamed: "Cutscene") {
-                // Set the scale mode to scale to fit the window
                 scene.coordinator = self.coordinator
+                
                 scene.scaleMode = .aspectFit
                 
-                // Present the scene
+                scene.backgroundColor = .black
+                
                 view.presentScene(scene)
             }
             

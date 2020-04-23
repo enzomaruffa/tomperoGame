@@ -18,7 +18,13 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        false ? gameSceneTest() : initial()
+        let gsTest = false
+        
+        #if DEGUB
+        gsTest ? gameSceneTest() : initial()
+        #else
+        initial()
+        #endif
     }
     
     func popToRoot() {
