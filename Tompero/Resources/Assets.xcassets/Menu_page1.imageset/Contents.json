@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "TentacleIcon.png",
+      "filename" : "Menu_page1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Menu_page1@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Menu_page1@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

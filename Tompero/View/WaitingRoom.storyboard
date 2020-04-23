@@ -27,8 +27,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQD-B7-pkr" userLabel="HeaderView">
                                 <rect key="frame" x="44" y="0.0" width="808" height="73"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pu5-td-27G">
-                                        <rect key="frame" x="4" y="20.5" width="63.5" height="59"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pu5-td-27G" userLabel="BackButton">
+                                        <rect key="frame" x="4" y="16" width="63.5" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="pu5-td-27G" secondAttribute="height" multiplier="74:69" id="rew-90-HI6"/>
                                         </constraints>
@@ -85,7 +85,7 @@
                                     <constraint firstAttribute="centerX" secondItem="pu5-td-27G" secondAttribute="trailing" multiplier="6" id="jPx-n0-6AV"/>
                                     <constraint firstItem="pMm-QI-Jd5" firstAttribute="leading" secondItem="OQD-B7-pkr" secondAttribute="centerX" multiplier="1.5" id="jl0-3l-ICp"/>
                                     <constraint firstItem="pu5-td-27G" firstAttribute="leading" secondItem="OQD-B7-pkr" secondAttribute="leading" constant="4" id="naA-b4-Tct"/>
-                                    <constraint firstItem="pu5-td-27G" firstAttribute="bottom" secondItem="pMm-QI-Jd5" secondAttribute="bottom" id="vis-85-0Jo"/>
+                                    <constraint firstItem="pu5-td-27G" firstAttribute="top" secondItem="OQD-B7-pkr" secondAttribute="top" constant="16" id="nwp-gy-qhj"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Inv-jQ-Eo8" userLabel="DifficultyView">
