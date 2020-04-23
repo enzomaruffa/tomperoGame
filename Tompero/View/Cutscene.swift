@@ -82,20 +82,18 @@ class Cutscene: SKScene {
     
     func endPlayback() {
         playbackEnded = true
-        videoNode.removeFromParent()
         videoNode.pause()
         coordinator?.popToRoot()
     }
     
     var lastUpdateTime: TimeInterval = 0
-    var deltaTime: TimeInterval = 0 //seconds
     var totalTime: Double = 0 //seconds
     var backTime: Double = 0 //seconds
     var playbackEnded = false
     
     override func update(_ currentTime: TimeInterval) {
-        
-        deltaTime = lastUpdateTime == 0 ? 0 : currentTime - lastUpdateTime
+
+        let deltaTime = lastUpdateTime == 0 ? 0 : currentTime - lastUpdateTime
         lastUpdateTime = currentTime
         totalTime += Double(deltaTime)
         backTime += Double(deltaTime)
@@ -107,5 +105,6 @@ class Cutscene: SKScene {
         if totalTime >= videoDuration && !playbackEnded {
             endPlayback()
         }
+        
     }
 }
