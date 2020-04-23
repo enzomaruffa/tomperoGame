@@ -18,13 +18,16 @@ class Cutscene: SKScene {
     // MARK: - Coordinator
     weak var coordinator: MainCoordinator?
     
+    // MARK: - Variables
     var player: AVPlayer!
     
     var videoNode: SKVideoNode!
     var videoDuration: Double! //seconds
     
-    var backButton: SKNode!
+    var backButton: SKSpriteNode!
     var backActive: Bool = true
+    
+    var videoNodeSize: CGSize!
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -39,21 +42,25 @@ class Cutscene: SKScene {
         
         let requiredScale = max(videoSize.width / currentViewSize.width, videoSize.height / currentViewSize.height)
         
+        let videoNodeSizeInPoints = CGSize(width: videoSize.width / requiredScale, height: videoSize.height / requiredScale)
+        videoNodeSize = videoNodeSizeInPoints.applying(.init(scaleX: requiredScale, y: requiredScale))
+        
         let cameraNode = SKCameraNode()
         camera = cameraNode
-        scene!.addChild(cameraNode)
-        camera!.setScale(requiredScale)
-        
-        setupBackButton()
+        scene?.addChild(cameraNode)
+        camera?.setScale(requiredScale)
         
         videoNode = SKVideoNode(url: videoURL)
         addChild(videoNode)
         videoNode.play()
+        
+        setupBackButton()
     }
     
     func setupBackButton() {
         backButton = SKSpriteNode(texture: SKTexture(imageNamed: "WR_backButton"), size: CGSize(width: 300, height: 300))
-        backButton.position = CGPoint(x: -0.4 * self.frame.width, y: 0.4 * self.frame.height)
+        backButton.anchorPoint = CGPoint(x: 0, y: 1)
+        backButton.position = CGPoint(x: -videoNodeSize.width, y: videoNodeSize.height) * 0.45
         addChild(backButton)
     }
     

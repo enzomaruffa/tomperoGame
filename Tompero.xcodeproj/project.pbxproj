@@ -151,7 +151,6 @@
 		FB82E8D923A271410032F6B5 /* CutsceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB82E8D823A271410032F6B5 /* CutsceneViewController.swift */; };
 		FB82E8DB23A271680032F6B5 /* Cutscene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */; };
 		FB82E8DD23A2722E0032F6B5 /* Cutscene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */; };
-		FB82E8DF23A272440032F6B5 /* Cutscene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FB82E8DE23A272440032F6B5 /* Cutscene.sks */; };
 		FB82E8E123A2773F0032F6B5 /* videoIntro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FB82E8E023A277310032F6B5 /* videoIntro.mp4 */; };
 		FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF38E238E9CFA00437124 /* Coordinator.swift */; };
 		FB9BF391238E9D6A00437124 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF390238E9D6A00437124 /* Storyboarded.swift */; };
@@ -310,7 +309,6 @@
 		FB82E8D823A271410032F6B5 /* CutsceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutsceneViewController.swift; sourceTree = "<group>"; };
 		FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cutscene.storyboard; sourceTree = "<group>"; };
 		FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
-		FB82E8DE23A272440032F6B5 /* Cutscene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Cutscene.sks; sourceTree = "<group>"; };
 		FB82E8E023A277310032F6B5 /* videoIntro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoIntro.mp4; sourceTree = "<group>"; };
 		FB9BF38E238E9CFA00437124 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FB9BF390238E9D6A00437124 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -554,7 +552,6 @@
 				479B7849239D8BAC003BC9DE /* Statistics.storyboard */,
 				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
 				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
-				FB82E8DE23A272440032F6B5 /* Cutscene.sks */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -804,7 +801,6 @@
 				56219D87239EAFA6001CE5DB /* GameScene.sks in Resources */,
 				479B784A239D8BAC003BC9DE /* Statistics.storyboard in Resources */,
 				476B7C93239C3276004D4116 /* Cook.atlas in Resources */,
-				FB82E8DF23A272440032F6B5 /* Cutscene.sks in Resources */,
 				FB55FBE4239A9DAE002EBB89 /* TitilliumWeb-Bold.ttf in Resources */,
 				562BCF742388249E00D5D51D /* WaitingRoom.storyboard in Resources */,
 				566FC92723A0205F0044AFA4 /* sfx - fireAlarm1.wav in Resources */,
