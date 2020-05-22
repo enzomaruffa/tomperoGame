@@ -92,22 +92,16 @@ Oh! To begin working you need to go to the central food supply station. Who want
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMM-s2-UEt" userLabel="Video">
-                                <rect key="frame" x="797" y="100" width="65" height="37.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="X8V-Lw-HnW"/>
-                                </constraints>
+                                <rect key="frame" x="803.5" y="100" width="66.5" height="44.5"/>
                                 <state key="normal" image="video.fill" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" scale="large" weight="black"/>
                                 </state>
                                 <connections>
                                     <action selector="playVideo:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="lYF-Vg-d4o"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1U3-D3-GHq" userLabel="Leaderboard">
-                                <rect key="frame" x="797" y="20" width="65" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="RCm-8C-dMk"/>
-                                </constraints>
+                                <rect key="frame" x="811" y="20" width="51" height="60"/>
                                 <state key="normal" image="suit.diamond.fill" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40" scale="large" weight="black"/>
                                 </state>
