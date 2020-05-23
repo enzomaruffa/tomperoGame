@@ -133,6 +133,7 @@
 		56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B52391B93B005E0807 /* IngredientNode.swift */; };
 		56B3A7BA2391CDC7005E0807 /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B3A7B92391CDC7005E0807 /* StationType.swift */; };
 		56D50AEC244E26DF00527234 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D50AEB244E26DF00527234 /* NavigationController.swift */; };
+		56E261C42478AB1F00C46FA6 /* UIButton+alignTitleVertically.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E261C32478AB1F00C46FA6 /* UIButton+alignTitleVertically.swift */; };
 		56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */; };
 		56E2D7C2238DA2B8000F8A3F /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C1238DA2B8000F8A3F /* Component.swift */; };
 		56E2D7C4238DC95D000F8A3F /* FryableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */; };
@@ -289,6 +290,7 @@
 		56B3A7B52391B93B005E0807 /* IngredientNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientNode.swift; sourceTree = "<group>"; };
 		56B3A7B92391CDC7005E0807 /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
 		56D50AEB244E26DF00527234 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		56E261C32478AB1F00C46FA6 /* UIButton+alignTitleVertically.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+alignTitleVertically.swift"; sourceTree = "<group>"; };
 		56E2D7BF238DA28E000F8A3F /* ChoppableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoppableComponent.swift; sourceTree = "<group>"; };
 		56E2D7C1238DA2B8000F8A3F /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		56E2D7C3238DC95D000F8A3F /* FryableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryableComponent.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */,
 				FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */,
 				471C60D223B45ACC004590D3 /* StringExtensions.swift */,
+				56E261C32478AB1F00C46FA6 /* UIButton+alignTitleVertically.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -542,12 +545,12 @@
 		562BCF702388233700D5D51D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB55FBE9239C33D0002EBB89 /* Main.storyboard */,
 				FB55FBE7239C2824002EBB89 /* DialogView.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
 				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
 				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
-				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 				479B7849239D8BAC003BC9DE /* Statistics.storyboard */,
 				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
@@ -963,6 +966,7 @@
 				567A07B7238C805000D6399A /* SaturnOnionRings.swift in Sources */,
 				56A6B735244F7AB2009933C7 /* WipeTransition.swift in Sources */,
 				FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */,
+				56E261C42478AB1F00C46FA6 /* UIButton+alignTitleVertically.swift in Sources */,
 				47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */,
 				56E2D7C0238DA28E000F8A3F /* ChoppableComponent.swift in Sources */,
 				471C60D723B588B3004590D3 /* ConsoleDebugLogger.swift in Sources */,

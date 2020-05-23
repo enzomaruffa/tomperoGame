@@ -21,11 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lataria" translatesAutoresizingMaskIntoConstraints="NO" id="Fuu-O0-8wV">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVr-Z2-Eoq">
-                                <rect key="frame" x="349" y="316" width="198" height="38"/>
+                                <rect key="frame" x="349" y="315" width="198" height="38"/>
                                 <color key="backgroundColor" red="0.90738040210000004" green="0.2909176946" blue="0.29409283400000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="198" id="D9c-Av-rhn"/>
@@ -64,18 +61,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Fuu-O0-8wV" firstAttribute="leading" secondItem="0mH-vg-ysg" secondAttribute="leading" id="2jW-74-xBr"/>
-                            <constraint firstItem="Fuu-O0-8wV" firstAttribute="top" secondItem="jLz-qk-tMt" secondAttribute="top" constant="-20" id="5DZ-Ie-Rl0"/>
-                            <constraint firstItem="FVr-Z2-Eoq" firstAttribute="bottom" secondItem="Fuu-O0-8wV" secondAttribute="bottom" constant="-60" id="6qs-7G-0fA"/>
-                            <constraint firstItem="FVr-Z2-Eoq" firstAttribute="centerX" secondItem="Fuu-O0-8wV" secondAttribute="centerX" id="E4F-YS-YgU"/>
+                            <constraint firstItem="9ES-aO-VER" firstAttribute="top" secondItem="jLz-qk-tMt" secondAttribute="top" constant="-20" id="5DZ-Ie-Rl0"/>
+                            <constraint firstItem="FVr-Z2-Eoq" firstAttribute="bottom" secondItem="9ES-aO-VER" secondAttribute="bottom" constant="-40" id="6qs-7G-0fA"/>
+                            <constraint firstItem="FVr-Z2-Eoq" firstAttribute="centerX" secondItem="9ES-aO-VER" secondAttribute="centerX" id="E4F-YS-YgU"/>
                             <constraint firstItem="JQE-hm-2cD" firstAttribute="top" secondItem="jLz-qk-tMt" secondAttribute="bottom" constant="20" id="Gko-aZ-a3f"/>
                             <constraint firstItem="S67-lx-u7S" firstAttribute="top" secondItem="JQE-hm-2cD" secondAttribute="bottom" constant="7.5" id="aJ5-jT-4JM"/>
                             <constraint firstItem="JQE-hm-2cD" firstAttribute="centerX" secondItem="jLz-qk-tMt" secondAttribute="centerX" id="eMV-Lf-9Nx"/>
-                            <constraint firstAttribute="trailing" secondItem="Fuu-O0-8wV" secondAttribute="trailing" id="k0T-N6-KzE"/>
                             <constraint firstItem="S67-lx-u7S" firstAttribute="centerX" secondItem="JQE-hm-2cD" secondAttribute="centerX" id="msO-Jo-Xj0"/>
-                            <constraint firstItem="Fuu-O0-8wV" firstAttribute="top" secondItem="0mH-vg-ysg" secondAttribute="top" id="plg-tl-0IN"/>
-                            <constraint firstAttribute="bottom" secondItem="Fuu-O0-8wV" secondAttribute="bottom" id="vnf-1x-fgS"/>
-                            <constraint firstItem="jLz-qk-tMt" firstAttribute="centerX" secondItem="Fuu-O0-8wV" secondAttribute="centerX" id="wqd-tb-JZK"/>
+                            <constraint firstItem="jLz-qk-tMt" firstAttribute="centerX" secondItem="9ES-aO-VER" secondAttribute="centerX" id="wqd-tb-JZK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9ES-aO-VER"/>
                     </view>
@@ -89,7 +82,4 @@
             <point key="canvasLocation" x="-147.32142857142856" y="47.826086956521742"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="lataria" width="2436" height="1154"/>
-    </resources>
 </document>
