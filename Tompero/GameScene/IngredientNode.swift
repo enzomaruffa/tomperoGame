@@ -42,9 +42,9 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     // MARK: - Methods
-    private func hideSpriteNode() {
+    private func hideSpriteNode(completion block: @escaping () -> Void) {
         // We use a very low alpha value otherwise its interaction is disabled
-        self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05))
+        self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05), completion: block)
     }
     
     private func showSpriteNode() {
@@ -135,7 +135,11 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
         case .stove:
             let canMove = station.ingredientNode?.ingredient == nil && ingredient.attemptChangeState(to: .cooking)
             if canMove {
-                hideSpriteNode()
+                spriteNode.run(.scale(to: 0, duration: 0.2)) {
+                    self.hideSpriteNode(completion: {
+                        self.spriteNode.setScale(1)
+                    })
+                }
                 setIngredientIn(station)
             }
             print("Result: \(canMove)")
@@ -144,7 +148,11 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
         case .fryer:
             let canMove = station.ingredientNode?.ingredient == nil && ingredient.attemptChangeState(to: .frying)
             if canMove {
-                hideSpriteNode()
+                spriteNode.run(.scale(to: 0, duration: 0.2)) {
+                    self.hideSpriteNode(completion: {
+                        self.spriteNode.setScale(1)
+                    })
+                }
                 setIngredientIn(station)
             }
             print("Result: \(canMove)")
@@ -246,6 +254,15 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     // MARK: - TappableDelegate
     func tap() {
         print("Ingredient tapped")
+        
+        // animation
+        if currentStation.stationType == .board {
+            spriteNode.run(.sequence([
+                .scale(to: 0.9, duration: 0.05),
+                .scale(to: 1, duration: 0.2, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.1)
+            ]))
+        }
+        
         currentStation.tap()
         checkTextureChange()
     }

@@ -85,7 +85,7 @@ class MainCoordinator: Coordinator {
         let tables: [String : [PlayerTable]] = [
             MCManager.shared.selfName : [
                 PlayerTable(type: .chopping, ingredient: nil),
-                PlayerTable(type: .plate, ingredient: nil),
+                PlayerTable(type: .cooking, ingredient: nil),
                 PlayerTable(type: .ingredient, ingredient: Tentacle())
             ],
             "alo" : [
