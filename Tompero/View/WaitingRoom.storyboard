@@ -91,7 +91,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Inv-jQ-Eo8" userLabel="DifficultyView">
                                 <rect key="frame" x="44" y="135.5" width="193.5" height="278.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_difficultyUI" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_difficultyUI" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp" userLabel="Difficulty Back Image">
                                         <rect key="frame" x="0.0" y="0.0" width="193.5" height="278.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ed-cWw">
@@ -104,7 +104,7 @@
                                             <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="48"/>
                                         </variation>
                                         <connections>
-                                            <action selector="levelButton:" destination="5eH-78-dlc" eventType="touchUpInside" id="mDS-iq-bgN"/>
+                                            <action selector="difficultyPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="hCp-hQ-rWo"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -357,11 +357,11 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="pu5-td-27G" id="hB6-Cy-aZ1"/>
+                        <outlet property="difficultyButton" destination="hGf-ed-cWw" id="FWM-GB-reT"/>
+                        <outlet property="difficultyImage" destination="itL-Jq-8zp" id="JLg-08-y3H"/>
                         <outlet property="goBackImage" destination="lau-UZ-6Cy" id="f0Y-0F-Ker"/>
                         <outlet property="goButton" destination="pyA-2k-fAU" id="29G-cc-eZp"/>
                         <outlet property="headerTitle" destination="Bu9-WS-vVT" id="12w-64-Blm"/>
-                        <outlet property="level" destination="hGf-ed-cWw" id="b17-Bm-feP"/>
-                        <outlet property="levelBackImage" destination="itL-Jq-8zp" id="k7x-6K-gF6"/>
                         <outlet property="menuButton" destination="k7F-M2-bfK" id="5vm-yx-zh5"/>
                         <outlet property="player1Image" destination="qhh-Hh-gEM" id="ruu-AZ-rLp"/>
                         <outlet property="player1InviteButton" destination="iYl-rx-fYK" id="YQR-t8-Jad"/>
