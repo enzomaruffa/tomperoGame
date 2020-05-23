@@ -18,8 +18,8 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        #if !DEGUB
-        true ? gameSceneTest() : initial()
+        #if DEGUB
+        false ? gameSceneTest() : initial()
         #else
         initial()
         #endif
