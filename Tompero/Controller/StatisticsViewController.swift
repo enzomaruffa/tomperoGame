@@ -24,7 +24,6 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
     
     // MARK: - Game Center
     var isGameCenterEnabled: Bool! // check if Game Center enabled
-    var defaultLeaderboard = "" // check default leaderboard ID
     let easyID = "com.spacespice.easy"
     let mediumID = "com.spacespice.medium"
     let hardID = "com.spacespice.hard"
@@ -44,7 +43,7 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
         // Do any additional setup after loading the view.
         deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) orders delivered!"
         
-        pointsLabel.text = "\(statistics.totalPoints) points earned!"
+        pointsLabel.text = "\(statistics.totalPoints) coins earned!"
         
         submitScoreToGameCenter()
     }
