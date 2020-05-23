@@ -44,10 +44,14 @@ class MovableSpriteNode: SKSpriteNode {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
-        moveDelegate?.moving(currentPosition: touch.location(in: scene!))
-        
-        // calculate offset
-        self.position = touch.location(in: scene!)
+        if let initialTouchPosition = self.initialTouchPosition {
+            let finalTouchPosition = touch.location(in: scene!)
+            let distanceToOrigin = initialTouchPosition.distanceTo(finalTouchPosition)
+            if distanceToOrigin >= 80 {
+                moveDelegate?.moving(currentPosition: touch.location(in: scene!))
+                self.position = touch.location(in: scene!)
+            }
+        }
         
         // TODO: how indicator nodes for placeable spaces
     }
@@ -71,7 +75,10 @@ class MovableSpriteNode: SKSpriteNode {
                     SFXPlayer.shared.putFoodDown.play()
                     
 //                    self.position = station.spriteNode.position
-                    self.run(.move(to: station.spriteNode.position, duration: 0.1))
+                    self.run(.group([
+                        .move(to: station.spriteNode.position, duration: 0.1),
+                        .rotate(toAngle: 0, duration: 0.1)
+                    ]))
                     print("Move success!")
                     return
                 }
@@ -80,6 +87,7 @@ class MovableSpriteNode: SKSpriteNode {
             moveDelegate?.moveCancel(currentPosition: touch.location(in: scene!))
             print("Returning to previous position...")
             self.position = previousPosition!
+            self.zRotation = 0
             previousPosition = .zero
         }
     }

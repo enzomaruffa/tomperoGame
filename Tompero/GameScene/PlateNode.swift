@@ -91,7 +91,7 @@ final class PlateNode: MovableDelegate {
         
         self.spriteNode.run(
             .sequence([
-                .scale(to: 0.85, duration: 0.05, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1),
+                .scale(to: 0.8, duration: 0.05, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1),
                 scale,
                 .run {
                     if type == .pipe {
@@ -104,7 +104,8 @@ final class PlateNode: MovableDelegate {
                 .group([
                     .move(by: vector, duration: duration),
                     .fadeOut(withDuration: duration),
-                    .scale(to: 0, duration: duration)
+                    .scale(to: 0, duration: duration),
+                    .rotate(byAngle: CGFloat.random(in: CGFloat.pi...4*CGFloat.pi), duration: duration)
                 ])
             ])
         )
@@ -128,7 +129,6 @@ final class PlateNode: MovableDelegate {
             currentStation.plateNode = self
             
             currentStation.ingredientNode = nil
-            //TODO: Remove ingredient node from scene destroy it whatever
             ingredientNode.spriteNode.removeFromParent()
         } else {
             self.spriteNode.zPosition = PlateNode.baseZPos
@@ -291,7 +291,6 @@ final class PlateNode: MovableDelegate {
     }
     
     func moveEnded(currentPosition: CGPoint) {
-        spriteNode.zRotation = 0
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil

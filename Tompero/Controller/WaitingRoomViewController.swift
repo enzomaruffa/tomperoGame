@@ -9,8 +9,9 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     // MARK: - Variables
     var hosting = false
-    var animationTimer: Timer?
-    var countLevel = GameDifficulty.easy
+    var closedBrowser = false
+    
+    var difficultySelected = GameDifficulty.easy
     
     var playersWithStatus: [MCPeerWithStatus] = [
         MCPeerWithStatus(peer: "__empty__", status: .notConnected),
@@ -18,13 +19,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         MCPeerWithStatus(peer: "__empty__", status: .notConnected),
         MCPeerWithStatus(peer: "__empty__", status: .notConnected)
     ]
-    
-    var playersImages: [UIImageView]!
-    let singleAnimationDuration = 0.35
-    
-    var closedBrowser = false
-    var viewOriginalTransform:CGAffineTransform!
-    var zoomedAndTransformed: CGAffineTransform!
     
     // MARK: - Outlets
     @IBOutlet weak var headerTitle: UILabel!
@@ -34,8 +28,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var goBackImage: UIImageView!
     
-    @IBOutlet weak var level: UIButton!
-    @IBOutlet weak var levelBackImage: UIImageView!
+    @IBOutlet weak var difficultyButton: UIButton!
+    @IBOutlet weak var difficultyImage: UIImageView!
     
     @IBOutlet weak var stackViewCenterYConstraint: NSLayoutConstraint!
     
@@ -62,9 +56,9 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         _ = stackViewCenterYConstraint.setMultiplier(multiplier: hosting ? 0.95 : 1)
         updateViewConstraints()
         
-        if let levelLabel = level.titleLabel {
-            levelLabel.numberOfLines = 1
-            levelLabel.adjustsFontSizeToFitWidth = true
+        if let diffLabel = difficultyButton.titleLabel {
+            diffLabel.numberOfLines = 1
+            diffLabel.adjustsFontSizeToFitWidth = true
         }
         
         headerTitle.numberOfLines = 1
@@ -95,9 +89,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        updateLevelUI(difficulty: countLevel)
-        
-        playersImages = [player1Image, player2Image, player3Image, player4Image]
+        updateDifficultyButton(difficulty: difficultySelected)
         
         player1InviteButton.isHidden = true
         player2InviteButton.isHidden = true
@@ -105,9 +97,9 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         player4InviteButton.isHidden = true
         
         if !hosting {
-            levelBackImage.isHidden = true
+            difficultyImage.isHidden = true
             goButton.isHidden = true
-            level.isHidden = true
+            difficultyButton.isHidden = true
             goBackImage.isHidden = true
         }
         
@@ -131,7 +123,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         EventLogger.shared.logButtonPress(buttonName: "waiting-play")
         
         let peers = playersWithStatus.map({ $0.name })
-        let rule = GameRuleFactory.generateRule(difficulty: countLevel, players: peers)
+        let rule = GameRuleFactory.generateRule(difficulty: difficultySelected, players: peers)
         
         let ruleData = try! JSONEncoder().encode(rule)
         MCManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
@@ -144,28 +136,28 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
     }
     
-    @IBAction func levelButton(_ sender: Any) {
+    @IBAction func difficultyPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-difficulty")
         
-        if countLevel == .easy {
-            countLevel = .medium
-        } else if countLevel == .medium {
-            countLevel = .hard
-        } else if countLevel == .hard {
-            countLevel = .easy
+        if difficultySelected == .easy {
+            difficultySelected = .medium
+        } else if difficultySelected == .medium {
+            difficultySelected = .hard
+        } else if difficultySelected == .hard {
+            difficultySelected = .easy
         }
         
-        updateLevelUI(difficulty: countLevel)
+        updateDifficultyButton(difficulty: difficultySelected)
     }
     
-    func updateLevelUI(difficulty: GameDifficulty) {
+    func updateDifficultyButton(difficulty: GameDifficulty) {
         switch difficulty {
         case .easy:
-            level.setTitle("EASY", for: .normal)
+            difficultyButton.setTitle("EASY", for: .normal)
         case .medium:
-            level.setTitle("MEDIUM", for: .normal)
+            difficultyButton.setTitle("MEDIUM", for: .normal)
         case .hard:
-            level.setTitle("HARD", for: .normal)
+            difficultyButton.setTitle("HARD", for: .normal)
         }
     }
     

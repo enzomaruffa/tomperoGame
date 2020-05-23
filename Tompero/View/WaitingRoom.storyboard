@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5eH-78-dlc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5eH-78-dlc">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -91,32 +91,32 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Inv-jQ-Eo8" userLabel="DifficultyView">
                                 <rect key="frame" x="44" y="135.5" width="193.5" height="278.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_difficultyUI" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_difficultyUI" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp" userLabel="Difficulty Back Image">
                                         <rect key="frame" x="0.0" y="0.0" width="193.5" height="278.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ed-cWw">
-                                        <rect key="frame" x="92" y="198.5" width="86" height="30"/>
+                                        <rect key="frame" x="77.5" y="198.5" width="112" height="30"/>
                                         <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="26"/>
-                                        <state key="normal" title="EASY">
+                                        <state key="normal" title="MEDIUM">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="48"/>
                                         </variation>
                                         <connections>
-                                            <action selector="levelButton:" destination="5eH-78-dlc" eventType="touchUpInside" id="mDS-iq-bgN"/>
+                                            <action selector="difficultyPressed:" destination="5eH-78-dlc" eventType="touchUpInside" id="hCp-hQ-rWo"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="itL-Jq-8zp" firstAttribute="leading" secondItem="Inv-jQ-Eo8" secondAttribute="leading" id="8eS-aJ-MTv"/>
-                                    <constraint firstItem="hGf-ed-cWw" firstAttribute="trailing" secondItem="itL-Jq-8zp" secondAttribute="trailing" multiplier="0.92" id="FxN-Ui-Qwh"/>
+                                    <constraint firstItem="hGf-ed-cWw" firstAttribute="trailing" secondItem="itL-Jq-8zp" secondAttribute="trailing" multiplier="0.98" id="FxN-Ui-Qwh"/>
                                     <constraint firstAttribute="width" secondItem="Inv-jQ-Eo8" secondAttribute="height" multiplier="320:461" id="Q4M-DN-MeN"/>
                                     <constraint firstAttribute="bottom" secondItem="itL-Jq-8zp" secondAttribute="bottom" id="QM4-XQ-WTf"/>
                                     <constraint firstItem="hGf-ed-cWw" firstAttribute="bottom" secondItem="itL-Jq-8zp" secondAttribute="bottom" multiplier="0.82" id="QQo-03-vUl"/>
                                     <constraint firstItem="hGf-ed-cWw" firstAttribute="top" secondItem="itL-Jq-8zp" secondAttribute="centerY" multiplier="1.425" id="e2g-VK-Iu4"/>
                                     <constraint firstItem="itL-Jq-8zp" firstAttribute="top" secondItem="Inv-jQ-Eo8" secondAttribute="top" id="uin-mu-U49"/>
-                                    <constraint firstItem="hGf-ed-cWw" firstAttribute="leading" secondItem="itL-Jq-8zp" secondAttribute="centerX" multiplier="0.95" id="xfn-KP-aSd"/>
+                                    <constraint firstItem="hGf-ed-cWw" firstAttribute="leading" secondItem="itL-Jq-8zp" secondAttribute="centerX" multiplier="0.8" id="xfn-KP-aSd"/>
                                     <constraint firstAttribute="trailing" secondItem="itL-Jq-8zp" secondAttribute="trailing" id="zk2-qR-F1h"/>
                                 </constraints>
                             </view>
@@ -357,11 +357,11 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="pu5-td-27G" id="hB6-Cy-aZ1"/>
+                        <outlet property="difficultyButton" destination="hGf-ed-cWw" id="FWM-GB-reT"/>
+                        <outlet property="difficultyImage" destination="itL-Jq-8zp" id="JLg-08-y3H"/>
                         <outlet property="goBackImage" destination="lau-UZ-6Cy" id="f0Y-0F-Ker"/>
                         <outlet property="goButton" destination="pyA-2k-fAU" id="29G-cc-eZp"/>
                         <outlet property="headerTitle" destination="Bu9-WS-vVT" id="12w-64-Blm"/>
-                        <outlet property="level" destination="hGf-ed-cWw" id="b17-Bm-feP"/>
-                        <outlet property="levelBackImage" destination="itL-Jq-8zp" id="k7x-6K-gF6"/>
                         <outlet property="menuButton" destination="k7F-M2-bfK" id="5vm-yx-zh5"/>
                         <outlet property="player1Image" destination="qhh-Hh-gEM" id="ruu-AZ-rLp"/>
                         <outlet property="player1InviteButton" destination="iYl-rx-fYK" id="YQR-t8-Jad"/>
