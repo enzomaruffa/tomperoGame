@@ -279,8 +279,7 @@ class GameScene: SKScene {
                 
                 // timer only starts when the first order is generated
                 if !timerStarted {
-                    timerStarted = true
-                    
+                    timerStarted = true   
                 }
             }
             

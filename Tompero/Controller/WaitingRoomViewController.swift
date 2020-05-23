@@ -66,6 +66,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             levelLabel.numberOfLines = 1
             levelLabel.adjustsFontSizeToFitWidth = true
         }
+        
         headerTitle.numberOfLines = 1
         headerTitle.adjustsFontSizeToFitWidth = true
         player1Label.adjustsFontSizeToFitWidth = true

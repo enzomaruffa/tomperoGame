@@ -18,10 +18,8 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let gsTest = false
-        
-        #if DEGUB
-        gsTest ? gameSceneTest() : initial()
+        #if !DEGUB
+        true ? gameSceneTest() : initial()
         #else
         initial()
         #endif
@@ -79,12 +77,12 @@ class MainCoordinator: Coordinator {
                 PlayerTable(type: .plate, ingredient: nil),
                 PlayerTable(type: .ingredient, ingredient: Asteroid())
             ],
-            "Enzo's Enzo's iPhone" : [
+            "alo" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil)
             ],
-            "God" : [
+            "alo 2" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil)
@@ -98,7 +96,7 @@ class MainCoordinator: Coordinator {
         
         game(
             rule: GameRule(
-                difficulty: .easy,
+                difficulty: .hard,
                 possibleIngredients: [
                     Asteroid(),
                     Tentacle(),
