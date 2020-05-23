@@ -129,7 +129,6 @@ final class PlateNode: MovableDelegate {
             currentStation.plateNode = self
             
             currentStation.ingredientNode = nil
-            //TODO: Remove ingredient node from scene destroy it whatever
             ingredientNode.spriteNode.removeFromParent()
         } else {
             self.spriteNode.zPosition = PlateNode.baseZPos
@@ -292,7 +291,6 @@ final class PlateNode: MovableDelegate {
     }
     
     func moveEnded(currentPosition: CGPoint) {
-        spriteNode.zRotation = 0
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil

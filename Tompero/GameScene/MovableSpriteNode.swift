@@ -71,7 +71,10 @@ class MovableSpriteNode: SKSpriteNode {
                     SFXPlayer.shared.putFoodDown.play()
                     
 //                    self.position = station.spriteNode.position
-                    self.run(.move(to: station.spriteNode.position, duration: 0.1))
+                    self.run(.group([
+                        .move(to: station.spriteNode.position, duration: 0.1),
+                        .rotate(toAngle: 0, duration: 0.1)
+                    ]))
                     print("Move success!")
                     return
                 }
@@ -80,6 +83,7 @@ class MovableSpriteNode: SKSpriteNode {
             moveDelegate?.moveCancel(currentPosition: touch.location(in: scene!))
             print("Returning to previous position...")
             self.position = previousPosition!
+            self.zRotation = 0
             previousPosition = .zero
         }
     }

@@ -26,8 +26,8 @@ class MainCoordinator: Coordinator {
 //        gsTest ? gameSceneTest() : initial()
 //        #endif
         
-        gameSceneTest()
-//        initial()
+//        gameSceneTest()
+        initial()
     }
     
     func popToRoot() {
@@ -43,6 +43,12 @@ class MainCoordinator: Coordinator {
         let controller = InicialViewController.instantiate()
         controller.coordinator = self
         navigationController.pushViewController(controller, animated: false)
+    }
+    
+    func video() {
+        let controller = CutsceneViewController.instantiate()
+        controller.coordinator = self
+        navigationController.pushViewController(controller, animated: true)
     }
     
     func menu() {
@@ -78,9 +84,9 @@ class MainCoordinator: Coordinator {
     fileprivate func gameSceneTest() {
         let tables: [String : [PlayerTable]] = [
             MCManager.shared.selfName : [
-                PlayerTable(type: .frying, ingredient: nil),
+                PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .plate, ingredient: nil),
-                PlayerTable(type: .ingredient, ingredient: Asteroid())
+                PlayerTable(type: .ingredient, ingredient: Tentacle())
             ],
             "alo" : [
                 PlayerTable(type: .chopping, ingredient: nil),
@@ -199,9 +205,4 @@ class MainCoordinator: Coordinator {
         //            } 
     }
     
-    func video() {
-        let controller = CutsceneViewController.instantiate()
-        controller.coordinator = self
-        navigationController.pushViewController(controller, animated: true)
-    }
 }

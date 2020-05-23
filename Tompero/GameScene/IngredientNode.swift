@@ -229,7 +229,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func moveEnded(currentPosition: CGPoint) {
-        spriteNode.zRotation = 0
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil
