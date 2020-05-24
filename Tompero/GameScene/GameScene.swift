@@ -451,7 +451,9 @@ extension GameScene: GameConnectionManagerObserver {
         )
         shelf.plateNode?.updateTexture()
         node.zPosition = 2
+        node.setScale(0)
         self.addChild(node)
+        node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
     
     func receiveIngredient(ingredient: Ingredient) {
@@ -469,7 +471,9 @@ extension GameScene: GameConnectionManagerObserver {
         )
         shelf.ingredientNode?.checkTextureChange()
         node.zPosition = 2
+        node.setScale(0)
         self.addChild(node)
+        node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
     
     func receiveOrders(orders: [Order]) {
