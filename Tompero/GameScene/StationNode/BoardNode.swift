@@ -55,7 +55,7 @@ class BoardNode: StationNode {
         
         let progressBarNode = ProgressBar(color: .green, size: CGSize(width: tappableNode.size.width * 0.5, height: 18))
         self.spriteNode.addChild(progressBarNode)
-        progressBarNode.zPosition = 8
+        progressBarNode.zPosition = 20
         progressBarNode.position = progressBarNodeOffset
         
         self.progressBarNode = progressBarNode
