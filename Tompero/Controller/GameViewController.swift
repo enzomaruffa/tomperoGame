@@ -30,7 +30,8 @@ class GameViewController: UIViewController, Storyboarded {
                 scene.coordinator = self.coordinator
                 scene.controller = self
                 
-                scene.scaleMode = .aspectFill
+                // if iPad
+                scene.scaleMode = traitCollection.verticalSizeClass == .regular ? .aspectFit : .aspectFill
                 
                 scene.backgroundColor = .clear
                 view.allowsTransparency = true

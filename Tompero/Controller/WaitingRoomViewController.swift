@@ -251,12 +251,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                         }
                     } else if playersWithStatus[index].status == .connecting {
                         self.player1Label.text = "..."
-                        
                         self.changeImageAnimated(image: "VREX - redline", viewChange: hat)
                     } else {
                         self.player1Label.text = playersWithStatus[index].name
                         self.changeImageAnimated(image: "VREX - FULL", viewChange: hat)
-                        
                     }
                 } else if index == 1 {
                     let hat = self.player2Image!
@@ -272,6 +270,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                     } else {
                         self.player2Label.text = playersWithStatus[index].name
                         self.changeImageAnimated(image: "SW77 - FULL", viewChange: hat)
+                        if self.hosting {
+                            self.player2InviteButton.setTitle(.none, for: .normal)
+                            self.player2InviteButton.isEnabled = false
+                        }
                     }
                 } else if index == 2 {
                     let hat = self.player3Image!
@@ -287,6 +289,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                     } else {
                         self.player3Label.text = playersWithStatus[index].name
                         self.changeImageAnimated(image: "MORGAN - FULL", viewChange: hat)
+                        if self.hosting {
+                            self.player3InviteButton.setTitle(.none, for: .normal)
+                            self.player3InviteButton.isEnabled = false
+                        }
                     }
                 } else if index == 3 {
                     let hat = self.player4Image!
@@ -302,6 +308,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                     } else {
                         self.player4Label.text = playersWithStatus[index].name
                         self.changeImageAnimated(image: "JERRY - FULL", viewChange: hat)
+                        if self.hosting {
+                            self.player4InviteButton.setTitle(.none, for: .normal)
+                            self.player4InviteButton.isEnabled = false
+                        }
                     }
                 }
             }

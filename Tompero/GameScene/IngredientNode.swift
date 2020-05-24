@@ -255,14 +255,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     func tap() {
         print("Ingredient tapped")
         
-        // animation
-        if currentStation.stationType == .board {
-            spriteNode.run(.sequence([
-                .scale(to: 0.9, duration: 0.05),
-                .scale(to: 1, duration: 0.2, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.1)
-            ]))
-        }
-        
         currentStation.tap()
         checkTextureChange()
     }
