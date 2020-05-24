@@ -69,7 +69,10 @@ class BoardNode: StationNode {
             choppableComponent.update()
             SFXPlayer.shared.chop.play()
             
-            playAnimation()
+            ingredientNode?.spriteNode.run(.sequence([
+                .scale(to: 0.9, duration: 0.05),
+                .scale(to: 1, duration: 0.2, delay: 0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.1)
+            ]))
             
             progressBarNode?.progress = CGFloat(choppableComponent.chopProgress / choppableComponent.chopCap)
             

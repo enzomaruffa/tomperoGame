@@ -128,10 +128,10 @@ class StationNode: TappableDelegate {
             animationRunning = true
             let timePerFrame = TimeInterval(stationAnimationDuration) / TimeInterval(stationAnimationFrames.count)
             var animationAction = SKAction.animate(
-                                    with: stationAnimationFrames,
-                                    timePerFrame: timePerFrame,
-                                    resize: stationAnimationResize,
-                                    restore: true
+                with: stationAnimationFrames,
+                timePerFrame: timePerFrame,
+                resize: stationAnimationResize,
+                restore: true
             )
             
             if stationAnimationRepeats {
