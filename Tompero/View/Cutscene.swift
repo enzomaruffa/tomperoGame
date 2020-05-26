@@ -58,8 +58,19 @@ class Cutscene: SKScene {
     }
     
     func setupBackButton() {
-        backButton = SKSpriteNode(texture: SKTexture(imageNamed: "WR_backButton"), size: CGSize(width: 300, height: 300))
-        backButton.anchorPoint = CGPoint(x: 0, y: 1)
+        backButton = SKSpriteNode(texture: .none, color: .clear, size: CGSize(width: 322, height: 300))
+        
+        let image = SKSpriteNode(texture: SKTexture(imageNamed: "WR_backButton"), size: backButton.size)
+        image.zPosition = 2
+        image.anchorPoint = CGPoint(x: 0, y: 1)
+        
+        let background = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: -backButton.size.height), size: backButton.size), cornerRadius: 24)
+        background.fillColor = #colorLiteral(red: 0.1921389997, green: 0.1921669245, blue: 0.1921294034, alpha: 1)
+        background.strokeColor = .clear
+        background.zPosition = 1
+        
+        backButton.addChild(image)
+        backButton.addChild(background)
         backButton.position = CGPoint(x: -videoNodeSize.width, y: videoNodeSize.height) * 0.45
         addChild(backButton)
     }
