@@ -118,6 +118,10 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         coordinator?.video()
     }
     
+    @IBAction func settingsPressed(_ sender: Any) {
+        coordinator?.settings()
+    }
+    
     // MARK: - Methods
     func setCoinsValue() {
         databaseManager.getPlayerCoinCount { count in

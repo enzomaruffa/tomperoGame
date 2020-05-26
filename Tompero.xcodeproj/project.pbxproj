@@ -140,6 +140,8 @@
 		56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C7238DC992000F8A3F /* CookableComponent.swift */; };
 		56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */; };
 		56EDA92A239B48B7004BFC2C /* OrderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EDA929239B48B7004BFC2C /* OrderNode.swift */; };
+		56FE9217247DACBF007E28BB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FE9216247DACBF007E28BB /* Settings.storyboard */; };
+		56FE9219247DAD25007E28BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE9218247DAD25007E28BB /* SettingsViewController.swift */; };
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
 		FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */; };
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
@@ -296,6 +298,8 @@
 		56E2D7C7238DC992000F8A3F /* CookableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookableComponent.swift; sourceTree = "<group>"; };
 		56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
 		56EDA929239B48B7004BFC2C /* OrderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNode.swift; sourceTree = "<group>"; };
+		56FE9216247DACBF007E28BB /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		56FE9218247DAD25007E28BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		B688C2DD78186CF812918984 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -544,14 +548,15 @@
 			children = (
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB55FBE9239C33D0002EBB89 /* Main.storyboard */,
+				56FE9216247DACBF007E28BB /* Settings.storyboard */,
+				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
+				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
 				FB55FBE7239C2824002EBB89 /* DialogView.swift */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
 				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
 				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 				479B7849239D8BAC003BC9DE /* Statistics.storyboard */,
-				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
-				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -560,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				FBFDDCFD238C040700CD503A /* InicialViewController.swift */,
+				56FE9218247DAD25007E28BB /* SettingsViewController.swift */,
 				FB82E8D823A271410032F6B5 /* CutsceneViewController.swift */,
 				562BCF75238824FE00D5D51D /* WaitingRoomViewController.swift */,
 				FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */,
@@ -810,6 +816,7 @@
 				47BE3EDC239C1F7200246F20 /* TeleportBlue.atlas in Resources */,
 				476B7C94239C3276004D4116 /* HatchVacuum.atlas in Resources */,
 				566E9C89239D7EC100787210 /* orderUp.wav in Resources */,
+				56FE9217247DACBF007E28BB /* Settings.storyboard in Resources */,
 				566FC92823A0205F0044AFA4 /* sfx - customerCrowd3.wav in Resources */,
 				56A0F1FA239F4A5A003EEF2D /* menuMusicVintage.wav in Resources */,
 				566E9C85239D7EC100787210 /* burn.wav in Resources */,
@@ -928,6 +935,7 @@
 				566A5BAF239A8564006D96CF /* ComponentType.swift in Sources */,
 				4722D477238EB750003D373C /* GameRuleFactory.swift in Sources */,
 				4709B28323A814B5004B8F51 /* HatchNode.swift in Sources */,
+				56FE9219247DAD25007E28BB /* SettingsViewController.swift in Sources */,
 				476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */,
 				471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */,
 				4709B27A23A6F3C8004B8F51 /* ShelfNode.swift in Sources */,

@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Settings_selectionButtonOFF.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Settings_selectionButtonOFF@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Settings_selectionButtonOFF@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

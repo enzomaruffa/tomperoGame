@@ -123,10 +123,21 @@ Oh! To begin working you need to go to the central food supply station. Who want
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4G-Dm-H07" userLabel="Settings">
+                                <rect key="frame" x="806" y="164.5" width="61" height="59"/>
+                                <state key="normal" image="gear" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" scale="large" weight="black"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingsPressed:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="hZO-kD-Hds"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="p4G-Dm-H07" firstAttribute="centerX" secondItem="MMM-s2-UEt" secondAttribute="centerX" id="2ZE-5r-BtQ"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.3257" id="6jO-17-epS"/>
+                            <constraint firstItem="p4G-Dm-H07" firstAttribute="top" secondItem="MMM-s2-UEt" secondAttribute="bottom" constant="20" id="9kf-Uy-m3S"/>
                             <constraint firstItem="1U3-D3-GHq" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="20" id="9tu-rh-GwS"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="centerX" secondItem="vzb-mj-gsY" secondAttribute="trailing" id="BdL-TS-hct"/>
                             <constraint firstItem="MMM-s2-UEt" firstAttribute="top" secondItem="1U3-D3-GHq" secondAttribute="bottom" constant="20" id="EEQ-CK-A4p"/>
@@ -169,6 +180,7 @@ Oh! To begin working you need to go to the central food supply station. Who want
         <image name="HOST - apagado" width="255" height="66"/>
         <image name="JOIN - apagado" width="155" height="68"/>
         <image name="caixa de texto" width="1199" height="335"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="nave" width="4355" height="2211"/>
         <image name="sapao" width="595" height="483"/>
         <image name="suit.diamond.fill" catalog="system" width="107" height="128"/>
