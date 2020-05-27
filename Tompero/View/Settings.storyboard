@@ -59,7 +59,7 @@
                                                     <constraint firstAttribute="width" secondItem="t8S-Wp-TLq" secondAttribute="height" multiplier="48:11" id="NnQ-KQ-ipk"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNh-hl-cXb" userLabel="Button">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNh-hl-cXb" userLabel="Button" customClass="SelectorButton" customModule="SpaceSpice" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="3.5" width="209" height="44"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="26"/>
                                                 <state key="normal" title="Settings">
@@ -90,7 +90,7 @@
                                                     <constraint firstAttribute="width" secondItem="adC-KW-Z6y" secondAttribute="height" multiplier="48:11" id="Ups-UM-J1g"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEM-4C-fve" userLabel="Button">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEM-4C-fve" userLabel="Button" customClass="SelectorButton" customModule="SpaceSpice" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="2" width="154.5" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Game Center">
@@ -121,7 +121,7 @@
                                                     <constraint firstAttribute="width" secondItem="WKC-kd-RlE" secondAttribute="height" multiplier="48:11" id="R6X-PN-YUp"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzv-vB-snm" userLabel="Button">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzv-vB-snm" userLabel="Button" customClass="SelectorButton" customModule="SpaceSpice" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="2" width="155" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Stats">
@@ -152,7 +152,7 @@
                                                     <constraint firstAttribute="width" secondItem="nk1-wf-j7G" secondAttribute="height" multiplier="48:11" id="tAY-wc-Qf8"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-td-utD" userLabel="Button">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-td-utD" userLabel="Button" customClass="SelectorButton" customModule="SpaceSpice" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="2" width="155" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Credits">

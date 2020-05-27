@@ -17,11 +17,10 @@ class SettingsViewController: UIViewController, Storyboarded {
     // MARK: - Outlets
     @IBOutlet weak var boxCenterYConstraint: NSLayoutConstraint!
     @IBOutlet var widthConstraints: [NSLayoutConstraint]!
-    @IBOutlet var buttons: [UIButton]!
+    @IBOutlet var buttons: [SelectorButton]!
     @IBOutlet var images: [UIImageView]!
     
     // MARK: - Variables
-    var selectedState: Int!
     
     // MARK: - Constants
     let selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 26)
@@ -34,6 +33,10 @@ class SettingsViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         
         _ = boxCenterYConstraint.setMultiplier(multiplier: traitCollection.verticalSizeClass == .regular ? 1 : 1.15)
+        
+        buttons.enumerated().forEach { index, button in
+            button.image = self.images[index]
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,23 +47,17 @@ class SettingsViewController: UIViewController, Storyboarded {
         navigationController?.popViewController(animated: true)
     }
     
-    func select(_ state: Int) {
-        selectedState = state
+    func select(_ tag: Int) {
         
         widthConstraints.enumerated().forEach { index, constraint in
-            _ = constraint.setMultiplier(multiplier: index == state ? selectedMultiplier : defaultMultiplier)
+            _ = constraint.setMultiplier(multiplier: index == tag ? selectedMultiplier : defaultMultiplier)
             UIView.animate(withDuration: 0.1) {
                 self.view.layoutIfNeeded()
             }
         }
         
         buttons.enumerated().forEach { index, button in
-            button.titleLabel!.font = index == state ? selectedFont : defaultFont
-            
-        }
-        
-        images.enumerated().forEach { index, image in
-            image.image = UIImage(named: index == state ? "Settings_selectionButtonON" : "Settings_selectionButtonOFF")
+            button.isEnabled = !(index == tag)
         }
         
         // change the view too

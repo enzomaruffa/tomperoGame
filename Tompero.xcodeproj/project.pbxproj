@@ -122,6 +122,7 @@
 		567A07BC238C805000D6399A /* Tardigrades.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AB238C805000D6399A /* Tardigrades.swift */; };
 		567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AC238C805000D6399A /* SpaceshipHull.swift */; };
 		567A07C0238C805000D6399A /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AF238C805000D6399A /* MarsSand.swift */; };
+		569B4692247EB9A300D7792F /* SelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4691247EB9A300D7792F /* SelectorButton.swift */; };
 		569B4D2A239E67E20057C7CC /* TrackWithIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4D29239E67E20057C7CC /* TrackWithIntro.swift */; };
 		569B4D35239E6D610057C7CC /* gameMusicIntro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */; };
 		569B4D36239E6D610057C7CC /* gameMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 569B4D34239E6D610057C7CC /* gameMusic.m4a */; };
@@ -280,6 +281,7 @@
 		567A07AB238C805000D6399A /* Tardigrades.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tardigrades.swift; sourceTree = "<group>"; };
 		567A07AC238C805000D6399A /* SpaceshipHull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHull.swift; sourceTree = "<group>"; };
 		567A07AF238C805000D6399A /* MarsSand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
+		569B4691247EB9A300D7792F /* SelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorButton.swift; sourceTree = "<group>"; };
 		569B4D29239E67E20057C7CC /* TrackWithIntro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWithIntro.swift; sourceTree = "<group>"; };
 		569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusicIntro.m4a; sourceTree = "<group>"; };
 		569B4D34239E6D610057C7CC /* gameMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusic.m4a; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 			children = (
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB55FBE9239C33D0002EBB89 /* Main.storyboard */,
+				569B4691247EB9A300D7792F /* SelectorButton.swift */,
 				56FE9216247DACBF007E28BB /* Settings.storyboard */,
 				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
 				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
@@ -927,6 +930,7 @@
 				471C60D523B58848004590D3 /* DebugLogger.swift in Sources */,
 				566E9C99239D823400787210 /* MusicPlayer.swift in Sources */,
 				47CC66CC238C056B00EB25C1 /* MCManager.swift in Sources */,
+				569B4692247EB9A300D7792F /* SelectorButton.swift in Sources */,
 				479B784C239D8BCB003BC9DE /* StatisticsViewController.swift in Sources */,
 				4709B28523A81609004B8F51 /* DeliveryNode.swift in Sources */,
 				471795E9238C1E54000575B0 /* GameConnectionManager.swift in Sources */,
