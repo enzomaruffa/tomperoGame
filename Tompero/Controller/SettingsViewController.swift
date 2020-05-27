@@ -78,9 +78,9 @@ class SettingsViewController: UIViewController, Storyboarded {
         }
         
         switch tag {
-        case 1: currentView = SettingsView.instantiate()
-        case 2: currentView = SettingsView.instantiate()
-        case 3: currentView = SettingsView.instantiate()
+        case 1: currentView = GameCenterView.instantiate()
+        case 2: currentView = StatsView.instantiate()
+        case 3: currentView = CreditsView.instantiate()
         default: currentView = SettingsView.instantiate()
         }
         

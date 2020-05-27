@@ -149,6 +149,7 @@
 		56F45BC8247EE6980067DE5D /* StatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56F45BC7247EE6980067DE5D /* StatsView.xib */; };
 		56F45BCA247EE6C10067DE5D /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F45BC9247EE6C10067DE5D /* CreditsView.swift */; };
 		56F45BCC247EE6E70067DE5D /* CreditsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56F45BCB247EE6E70067DE5D /* CreditsView.xib */; };
+		56F45BCE247EE7D40067DE5D /* GameCenterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56F45BCD247EE7D40067DE5D /* GameCenterView.xib */; };
 		56FE9217247DACBF007E28BB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FE9216247DACBF007E28BB /* Settings.storyboard */; };
 		56FE9219247DAD25007E28BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE9218247DAD25007E28BB /* SettingsViewController.swift */; };
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
@@ -311,11 +312,11 @@
 		56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
 		56EDA929239B48B7004BFC2C /* OrderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNode.swift; sourceTree = "<group>"; };
 		56F45BC2247EE5F70067DE5D /* GameCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterView.swift; sourceTree = "<group>"; };
-		56F45BC4247EE60C0067DE5D /* GameCenterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GameCenterView.xib; path = "/Users/viniciusbinder/Documents/ADA/Mini Challenges/3rd Mini Challenge/Tompero/Tompero/View/Settings/GameCenterView.xib"; sourceTree = "<absolute>"; };
 		56F45BC5247EE6740067DE5D /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		56F45BC7247EE6980067DE5D /* StatsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsView.xib; sourceTree = "<group>"; };
 		56F45BC9247EE6C10067DE5D /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		56F45BCB247EE6E70067DE5D /* CreditsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditsView.xib; sourceTree = "<group>"; };
+		56F45BCD247EE7D40067DE5D /* GameCenterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameCenterView.xib; sourceTree = "<group>"; };
 		56FE9216247DACBF007E28BB /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		56FE9218247DAD25007E28BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
@@ -688,7 +689,7 @@
 				569B4698247ED5D900D7792F /* SettingsView.swift */,
 				569B4696247EBEF200D7792F /* SettingsView.xib */,
 				56F45BC2247EE5F70067DE5D /* GameCenterView.swift */,
-				56F45BC4247EE60C0067DE5D /* GameCenterView.xib */,
+				56F45BCD247EE7D40067DE5D /* GameCenterView.xib */,
 				56F45BC5247EE6740067DE5D /* StatsView.swift */,
 				56F45BC7247EE6980067DE5D /* StatsView.xib */,
 				56F45BC9247EE6C10067DE5D /* CreditsView.swift */,
@@ -882,6 +883,7 @@
 				FB55FBEB239C33D0002EBB89 /* Main.storyboard in Resources */,
 				566FC93023A0205F0044AFA4 /* sfx - angryCrowd2.wav in Resources */,
 				569B4D35239E6D610057C7CC /* gameMusicIntro.m4a in Resources */,
+				56F45BCE247EE7D40067DE5D /* GameCenterView.xib in Resources */,
 				566E9C88239D7EC100787210 /* takeFood.wav in Resources */,
 				562BCF6823881CFC00D5D51D /* LaunchScreen.storyboard in Resources */,
 				FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */,
