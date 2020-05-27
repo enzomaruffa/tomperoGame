@@ -112,12 +112,6 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         kombiTimer?.invalidate()
     }
     
-    @IBAction func playVideo(_ sender: Any) {
-        MusicPlayer.shared.stop(.menu)
-        MusicPlayer.shared.stop(.game)
-        coordinator?.video()
-    }
-    
     @IBAction func settingsPressed(_ sender: Any) {
         coordinator?.settings()
     }

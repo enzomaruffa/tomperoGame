@@ -10,6 +10,8 @@ import AVFoundation
 
 class MusicPlayer {
     
+    static var musicOn = true
+    
     static var shared = MusicPlayer()
     
     private var score = [TrackNumber: Track]()
@@ -20,6 +22,8 @@ class MusicPlayer {
     }
     
     func play(_ trackToPlay: TrackNumber) {
+        guard MusicPlayer.musicOn else { return }
+        
         for (trackNumber, track) in score {
             if trackNumber == trackToPlay {
                 track.play()
@@ -31,6 +35,12 @@ class MusicPlayer {
     
     func stop(_ trackToStop: TrackNumber) {
         if let track = score[trackToStop] {
+            track.stop()
+        }
+    }
+    
+    func stopAll() {
+        for (_, track) in score {
             track.stop()
         }
     }

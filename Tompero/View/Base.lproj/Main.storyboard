@@ -91,17 +91,8 @@ Oh! To begin working you need to go to the central food supply station. Who want
                                     <constraint firstItem="kvu-2L-o1z" firstAttribute="centerY" secondItem="07h-SX-LdR" secondAttribute="centerY" id="tyA-YZ-Zp9"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMM-s2-UEt" userLabel="Video">
-                                <rect key="frame" x="803.5" y="100" width="66.5" height="44.5"/>
-                                <state key="normal" image="video.fill" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" scale="large" weight="black"/>
-                                </state>
-                                <connections>
-                                    <action selector="playVideo:" destination="1qB-Oy-VQR" eventType="touchUpInside" id="lYF-Vg-d4o"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1U3-D3-GHq" userLabel="Leaderboard">
-                                <rect key="frame" x="811" y="20" width="51" height="60"/>
+                                <rect key="frame" x="801" y="20" width="51" height="60"/>
                                 <state key="normal" image="suit.diamond.fill" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40" scale="large" weight="black"/>
                                 </state>
@@ -124,7 +115,7 @@ Oh! To begin working you need to go to the central food supply station. Who want
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4G-Dm-H07" userLabel="Settings">
-                                <rect key="frame" x="806" y="164.5" width="61" height="59"/>
+                                <rect key="frame" x="796" y="100" width="61" height="59"/>
                                 <state key="normal" image="gear" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" scale="large" weight="black"/>
                                 </state>
@@ -135,22 +126,20 @@ Oh! To begin working you need to go to the central food supply station. Who want
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="p4G-Dm-H07" firstAttribute="centerX" secondItem="MMM-s2-UEt" secondAttribute="centerX" id="2ZE-5r-BtQ"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="height" secondItem="7E9-WB-dTq" secondAttribute="height" multiplier="0.3257" id="6jO-17-epS"/>
-                            <constraint firstItem="p4G-Dm-H07" firstAttribute="top" secondItem="MMM-s2-UEt" secondAttribute="bottom" constant="20" id="9kf-Uy-m3S"/>
                             <constraint firstItem="1U3-D3-GHq" firstAttribute="top" secondItem="7E9-WB-dTq" secondAttribute="top" constant="20" id="9tu-rh-GwS"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="centerX" secondItem="vzb-mj-gsY" secondAttribute="trailing" id="BdL-TS-hct"/>
-                            <constraint firstItem="MMM-s2-UEt" firstAttribute="top" secondItem="1U3-D3-GHq" secondAttribute="bottom" constant="20" id="EEQ-CK-A4p"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="centerY" secondItem="7E9-WB-dTq" secondAttribute="centerY" multiplier="1.7" id="MSN-8l-wMP"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="top" secondItem="aGT-i2-1uU" secondAttribute="top" constant="-20" id="Mkx-bA-2ay"/>
                             <constraint firstItem="lxF-wq-pZV" firstAttribute="width" secondItem="7E9-WB-dTq" secondAttribute="width" id="NRb-cV-4cq"/>
                             <constraint firstItem="E0N-yL-dCX" firstAttribute="leading" secondItem="7E9-WB-dTq" secondAttribute="leading" constant="10" id="Nvy-sN-fjQ"/>
-                            <constraint firstItem="MMM-s2-UEt" firstAttribute="centerX" secondItem="1U3-D3-GHq" secondAttribute="centerX" id="PcI-kS-rw2"/>
+                            <constraint firstItem="p4G-Dm-H07" firstAttribute="centerX" secondItem="1U3-D3-GHq" secondAttribute="centerX" id="PPc-7Z-2H2"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="top" secondItem="H4T-P9-M7q" secondAttribute="top" id="aaq-eS-QA2"/>
                             <constraint firstItem="vzb-mj-gsY" firstAttribute="height" secondItem="E0N-yL-dCX" secondAttribute="height" id="bNU-tY-PNR"/>
+                            <constraint firstItem="p4G-Dm-H07" firstAttribute="top" secondItem="1U3-D3-GHq" secondAttribute="bottom" constant="20" id="baE-77-0bX"/>
                             <constraint firstItem="vzb-mj-gsY" firstAttribute="leading" secondItem="E0N-yL-dCX" secondAttribute="trailing" constant="10" id="bkg-pq-XBn"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="bottom" secondItem="H4T-P9-M7q" secondAttribute="bottom" id="cO4-xq-xTH"/>
-                            <constraint firstItem="1U3-D3-GHq" firstAttribute="trailing" secondItem="7E9-WB-dTq" secondAttribute="trailing" constant="10" id="d4i-Gj-2KD"/>
+                            <constraint firstItem="1U3-D3-GHq" firstAttribute="trailing" secondItem="7E9-WB-dTq" secondAttribute="trailing" id="d4i-Gj-2KD"/>
                             <constraint firstItem="E0N-yL-dCX" firstAttribute="centerY" secondItem="1U3-D3-GHq" secondAttribute="centerY" id="ddk-dZ-e8R"/>
                             <constraint firstItem="H4T-P9-M7q" firstAttribute="trailing" secondItem="7E9-WB-dTq" secondAttribute="trailing" id="fVF-2M-Cxi"/>
                             <constraint firstItem="7E9-WB-dTq" firstAttribute="leading" secondItem="H4T-P9-M7q" secondAttribute="leading" id="kvA-74-4vn"/>
@@ -184,6 +173,5 @@ Oh! To begin working you need to go to the central food supply station. Who want
         <image name="nave" width="4355" height="2211"/>
         <image name="sapao" width="595" height="483"/>
         <image name="suit.diamond.fill" catalog="system" width="107" height="128"/>
-        <image name="video.fill" catalog="system" width="128" height="82"/>
     </resources>
 </document>

@@ -19,14 +19,18 @@ class SettingsViewController: UIViewController, Storyboarded {
     @IBOutlet var widthConstraints: [NSLayoutConstraint]!
     @IBOutlet var buttons: [SelectorButton]!
     @IBOutlet var images: [UIImageView]!
-    @IBOutlet weak var box: UIView!
+    @IBOutlet var views: [UIView]!
+    @IBOutlet var labels: [UILabel]!
+    
+    // Settings
+    @IBOutlet weak var soundSwitch: UISwitch!
+    @IBOutlet weak var musicSwitch: UISwitch!
+    @IBOutlet weak var cutsceneButton: UIButton!
     
     // MARK: - Variables
     var currentView: UIView!
     
     // MARK: - Constants
-    let selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 26)
-    let defaultFont = UIFont(name: "TitilliumWeb-Light", size: 19)
     let selectedMultiplier: CGFloat = 0.31
     let defaultMultiplier: CGFloat = 0.23
     
@@ -47,9 +51,17 @@ class SettingsViewController: UIViewController, Storyboarded {
             button.defaultFont = UIFont(name: "TitilliumWeb-Light", size: defaultSize)
             button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: selectedSize)
         }
+        
+        soundSwitch.isOn = CustomAudioPlayer.soundOn
+        musicSwitch.isOn = MusicPlayer.musicOn
+        cutsceneButton.titleLabel!.font = UIFont(name: "TitilliumWeb-Bold", size: defaultSize)
+        labels.forEach { label in
+            label.font = UIFont(name: "TitilliumWeb-Bold", size: selectedSize)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        MusicPlayer.shared.play(.menu)
         select(0)
     }
     
@@ -69,34 +81,30 @@ class SettingsViewController: UIViewController, Storyboarded {
             button.isEnabled = !(index == tag)
         }
         
-        loadView(tag)
-    }
-    
-    func loadView(_ tag: Int) {
-        if currentView != nil {
-            currentView.removeFromSuperview()
+        views.enumerated().forEach { index, view in
+            view.isHidden = !(index == tag)
         }
-        
-        switch tag {
-        case 1: currentView = GameCenterView.instantiate()
-        case 2: currentView = StatsView.instantiate()
-        case 3: currentView = CreditsView.instantiate()
-        default: currentView = SettingsView.instantiate()
-        }
-        
-        currentView.translatesAutoresizingMaskIntoConstraints = false
-        box.addSubview(currentView)
-        
-        NSLayoutConstraint.activate([
-            currentView.topAnchor.constraint(equalTo: box.topAnchor),
-            currentView.trailingAnchor.constraint(equalTo: box.trailingAnchor),
-            currentView.widthAnchor.constraint(equalTo: box.widthAnchor, multiplier: 0.975),
-            currentView.heightAnchor.constraint(equalTo: box.heightAnchor, multiplier: 0.86)
-        ])
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
         select((sender as! UIButton).tag)
     }
     
+    @IBAction func soundTapped(_ sender: Any) {
+        CustomAudioPlayer.soundOn.toggle()
+    }
+    
+    @IBAction func musicTapped(_ sender: Any) {
+        MusicPlayer.musicOn.toggle()
+        if MusicPlayer.musicOn {
+            MusicPlayer.shared.play(.menu)
+        } else {
+            MusicPlayer.shared.stopAll()
+        }
+    }
+    
+    @IBAction func cutsceneTapped(_ sender: Any) {
+        MusicPlayer.shared.stopAll()
+        coordinator?.video()
+    }
 }

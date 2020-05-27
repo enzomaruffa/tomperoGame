@@ -15,8 +15,7 @@ import AVFoundation
 // swiftlint:disable force_cast
 class Cutscene: SKScene {
     
-    // MARK: - Coordinator
-    weak var coordinator: MainCoordinator?
+    weak var controller: CutsceneViewController?
     
     // MARK: - Variables
     var player: AVPlayer!
@@ -65,7 +64,7 @@ class Cutscene: SKScene {
         image.anchorPoint = CGPoint(x: 0, y: 1)
         
         let background = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: -backButton.size.height), size: backButton.size), cornerRadius: 24)
-        background.fillColor = #colorLiteral(red: 0.1921389997, green: 0.1921669245, blue: 0.1921294034, alpha: 1)
+        background.fillColor = .black
         background.strokeColor = .clear
         background.zPosition = 1
         
@@ -101,7 +100,7 @@ class Cutscene: SKScene {
     func endPlayback() {
         playbackEnded = true
         videoNode.pause()
-        coordinator?.popToRoot()
+        controller?.navigationController?.popViewController(animated: true)
     }
     
     var lastUpdateTime: TimeInterval = 0
