@@ -13,9 +13,16 @@ class SettingsViewController: UIViewController, Storyboarded {
     static var storyboardName = "Settings"
     weak var coordinator: MainCoordinator?
 
+    @IBOutlet weak var boxCenterYConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        _ = boxCenterYConstraint.setMultiplier(multiplier: traitCollection.verticalSizeClass == .regular ? 1 : 1.15)
+        
     }
 
+    @IBAction func backPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
 }

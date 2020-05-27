@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngM-n1-4Tf">
-    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ngM-n1-4Tf">
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -19,17 +19,17 @@
             <objects>
                 <viewController storyboardIdentifier="MenuCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ngM-n1-4Tf" customClass="MenuCollectionViewController" customModule="SpaceSpice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HsO-25-kPV" customClass="StarsOverlay" customModule="SpaceSpice" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_bgFront" translatesAutoresizingMaskIntoConstraints="NO" id="7Zs-Sa-TL5" userLabel="RedOverlay">
-                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CL2-7B-5oQ" userLabel="HeaderView">
-                                <rect key="frame" x="0.0" y="0.0" width="1366" height="186"/>
+                                <rect key="frame" x="44" y="0.0" width="808" height="73"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6t-DM-S8B" userLabel="BackButton">
-                                        <rect key="frame" x="4" y="16" width="110" height="102.5"/>
+                                        <rect key="frame" x="4" y="16" width="63.5" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="t6t-DM-S8B" secondAttribute="height" multiplier="74:69" id="LSY-E3-Jv5"/>
                                         </constraints>
@@ -39,7 +39,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW TO :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wn7-en-ksw" userLabel="HeaderLabel">
-                                        <rect key="frame" x="478" y="20" width="410" height="166"/>
+                                        <rect key="frame" x="283" y="20" width="242" height="53"/>
                                         <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="34"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                                         </variation>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu_label" translatesAutoresizingMaskIntoConstraints="NO" id="xob-Iq-pxz">
-                                        <rect key="frame" x="1024.5" y="65.5" width="331.5" height="75"/>
+                                        <rect key="frame" x="606" y="25" width="192" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xob-Iq-pxz" secondAttribute="height" multiplier="466:105" id="36N-r0-D4i"/>
                                         </constraints>
@@ -67,16 +67,16 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu_detailLeft" translatesAutoresizingMaskIntoConstraints="NO" id="oSi-as-5oh">
-                                <rect key="frame" x="0.0" y="573" width="227.5" height="451"/>
+                                <rect key="frame" x="44" y="205.5" width="105.5" height="208.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="oSi-as-5oh" secondAttribute="height" multiplier="272:539" id="JQq-Vr-X3y"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVf-Jj-i4E">
-                                <rect key="frame" x="116" y="186" width="1134" height="742.5"/>
+                                <rect key="frame" x="112.5" y="73" width="671" height="287"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0xh-LO-8NS" userLabel="CollectionView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1134" height="742.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="671" height="287"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="S5x-bb-UFG">
                                             <size key="itemSize" width="671" height="245"/>
@@ -86,7 +86,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="menuCell" id="9aL-i4-lbq" customClass="MenuCollectionViewCell" customModule="SpaceSpice" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="671" height="245"/>
+                                                <rect key="frame" x="0.0" y="21" width="671" height="245"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dlA-IM-DaQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="671" height="245"/>
@@ -115,7 +115,7 @@
                                         </connections>
                                     </collectionView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="VuZ-S0-Uqf">
-                                        <rect key="frame" x="555.5" y="705.5" width="23" height="37"/>
+                                        <rect key="frame" x="324" y="250" width="23" height="37"/>
                                         <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </pageControl>
@@ -130,7 +130,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu_detailRight" translatesAutoresizingMaskIntoConstraints="NO" id="pCt-Th-Rip">
-                                <rect key="frame" x="772.5" y="758.5" width="593.5" height="265.5"/>
+                                <rect key="frame" x="584" y="294" width="268" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pCt-Th-Rip" secondAttribute="height" multiplier="675:302" id="Huh-mN-B36"/>
                                 </constraints>

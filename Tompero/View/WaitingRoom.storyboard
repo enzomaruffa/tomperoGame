@@ -94,7 +94,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WR_difficultyUI" translatesAutoresizingMaskIntoConstraints="NO" id="itL-Jq-8zp" userLabel="Difficulty Back Image">
                                         <rect key="frame" x="0.0" y="0.0" width="193.5" height="278.5"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ed-cWw">
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ed-cWw">
                                         <rect key="frame" x="77.5" y="198.5" width="112" height="30"/>
                                         <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="26"/>
                                         <state key="normal" title="MEDIUM">
