@@ -48,7 +48,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OhK-eY-Syq" userLabel="Selector">
-                                <rect key="frame" x="118.5" y="36.5" width="673" height="50"/>
+                                <rect key="frame" x="118" y="36.5" width="673.5" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktg-qe-8oo" userLabel="Settings">
                                         <rect key="frame" x="0.0" y="2.5" width="209" height="47.5"/>
@@ -88,7 +88,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEM-4C-fve" userLabel="Button">
-                                                <rect key="frame" x="0.0" y="2.5" width="154.5" height="32.5"/>
+                                                <rect key="frame" x="0.0" y="2" width="154.5" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Game Center">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -107,16 +107,16 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Shi-tY-bmZ" userLabel="Statistics">
-                                        <rect key="frame" x="363.5" y="15" width="154.5" height="35"/>
+                                        <rect key="frame" x="363.5" y="15" width="155" height="35"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_selectionButtonOFF" translatesAutoresizingMaskIntoConstraints="NO" id="WKC-kd-RlE">
-                                                <rect key="frame" x="0.0" y="0.0" width="154.5" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="WKC-kd-RlE" secondAttribute="height" multiplier="48:11" id="R6X-PN-YUp"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzv-vB-snm" userLabel="Button">
-                                                <rect key="frame" x="0.0" y="2.5" width="154.5" height="32.5"/>
+                                                <rect key="frame" x="0.0" y="2" width="155" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Stats">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -135,7 +135,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YW-LO-UHC" userLabel="Credits">
-                                        <rect key="frame" x="518" y="15" width="155" height="35"/>
+                                        <rect key="frame" x="518.5" y="15" width="155" height="35"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_selectionButtonOFF" translatesAutoresizingMaskIntoConstraints="NO" id="nk1-wf-j7G">
                                                 <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
@@ -144,7 +144,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-td-utD" userLabel="Button">
-                                                <rect key="frame" x="0.0" y="2.5" width="155" height="32.5"/>
+                                                <rect key="frame" x="0.0" y="2" width="155" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Credits">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -209,7 +209,7 @@
                             <constraint firstItem="OhK-eY-Syq" firstAttribute="height" secondItem="O3G-IU-2cZ" secondAttribute="height" multiplier="0.18" id="g64-gZ-T6X"/>
                             <constraint firstItem="O3G-IU-2cZ" firstAttribute="centerY" secondItem="Xxw-Hn-gjD" secondAttribute="centerY" multiplier="1.15" id="kdT-cL-KM9"/>
                             <constraint firstItem="O3G-IU-2cZ" firstAttribute="top" secondItem="OhK-eY-Syq" secondAttribute="bottom" id="leM-zE-BVg"/>
-                            <constraint firstItem="OhK-eY-Syq" firstAttribute="leading" secondItem="O3G-IU-2cZ" secondAttribute="leading" multiplier="1.135" id="mQ0-r4-rmW"/>
+                            <constraint firstItem="OhK-eY-Syq" firstAttribute="leading" secondItem="O3G-IU-2cZ" secondAttribute="leading" multiplier="1.13" id="mQ0-r4-rmW"/>
                             <constraint firstItem="8xH-RY-nkG" firstAttribute="trailing" secondItem="Xxw-Hn-gjD" secondAttribute="trailing" id="wKQ-SU-Ro8"/>
                             <constraint firstItem="OhK-eY-Syq" firstAttribute="trailing" secondItem="O3G-IU-2cZ" secondAttribute="trailing" id="xMs-90-jUq"/>
                             <constraint firstItem="kzO-1T-snb" firstAttribute="top" secondItem="dWv-aI-AdI" secondAttribute="top" id="xXg-GP-6mV"/>
