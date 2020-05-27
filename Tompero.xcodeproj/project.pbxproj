@@ -123,6 +123,7 @@
 		567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AC238C805000D6399A /* SpaceshipHull.swift */; };
 		567A07C0238C805000D6399A /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AF238C805000D6399A /* MarsSand.swift */; };
 		569B4692247EB9A300D7792F /* SelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4691247EB9A300D7792F /* SelectorButton.swift */; };
+		569B4697247EBEF300D7792F /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 569B4696247EBEF200D7792F /* SettingsView.xib */; };
 		569B4D2A239E67E20057C7CC /* TrackWithIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4D29239E67E20057C7CC /* TrackWithIntro.swift */; };
 		569B4D35239E6D610057C7CC /* gameMusicIntro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */; };
 		569B4D36239E6D610057C7CC /* gameMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 569B4D34239E6D610057C7CC /* gameMusic.m4a */; };
@@ -148,7 +149,6 @@
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
 		FB55FBE4239A9DAE002EBB89 /* TitilliumWeb-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB55FBE2239A9DAD002EBB89 /* TitilliumWeb-Bold.ttf */; };
 		FB55FBE5239A9DAE002EBB89 /* TitilliumWeb-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB55FBE3239A9DAD002EBB89 /* TitilliumWeb-Light.ttf */; };
-		FB55FBE8239C2824002EBB89 /* DialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB55FBE7239C2824002EBB89 /* DialogView.swift */; };
 		FB55FBEB239C33D0002EBB89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB55FBE9239C33D0002EBB89 /* Main.storyboard */; };
 		FB56706C2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */; };
 		FB82E8D923A271410032F6B5 /* CutsceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB82E8D823A271410032F6B5 /* CutsceneViewController.swift */; };
@@ -282,6 +282,7 @@
 		567A07AC238C805000D6399A /* SpaceshipHull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHull.swift; sourceTree = "<group>"; };
 		567A07AF238C805000D6399A /* MarsSand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
 		569B4691247EB9A300D7792F /* SelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorButton.swift; sourceTree = "<group>"; };
+		569B4696247EBEF200D7792F /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		569B4D29239E67E20057C7CC /* TrackWithIntro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWithIntro.swift; sourceTree = "<group>"; };
 		569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusicIntro.m4a; sourceTree = "<group>"; };
 		569B4D34239E6D610057C7CC /* gameMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusic.m4a; sourceTree = "<group>"; };
@@ -309,7 +310,6 @@
 		FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuStoryboard.storyboard; sourceTree = "<group>"; };
 		FB55FBE2239A9DAD002EBB89 /* TitilliumWeb-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Bold.ttf"; sourceTree = "<group>"; };
 		FB55FBE3239A9DAD002EBB89 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
-		FB55FBE7239C2824002EBB89 /* DialogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogView.swift; sourceTree = "<group>"; };
 		FB55FBEA239C33D0002EBB89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtention.swift; sourceTree = "<group>"; };
 		FB82E8D823A271410032F6B5 /* CutsceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutsceneViewController.swift; sourceTree = "<group>"; };
@@ -550,14 +550,10 @@
 			children = (
 				562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */,
 				FB55FBE9239C33D0002EBB89 /* Main.storyboard */,
-				569B4691247EB9A300D7792F /* SelectorButton.swift */,
-				56FE9216247DACBF007E28BB /* Settings.storyboard */,
-				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
-				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
-				FB55FBE7239C2824002EBB89 /* DialogView.swift */,
+				569B4693247EBD5800D7792F /* Settings */,
+				569B4694247EBD6800D7792F /* Cutscene */,
 				562BCF732388249E00D5D51D /* WaitingRoom.storyboard */,
-				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
-				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
+				569B4695247EBD8300D7792F /* Menu */,
 				FB9BF394238EA67500437124 /* Game.storyboard */,
 				479B7849239D8BAC003BC9DE /* Statistics.storyboard */,
 			);
@@ -666,6 +662,34 @@
 				566FC92323A0205F0044AFA4 /* sfx - angryCrowd1.wav */,
 			);
 			path = "SFX-B";
+			sourceTree = "<group>";
+		};
+		569B4693247EBD5800D7792F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				569B4691247EB9A300D7792F /* SelectorButton.swift */,
+				56FE9216247DACBF007E28BB /* Settings.storyboard */,
+				569B4696247EBEF200D7792F /* SettingsView.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		569B4694247EBD6800D7792F /* Cutscene */ = {
+			isa = PBXGroup;
+			children = (
+				FB82E8DC23A2722E0032F6B5 /* Cutscene.swift */,
+				FB82E8DA23A271680032F6B5 /* Cutscene.storyboard */,
+			);
+			path = Cutscene;
+			sourceTree = "<group>";
+		};
+		569B4695247EBD8300D7792F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */,
+				FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		569B4D32239E6D610057C7CC /* Music */ = {
@@ -827,6 +851,7 @@
 				566E9C8C239D7EC100787210 /* chopping.wav in Resources */,
 				562BCF6523881CFC00D5D51D /* Assets.xcassets in Resources */,
 				566E9C84239D7EC100787210 /* endTimer.wav in Resources */,
+				569B4697247EBEF300D7792F /* SettingsView.xib in Resources */,
 				566FC92E23A0205F0044AFA4 /* sfx - happyCrowd1.wav in Resources */,
 				566E9C8E239D7EC100787210 /* timesUp.wav in Resources */,
 				FB55FBEB239C33D0002EBB89 /* Main.storyboard in Resources */,
@@ -984,7 +1009,6 @@
 				4709B27E23A81246004B8F51 /* IngredientBoxNode.swift in Sources */,
 				476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */,
 				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
-				FB55FBE8239C2824002EBB89 /* DialogView.swift in Sources */,
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
 				FB82E8DD23A2722E0032F6B5 /* Cutscene.swift in Sources */,
 				56B3A7B62391B93B005E0807 /* IngredientNode.swift in Sources */,
