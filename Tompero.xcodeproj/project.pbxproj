@@ -124,6 +124,8 @@
 		567A07C0238C805000D6399A /* MarsSand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A07AF238C805000D6399A /* MarsSand.swift */; };
 		569B4692247EB9A300D7792F /* SelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4691247EB9A300D7792F /* SelectorButton.swift */; };
 		569B4697247EBEF300D7792F /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 569B4696247EBEF200D7792F /* SettingsView.xib */; };
+		569B4699247ED5D900D7792F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4698247ED5D900D7792F /* SettingsView.swift */; };
+		569B469B247EE02300D7792F /* UIView+instantiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B469A247EE02200D7792F /* UIView+instantiate.swift */; };
 		569B4D2A239E67E20057C7CC /* TrackWithIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569B4D29239E67E20057C7CC /* TrackWithIntro.swift */; };
 		569B4D35239E6D610057C7CC /* gameMusicIntro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */; };
 		569B4D36239E6D610057C7CC /* gameMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 569B4D34239E6D610057C7CC /* gameMusic.m4a */; };
@@ -142,6 +144,11 @@
 		56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C7238DC992000F8A3F /* CookableComponent.swift */; };
 		56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */; };
 		56EDA92A239B48B7004BFC2C /* OrderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EDA929239B48B7004BFC2C /* OrderNode.swift */; };
+		56F45BC3247EE5F70067DE5D /* GameCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F45BC2247EE5F70067DE5D /* GameCenterView.swift */; };
+		56F45BC6247EE6740067DE5D /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F45BC5247EE6740067DE5D /* StatsView.swift */; };
+		56F45BC8247EE6980067DE5D /* StatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56F45BC7247EE6980067DE5D /* StatsView.xib */; };
+		56F45BCA247EE6C10067DE5D /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F45BC9247EE6C10067DE5D /* CreditsView.swift */; };
+		56F45BCC247EE6E70067DE5D /* CreditsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56F45BCB247EE6E70067DE5D /* CreditsView.xib */; };
 		56FE9217247DACBF007E28BB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FE9216247DACBF007E28BB /* Settings.storyboard */; };
 		56FE9219247DAD25007E28BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE9218247DAD25007E28BB /* SettingsViewController.swift */; };
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
@@ -283,6 +290,8 @@
 		567A07AF238C805000D6399A /* MarsSand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
 		569B4691247EB9A300D7792F /* SelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorButton.swift; sourceTree = "<group>"; };
 		569B4696247EBEF200D7792F /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
+		569B4698247ED5D900D7792F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		569B469A247EE02200D7792F /* UIView+instantiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+instantiate.swift"; sourceTree = "<group>"; };
 		569B4D29239E67E20057C7CC /* TrackWithIntro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackWithIntro.swift; sourceTree = "<group>"; };
 		569B4D33239E6D610057C7CC /* gameMusicIntro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusicIntro.m4a; sourceTree = "<group>"; };
 		569B4D34239E6D610057C7CC /* gameMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameMusic.m4a; sourceTree = "<group>"; };
@@ -301,6 +310,12 @@
 		56E2D7C7238DC992000F8A3F /* CookableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookableComponent.swift; sourceTree = "<group>"; };
 		56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
 		56EDA929239B48B7004BFC2C /* OrderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNode.swift; sourceTree = "<group>"; };
+		56F45BC2247EE5F70067DE5D /* GameCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterView.swift; sourceTree = "<group>"; };
+		56F45BC4247EE60C0067DE5D /* GameCenterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GameCenterView.xib; path = "/Users/viniciusbinder/Documents/ADA/Mini Challenges/3rd Mini Challenge/Tompero/Tompero/View/Settings/GameCenterView.xib"; sourceTree = "<absolute>"; };
+		56F45BC5247EE6740067DE5D /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		56F45BC7247EE6980067DE5D /* StatsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsView.xib; sourceTree = "<group>"; };
+		56F45BC9247EE6C10067DE5D /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		56F45BCB247EE6E70067DE5D /* CreditsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditsView.xib; sourceTree = "<group>"; };
 		56FE9216247DACBF007E28BB /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		56FE9218247DAD25007E28BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
@@ -464,6 +479,7 @@
 				47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */,
 				FB56706B2397F43100B5ABA8 /* NSLayoutConstraintExtention.swift */,
 				471C60D223B45ACC004590D3 /* StringExtensions.swift */,
+				569B469A247EE02200D7792F /* UIView+instantiate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -669,7 +685,14 @@
 			children = (
 				569B4691247EB9A300D7792F /* SelectorButton.swift */,
 				56FE9216247DACBF007E28BB /* Settings.storyboard */,
+				569B4698247ED5D900D7792F /* SettingsView.swift */,
 				569B4696247EBEF200D7792F /* SettingsView.xib */,
+				56F45BC2247EE5F70067DE5D /* GameCenterView.swift */,
+				56F45BC4247EE60C0067DE5D /* GameCenterView.xib */,
+				56F45BC5247EE6740067DE5D /* StatsView.swift */,
+				56F45BC7247EE6980067DE5D /* StatsView.xib */,
+				56F45BC9247EE6C10067DE5D /* CreditsView.swift */,
+				56F45BCB247EE6E70067DE5D /* CreditsView.xib */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -821,8 +844,10 @@
 				47BE3ED7239C1F7200246F20 /* TeleportOrange.atlas in Resources */,
 				476B7C96239C3276004D4116 /* CookBurnt.atlas in Resources */,
 				476B7C97239C3276004D4116 /* Fry.atlas in Resources */,
+				56F45BCC247EE6E70067DE5D /* CreditsView.xib in Resources */,
 				FB82E8DB23A271680032F6B5 /* Cutscene.storyboard in Resources */,
 				566E9C86239D7EC100787210 /* roundStarted.wav in Resources */,
+				56F45BC8247EE6980067DE5D /* StatsView.xib in Resources */,
 				566FC92D23A0205F0044AFA4 /* sfx - angryCustomer4.wav in Resources */,
 				566E9C8A239D7EC100787210 /* frying.wav in Resources */,
 				47BE3ED8239C1F7200246F20 /* TeleportPurple.atlas in Resources */,
@@ -968,12 +993,15 @@
 				476F70AC23933A1D0000465F /* TappableDelegate.swift in Sources */,
 				471795E7238C1CB6000575B0 /* MCManagerDataObserver.swift in Sources */,
 				4709B27A23A6F3C8004B8F51 /* ShelfNode.swift in Sources */,
+				56F45BC6247EE6740067DE5D /* StatsView.swift in Sources */,
 				FB9BF38F238E9CFA00437124 /* Coordinator.swift in Sources */,
 				471795F0238C75CF000575B0 /* MCManagerMatchmakingObserver.swift in Sources */,
 				4722D47F238EB982003D373C /* PlayerTableType.swift in Sources */,
 				FB82E8D923A271410032F6B5 /* CutsceneViewController.swift in Sources */,
+				56F45BCA247EE6C10067DE5D /* CreditsView.swift in Sources */,
 				56E2D7C6238DC97D000F8A3F /* IngredientState.swift in Sources */,
 				56A6B732244F69CA009933C7 /* AnimationDelegate.swift in Sources */,
+				569B469B247EE02300D7792F /* UIView+instantiate.swift in Sources */,
 				567A07B9238C805000D6399A /* Asteroid.swift in Sources */,
 				567A07B5238C805000D6399A /* Ingredient.swift in Sources */,
 				567A07BA238C805000D6399A /* MoonCheese.swift in Sources */,
@@ -984,6 +1012,7 @@
 				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
 				476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */,
 				FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */,
+				56F45BC3247EE5F70067DE5D /* GameCenterView.swift in Sources */,
 				566E9C96239D823400787210 /* Track.swift in Sources */,
 				566E9BD3239D391400787210 /* ProgressBar.swift in Sources */,
 				562BCF5E23881CF900D5D51D /* GameScene.swift in Sources */,
@@ -1008,6 +1037,7 @@
 				567A07BD238C805000D6399A /* SpaceshipHull.swift in Sources */,
 				4709B27E23A81246004B8F51 /* IngredientBoxNode.swift in Sources */,
 				476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */,
+				569B4699247ED5D900D7792F /* SettingsView.swift in Sources */,
 				4722D487238FFA93003D373C /* MCPeerWithStatus.swift in Sources */,
 				4722D479238EB762003D373C /* GameDifficulty.swift in Sources */,
 				FB82E8DD23A2722E0032F6B5 /* Cutscene.swift in Sources */,

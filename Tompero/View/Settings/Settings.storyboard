@@ -242,6 +242,7 @@
                         <viewLayoutGuide key="safeArea" id="Xxw-Hn-gjD"/>
                     </view>
                     <connections>
+                        <outlet property="box" destination="O3G-IU-2cZ" id="zsQ-FF-tWe"/>
                         <outlet property="boxCenterYConstraint" destination="kdT-cL-KM9" id="Ih5-q9-6TU"/>
                         <outletCollection property="widthConstraints" destination="OG9-1h-lLJ" collectionClass="NSMutableArray" id="Jav-SL-Wwz"/>
                         <outletCollection property="widthConstraints" destination="D3v-RW-Iie" collectionClass="NSMutableArray" id="Pf9-O1-uGx"/>

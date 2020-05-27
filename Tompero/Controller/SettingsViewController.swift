@@ -19,8 +19,10 @@ class SettingsViewController: UIViewController, Storyboarded {
     @IBOutlet var widthConstraints: [NSLayoutConstraint]!
     @IBOutlet var buttons: [SelectorButton]!
     @IBOutlet var images: [UIImageView]!
+    @IBOutlet weak var box: UIView!
     
     // MARK: - Variables
+    var currentView: UIView!
     
     // MARK: - Constants
     let selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 26)
@@ -36,13 +38,14 @@ class SettingsViewController: UIViewController, Storyboarded {
         
         buttons.enumerated().forEach { index, button in
             button.image = self.images[index]
-            if traitCollection.verticalSizeClass == .regular {
-                button.defaultFont = UIFont(name: "TitilliumWeb-Light", size: 32)
-                button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 44)
-            } else {
-                button.defaultFont = UIFont(name: "TitilliumWeb-Light", size: 19)
-                button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 26)
-            }
+        }
+        
+        let selectorWidth = self.view.frame.width * 0.85 / 8
+        let defaultSize = (selectorWidth * defaultMultiplier).rounded(.down)
+        let selectedSize = (selectorWidth * selectedMultiplier).rounded(.down)
+        buttons.forEach { button in
+            button.defaultFont = UIFont(name: "TitilliumWeb-Light", size: defaultSize)
+            button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: selectedSize)
         }
     }
     
@@ -55,7 +58,6 @@ class SettingsViewController: UIViewController, Storyboarded {
     }
     
     func select(_ tag: Int) {
-        
         widthConstraints.enumerated().forEach { index, constraint in
             _ = constraint.setMultiplier(multiplier: index == tag ? selectedMultiplier : defaultMultiplier)
             UIView.animate(withDuration: 0.1) {
@@ -67,7 +69,30 @@ class SettingsViewController: UIViewController, Storyboarded {
             button.isEnabled = !(index == tag)
         }
         
-        // change the view too
+        loadView(tag)
+    }
+    
+    func loadView(_ tag: Int) {
+        if currentView != nil {
+            currentView.removeFromSuperview()
+        }
+        
+        switch tag {
+        case 1: currentView = SettingsView.instantiate()
+        case 2: currentView = SettingsView.instantiate()
+        case 3: currentView = SettingsView.instantiate()
+        default: currentView = SettingsView.instantiate()
+        }
+        
+        currentView.translatesAutoresizingMaskIntoConstraints = false
+        box.addSubview(currentView)
+        
+        NSLayoutConstraint.activate([
+            currentView.topAnchor.constraint(equalTo: box.topAnchor),
+            currentView.trailingAnchor.constraint(equalTo: box.trailingAnchor),
+            currentView.widthAnchor.constraint(equalTo: box.widthAnchor, multiplier: 0.975),
+            currentView.heightAnchor.constraint(equalTo: box.heightAnchor, multiplier: 0.86)
+        ])
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
