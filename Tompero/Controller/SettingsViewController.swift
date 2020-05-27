@@ -27,15 +27,16 @@ class SettingsViewController: UIViewController, Storyboarded {
     let selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 26)
     let defaultFont = UIFont(name: "TitilliumWeb-Light", size: 19)
     let selectedMultiplier: CGFloat = 0.31
-    var defaultMultiplier: CGFloat!
+    let defaultMultiplier: CGFloat = 0.23
     
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         _ = boxCenterYConstraint.setMultiplier(multiplier: traitCollection.verticalSizeClass == .regular ? 1 : 1.15)
-        
-        defaultMultiplier = (1 - selectedMultiplier) / 3
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         select(0)
     }
     
@@ -48,6 +49,9 @@ class SettingsViewController: UIViewController, Storyboarded {
         
         widthConstraints.enumerated().forEach { index, constraint in
             _ = constraint.setMultiplier(multiplier: index == state ? selectedMultiplier : defaultMultiplier)
+            UIView.animate(withDuration: 0.1) {
+                self.view.layoutIfNeeded()
+            }
         }
         
         buttons.enumerated().forEach { index, button in
