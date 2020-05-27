@@ -65,6 +65,9 @@
                                                 <state key="normal" title="Settings">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="Ssm-kg-x06"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -87,12 +90,15 @@
                                                     <constraint firstAttribute="width" secondItem="adC-KW-Z6y" secondAttribute="height" multiplier="48:11" id="Ups-UM-J1g"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEM-4C-fve" userLabel="Button">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEM-4C-fve" userLabel="Button">
                                                 <rect key="frame" x="0.0" y="2" width="154.5" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Game Center">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="ACL-xl-KoM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -106,7 +112,7 @@
                                             <constraint firstItem="adC-KW-Z6y" firstAttribute="top" secondItem="Bk6-ot-YwU" secondAttribute="top" id="wWi-KU-bYe"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Shi-tY-bmZ" userLabel="Statistics">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Shi-tY-bmZ" userLabel="Stats">
                                         <rect key="frame" x="363.5" y="15" width="155" height="35"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_selectionButtonOFF" translatesAutoresizingMaskIntoConstraints="NO" id="WKC-kd-RlE">
@@ -115,12 +121,15 @@
                                                     <constraint firstAttribute="width" secondItem="WKC-kd-RlE" secondAttribute="height" multiplier="48:11" id="R6X-PN-YUp"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzv-vB-snm" userLabel="Button">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzv-vB-snm" userLabel="Button">
                                                 <rect key="frame" x="0.0" y="2" width="155" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Stats">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="Afh-M9-gT7"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -143,12 +152,15 @@
                                                     <constraint firstAttribute="width" secondItem="nk1-wf-j7G" secondAttribute="height" multiplier="48:11" id="tAY-wc-Qf8"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-td-utD" userLabel="Button">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-td-utD" userLabel="Button">
                                                 <rect key="frame" x="0.0" y="2" width="155" height="33"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                 <state key="normal" title="Credits">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="TXy-wT-b9h"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -219,6 +231,18 @@
                     </view>
                     <connections>
                         <outlet property="boxCenterYConstraint" destination="kdT-cL-KM9" id="Ih5-q9-6TU"/>
+                        <outletCollection property="widthConstraints" destination="OG9-1h-lLJ" collectionClass="NSMutableArray" id="Jav-SL-Wwz"/>
+                        <outletCollection property="widthConstraints" destination="D3v-RW-Iie" collectionClass="NSMutableArray" id="Pf9-O1-uGx"/>
+                        <outletCollection property="widthConstraints" destination="Anh-zr-4MN" collectionClass="NSMutableArray" id="Mn9-hI-CRf"/>
+                        <outletCollection property="widthConstraints" destination="8oM-Hp-hn5" collectionClass="NSMutableArray" id="0iE-pa-CLH"/>
+                        <outletCollection property="buttons" destination="cNh-hl-cXb" collectionClass="NSMutableArray" id="7Fy-pw-cDV"/>
+                        <outletCollection property="buttons" destination="sEM-4C-fve" collectionClass="NSMutableArray" id="h1w-WQ-Wh3"/>
+                        <outletCollection property="buttons" destination="bzv-vB-snm" collectionClass="NSMutableArray" id="XMF-br-oWO"/>
+                        <outletCollection property="buttons" destination="RgV-td-utD" collectionClass="NSMutableArray" id="XFx-4z-GBE"/>
+                        <outletCollection property="images" destination="t8S-Wp-TLq" collectionClass="NSMutableArray" id="LPM-TH-QKG"/>
+                        <outletCollection property="images" destination="adC-KW-Z6y" collectionClass="NSMutableArray" id="uxV-yd-Fhf"/>
+                        <outletCollection property="images" destination="WKC-kd-RlE" collectionClass="NSMutableArray" id="ZeZ-1Z-DfQ"/>
+                        <outletCollection property="images" destination="nk1-wf-j7G" collectionClass="NSMutableArray" id="zW2-2E-pID"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WxJ-k1-pcT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
