@@ -12,8 +12,8 @@ class SelectorButton: UIButton {
     
     var image: UIImageView?
     
-    let selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 26)
-    let defaultFont = UIFont(name: "TitilliumWeb-Light", size: 19)
+    var selectedFont: UIFont!
+    var defaultFont: UIFont!
 
     override var isHighlighted: Bool {
         didSet {

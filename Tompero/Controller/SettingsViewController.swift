@@ -36,6 +36,13 @@ class SettingsViewController: UIViewController, Storyboarded {
         
         buttons.enumerated().forEach { index, button in
             button.image = self.images[index]
+            if traitCollection.verticalSizeClass == .regular {
+                button.defaultFont = UIFont(name: "TitilliumWeb-Light", size: 32)
+                button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 44)
+            } else {
+                button.defaultFont = UIFont(name: "TitilliumWeb-Light", size: 19)
+                button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: 26)
+            }
         }
     }
     

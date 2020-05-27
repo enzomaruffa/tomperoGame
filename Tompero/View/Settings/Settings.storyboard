@@ -48,23 +48,26 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OhK-eY-Syq" userLabel="Selector">
-                                <rect key="frame" x="118" y="36.5" width="673.5" height="50"/>
+                                <rect key="frame" x="118.5" y="36.5" width="673" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktg-qe-8oo" userLabel="Settings">
-                                        <rect key="frame" x="0.0" y="2.5" width="209" height="47.5"/>
+                                        <rect key="frame" x="0.0" y="2.5" width="208.5" height="47.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_selectionButtonON" translatesAutoresizingMaskIntoConstraints="NO" id="t8S-Wp-TLq">
-                                                <rect key="frame" x="0.0" y="0.0" width="209" height="47.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="208.5" height="47.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="t8S-Wp-TLq" secondAttribute="height" multiplier="48:11" id="NnQ-KQ-ipk"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNh-hl-cXb" userLabel="Button" customClass="SelectorButton" customModule="SpaceSpice" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="3.5" width="209" height="44"/>
+                                                <rect key="frame" x="0.0" y="3.5" width="208.5" height="44"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="26"/>
                                                 <state key="normal" title="Settings">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="44"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="Ssm-kg-x06"/>
                                                 </connections>
@@ -82,20 +85,23 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bk6-ot-YwU" userLabel="Game Center">
-                                        <rect key="frame" x="209" y="15" width="154.5" height="35"/>
+                                        <rect key="frame" x="208.5" y="15" width="155" height="35"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_selectionButtonOFF" translatesAutoresizingMaskIntoConstraints="NO" id="adC-KW-Z6y">
-                                                <rect key="frame" x="0.0" y="0.0" width="154.5" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="adC-KW-Z6y" secondAttribute="height" multiplier="48:11" id="Ups-UM-J1g"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEM-4C-fve" userLabel="Button" customClass="SelectorButton" customModule="SpaceSpice" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="2" width="154.5" height="33"/>
-                                                <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
+                                                <rect key="frame" x="0.0" y="2.5" width="155" height="32.5"/>
+                                                <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="19"/>
                                                 <state key="normal" title="Game Center">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="32"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="ACL-xl-KoM"/>
                                                 </connections>
@@ -113,20 +119,23 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Shi-tY-bmZ" userLabel="Stats">
-                                        <rect key="frame" x="363.5" y="15" width="155" height="35"/>
+                                        <rect key="frame" x="363.5" y="15" width="154.5" height="35"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_selectionButtonOFF" translatesAutoresizingMaskIntoConstraints="NO" id="WKC-kd-RlE">
-                                                <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="154.5" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="WKC-kd-RlE" secondAttribute="height" multiplier="48:11" id="R6X-PN-YUp"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzv-vB-snm" userLabel="Button" customClass="SelectorButton" customModule="SpaceSpice" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="2" width="155" height="33"/>
-                                                <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
+                                                <rect key="frame" x="0.0" y="2.5" width="154.5" height="32.5"/>
+                                                <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="19"/>
                                                 <state key="normal" title="Stats">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="32"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="Afh-M9-gT7"/>
                                                 </connections>
@@ -144,7 +153,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9YW-LO-UHC" userLabel="Credits">
-                                        <rect key="frame" x="518.5" y="15" width="155" height="35"/>
+                                        <rect key="frame" x="518" y="15" width="155" height="35"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_selectionButtonOFF" translatesAutoresizingMaskIntoConstraints="NO" id="nk1-wf-j7G">
                                                 <rect key="frame" x="0.0" y="0.0" width="155" height="35"/>
@@ -153,11 +162,14 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgV-td-utD" userLabel="Button" customClass="SelectorButton" customModule="SpaceSpice" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="2" width="155" height="33"/>
-                                                <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
+                                                <rect key="frame" x="0.0" y="2.5" width="155" height="32.5"/>
+                                                <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="19"/>
                                                 <state key="normal" title="Credits">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="32"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="buttonTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="TXy-wT-b9h"/>
                                                 </connections>
@@ -191,7 +203,7 @@
                                     <constraint firstItem="ktg-qe-8oo" firstAttribute="leading" secondItem="OhK-eY-Syq" secondAttribute="leading" id="xq3-27-EfQ"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O3G-IU-2cZ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O3G-IU-2cZ" userLabel="Box">
                                 <rect key="frame" x="104.5" y="86.5" width="687" height="278.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_box" translatesAutoresizingMaskIntoConstraints="NO" id="6L9-9q-vxZ">
@@ -214,6 +226,7 @@
                             <constraint firstAttribute="trailing" secondItem="kzO-1T-snb" secondAttribute="trailing" id="5PO-nJ-rxe"/>
                             <constraint firstItem="kzO-1T-snb" firstAttribute="leading" secondItem="dWv-aI-AdI" secondAttribute="leading" id="9tN-vl-CFI"/>
                             <constraint firstItem="Xxw-Hn-gjD" firstAttribute="leading" secondItem="8xH-RY-nkG" secondAttribute="leading" id="CBT-uu-vul"/>
+                            <constraint firstItem="OhK-eY-Syq" firstAttribute="width" secondItem="O3G-IU-2cZ" secondAttribute="width" multiplier="0.98" id="EqN-Si-xJ6"/>
                             <constraint firstItem="O3G-IU-2cZ" firstAttribute="width" secondItem="Xxw-Hn-gjD" secondAttribute="width" multiplier="0.85" id="OWK-d0-hWY"/>
                             <constraint firstItem="O3G-IU-2cZ" firstAttribute="centerX" secondItem="kzO-1T-snb" secondAttribute="centerX" id="PaZ-5X-vWy"/>
                             <constraint firstItem="Xxw-Hn-gjD" firstAttribute="centerY" secondItem="8xH-RY-nkG" secondAttribute="bottom" multiplier="2.7" id="ZoW-rJ-VDE"/>
@@ -221,7 +234,6 @@
                             <constraint firstItem="OhK-eY-Syq" firstAttribute="height" secondItem="O3G-IU-2cZ" secondAttribute="height" multiplier="0.18" id="g64-gZ-T6X"/>
                             <constraint firstItem="O3G-IU-2cZ" firstAttribute="centerY" secondItem="Xxw-Hn-gjD" secondAttribute="centerY" multiplier="1.15" id="kdT-cL-KM9"/>
                             <constraint firstItem="O3G-IU-2cZ" firstAttribute="top" secondItem="OhK-eY-Syq" secondAttribute="bottom" id="leM-zE-BVg"/>
-                            <constraint firstItem="OhK-eY-Syq" firstAttribute="leading" secondItem="O3G-IU-2cZ" secondAttribute="leading" multiplier="1.13" id="mQ0-r4-rmW"/>
                             <constraint firstItem="8xH-RY-nkG" firstAttribute="trailing" secondItem="Xxw-Hn-gjD" secondAttribute="trailing" id="wKQ-SU-Ro8"/>
                             <constraint firstItem="OhK-eY-Syq" firstAttribute="trailing" secondItem="O3G-IU-2cZ" secondAttribute="trailing" id="xMs-90-jUq"/>
                             <constraint firstItem="kzO-1T-snb" firstAttribute="top" secondItem="dWv-aI-AdI" secondAttribute="top" id="xXg-GP-6mV"/>
