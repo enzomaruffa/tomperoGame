@@ -141,6 +141,7 @@
 		56E2D7C8238DC992000F8A3F /* CookableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7C7238DC992000F8A3F /* CookableComponent.swift */; };
 		56E2D7CB238DFDEC000F8A3F /* HasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */; };
 		56EDA92A239B48B7004BFC2C /* OrderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EDA929239B48B7004BFC2C /* OrderNode.swift */; };
+		56F45BD0247F1E420067DE5D /* CreditsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F45BCF247F1E420067DE5D /* CreditsCell.swift */; };
 		56FE9217247DACBF007E28BB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FE9216247DACBF007E28BB /* Settings.storyboard */; };
 		56FE9219247DAD25007E28BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE9218247DAD25007E28BB /* SettingsViewController.swift */; };
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
@@ -299,6 +300,7 @@
 		56E2D7C7238DC992000F8A3F /* CookableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookableComponent.swift; sourceTree = "<group>"; };
 		56E2D7CA238DFDEC000F8A3F /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
 		56EDA929239B48B7004BFC2C /* OrderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNode.swift; sourceTree = "<group>"; };
+		56F45BCF247F1E420067DE5D /* CreditsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsCell.swift; sourceTree = "<group>"; };
 		56FE9216247DACBF007E28BB /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		56FE9218247DAD25007E28BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 			children = (
 				569B4691247EB9A300D7792F /* SelectorButton.swift */,
 				56FE9216247DACBF007E28BB /* Settings.storyboard */,
+				56F45BCF247F1E420067DE5D /* CreditsCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1028,6 +1031,7 @@
 				567A07C0238C805000D6399A /* MarsSand.swift in Sources */,
 				4709B27C23A8116F004B8F51 /* PlateBoxNode.swift in Sources */,
 				56D50AEC244E26DF00527234 /* NavigationController.swift in Sources */,
+				56F45BD0247F1E420067DE5D /* CreditsCell.swift in Sources */,
 				567A07B8238C805000D6399A /* HasIngredients.swift in Sources */,
 				4709B28123A8141A004B8F51 /* PipeNode.swift in Sources */,
 				567A07B3238C805000D6399A /* Tentacle.swift in Sources */,

@@ -212,16 +212,47 @@
                                             <constraint firstAttribute="width" secondItem="6L9-9q-vxZ" secondAttribute="height" multiplier="587:238" id="s49-x3-WlE"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYB-lj-idV" userLabel="Credits">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbb-k6-6Bq" userLabel="GameCenter">
                                         <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Settings_gameCenterIcon" translatesAutoresizingMaskIntoConstraints="NO" id="MmV-q0-FsV">
+                                                <rect key="frame" x="303" y="38.5" width="63" height="81.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="MmV-q0-FsV" secondAttribute="height" multiplier="62:80" id="d4X-E5-F80"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dp5-Jp-Y5M">
+                                                <rect key="frame" x="233.5" y="144" width="202.5" height="54"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="dp5-Jp-Y5M" secondAttribute="height" multiplier="233:62" id="d6m-g7-uuu"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="19"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Leaderboards" backgroundImage="Settings_gameCenterButton"/>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="0.50163206339999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="leaderboardsTapped:" destination="UC5-lN-XpR" eventType="touchUpInside" id="5OU-9F-7DQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="dp5-Jp-Y5M" firstAttribute="top" secondItem="mbb-k6-6Bq" secondAttribute="centerY" multiplier="1.2" id="4Ot-Se-hdk"/>
+                                            <constraint firstItem="MmV-q0-FsV" firstAttribute="centerX" secondItem="mbb-k6-6Bq" secondAttribute="centerX" id="8dT-6F-1KC"/>
+                                            <constraint firstItem="dp5-Jp-Y5M" firstAttribute="height" secondItem="mbb-k6-6Bq" secondAttribute="height" multiplier="0.225" id="BXn-z9-rCk"/>
+                                            <constraint firstItem="dp5-Jp-Y5M" firstAttribute="centerX" secondItem="mbb-k6-6Bq" secondAttribute="centerX" id="BhC-4m-V0x"/>
+                                            <constraint firstItem="MmV-q0-FsV" firstAttribute="height" secondItem="mbb-k6-6Bq" secondAttribute="height" multiplier="0.34" id="pK0-jc-ZuV"/>
+                                            <constraint firstItem="dp5-Jp-Y5M" firstAttribute="top" secondItem="MmV-q0-FsV" secondAttribute="bottom" multiplier="1.2" id="zSg-sh-vON"/>
+                                        </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ5-8b-Qgw" userLabel="Stats">
-                                        <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbb-k6-6Bq" userLabel="GameCenter">
-                                        <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3l-dk-igN" userLabel="Settings">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3l-dk-igN" userLabel="Settings">
                                         <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ohE-Cj-coJ">
@@ -231,7 +262,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-n4-3lT">
-                                                                <rect key="frame" x="0.0" y="7" width="82" height="46"/>
+                                                                <rect key="frame" x="0.0" y="12.5" width="88" height="35"/>
                                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="30"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -255,7 +286,7 @@
                                                         <rect key="frame" x="0.0" y="60" width="170" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kO-8z-2kY" userLabel="Music">
-                                                                <rect key="frame" x="0.0" y="7" width="78" height="46"/>
+                                                                <rect key="frame" x="0.0" y="12.5" width="81" height="35"/>
                                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="30"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -281,11 +312,11 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pJ-LF-6Bj">
-                                                <rect key="frame" x="401.5" y="90" width="177" height="60"/>
-                                                <color key="backgroundColor" red="0.66097360849999998" green="0.20016807319999999" blue="0.2235153913" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <rect key="frame" x="401.5" y="93" width="202.5" height="54"/>
                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="19"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Play Cutscene"/>
+                                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Play Cutscene" backgroundImage="Settings_gameCenterButton"/>
                                                 <state key="highlighted">
                                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="0.50163206335616439" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -301,12 +332,86 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="ohE-Cj-coJ" firstAttribute="centerY" secondItem="i3l-dk-igN" secondAttribute="centerY" id="8wc-7d-omo"/>
-                                            <constraint firstItem="9pJ-LF-6Bj" firstAttribute="width" secondItem="9pJ-LF-6Bj" secondAttribute="height" multiplier="192:65" id="D6Y-6r-bb8"/>
+                                            <constraint firstItem="9pJ-LF-6Bj" firstAttribute="width" secondItem="9pJ-LF-6Bj" secondAttribute="height" multiplier="233:62" id="D6Y-6r-bb8"/>
                                             <constraint firstItem="9pJ-LF-6Bj" firstAttribute="centerY" secondItem="i3l-dk-igN" secondAttribute="centerY" id="Dew-NV-U5i"/>
-                                            <constraint firstItem="9pJ-LF-6Bj" firstAttribute="height" secondItem="i3l-dk-igN" secondAttribute="height" multiplier="0.25" id="MVE-Nf-1cg"/>
                                             <constraint firstItem="9pJ-LF-6Bj" firstAttribute="leading" secondItem="i3l-dk-igN" secondAttribute="centerX" multiplier="1.2" id="TTa-C3-dRR"/>
                                             <constraint firstAttribute="centerX" secondItem="ohE-Cj-coJ" secondAttribute="trailing" multiplier="1.2" id="XIa-xG-sf9"/>
                                             <constraint firstItem="ohE-Cj-coJ" firstAttribute="height" secondItem="i3l-dk-igN" secondAttribute="height" multiplier="0.501044" id="fQW-jW-Sdf"/>
+                                            <constraint firstItem="9pJ-LF-6Bj" firstAttribute="height" secondItem="i3l-dk-igN" secondAttribute="height" multiplier="0.225" id="fwK-Uh-Wvj"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ5-8b-Qgw" userLabel="Stats">
+                                        <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYB-lj-idV" userLabel="Credits">
+                                        <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="gMc-w7-NMY">
+                                                <rect key="frame" x="100" y="36" width="469" height="168"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CreditsCell" id="CFM-17-KAX" customClass="CreditsCell" customModule="SpaceSpice" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="469" height="44.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CFM-17-KAX" id="azm-Ca-yCt">
+                                                            <rect key="frame" x="0.0" y="0.0" width="469" height="44.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flavio Akira Tsukamoto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwY-3c-6he">
+                                                                    <rect key="frame" x="62" y="12.5" width="176" height="20"/>
+                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="17"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="26"/>
+                                                                    </variation>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg3-u8-PID">
+                                                                    <rect key="frame" x="371.5" y="12.5" width="77.5" height="20"/>
+                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="17"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="26"/>
+                                                                    </variation>
+                                                                </label>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LinkedInLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9VK-JR-0On">
+                                                                    <rect key="frame" x="20" y="10" width="24.5" height="24.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="9VK-JR-0On" secondAttribute="height" multiplier="1:1" id="LB4-Pj-Krf"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="width" secondItem="azm-Ca-yCt" secondAttribute="width" multiplier="0.0522388" id="51Z-aU-RzL"/>
+                                                                <constraint firstItem="Kg3-u8-PID" firstAttribute="centerY" secondItem="azm-Ca-yCt" secondAttribute="centerY" id="QQx-Hp-YxF"/>
+                                                                <constraint firstItem="EwY-3c-6he" firstAttribute="centerY" secondItem="azm-Ca-yCt" secondAttribute="centerY" id="TjS-tn-66a"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Kg3-u8-PID" secondAttribute="trailing" constant="20" id="VJF-fS-ThB"/>
+                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="height" secondItem="azm-Ca-yCt" secondAttribute="height" multiplier="0.55" id="Vla-YT-Hgb"/>
+                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="centerY" secondItem="EwY-3c-6he" secondAttribute="centerY" id="YAh-me-YGb"/>
+                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="centerX" secondItem="EwY-3c-6he" secondAttribute="leading" constant="-30" id="eXo-fR-mIe"/>
+                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="centerX" secondItem="azm-Ca-yCt" secondAttribute="leading" constant="32" id="igf-Z6-Q11"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="domainImageView" destination="9VK-JR-0On" id="016-QI-V63"/>
+                                                            <outlet property="nameLabel" destination="EwY-3c-6he" id="qVJ-2x-Lkh"/>
+                                                            <outlet property="roleLabel" destination="Kg3-u8-PID" id="pQQ-S3-GFw"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                                <sections/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="UC5-lN-XpR" id="EpS-5u-BbU"/>
+                                                    <outlet property="delegate" destination="UC5-lN-XpR" id="6UI-4Q-66x"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="gMc-w7-NMY" firstAttribute="height" secondItem="xYB-lj-idV" secondAttribute="height" multiplier="0.7" id="QGd-zl-mMl"/>
+                                            <constraint firstItem="gMc-w7-NMY" firstAttribute="centerX" secondItem="xYB-lj-idV" secondAttribute="centerX" id="Uaw-hA-dML"/>
+                                            <constraint firstItem="gMc-w7-NMY" firstAttribute="centerY" secondItem="xYB-lj-idV" secondAttribute="centerY" id="ZaK-sZ-9OL"/>
+                                            <constraint firstItem="gMc-w7-NMY" firstAttribute="width" secondItem="xYB-lj-idV" secondAttribute="width" multiplier="0.7" id="hWe-NH-vwP"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -356,7 +461,6 @@
                     </view>
                     <connections>
                         <outlet property="boxCenterYConstraint" destination="kdT-cL-KM9" id="Ih5-q9-6TU"/>
-                        <outlet property="cutsceneButton" destination="9pJ-LF-6Bj" id="Wic-SF-Qbp"/>
                         <outlet property="musicSwitch" destination="9Bu-I0-QWa" id="9qL-zX-4sO"/>
                         <outlet property="soundSwitch" destination="7tq-z5-1k8" id="ZzD-xE-Wzd"/>
                         <outletCollection property="widthConstraints" destination="OG9-1h-lLJ" collectionClass="NSMutableArray" id="Jav-SL-Wwz"/>
@@ -377,6 +481,8 @@
                         <outletCollection property="views" destination="xYB-lj-idV" collectionClass="NSMutableArray" id="HJM-sI-QlG"/>
                         <outletCollection property="labels" destination="gfh-n4-3lT" collectionClass="NSMutableArray" id="22f-Jc-ZZ6"/>
                         <outletCollection property="labels" destination="7kO-8z-2kY" collectionClass="NSMutableArray" id="SYx-CR-jEJ"/>
+                        <outletCollection property="labelButtons" destination="9pJ-LF-6Bj" collectionClass="NSMutableArray" id="Flj-jz-5Tq"/>
+                        <outletCollection property="labelButtons" destination="dp5-Jp-Y5M" collectionClass="NSMutableArray" id="Qf1-rE-Fao"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WxJ-k1-pcT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -385,7 +491,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LinkedInLogo" width="255" height="255"/>
         <image name="Settings_box" width="1174" height="475"/>
+        <image name="Settings_gameCenterButton" width="233" height="61.5"/>
+        <image name="Settings_gameCenterIcon" width="61" height="79"/>
         <image name="Settings_selectionButtonOFF" width="240" height="55"/>
         <image name="Settings_selectionButtonON" width="383" height="87"/>
         <image name="WR_backButton" width="222" height="207"/>
