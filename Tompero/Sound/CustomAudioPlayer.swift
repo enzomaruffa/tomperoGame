@@ -38,6 +38,8 @@ class CustomAudioPlayer {
     }
     
     func play() {
+        guard MusicPlayer.shared.soundOn else { return }
+        
         DispatchQueue.global(qos: .background).async {
             for player in self.players where !player.isPlaying {
                 player.play()

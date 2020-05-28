@@ -15,8 +15,7 @@ import AVFoundation
 // swiftlint:disable force_cast
 class Cutscene: SKScene {
     
-    // MARK: - Coordinator
-    weak var coordinator: MainCoordinator?
+    weak var controller: CutsceneViewController?
     
     // MARK: - Variables
     var player: AVPlayer!
@@ -58,8 +57,19 @@ class Cutscene: SKScene {
     }
     
     func setupBackButton() {
-        backButton = SKSpriteNode(texture: SKTexture(imageNamed: "WR_backButton"), size: CGSize(width: 300, height: 300))
-        backButton.anchorPoint = CGPoint(x: 0, y: 1)
+        backButton = SKSpriteNode(texture: .none, color: .clear, size: CGSize(width: 322, height: 300))
+        
+        let image = SKSpriteNode(texture: SKTexture(imageNamed: "WR_backButton"), size: backButton.size)
+        image.zPosition = 2
+        image.anchorPoint = CGPoint(x: 0, y: 1)
+        
+        let background = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: -backButton.size.height), size: backButton.size), cornerRadius: 24)
+        background.fillColor = .black
+        background.strokeColor = .clear
+        background.zPosition = 1
+        
+        backButton.addChild(image)
+        backButton.addChild(background)
         backButton.position = CGPoint(x: -videoNodeSize.width, y: videoNodeSize.height) * 0.45
         addChild(backButton)
     }
@@ -90,7 +100,7 @@ class Cutscene: SKScene {
     func endPlayback() {
         playbackEnded = true
         videoNode.pause()
-        coordinator?.popToRoot()
+        controller?.navigationController?.popViewController(animated: true)
     }
     
     var lastUpdateTime: TimeInterval = 0

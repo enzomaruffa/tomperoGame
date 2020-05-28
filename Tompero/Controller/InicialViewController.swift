@@ -2,7 +2,7 @@ import UIKit
 import MultipeerConnectivity
 import GameKit
 
-class InicialViewController: UIViewController, Storyboarded, GKGameCenterControllerDelegate {
+class InicialViewController: UIViewController, Storyboarded {
     
     // MARK: - Storyboarded
     static var storyboardName = "Main"
@@ -112,10 +112,8 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         kombiTimer?.invalidate()
     }
     
-    @IBAction func playVideo(_ sender: Any) {
-        MusicPlayer.shared.stop(.menu)
-        MusicPlayer.shared.stop(.game)
-        coordinator?.video()
+    @IBAction func settingsPressed(_ sender: Any) {
+        coordinator?.settings()
     }
     
     // MARK: - Methods
@@ -209,16 +207,4 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
             }
         }
     }
-    
-    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func openLeaderboard(_ sender: Any) {
-        let newVC = GKGameCenterViewController()
-        newVC.gameCenterDelegate = self
-        newVC.viewState = .default
-        present(newVC, animated: true, completion: nil)
-    }
-    
 }

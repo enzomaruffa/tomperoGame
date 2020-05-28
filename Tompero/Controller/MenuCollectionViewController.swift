@@ -28,12 +28,8 @@ class MenuCollectionViewController: UIViewController, UICollectionViewDataSource
     override func viewDidLoad() {
         pageControl.numberOfPages = numberOfPages
         
-        if traitCollection.verticalSizeClass == .regular {
-            // if iPad
-            _ = collectionViewBottomConstraint.setMultiplier(multiplier: 1)
-        } else {
-            _ = collectionViewBottomConstraint.setMultiplier(multiplier: 0.86)
-        }
+        // if iPad
+        _ = collectionViewBottomConstraint.setMultiplier(multiplier: traitCollection.verticalSizeClass == .regular ? 1 : 0.86)
     }
     
     // MARK: - Methods

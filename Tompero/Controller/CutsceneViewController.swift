@@ -20,7 +20,7 @@ class CutsceneViewController: UIViewController, Storyboarded {
         
         if let view = self.view as! SKView? {
             let scene = Cutscene(size: view.frame.size)
-            scene.coordinator = coordinator
+            scene.controller = self
             scene.scaleMode = .aspectFit
             scene.backgroundColor = .black
                 

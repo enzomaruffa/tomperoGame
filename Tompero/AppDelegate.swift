@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Firebase Analytics
         FirebaseApp.configure()
         
+        MusicPlayer.shared.loadData()
+        
        // create the main navigation controller to be used for our app
         let navController = NavigationController()
 

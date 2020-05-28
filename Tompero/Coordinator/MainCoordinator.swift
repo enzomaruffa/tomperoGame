@@ -45,6 +45,12 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(controller, animated: false)
     }
     
+    func settings() {
+        let controller = SettingsViewController.instantiate()
+        controller.coordinator = self
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
     func video() {
         let controller = CutsceneViewController.instantiate()
         controller.coordinator = self

@@ -69,7 +69,7 @@ class GameScene: SKScene {
     
     var matchStatistics: MatchStatistics?
     
-    var matchTimer = Float(180)
+    var matchTimer: Float = 180
     var timerStarted = false
     var timerUpdateCounter = 0
     

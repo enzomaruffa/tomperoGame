@@ -29,21 +29,36 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
     let hardID = "com.spacespice.hard"
     
     // MARK: - Outlets
-    @IBOutlet weak var deliveredOrdersLabel: UILabel!
-    @IBOutlet weak var pointsLabel: UILabel!
+    @IBOutlet weak var ordersLabel: UILabel!
+    @IBOutlet weak var coinsLabel: UILabel!
+    @IBOutlet weak var gameOverLabel: UILabel!
+    @IBOutlet weak var mainMenuButton: UIButton!
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let labelMultiplier: CGFloat = traitCollection.verticalSizeClass == .regular ? 0.4/11.3 : 0.6/9.5
+        let labelFontSize: CGFloat = (self.view.frame.height * labelMultiplier).rounded(.down)
+        ordersLabel.font = UIFont(name: "TitilliumWeb-Bold", size: labelFontSize)
+        coinsLabel.font = UIFont(name: "TitilliumWeb-Bold", size: labelFontSize)
+        
+        let titleMultiplier: CGFloat = traitCollection.verticalSizeClass == .regular ? 0.4/10.7 : 0.6/8.8
+        let titleFontSize: CGFloat = (self.view.frame.height * titleMultiplier).rounded(.down)
+        gameOverLabel.font = UIFont(name: "TitilliumWeb-Bold", size: titleFontSize)
+        
+        let buttonMultiplier: CGFloat = traitCollection.verticalSizeClass == .regular ? 0.4/12.8 : 0.6/11.2
+        let buttonFontSize: CGFloat = (self.view.frame.height * buttonMultiplier).rounded(.down)
+        mainMenuButton.titleLabel!.font = UIFont(name: "TitilliumWeb-Bold", size: buttonFontSize)
         
         EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
         
         databaseManager.addNewMatch(withHash: statistics.matchHash, coinCount: statistics.totalPoints)
         
         // Do any additional setup after loading the view.
-        deliveredOrdersLabel.text = "\(statistics.totalDeliveredOrders) orders delivered!"
+        ordersLabel.text = "\(statistics.totalDeliveredOrders) orders delivered!"
         
-        pointsLabel.text = "\(statistics.totalPoints) coins earned!"
+        coinsLabel.text = "\(statistics.totalPoints) coins earned!"
         
         submitScoreToGameCenter()
     }
