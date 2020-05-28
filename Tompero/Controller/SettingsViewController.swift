@@ -22,6 +22,8 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
     @IBOutlet var images: [UIImageView]!
     @IBOutlet var views: [UIView]!
     @IBOutlet var labels: [UILabel]!
+    @IBOutlet weak var statsTableView: UITableView!
+    @IBOutlet weak var creditsTableView: UITableView!
     
     // Settings
     @IBOutlet weak var soundSwitch: UISwitch!
@@ -30,6 +32,8 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
     
     // MARK: - Variables
     var currentView: UIView!
+    var selectedFontSize: CGFloat!
+    var defaultFontSize: CGFloat!
     
     // MARK: - Constants
     let selectedMultiplier: CGFloat = 0.31
@@ -61,20 +65,20 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
         }
         
         let selectorWidth = self.view.frame.width * 0.85 / 8
-        let defaultSize = (selectorWidth * defaultMultiplier).rounded(.down)
-        let selectedSize = (selectorWidth * selectedMultiplier).rounded(.down)
+        defaultFontSize = (selectorWidth * defaultMultiplier).rounded(.down)
+        selectedFontSize = (selectorWidth * selectedMultiplier).rounded(.down)
         buttons.forEach { button in
-            button.defaultFont = UIFont(name: "TitilliumWeb-Light", size: defaultSize)
-            button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: selectedSize)
+            button.defaultFont = UIFont(name: "TitilliumWeb-Light", size: defaultFontSize)
+            button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: selectedFontSize)
         }
         
         soundSwitch.isOn = CustomAudioPlayer.soundOn
         musicSwitch.isOn = MusicPlayer.musicOn
         labelButtons.forEach { button in
-            button.titleLabel!.font = UIFont(name: "TitilliumWeb-Bold", size: defaultSize)
+            button.titleLabel!.font = UIFont(name: "TitilliumWeb-Bold", size: defaultFontSize)
         }
         labels.forEach { label in
-            label.font = UIFont(name: "TitilliumWeb-Bold", size: selectedSize)
+            label.font = UIFont(name: "TitilliumWeb-Bold", size: selectedFontSize)
         }
     }
     
@@ -144,23 +148,45 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        profiles.count
+        if tableView === creditsTableView {
+            profiles.count
+        } else if tableView === statsTableView {
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CreditsCell", for: indexPath) as! CreditsCell
+        if tableView === creditsTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CreditsCell", for: indexPath) as! CreditsCell
 
-        let profile = profiles[indexPath.row]
-        cell.nameLabel.text = profile.name
-        cell.roleLabel.text = profile.role
-        cell.domainImageView.image = UIImage(named: "\(profile.domain)Logo")?.withRenderingMode(.alwaysTemplate)
-        
-        cell.backgroundColor = indexPath.row % 2 == 0 ? #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5047356592) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
-        
-        return cell
+            let profile = profiles[indexPath.row]
+            cell.nameLabel.text = profile.name
+            cell.roleLabel.text = profile.role
+            cell.domainImageView.image = UIImage(named: "\(profile.domain)Logo")?.withRenderingMode(.alwaysTemplate)
+            
+            cell.nameLabel.font = UIFont(name: "TitilliumWeb-Bold", size: (selectedFontSize / 2).rounded(.up))
+            cell.roleLabel.font = UIFont(name: "TitilliumWeb-Light", size: (selectedFontSize / 2).rounded(.up))
+            
+            cell.backgroundColor = indexPath.row % 2 == 0 ? #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5047356592) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
+            
+            return cell
+        } else if tableView === statsTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StatsCell", for: indexPath) as! StatsCell
+            
+            // put stuff
+            
+            cell.statLabel.font = UIFont(name: "TitilliumWeb-Bold", size: (selectedFontSize / 2).rounded(.up))
+            cell.numberLabel.font = UIFont(name: "TitilliumWeb-Light", size: (selectedFontSize / 2).rounded(.up))
+            
+            cell.backgroundColor = indexPath.row % 2 == 0 ? #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5047356592) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard tableView === creditsTableView else { return }
+        
         let profile = profiles[indexPath.row]
         if let url = URL(string: profile.url) {
             displayAlert(url, domain: profile.domain)

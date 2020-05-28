@@ -71,6 +71,7 @@
 		562C4D9A244E411A00AB2B74 /* StarsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562C4D99244E411A00AB2B74 /* StarsOverlay.swift */; };
 		565AEFE223915E6400E3E15F /* MovableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */; };
 		565AEFE4239164E300E3E15F /* StationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565AEFE3239164E300E3E15F /* StationNode.swift */; };
+		565B289A2480145A002A4E4D /* StatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B28992480145A002A4E4D /* StatsCell.swift */; };
 		566A5BAF239A8564006D96CF /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A5BAE239A8564006D96CF /* ComponentType.swift */; };
 		566A5BB2239AD3AF006D96CF /* OrderListNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A5BB1239AD3AF006D96CF /* OrderListNode.swift */; };
 		566E9BD3239D391400787210 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566E9BD2239D391400787210 /* ProgressBar.swift */; };
@@ -230,6 +231,7 @@
 		562C4D99244E411A00AB2B74 /* StarsOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarsOverlay.swift; sourceTree = "<group>"; };
 		565AEFE123915E6400E3E15F /* MovableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableSpriteNode.swift; sourceTree = "<group>"; };
 		565AEFE3239164E300E3E15F /* StationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNode.swift; sourceTree = "<group>"; };
+		565B28992480145A002A4E4D /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		566A5BAE239A8564006D96CF /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		566A5BB1239AD3AF006D96CF /* OrderListNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListNode.swift; sourceTree = "<group>"; };
 		566E9BD2239D391400787210 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 				569B4691247EB9A300D7792F /* SelectorButton.swift */,
 				56FE9216247DACBF007E28BB /* Settings.storyboard */,
 				56F45BCF247F1E420067DE5D /* CreditsCell.swift */,
+				565B28992480145A002A4E4D /* StatsCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -980,6 +983,7 @@
 				4709B27823A6F2AC004B8F51 /* FryerNode.swift in Sources */,
 				566E9C9B239D82E200787210 /* SFXPlayer.swift in Sources */,
 				567A07BB238C805000D6399A /* Order.swift in Sources */,
+				565B289A2480145A002A4E4D /* StatsCell.swift in Sources */,
 				FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */,
 				476925C62390AA0900FBAB1F /* SKNodeExtensions.swift in Sources */,
 				FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */,

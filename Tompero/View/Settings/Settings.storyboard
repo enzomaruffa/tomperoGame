@@ -262,7 +262,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfh-n4-3lT">
-                                                                <rect key="frame" x="0.0" y="12.5" width="88" height="35"/>
+                                                                <rect key="frame" x="0.0" y="7" width="82" height="46"/>
                                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="30"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -286,7 +286,7 @@
                                                         <rect key="frame" x="0.0" y="60" width="170" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kO-8z-2kY" userLabel="Music">
-                                                                <rect key="frame" x="0.0" y="12.5" width="81" height="35"/>
+                                                                <rect key="frame" x="0.0" y="7" width="78" height="46"/>
                                                                 <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="30"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -340,10 +340,7 @@
                                             <constraint firstItem="9pJ-LF-6Bj" firstAttribute="height" secondItem="i3l-dk-igN" secondAttribute="height" multiplier="0.225" id="fwK-Uh-Wvj"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ5-8b-Qgw" userLabel="Stats">
-                                        <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYB-lj-idV" userLabel="Credits">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYB-lj-idV" userLabel="Credits">
                                         <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="gMc-w7-NMY">
@@ -351,46 +348,47 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CreditsCell" id="CFM-17-KAX" customClass="CreditsCell" customModule="SpaceSpice" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="469" height="44.5"/>
+                                                        <rect key="frame" x="0.0" y="28" width="469" height="31.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CFM-17-KAX" id="azm-Ca-yCt">
-                                                            <rect key="frame" x="0.0" y="0.0" width="469" height="44.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="469" height="31.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flavio Akira Tsukamoto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwY-3c-6he">
-                                                                    <rect key="frame" x="62" y="12.5" width="176" height="20"/>
-                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="17"/>
+                                                                    <rect key="frame" x="40" y="5" width="141" height="21.5"/>
+                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="14"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="26"/>
+                                                                        <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="20"/>
                                                                     </variation>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Developer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kg3-u8-PID">
-                                                                    <rect key="frame" x="371.5" y="12.5" width="77.5" height="20"/>
-                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="17"/>
+                                                                    <rect key="frame" x="389.5" y="5" width="59.5" height="21.5"/>
+                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="14"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                                        <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="26"/>
+                                                                        <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
                                                                     </variation>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LinkedInLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9VK-JR-0On">
-                                                                    <rect key="frame" x="20" y="10" width="24.5" height="24.5"/>
+                                                                    <rect key="frame" x="10" y="6" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="9VK-JR-0On" secondAttribute="height" multiplier="1:1" id="LB4-Pj-Krf"/>
                                                                     </constraints>
                                                                 </imageView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="width" secondItem="azm-Ca-yCt" secondAttribute="width" multiplier="0.0522388" id="51Z-aU-RzL"/>
+                                                                <constraint firstAttribute="bottom" secondItem="EwY-3c-6he" secondAttribute="bottom" constant="5" id="QMC-rA-q65"/>
                                                                 <constraint firstItem="Kg3-u8-PID" firstAttribute="centerY" secondItem="azm-Ca-yCt" secondAttribute="centerY" id="QQx-Hp-YxF"/>
                                                                 <constraint firstItem="EwY-3c-6he" firstAttribute="centerY" secondItem="azm-Ca-yCt" secondAttribute="centerY" id="TjS-tn-66a"/>
+                                                                <constraint firstItem="EwY-3c-6he" firstAttribute="leading" secondItem="9VK-JR-0On" secondAttribute="trailing" constant="10" id="UKm-s2-1Sr"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Kg3-u8-PID" secondAttribute="trailing" constant="20" id="VJF-fS-ThB"/>
-                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="height" secondItem="azm-Ca-yCt" secondAttribute="height" multiplier="0.55" id="Vla-YT-Hgb"/>
+                                                                <constraint firstItem="EwY-3c-6he" firstAttribute="leading" secondItem="azm-Ca-yCt" secondAttribute="leading" constant="40" id="WGt-GR-JbE"/>
                                                                 <constraint firstItem="9VK-JR-0On" firstAttribute="centerY" secondItem="EwY-3c-6he" secondAttribute="centerY" id="YAh-me-YGb"/>
-                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="centerX" secondItem="EwY-3c-6he" secondAttribute="leading" constant="-30" id="eXo-fR-mIe"/>
-                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="centerX" secondItem="azm-Ca-yCt" secondAttribute="leading" constant="32" id="igf-Z6-Q11"/>
+                                                                <constraint firstItem="9VK-JR-0On" firstAttribute="leading" secondItem="azm-Ca-yCt" secondAttribute="leading" constant="10" id="ayq-YZ-Wxe"/>
+                                                                <constraint firstItem="EwY-3c-6he" firstAttribute="top" secondItem="azm-Ca-yCt" secondAttribute="top" constant="5" id="zxr-AU-vOJ"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
@@ -412,6 +410,68 @@
                                             <constraint firstItem="gMc-w7-NMY" firstAttribute="centerX" secondItem="xYB-lj-idV" secondAttribute="centerX" id="Uaw-hA-dML"/>
                                             <constraint firstItem="gMc-w7-NMY" firstAttribute="centerY" secondItem="xYB-lj-idV" secondAttribute="centerY" id="ZaK-sZ-9OL"/>
                                             <constraint firstItem="gMc-w7-NMY" firstAttribute="width" secondItem="xYB-lj-idV" secondAttribute="width" multiplier="0.7" id="hWe-NH-vwP"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ5-8b-Qgw" userLabel="Stats">
+                                        <rect key="frame" x="17.5" y="0.0" width="669.5" height="239.5"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="qFa-mz-juB">
+                                                <rect key="frame" x="100" y="36" width="469" height="168"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatsCell" id="DPj-ht-4SS" customClass="StatsCell">
+                                                        <rect key="frame" x="0.0" y="28" width="469" height="31.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DPj-ht-4SS" id="vR2-bS-s4B">
+                                                            <rect key="frame" x="0.0" y="0.0" width="469" height="31.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Matches played" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppe-FT-6TA">
+                                                                    <rect key="frame" x="20" y="5" width="95.5" height="21.5"/>
+                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="14"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" name="TitilliumWeb-Bold" family="Titillium Web" pointSize="20"/>
+                                                                    </variation>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXx-Ma-uIs">
+                                                                    <rect key="frame" x="401" y="5" width="48" height="21.5"/>
+                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="14"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" name="TitilliumWeb-Light" family="Titillium Web" pointSize="20"/>
+                                                                    </variation>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="IXx-Ma-uIs" secondAttribute="trailing" constant="20" id="61z-cz-UEf"/>
+                                                                <constraint firstItem="ppe-FT-6TA" firstAttribute="top" secondItem="vR2-bS-s4B" secondAttribute="top" constant="5" id="6Dg-jt-JqO"/>
+                                                                <constraint firstItem="IXx-Ma-uIs" firstAttribute="centerY" secondItem="vR2-bS-s4B" secondAttribute="centerY" id="HKT-H8-lYZ"/>
+                                                                <constraint firstItem="ppe-FT-6TA" firstAttribute="leading" secondItem="vR2-bS-s4B" secondAttribute="leading" constant="20" id="ISA-eS-PJZ"/>
+                                                                <constraint firstItem="ppe-FT-6TA" firstAttribute="centerY" secondItem="vR2-bS-s4B" secondAttribute="centerY" id="PUv-sz-uQu"/>
+                                                                <constraint firstAttribute="bottom" secondItem="ppe-FT-6TA" secondAttribute="bottom" constant="5" id="sLZ-yw-mwv"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="numberLabel" destination="IXx-Ma-uIs" id="zvJ-H5-4JZ"/>
+                                                            <outlet property="statLabel" destination="ppe-FT-6TA" id="ycv-rf-RRp"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                                <sections/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="UC5-lN-XpR" id="Ayv-0O-oD1"/>
+                                                    <outlet property="delegate" destination="UC5-lN-XpR" id="cVj-bW-C3s"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="qFa-mz-juB" firstAttribute="centerY" secondItem="ZQ5-8b-Qgw" secondAttribute="centerY" id="2DO-bz-RgN"/>
+                                            <constraint firstItem="qFa-mz-juB" firstAttribute="centerX" secondItem="ZQ5-8b-Qgw" secondAttribute="centerX" id="Zno-8A-O9F"/>
+                                            <constraint firstItem="qFa-mz-juB" firstAttribute="width" secondItem="ZQ5-8b-Qgw" secondAttribute="width" multiplier="0.7" id="rLA-Te-wK1"/>
+                                            <constraint firstItem="qFa-mz-juB" firstAttribute="height" secondItem="ZQ5-8b-Qgw" secondAttribute="height" multiplier="0.7" id="z20-PO-5t8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -461,8 +521,10 @@
                     </view>
                     <connections>
                         <outlet property="boxCenterYConstraint" destination="kdT-cL-KM9" id="Ih5-q9-6TU"/>
+                        <outlet property="creditsTableView" destination="gMc-w7-NMY" id="LcG-Nw-Vq4"/>
                         <outlet property="musicSwitch" destination="9Bu-I0-QWa" id="9qL-zX-4sO"/>
                         <outlet property="soundSwitch" destination="7tq-z5-1k8" id="ZzD-xE-Wzd"/>
+                        <outlet property="statsTableView" destination="qFa-mz-juB" id="gv2-5L-z4V"/>
                         <outletCollection property="widthConstraints" destination="OG9-1h-lLJ" collectionClass="NSMutableArray" id="Jav-SL-Wwz"/>
                         <outletCollection property="widthConstraints" destination="D3v-RW-Iie" collectionClass="NSMutableArray" id="Pf9-O1-uGx"/>
                         <outletCollection property="widthConstraints" destination="Anh-zr-4MN" collectionClass="NSMutableArray" id="Mn9-hI-CRf"/>
