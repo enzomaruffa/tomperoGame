@@ -149,9 +149,14 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView === creditsTableView {
-            profiles.count
+            return profiles.count
         } else if tableView === statsTableView {
-            
+            return 0
+        }
+        switch tableView {
+        case creditsTableView: return profiles.count
+        case statsTableView: return 0
+        default: return 0
         }
     }
     
@@ -181,6 +186,8 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
             cell.backgroundColor = indexPath.row % 2 == 0 ? #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5047356592) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
             
             return cell
+        } else {
+            return UITableViewCell()
         }
     }
     
