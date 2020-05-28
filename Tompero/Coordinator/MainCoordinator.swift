@@ -26,8 +26,8 @@ class MainCoordinator: Coordinator {
 //        gsTest ? gameSceneTest() : initial()
 //        #endif
         
-        gameSceneTest()
-//        initial()
+//        gameSceneTest()
+        initial()
     }
     
     func popToRoot() {
