@@ -419,7 +419,7 @@
                                                 <rect key="frame" x="100" y="36" width="469" height="168"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatsCell" id="DPj-ht-4SS" customClass="StatsCell">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatsCell" id="DPj-ht-4SS" customClass="StatsCell" customModule="SpaceSpice" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="469" height="31.5"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DPj-ht-4SS" id="vR2-bS-s4B">
@@ -455,15 +455,15 @@
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
-                                                            <outlet property="numberLabel" destination="IXx-Ma-uIs" id="zvJ-H5-4JZ"/>
+                                                            <outlet property="numberLabel" destination="IXx-Ma-uIs" id="9gO-QI-1hk"/>
                                                             <outlet property="statLabel" destination="ppe-FT-6TA" id="ycv-rf-RRp"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                                 <sections/>
                                                 <connections>
-                                                    <outlet property="dataSource" destination="UC5-lN-XpR" id="Ayv-0O-oD1"/>
-                                                    <outlet property="delegate" destination="UC5-lN-XpR" id="cVj-bW-C3s"/>
+                                                    <outlet property="dataSource" destination="UC5-lN-XpR" id="iRw-4C-9lR"/>
+                                                    <outlet property="delegate" destination="UC5-lN-XpR" id="AUm-Wx-Wjt"/>
                                                 </connections>
                                             </tableView>
                                         </subviews>

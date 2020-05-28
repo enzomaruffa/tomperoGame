@@ -10,8 +10,6 @@ import AVFoundation
 
 class CustomAudioPlayer {
     
-    static var soundOn = true
-    
     private var players = [AVAudioPlayer]()
     private var url: URL!
     
@@ -40,7 +38,7 @@ class CustomAudioPlayer {
     }
     
     func play() {
-        guard CustomAudioPlayer.soundOn else { return }
+        guard MusicPlayer.shared.soundOn else { return }
         
         DispatchQueue.global(qos: .background).async {
             for player in self.players where !player.isPlaying {

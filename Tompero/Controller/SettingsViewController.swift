@@ -72,8 +72,8 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
             button.selectedFont = UIFont(name: "TitilliumWeb-Bold", size: selectedFontSize)
         }
         
-        soundSwitch.isOn = CustomAudioPlayer.soundOn
-        musicSwitch.isOn = MusicPlayer.musicOn
+        soundSwitch.isOn = MusicPlayer.shared.soundOn
+        musicSwitch.isOn = MusicPlayer.shared.musicOn
         labelButtons.forEach { button in
             button.titleLabel!.font = UIFont(name: "TitilliumWeb-Bold", size: defaultFontSize)
         }
@@ -113,12 +113,12 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
     }
     
     @IBAction func soundTapped(_ sender: Any) {
-        CustomAudioPlayer.soundOn.toggle()
+        MusicPlayer.shared.soundOn.toggle()
     }
     
     @IBAction func musicTapped(_ sender: Any) {
-        MusicPlayer.musicOn.toggle()
-        if MusicPlayer.musicOn {
+        MusicPlayer.shared.musicOn.toggle()
+        if MusicPlayer.shared.musicOn {
             MusicPlayer.shared.play(.menu)
         } else {
             MusicPlayer.shared.stopAll()
@@ -148,14 +148,9 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView === creditsTableView {
-            return profiles.count
-        } else if tableView === statsTableView {
-            return 0
-        }
         switch tableView {
         case creditsTableView: return profiles.count
-        case statsTableView: return 0
+        case statsTableView: return 1
         default: return 0
         }
     }
@@ -178,7 +173,8 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
         } else if tableView === statsTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StatsCell", for: indexPath) as! StatsCell
             
-            // put stuff
+            cell.statLabel.text = "Coming soon!"
+            cell.numberLabel.text = ""
             
             cell.statLabel.font = UIFont(name: "TitilliumWeb-Bold", size: (selectedFontSize / 2).rounded(.up))
             cell.numberLabel.font = UIFont(name: "TitilliumWeb-Light", size: (selectedFontSize / 2).rounded(.up))
