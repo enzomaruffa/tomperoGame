@@ -17,24 +17,94 @@ class MainCoordinator: Coordinator {
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     
+    func start() {
+//        let gsTest = false
+//
+//        #if !DEGUB
+//        initial()
+//        #else
+//        gsTest ? gameSceneTest() : initial()
+//        #endif
+        
+//        gameSceneTest()
+        initial()
+    }
+    
+    func popToRoot() {
+        navigationController.popToRootViewController(animated: true)
+    }
+    
+    // Returns if a view controller is on top
+    func isOnTop(controller: UIViewController?) -> Bool {
+        return navigationController.viewControllers.last == controller
+    }
+    
+    func initial() {
+        let controller = InicialViewController.instantiate()
+        controller.coordinator = self
+        navigationController.pushViewController(controller, animated: false)
+    }
+    
+    func settings() {
+        let controller = SettingsViewController.instantiate()
+        controller.coordinator = self
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
+    func video() {
+        let controller = CutsceneViewController.instantiate()
+        controller.coordinator = self
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
+    func menu() {
+        let controller = MenuCollectionViewController.instantiate()
+        controller.coordinator = self
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
+    func waitingRoom(hosting: Bool) {
+        let controller = WaitingRoomViewController.instantiate()
+        controller.coordinator = self
+        controller.hosting = hosting
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
+    func game(rule: GameRule, hosting: Bool) {
+        let controller = GameViewController.instantiate()
+        controller.coordinator = self
+        controller.hosting = hosting
+        controller.rule = rule
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
+    func statistics(statistics: MatchStatistics) {
+        let controller = StatisticsViewController.instantiate()
+        controller.coordinator = self
+        controller.statistics = statistics
+        navigationController.pushViewController(controller, animated: false)
+    }
+    
+    // MARK: - Testing functions
+    
     fileprivate func gameSceneTest() {
         let tables: [String : [PlayerTable]] = [
-            "God" : [
-                PlayerTable(type: .frying, ingredient: nil),
-                PlayerTable(type: .plate, ingredient: nil),
-                PlayerTable(type: .ingredient, ingredient: Asteroid())
+            MCManager.shared.selfName : [
+                PlayerTable(type: .chopping, ingredient: nil),
+                PlayerTable(type: .cooking, ingredient: nil),
+                PlayerTable(type: .ingredient, ingredient: Tentacle())
             ],
-            "Enzo's Enzo's iPhone" : [
+            "alo" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil)
             ],
-            "CU" : [
+            "alo 2" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil)
             ],
-            "CU 2" : [
+            "__empty__" : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .chopping, ingredient: nil)
@@ -43,7 +113,7 @@ class MainCoordinator: Coordinator {
         
         game(
             rule: GameRule(
-                difficulty: .easy,
+                difficulty: .hard,
                 possibleIngredients: [
                     Asteroid(),
                     Tentacle(),
@@ -53,9 +123,9 @@ class MainCoordinator: Coordinator {
                 ],
                 playerTables: tables,
                 playerOrder: [
-                    "God",
+                    MCManager.shared.selfName,
                     "Enzo's Enzo's iPhone",
-                    "__empty__",
+                    "God",
                     "__empty__"]
             ),
             hosting: true
@@ -67,7 +137,7 @@ class MainCoordinator: Coordinator {
             "God" : [
                 PlayerTable(type: .frying, ingredient: nil),
                 PlayerTable(type: .plate, ingredient: nil),
-                PlayerTable(type: .ingredient, ingredient: Asteroid())
+                PlayerTable(type: .ingredient, ingredient: Tentacle())
             ],
             "Enzo's Enzo's iPhone" : [
                 PlayerTable(type: .chopping, ingredient: nil),
@@ -102,8 +172,6 @@ class MainCoordinator: Coordinator {
                 "CU",
                 "CU 2"]
         ))
-        
-        
         
         statistics(statistics: stats)
         
@@ -140,65 +208,7 @@ class MainCoordinator: Coordinator {
         //
         //            dbManager.checkMatchExists(hash: stats2.matchHash) { (result) in
         //                print("Match with hash \(stats2.matchHash) exists? \(result)")
-        //            }
-        
-        
-    }
-    
-    func start() {
-        var gameSceneTest: Bool = false
-        
-        #if !DEBUG
-        gameSceneTest = false
-        #endif
-        
-        if gameSceneTest {
-            statisticsTest()
-            //            gameSceneTest()
-            //            return
-        }
-        
-        inicial()
-    }
-    
-    func popToRoot() {
-        navigationController.popToRootViewController(animated: true)
-    }
-    
-    func inicial() {
-        let controller = InicialViewController.instantiate()
-        controller.coordinator = self
-        navigationController.pushViewController(controller, animated: false)
-    }
-    
-    func menu() {
-        let controller = MenuCollectionViewController.instantiate()
-        controller.coordinator = self
-        controller.modalTransitionStyle = .crossDissolve
-        //        navigationController.present(controller, animated: true, completion: nil)
-        navigationController.pushViewController(controller, animated: false)
-    }
-    
-    func waitingRoom(hosting: Bool) {
-        let controller = WaitingRoomViewController.instantiate()
-        controller.coordinator = self
-        controller.hosting = hosting
-        navigationController.pushViewController(controller, animated: false)
-    }
-    
-    func game(rule: GameRule, hosting: Bool) {
-        let controller = GameViewController.instantiate()
-        controller.coordinator = self
-        controller.hosting = hosting
-        controller.rule = rule
-        navigationController.pushViewController(controller, animated: false)
-    }
-    
-    func statistics(statistics: MatchStatistics) {
-        let controller = StatisticsViewController.instantiate()
-        controller.coordinator = self
-        controller.statistics = statistics
-        navigationController.pushViewController(controller, animated: false)
+        //            } 
     }
     
 }

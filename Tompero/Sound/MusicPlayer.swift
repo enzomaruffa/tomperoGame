@@ -10,6 +10,18 @@ import AVFoundation
 
 class MusicPlayer {
     
+    var musicOn = true {
+        didSet {
+            MusicPlayer.shared.saveData()
+        }
+    }
+    
+    var soundOn = true {
+        didSet {
+            MusicPlayer.shared.saveData()
+        }
+    }
+    
     static var shared = MusicPlayer()
     
     private var score = [TrackNumber: Track]()
@@ -20,6 +32,8 @@ class MusicPlayer {
     }
     
     func play(_ trackToPlay: TrackNumber) {
+        guard musicOn else { return }
+        
         for (trackNumber, track) in score {
             if trackNumber == trackToPlay {
                 track.play()
@@ -29,14 +43,33 @@ class MusicPlayer {
         }
     }
     
-    func stop(_ trackToPlay: TrackNumber) {
-        for (trackNumber, track) in score {
-            if trackNumber != trackToPlay {
-                track.play()
-            } else {
-                track.stop()
-            }
+    func stop(_ trackToStop: TrackNumber) {
+        if let track = score[trackToStop] {
+            track.stop()
         }
+    }
+    
+    func stopAll() {
+        for (_, track) in score {
+            track.stop()
+        }
+    }
+    
+    func saveData() {
+        UserDefaults.standard.set(musicOn, forKey: "musicOn")
+        UserDefaults.standard.set(soundOn, forKey: "soundOn")
+    }
+    
+    func loadData() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Error: Could not start audio session.")
+        }
+        
+        musicOn = UserDefaults.standard.bool(forKey: "musicOn")
+        soundOn = UserDefaults.standard.bool(forKey: "soundOn")
     }
 }
 

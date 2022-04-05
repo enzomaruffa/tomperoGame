@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="APN-Ha-0LA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="APN-Ha-0LA">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,13 +11,28 @@
         <!--Game View Controller-->
         <scene sceneID="cfG-1h-AIz">
             <objects>
-                <viewController storyboardIdentifier="GameViewController" id="APN-Ha-0LA" customClass="GameViewController" customModule="Tompero" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dFo-Q8-ydI" customClass="SKView">
+                <viewController storyboardIdentifier="GameViewController" id="APN-Ha-0LA" customClass="GameViewController" customModule="SpaceSpice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dFo-Q8-ydI" customClass="StarsOverlay" customModule="SpaceSpice" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbq-Dh-NVx" userLabel="SKView" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="fbq-Dh-NVx" secondAttribute="bottom" id="ARb-0Y-SWA"/>
+                            <constraint firstItem="fbq-Dh-NVx" firstAttribute="leading" secondItem="dFo-Q8-ydI" secondAttribute="leading" id="BUm-dp-JWg"/>
+                            <constraint firstItem="fbq-Dh-NVx" firstAttribute="top" secondItem="dFo-Q8-ydI" secondAttribute="top" id="CTC-eL-uh5"/>
+                            <constraint firstAttribute="trailing" secondItem="fbq-Dh-NVx" secondAttribute="trailing" id="Ge9-5e-CBi"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iQa-AG-3BG"/>
                     </view>
+                    <connections>
+                        <outlet property="skView" destination="fbq-Dh-NVx" id="na4-sP-qGi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aeN-tJ-Z1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

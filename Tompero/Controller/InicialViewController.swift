@@ -2,7 +2,7 @@ import UIKit
 import MultipeerConnectivity
 import GameKit
 
-class InicialViewController: UIViewController, Storyboarded, GKGameCenterControllerDelegate {
+class InicialViewController: UIViewController, Storyboarded {
     
     // MARK: - Storyboarded
     static var storyboardName = "Main"
@@ -18,7 +18,6 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     // MARK: - Game Center
     var isGameCenterEnabled: Bool! // check if Game Center enabled
     var defaultLeaderboard = "" // check default leaderboard ID
-    let leaderboardID = "com.score.spacespice"
     
     // MARK: - Outlets
     @IBOutlet weak var join: UIImageView!
@@ -27,6 +26,7 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
     @IBOutlet weak var textBox: UIImageView!
     @IBOutlet weak var sapao: UIImageView!
     @IBOutlet weak var viewDialog: UIView!
+    @IBOutlet weak var coinLabel: UILabel!
     
     var lightsOn = false
     var countLightsOn = 0
@@ -54,18 +54,9 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
         host.addGestureRecognizer(tapGestureRecognizerHost)
         viewDialog.addGestureRecognizer(tapGestureRecognizerText)
         viewDialog.isUserInteractionEnabled = true
-        
-        animateDialog(text: textSapao1)
-        
-        MusicPlayer.shared.play(.menu)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        MCManager.shared.resetSession()
-    
-        // TODO: Make update in UI with coin count
-        setCoinsValue()
-        
+    fileprivate func createKombiTimer() {
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             //print("Timer called")
             
@@ -74,47 +65,66 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
             if self.lightsOn && self.countLightsOn >= 2 {
                 UIView.transition(with: self.host,
                                   duration: 0.05,
-                options: .transitionFlipFromRight,
-                    animations: { self.host.image = UIImage(named: "HOST - apagado") },
-                    completion: nil)
+                                  options: .transitionFlipFromRight,
+                                  animations: { self.host.image = UIImage(named: "HOST - apagado") },
+                                  completion: nil)
                 self.lightsOn = false
                 
                 UIView.transition(with: self.join,
                                   duration: 0.05,
-                options: .transitionFlipFromRight,
-                    animations: { self.join.image = UIImage(named: "JOIN - apagado") },
-                    completion: nil)
+                                  options: .transitionFlipFromRight,
+                                  animations: { self.join.image = UIImage(named: "JOIN - apagado") },
+                                  completion: nil)
             } else if !self.lightsOn {
                 UIView.transition(with: self.host,
                                   duration: 0.05,
-                    options: .transitionFlipFromRight,
-                    animations: { self.host.image = UIImage(named: "HOST - brilhando") },
-                    completion: nil)
+                                  options: .transitionFlipFromRight,
+                                  animations: { self.host.image = UIImage(named: "HOST - brilhando") },
+                                  completion: nil)
                 
                 UIView.transition(with: self.join,
                                   duration: 0.05,
-                    options: .transitionFlipFromRight,
-                    animations: { self.join.image = UIImage(named: "JOIN - brilhando") },
-                    completion: nil)
+                                  options: .transitionFlipFromRight,
+                                  animations: { self.join.image = UIImage(named: "JOIN - brilhando") },
+                                  completion: nil)
                 
                 self.countLightsOn = 0
                 self.lightsOn = true
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        MusicPlayer.shared.play(.menu)
+        
+        MCManager.shared.resetSession()
+    
+        // TODO: Make update in UI with coin count
+        setCoinsValue()
+        
+        createKombiTimer()
         kombiTimer?.fire()
+        
+        animateDialog(text: textSapao1)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         kombiTimer?.invalidate()
     }
     
-    // MARK: - Methods
-    func setCoinsValue() {
-        databaseManager.getPlayerCoinCount {
-            print("Current coin count: \($0)")
-        }
+    @IBAction func settingsPressed(_ sender: Any) {
+        coordinator?.settings()
     }
     
+    // MARK: - Methods
+    func setCoinsValue() {
+        databaseManager.getPlayerCoinCount { count in
+            print("Current coin count: \(count)")
+            DispatchQueue.main.async {
+                self.coinLabel.text = count.description
+            }
+        }
+    }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
@@ -132,10 +142,12 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
             coordinator?.waitingRoom(hosting: true)
         }
     }
+    
     @objc func screenTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         textTimer?.invalidate()
         textLabel.text = textSapao1
     }
+    
     func animateDialog(text: String) {
         self.textLabel.text = ""
         if textTimer != nil {
@@ -181,7 +193,7 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
                 // get default leaderboard ID
                 localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
                     if error != nil {
-                        print(error)
+                        print(error!)
                     } else {
                         self.defaultLeaderboard = leaderboardIdentifer!
                     }
@@ -191,21 +203,8 @@ class InicialViewController: UIViewController, Storyboarded, GKGameCenterControl
                 // 3. game center is not enabled on the users device
                 self.isGameCenterEnabled = false
                 print("Local player could not be authenticated!")
-                print(error)
+                print(error!)
             }
         }
     }
-    
-    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func openLeaderboard(_ sender: Any) {
-        let newVC = GKGameCenterViewController()
-        newVC.gameCenterDelegate = self
-        newVC.viewState = .leaderboards
-        newVC.leaderboardIdentifier = leaderboardID
-        present(newVC, animated: true, completion: nil)
-    }
-    
 }
