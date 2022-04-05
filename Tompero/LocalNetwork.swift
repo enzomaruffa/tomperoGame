@@ -6,60 +6,79 @@
 //  Copyright © 2022 Tompero. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Network
 
-@available(iOS 14.0, *)
-public class LocalNetworkAuthorization: NSObject {
-    private var browser: NWBrowser?
-    private var netService: NetService?
-    private var completion: ((Bool) -> Void)?
+class LocalNetworkPermissionChecker {
+    private var host: String
+    private var port: UInt16
+    private var checkPermissionStatus: DispatchWorkItem?
     
-    public func requestAuthorization(completion: @escaping (Bool) -> Void) {
-        self.completion = completion
+    private lazy var detectDeclineTimer: Timer? = Timer.scheduledTimer(
+        withTimeInterval: .zero,
+        repeats: false,
+        block: { [weak self] _ in
+            guard let checkPermissionStatus = self?.checkPermissionStatus else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now(), execute: checkPermissionStatus)
+        })
+    
+    init(host: String, port: UInt16, granted: @escaping () -> Void, failure: @escaping (Error?) -> Void) {
+        self.host = host
+        self.port = port
         
-        // Create parameters, and allow browsing over peer-to-peer link.
-        let parameters = NWParameters()
-        parameters.includePeerToPeer = true
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationIsInBackground),
+            name: UIApplication.willResignActiveNotification,
+            object: nil)
         
-        // Browse for a custom service type.
-        let browser = NWBrowser(for: .bonjour(type: "_bonjour._tcp", domain: nil), using: parameters)
-        self.browser = browser
-        browser.stateUpdateHandler = { newState in
-            switch newState {
-            case .failed(let error):
-                print(error.localizedDescription)
-            case .ready, .cancelled:
-                break
-            case let .waiting(error):
-                print("Local network permission has been denied: \(error)")
-                self.reset()
-                self.completion?(false)
-            default:
-                break
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationIsInForeground),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
+        
+        actionRequestNetworkPermissions(granted: granted, failure: failure)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    /// Creating a network connection prompts the user for permission to access the local network. We do not have the need to actually send anything over the connection.
+    /// - Note: The user will only be prompted once for permission to access the local network. The first time they do this the app will be placed in the background while
+    /// the user is being prompted. We check for this to occur. If it does we invalidate our timer and allow the user to make a selection. When the app returns to the foreground
+    /// verify what they selected. If this is not the first time they are on this screen, the timer will not be invalidated and we will check the dispatchWorkItem block to see what
+    /// their selection was previously.
+    /// - Parameters:
+    ///   - granted: Informs application that user has provided us with local network permission.
+    ///   - failure: Something went awry.
+    private func actionRequestNetworkPermissions(granted: @escaping () -> Void, failure: @escaping (Error?) -> Void) {
+        guard let port = NWEndpoint.Port(rawValue: port) else { return }
+        
+        let connection = NWConnection(host: NWEndpoint.Host(host), port: port, using: .udp)
+        connection.start(queue: .main)
+        
+        checkPermissionStatus = DispatchWorkItem(block: { [weak self] in
+            if connection.state == .ready {
+                self?.detectDeclineTimer?.invalidate()
+                granted()
+            } else {
+                failure(nil)
             }
-        }
+        })
         
-        self.netService = NetService(domain: "local.", type:"_lnp._tcp.", name: "LocalNetworkPrivacy", port: 1100)
-        self.netService?.delegate = self
-        
-        self.browser?.start(queue: .main)
-        self.netService?.publish()
+        detectDeclineTimer?.fireDate = Date() + 1
     }
     
-    private func reset() {
-        self.browser?.cancel()
-        self.browser = nil
-        self.netService?.stop()
-        self.netService = nil
+    /// Permission prompt will throw the application in to the background and invalidate the timer.
+    @objc private func applicationIsInBackground() {
+        detectDeclineTimer?.invalidate()
     }
-}
-
-@available(iOS 14.0, *)
-extension LocalNetworkAuthorization : NetServiceDelegate {
-    public func netServiceDidPublish(_ sender: NetService) {
-        self.reset()
-        print("Local network permission has been granted")
-        completion?(true)
+    
+    /// - Important: DispatchWorkItem must be called after 1sec otherwise we are calling before the user state is updated.
+    @objc private func applicationIsInForeground() {
+        guard let checkPermissionStatus = checkPermissionStatus else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: checkPermissionStatus)
     }
 }

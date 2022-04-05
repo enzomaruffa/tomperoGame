@@ -68,8 +68,17 @@ class MusicPlayer {
             print("Error: Could not start audio session.")
         }
         
-        musicOn = UserDefaults.standard.bool(forKey: "musicOn")
-        soundOn = UserDefaults.standard.bool(forKey: "soundOn")
+        if let _ = UserDefaults.standard.object(forKey: "musicOn") {
+            musicOn = UserDefaults.standard.bool(forKey: "musicOn")
+        } else {
+            musicOn = true
+        }
+        
+        if let _ = UserDefaults.standard.object(forKey: "soundOn") {
+            soundOn = UserDefaults.standard.bool(forKey: "soundOn")
+        } else {
+            soundOn = true
+        }
     }
 }
 
