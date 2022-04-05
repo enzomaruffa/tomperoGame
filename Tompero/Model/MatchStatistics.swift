@@ -26,7 +26,6 @@ class MatchStatistics: Codable {
             }.joined()
         }.joined()
         
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         stringToBeHashed += dateFormatter.string(from: Date())

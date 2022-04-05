@@ -20,6 +20,7 @@ final class PlateNode: MovableDelegate {
     
     var scaleBeforeMove: CGFloat = 1
     var alphaBeforeMove: CGFloat = 1
+    var zPosBeforeMove: CGFloat = 10
     
     var moving = false
     var successfulDelivery = false
@@ -62,7 +63,7 @@ final class PlateNode: MovableDelegate {
                     if self.successfulDelivery {
                         SFXPlayer.shared.cashRegister.play()
                     } else {
-                        
+                        // play fail sound
                     }
                 }
             ])
@@ -73,9 +74,45 @@ final class PlateNode: MovableDelegate {
         }
     }
     
-    private func implodeSpriteNode() {
+    private func sendSpriteNode(to type: StationType) {
         self.currentStation.plateNode = nil
-        spriteNode.removeFromParent()
+        
+        for ingredient in self.plate.ingredients {
+            ingredient.sprite.removeFromParent()
+            ingredient.sprite.position = .zero
+            spriteNode.addChild(ingredient.sprite)
+        }
+        
+        let duration = TimeInterval.random(in: 2...7)
+        let vector = CGVector.randomVector(totalLength: CGFloat(duration * 150))
+        
+        let scale = SKAction.scale(to: 0.3, duration: 0.15)
+        scale.timingMode = .easeIn
+        
+        self.spriteNode.run(
+            .sequence([
+                .scale(to: 0.8, duration: 0.05, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1),
+                scale,
+                .run {
+                    if type == .pipe {
+                        self.spriteNode.removeFromParent()
+                        return
+                    } else if type == .hatch {
+                        self.spriteNode.zPosition = -50
+                    }
+                    },
+                .group([
+                    .move(by: vector, duration: duration),
+                    .fadeOut(withDuration: duration),
+                    .scale(to: 0, duration: duration),
+                    .rotate(byAngle: CGFloat.random(in: CGFloat.pi...4*CGFloat.pi), duration: duration)
+                ])
+            ])
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.2) {
+            self.spriteNode.removeFromParent()
+        }
     }
     
     private func setPlateIn(_ station: StationNode) {
@@ -92,14 +129,18 @@ final class PlateNode: MovableDelegate {
             currentStation.plateNode = self
             
             currentStation.ingredientNode = nil
-            //TODO: Remove ingredient node from scene destroy it whatever
             ingredientNode.spriteNode.removeFromParent()
         } else {
-            self.spriteNode.zPosition = PlateNode.baseZPos + 10
+            self.spriteNode.zPosition = PlateNode.baseZPos
             self.updateTexture()
             
             currentStation = station
             currentStation.plateNode = self
+        }
+        
+        if station.stationType == .shelf {
+            self.spriteNode.zPosition = PlateNode.baseZPos + 10
+            self.updateTexture()
         }
         
     }
@@ -191,11 +232,11 @@ final class PlateNode: MovableDelegate {
             
             GameConnectionManager.shared.send(plate: self.plate, to: playerToSendTo)
         
-            implodeSpriteNode()
+            sendSpriteNode(to: .pipe)
             return true
             
         case .hatch:
-            implodeSpriteNode()
+            sendSpriteNode(to: .hatch)
             return true
             
         case .delivery:
@@ -230,6 +271,9 @@ final class PlateNode: MovableDelegate {
             self.spriteNode.run(SKAction.scale(to: 0.7, duration: 0.2))
             self.spriteNode.alpha = 1
             
+            zPosBeforeMove = spriteNode.zPosition
+            spriteNode.zPosition = 30
+            
             let duration = 0.2
             
             let minRotation = CGFloat(-0.3)
@@ -247,7 +291,6 @@ final class PlateNode: MovableDelegate {
     }
     
     func moveEnded(currentPosition: CGPoint) {
-        spriteNode.zRotation = 0
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil
@@ -259,6 +302,7 @@ final class PlateNode: MovableDelegate {
         print("Move cancelled")
         spriteNode.setScale(scaleBeforeMove)
         spriteNode.alpha = alphaBeforeMove
+        spriteNode.zPosition = zPosBeforeMove
     }
     
 }

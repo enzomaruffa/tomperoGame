@@ -9,135 +9,64 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     // MARK: - Variables
     var hosting = false
-    var animationTimer: Timer?
-    var countLevel = GameDifficulty.easy
-    
-    var playersWithStatus: [MCPeerWithStatus] = [MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
-    
-    var playersImages: [UIImageView]!
-    let singleAnimationDuration = 0.35
-    
-    var isZoomed = false
     var closedBrowser = false
-    var viewOriginalTransform:CGAffineTransform!
-    var zoomedAndTransformed: CGAffineTransform!
+    
+    var difficultySelected = GameDifficulty.easy
+    
+    var playersWithStatus: [MCPeerWithStatus] = [
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
+        MCPeerWithStatus(peer: "__empty__", status: .notConnected)
+    ]
     
     // MARK: - Outlets
+    @IBOutlet weak var headerTitle: UILabel!
+    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var goBackImage: UIImageView!
     
-    @IBOutlet weak var painelHost: UIImageView!
+    @IBOutlet weak var difficultyButton: UIButton!
+    @IBOutlet weak var difficultyImage: UIImageView!
     
-    @IBOutlet weak var level: UIButton!
-    @IBOutlet weak var levelBackImage: UIImageView!
-    
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet var stackWidthConstraint: NSLayoutConstraint!
-    @IBOutlet var stackHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var stackCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player1Image: UIImageView!
     @IBOutlet weak var player1Label: UILabel!
     @IBOutlet weak var player1InviteButton: UIButton!
-    @IBOutlet var player1LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player2Image: UIImageView!
     @IBOutlet weak var player2Label: UILabel!
     @IBOutlet weak var player2InviteButton: UIButton!
-    @IBOutlet var player2LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player3Image: UIImageView!
     @IBOutlet weak var player3Label: UILabel!
     @IBOutlet weak var player3InviteButton: UIButton!
-    @IBOutlet var player3LabelCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var player4Image: UIImageView!
     @IBOutlet weak var player4Label: UILabel!
     @IBOutlet weak var player4InviteButton: UIButton!
-    @IBOutlet var player4LabelCenterYConstraint: NSLayoutConstraint!
     
     // MARK: - View LifeCycle
-    override func viewWillAppear(_ animated: Bool) {
-        updateLevelUI(difficulty: countLevel)
-        
-        playersImages = [player1Image, player2Image, player3Image, player4Image]
-        
-        player1InviteButton.isHidden = true
-        player2InviteButton.isHidden = true
-        player3InviteButton.isHidden = true
-        player4InviteButton.isHidden = true
-        
-        if !hosting {
-            // Images
-            stackWidthConstraint.setMultiplier(multiplier: 0.8)
-            stackHeightConstraint.setMultiplier(multiplier: 0.8)
-            stackCenterYConstraint.setMultiplier(multiplier: 1.15)
-            // Names
-            player1LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
-            player2LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
-            player4LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
-            player3LabelCenterYConstraint.setMultiplier(multiplier: 1.5)
-            
-            levelBackImage.isHidden = true
-            goButton.isHidden = true
-            level.isHidden = true
-            painelHost.isHidden = true
-        }
-        
-        stackView.layoutIfNeeded()
-        updatePlayers(playersWithStatus)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        if isZoomed {
-            zoomOut()
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //ZOOM do menu
-        let viewTransform = self.view.transform
-        let scaleX = (view.frame.width/menuButton.frame.width)
-        let scaleY = (view.frame.height/menuButton.frame.height)
-        let translatedTransform = viewTransform.scaledBy(x: scaleX, y: scaleY)
-        let translatedAndScaledTransform = translatedTransform.translatedBy(x: (-menuButton.frame.midX + self.view.frame.midX), y: -menuButton.frame.midY + self.view.frame.midY)
-        self.zoomedAndTransformed = translatedAndScaledTransform
+        _ = stackViewCenterYConstraint.setMultiplier(multiplier: hosting ? 0.95 : 1)
+        updateViewConstraints()
         
-        let tapGestureRecognizerBlue = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        let tapGestureRecognizerPurple = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        let tapGestureRecognizerGreen = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        let tapGestureRecognizerOrange = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        if let diffLabel = difficultyButton.titleLabel {
+            diffLabel.numberOfLines = 1
+            diffLabel.adjustsFontSizeToFitWidth = true
+        }
         
-        let scaleHat = CGFloat(1.1)
-        player1Image.tag = 0
-        player1Image.isUserInteractionEnabled = true
-        player1Image.addGestureRecognizer(tapGestureRecognizerBlue)
-        player1Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
-        player1Label.text = "PLAYER 1"
-        
-        player2Image.tag = 1
-        player2Image.isUserInteractionEnabled = true
-        player2Image.addGestureRecognizer(tapGestureRecognizerPurple)
-        player2Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
-        player2Label.text = "PLAYER 2"
-        
-        player3Image.tag = 2
-        player3Image.isUserInteractionEnabled = true
-        player3Image.addGestureRecognizer(tapGestureRecognizerGreen)
-        player3Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
-        player3Label.text = "PLAYER 3"
-        
-        player4Image.tag = 3
-        player4Image.isUserInteractionEnabled = true
-        player4Image.addGestureRecognizer(tapGestureRecognizerOrange)
-        player4Image.transform = CGAffineTransform(scaleX: scaleHat, y: scaleHat)
-        player4Label.text = "PLAYER 4"
+        headerTitle.numberOfLines = 1
+        headerTitle.adjustsFontSizeToFitWidth = true
+        player1Label.adjustsFontSizeToFitWidth = true
+        player2Label.adjustsFontSizeToFitWidth = true
+        player3Label.adjustsFontSizeToFitWidth = true
+        player4Label.adjustsFontSizeToFitWidth = true
         
         // Array com lista de connected players
         //MCManager.shared.mcSession?.connectedPeers
@@ -148,7 +77,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected),
                                  MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
-//            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+            //            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
         } else {
             MCManager.shared.joinSession()
         }
@@ -159,24 +88,34 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         print("STATUS DO PLAYER ORANGE: ", playersWithStatus[3].status.rawValue)
     }
     
-    // MARK: - ActionsButtons
+    override func viewWillAppear(_ animated: Bool) {
+        updateDifficultyButton(difficulty: difficultySelected)
+        
+        player1InviteButton.isHidden = true
+        player2InviteButton.isHidden = true
+        player3InviteButton.isHidden = true
+        player4InviteButton.isHidden = true
+        
+        if !hosting {
+            difficultyImage.isHidden = true
+            goButton.isHidden = true
+            difficultyButton.isHidden = true
+            goBackImage.isHidden = true
+        }
+        
+        updatePlayers(playersWithStatus)
+    }
+     
+    // MARK: - Buttons
+    
     @IBAction func backPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-back")
         self.navigationController?.popViewController(animated: true)
-        
     }
+    
     @IBAction func menuPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-recipeMenu")
-        
-        let timeAnimation = 0.6
-        UIView.animate(withDuration: timeAnimation, delay: 0, options: .curveEaseIn, animations: {
-            self.view.transform = self.zoomedAndTransformed
-        }, completion: {(_)in
-            self.isZoomed = true
-            self.view.transform = .identity
-            self.coordinator?.menu()
-        })
-        
+        self.coordinator?.menu()
     }
     
     @IBAction func play(_ sender: Any) {
@@ -184,11 +123,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         EventLogger.shared.logButtonPress(buttonName: "waiting-play")
         
         let peers = playersWithStatus.map({ $0.name })
-        let rule = GameRuleFactory.generateRule(difficulty: countLevel, players: peers)
+        let rule = GameRuleFactory.generateRule(difficulty: difficultySelected, players: peers)
         
         let ruleData = try! JSONEncoder().encode(rule)
         MCManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
-        animatedSpaceshipToUP()
         
         MusicPlayer.shared.stop(.menu)
         
@@ -198,30 +136,28 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
     }
     
-    @IBAction func levelButtom(_ sender: Any) {
+    @IBAction func difficultyPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-difficulty")
         
-        if countLevel == .easy {
-            countLevel = .medium
-        } else if countLevel == .medium {
-            countLevel = .hard
-        } else if countLevel == .hard {
-            countLevel = .easy
+        if difficultySelected == .easy {
+            difficultySelected = .medium
+        } else if difficultySelected == .medium {
+            difficultySelected = .hard
+        } else if difficultySelected == .hard {
+            difficultySelected = .easy
         }
         
-        updateLevelUI(difficulty: countLevel)
+        updateDifficultyButton(difficulty: difficultySelected)
     }
     
-    func updateLevelUI(difficulty: GameDifficulty) {
+    func updateDifficultyButton(difficulty: GameDifficulty) {
         switch difficulty {
         case .easy:
-            level.setTitle("EASY", for: .normal)
+            difficultyButton.setTitle("EASY", for: .normal)
         case .medium:
-            level.setTitle("MEDIUM", for: .normal)
+            difficultyButton.setTitle("MEDIUM", for: .normal)
         case .hard:
-            level.setTitle("HARD", for: .normal)
-        default:
-            level.setTitle("EASY", for: .normal)
+            difficultyButton.setTitle("HARD", for: .normal)
         }
     }
     
@@ -243,31 +179,15 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
     
     // MARK: - Methods
-    func zoomOut() {
-        print(self)
-        if self.isZoomed {
-            self.view.transform = zoomedAndTransformed
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.transform = .identity //viewOriginalTransform
-            }, completion: { (_) in
-                self.view.layoutSubviews()
-            })
-            self.isZoomed = false
-        }
-    }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
         imageViewOpacity(imageView: tappedImage)
-        if tappedImage.tag == 0 {
-            
-        } else if tappedImage.tag == 1 {
-            print("CHAPEU SELECIONADO", player2Image!)
-            
-        } else if tappedImage.tag == 2 {
-            print("CHAPEU SELECIONADO", player3Image!)
-        } else if tappedImage.tag == 3 {
-            print("CHAPEU SELECIONADO", player4Image!)
+        switch tappedImage.tag {
+        case 1: print("Player 2 ", player2Image!)
+        case 2: print("Player 3 ", player3Image!)
+        case 3: print("Player 4 ", player4Image!)
+        default: print("Player 1 ", player1Image!)
         }
     }
     
@@ -285,6 +205,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         })
         
     }
+    
     func changeImageAnimated(image: String, viewChange: UIImageView) {
         guard let currentImage = viewChange.image, let newImage = UIImage(named: image) else {
             return
@@ -298,42 +219,12 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         viewChange.layer.add(crossFade, forKey: "animateContents")
     }
     
-    func animatedSpaceshipToUP() {
-        let positionFinal = ((painelHost.frame.size.height)/2) * (917/1117)
-        print(positionFinal)
-        let originalTransform = CGAffineTransform.identity
-        let translatedTransform = originalTransform.translatedBy(x: (0), y: positionFinal)
-        let scaledTransformAndTransform = translatedTransform.scaledBy(x: 0.001, y: 0.001)
-        
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-            self.stackView.transform = scaledTransformAndTransform
-        })
-    }
-    
-//    func playAnimatedSpaceshipLeftAndRight() {
-//        let hats = [hatBlue, hatPurple, hatGreen, hatOrange]
-//        hats.forEach { (hat) in
-//            let hatAngle = atan2f(Float(hat!.transform.b), Float(hat!.transform.a))
-//            if hatAngle < 0 {
-//                UIView.animate(withDuration: self.singleAnimationDuration, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
-//                    hat!.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/(1 * 14)))
-//                })
-//            } else {
-//                UIView.animate(withDuration: self.singleAnimationDuration, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
-//                    hat!.transform = CGAffineTransform(rotationAngle: CGFloat(-1 * Double.pi/14))
-//                })
-//            }
-//        }
-//    }
-    
     func checkGoButton(playersWithStatus: [MCPeerWithStatus]) {
         DispatchQueue.main.async {
             if playersWithStatus.filter({ $0.status == .connected }).count <= 1 {
                 self.goButton.isEnabled = false
-                self.goButton.imageView?.image = UIImage(named: "go_disabled")
             } else {
                 self.goButton.isEnabled = true
-                self.goButton.imageView?.image = UIImage(named: "go_")
             }
         }
     }
@@ -360,12 +251,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                         }
                     } else if playersWithStatus[index].status == .connecting {
                         self.player1Label.text = "..."
-                        
                         self.changeImageAnimated(image: "VREX - redline", viewChange: hat)
                     } else {
                         self.player1Label.text = playersWithStatus[index].name
                         self.changeImageAnimated(image: "VREX - FULL", viewChange: hat)
-                        
                     }
                 } else if index == 1 {
                     let hat = self.player2Image!
@@ -381,6 +270,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                     } else {
                         self.player2Label.text = playersWithStatus[index].name
                         self.changeImageAnimated(image: "SW77 - FULL", viewChange: hat)
+                        if self.hosting {
+                            self.player2InviteButton.setTitle(.none, for: .normal)
+                            self.player2InviteButton.isEnabled = false
+                        }
                     }
                 } else if index == 2 {
                     let hat = self.player3Image!
@@ -396,6 +289,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                     } else {
                         self.player3Label.text = playersWithStatus[index].name
                         self.changeImageAnimated(image: "MORGAN - FULL", viewChange: hat)
+                        if self.hosting {
+                            self.player3InviteButton.setTitle(.none, for: .normal)
+                            self.player3InviteButton.isEnabled = false
+                        }
                     }
                 } else if index == 3 {
                     let hat = self.player4Image!
@@ -411,6 +308,10 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
                     } else {
                         self.player4Label.text = playersWithStatus[index].name
                         self.changeImageAnimated(image: "JERRY - FULL", viewChange: hat)
+                        if self.hosting {
+                            self.player4InviteButton.setTitle(.none, for: .normal)
+                            self.player4InviteButton.isEnabled = false
+                        }
                     }
                 }
             }
@@ -425,10 +326,10 @@ extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         browserViewController.dismiss(animated: true)
         closedBrowser = true
-        //        guard playersWithStatus.count == 4 else {
-        //            self.navigationController?.popViewController(animated: true)
-        //            return
-        //        }
+//        guard playersWithStatus.count == 4 else {
+//            self.navigationController?.popViewController(animated: true)
+//            return
+//        }
         
         updatePlayers(playersWithStatus)
     }
@@ -448,6 +349,7 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
         // start game
         MCManager.shared.stopAdvertiser()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            MusicPlayer.shared.stop(.menu)
             self.coordinator?.game(rule: rule, hosting: false)
         }
     }

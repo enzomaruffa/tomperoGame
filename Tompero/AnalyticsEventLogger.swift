@@ -20,8 +20,8 @@ class EventLogger {
         print("Loggin plate deliver \(success) \(actionCount),\(ingredientCount)")
         Analytics.logEvent("plate_deliver", parameters: [
             "success": success,
-            "action_count": success,
-            "ingredient_count": success
+            "action_count": actionCount,
+            "ingredient_count": ingredientCount
         ])
         #endif
     }
@@ -31,8 +31,8 @@ class EventLogger {
         print("Loggin order resu;lt \(success) \(actionCount),\(ingredientCount) \(difficulty)")
         Analytics.logEvent("order_result", parameters: [
             "success": success,
-            "action_count": success,
-            "ingredient_count": success,
+            "action_count": actionCount,
+            "ingredient_count": ingredientCount,
             "difficulty": difficulty
         ])
         #endif

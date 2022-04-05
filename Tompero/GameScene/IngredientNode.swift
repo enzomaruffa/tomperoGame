@@ -20,6 +20,7 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     
     var scaleBeforeMove: CGFloat = 1
     var alphaBeforeMove: CGFloat = 1
+    var zPosBeforeMove: CGFloat = 10
     
     var moving = false
     
@@ -41,17 +42,46 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     // MARK: - Methods
-    private func hideSpriteNode() {
+    private func hideSpriteNode(completion block: @escaping () -> Void) {
         // We use a very low alpha value otherwise its interaction is disabled
-        self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05))
+        self.spriteNode.run(SKAction.fadeAlpha(to: 0.0001, duration: 0.05), completion: block)
     }
     
     private func showSpriteNode() {
         self.spriteNode.alpha = 1
     }
     
-    func implodeSpriteNode() {
-        self.spriteNode.removeFromParent()
+    private func sendSpriteNode(to type: StationType) {
+        let duration = TimeInterval.random(in: 2...7)
+        let vector = CGVector.randomVector(totalLength: CGFloat(duration * 150))
+        
+        let scale = SKAction.scale(to: 0.3, duration: 0.15)
+        scale.timingMode = .easeIn
+        
+        self.spriteNode.run(
+            .sequence([
+                .scale(to: 0.8, duration: 0.05, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1),
+                scale,
+                .run {
+                    if type == .pipe {
+                        self.spriteNode.removeFromParent()
+                        return
+                    } else if type == .hatch {
+                        self.spriteNode.zPosition = -10
+                    }
+                    },
+                .group([
+                    .move(by: vector, duration: duration),
+                    .fadeOut(withDuration: duration),
+                    .scale(to: 0, duration: duration),
+                    .rotate(byAngle: CGFloat.random(in: CGFloat.pi...4*CGFloat.pi), duration: duration)
+                ])
+            ])
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.2) {
+            self.spriteNode.removeFromParent()
+        }
     }
     
     func addIngredientTo(_ plateNode: PlateNode) {
@@ -105,7 +135,11 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
         case .stove:
             let canMove = station.ingredientNode?.ingredient == nil && ingredient.attemptChangeState(to: .cooking)
             if canMove {
-                hideSpriteNode()
+                spriteNode.run(.scale(to: 0, duration: 0.2)) {
+                    self.hideSpriteNode(completion: {
+                        self.spriteNode.setScale(1)
+                    })
+                }
                 setIngredientIn(station)
             }
             print("Result: \(canMove)")
@@ -114,7 +148,11 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
         case .fryer:
             let canMove = station.ingredientNode?.ingredient == nil && ingredient.attemptChangeState(to: .frying)
             if canMove {
-                hideSpriteNode()
+                spriteNode.run(.scale(to: 0, duration: 0.2)) {
+                    self.hideSpriteNode(completion: {
+                        self.spriteNode.setScale(1)
+                    })
+                }
                 setIngredientIn(station)
             }
             print("Result: \(canMove)")
@@ -143,12 +181,12 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
             GameConnectionManager.shared.send(ingredient: self.ingredient, to: playerToSendTo)
 
             removeFromPreviousStation()
-            implodeSpriteNode()
+            sendSpriteNode(to: .pipe)
             return true
             
         case .hatch:
             removeFromPreviousStation()
-            implodeSpriteNode()
+            sendSpriteNode(to: .hatch)
             return true
             
         case .plateBox:
@@ -176,6 +214,8 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
             
             SFXPlayer.shared.takeFood.play()
             moving = true
+            zPosBeforeMove = spriteNode.zPosition
+            spriteNode.zPosition = 90
             
             self.spriteNode.run(SKAction.scale(to: 0.7, duration: 0.2))
             self.spriteNode.alpha = 1
@@ -197,7 +237,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func moveEnded(currentPosition: CGPoint) {
-        spriteNode.zRotation = 0
         spriteNode.removeAllActions()
         rotationTimer?.invalidate()
         rotationTimer = nil
@@ -209,11 +248,13 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
         print("Move cancelled")
         spriteNode.setScale(scaleBeforeMove)
         spriteNode.alpha = alphaBeforeMove
+        spriteNode.zPosition = zPosBeforeMove
     }
     
     // MARK: - TappableDelegate
     func tap() {
         print("Ingredient tapped")
+        
         currentStation.tap()
         checkTextureChange()
     }

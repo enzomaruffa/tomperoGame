@@ -18,8 +18,9 @@ class GameScene: SKScene {
     
     // MARK: - Game Variables
     var hosting = false
+    weak var controller: UIViewController?
     
-    var player: String = "God" //MCManager.shared.selfName
+    var player: String = MCManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -68,7 +69,7 @@ class GameScene: SKScene {
     
     var matchStatistics: MatchStatistics?
     
-    var matchTimer = Float(30)
+    var matchTimer: Float = 180
     var timerStarted = false
     var timerUpdateCounter = 0
     
@@ -123,7 +124,6 @@ class GameScene: SKScene {
         setupBackground()
         
         SFXPlayer.shared.roundStarted.play()
-        
     }
     
     func setupOrderListNode() {
@@ -279,8 +279,7 @@ class GameScene: SKScene {
                 
                 // timer only starts when the first order is generated
                 if !timerStarted {
-                    timerStarted = true
-                    
+                    timerStarted = true   
                 }
             }
             
@@ -320,6 +319,7 @@ class GameScene: SKScene {
         }
         
         if error {
+            MusicPlayer.shared.stop(.game)
             coordinator?.popToRoot()
         }
     }
@@ -451,7 +451,9 @@ extension GameScene: GameConnectionManagerObserver {
         )
         shelf.plateNode?.updateTexture()
         node.zPosition = 2
+        node.setScale(0)
         self.addChild(node)
+        node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
     
     func receiveIngredient(ingredient: Ingredient) {
@@ -469,7 +471,9 @@ extension GameScene: GameConnectionManagerObserver {
         )
         shelf.ingredientNode?.checkTextureChange()
         node.zPosition = 2
+        node.setScale(0)
         self.addChild(node)
+        node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
     
     func receiveOrders(orders: [Order]) {
@@ -527,7 +531,7 @@ extension GameScene: MCManagerMatchmakingObserver {
     func playerUpdate(player: String, state: MCSessionState) {
         // end game if disconnect received
         
-        if state == .notConnected {
+        if state == .notConnected && coordinator?.isOnTop(controller: controller) ?? false {
             endMatch(error: true)
         }
     }
