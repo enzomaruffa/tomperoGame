@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: blacksmith-8vcpu-macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install CocoaPods deps
+        run: pod install --repo-update
+
+      - name: Build
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -workspace Tompero.xcworkspace \
+            -scheme Tompero \
+            -configuration Debug \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcbeautify || true
+
+  lint:
+    name: SwiftLint
+    runs-on: blacksmith-2vcpu-ubuntu-2204
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install SwiftLint
+        run: |
+          curl -L -o swiftlint.zip https://github.com/realm/SwiftLint/releases/latest/download/swiftlint_linux.zip
+          unzip swiftlint.zip
+          chmod +x swiftlint
+      - name: Run SwiftLint
+        run: ./swiftlint --strict --reporter github-actions-logging
