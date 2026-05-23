@@ -192,28 +192,28 @@ final class LANConnectionManager: NSObject {
 
     // MARK: - Observers
 
-    func subscribeDataObserver(observer: MCManagerDataObserver) {
+    func subscribeDataObserver(observer: LANDataObserver) {
         dataObservers.add(observer as AnyObject)
     }
 
-    func unsubscribeDataObserver(observer: MCManagerDataObserver) {
+    func unsubscribeDataObserver(observer: LANDataObserver) {
         dataObservers.remove(observer as AnyObject)
     }
 
-    func subscribeMatchmakingObserver(observer: MCManagerMatchmakingObserver) {
+    func subscribeMatchmakingObserver(observer: LANMatchmakingObserver) {
         matchmakingObservers.add(observer as AnyObject)
     }
 
-    func unsubscribeMatchmakingObserver(observer: MCManagerMatchmakingObserver) {
+    func unsubscribeMatchmakingObserver(observer: LANMatchmakingObserver) {
         matchmakingObservers.remove(observer as AnyObject)
     }
 
-    private var dataObserversSnapshot: [MCManagerDataObserver] {
-        dataObservers.allObjects.compactMap { $0 as? MCManagerDataObserver }
+    private var dataObserversSnapshot: [LANDataObserver] {
+        dataObservers.allObjects.compactMap { $0 as? LANDataObserver }
     }
 
-    private var matchmakingObserversSnapshot: [MCManagerMatchmakingObserver] {
-        matchmakingObservers.allObjects.compactMap { $0 as? MCManagerMatchmakingObserver }
+    private var matchmakingObserversSnapshot: [LANMatchmakingObserver] {
+        matchmakingObservers.allObjects.compactMap { $0 as? LANMatchmakingObserver }
     }
 
     // MARK: - Incoming routing
