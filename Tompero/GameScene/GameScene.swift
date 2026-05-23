@@ -12,9 +12,14 @@ import GameplayKit
 // swiftlint:disable force_cast
 class GameScene: SKScene {
     
-    // MARK: - Coordinator
-    weak var coordinator: MainCoordinator?
-    
+    // MARK: - Host callbacks
+    /// Fired when a successful match ends with final statistics; SwiftUI
+    /// host pushes the statistics screen. Replaces direct coordinator access.
+    var onMatchEnd: ((MatchStatistics) -> Void)?
+    /// Fired on a match-aborting error (peer dropped with no recovery). The
+    /// SwiftUI host pops to root.
+    var onMatchError: (() -> Void)?
+
     // MARK: - Game Variables
     var hosting = false
     weak var controller: UIViewController?
@@ -311,18 +316,16 @@ class GameScene: SKScene {
         self.isPaused = true
         stations.forEach({ $0.stopAnimation() })
         
-        if hosting && !error {
+        if hosting && !error, let matchStatistics {
             EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule?.difficulty ?? .easy)
-            
-            GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
-            coordinator?.statistics(statistics: matchStatistics!)
-        } else if hosting && error {
-            // TODO: Log error event
+
+            GameConnectionManager.shared.sendEveryone(statistics: matchStatistics)
+            onMatchEnd?(matchStatistics)
         }
-        
+
         if error {
             MusicPlayer.shared.stop(.game)
-            coordinator?.popToRoot()
+            onMatchError?()
         }
     }
     
@@ -522,7 +525,7 @@ extension GameScene: GameConnectionManagerObserver {
     func receiveStatistics(statistics: MatchStatistics) {
         endMatch()
         DispatchQueue.main.async {
-            self.coordinator?.statistics(statistics: statistics)
+            self.onMatchEnd?(statistics)
         }
     }
     
@@ -534,7 +537,7 @@ extension GameScene: LANMatchmakingObserver {
         // reconnect work in PR #6 a drop is often transient (background, brief
         // Wi-Fi loss), so we now hold the match paused for a 30s grace window
         // and only declare it over if the peer doesn't come back.
-        guard coordinator?.isOnTop(controller: controller) ?? false else { return }
+        guard view != nil else { return }
 
         switch state {
         case .notConnected:

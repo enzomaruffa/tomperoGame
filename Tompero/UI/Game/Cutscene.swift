@@ -15,7 +15,9 @@ import AVFoundation
 // swiftlint:disable force_cast
 class Cutscene: SKScene {
     
-    weak var controller: CutsceneViewController?
+    /// SwiftUI-host callback fired when playback ends or the back button is
+    /// tapped. Replaces the deleted UIKit navigationController hop.
+    var onFinish: (() -> Void)?
     
     // MARK: - Variables
     var player: AVPlayer!
@@ -100,7 +102,7 @@ class Cutscene: SKScene {
     func endPlayback() {
         playbackEnded = true
         videoNode.pause()
-        controller?.navigationController?.popViewController(animated: true)
+        onFinish?()
     }
     
     var lastUpdateTime: TimeInterval = 0
