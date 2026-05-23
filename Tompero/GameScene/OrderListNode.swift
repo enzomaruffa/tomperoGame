@@ -51,11 +51,7 @@ class OrderListNode: SKSpriteNode {
     }
     
     private func canChangeCurrentState(to state: State) -> Bool {
-//        print("[OrderListNode.canChangeCurrentState] current state: \(currentState)")
-        if states[currentState]!.contains(state) {
-            return true
-        }
-        return false
+        states[currentState]?.contains(state) == true
     }
     
     func open() {

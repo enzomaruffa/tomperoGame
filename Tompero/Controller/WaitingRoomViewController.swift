@@ -124,8 +124,13 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         let peers = playersWithStatus.map({ $0.name })
         let rule = GameRuleFactory.generateRule(difficulty: difficultySelected, players: peers)
 
-        let ruleData = try! JSONEncoder().encode(rule)
-        LANConnectionManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
+        do {
+            let ruleData = try JSONEncoder().encode(rule)
+            LANConnectionManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
+        } catch {
+            print("[WaitingRoom] Failed to encode GameRule: \(error.localizedDescription)")
+            return
+        }
 
         MusicPlayer.shared.stop(.menu)
 
