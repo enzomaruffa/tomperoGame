@@ -2,8 +2,9 @@
 //  StatisticsView.swift
 //  Tompero
 //
-//  End-of-match summary. Pushed by the game container with the final
-//  MatchStatistics; tapping MAIN MENU pops back to the root.
+//  End-of-match summary. Layout matches the original Statistics.storyboard:
+//  WR_bgFront base, GameOver_detail flanking overlays, and a central
+//  GameOver_box panel with title, orders, coins, and MAIN MENU button.
 //
 
 import SwiftUI
@@ -15,57 +16,68 @@ struct StatisticsView: View {
     @EnvironmentObject private var router: AppRouter
 
     var body: some View {
-        ZStack {
-            StarsBackground().ignoresSafeArea()
+        DesignCanvas { scale in
+            // Flanking decorative panels
+            Image("GameOver_detailLeft")
+                .resizable()
+                .scaledToFit()
+                .designed(x: 0, y: 0, w: 213, h: 414, scale: scale)
+            Image("GameOver_detailRight")
+                .resizable()
+                .scaledToFit()
+                .designed(x: 683, y: 0, w: 213, h: 414, scale: scale)
 
-            VStack(spacing: 32) {
-                Spacer()
+            // Central box with title + stats + button (storyboard inner frame
+            // at (181, 63.5, 534, 266); we add 181 to x and 63.5 to y for
+            // each inner child).
+            Image("GameOver_box")
+                .resizable()
+                .scaledToFit()
+                .designed(x: 181, y: 63.5, w: 534, h: 266, scale: scale)
 
-                Text("GAME OVER")
-                    .font(.custom("TitilliumWeb-Bold", size: 64))
+            Text("GAME OVER")
+                .font(.custom("TitilliumWeb-Bold", size: 36 * scale))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.5)
+                .designed(x: 194.5, y: 68, w: 520.5, h: 45.5, scale: scale)
+
+            Text("\(statistics.totalDeliveredOrders) orders delivered!")
+                .font(.custom("TitilliumWeb-Bold", size: 24 * scale))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.5)
+                .designed(x: 349, y: 113.5, w: 211, h: 74, scale: scale)
+
+            Text("\(statistics.totalPoints) coins earned!")
+                .font(.custom("TitilliumWeb-Bold", size: 24 * scale))
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.5)
+                .designed(x: 369.5, y: 147.5, w: 170.5, h: 74.5, scale: scale)
+
+            Button {
+                EventLogger.shared.logButtonPress(buttonName: "statistics-menu")
+                router.popToRoot()
+            } label: {
+                Text("MAIN MENU")
+                    .font(.custom("TitilliumWeb-Bold", size: 22 * scale))
                     .foregroundColor(.white)
-
-                VStack(spacing: 16) {
-                    Text("\(statistics.totalDeliveredOrders) orders delivered!")
-                        .font(.custom("TitilliumWeb-Bold", size: 36))
-                        .foregroundColor(.white)
-                    Text("\(statistics.totalPoints) coins earned!")
-                        .font(.custom("TitilliumWeb-Bold", size: 36))
-                        .foregroundColor(.white)
-                }
-
-                Spacer()
-
-                Button {
-                    EventLogger.shared.logButtonPress(buttonName: "statistics-menu")
-                    router.popToRoot()
-                } label: {
-                    Text("MAIN MENU")
-                        .font(.custom("TitilliumWeb-Bold", size: 32))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 16)
-                        .background(Color.black.opacity(0.35))
-                        .cornerRadius(16)
-                }
-
-                Spacer().frame(height: 32)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black.opacity(0.35))
+                    .cornerRadius(12 * scale)
             }
-            .padding()
+            .buttonStyle(.plain)
+            .designed(x: 334, y: 229.5, w: 241, h: 47, scale: scale)
         }
         .task {
-            await submitStatisticsSideEffects()
+            EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
+            CloudKitManager.shared.addNewMatch(
+                withHash: statistics.matchHash,
+                coinCount: statistics.totalPoints
+            )
+            submitScoreToGameCenter()
         }
-    }
-
-    /// Fire-and-forget side effects that used to run in viewDidLoad.
-    private func submitStatisticsSideEffects() async {
-        EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
-        CloudKitManager.shared.addNewMatch(
-            withHash: statistics.matchHash,
-            coinCount: statistics.totalPoints
-        )
-        submitScoreToGameCenter()
     }
 
     private func submitScoreToGameCenter() {

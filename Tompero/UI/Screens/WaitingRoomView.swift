@@ -2,15 +2,17 @@
 //  WaitingRoomView.swift
 //  Tompero
 //
-//  Multiplayer lobby. Hosts a 4-slot player roster, a peer-picker sheet,
-//  difficulty cycler, and the GO button that broadcasts a fresh GameRule.
+//  Multiplayer lobby. Layout matches WaitingRoom.storyboard:
+//  - Header (44, 0, 808, 73): back button, title, recipe-menu accessory
+//  - Difficulty panel (44, 135.5, 193.5, 278.5) — host only
+//  - Go panel (515, 273.5, 337, 140.5) — host only
+//  - 4 player slots row (125, 108, 646, 157.5)
 //
 
 import SwiftUI
 
 private let emptyName = "__empty__"
 
-/// Bridges the matchmaking observer protocol into `@Published` state.
 final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
 
     @Published var players: [PeerWithStatus]
@@ -72,7 +74,6 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
     // MARK: - LANMatchmakingObserver
 
     func receiveGameRule(rule: GameRule) {
-        // Joiner path: host broadcasts the rule; we transition into the game.
         LANConnectionManager.shared.stopAdvertising()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             MusicPlayer.shared.stop(.menu)
@@ -117,93 +118,98 @@ struct WaitingRoomView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .top) {
-            StarsBackground().ignoresSafeArea()
-
-            VStack(spacing: 24) {
-                header
-                playerRow
-                if hosting {
-                    controls
+        DesignCanvas { scale in
+            // Header — back button + title
+            HeaderBar(
+                title: hosting ? "HOSTING..." : "WAITING...",
+                scale: scale,
+                onBack: {
+                    EventLogger.shared.logButtonPress(buttonName: "waiting-back")
+                    router.pop()
                 }
-                Spacer()
+            )
+
+            // Recipe-menu accessory in the header (host & joiner both have it)
+            // Original frame inside header: (606, 0, 192, 79.5) → absolute (650, 0)
+            Image("WR_menuUI")
+                .resizable()
+                .scaledToFit()
+                .designed(x: 650, y: 0, w: 192, h: 79.5, scale: scale)
+
+            Button {
+                EventLogger.shared.logButtonPress(buttonName: "waiting-recipeMenu")
+                router.push(.menu)
+            } label: {
+                Image("WR_menuButton")
+                    .resizable()
+                    .scaledToFit()
             }
-            .padding()
+            .buttonStyle(.plain)
+            .designed(x: 676.5, y: 38, w: 96.5, h: 26.5, scale: scale)
+
+            // Difficulty panel — host only
+            if hosting {
+                Image("WR_difficultyUI")
+                    .resizable()
+                    .scaledToFit()
+                    .designed(x: 44, y: 135.5, w: 193.5, h: 278.5, scale: scale)
+
+                Button {
+                    EventLogger.shared.logButtonPress(buttonName: "waiting-difficulty")
+                    viewModel.cycleDifficulty()
+                } label: {
+                    Text(difficultyTitle)
+                        .font(.custom("TitilliumWeb-Bold", size: 22 * scale))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .buttonStyle(.plain)
+                // Original (77.5, 198.5, 112, 30) inside difficulty view (44, 135.5)
+                .designed(x: 121.5, y: 334, w: 112, h: 30, scale: scale)
+            }
+
+            // GO panel — host only
+            if hosting {
+                Image("WR_goUI")
+                    .resizable()
+                    .scaledToFit()
+                    .designed(x: 515, y: 273.5, w: 337, h: 140.5, scale: scale)
+
+                Button {
+                    EventLogger.shared.logButtonPress(buttonName: "waiting-play")
+                    viewModel.startMatch()
+                } label: {
+                    Image("WR_goButton")
+                        .resizable()
+                        .scaledToFit()
+                        .opacity(viewModel.canStart ? 1.0 : 0.5)
+                }
+                .buttonStyle(.plain)
+                .disabled(!viewModel.canStart)
+                // Inside go view at (207.5, 24, 72, 72)
+                .designed(x: 722.5, y: 297.5, w: 72, h: 72, scale: scale)
+            }
+
+            // Player slots row at (125, 108, 646, 157.5) — 4 slots × 154w + 10 gap
+            ForEach(0..<4, id: \.self) { index in
+                PlayerSlotView(
+                    player: viewModel.players[index],
+                    slotIndex: index,
+                    hosting: hosting,
+                    scale: scale,
+                    onInvite: {
+                        EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
+                        viewModel.showPicker = true
+                    }
+                )
+                .designed(x: 125 + CGFloat(index) * 164, y: 108, w: 154, h: 157.5, scale: scale)
+            }
         }
         .sheet(isPresented: $viewModel.showPicker) {
             PeerPickerView()
         }
         .onReceive(viewModel.$startedGame.compactMap { $0 }) { rule in
             router.push(.game(rule: rule, hosting: hosting))
-        }
-    }
-
-    private var header: some View {
-        HStack {
-            Button { router.pop() } label: {
-                Image(systemName: "chevron.left")
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .padding(12)
-                    .background(Color.black.opacity(0.35))
-                    .clipShape(Circle())
-            }
-            Spacer()
-            Text(hosting ? "HOSTING…" : "WAITING…")
-                .font(.custom("TitilliumWeb-Bold", size: 28))
-                .foregroundColor(.white)
-            Spacer()
-            Button { router.push(.menu) } label: {
-                Image(systemName: "book.fill")
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .padding(12)
-                    .background(Color.black.opacity(0.35))
-                    .clipShape(Circle())
-            }
-        }
-    }
-
-    private var playerRow: some View {
-        HStack(spacing: 16) {
-            ForEach(Array(viewModel.players.enumerated()), id: \.offset) { index, player in
-                PlayerSlotView(
-                    player: player,
-                    slotIndex: index,
-                    hosting: hosting,
-                    onInvite: {
-                        EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
-                        viewModel.showPicker = true
-                    }
-                )
-            }
-        }
-    }
-
-    private var controls: some View {
-        HStack(spacing: 24) {
-            Button { viewModel.cycleDifficulty() } label: {
-                Text(difficultyTitle)
-                    .font(.custom("TitilliumWeb-Bold", size: 24))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 12)
-                    .background(Color.black.opacity(0.35))
-                    .cornerRadius(12)
-            }
-            Button {
-                EventLogger.shared.logButtonPress(buttonName: "waiting-play")
-                viewModel.startMatch()
-            } label: {
-                Text("GO")
-                    .font(.custom("TitilliumWeb-Bold", size: 32))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 48)
-                    .padding(.vertical, 16)
-                    .background(viewModel.canStart ? Color.green : Color.gray)
-                    .cornerRadius(16)
-            }
-            .disabled(!viewModel.canStart)
         }
     }
 
@@ -220,6 +226,7 @@ private struct PlayerSlotView: View {
     let player: PeerWithStatus
     let slotIndex: Int
     let hosting: Bool
+    let scale: CGFloat
     let onInvite: () -> Void
 
     private static let hatNames = ["VREX", "SW77", "MORGAN", "JERRY"]
@@ -245,27 +252,34 @@ private struct PlayerSlotView: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
+        ZStack {
+            // Hat image (154, 129) anchored top
             Image(hatImage)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 120, height: 120)
-                .id(hatImage)
-                .transition(.opacity)
-                .animation(.easeInOut(duration: 0.3), value: hatImage)
+                .frame(width: 154 * scale, height: 129 * scale)
+                .frame(maxHeight: .infinity, alignment: .top)
+
+            // Player name label (10, 133.5, 134, 24)
             Text(label)
-                .font(.custom("TitilliumWeb-Bold", size: 18))
+                .font(.custom("TitilliumWeb-Bold", size: 16 * scale))
                 .foregroundColor(.white)
+                .multilineTextAlignment(.center)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
+                .frame(width: 134 * scale, height: 24 * scale)
+                .position(x: 77 * scale, y: 145.5 * scale)
+
+            // Invite button on empty slots (host only)
             if hosting && player.status == .notConnected {
                 Button("INVITE", action: onInvite)
-                    .font(.custom("TitilliumWeb-Bold", size: 14))
+                    .font(.custom("TitilliumWeb-Bold", size: 20 * scale))
                     .foregroundColor(.white)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
+                    .padding(.horizontal, 12 * scale)
+                    .padding(.vertical, 6 * scale)
                     .background(Color.black.opacity(0.35))
-                    .cornerRadius(8)
+                    .cornerRadius(10 * scale)
+                    .position(x: 77 * scale, y: 60 * scale)
             }
         }
     }
