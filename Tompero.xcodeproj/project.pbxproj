@@ -65,6 +65,7 @@
 		68B4B420D1175B93537C64AD /* LANReconnectPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0D5A8194925578D257A750 /* LANReconnectPolicyTests.swift */; };
 		9C5F527400971F3202E09CD4 /* WirePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164FB150BCF6660A856BB9D /* WirePayload.swift */; };
 		AD8798582F53F629EB80677E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B28FB193E39DDFFE68373F /* Foundation.framework */; };
+		B5C081FCFFA1B528476C629A /* LANSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C210DD2C33CE46FEB1CE2EB3 /* LANSecurity.swift */; };
 		BEEFD00000000000000000D1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000D1 /* PrivacyInfo.xcprivacy */; };
 		DE97E783A148D76C5E2BDC96 /* PeerIdentityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E114B763683786208A686C /* PeerIdentityTests.swift */; };
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
@@ -244,6 +245,7 @@
 		BEEFF00000000000000000BC /* LANReconnectPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANReconnectPolicy.swift; sourceTree = "<group>"; };
 		BEEFF00000000000000000BD /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		BEEFF00000000000000000D1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		C210DD2C33CE46FEB1CE2EB3 /* LANSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LANSecurity.swift; sourceTree = "<group>"; };
 		F9A6012B7EBD7842B2A2EDDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 				BEEFF00000000000000000BD /* Log.swift */,
 				7164FB150BCF6660A856BB9D /* WirePayload.swift */,
 				225509DAE914630EBFB1B2AD /* WirePayloadType.swift */,
+				C210DD2C33CE46FEB1CE2EB3 /* LANSecurity.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 			files = (
 				9C5F527400971F3202E09CD4 /* WirePayload.swift in Sources */,
 				3EE52997BF2A43AC3EB40A0C /* WirePayloadType.swift in Sources */,
+				B5C081FCFFA1B528476C629A /* LANSecurity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

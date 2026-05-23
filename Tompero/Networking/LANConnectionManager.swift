@@ -220,7 +220,7 @@ final class LANConnectionManager: NSObject {
         if let expectedName {
             dialledEndpoints[expectedName] = endpoint
         }
-        let nwConnection = NWConnection(to: endpoint, using: peerToPeerTCPParameters())
+        let nwConnection = NWConnection(to: endpoint, using: LANSecurity.makeParameters())
         let lan = LANPeerConnection(connection: nwConnection, direction: .outbound, queue: queue, remoteEndpoint: endpoint)
         lan.delegate = self
         pending[ObjectIdentifier(lan)] = lan
@@ -493,10 +493,3 @@ protocol LANDiscoveryObserver: AnyObject {
     func discoveryDidUpdate(peers: [LANBrowser.DiscoveredPeer])
 }
 
-// MARK: - Helpers
-
-private func peerToPeerTCPParameters() -> NWParameters {
-    let parameters = NWParameters.tcp
-    parameters.includePeerToPeer = true
-    return parameters
-}
