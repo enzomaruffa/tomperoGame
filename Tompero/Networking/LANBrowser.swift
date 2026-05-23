@@ -29,6 +29,9 @@ final class LANBrowser {
     func start() {
         guard browser == nil else { return }
 
+        // Browser doesn't need TLS (it's only listing Bonjour services), but it
+        // does need peer-to-peer enabled so we see services advertised over
+        // AWDL / Bluetooth as well as infra Wi-Fi.
         let parameters = NWParameters()
         parameters.includePeerToPeer = true
 

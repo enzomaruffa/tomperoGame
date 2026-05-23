@@ -28,8 +28,7 @@ final class LANListener {
     func start() throws {
         guard listener == nil else { return }
 
-        let parameters = NWParameters.tcp
-        parameters.includePeerToPeer = true
+        let parameters = LANSecurity.makeParameters()
 
         let newListener = try NWListener(using: parameters)
         // Bonjour service name — visible to NWBrowser on the LAN. Set to the
