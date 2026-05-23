@@ -37,11 +37,6 @@ targets:
         excludes:
           - Info.plist
           - SpaceSpice.entitlements
-          - GoogleService-Info.plist
-      - path: Tompero/GoogleService-Info.plist
-        buildPhase: resources
-      - path: Tompero/PrivacyInfo.xcprivacy
-        buildPhase: resources
     settings:
       base:
         INFOPLIST_FILE: Tompero/Info.plist
