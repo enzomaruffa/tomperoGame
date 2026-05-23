@@ -15,10 +15,10 @@ jobs:
       - name: Install CocoaPods deps
         run: pod install --repo-update
 
-      - name: Build
+      - name: Build & test
         run: |
           set -o pipefail
-          xcodebuild build \
+          xcodebuild test \
             -workspace Tompero.xcworkspace \
             -scheme Tompero \
             -configuration Debug \
