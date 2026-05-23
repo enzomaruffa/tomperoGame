@@ -10,7 +10,7 @@
 import Foundation
 
 protocol LANDataObserver: AnyObject {
-    func receiveData(wrapper: MCDataWrapper)
+    func receiveData(wrapper: WirePayload)
 }
 
 protocol LANMatchmakingObserver: AnyObject {

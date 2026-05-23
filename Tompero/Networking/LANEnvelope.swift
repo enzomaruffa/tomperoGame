@@ -14,9 +14,9 @@ struct LANEnvelope: Codable {
     /// Recipient display name, or nil for broadcast to all connected peers.
     let to: String?
     /// The application-level payload (same type the rest of the app already
-    /// uses — keeps `MCDataWrapper`'s on-the-wire format untouched so this
+    /// uses — keeps `WirePayload`'s on-the-wire format untouched so this
     /// swap is transport-only).
-    let payload: MCDataWrapper
+    let payload: WirePayload
 }
 
 /// Bootstrap message exchanged immediately after a TCP connection is

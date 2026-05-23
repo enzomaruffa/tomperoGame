@@ -123,7 +123,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
 
         do {
             let ruleData = try JSONEncoder().encode(rule)
-            LANConnectionManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
+            LANConnectionManager.shared.sendEveryone(dataWrapper: WirePayload(object: ruleData, type: .gameRule))
         } catch {
             print("[WaitingRoom] Failed to encode GameRule: \(error.localizedDescription)")
             return

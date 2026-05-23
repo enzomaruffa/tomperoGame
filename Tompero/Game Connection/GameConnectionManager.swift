@@ -40,7 +40,7 @@ class GameConnectionManager {
         do {
             print("[GameConnectionManager] Preparing message")
             let messageData = try JSONEncoder().encode(message)
-            let wrapped = MCDataWrapper(object: messageData, type: .string)
+            let wrapped = WirePayload(object: messageData, type: .string)
             LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
@@ -51,7 +51,7 @@ class GameConnectionManager {
         do {
             print("[GameConnectionManager] Preparing order list")
             let ordersData = try JSONEncoder().encode(orderList)
-            let wrapped = MCDataWrapper(object: ordersData, type: .orders)
+            let wrapped = WirePayload(object: ordersData, type: .orders)
             LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
@@ -62,7 +62,7 @@ class GameConnectionManager {
         do {
             print("[GameConnectionManager] Preparing delivery notification")
             let notificationData = try JSONEncoder().encode(deliveryNotification)
-            let wrapped = MCDataWrapper(object: notificationData, type: .deliveryNotification)
+            let wrapped = WirePayload(object: notificationData, type: .deliveryNotification)
             LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
@@ -73,7 +73,7 @@ class GameConnectionManager {
         do {
             print("[GameConnectionManager] Preparing statistics list")
             let statisticsData = try JSONEncoder().encode(statistics)
-            let wrapped = MCDataWrapper(object: statisticsData, type: .statistics)
+            let wrapped = WirePayload(object: statisticsData, type: .statistics)
             LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
@@ -83,7 +83,7 @@ class GameConnectionManager {
     func send(ingredient: Ingredient, to player: String) {
         do {
             let ingredientData = try JSONEncoder().encode(ingredient)
-            let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
+            let wrapped = WirePayload(object: ingredientData, type: .ingredient)
             LANConnectionManager.shared.send(dataWrapper: wrapped, toDisplayName: player)
         } catch {
             print("[GameConnectionManager] Error encoding ingredient: \(error.localizedDescription)")
@@ -93,7 +93,7 @@ class GameConnectionManager {
     func send(plate: Plate, to player: String) {
         do {
             let plateData = try JSONEncoder().encode(plate)
-            let wrapped = MCDataWrapper(object: plateData, type: .plate)
+            let wrapped = WirePayload(object: plateData, type: .plate)
             LANConnectionManager.shared.send(dataWrapper: wrapped, toDisplayName: player)
         } catch {
             print("[GameConnectionManager] Error encoding plate: \(error.localizedDescription)")
@@ -105,7 +105,7 @@ class GameConnectionManager {
 // MARK: - LANDataObserver Methods
 extension GameConnectionManager: LANDataObserver {
     
-    func receiveData(wrapper: MCDataWrapper) {
+    func receiveData(wrapper: WirePayload) {
         print("[GameConnectionManager] Received data with type: \(wrapper.type)")
         
         switch wrapper.type {
