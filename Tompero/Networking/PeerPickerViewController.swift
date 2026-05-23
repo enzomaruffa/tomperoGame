@@ -19,6 +19,7 @@ final class PeerPickerViewController: UIViewController {
     weak var delegate: PeerPickerDelegate?
 
     private let tableView = UITableView()
+    private let emptyLabel = UILabel()
     private var peers: [LANBrowser.DiscoveredPeer] = []
 
     override func viewDidLoad() {
@@ -42,15 +43,34 @@ final class PeerPickerViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "peer")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+
+        emptyLabel.text = "Looking for nearby players…"
+        emptyLabel.textAlignment = .center
+        emptyLabel.textColor = .secondaryLabel
+        emptyLabel.numberOfLines = 0
+        emptyLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emptyLabel)
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 32),
+            emptyLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -32)
         ])
 
         peers = LANConnectionManager.shared.discoveredPeers
         LANConnectionManager.shared.setDiscoveryObserver(self)
+        updateEmptyState()
+    }
+
+    private func updateEmptyState() {
+        let hasPeers = !peers.isEmpty
+        tableView.isHidden = !hasPeers
+        emptyLabel.isHidden = hasPeers
     }
 
     deinit {
@@ -89,5 +109,6 @@ extension PeerPickerViewController: LANDiscoveryObserver {
     func discoveryDidUpdate(peers: [LANBrowser.DiscoveredPeer]) {
         self.peers = peers
         tableView.reloadData()
+        updateEmptyState()
     }
 }

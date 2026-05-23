@@ -79,6 +79,10 @@ class GameScene: SKScene {
     
     // MARK: - Animation Variables
     var stationsAnimationsRunning = false
+
+    // Disconnect-recovery overlay
+    fileprivate var reconnectingOverlay: SKNode?
+    fileprivate var reconnectTimeoutTimer: Timer?
     
     // Teleport variables
     private var teleportAnimationNode: SKSpriteNode!
@@ -529,10 +533,74 @@ extension GameScene: GameConnectionManagerObserver {
 
 extension GameScene: LANMatchmakingObserver {
     func playerUpdate(player: String, state: PeerConnectionState) {
-        // end game if disconnect received
-        
-        if state == .notConnected && coordinator?.isOnTop(controller: controller) ?? false {
-            endMatch(error: true)
+        // A bare .notConnected used to end the match instantly. With the
+        // reconnect work in PR #6 a drop is often transient (background, brief
+        // Wi-Fi loss), so we now hold the match paused for a 30s grace window
+        // and only declare it over if the peer doesn't come back.
+        guard coordinator?.isOnTop(controller: controller) ?? false else { return }
+
+        switch state {
+        case .notConnected:
+            beginReconnectingOverlay(for: player)
+        case .connecting:
+            beginReconnectingOverlay(for: player)
+        case .connected:
+            endReconnectingOverlay(for: player)
         }
+    }
+
+    fileprivate func beginReconnectingOverlay(for player: String) {
+        let overlay = reconnectingOverlay ?? makeReconnectingOverlay()
+        (overlay.children.compactMap { $0 as? SKLabelNode }).forEach {
+            $0.text = "\(player) reconnecting…"
+        }
+        if overlay.parent == nil, let camera {
+            camera.addChild(overlay)
+        }
+        isPaused = true
+        reconnectingOverlay = overlay
+        cancelReconnectTimeout()
+        scheduleReconnectTimeout()
+    }
+
+    fileprivate func endReconnectingOverlay(for player: String) {
+        guard reconnectingOverlay != nil else { return }
+        reconnectingOverlay?.removeFromParent()
+        reconnectingOverlay = nil
+        cancelReconnectTimeout()
+        isPaused = false
+    }
+
+    fileprivate func makeReconnectingOverlay() -> SKNode {
+        let overlay = SKNode()
+        overlay.zPosition = 1000
+        overlay.name = "reconnectingOverlay"
+
+        let dim = SKShapeNode(rectOf: CGSize(width: 4000, height: 4000))
+        dim.fillColor = UIColor.black.withAlphaComponent(0.65)
+        dim.strokeColor = .clear
+        overlay.addChild(dim)
+
+        let label = SKLabelNode(fontNamed: "TitilliumWeb-Bold")
+        label.fontSize = 80
+        label.fontColor = .white
+        label.verticalAlignmentMode = .center
+        overlay.addChild(label)
+        return overlay
+    }
+
+    fileprivate func scheduleReconnectTimeout() {
+        let timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: false) { [weak self] _ in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.endMatch(error: true)
+            }
+        }
+        reconnectTimeoutTimer = timer
+    }
+
+    fileprivate func cancelReconnectTimeout() {
+        reconnectTimeoutTimer?.invalidate()
+        reconnectTimeoutTimer = nil
     }
 }
