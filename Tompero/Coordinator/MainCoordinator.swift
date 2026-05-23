@@ -62,8 +62,11 @@ class MainCoordinator: Coordinator {
     }
     
     func game(rule: GameRule, hosting: Bool) {
-        let controller = GameViewController.instantiate()
-        controller.coordinator = self
+        // GameViewController is now code-only (no storyboard) — instantiate
+        // directly. This coordinator path is being removed in the SwiftUI
+        // migration's final commit; kept compiling here so intermediate
+        // commits stay green.
+        let controller = GameViewController()
         controller.hosting = hosting
         controller.rule = rule
         navigationController.pushViewController(controller, animated: true)
