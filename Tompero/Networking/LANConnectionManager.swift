@@ -55,6 +55,23 @@ final class LANConnectionManager: NSObject {
     /// picker UI via `discoveredPeers`.
     private var discovered: [LANBrowser.DiscoveredPeer] = []
 
+    /// Endpoints we've dialed so we can re-dial after a transient drop.
+    /// Keyed by display name (the routing key the rest of the app uses).
+    private var dialledEndpoints: [String: NWEndpoint] = [:]
+
+    /// Per-peer reconnect backoff state. Reset on a successful re-handshake.
+    private var reconnectPolicies: [String: LANReconnectPolicy] = [:]
+
+    /// Direct sends to a currently-disconnected peer are queued here so
+    /// reconnect can replay them. Capped per peer to avoid unbounded growth.
+    private static let sendBufferCapacity = 32
+    private var pendingSends: [String: [LANEnvelope]] = [:]
+
+    /// True while the app is backgrounded — we stop advertising/browsing and
+    /// pause reconnect attempts (iOS would block them anyway), then resume
+    /// on `didBecomeActive`.
+    private var isBackgrounded = false
+
     private let dataObservers = NSHashTable<AnyObject>.weakObjects()
     private let matchmakingObservers = NSHashTable<AnyObject>.weakObjects()
     private weak var discoveryObserver: LANDiscoveryObserver?
@@ -69,6 +86,58 @@ final class LANConnectionManager: NSObject {
         super.init()
         listener.delegate = self
         browser.delegate = self
+        registerLifecycleObservers()
+    }
+
+    private func registerLifecycleObservers() {
+        let center = NotificationCenter.default
+        center.addObserver(
+            self,
+            selector: #selector(applicationWillResignActive),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+        center.addObserver(
+            self,
+            selector: #selector(applicationDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+    }
+
+    @objc private func applicationWillResignActive() {
+        queue.async { [weak self] in
+            guard let self else { return }
+            self.isBackgrounded = true
+            // iOS will pause our connections; stop the discovery surfaces so
+            // we don't sit advertising into the void.
+            self.listener.stop()
+            self.browser.stop()
+        }
+    }
+
+    @objc private func applicationDidBecomeActive() {
+        queue.async { [weak self] in
+            guard let self else { return }
+            self.isBackgrounded = false
+            // Restart the appropriate discovery surface for our role.
+            if self.hosting {
+                self.browser.start()
+            } else {
+                try? self.listener.start()
+            }
+            // Anything that didn't survive the background will surface as a
+            // disconnect callback and trigger the reconnect path. Kick the
+            // joiner side proactively by re-dialing every endpoint we know,
+            // since the listener-only joiner needs the host to find it again.
+            self.attemptKnownReconnects()
+        }
+    }
+
+    private func attemptKnownReconnects() {
+        for (name, endpoint) in dialledEndpoints where connections[name] == nil {
+            dialEndpoint(endpoint, expectedName: name)
+        }
     }
 
     // MARK: - Session lifecycle
@@ -83,6 +152,9 @@ final class LANConnectionManager: NSObject {
             self.pending.values.forEach { $0.cancel() }
             self.pending.removeAll()
             self.discovered.removeAll()
+            self.dialledEndpoints.removeAll()
+            self.reconnectPolicies.removeAll()
+            self.pendingSends.removeAll()
             self.listener.stop()
             self.browser.stop()
             self.hosting = false
@@ -139,13 +211,64 @@ final class LANConnectionManager: NSObject {
     /// Host picked a peer in the picker — dial them.
     func invite(_ peer: LANBrowser.DiscoveredPeer) {
         queue.async { [weak self] in
+            self?.dialEndpoint(peer.endpoint, expectedName: peer.displayName)
+        }
+    }
+
+    /// Open an outbound connection. Used both for the initial invite and for
+    /// reconnect attempts after a drop.
+    private func dialEndpoint(_ endpoint: NWEndpoint, expectedName: String?) {
+        if let expectedName {
+            dialledEndpoints[expectedName] = endpoint
+        }
+        let nwConnection = NWConnection(to: endpoint, using: peerToPeerTCPParameters())
+        let lan = LANPeerConnection(connection: nwConnection, direction: .outbound, queue: queue, remoteEndpoint: endpoint)
+        lan.delegate = self
+        pending[ObjectIdentifier(lan)] = lan
+        lan.start()
+        lan.sendHandshake(asHost: hosting)
+    }
+
+    private func scheduleReconnect(for name: String) {
+        guard !isBackgrounded else { return }
+        guard let endpoint = dialledEndpoints[name] else { return }
+
+        var policy = reconnectPolicies[name] ?? .default
+        guard let delay = policy.next() else {
+            print("[LANConnectionManager] Reconnect to \(name) gave up after exhausting policy")
+            dialledEndpoints.removeValue(forKey: name)
+            reconnectPolicies.removeValue(forKey: name)
+            pendingSends.removeValue(forKey: name)
+            return
+        }
+        reconnectPolicies[name] = policy
+
+        print("[LANConnectionManager] Reconnecting to \(name) in \(delay)s")
+        queue.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self else { return }
-            let nwConnection = NWConnection(to: peer.endpoint, using: peerToPeerTCPParameters())
-            let lan = LANPeerConnection(connection: nwConnection, direction: .outbound, queue: self.queue)
-            lan.delegate = self
-            self.pending[ObjectIdentifier(lan)] = lan
-            lan.start()
-            lan.sendHandshake(asHost: true)
+            guard self.connections[name] == nil else { return }
+            self.dialEndpoint(endpoint, expectedName: name)
+        }
+    }
+
+    private func bufferSendIfDirected(_ envelope: LANEnvelope) {
+        // Broadcasts get dropped during disconnect (state-update messages
+        // typically supersede prior ones; replaying stale broadcasts costs
+        // memory for no gain). Direct sends get buffered.
+        guard let target = envelope.to, target != selfName else { return }
+        var buffer = pendingSends[target] ?? []
+        buffer.append(envelope)
+        if buffer.count > LANConnectionManager.sendBufferCapacity {
+            buffer.removeFirst(buffer.count - LANConnectionManager.sendBufferCapacity)
+        }
+        pendingSends[target] = buffer
+    }
+
+    private func flushPendingSends(to name: String) {
+        guard let buffer = pendingSends.removeValue(forKey: name) else { return }
+        guard let connection = connections[name] else { return }
+        for envelope in buffer {
+            connection.sendEnvelope(envelope)
         }
     }
 
@@ -180,13 +303,20 @@ final class LANConnectionManager: NSObject {
     private func dispatchOutgoing(_ envelope: LANEnvelope) {
         if hosting {
             if let target = envelope.to {
-                connections[target]?.sendEnvelope(envelope)
+                if let connection = connections[target] {
+                    connection.sendEnvelope(envelope)
+                } else {
+                    bufferSendIfDirected(envelope)
+                }
             } else {
                 connections.values.forEach { $0.sendEnvelope(envelope) }
             }
         } else {
-            // Single connection to host; host will re-route by `to`.
-            connections.values.first?.sendEnvelope(envelope)
+            if let connection = connections.values.first {
+                connection.sendEnvelope(envelope)
+            } else {
+                bufferSendIfDirected(envelope)
+            }
         }
     }
 
@@ -323,6 +453,11 @@ extension LANConnectionManager: LANPeerConnectionDelegate {
         }
         connections[name] = connection
 
+        // Successful handshake — reset backoff and replay anything we buffered
+        // while the peer was offline.
+        reconnectPolicies[name]?.reset()
+        flushPendingSends(to: name)
+
         let observers = matchmakingObserversSnapshot
         DispatchQueue.main.async {
             observers.forEach { $0.playerUpdate(player: name, state: .connected) }
@@ -343,6 +478,11 @@ extension LANConnectionManager: LANPeerConnectionDelegate {
             let observers = matchmakingObserversSnapshot
             DispatchQueue.main.async {
                 observers.forEach { $0.playerUpdate(player: name, state: .notConnected) }
+            }
+            // If this was an outbound connection (we know the endpoint),
+            // attempt to re-establish.
+            if dialledEndpoints[name] != nil {
+                scheduleReconnect(for: name)
             }
         }
     }

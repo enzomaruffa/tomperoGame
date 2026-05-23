@@ -27,10 +27,22 @@ struct LANHandshake: Codable {
     let isHost: Bool
 }
 
-/// First-frame discriminator so a connection can carry either a handshake
-/// (once at connect time) or a stream of envelopes (everything after). Tagged
-/// JSON keeps the framing dead simple — no separate channel.
+/// Heartbeat frame so each side can prove liveness independently of the TCP
+/// stack — `NWConnection` doesn't notice a wedged peer for ~60s, our app
+/// gives up after 6.
+struct LANPing: Codable {
+    let id: UUID
+}
+
+struct LANPong: Codable {
+    let id: UUID
+}
+
+/// Tagged frame the wire carries. Either one of two control messages
+/// (handshake, ping/pong) or an application-level envelope.
 enum LANFrame: Codable {
     case handshake(LANHandshake)
     case envelope(LANEnvelope)
+    case ping(LANPing)
+    case pong(LANPong)
 }
