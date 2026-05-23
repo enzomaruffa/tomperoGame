@@ -22,7 +22,6 @@ class CustomAudioPlayer {
             player.prepareToPlay()
             players.append(player)
         } catch {
-            print("se fodeu playboy")
         }
     }
     

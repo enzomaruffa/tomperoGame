@@ -79,9 +79,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
 
         LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
-        print("STATUS DO PLAYER GREEN: ", playersWithStatus[2].status.rawValue)
         
-        print("STATUS DO PLAYER ORANGE: ", playersWithStatus[3].status.rawValue)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,7 +123,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
             let ruleData = try JSONEncoder().encode(rule)
             LANConnectionManager.shared.sendEveryone(dataWrapper: WirePayload(object: ruleData, type: .gameRule))
         } catch {
-            print("[WaitingRoom] Failed to encode GameRule: \(error.localizedDescription)")
+            Log.network.debug("Failed to encode GameRule: \(error.localizedDescription)")
             return
         }
 
@@ -190,14 +188,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     // MARK: - Methods
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        guard let tappedImage = tapGestureRecognizer.view as? UIImageView else { return }
         imageViewOpacity(imageView: tappedImage)
-        switch tappedImage.tag {
-        case 1: print("Player 2 ", player2Image!)
-        case 2: print("Player 3 ", player3Image!)
-        case 3: print("Player 4 ", player4Image!)
-        default: print("Player 1 ", player1Image!)
-        }
     }
     
     func imageViewOpacity(imageView: UIImageView) {
@@ -243,7 +235,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         for index in 0..<playersWithStatus.count {
             // Esse loop, antes, só entrava se o usuário estivesse entnraod pela primeira vez na lista (pra não fazer animação  repetida. Como agora  não tem a animação doida, ele entra  sempre no loop
             // if playersWithStatus[index].name != oldList[index].name {
-            print("[playerListSent] Jogador \(index) com nome \(playersWithStatus[index].name) entrou")
+            Log.network.debug("Jogador \(index) com nome \(playersWithStatus[index].name) entrou")
             
             // Precisamos do dispatch queue pois estamos fazendo mudanças no UIKit e isso precisa do thread principal
             DispatchQueue.main.async {
@@ -356,13 +348,12 @@ extension WaitingRoomViewController: LANMatchmakingObserver {
     }
 
     func playerListSent(playersWithStatus: [PeerWithStatus]) {
-        print("[playerListSent] \(playersWithStatus)")
+        Log.network.debug("\(playersWithStatus)")
         if self.playersWithStatus != playersWithStatus && !self.hosting {
             
             let oldList = self.playersWithStatus
             
             guard !oldList.isEmpty else {
-                print("As lista está vazia")
                 // rodar as animações para todos
                 return
             }
@@ -370,7 +361,6 @@ extension WaitingRoomViewController: LANMatchmakingObserver {
             // seta o da classe pro novo
             self.playersWithStatus = playersWithStatus
         } else {
-            print("Listas iguais")
         }
     }
     
@@ -382,20 +372,16 @@ extension WaitingRoomViewController: LANMatchmakingObserver {
 
             let newPlayerList = self.playersWithStatus.map({ $0.copy() })
 
-            print("\n[playerUpdate] HOSTING")
-            print("[playerUpdate] Atualizando lista")
-            print("[playerUpdate] Players na lista: \(newPlayerList.map({$0.name}))")
+            Log.network.debug("Atualizando lista")
+            Log.network.debug("Players na lista: \(newPlayerList.map({$0.name}))")
             if !newPlayerList.filter({ $0.name == player }).isEmpty {
                 // ja existe, atualiza estado
 
-                print(" [playerUpdate] Atualizando estado do player \(player) para \(state)")
                 let playerWithStatus = newPlayerList.first(where: { $0.name == player })
                 playerWithStatus?.status = state
             } else {
                 // procura espaço vazio
-                print(" [playerUpdate] Adicionando o player \(player)")
                 if let emptyPlayerWithStatus = newPlayerList.filter({ $0.name == "__empty__" }).first {
-                    print("     [playerUpdate] Achou espaço vazio!")
                     emptyPlayerWithStatus.name = player
                     emptyPlayerWithStatus.status = state
                 } else if let ncPlayerWithStatus = newPlayerList.filter({ $0.status == .notConnected }).first {
@@ -404,7 +390,7 @@ extension WaitingRoomViewController: LANMatchmakingObserver {
                 }
             }
 
-            print("[playerUpdate] Enviando lista pros Peers")
+            Log.network.debug("Enviando lista pros Peers")
             LANConnectionManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
             self.playersWithStatus = newPlayerList
 

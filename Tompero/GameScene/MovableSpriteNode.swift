@@ -79,13 +79,11 @@ class MovableSpriteNode: SKSpriteNode {
                         .move(to: station.spriteNode.position, duration: 0.1),
                         .rotate(toAngle: 0, duration: 0.1)
                     ]))
-                    print("Move success!")
                     return
                 }
             }
 
             moveDelegate?.moveCancel(currentPosition: touch.location(in: scene!))
-            print("Returning to previous position...")
             self.position = previousPosition!
             self.zRotation = 0
             previousPosition = .zero

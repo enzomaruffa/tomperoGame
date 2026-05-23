@@ -65,7 +65,6 @@ class MusicPlayer {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-            print("Error: Could not start audio session.")
         }
         
         if let _ = UserDefaults.standard.object(forKey: "musicOn") {

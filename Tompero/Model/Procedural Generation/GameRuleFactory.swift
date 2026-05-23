@@ -146,7 +146,6 @@ class GameRuleFactory {
         playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}) ?? false) })
         while !playerWithEmptyTablesList.isEmpty {
             let randomPlayerWithEmpty = playerWithEmptyTablesList.randomElement()!
-            print("\(randomPlayerWithEmpty) has an empty space!")
 
             // List of those with something
             let playersWithSomethingList = playerTables.keys.filter({ !(playerTables[$0]?.contains(where: {$0.type == .empty}) ?? true) })
@@ -165,7 +164,6 @@ class GameRuleFactory {
                 randomTable?.ingredient = randomTableToCopy.ingredient
             }
             
-            print("Filled with \(randomTableToCopy.type)")
             
             // repeating search
             playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}) ?? false) })

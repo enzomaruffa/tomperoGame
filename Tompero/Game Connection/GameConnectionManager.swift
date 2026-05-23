@@ -38,45 +38,45 @@ class GameConnectionManager {
     
     func sendEveryone(message: String) {
         do {
-            print("[GameConnectionManager] Preparing message")
+            Log.network.debug("Preparing message")
             let messageData = try JSONEncoder().encode(message)
             let wrapped = WirePayload(object: messageData, type: .string)
             LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
-            print(error.localizedDescription)
+            Log.network.error("\(error.localizedDescription, privacy: .public)")
         }
     }
     
     func sendEveryone(orderList: [Order]) {
         do {
-            print("[GameConnectionManager] Preparing order list")
+            Log.network.debug("Preparing order list")
             let ordersData = try JSONEncoder().encode(orderList)
             let wrapped = WirePayload(object: ordersData, type: .orders)
             LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
-            print(error.localizedDescription)
+            Log.network.error("\(error.localizedDescription, privacy: .public)")
         }
     }
     
     func sendEveryone(deliveryNotification: OrderDeliveryNotification) {
         do {
-            print("[GameConnectionManager] Preparing delivery notification")
+            Log.network.debug("Preparing delivery notification")
             let notificationData = try JSONEncoder().encode(deliveryNotification)
             let wrapped = WirePayload(object: notificationData, type: .deliveryNotification)
             LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
-            print(error.localizedDescription)
+            Log.network.error("\(error.localizedDescription, privacy: .public)")
         }
     }
     
     func sendEveryone(statistics: MatchStatistics) {
         do {
-            print("[GameConnectionManager] Preparing statistics list")
+            Log.network.debug("Preparing statistics list")
             let statisticsData = try JSONEncoder().encode(statistics)
             let wrapped = WirePayload(object: statisticsData, type: .statistics)
             LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
-            print(error.localizedDescription)
+            Log.network.error("\(error.localizedDescription, privacy: .public)")
         }
     }
     
@@ -86,7 +86,7 @@ class GameConnectionManager {
             let wrapped = WirePayload(object: ingredientData, type: .ingredient)
             LANConnectionManager.shared.send(dataWrapper: wrapped, toDisplayName: player)
         } catch {
-            print("[GameConnectionManager] Error encoding ingredient: \(error.localizedDescription)")
+            Log.network.debug("Error encoding ingredient: \(error.localizedDescription)")
         }
     }
 
@@ -96,7 +96,7 @@ class GameConnectionManager {
             let wrapped = WirePayload(object: plateData, type: .plate)
             LANConnectionManager.shared.send(dataWrapper: wrapped, toDisplayName: player)
         } catch {
-            print("[GameConnectionManager] Error encoding plate: \(error.localizedDescription)")
+            Log.network.debug("Error encoding plate: \(error.localizedDescription)")
         }
     }
     
@@ -106,7 +106,7 @@ class GameConnectionManager {
 extension GameConnectionManager: LANDataObserver {
     
     func receiveData(wrapper: WirePayload) {
-        print("[GameConnectionManager] Received data with type: \(wrapper.type)")
+        Log.network.debug("Received data with type: \(wrapper.type)")
         
         switch wrapper.type {
         case .plate:
@@ -119,11 +119,9 @@ extension GameConnectionManager: LANDataObserver {
                 let newPlate = Plate()
                 newPlate.ingredients = newIngredients
                 
-                newIngredients.forEach({ print($0.texturePrefix, type(of: $0)) })
-                
                 observersSnapshot.forEach({ $0.receivePlate(plate: newPlate) })
             } catch let error {
-                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+                Log.network.debug("Error decoding: \(error.localizedDescription)")
             }
             
         case .ingredient:
@@ -134,7 +132,7 @@ extension GameConnectionManager: LANDataObserver {
                 
                 observersSnapshot.forEach({ $0.receiveIngredient(ingredient: newIngredient) })
             } catch let error {
-                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+                Log.network.debug("Error decoding: \(error.localizedDescription)")
             }
             
         case .orders:
@@ -150,46 +148,46 @@ extension GameConnectionManager: LANDataObserver {
                     newOrders.append(newOrder)
                 }
                 
-                print("[GameConnectionManager] Received orderList: \(newOrders)")
+                Log.network.debug("Received orderList: \(newOrders)")
                 observersSnapshot.forEach({ $0.receiveOrders(orders: newOrders) })
                 
                 // Chamar delegates que tem o receiveMessage
             } catch let error {
-                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+                Log.network.debug("Error decoding: \(error.localizedDescription)")
             }
             
         case .deliveryNotification:
             do {
                 let deliveryNotification = try JSONDecoder().decode(OrderDeliveryNotification.self, from: wrapper.object)
-                print("[GameConnectionManager] Received notification: \(deliveryNotification)")
+                Log.network.debug("Received notification: \(deliveryNotification)")
                 observersSnapshot.forEach({ $0.receiveDeliveryNotification(notification: deliveryNotification) })
                 
                 // Chamar delegates que tem o receiveMessage
             } catch let error {
-                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+                Log.network.debug("Error decoding: \(error.localizedDescription)")
             }
             
         case .statistics:
             do {
                 let statistics = try JSONDecoder().decode(MatchStatistics.self, from: wrapper.object)
-                print("[GameConnectionManager] Received statistics: \(statistics)")
+                Log.network.debug("Received statistics: \(statistics)")
                 
                 observersSnapshot.forEach({ $0.receiveStatistics(statistics: statistics) })
             } catch let error {
-                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+                Log.network.debug("Error decoding: \(error.localizedDescription)")
             }
             
         case .string:
             do {
                 let message = try JSONDecoder().decode(String.self, from: wrapper.object)
-                print("[GameConnectionManager] Received message: \(message)")
+                Log.network.debug("Received message: \(message)")
                 
                 // Chamar delegates que tem o receiveMessage
             } catch let error {
-                print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
+                Log.network.debug("Error decoding: \(error.localizedDescription)")
             } 
         default:
-            print("[GameConnectionManager] Unknown type received")
+            Log.network.debug("Unknown type received")
         }
     }
     

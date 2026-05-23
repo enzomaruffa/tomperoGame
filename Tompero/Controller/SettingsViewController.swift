@@ -194,7 +194,7 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
         if let url = URL(string: profile.url) {
             displayAlert(url, domain: profile.domain)
         } else {
-            print("Failed to create URL for contributor's profile")
+            Log.ui.error("Failed to create URL for contributor's profile")
         }
     }
     
