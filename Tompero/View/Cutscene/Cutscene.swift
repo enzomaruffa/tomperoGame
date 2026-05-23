@@ -16,6 +16,10 @@ import AVFoundation
 class Cutscene: SKScene {
     
     weak var controller: CutsceneViewController?
+    /// SwiftUI-host callback fired when playback ends. Replaces the
+    /// `controller?.navigationController?.popViewController(...)` jump so
+    /// `Cutscene` no longer reaches into UIKit navigation directly.
+    var onFinish: (() -> Void)?
     
     // MARK: - Variables
     var player: AVPlayer!
@@ -100,7 +104,11 @@ class Cutscene: SKScene {
     func endPlayback() {
         playbackEnded = true
         videoNode.pause()
-        controller?.navigationController?.popViewController(animated: true)
+        if let onFinish {
+            onFinish()
+        } else {
+            controller?.navigationController?.popViewController(animated: true)
+        }
     }
     
     var lastUpdateTime: TimeInterval = 0
