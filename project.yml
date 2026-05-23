@@ -1,0 +1,104 @@
+name: Tompero
+options:
+  bundleIdPrefix: com.enzomaruffa
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "15.0"
+  developmentLanguage: en
+  groupSortPosition: top
+  generateEmptyDirectories: true
+  defaultConfig: Release
+  xcodeVersion: "1500"
+
+configs:
+  Debug: debug
+  Release: release
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    CODE_SIGN_IDENTITY: "Apple Development"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: D9FBK2WPJX
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "21"
+    ALWAYS_SEARCH_USER_PATHS: NO
+    ENABLE_STRICT_OBJC_MSGSEND: YES
+    CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS: YES
+    CLANG_WARN_UNGUARDED_AVAILABILITY: YES_AGGRESSIVE
+
+targets:
+  Tompero:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: Tompero
+        excludes:
+          - Info.plist
+          - SpaceSpice.entitlements
+          - GoogleService-Info.plist
+      - path: Tompero/GoogleService-Info.plist
+        buildPhase: resources
+      - path: Tompero/PrivacyInfo.xcprivacy
+        buildPhase: resources
+    settings:
+      base:
+        INFOPLIST_FILE: Tompero/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.enzomaruffa.spacespice
+        PRODUCT_NAME: SpaceSpice
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGN_ENTITLEMENTS: Tompero/SpaceSpice.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO
+        OTHER_SWIFT_FLAGS: "$(inherited) -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200"
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/Frameworks"
+
+  TomperoTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: TomperoTests
+        excludes:
+          - Info.plist
+          - README.md
+    dependencies:
+      - target: Tompero
+    settings:
+      base:
+        INFOPLIST_FILE: TomperoTests/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.enzomaruffa.spacespice.tests
+        PRODUCT_NAME: $(TARGET_NAME)
+        TARGETED_DEVICE_FAMILY: "1,2"
+        BUNDLE_LOADER: $(TEST_HOST)
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/SpaceSpice.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpaceSpice
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/Frameworks"
+          - "@loader_path/Frameworks"
+        ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: NO
+
+schemes:
+  Tompero:
+    build:
+      targets:
+        Tompero: all
+        TomperoTests: [test]
+    run:
+      config: Debug
+      commandLineArguments:
+        "-FIRAnalyticsDebugEnabled": false
+        "-FIRDebugDisabled": true
+    test:
+      config: Debug
+      targets:
+        - TomperoTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
