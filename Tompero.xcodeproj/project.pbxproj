@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B688C2DD78186CF812918984 /* Pods_Tompero.framework */; };
 		4709B27423A2CBC8004B8F51 /* BoardNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27323A2CBC8004B8F51 /* BoardNode.swift */; };
 		4709B27623A6F060004B8F51 /* StoveNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27523A6F060004B8F51 /* StoveNode.swift */; };
 		4709B27823A6F2AC004B8F51 /* FryerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4709B27723A6F2AC004B8F51 /* FryerNode.swift */; };
@@ -35,7 +34,6 @@
 		472F9F2823992FEA00DC7B9C /* PlateNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F9F2723992FEA00DC7B9C /* PlateNode.swift */; };
 		4733B6A62393597700D80AD0 /* MovableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733B6A52393597700D80AD0 /* MovableDelegate.swift */; };
 		475A4B5323A0379F000016B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 475A4B5223A0379F000016B3 /* GoogleService-Info.plist */; };
-		BEEFD00000000000000000D1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000D1 /* PrivacyInfo.xcprivacy */; };
 		475A4B5523A0469E000016B3 /* AnalyticsEventLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475A4B5423A0469E000016B3 /* AnalyticsEventLogger.swift */; };
 		47632784239D49C4006BA9C5 /* MatchStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47632783239D49C4006BA9C5 /* MatchStatistics.swift */; };
 		476925C52390AA0900FBAB1F /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */; };
@@ -56,6 +54,7 @@
 		47BE3EDC239C1F7200246F20 /* TeleportBlue.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 47BE3ED3239C1F7200246F20 /* TeleportBlue.atlas */; };
 		47CBC4CE23943B1B001CD4E8 /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */; };
 		47D169B42399A154005541C6 /* OrderDeliveryNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */; };
+		5077F2210371CBB48C390EE9 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501B110B7B7C0DBC4E815321 /* Pods_Tompero.framework */; };
 		561DC2E723AC030D005584F8 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 561DC2E623AC030D005584F8 /* GameKit.framework */; };
 		56219D87239EAFA6001CE5DB /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 56219D86239EAFA6001CE5DB /* GameScene.sks */; };
 		562BCF5823881CF900D5D51D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562BCF5723881CF900D5D51D /* AppDelegate.swift */; };
@@ -142,6 +141,24 @@
 		56F45BD0247F1E420067DE5D /* CreditsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F45BCF247F1E420067DE5D /* CreditsCell.swift */; };
 		56FE9217247DACBF007E28BB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FE9216247DACBF007E28BB /* Settings.storyboard */; };
 		56FE9219247DAD25007E28BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE9218247DAD25007E28BB /* SettingsViewController.swift */; };
+		6063306267938D0A481B48EA /* LANFrameCodecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E4BB7140B741BD7798D35 /* LANFrameCodecTests.swift */; };
+		68B4B420D1175B93537C64AD /* LANReconnectPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0D5A8194925578D257A750 /* LANReconnectPolicyTests.swift */; };
+		AD8798582F53F629EB80677E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B28FB193E39DDFFE68373F /* Foundation.framework */; };
+		BEEFB00000000000000000B1 /* PeerConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B1 /* PeerConnectionState.swift */; };
+		BEEFB00000000000000000B2 /* PeerIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B2 /* PeerIdentity.swift */; };
+		BEEFB00000000000000000B3 /* PeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B3 /* PeerWithStatus.swift */; };
+		BEEFB00000000000000000B4 /* LANEnvelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B4 /* LANEnvelope.swift */; };
+		BEEFB00000000000000000B5 /* LANFraming.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B5 /* LANFraming.swift */; };
+		BEEFB00000000000000000B6 /* LANPeerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B6 /* LANPeerConnection.swift */; };
+		BEEFB00000000000000000B7 /* LANListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B7 /* LANListener.swift */; };
+		BEEFB00000000000000000B8 /* LANBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B8 /* LANBrowser.swift */; };
+		BEEFB00000000000000000B9 /* LANConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B9 /* LANConnectionManager.swift */; };
+		BEEFB00000000000000000BA /* LANObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BA /* LANObservers.swift */; };
+		BEEFB00000000000000000BB /* PeerPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BB /* PeerPickerViewController.swift */; };
+		BEEFB00000000000000000BC /* LANReconnectPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BC /* LANReconnectPolicy.swift */; };
+		BEEFB00000000000000000BD /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BD /* Log.swift */; };
+		BEEFD00000000000000000D1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000D1 /* PrivacyInfo.xcprivacy */; };
+		DE97E783A148D76C5E2BDC96 /* PeerIdentityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E114B763683786208A686C /* PeerIdentityTests.swift */; };
 		FB2CB742238D5D2C001C72F3 /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */; };
 		FB2CB743238D5D2C001C72F3 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */; };
 		FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */; };
@@ -158,22 +175,23 @@
 		FB9BF393238E9F4700437124 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BF392238E9F4700437124 /* MainCoordinator.swift */; };
 		FB9BF395238EA67500437124 /* Game.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB9BF394238EA67500437124 /* Game.storyboard */; };
 		FBFDDCFE238C040700CD503A /* InicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBFDDCFD238C040700CD503A /* InicialViewController.swift */; };
-		BEEFB00000000000000000B1 /* PeerConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B1 /* PeerConnectionState.swift */; };
-		BEEFB00000000000000000B2 /* PeerIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B2 /* PeerIdentity.swift */; };
-		BEEFB00000000000000000B3 /* PeerWithStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B3 /* PeerWithStatus.swift */; };
-		BEEFB00000000000000000B4 /* LANEnvelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B4 /* LANEnvelope.swift */; };
-		BEEFB00000000000000000B5 /* LANFraming.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B5 /* LANFraming.swift */; };
-		BEEFB00000000000000000B6 /* LANPeerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B6 /* LANPeerConnection.swift */; };
-		BEEFB00000000000000000B7 /* LANListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B7 /* LANListener.swift */; };
-		BEEFB00000000000000000B8 /* LANBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B8 /* LANBrowser.swift */; };
-		BEEFB00000000000000000B9 /* LANConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000B9 /* LANConnectionManager.swift */; };
-		BEEFB00000000000000000BA /* LANObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BA /* LANObservers.swift */; };
-		BEEFB00000000000000000BB /* PeerPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BB /* PeerPickerViewController.swift */; };
-		BEEFB00000000000000000BC /* LANReconnectPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BC /* LANReconnectPolicy.swift */; };
-		BEEFB00000000000000000BD /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BD /* Log.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F4F6A75581CAFC3A2A8C8239 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 562BCF4C23881CF900D5D51D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 562BCF5323881CF900D5D51D;
+			remoteInfo = Tompero;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1C0D5A8194925578D257A750 /* LANReconnectPolicyTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LANReconnectPolicyTests.swift; sourceTree = "<group>"; };
+		2CC7926B399F5168EF8C525B /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
+		30B28FB193E39DDFFE68373F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		37E114B763683786208A686C /* PeerIdentityTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PeerIdentityTests.swift; sourceTree = "<group>"; };
 		4709B27323A2CBC8004B8F51 /* BoardNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardNode.swift; sourceTree = "<group>"; };
 		4709B27523A6F060004B8F51 /* StoveNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoveNode.swift; sourceTree = "<group>"; };
 		4709B27723A6F2AC004B8F51 /* FryerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryerNode.swift; sourceTree = "<group>"; };
@@ -202,7 +220,6 @@
 		472F9F2723992FEA00DC7B9C /* PlateNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateNode.swift; sourceTree = "<group>"; };
 		4733B6A52393597700D80AD0 /* MovableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableDelegate.swift; sourceTree = "<group>"; };
 		475A4B5223A0379F000016B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BEEFF00000000000000000D1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		475A4B5423A0469E000016B3 /* AnalyticsEventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventLogger.swift; sourceTree = "<group>"; };
 		47632783239D49C4006BA9C5 /* MatchStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatistics.swift; sourceTree = "<group>"; };
 		476925C22390AA0900FBAB1F /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
@@ -223,7 +240,7 @@
 		47BE3ED3239C1F7200246F20 /* TeleportBlue.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportBlue.atlas; sourceTree = "<group>"; };
 		47CBC4CD23943B1B001CD4E8 /* SKActionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKActionExtensions.swift; sourceTree = "<group>"; };
 		47D169B32399A154005541C6 /* OrderDeliveryNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryNotification.swift; sourceTree = "<group>"; };
-		4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
+		501B110B7B7C0DBC4E815321 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		561DC2E623AC030D005584F8 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		56219D86239EAFA6001CE5DB /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		562BCF5423881CF900D5D51D /* SpaceSpice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceSpice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,8 +329,23 @@
 		56F45BCF247F1E420067DE5D /* CreditsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsCell.swift; sourceTree = "<group>"; };
 		56FE9216247DACBF007E28BB /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		56FE9218247DAD25007E28BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
-		B688C2DD78186CF812918984 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		630E4BB7140B741BD7798D35 /* LANFrameCodecTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LANFrameCodecTests.swift; sourceTree = "<group>"; };
+		7A254C459E3BD30C190CFA84 /* TomperoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TomperoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEEFF00000000000000000B1 /* PeerConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerConnectionState.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000B2 /* PeerIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerIdentity.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000B3 /* PeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerWithStatus.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000B4 /* LANEnvelope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANEnvelope.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000B5 /* LANFraming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANFraming.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000B6 /* LANPeerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANPeerConnection.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000B7 /* LANListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANListener.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000B8 /* LANBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANBrowser.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000B9 /* LANConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANConnectionManager.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000BA /* LANObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANObservers.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000BB /* PeerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPickerViewController.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000BC /* LANReconnectPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANReconnectPolicy.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000BD /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000D1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		F9A6012B7EBD7842B2A2EDDC /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		FB2CB73F238D5D2C001C72F3 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB2CB740238D5D2C001C72F3 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
 		FB2CB741238D5D2C001C72F3 /* MenuStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuStoryboard.storyboard; sourceTree = "<group>"; };
@@ -330,29 +362,24 @@
 		FB9BF392238E9F4700437124 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		FB9BF394238EA67500437124 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		FBFDDCFD238C040700CD503A /* InicialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialViewController.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B1 /* PeerConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerConnectionState.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B2 /* PeerIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerIdentity.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B3 /* PeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerWithStatus.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B4 /* LANEnvelope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANEnvelope.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B5 /* LANFraming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANFraming.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B6 /* LANPeerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANPeerConnection.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B7 /* LANListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANListener.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B8 /* LANBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANBrowser.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000B9 /* LANConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANConnectionManager.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000BA /* LANObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANObservers.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000BB /* PeerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPickerViewController.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000BC /* LANReconnectPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANReconnectPolicy.swift; sourceTree = "<group>"; };
-		BEEFF00000000000000000BD /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		30004BB090B4E803B021CFA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD8798582F53F629EB80677E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		562BCF5123881CF900D5D51D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				408CF0B422695B130AEAF368 /* Pods_Tompero.framework in Frameworks */,
 				561DC2E723AC030D005584F8 /* GameKit.framework in Frameworks */,
 				471C60CD23B2C194004590D3 /* CloudKit.framework in Frameworks */,
+				5077F2210371CBB48C390EE9 /* Pods_Tompero.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +391,8 @@
 			children = (
 				561DC2E623AC030D005584F8 /* GameKit.framework */,
 				471C60CC23B2C194004590D3 /* CloudKit.framework */,
-				B688C2DD78186CF812918984 /* Pods_Tompero.framework */,
+				501B110B7B7C0DBC4E815321 /* Pods_Tompero.framework */,
+				E73541D22913996A3CAF6BB5 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -402,26 +430,6 @@
 				471795EA238C1E87000575B0 /* GameConnectionManagerObserver.swift */,
 			);
 			path = "Game Connection";
-			sourceTree = "<group>";
-		};
-		BEEFC00000000000000000C1 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				BEEFF00000000000000000B1 /* PeerConnectionState.swift */,
-				BEEFF00000000000000000B2 /* PeerIdentity.swift */,
-				BEEFF00000000000000000B3 /* PeerWithStatus.swift */,
-				BEEFF00000000000000000B4 /* LANEnvelope.swift */,
-				BEEFF00000000000000000B5 /* LANFraming.swift */,
-				BEEFF00000000000000000B6 /* LANPeerConnection.swift */,
-				BEEFF00000000000000000B7 /* LANListener.swift */,
-				BEEFF00000000000000000B8 /* LANBrowser.swift */,
-				BEEFF00000000000000000B9 /* LANConnectionManager.swift */,
-				BEEFF00000000000000000BA /* LANObservers.swift */,
-				BEEFF00000000000000000BB /* PeerPickerViewController.swift */,
-				BEEFF00000000000000000BC /* LANReconnectPolicy.swift */,
-				BEEFF00000000000000000BD /* Log.swift */,
-			);
-			path = Networking;
 			sourceTree = "<group>";
 		};
 		471C60D823B588BA004590D3 /* Logger */ = {
@@ -529,6 +537,7 @@
 				562BCF5523881CF900D5D51D /* Products */,
 				56D9BB225FBAE3D038F75D05 /* Pods */,
 				07F4238B08A3D100EFB608C4 /* Frameworks */,
+				BFD7437C9EEEF4D5782E2260 /* TomperoTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -536,6 +545,7 @@
 			isa = PBXGroup;
 			children = (
 				562BCF5423881CF900D5D51D /* SpaceSpice.app */,
+				7A254C459E3BD30C190CFA84 /* TomperoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -757,10 +767,49 @@
 		56D9BB225FBAE3D038F75D05 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */,
-				4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */,
+				F9A6012B7EBD7842B2A2EDDC /* Pods-Tompero.debug.xcconfig */,
+				2CC7926B399F5168EF8C525B /* Pods-Tompero.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BEEFC00000000000000000C1 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				BEEFF00000000000000000B1 /* PeerConnectionState.swift */,
+				BEEFF00000000000000000B2 /* PeerIdentity.swift */,
+				BEEFF00000000000000000B3 /* PeerWithStatus.swift */,
+				BEEFF00000000000000000B4 /* LANEnvelope.swift */,
+				BEEFF00000000000000000B5 /* LANFraming.swift */,
+				BEEFF00000000000000000B6 /* LANPeerConnection.swift */,
+				BEEFF00000000000000000B7 /* LANListener.swift */,
+				BEEFF00000000000000000B8 /* LANBrowser.swift */,
+				BEEFF00000000000000000B9 /* LANConnectionManager.swift */,
+				BEEFF00000000000000000BA /* LANObservers.swift */,
+				BEEFF00000000000000000BB /* PeerPickerViewController.swift */,
+				BEEFF00000000000000000BC /* LANReconnectPolicy.swift */,
+				BEEFF00000000000000000BD /* Log.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		BFD7437C9EEEF4D5782E2260 /* TomperoTests */ = {
+			isa = PBXGroup;
+			children = (
+				630E4BB7140B741BD7798D35 /* LANFrameCodecTests.swift */,
+				1C0D5A8194925578D257A750 /* LANReconnectPolicyTests.swift */,
+				37E114B763683786208A686C /* PeerIdentityTests.swift */,
+			);
+			name = TomperoTests;
+			path = TomperoTests;
+			sourceTree = "<group>";
+		};
+		E73541D22913996A3CAF6BB5 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				30B28FB193E39DDFFE68373F /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		FB55FBE6239A9DB5002EBB89 /* Font */ = {
@@ -786,17 +835,35 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3B9EA6A7B1B2A5A5D1585234 /* TomperoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31EF9B4B39B183BA6C4B24D9 /* Build configuration list for PBXNativeTarget "TomperoTests" */;
+			buildPhases = (
+				98ADF4573395714B50923FF4 /* Sources */,
+				30004BB090B4E803B021CFA1 /* Frameworks */,
+				34A75F39426D3E6E0F3C5909 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FF4E2DD9E9E6CECAF28303A /* PBXTargetDependency */,
+			);
+			name = TomperoTests;
+			productName = TomperoTests;
+			productReference = 7A254C459E3BD30C190CFA84 /* TomperoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		562BCF5323881CF900D5D51D /* Tompero */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 562BCF6C23881CFC00D5D51D /* Build configuration list for PBXNativeTarget "Tompero" */;
 			buildPhases = (
-				8558EB2BA8760397F6F98020 /* [CP] Check Pods Manifest.lock */,
+				EDAAFD56CF83A9107A270884 /* [CP] Check Pods Manifest.lock */,
 				562BCF5023881CF900D5D51D /* Sources */,
 				562BCF5123881CF900D5D51D /* Frameworks */,
 				562BCF5223881CF900D5D51D /* Resources */,
 				471795EC238C6520000575B0 /* ShellScript */,
-				F3D5CBDD8BA7DEE5F313A028 /* [CP] Embed Pods Frameworks */,
 				475A4B5623A10AC4000016B3 /* ShellScript */,
+				1DD3347AE0AC9CC526FCC457 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -836,11 +903,19 @@
 			projectRoot = "";
 			targets = (
 				562BCF5323881CF900D5D51D /* Tompero */,
+				3B9EA6A7B1B2A5A5D1585234 /* TomperoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		34A75F39426D3E6E0F3C5909 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		562BCF5223881CF900D5D51D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -909,6 +984,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1DD3347AE0AC9CC526FCC457 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		471795EC238C6520000575B0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -943,7 +1035,7 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
 		};
-		8558EB2BA8760397F6F98020 /* [CP] Check Pods Manifest.lock */ = {
+		EDAAFD56CF83A9107A270884 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -963,23 +1055,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F3D5CBDD8BA7DEE5F313A028 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1095,7 +1170,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		98ADF4573395714B50923FF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6063306267938D0A481B48EA /* LANFrameCodecTests.swift in Sources */,
+				68B4B420D1175B93537C64AD /* LANReconnectPolicyTests.swift in Sources */,
+				DE97E783A148D76C5E2BDC96 /* PeerIdentityTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7FF4E2DD9E9E6CECAF28303A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Tompero;
+			target = 562BCF5323881CF900D5D51D /* Tompero */;
+			targetProxy = F4F6A75581CAFC3A2A8C8239 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		562BCF6623881CFC00D5D51D /* LaunchScreen.storyboard */ = {
@@ -1117,6 +1211,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		17C0B153C0372ED31EEC15C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
+				INFOPLIST_FILE = TomperoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.enzomaruffa.spacespice.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceSpice.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpaceSpice";
+			};
+			name = Debug;
+		};
+		4E31D9B4462E13606CA62C66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9FBK2WPJX;
+				INFOPLIST_FILE = TomperoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.enzomaruffa.spacespice.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.10;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpaceSpice.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpaceSpice";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		562BCF6A23881CFC00D5D51D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1234,7 +1377,7 @@
 		};
 		562BCF6D23881CFC00D5D51D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8DD3C20EEB7D6EC0D5684DDC /* Pods-Tompero.debug.xcconfig */;
+			baseConfigurationReference = F9A6012B7EBD7842B2A2EDDC /* Pods-Tompero.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
@@ -1248,7 +1391,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.enzomaruffa.spacespice;
 				PRODUCT_NAME = SpaceSpice;
 				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = DEBUG;
@@ -1259,7 +1402,7 @@
 		};
 		562BCF6E23881CFC00D5D51D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DAFEC243ECD8CDB29A29BAB /* Pods-Tompero.release.xcconfig */;
+			baseConfigurationReference = 2CC7926B399F5168EF8C525B /* Pods-Tompero.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
@@ -1272,7 +1415,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.enzomaruffa.spacespice;
 				PRODUCT_NAME = SpaceSpice;
 				SWIFT_VERSION = 5.10;
@@ -1283,6 +1426,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		31EF9B4B39B183BA6C4B24D9 /* Build configuration list for PBXNativeTarget "TomperoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E31D9B4462E13606CA62C66 /* Release */,
+				17C0B153C0372ED31EEC15C6 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		562BCF4F23881CF900D5D51D /* Build configuration list for PBXProject "Tompero" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
