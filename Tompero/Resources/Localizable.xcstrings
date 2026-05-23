@@ -1,96 +1,256 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "difficulty.easy" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "EASY" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "FÁCIL" } }
-      }
+    "%@" : {
+
     },
-    "difficulty.medium" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "MEDIUM" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "MÉDIO" } }
-      }
+    "%@ coins earned!" : {
+
     },
-    "difficulty.hard" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "HARD" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "DIFÍCIL" } }
-      }
+    "%@ orders delivered!" : {
+
     },
-    "picker.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Nearby Players" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Jogadores Próximos" } }
-      }
+    "👤 %@" : {
+
     },
-    "picker.empty" : {
+    "alert.cancel" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Looking for nearby players…" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Procurando jogadores próximos…" } }
-      }
-    },
-    "match.reconnecting" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ reconnecting…" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "%@ reconectando…" } }
-      }
-    },
-    "alert.redirect.title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Do you want to continue?" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Deseja continuar?" } }
-      }
-    },
-    "alert.redirect.message" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "You're about to be redirected to a contributor's %@ profile." } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Você está prestes a ser redirecionado para o perfil %@ de um colaborador." } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        }
       }
     },
     "alert.redirect.confirm" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Go to website" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Ir para o site" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to website"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ir para o site"
+          }
+        }
       }
     },
-    "alert.cancel" : {
+    "alert.redirect.message" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're about to be redirected to a contributor's %@ profile."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você está prestes a ser redirecionado para o perfil %@ de um colaborador."
+          }
+        }
       }
     },
-    "name.title" : {
+    "alert.redirect.title" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your name" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Seu nome" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to continue?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deseja continuar?"
+          }
+        }
+      }
+    },
+    "Coming soon!" : {
+
+    },
+    "difficulty.easy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EASY"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FÁCIL"
+          }
+        }
+      }
+    },
+    "difficulty.hard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HARD"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DIFÍCIL"
+          }
+        }
+      }
+    },
+    "difficulty.medium" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MEDIUM"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MÉDIO"
+          }
+        }
+      }
+    },
+    "GAME OVER" : {
+
+    },
+    "GO" : {
+
+    },
+    "Leaderboards" : {
+
+    },
+    "MAIN MENU" : {
+
+    },
+    "match.reconnecting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ reconnecting…"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ reconectando…"
+          }
+        }
       }
     },
     "name.message" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Other players will see this name in the lobby." } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Os outros jogadores verão este nome no lobby." } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other players will see this name in the lobby."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os outros jogadores verão este nome no lobby."
+          }
+        }
       }
     },
     "name.save" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Salvar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar"
+          }
+        }
       }
+    },
+    "name.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your name"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seu nome"
+          }
+        }
+      }
+    },
+    "picker.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looking for nearby players…"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Procurando jogadores próximos…"
+          }
+        }
+      }
+    },
+    "picker.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nearby Players"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jogadores Próximos"
+          }
+        }
+      }
+    },
+    "Play Cutscene" : {
+
     }
   },
   "version" : "1.0"
