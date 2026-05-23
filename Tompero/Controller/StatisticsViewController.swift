@@ -77,9 +77,9 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
         }
         let score = GKScore(leaderboardIdentifier: leaderboardID)
         score.value = Int64(statistics.totalPoints)
-        GKScore.report([score]) { (error) in
-            if error != nil {
-                print(error!.localizedDescription)
+        GKScore.report([score]) { error in
+            if let error {
+                print(error.localizedDescription)
             } else {
                 print("Best Score submitted to leaderboard!")
             }

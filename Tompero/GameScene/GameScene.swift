@@ -23,25 +23,25 @@ class GameScene: SKScene {
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
-        rule!.playerTables[player]!
+        rule?.playerTables[player] ?? []
     }
     var playerOrder: [String] {
-        rule!.playerOrder
+        rule?.playerOrder ?? []
     }
     var players: [String] {
-        let players = rule!.playerOrder
-        return players.filter({ $0 != player })
+        playerOrder.filter { $0 != player }
     }
+    private static let playerColorPalette = ["Blue", "Purple", "Green", "Orange"]
     var playerColor: String {
-        let colors = ["Blue", "Purple", "Green", "Orange"]
-        print(playerOrder)
-        print(playerOrder.firstIndex(of: player)!)
-        return colors[playerOrder.firstIndex(of: player)!]
+        guard let index = playerOrder.firstIndex(of: player) else { return GameScene.playerColorPalette[0] }
+        return GameScene.playerColorPalette[index]
     }
     var colors: [String] {
-        var colors = ["Blue", "Purple", "Green", "Orange"]
-        colors.remove(at: playerOrder.firstIndex(of: player)!)
-        return colors
+        var palette = GameScene.playerColorPalette
+        if let index = playerOrder.firstIndex(of: player) {
+            palette.remove(at: index)
+        }
+        return palette
     }
     
     var stations: [StationNode] = []
@@ -110,9 +110,9 @@ class GameScene: SKScene {
         GameConnectionManager.shared.subscribe(observer: self)
         LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
 
-        if hosting {
-            matchStatistics = MatchStatistics(ruleUsed: rule!)
-            EventLogger.shared.logMatchStart(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+        if hosting, let rule {
+            matchStatistics = MatchStatistics(ruleUsed: rule)
+            EventLogger.shared.logMatchStart(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule.difficulty)
         }
         
         setupOrderListNode()
@@ -234,13 +234,13 @@ class GameScene: SKScene {
     // MARK: - Game Logic
     
     func generateRandomOrder() {
-        let order = rule?.generateOrder()
+        guard let order = rule?.generateOrder() else { return }
         orderCount += 1
-        order!.number = orderCount
-        orders.append(order!)
-        
+        order.number = orderCount
+        orders.append(order)
+
         updateOrderUI(orders)
-        
+
         matchStatistics?.totalGeneratedOrders += 1
     }
     
@@ -252,7 +252,7 @@ class GameScene: SKScene {
                 if order.timeLeft <= 0.0 {
 
                     let totalActions = order.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
-                    EventLogger.shared.logOrderResult(success: false, actionCount: totalActions, ingredientCount: order.ingredients.count, difficulty: rule!.difficulty)
+                    EventLogger.shared.logOrderResult(success: false, actionCount: totalActions, ingredientCount: order.ingredients.count, difficulty: rule?.difficulty ?? .easy)
                     
                     orders.remove(at: index)
                     GameConnectionManager.shared.sendEveryone(orderList: orders)
@@ -309,7 +309,7 @@ class GameScene: SKScene {
         stations.forEach({ $0.stopAnimation() })
         
         if hosting && !error {
-            EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule!.difficulty)
+            EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule?.difficulty ?? .easy)
             
             GameConnectionManager.shared.sendEveryone(statistics: matchStatistics!)
             coordinator?.statistics(statistics: matchStatistics!)
@@ -375,10 +375,11 @@ class GameScene: SKScene {
         }
         
         EventLogger.shared.logPlateDeliver(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count)
-        EventLogger.shared.logOrderResult(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count, difficulty: rule!.difficulty)
+        EventLogger.shared.logOrderResult(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count, difficulty: rule?.difficulty ?? .easy)
         
-        let difficultyBonus = [GameDifficulty.easy: 1, .medium: 2, .hard: 3]
-        let totalScore = targetOrder.score * difficultyBonus[rule!.difficulty]!
+        let difficultyBonus: [GameDifficulty: Int] = [.easy: 1, .medium: 2, .hard: 3]
+        let bonus = difficultyBonus[rule?.difficulty ?? .easy] ?? 1
+        let totalScore = targetOrder.score * bonus
         
         print("Total score: \(totalScore)")
         
