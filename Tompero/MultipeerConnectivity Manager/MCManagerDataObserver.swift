@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol MCManagerDataObserver {
-    
+protocol MCManagerDataObserver: AnyObject {
+
     func receiveData(wrapper: MCDataWrapper)
-    
+
 }

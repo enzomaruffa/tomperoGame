@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GameConnectionManagerObserver: class {
+protocol GameConnectionManagerObserver: AnyObject {
     
     // funcoes para receber ingredientes etc
     func receivePlate(plate: Plate)

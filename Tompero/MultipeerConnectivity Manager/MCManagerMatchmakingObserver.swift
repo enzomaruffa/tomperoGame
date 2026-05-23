@@ -9,11 +9,11 @@
 import Foundation
 import MultipeerConnectivity
 
-protocol MCManagerMatchmakingObserver {
-    
+protocol MCManagerMatchmakingObserver: AnyObject {
+
     func playerUpdate(player: String, state: MCSessionState)
     func playerListSent(playersWithStatus: [MCPeerWithStatus])
-    
+
     func receiveGameRule(rule: GameRule)
 }
 

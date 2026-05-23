@@ -10,24 +10,31 @@ import Foundation
 import MultipeerConnectivity
 
 class GameConnectionManager {
-    
+
     // MARK: - Static Variables
     static let shared = GameConnectionManager()
-    
+
     // MARK: - Variables
-    var observers: [GameConnectionManagerObserver] = []
-    
+    private let observers = NSHashTable<AnyObject>.weakObjects()
+    private var observersSnapshot: [GameConnectionManagerObserver] {
+        observers.allObjects.compactMap { $0 as? GameConnectionManagerObserver }
+    }
+
     // MARK: - Methods
     private init() {
         MCManager.shared.subscribeDataObserver(observer: self)
     }
-    
+
     func subscribe(observer: GameConnectionManagerObserver) {
-        observers.append(observer)
+        observers.add(observer as AnyObject)
     }
-    
+
+    func remove(observer: GameConnectionManagerObserver) {
+        observers.remove(observer as AnyObject)
+    }
+
     func removeAllObservers() {
-        observers.removeAll()
+        observers.removeAllObjects()
     }
     
     func sendEveryone(message: String) {
@@ -75,27 +82,30 @@ class GameConnectionManager {
     }
     
     func send(ingredient: Ingredient, to player: String) {
+        guard let peer = MCManager.shared.connectedPeer(named: player) else {
+            print("[GameConnectionManager] Cannot send ingredient — peer \(player) is not connected")
+            return
+        }
         do {
-            print("[GameConnectionManager] Preparing ingredient")
             let ingredientData = try JSONEncoder().encode(ingredient)
             let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
-            MCManager.shared.connectedPeers?.forEach({ print($0.displayName) })
-            let peer = MCManager.shared.connectedPeers?.filter({ $0.displayName == player })
-            MCManager.shared.send(dataWrapper: wrapped, to: peer!)
-        } catch let error {
-            print(error.localizedDescription)
+            MCManager.shared.send(dataWrapper: wrapped, to: [peer])
+        } catch {
+            print("[GameConnectionManager] Error encoding ingredient: \(error.localizedDescription)")
         }
     }
-    
+
     func send(plate: Plate, to player: String) {
+        guard let peer = MCManager.shared.connectedPeer(named: player) else {
+            print("[GameConnectionManager] Cannot send plate — peer \(player) is not connected")
+            return
+        }
         do {
-            print("[GameConnectionManager] Preparing plate")
             let plateData = try JSONEncoder().encode(plate)
             let wrapped = MCDataWrapper(object: plateData, type: .plate)
-            let peer = MCManager.shared.connectedPeers?.filter({ $0.displayName == player })
-            MCManager.shared.send(dataWrapper: wrapped, to: peer!)
-        } catch let error {
-            print(error.localizedDescription)
+            MCManager.shared.send(dataWrapper: wrapped, to: [peer])
+        } catch {
+            print("[GameConnectionManager] Error encoding plate: \(error.localizedDescription)")
         }
     }
     
@@ -120,7 +130,7 @@ extension GameConnectionManager: MCManagerDataObserver {
                 
                 newIngredients.forEach({ print($0.texturePrefix, type(of: $0)) })
                 
-                observers.forEach({ $0.receivePlate(plate: newPlate) })
+                observersSnapshot.forEach({ $0.receivePlate(plate: newPlate) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }
@@ -131,7 +141,7 @@ extension GameConnectionManager: MCManagerDataObserver {
                 
                 let newIngredient = ingredient.findDowncast()
                 
-                observers.forEach({ $0.receiveIngredient(ingredient: newIngredient) })
+                observersSnapshot.forEach({ $0.receiveIngredient(ingredient: newIngredient) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }
@@ -150,7 +160,7 @@ extension GameConnectionManager: MCManagerDataObserver {
                 }
                 
                 print("[GameConnectionManager] Received orderList: \(newOrders)")
-                observers.forEach({ $0.receiveOrders(orders: newOrders) })
+                observersSnapshot.forEach({ $0.receiveOrders(orders: newOrders) })
                 
                 // Chamar delegates que tem o receiveMessage
             } catch let error {
@@ -161,7 +171,7 @@ extension GameConnectionManager: MCManagerDataObserver {
             do {
                 let deliveryNotification = try JSONDecoder().decode(OrderDeliveryNotification.self, from: wrapper.object)
                 print("[GameConnectionManager] Received notification: \(deliveryNotification)")
-                observers.forEach({ $0.receiveDeliveryNotification(notification: deliveryNotification) })
+                observersSnapshot.forEach({ $0.receiveDeliveryNotification(notification: deliveryNotification) })
                 
                 // Chamar delegates que tem o receiveMessage
             } catch let error {
@@ -173,7 +183,7 @@ extension GameConnectionManager: MCManagerDataObserver {
                 let statistics = try JSONDecoder().decode(MatchStatistics.self, from: wrapper.object)
                 print("[GameConnectionManager] Received statistics: \(statistics)")
                 
-                observers.forEach({ $0.receiveStatistics(statistics: statistics) })
+                observersSnapshot.forEach({ $0.receiveStatistics(statistics: statistics) })
             } catch let error {
                 print("[GameConnectionManager] Error decoding: \(error.localizedDescription)")
             }
