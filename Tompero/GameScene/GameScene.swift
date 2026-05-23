@@ -8,7 +8,6 @@
 
 import SpriteKit
 import GameplayKit
-import MultipeerConnectivity
 
 // swiftlint:disable force_cast
 class GameScene: SKScene {
@@ -20,7 +19,7 @@ class GameScene: SKScene {
     var hosting = false
     weak var controller: UIViewController?
     
-    var player: String = MCManager.shared.selfName
+    var player: String = LANConnectionManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
     var tables: [PlayerTable] {
@@ -109,7 +108,7 @@ class GameScene: SKScene {
         
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
-        MCManager.shared.subscribeMatchmakingObserver(observer: self)
+        LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
 
         if hosting {
             matchStatistics = MatchStatistics(ruleUsed: rule!)
@@ -527,8 +526,8 @@ extension GameScene: GameConnectionManagerObserver {
     
 }
 
-extension GameScene: MCManagerMatchmakingObserver {
-    func playerUpdate(player: String, state: MCSessionState) {
+extension GameScene: LANMatchmakingObserver {
+    func playerUpdate(player: String, state: PeerConnectionState) {
         // end game if disconnect received
         
         if state == .notConnected && coordinator?.isOnTop(controller: controller) ?? false {

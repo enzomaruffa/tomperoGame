@@ -1,23 +1,22 @@
 import UIKit
-import MultipeerConnectivity
 
 class WaitingRoomViewController: UIViewController, Storyboarded {
-    
+
     // MARK: - Storyboarded
     static var storyboardName = "WaitingRoom"
     weak var coordinator: MainCoordinator?
-    
+
     // MARK: - Variables
     var hosting = false
     var closedBrowser = false
-    
+
     var difficultySelected = GameDifficulty.easy
-    
-    var playersWithStatus: [MCPeerWithStatus] = [
-        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-        MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-        MCPeerWithStatus(peer: "__empty__", status: .notConnected)
+
+    var playersWithStatus: [PeerWithStatus] = [
+        PeerWithStatus(name: "__empty__", status: .notConnected),
+        PeerWithStatus(name: "__empty__", status: .notConnected),
+        PeerWithStatus(name: "__empty__", status: .notConnected),
+        PeerWithStatus(name: "__empty__", status: .notConnected)
     ]
     
     // MARK: - Outlets
@@ -73,16 +72,16 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         
         if hosting {
             print(" CURRENTLY HOSTING<<")
-            playersWithStatus = [MCPeerWithStatus(peer: MCManager.shared.peerID!.displayName, status: .connected),
-                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected),
-                                 MCPeerWithStatus(peer: "__empty__", status: .notConnected)]
-            //            MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+            playersWithStatus = [PeerWithStatus(name: LANConnectionManager.shared.selfName, status: .connected),
+                                 PeerWithStatus(name: "__empty__", status: .notConnected),
+                                 PeerWithStatus(name: "__empty__", status: .notConnected),
+                                 PeerWithStatus(name: "__empty__", status: .notConnected)]
+            LANConnectionManager.shared.startHosting()
         } else {
-            MCManager.shared.joinSession()
+            LANConnectionManager.shared.startJoining()
         }
-        
-        MCManager.shared.subscribeMatchmakingObserver(observer: self)
+
+        LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
         print("STATUS DO PLAYER GREEN: ", playersWithStatus[2].status.rawValue)
         
         print("STATUS DO PLAYER ORANGE: ", playersWithStatus[3].status.rawValue)
@@ -121,15 +120,15 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     @IBAction func play(_ sender: Any) {
         // Generate rules and send to other players
         EventLogger.shared.logButtonPress(buttonName: "waiting-play")
-        
+
         let peers = playersWithStatus.map({ $0.name })
         let rule = GameRuleFactory.generateRule(difficulty: difficultySelected, players: peers)
-        
+
         let ruleData = try! JSONEncoder().encode(rule)
-        MCManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
-        
+        LANConnectionManager.shared.sendEveryone(dataWrapper: MCDataWrapper(object: ruleData, type: .gameRule))
+
         MusicPlayer.shared.stop(.menu)
-        
+
         // Start game view with necessary information
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.coordinator?.game(rule: rule, hosting: true)
@@ -163,19 +162,27 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     
     @IBAction func player1InviteButtonPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
-        MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+        presentPeerPicker()
     }
     @IBAction func player2InviteButtonPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
-        MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+        presentPeerPicker()
     }
     @IBAction func player3InviteButtonPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
-        MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+        presentPeerPicker()
     }
     @IBAction func player4InviteButtonPressed(_ sender: Any) {
         EventLogger.shared.logButtonPress(buttonName: "waiting-invite")
-        MCManager.shared.hostSession(presentingFrom: self, delegate: self)
+        presentPeerPicker()
+    }
+
+    private func presentPeerPicker() {
+        let picker = PeerPickerViewController()
+        picker.delegate = self
+        let nav = UINavigationController(rootViewController: picker)
+        nav.modalPresentationStyle = .formSheet
+        present(nav, animated: true)
     }
     
     // MARK: - Methods
@@ -219,7 +226,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         viewChange.layer.add(crossFade, forKey: "animateContents")
     }
     
-    func checkGoButton(playersWithStatus: [MCPeerWithStatus]) {
+    func checkGoButton(playersWithStatus: [PeerWithStatus]) {
         DispatchQueue.main.async {
             if playersWithStatus.filter({ $0.status == .connected }).count <= 1 {
                 self.goButton.isEnabled = false
@@ -229,7 +236,7 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
     }
     
-    private func updatePlayers(_ playersWithStatus: [MCPeerWithStatus]) {
+    private func updatePlayers(_ playersWithStatus: [PeerWithStatus]) {
         checkGoButton(playersWithStatus: playersWithStatus)
         for index in 0..<playersWithStatus.count {
             // Esse loop, antes, só entrava se o usuário estivesse entnraod pela primeira vez na lista (pra não fazer animação  repetida. Como agora  não tem a animação doida, ele entra  sempre no loop
@@ -320,41 +327,33 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     }
 }
 
-// MARK: - MCBrowserViewControllerDelegate Methods
-extension WaitingRoomViewController: MCBrowserViewControllerDelegate {
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        browserViewController.dismiss(animated: true)
+// MARK: - PeerPickerDelegate Methods
+extension WaitingRoomViewController: PeerPickerDelegate {
+
+    func peerPickerDidFinish(_ picker: PeerPickerViewController) {
+        picker.dismiss(animated: true)
         closedBrowser = true
-//        guard playersWithStatus.count == 4 else {
-//            self.navigationController?.popViewController(animated: true)
-//            return
-//        }
-        
         updatePlayers(playersWithStatus)
     }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        browserViewController.dismiss(animated: true)
+
+    func peerPickerDidCancel(_ picker: PeerPickerViewController) {
+        picker.dismiss(animated: true)
     }
-    
 }
 
-// MARK: - MCManagerMatchmakingObserver Methods
-extension WaitingRoomViewController: MCManagerMatchmakingObserver {
-    
+// MARK: - LANMatchmakingObserver Methods
+extension WaitingRoomViewController: LANMatchmakingObserver {
+
     func receiveGameRule(rule: GameRule) {
-        // Play animation
-        
         // start game
-        MCManager.shared.stopAdvertiser()
+        LANConnectionManager.shared.stopAdvertising()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             MusicPlayer.shared.stop(.menu)
             self.coordinator?.game(rule: rule, hosting: false)
         }
     }
-    
-    func playerListSent(playersWithStatus: [MCPeerWithStatus]) {
+
+    func playerListSent(playersWithStatus: [PeerWithStatus]) {
         print("[playerListSent] \(playersWithStatus)")
         if self.playersWithStatus != playersWithStatus && !self.hosting {
             
@@ -373,20 +372,20 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
         }
     }
     
-    func playerUpdate(player: String, state: MCSessionState) {
-        
+    func playerUpdate(player: String, state: PeerConnectionState) {
+
         // host envia para todos a lista
         if hosting {
             // atualizo a lista do host
-            
+
             let newPlayerList = self.playersWithStatus.map({ $0.copy() })
-            
+
             print("\n[playerUpdate] HOSTING")
             print("[playerUpdate] Atualizando lista")
             print("[playerUpdate] Players na lista: \(newPlayerList.map({$0.name}))")
             if !newPlayerList.filter({ $0.name == player }).isEmpty {
                 // ja existe, atualiza estado
-                
+
                 print(" [playerUpdate] Atualizando estado do player \(player) para \(state)")
                 let playerWithStatus = newPlayerList.first(where: { $0.name == player })
                 playerWithStatus?.status = state
@@ -402,16 +401,14 @@ extension WaitingRoomViewController: MCManagerMatchmakingObserver {
                     ncPlayerWithStatus.status = state
                 }
             }
-            
+
             print("[playerUpdate] Enviando lista pros Peers")
-            MCManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
+            LANConnectionManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
             self.playersWithStatus = newPlayerList
-            
+
             if closedBrowser {
                 updatePlayers(newPlayerList)
             }
-            
         }
     }
-    
 }

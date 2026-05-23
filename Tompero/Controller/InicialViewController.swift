@@ -1,5 +1,4 @@
 import UIKit
-import MultipeerConnectivity
 import GameKit
 
 class InicialViewController: UIViewController, Storyboarded {
@@ -97,7 +96,7 @@ class InicialViewController: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         MusicPlayer.shared.play(.menu)
         
-        MCManager.shared.resetSession()
+        LANConnectionManager.shared.resetSession()
     
         // TODO: Make update in UI with coin count
         setCoinsValue()

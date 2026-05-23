@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MultipeerConnectivity
 
 class GameConnectionManager {
 
@@ -22,7 +21,7 @@ class GameConnectionManager {
 
     // MARK: - Methods
     private init() {
-        MCManager.shared.subscribeDataObserver(observer: self)
+        LANConnectionManager.shared.subscribeDataObserver(observer: self)
     }
 
     func subscribe(observer: GameConnectionManagerObserver) {
@@ -42,7 +41,7 @@ class GameConnectionManager {
             print("[GameConnectionManager] Preparing message")
             let messageData = try JSONEncoder().encode(message)
             let wrapped = MCDataWrapper(object: messageData, type: .string)
-            MCManager.shared.sendEveryone(dataWrapper: wrapped)
+            LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
         }
@@ -53,7 +52,7 @@ class GameConnectionManager {
             print("[GameConnectionManager] Preparing order list")
             let ordersData = try JSONEncoder().encode(orderList)
             let wrapped = MCDataWrapper(object: ordersData, type: .orders)
-            MCManager.shared.sendEveryone(dataWrapper: wrapped)
+            LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
         }
@@ -64,7 +63,7 @@ class GameConnectionManager {
             print("[GameConnectionManager] Preparing delivery notification")
             let notificationData = try JSONEncoder().encode(deliveryNotification)
             let wrapped = MCDataWrapper(object: notificationData, type: .deliveryNotification)
-            MCManager.shared.sendEveryone(dataWrapper: wrapped)
+            LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
         }
@@ -75,35 +74,27 @@ class GameConnectionManager {
             print("[GameConnectionManager] Preparing statistics list")
             let statisticsData = try JSONEncoder().encode(statistics)
             let wrapped = MCDataWrapper(object: statisticsData, type: .statistics)
-            MCManager.shared.sendEveryone(dataWrapper: wrapped)
+            LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
         } catch let error {
             print(error.localizedDescription)
         }
     }
     
     func send(ingredient: Ingredient, to player: String) {
-        guard let peer = MCManager.shared.connectedPeer(named: player) else {
-            print("[GameConnectionManager] Cannot send ingredient — peer \(player) is not connected")
-            return
-        }
         do {
             let ingredientData = try JSONEncoder().encode(ingredient)
             let wrapped = MCDataWrapper(object: ingredientData, type: .ingredient)
-            MCManager.shared.send(dataWrapper: wrapped, to: [peer])
+            LANConnectionManager.shared.send(dataWrapper: wrapped, toDisplayName: player)
         } catch {
             print("[GameConnectionManager] Error encoding ingredient: \(error.localizedDescription)")
         }
     }
 
     func send(plate: Plate, to player: String) {
-        guard let peer = MCManager.shared.connectedPeer(named: player) else {
-            print("[GameConnectionManager] Cannot send plate — peer \(player) is not connected")
-            return
-        }
         do {
             let plateData = try JSONEncoder().encode(plate)
             let wrapped = MCDataWrapper(object: plateData, type: .plate)
-            MCManager.shared.send(dataWrapper: wrapped, to: [peer])
+            LANConnectionManager.shared.send(dataWrapper: wrapped, toDisplayName: player)
         } catch {
             print("[GameConnectionManager] Error encoding plate: \(error.localizedDescription)")
         }
@@ -111,8 +102,8 @@ class GameConnectionManager {
     
 }
 
-// MARK: - MCManagerDataObserver Methoods
-extension GameConnectionManager: MCManagerDataObserver {
+// MARK: - LANDataObserver Methods
+extension GameConnectionManager: LANDataObserver {
     
     func receiveData(wrapper: MCDataWrapper) {
         print("[GameConnectionManager] Received data with type: \(wrapper.type)")
