@@ -3,7 +3,7 @@ options:
   bundleIdPrefix: com.enzomaruffa
   createIntermediateGroups: true
   deploymentTarget:
-    iOS: "15.0"
+    iOS: "16.0"
   developmentLanguage: en
   groupSortPosition: top
   generateEmptyDirectories: true
@@ -31,7 +31,7 @@ targets:
   Tompero:
     type: application
     platform: iOS
-    deploymentTarget: "15.0"
+    deploymentTarget: "16.0"
     sources:
       - path: Tompero
         excludes:
@@ -54,7 +54,7 @@ targets:
   TomperoTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "15.0"
+    deploymentTarget: "16.0"
     sources:
       - path: TomperoTests
         excludes:

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00F3827024BC237961A67319 /* StarsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73976F68FCB1063F32A13BC3 /* StarsOverlay.swift */; };
+		019884A7BC527AFEB4916DB4 /* WipeTransitionAnyTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D77BEAF40A6069551DF3309 /* WipeTransitionAnyTransition.swift */; };
 		0247D5AA6764D5A650EC74EC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DC355FA34ADC5A76C5E6E422 /* PrivacyInfo.xcprivacy */; };
 		0670B8823A3D45ADB739C012 /* chopping.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4E6739077E24EBD3B97F67C2 /* chopping.wav */; };
 		07B0ABAEC51B43BDB7095D05 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1D6752BDAF316A1F7AB9224 /* GameScene.sks */; };
@@ -34,12 +35,12 @@
 		1DF7E9EC700070E9DE47EA25 /* PipeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B93D0B0829AB1985C220C0 /* PipeNode.swift */; };
 		1E18253760304978DFDBAB80 /* LANReconnectPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7059E56528EC960871CAAA1A /* LANReconnectPolicyTests.swift */; };
 		1F0BD3AD30CFA6B273607095 /* SpaceshipHull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4839F7DCF9EADCB2D0B11B50 /* SpaceshipHull.swift */; };
+		1FAAB1D96476372D3F770878 /* InicialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F7C3DB7E4DAE93FEDE1E0 /* InicialView.swift */; };
 		236FD77C5942E1149871EAB0 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3FA0297A3FC3E2265FE3A2 /* MainCoordinator.swift */; };
 		23FD7F4CF6FB4E21777A579A /* DebugLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A07A6ADE33646209F2DBEC /* DebugLogger.swift */; };
 		255AA4E27DF0FC1506FC5D79 /* LANListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB376F3C96CA68C2A3F96596 /* LANListener.swift */; };
 		27934B1F71EC5F6B1EFCB938 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742546D0BA44E3672841CA3A /* Log.swift */; };
 		27FB50DDB4205AA523DDDD38 /* teleporter.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9D45FAE69D3C95F696517948 /* teleporter.wav */; };
-		2971DBE1B0E645B0C478F85D /* Pods_TomperoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F4957FC66DA1C30F305E35B /* Pods_TomperoTests.framework */; };
 		2C1C6300120D50D1336EC51A /* WirePayloadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17CFE8C43BA7AA3D6C3783 /* WirePayloadType.swift */; };
 		2DD5B2FCCC888FAB95833762 /* sfx - customerCrowd3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 11BBA20E3413FE3F02894A1F /* sfx - customerCrowd3.wav */; };
 		2E87D1BFD5B7C97A759E7979 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D3BDEA696742FF6F6BC027 /* SceneDelegate.swift */; };
@@ -49,16 +50,19 @@
 		33AA25FF9733CA06EBCB6CC4 /* CutsceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A9B879C28EDF4B7EEEB76 /* CutsceneViewController.swift */; };
 		34B08D74A435F73A4C7E0A84 /* DeliveryNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AAA587E9FABD1366E1D633 /* DeliveryNode.swift */; };
 		38355BBA488EF6B80679762D /* sfx - angryCustomer4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6B8ED9A267892A89BD57516C /* sfx - angryCustomer4.wav */; };
+		3ACE18090B152FB4DE2719A0 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C77CDFE7E3C6B128F13C18 /* MenuView.swift */; };
 		3F3AD1EF20630570990A4F4C /* IngredientBoxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A04E07A1CD07A1D528A032 /* IngredientBoxNode.swift */; };
 		3F6D216C3CBCA66A06C4DF79 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1881DD08D2F35296E938FEB6 /* DatabaseManager.swift */; };
 		3F9D972DF4DB382E146FECA2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272407CD735838DE7AFA2497 /* SettingsViewController.swift */; };
 		402535AC023B5664DDD9B847 /* FryerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDA2583A7693EA9D4040D3 /* FryerNode.swift */; };
+		406B064AB74DBEC30AA45B4D /* WaitingRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503008E088D6CE382E46BC5 /* WaitingRoomView.swift */; };
 		422C636D29A6D4F4C7524ACC /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518DDED6C33356FD48DCDFC8 /* MenuCollectionViewCell.swift */; };
 		42B0C20D61653F36B80C5421 /* PlayerTableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E1D67B22A9858B5C8B40BB /* PlayerTableType.swift */; };
 		42BA52B3FDA1478565FD9881 /* TappableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02E01AB1A05D7D959F25C1 /* TappableSpriteNode.swift */; };
 		42CB0F1EF810D6DC9B4B8753 /* PeerConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C309E5CD3B032BDB16DD0F7 /* PeerConnectionState.swift */; };
 		43C4B3266C26EB37D3647925 /* WaitingRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5940C6C7865046506E863824 /* WaitingRoom.storyboard */; };
 		4406D05C56E61D597C86EB02 /* WirePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = A056BC0FB53C76EC4B247DC6 /* WirePayload.swift */; };
+		4507F8B7E6BE681DD4FD81F2 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB5BC7A404AD1F2D5189D6 /* AppRouter.swift */; };
 		496ACF391D8B6035649FEBE1 /* airSuction.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5501516F2B2FD6D17AC3F147 /* airSuction.wav */; };
 		49B9A899EC6FD0131C24DFE6 /* ChoppableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43535D3B5DB62114466129B6 /* ChoppableComponent.swift */; };
 		4CEF4519A788444D62C6483C /* GameRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0332CC351D7A6EBEAE2DB5 /* GameRule.swift */; };
@@ -71,6 +75,7 @@
 		5346C8FEB36B008C1F2F7D69 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F83B8BFD25D4A5F88E556A /* Coordinator.swift */; };
 		53EBA56234C20C5B1BCE1D41 /* IngredientState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C242A954E5DB9EFC938B97 /* IngredientState.swift */; };
 		557C7F727F6239EF3014C017 /* LANEnvelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B29FE5AE2086BB6362093 /* LANEnvelope.swift */; };
+		559EE92C9FAE941920DEF830 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8A7E53403163ED78103A9 /* RootView.swift */; };
 		56392BF565B82DC56791F22B /* sfx - angryCustomer2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7CF75D883632952AD09D3B3F /* sfx - angryCustomer2.wav */; };
 		582E88C5086E28FC5F020DA6 /* cooking.wav in Resources */ = {isa = PBXBuildFile; fileRef = EB91AD126AED700D7514E9FA /* cooking.wav */; };
 		5A204753C34E15732E451DE2 /* PipeVacuum.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2AEEF2E298213DE3942DD533 /* PipeVacuum.atlas */; };
@@ -80,12 +85,12 @@
 		5E8F42E2FF64D57EF20DEAE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 289DD39650906D8D25B74FE9 /* LaunchScreen.storyboard */; };
 		5F86028A1124CC3763F906CA /* LocalNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4D223860BA5D7AA04A2E42 /* LocalNetwork.swift */; };
 		6162AF1AAC2FB68D9225E246 /* CookBurnt.atlas in Resources */ = {isa = PBXBuildFile; fileRef = C9F0AA721B6DBF352084F5B4 /* CookBurnt.atlas */; };
+		61EE3903D165976F97BEADEE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80B0954C5F615809DE6D3F0 /* StatisticsView.swift */; };
 		642B455924FC332A487A3CB5 /* MenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09C58EA09AAEA6F73B3F8700 /* MenuStoryboard.storyboard */; };
 		64465CBCC3A009D605AEA616 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939ECEDFDC7EE7D856C0A057 /* Component.swift */; };
 		64531114DEBD657B0831C2CE /* StationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DB120D12A228D0BB2BA346 /* StationType.swift */; };
 		64FE468050E382B9E7630FF9 /* Plate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC9856321785FE165E81D4 /* Plate.swift */; };
 		67462E0E20AD87431D6BCBB2 /* LANFraming.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A7D96B1D65E2F6D6345E6 /* LANFraming.swift */; };
-		6AC6985507C2EB1D0C395560 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0046C574772E0EC449BF909E /* Pods_Tompero.framework */; };
 		6B7E4277EBB2CBFEAA400274 /* airR1.gif in Resources */ = {isa = PBXBuildFile; fileRef = C732151202AC0EE847435BD1 /* airR1.gif */; };
 		6B84F8E0F645E1E95D831EE7 /* MovableSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B48115C906082D88C826D6E /* MovableSpriteNode.swift */; };
 		6BCB2B02E95B0682BEEF9E18 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF417B69E86D5DF3D9CD0F0A /* Order.swift */; };
@@ -119,11 +124,15 @@
 		97A7E2FAEA9F0A0DF4C966ED /* OrderDeliveryNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF397E12646B84B4866A879E /* OrderDeliveryNotification.swift */; };
 		9976134865C2D508FC28AACF /* PlateBoxNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524B54B43AF98F44F22B6708 /* PlateBoxNode.swift */; };
 		99F8B5B2919159FDB78C817E /* SaturnOnionRings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB5397B2E71C11ABD9B0477 /* SaturnOnionRings.swift */; };
+		9BE1737CCCA9D155C72ACAE2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA24147851A64ED007127A5 /* SettingsView.swift */; };
 		9D9268851A3FAA564615FF0E /* timesUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7B246ACDB2A772C34E593753 /* timesUp.wav */; };
+		9E22A4CD32FE671BB020A07C /* GameContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2A77CE8713262CC9EAA7A7 /* GameContainerView.swift */; };
+		9F769FC9598F06BDEC0F8954 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6B8FE30C24B4DEBAD65C90 /* Pods_Tompero.framework */; };
 		9FE1D3DC192950E602641265 /* sfx - angryCrowd1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF284A2AF9B86F89B7015CC4 /* sfx - angryCrowd1.wav */; };
 		A29893E82617E84249D704F9 /* IngredientNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B071C148A5B703AF90E3FC5B /* IngredientNode.swift */; };
 		A44C2390642D89389A8DE2EE /* MatchStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6CEC3DFD9CC0B0F824120 /* MatchStatistics.swift */; };
 		A47B195AA994E0C7DBA45A06 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C8529B6E62CE76B76D0E99 /* StatisticsViewController.swift */; };
+		A4C554DD83A0243F43F35924 /* Pods_TomperoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5C7F71C69394DCC51414A0 /* Pods_TomperoTests.framework */; };
 		A5E5D7C8707BA586F5D48959 /* menuMusicVintage.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB167E5DB26FCF0645D90069 /* menuMusicVintage.wav */; };
 		A944A58127B7E26C0B67D1F8 /* SelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F928AAB15DC9F449A3735EF /* SelectorButton.swift */; };
 		AB39B0D058588A7077339D56 /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71E11FED474729CA4B4CD2 /* CGPointVectorExtensions.swift */; };
@@ -133,6 +142,7 @@
 		B4E644C0899039D293C27D12 /* MenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355339D9DD56A65984E296D7 /* MenuCollectionViewController.swift */; };
 		B573ACE1A8CCC16D8C25688F /* HatchVacuum.atlas in Resources */ = {isa = PBXBuildFile; fileRef = E5D463C66B71CC015132D037 /* HatchVacuum.atlas */; };
 		B5E27A2E09FC95A1A9BB133B /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CA376AA99A774D4550A592 /* Ingredient.swift */; };
+		BAD9150FC6561CEBFCB17138 /* CutsceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA4130F3C65458F5C8054D /* CutsceneView.swift */; };
 		BB69D76E05E269122C0943F8 /* TitilliumWeb-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A38CEF8B8AD79874C6375A28 /* TitilliumWeb-Bold.ttf */; };
 		BBF6599E32C60494227AF21B /* OrderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFF981B1563703AAD42729F /* OrderNode.swift */; };
 		BF2D5C3ED3FDB08777D159A9 /* gameMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B7827BF1A428547EBEE72FEC /* gameMusic.m4a */; };
@@ -152,6 +162,7 @@
 		CC8874AE16363464516411A1 /* TeleportBlue.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 05901DD4BE9EEB9C9820B9A3 /* TeleportBlue.atlas */; };
 		CDF3140F1F2DD2950976D683 /* putFoodDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42181C62B226F26E5EB94B0 /* putFoodDown.wav */; };
 		D0B77D65AF42FF265BDF84E4 /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728DFD6198BBFDBD0C8B9B2C /* WaitingRoomViewController.swift */; };
+		D0DB1561524BEC4C9A9A1453 /* StarsBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C514A7CAD53F689DE2A42 /* StarsBackground.swift */; };
 		D37244883DE635494A787C0A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00076AAEC27A251D7FB4A586 /* Eyes.swift */; };
 		D413CF67C562FFC313DAE0BA /* sfx - fireAlarm2.wav in Resources */ = {isa = PBXBuildFile; fileRef = B1598732486A7A9E5120A78C /* sfx - fireAlarm2.wav */; };
 		D51886589D8F214AE7A43EC4 /* StationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1860EB421754953DD5F3A86A /* StationNode.swift */; };
@@ -192,7 +203,6 @@
 
 /* Begin PBXFileReference section */
 		00076AAEC27A251D7FB4A586 /* Eyes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eyes.swift; sourceTree = "<group>"; };
-		0046C574772E0EC449BF909E /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0116787B3600949CD9BAD5E7 /* SFXPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFXPlayer.swift; sourceTree = "<group>"; };
 		046A4F8502617BB678606690 /* hatch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hatch.wav; sourceTree = "<group>"; };
 		05901DD4BE9EEB9C9820B9A3 /* TeleportBlue.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportBlue.atlas; sourceTree = "<group>"; };
@@ -208,13 +218,16 @@
 		1026AEFEDF3086C01E5CB553 /* GameRuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRuleFactory.swift; sourceTree = "<group>"; };
 		10439741A67C247F4CD10C91 /* orderUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = orderUp.wav; sourceTree = "<group>"; };
 		112DC54D8363A623B107760A /* TomperoTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TomperoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		117DDBF8917D3D4E6476D80D /* Pods-TomperoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.release.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.release.xcconfig"; sourceTree = "<group>"; };
 		11BBA20E3413FE3F02894A1F /* sfx - customerCrowd3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - customerCrowd3.wav"; sourceTree = "<group>"; };
 		12CA376AA99A774D4550A592 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		14AB5BC7A404AD1F2D5189D6 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		1860EB421754953DD5F3A86A /* StationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNode.swift; sourceTree = "<group>"; };
 		1881DD08D2F35296E938FEB6 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		19B5707BC16005EC4C360787 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A4D223860BA5D7AA04A2E42 /* LocalNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetwork.swift; sourceTree = "<group>"; };
 		1B6E30B471BD89D792394515 /* burn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = burn.wav; sourceTree = "<group>"; };
+		1BDFFCB021F2782BD57F25BB /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		1D583940A5D9B4E10568D659 /* Horn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Horn.swift; sourceTree = "<group>"; };
 		1D5EDE8B3859F01AFD14126E /* DevilMashedBread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevilMashedBread.swift; sourceTree = "<group>"; };
 		1F6D6F788A3467312B9DA3BC /* sfx - happyCrowd2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - happyCrowd2.wav"; sourceTree = "<group>"; };
@@ -224,7 +237,6 @@
 		23C2EF4A40E85C64D5B29FDC /* sfx - customerCrowd2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - customerCrowd2.wav"; sourceTree = "<group>"; };
 		24DC84B3EDB4A3182399A783 /* MoonCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonCheese.swift; sourceTree = "<group>"; };
 		272407CD735838DE7AFA2497 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		2914D2DABFD8D4290804FE33 /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		2AEEF2E298213DE3942DD533 /* PipeVacuum.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PipeVacuum.atlas; sourceTree = "<group>"; };
 		2B279DE7BBDC589E7474464F /* GameConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConnectionManager.swift; sourceTree = "<group>"; };
 		2EA99C9CE0C846C80AC4CD99 /* TeleportGreen.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportGreen.atlas; sourceTree = "<group>"; };
@@ -234,12 +246,17 @@
 		34C8529B6E62CE76B76D0E99 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		355339D9DD56A65984E296D7 /* MenuCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewController.swift; sourceTree = "<group>"; };
 		36A04E07A1CD07A1D528A032 /* IngredientBoxNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientBoxNode.swift; sourceTree = "<group>"; };
+		377776D738103AF4894A541E /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
+		37C77CDFE7E3C6B128F13C18 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		3C309E5CD3B032BDB16DD0F7 /* PeerConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerConnectionState.swift; sourceTree = "<group>"; };
 		3C3FA0297A3FC3E2265FE3A2 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		3C6B8FE30C24B4DEBAD65C90 /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EA24147851A64ED007127A5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3EFF981B1563703AAD42729F /* OrderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNode.swift; sourceTree = "<group>"; };
 		3F622B5F629575E57629575F /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		405F88FB60AF234A9D49C10D /* sfx - fireAlarm1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - fireAlarm1.wav"; sourceTree = "<group>"; };
 		43535D3B5DB62114466129B6 /* ChoppableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoppableComponent.swift; sourceTree = "<group>"; };
+		4503008E088D6CE382E46BC5 /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
 		46B93D0B0829AB1985C220C0 /* PipeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipeNode.swift; sourceTree = "<group>"; };
 		4792FD283E019E0DA10145B4 /* menuMusicAmbiance.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menuMusicAmbiance.wav; sourceTree = "<group>"; };
 		4839F7DCF9EADCB2D0B11B50 /* SpaceshipHull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceshipHull.swift; sourceTree = "<group>"; };
@@ -247,20 +264,20 @@
 		4E300C57FE93376C807C17E7 /* TeleportPurple.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportPurple.atlas; sourceTree = "<group>"; };
 		4E6739077E24EBD3B97F67C2 /* chopping.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chopping.wav; sourceTree = "<group>"; };
 		4E8E95FF6D888D2C7916A705 /* FryableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryableComponent.swift; sourceTree = "<group>"; };
+		4F5C7F71C69394DCC51414A0 /* Pods_TomperoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomperoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FA9FAF14782560A2C52E8D0 /* LANFrameCodecTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANFrameCodecTests.swift; sourceTree = "<group>"; };
 		518DDED6C33356FD48DCDFC8 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		524B54B43AF98F44F22B6708 /* PlateBoxNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateBoxNode.swift; sourceTree = "<group>"; };
 		5270855805C5BBC077E4AE45 /* endTimer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = endTimer.wav; sourceTree = "<group>"; };
 		52DC5925CC178FD90700CA9B /* GameConnectionManagerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConnectionManagerObserver.swift; sourceTree = "<group>"; };
-		53B579ACB9FC08ED1075A778 /* Pods-TomperoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.release.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.release.xcconfig"; sourceTree = "<group>"; };
 		5501516F2B2FD6D17AC3F147 /* airSuction.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airSuction.wav; sourceTree = "<group>"; };
 		5742AF2B802162005F27011D /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		58889C87736BC4F8E46C127C /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
 		5940C6C7865046506E863824 /* WaitingRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WaitingRoom.storyboard; sourceTree = "<group>"; };
 		5BBE3A707CB42D82F6D16971 /* Cook.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Cook.atlas; sourceTree = "<group>"; };
 		5C2530062C4E31D71A825AC4 /* GameDifficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficulty.swift; sourceTree = "<group>"; };
+		5E3F7C3DB7E4DAE93FEDE1E0 /* InicialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicialView.swift; sourceTree = "<group>"; };
 		5E7D1059D77AE505B033EFED /* Tardigrades.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tardigrades.swift; sourceTree = "<group>"; };
-		5EF7676520EE94988761BFFF /* Pods-TomperoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.debug.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		62BD6E63B21BD9EC6FA44F43 /* MarsSand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsSand.swift; sourceTree = "<group>"; };
 		63DB120D12A228D0BB2BA346 /* StationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationType.swift; sourceTree = "<group>"; };
 		654FC8494EF5FC5EAE6E9A8D /* menuMusicClean.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menuMusicClean.wav; sourceTree = "<group>"; };
@@ -276,6 +293,8 @@
 		75A07A6ADE33646209F2DBEC /* DebugLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogger.swift; sourceTree = "<group>"; };
 		75AAA587E9FABD1366E1D633 /* DeliveryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryNode.swift; sourceTree = "<group>"; };
 		76D6CEC3DFD9CC0B0F824120 /* MatchStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatistics.swift; sourceTree = "<group>"; };
+		77EA4130F3C65458F5C8054D /* CutsceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutsceneView.swift; sourceTree = "<group>"; };
+		7A2A77CE8713262CC9EAA7A7 /* GameContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContainerView.swift; sourceTree = "<group>"; };
 		7A3FEE02CB98B201FC3CFE06 /* Broccoli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broccoli.swift; sourceTree = "<group>"; };
 		7B02E01AB1A05D7D959F25C1 /* TappableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableSpriteNode.swift; sourceTree = "<group>"; };
 		7B246ACDB2A772C34E593753 /* timesUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp.wav; sourceTree = "<group>"; };
@@ -302,9 +321,9 @@
 		9B48115C906082D88C826D6E /* MovableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableSpriteNode.swift; sourceTree = "<group>"; };
 		9CEA0F4C960C75092DEEF7C6 /* LANObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANObservers.swift; sourceTree = "<group>"; };
 		9D45FAE69D3C95F696517948 /* teleporter.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = teleporter.wav; sourceTree = "<group>"; };
+		9D77BEAF40A6069551DF3309 /* WipeTransitionAnyTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeTransitionAnyTransition.swift; sourceTree = "<group>"; };
 		9E71E11FED474729CA4B4CD2 /* CGPointVectorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointVectorExtensions.swift; sourceTree = "<group>"; };
 		9EE48D8DCBFFC007AF58AD91 /* AnalyticsEventLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventLogger.swift; sourceTree = "<group>"; };
-		9F4957FC66DA1C30F305E35B /* Pods_TomperoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomperoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A056BC0FB53C76EC4B247DC6 /* WirePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WirePayload.swift; sourceTree = "<group>"; };
 		A38CEF8B8AD79874C6375A28 /* TitilliumWeb-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Bold.ttf"; sourceTree = "<group>"; };
 		A41A7D96B1D65E2F6D6345E6 /* LANFraming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANFraming.swift; sourceTree = "<group>"; };
@@ -323,6 +342,7 @@
 		B2B542FA1D2D68BF5C938F2C /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		B38F72ABE4B339A435AD2859 /* HasIngredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasIngredients.swift; sourceTree = "<group>"; };
 		B58DBFFB7F21BC9C8866EDB8 /* takeFood.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = takeFood.wav; sourceTree = "<group>"; };
+		B6A8A7E53403163ED78103A9 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		B7827BF1A428547EBEE72FEC /* gameMusic.m4a */ = {isa = PBXFileReference; path = gameMusic.m4a; sourceTree = "<group>"; };
 		B82A9B879C28EDF4B7EEEB76 /* CutsceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutsceneViewController.swift; sourceTree = "<group>"; };
 		BACC9856321785FE165E81D4 /* Plate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plate.swift; sourceTree = "<group>"; };
@@ -331,10 +351,10 @@
 		BDD5F609E76E73F97BDC136D /* SKNodeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
 		BF74553ADD0B615B0365083D /* LANConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANConnectionManager.swift; sourceTree = "<group>"; };
 		C07BCA3F246059B7AFCA2771 /* Statistics.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Statistics.storyboard; sourceTree = "<group>"; };
+		C11C514A7CAD53F689DE2A42 /* StarsBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsBackground.swift; sourceTree = "<group>"; };
 		C1FDED977961E9EE88C1C831 /* SKActionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKActionExtensions.swift; sourceTree = "<group>"; };
 		C2210C973FB32A1022B05937 /* WipeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WipeTransition.swift; sourceTree = "<group>"; };
 		C2C242A954E5DB9EFC938B97 /* IngredientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientState.swift; sourceTree = "<group>"; };
-		C37FF62A32174D8762B799E1 /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		C5F7A21E9E1E3497D2771DC9 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		C732151202AC0EE847435BD1 /* airR1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = airR1.gif; sourceTree = "<group>"; };
 		C9F0AA721B6DBF352084F5B4 /* CookBurnt.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = CookBurnt.atlas; sourceTree = "<group>"; };
@@ -351,6 +371,7 @@
 		DCD4371AC0FD95F489E5BA0D /* CookableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookableComponent.swift; sourceTree = "<group>"; };
 		DF5C1419613C59BC4CB5E8DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF9C696BD4BA769BD0C8216C /* TrackWithIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWithIntro.swift; sourceTree = "<group>"; };
+		E03E3FBC88DA3440C9D83F31 /* Pods-TomperoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.debug.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E1F83B8BFD25D4A5F88E556A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E2FD302ED74FF4C7492CB519 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		E42181C62B226F26E5EB94B0 /* putFoodDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = putFoodDown.wav; sourceTree = "<group>"; };
@@ -364,6 +385,7 @@
 		EF397E12646B84B4866A879E /* OrderDeliveryNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryNotification.swift; sourceTree = "<group>"; };
 		F024A87250D85E42F04E9359 /* OrderListNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListNode.swift; sourceTree = "<group>"; };
 		F035DBCC2CA32599A6027540 /* frying.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = frying.wav; sourceTree = "<group>"; };
+		F80B0954C5F615809DE6D3F0 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		FCCDB6687FAC5B57CF6EB164 /* PlayerTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTable.swift; sourceTree = "<group>"; };
 		FF284A2AF9B86F89B7015CC4 /* sfx - angryCrowd1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - angryCrowd1.wav"; sourceTree = "<group>"; };
 		FF3DFF7C5D7CCFFA63840FE1 /* sfx - customerCrowd1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - customerCrowd1.wav"; sourceTree = "<group>"; };
@@ -371,19 +393,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		07225301569C5C989B885356 /* Frameworks */ = {
+		961AF950311B173E8A3B2114 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2971DBE1B0E645B0C478F85D /* Pods_TomperoTests.framework in Frameworks */,
+				A4C554DD83A0243F43F35924 /* Pods_TomperoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1EB93481A5859CBD7BBF51CC /* Frameworks */ = {
+		B9D2EB606A0F5FE0FA4F4521 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AC6985507C2EB1D0C395560 /* Pods_Tompero.framework in Frameworks */,
+				9F769FC9598F06BDEC0F8954 /* Pods_Tompero.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +453,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		26B1F70F9401FD5573A3C754 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EB1BDAD46DEDC21E7A28CA1E /* App */,
+				5495AA1FD8DF7EAC929DC68E /* Components */,
+				CCCB910086C180684F74932E /* Game */,
+				4EEFB4A8385C787253F0BAD3 /* Screens */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		2DB1E3D96C453BE83E7FC4AF /* Sound */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,18 +504,6 @@
 			path = Cutscene;
 			sourceTree = "<group>";
 		};
-		3BF4B06A625066E1721572D9 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C37FF62A32174D8762B799E1 /* Pods-Tompero.debug.xcconfig */,
-				2914D2DABFD8D4290804FE33 /* Pods-Tompero.release.xcconfig */,
-				5EF7676520EE94988761BFFF /* Pods-TomperoTests.debug.xcconfig */,
-				53B579ACB9FC08ED1075A778 /* Pods-TomperoTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		404376C6684F6ED6208663ED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +527,28 @@
 			path = Order;
 			sourceTree = "<group>";
 		};
+		4EEFB4A8385C787253F0BAD3 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				77EA4130F3C65458F5C8054D /* CutsceneView.swift */,
+				5E3F7C3DB7E4DAE93FEDE1E0 /* InicialView.swift */,
+				37C77CDFE7E3C6B128F13C18 /* MenuView.swift */,
+				3EA24147851A64ED007127A5 /* SettingsView.swift */,
+				F80B0954C5F615809DE6D3F0 /* StatisticsView.swift */,
+				4503008E088D6CE382E46BC5 /* WaitingRoomView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		5495AA1FD8DF7EAC929DC68E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C11C514A7CAD53F689DE2A42 /* StarsBackground.swift */,
+				9D77BEAF40A6069551DF3309 /* WipeTransitionAnyTransition.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		5D67F5F1AB1A505D30217E4F /* Ingredients */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,15 +565,6 @@
 				8FA6F2968A6649DDB1934A7D /* Tentacle.swift */,
 			);
 			path = Ingredients;
-			sourceTree = "<group>";
-		};
-		623B0EFA60C1061963DD7F0C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0046C574772E0EC449BF909E /* Pods_Tompero.framework */,
-				9F4957FC66DA1C30F305E35B /* Pods_TomperoTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6560A2ED3D11D63D42207089 /* GameScene */ = {
@@ -569,6 +603,18 @@
 				09C58EA09AAEA6F73B3F8700 /* MenuStoryboard.storyboard */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		770A5E546EA26F1AB676D0D1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				377776D738103AF4894A541E /* Pods-Tompero.debug.xcconfig */,
+				1BDFFCB021F2782BD57F25BB /* Pods-Tompero.release.xcconfig */,
+				E03E3FBC88DA3440C9D83F31 /* Pods-TomperoTests.debug.xcconfig */,
+				117DDBF8917D3D4E6476D80D /* Pods-TomperoTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		8307FB4F17038A50E5C8732D /* Products */ = {
@@ -710,6 +756,15 @@
 			path = SFX;
 			sourceTree = "<group>";
 		};
+		C51DC84906C83DCE5A94CC03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C6B8FE30C24B4DEBAD65C90 /* Pods_Tompero.framework */,
+				4F5C7F71C69394DCC51414A0 /* Pods_TomperoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CA9F16E306D9E93DF173D29C /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,14 +774,22 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		CCCB910086C180684F74932E /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				7A2A77CE8713262CC9EAA7A7 /* GameContainerView.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
 		CD086E4E908B83E02990C517 = {
 			isa = PBXGroup;
 			children = (
 				D5286CBA5548E7CCB883B677 /* Tompero */,
 				3829CFF7FF254BB69BC176A0 /* TomperoTests */,
 				8307FB4F17038A50E5C8732D /* Products */,
-				3BF4B06A625066E1721572D9 /* Pods */,
-				623B0EFA60C1061963DD7F0C /* Frameworks */,
+				770A5E546EA26F1AB676D0D1 /* Pods */,
+				C51DC84906C83DCE5A94CC03 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -767,6 +830,7 @@
 				B0181602F6FBBBE7E201A903 /* Networking */,
 				1FF884AFC64978028C5111BF /* Resources */,
 				2DB1E3D96C453BE83E7FC4AF /* Sound */,
+				26B1F70F9401FD5573A3C754 /* UI */,
 				EA53C66221F41214109AB104 /* View */,
 				C732151202AC0EE847435BD1 /* airR1.gif */,
 				9EE48D8DCBFFC007AF58AD91 /* AnalyticsEventLogger.swift */,
@@ -813,6 +877,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EB1BDAD46DEDC21E7A28CA1E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				14AB5BC7A404AD1F2D5189D6 /* AppRouter.swift */,
+				B6A8A7E53403163ED78103A9 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		F5FF758AF2AE7EB7EB123296 /* WipeAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,11 +902,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8908D201A50D9474AC566A8 /* Build configuration list for PBXNativeTarget "Tompero" */;
 			buildPhases = (
-				DF91746A1A13F18AD60E0714 /* [CP] Check Pods Manifest.lock */,
+				CCA1485169ABF5BC9AD4AE56 /* [CP] Check Pods Manifest.lock */,
 				8895161365CC4FAD0032D8BD /* Sources */,
 				854A645CA17ED0000CB1D7A0 /* Resources */,
-				1EB93481A5859CBD7BBF51CC /* Frameworks */,
-				FD2172C9C6F4E3741D38C828 /* [CP] Embed Pods Frameworks */,
+				B9D2EB606A0F5FE0FA4F4521 /* Frameworks */,
+				815420AC5AFB2B6A4D20042F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -848,9 +921,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 007A9C8B08ED629082EEE7D1 /* Build configuration list for PBXNativeTarget "TomperoTests" */;
 			buildPhases = (
-				117AAE2F7EDC8A3806961DA4 /* [CP] Check Pods Manifest.lock */,
+				B95C423E3D9EBD39D7C95984 /* [CP] Check Pods Manifest.lock */,
 				FDC15471BF0B9C7891D2A8E6 /* Sources */,
-				07225301569C5C989B885356 /* Frameworks */,
+				961AF950311B173E8A3B2114 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -973,7 +1046,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		117AAE2F7EDC8A3806961DA4 /* [CP] Check Pods Manifest.lock */ = {
+		815420AC5AFB2B6A4D20042F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B95C423E3D9EBD39D7C95984 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -995,7 +1085,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DF91746A1A13F18AD60E0714 /* [CP] Check Pods Manifest.lock */ = {
+		CCA1485169ABF5BC9AD4AE56 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1017,23 +1107,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FD2172C9C6F4E3741D38C828 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1044,6 +1117,7 @@
 				18B32956A45D247EAB938F15 /* AnalyticsEventLogger.swift in Sources */,
 				6D04566256171EF3E7A52890 /* AnimationDelegate.swift in Sources */,
 				510D065379F38B27DDF47E08 /* AppDelegate.swift in Sources */,
+				4507F8B7E6BE681DD4FD81F2 /* AppRouter.swift in Sources */,
 				74A51ABE1588970A21CEC7CD /* Asteroid.swift in Sources */,
 				C5F6AAF3053F90F1B1A2AEF8 /* BoardNode.swift in Sources */,
 				C629AE635915AB5002D4D76E /* Broccoli.swift in Sources */,
@@ -1058,6 +1132,7 @@
 				DF9AED1EDF7369E6487BFE36 /* CreditsCell.swift in Sources */,
 				86D3E13A9998B3C363E737D5 /* CustomAudioPlayer.swift in Sources */,
 				8B34C9467B5C2BE9A868A073 /* Cutscene.swift in Sources */,
+				BAD9150FC6561CEBFCB17138 /* CutsceneView.swift in Sources */,
 				33AA25FF9733CA06EBCB6CC4 /* CutsceneViewController.swift in Sources */,
 				3F6D216C3CBCA66A06C4DF79 /* DatabaseManager.swift in Sources */,
 				23FD7F4CF6FB4E21777A579A /* DebugLogger.swift in Sources */,
@@ -1068,6 +1143,7 @@
 				402535AC023B5664DDD9B847 /* FryerNode.swift in Sources */,
 				107958FEF68B19E527580739 /* GameConnectionManager.swift in Sources */,
 				ED6454D5C6D2271777D0370E /* GameConnectionManagerObserver.swift in Sources */,
+				9E22A4CD32FE671BB020A07C /* GameContainerView.swift in Sources */,
 				ADFB8965F69EC517E8FA601F /* GameDifficulty.swift in Sources */,
 				4CEF4519A788444D62C6483C /* GameRule.swift in Sources */,
 				31D3FFAA3B614461CCE9C905 /* GameRuleFactory.swift in Sources */,
@@ -1081,6 +1157,7 @@
 				3F3AD1EF20630570990A4F4C /* IngredientBoxNode.swift in Sources */,
 				A29893E82617E84249D704F9 /* IngredientNode.swift in Sources */,
 				53EBA56234C20C5B1BCE1D41 /* IngredientState.swift in Sources */,
+				1FAAB1D96476372D3F770878 /* InicialView.swift in Sources */,
 				C2B1D1436583F617E7E74A78 /* InicialViewController.swift in Sources */,
 				6D27C8BB3D4FE71147F30437 /* LANBrowser.swift in Sources */,
 				5D00042F8B9C09BD20E13858 /* LANConnectionManager.swift in Sources */,
@@ -1098,6 +1175,7 @@
 				A44C2390642D89389A8DE2EE /* MatchStatistics.swift in Sources */,
 				422C636D29A6D4F4C7524ACC /* MenuCollectionViewCell.swift in Sources */,
 				B4E644C0899039D293C27D12 /* MenuCollectionViewController.swift in Sources */,
+				3ACE18090B152FB4DE2719A0 /* MenuView.swift in Sources */,
 				726DB16099C2CF67E5D3296B /* MoonCheese.swift in Sources */,
 				EE47E8BDF2E627BC95630E79 /* MovableDelegate.swift in Sources */,
 				6B84F8E0F645E1E95D831EE7 /* MovableSpriteNode.swift in Sources */,
@@ -1119,6 +1197,7 @@
 				17642104DABC2B866029E2CC /* PlayerTable.swift in Sources */,
 				42B0C20D61653F36B80C5421 /* PlayerTableType.swift in Sources */,
 				4F14BAB8B8650F2C7B280F9D /* ProgressBar.swift in Sources */,
+				559EE92C9FAE941920DEF830 /* RootView.swift in Sources */,
 				5A9FB1985D2A9A78E777FD75 /* SFXPlayer.swift in Sources */,
 				101B6BA48BD91835D0AC920A /* SKActionExtensions.swift in Sources */,
 				78B1BC06D18E1E03B17380C6 /* SKNodeExtensions.swift in Sources */,
@@ -1126,12 +1205,15 @@
 				99F8B5B2919159FDB78C817E /* SaturnOnionRings.swift in Sources */,
 				2E87D1BFD5B7C97A759E7979 /* SceneDelegate.swift in Sources */,
 				A944A58127B7E26C0B67D1F8 /* SelectorButton.swift in Sources */,
+				9BE1737CCCA9D155C72ACAE2 /* SettingsView.swift in Sources */,
 				3F9D972DF4DB382E146FECA2 /* SettingsViewController.swift in Sources */,
 				147322A70EF5A58EE20F506D /* ShelfNode.swift in Sources */,
 				1F0BD3AD30CFA6B273607095 /* SpaceshipHull.swift in Sources */,
+				D0DB1561524BEC4C9A9A1453 /* StarsBackground.swift in Sources */,
 				00F3827024BC237961A67319 /* StarsOverlay.swift in Sources */,
 				D51886589D8F214AE7A43EC4 /* StationNode.swift in Sources */,
 				64531114DEBD657B0831C2CE /* StationType.swift in Sources */,
+				61EE3903D165976F97BEADEE /* StatisticsView.swift in Sources */,
 				A47B195AA994E0C7DBA45A06 /* StatisticsViewController.swift in Sources */,
 				D8B01000B65D289721B18395 /* StatsCell.swift in Sources */,
 				184B5DC4F16DFD5262A8EBB4 /* Storyboarded.swift in Sources */,
@@ -1143,8 +1225,10 @@
 				5BA89A700E09D3E783F63234 /* Tentacle.swift in Sources */,
 				C8C9E1508058D8834466606A /* Track.swift in Sources */,
 				797AB21BF35882A755C78851 /* TrackWithIntro.swift in Sources */,
+				406B064AB74DBEC30AA45B4D /* WaitingRoomView.swift in Sources */,
 				D0B77D65AF42FF265BDF84E4 /* WaitingRoomViewController.swift in Sources */,
 				0ACD8716AC360033C32E9BB4 /* WipeTransition.swift in Sources */,
+				019884A7BC527AFEB4916DB4 /* WipeTransitionAnyTransition.swift in Sources */,
 				4406D05C56E61D597C86EB02 /* WirePayload.swift in Sources */,
 				2C1C6300120D50D1336EC51A /* WirePayloadType.swift in Sources */,
 			);
@@ -1192,14 +1276,14 @@
 /* Begin XCBuildConfiguration section */
 		5A344A478A096AC0D1CA2044 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2914D2DABFD8D4290804FE33 /* Pods-Tompero.release.xcconfig */;
+			baseConfigurationReference = 1BDFFCB021F2782BD57F25BB /* Pods-Tompero.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Tompero/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1214,12 +1298,12 @@
 		};
 		72CF34E75AEC3D5724190269 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EF7676520EE94988761BFFF /* Pods-TomperoTests.debug.xcconfig */;
+			baseConfigurationReference = E03E3FBC88DA3440C9D83F31 /* Pods-TomperoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TomperoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1288,7 +1372,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1303,12 +1387,12 @@
 		};
 		A0DC54A0C6765B19136F003E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53B579ACB9FC08ED1075A778 /* Pods-TomperoTests.release.xcconfig */;
+			baseConfigurationReference = 117DDBF8917D3D4E6476D80D /* Pods-TomperoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TomperoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1324,14 +1408,14 @@
 		};
 		DD47A27835C44028FB447FED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C37FF62A32174D8762B799E1 /* Pods-Tompero.debug.xcconfig */;
+			baseConfigurationReference = 377776D738103AF4894A541E /* Pods-Tompero.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Tompero/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1393,7 +1477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
