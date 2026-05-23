@@ -25,11 +25,19 @@ class CloudKitManager: DatabaseManager {
     private lazy var publicDB: CKDatabase = container.publicCloudDatabase
     private lazy var privateDB: CKDatabase = container.privateCloudDatabase
 
-    /// True when CloudKit calls are safe to make. False under XCTest (no
-    /// code signing, no entitlement → `CKContainer(identifier:)` aborts the
-    /// process via `_os_crash` rather than returning an error we can handle).
+    /// True only when CloudKit is actually usable. False under XCTest *and*
+    /// under unsigned simulator builds without an iCloud account signed in —
+    /// both cases would otherwise crash the process via `_os_crash`
+    /// (uncatchable) the moment `CKContainer(identifier:)` is allocated.
+    ///
+    /// `ubiquityIdentityToken` returns nil when either the user isn't signed
+    /// in to iCloud or the app's entitlement isn't honored (unsigned builds),
+    /// so it's a single gate for both situations.
     private static let isAvailable: Bool = {
-        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil
+        guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else {
+            return false
+        }
+        return FileManager.default.ubiquityIdentityToken != nil
     }()
 
     // MARK: Initializers
