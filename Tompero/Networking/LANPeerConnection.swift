@@ -30,6 +30,10 @@ final class LANPeerConnection {
     private let queue: DispatchQueue
     private let codec = LANFrameCodec()
 
+    /// Endpoint we dialed (outbound connections only). Persisted so the
+    /// manager can attempt a reconnect after a transient drop.
+    let remoteEndpoint: NWEndpoint?
+
     /// Identity of the remote peer. nil until the handshake frame arrives
     /// (and, for outbound connections, until we've at least dialed — we
     /// don't know who's at the other end of a Bonjour endpoint until they
@@ -40,10 +44,19 @@ final class LANPeerConnection {
 
     private var hasSentHandshake = false
 
-    init(connection: NWConnection, direction: Direction, queue: DispatchQueue) {
+    // Heartbeat. We send a ping every `heartbeatInterval`; if no traffic
+    // (any frame, not just pongs) arrives within `heartbeatTimeout`, we
+    // declare the link dead and tear down.
+    private static let heartbeatInterval: TimeInterval = 2
+    private static let heartbeatTimeout: TimeInterval = 6
+    private var heartbeatTimer: DispatchSourceTimer?
+    private var lastInboundActivity: Date = .distantPast
+
+    init(connection: NWConnection, direction: Direction, queue: DispatchQueue, remoteEndpoint: NWEndpoint? = nil) {
         self.nwConnection = connection
         self.direction = direction
         self.queue = queue
+        self.remoteEndpoint = remoteEndpoint
     }
 
     func start() {
@@ -55,7 +68,37 @@ final class LANPeerConnection {
 
     /// Tear down the connection. Safe to call multiple times.
     func cancel() {
+        stopHeartbeat()
         nwConnection.cancel()
+    }
+
+    // MARK: - Heartbeat
+
+    private func startHeartbeat() {
+        stopHeartbeat()
+        lastInboundActivity = Date()
+        let timer = DispatchSource.makeTimerSource(queue: queue)
+        timer.schedule(deadline: .now() + Self.heartbeatInterval, repeating: Self.heartbeatInterval)
+        timer.setEventHandler { [weak self] in
+            self?.heartbeatTick()
+        }
+        heartbeatTimer = timer
+        timer.resume()
+    }
+
+    private func stopHeartbeat() {
+        heartbeatTimer?.cancel()
+        heartbeatTimer = nil
+    }
+
+    private func heartbeatTick() {
+        let elapsed = Date().timeIntervalSince(lastInboundActivity)
+        if elapsed > Self.heartbeatTimeout {
+            print("[LANPeerConnection] Heartbeat timeout (\(elapsed)s), dropping connection")
+            cancel()
+            return
+        }
+        sendFrame(.ping(LANPing(id: UUID())))
     }
 
     func sendHandshake(asHost: Bool) {
@@ -96,6 +139,7 @@ final class LANPeerConnection {
         case .ready:
             transition(to: .connecting) // still "connecting" until handshake completes
             scheduleReceive()
+            startHeartbeat()
         case .failed(let error):
             print("[LANPeerConnection] Failed: \(error)")
             transition(to: .notConnected)
@@ -141,6 +185,7 @@ final class LANPeerConnection {
     }
 
     private func handleFrame(_ frame: LANFrame) {
+        lastInboundActivity = Date()
         switch frame {
         case .handshake(let handshake):
             remoteIdentity = handshake.peer
@@ -148,6 +193,12 @@ final class LANPeerConnection {
             delegate?.peerConnection(self, didCompleteHandshake: handshake)
         case .envelope(let envelope):
             delegate?.peerConnection(self, didReceive: envelope)
+        case .ping(let ping):
+            sendFrame(.pong(LANPong(id: ping.id)))
+        case .pong:
+            // lastInboundActivity already updated above — pong has no
+            // additional semantic.
+            break
         }
     }
 
