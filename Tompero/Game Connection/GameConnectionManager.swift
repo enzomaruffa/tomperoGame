@@ -106,7 +106,7 @@ class GameConnectionManager {
 extension GameConnectionManager: LANDataObserver {
     
     func receiveData(wrapper: WirePayload) {
-        Log.network.debug("Received data with type: \(wrapper.type)")
+        Log.network.debug("Received data with type: \(wrapper.type.rawValue)")
         
         switch wrapper.type {
         case .plate:
@@ -148,7 +148,7 @@ extension GameConnectionManager: LANDataObserver {
                     newOrders.append(newOrder)
                 }
                 
-                Log.network.debug("Received orderList: \(newOrders)")
+                Log.network.debug("Received orderList: \(String(describing: newOrders))")
                 observersSnapshot.forEach({ $0.receiveOrders(orders: newOrders) })
                 
                 // Chamar delegates que tem o receiveMessage
@@ -159,7 +159,7 @@ extension GameConnectionManager: LANDataObserver {
         case .deliveryNotification:
             do {
                 let deliveryNotification = try JSONDecoder().decode(OrderDeliveryNotification.self, from: wrapper.object)
-                Log.network.debug("Received notification: \(deliveryNotification)")
+                Log.network.debug("Received notification: \(String(describing: deliveryNotification))")
                 observersSnapshot.forEach({ $0.receiveDeliveryNotification(notification: deliveryNotification) })
                 
                 // Chamar delegates que tem o receiveMessage
@@ -170,7 +170,7 @@ extension GameConnectionManager: LANDataObserver {
         case .statistics:
             do {
                 let statistics = try JSONDecoder().decode(MatchStatistics.self, from: wrapper.object)
-                Log.network.debug("Received statistics: \(statistics)")
+                Log.network.debug("Received statistics: \(String(describing: statistics))")
                 
                 observersSnapshot.forEach({ $0.receiveStatistics(statistics: statistics) })
             } catch let error {
