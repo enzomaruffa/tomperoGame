@@ -152,11 +152,11 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
     func updateDifficultyButton(difficulty: GameDifficulty) {
         switch difficulty {
         case .easy:
-            difficultyButton.setTitle("EASY", for: .normal)
+            difficultyButton.setTitle(String(localized: "difficulty.easy"), for: .normal)
         case .medium:
-            difficultyButton.setTitle("MEDIUM", for: .normal)
+            difficultyButton.setTitle(String(localized: "difficulty.medium"), for: .normal)
         case .hard:
-            difficultyButton.setTitle("HARD", for: .normal)
+            difficultyButton.setTitle(String(localized: "difficulty.hard"), for: .normal)
         }
     }
     

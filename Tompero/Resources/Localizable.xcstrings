@@ -1,0 +1,76 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "difficulty.easy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "EASY" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "FÁCIL" } }
+      }
+    },
+    "difficulty.medium" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "MEDIUM" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "MÉDIO" } }
+      }
+    },
+    "difficulty.hard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "HARD" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "DIFÍCIL" } }
+      }
+    },
+    "picker.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Nearby Players" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Jogadores Próximos" } }
+      }
+    },
+    "picker.empty" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Looking for nearby players…" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Procurando jogadores próximos…" } }
+      }
+    },
+    "match.reconnecting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ reconnecting…" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "%@ reconectando…" } }
+      }
+    },
+    "alert.redirect.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Do you want to continue?" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Deseja continuar?" } }
+      }
+    },
+    "alert.redirect.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You're about to be redirected to a contributor's %@ profile." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Você está prestes a ser redirecionado para o perfil %@ de um colaborador." } }
+      }
+    },
+    "alert.redirect.confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Go to website" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Ir para o site" } }
+      }
+    },
+    "alert.cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

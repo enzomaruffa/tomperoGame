@@ -199,13 +199,17 @@ class SettingsViewController: UIViewController, Storyboarded, GKGameCenterContro
     }
     
     func displayAlert(_ url: URL, domain: String) {
-        let alert = UIAlertController(title: "Do you want to continue?", message: "You're about to be redirected to a contributor's \(domain) profile.", preferredStyle: .alert)
-        
-        let goAction = UIAlertAction(title: "Go to website", style: .default, handler: { (_) -> Void in
+        let alert = UIAlertController(
+            title: String(localized: "alert.redirect.title"),
+            message: String(format: String(localized: "alert.redirect.message"), domain),
+            preferredStyle: .alert
+        )
+
+        let goAction = UIAlertAction(title: String(localized: "alert.redirect.confirm"), style: .default, handler: { (_) -> Void in
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        let cancelAction = UIAlertAction(title: String(localized: "alert.cancel"), style: .cancel)
         
         alert.addAction(goAction)
         alert.addAction(cancelAction)
