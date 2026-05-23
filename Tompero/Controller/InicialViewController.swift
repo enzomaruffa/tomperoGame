@@ -74,7 +74,7 @@ class InicialViewController: UIViewController, Storyboarded {
     private func installNameEditorButton() {
         view.addSubview(nameEditorButton)
         NSLayoutConstraint.activate([
-            nameEditorButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            nameEditorButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             nameEditorButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
         ])
         refreshNameEditorTitle()
