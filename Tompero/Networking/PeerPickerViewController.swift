@@ -64,6 +64,7 @@ final class PeerPickerViewController: UIViewController {
 
         peers = LANConnectionManager.shared.discoveredPeers
         LANConnectionManager.shared.setDiscoveryObserver(self)
+        LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
         updateEmptyState()
     }
 
@@ -75,6 +76,7 @@ final class PeerPickerViewController: UIViewController {
 
     deinit {
         LANConnectionManager.shared.setDiscoveryObserver(nil)
+        LANConnectionManager.shared.unsubscribeMatchmakingObserver(observer: self)
     }
 
     @objc private func cancelTapped() {
@@ -110,5 +112,16 @@ extension PeerPickerViewController: LANDiscoveryObserver {
         self.peers = peers
         tableView.reloadData()
         updateEmptyState()
+    }
+}
+
+extension PeerPickerViewController: LANMatchmakingObserver {
+    func playerUpdate(player: String, state: PeerConnectionState) {
+        // Auto-dismiss as soon as the first peer we invited becomes connected
+        // so the host returns to the lobby and sees the updated slot. Without
+        // this the host had to manually tap Done before the lobby refreshed.
+        if state == .connected {
+            delegate?.peerPickerDidFinish(self)
+        }
     }
 }

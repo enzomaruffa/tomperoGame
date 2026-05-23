@@ -70,6 +70,27 @@
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } },
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } }
       }
+    },
+    "name.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Your name" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Seu nome" } }
+      }
+    },
+    "name.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Other players will see this name in the lobby." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Os outros jogadores verão este nome no lobby." } }
+      }
+    },
+    "name.save" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Salvar" } }
+      }
     }
   },
   "version" : "1.0"
