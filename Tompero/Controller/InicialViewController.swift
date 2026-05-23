@@ -53,8 +53,59 @@ class InicialViewController: UIViewController, Storyboarded {
         host.addGestureRecognizer(tapGestureRecognizerHost)
         viewDialog.addGestureRecognizer(tapGestureRecognizerText)
         viewDialog.isUserInteractionEnabled = true
+
+        installNameEditorButton()
     }
-    
+
+    // MARK: - Name editor
+
+    private lazy var nameEditorButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = UIFont(name: "TitilliumWeb-Bold", size: 18)
+        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        button.layer.cornerRadius = 12
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.35)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(promptForName), for: .touchUpInside)
+        return button
+    }()
+
+    private func installNameEditorButton() {
+        view.addSubview(nameEditorButton)
+        NSLayoutConstraint.activate([
+            nameEditorButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            nameEditorButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
+        ])
+        refreshNameEditorTitle()
+    }
+
+    private func refreshNameEditorTitle() {
+        nameEditorButton.setTitle("👤 \(LANConnectionManager.shared.selfName)", for: .normal)
+    }
+
+    @objc private func promptForName() {
+        let alert = UIAlertController(
+            title: String(localized: "name.title"),
+            message: String(localized: "name.message"),
+            preferredStyle: .alert
+        )
+        alert.addTextField { textField in
+            textField.text = LocalPeerIdentity.userSetName
+            textField.placeholder = UIDevice.current.name
+            textField.autocapitalizationType = .words
+            textField.clearButtonMode = .whileEditing
+        }
+        alert.addAction(UIAlertAction(title: String(localized: "alert.cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: String(localized: "name.save"), style: .default) { [weak self] _ in
+            let newName = alert.textFields?.first?.text
+            LocalPeerIdentity.setUserSetName(newName)
+            LANConnectionManager.shared.resetSession()
+            self?.refreshNameEditorTitle()
+        })
+        present(alert, animated: true)
+    }
+
     fileprivate func createKombiTimer() {
         kombiTimer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: true) { (_) in
             //print("Timer called")
@@ -95,7 +146,8 @@ class InicialViewController: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         MusicPlayer.shared.play(.menu)
-        
+
+        refreshNameEditorTitle()
         LANConnectionManager.shared.resetSession()
     
         // TODO: Make update in UI with coin count
