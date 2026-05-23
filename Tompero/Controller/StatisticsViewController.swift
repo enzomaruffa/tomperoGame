@@ -69,18 +69,20 @@ class StatisticsViewController: UIViewController, Storyboarded, GKGameCenterCont
     }
     
     func submitScoreToGameCenter() {
-        var leaderboardID = ""
+        let leaderboardID: String
         switch statistics.ruleUsed.difficulty {
         case .easy: leaderboardID = easyID
         case .medium: leaderboardID = mediumID
         case .hard: leaderboardID = hardID
         }
-        let score = GKScore(leaderboardIdentifier: leaderboardID)
-        score.value = Int64(statistics.totalPoints)
-        GKScore.report([score]) { error in
+        GKLeaderboard.submitScore(
+            statistics.totalPoints,
+            context: 0,
+            player: GKLocalPlayer.local,
+            leaderboardIDs: [leaderboardID]
+        ) { error in
             if let error {
                 Log.game.error("\(error.localizedDescription, privacy: .public)")
-            } else {
             }
         }
     }

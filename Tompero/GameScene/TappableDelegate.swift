@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol TappableDelegate: class {
+protocol TappableDelegate: AnyObject {
     func tap()
 }

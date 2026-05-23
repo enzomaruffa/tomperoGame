@@ -55,29 +55,22 @@ class CloudKitManager: DatabaseManager {
     private func retrieveCoinRecord(_ callback: @escaping (CKRecord?) -> Void) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Coin", predicate: predicate)
-        
-        var firstResult: CKRecord?
-        
+
         logger.log(message: " Performing query...")
-        privateDB.perform(query,
-                          inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
-                            self?.logger.log(message: "Query in progress")
-                            guard let self = self else { return }
-                            
-                            if let error = error {
-                                self.logger.log(message: "Error: \(error.localizedDescription)")
-                                return
-                            }
-                            
-                            // Check if it exists in the remote container
-                            guard let results = results else {
-                                self.logger.log(message: "Returning nil!")
-                                callback(nil)
-                                return
-                            }
-                            self.logger.log(message: "First result found :)")
-                            firstResult = results.first
-                            callback(firstResult)
+        privateDB.fetch(
+            withQuery: query,
+            inZoneWith: CKRecordZone.default().zoneID,
+            desiredKeys: nil,
+            resultsLimit: 1
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let response):
+                let firstRecord = response.matchResults.compactMap { try? $0.1.get() }.first
+                callback(firstRecord)
+            case .failure(let error):
+                self.logger.log(message: "Error: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -95,29 +88,22 @@ class CloudKitManager: DatabaseManager {
     private func retrieveMatchHistoryRecord(withHash hash: String, _ callback: @escaping (CKRecord?) -> Void) {
         let predicate = NSPredicate(format: "matchHash == %@", hash)
         let query = CKQuery(recordType: "MatchHistory", predicate: predicate)
-        
-        var firstResult: CKRecord?
-        
+
         logger.log(message: "Performing query...")
-        privateDB.perform(query,
-                          inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
-                            self?.logger.log(message: "Query in progress")
-                            guard let self = self else { return }
-                            
-                            if let error = error {
-                                self.logger.log(message: "Error: \(error.localizedDescription)")
-                                return
-                            }
-                            
-                            // Check if it exists in the remote container
-                            guard let results = results else {
-                                self.logger.log(message: "Returning nil!")
-                                callback(nil)
-                                return
-                            }
-                            self.logger.log(message: "First result found :)")
-                            firstResult = results.first
-                            callback(firstResult)
+        privateDB.fetch(
+            withQuery: query,
+            inZoneWith: CKRecordZone.default().zoneID,
+            desiredKeys: nil,
+            resultsLimit: 1
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let response):
+                let firstRecord = response.matchResults.compactMap { try? $0.1.get() }.first
+                callback(firstRecord)
+            case .failure(let error):
+                self.logger.log(message: "Error: \(error.localizedDescription)")
+            }
         }
     }
     

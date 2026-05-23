@@ -2,28 +2,17 @@
 //  StringExtensions.swift
 //  Tompero
 //
-//  Created by Enzo Maruffa Moreira on 26/12/19.
-//  Copyright © 2019 Tompero. All rights reserved.
-//
 
 import Foundation
-import CommonCrypto
+import CryptoKit
 
 extension String {
+    /// Hex-encoded MD5 of the UTF-8 bytes. Kept on MD5 (via CryptoKit's
+    /// `Insecure.MD5`) to preserve compatibility with existing match-hash
+    /// values stored in CloudKit — not used in a security context.
     var md5Value: String {
-        let length = Int(CC_MD5_DIGEST_LENGTH)
-        var digest = [UInt8](repeating: 0, count: length)
-
-        if let data = self.data(using: .utf8) {
-            _ = data.withUnsafeBytes { body -> String in
-                CC_MD5(body.baseAddress, CC_LONG(data.count), &digest)
-
-                return ""
-            }
-        }
-
-        return (0 ..< length).reduce("") {
-            $0 + String(format: "%02x", digest[$1])
-        }
+        guard let data = data(using: .utf8) else { return "" }
+        let digest = Insecure.MD5.hash(data: data)
+        return digest.map { String(format: "%02x", $0) }.joined()
     }
 }

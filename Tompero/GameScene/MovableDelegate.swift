@@ -9,7 +9,7 @@
 import Foundation
 import CoreGraphics
 
-protocol MovableDelegate: class {
+protocol MovableDelegate: AnyObject {
     // Moves and returns if the movement is possible
     var currentStation: StationNode { get set }
     func moveStarted(currentPosition: CGPoint)
