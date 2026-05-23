@@ -15,7 +15,6 @@
 		07B0ABAEC51B43BDB7095D05 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B1D6752BDAF316A1F7AB9224 /* GameScene.sks */; };
 		088FDE52B1B6BBD800DC526B /* sfx - customerCrowd1.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF3DFF7C5D7CCFFA63840FE1 /* sfx - customerCrowd1.wav */; };
 		0ACD8716AC360033C32E9BB4 /* WipeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2210C973FB32A1022B05937 /* WipeTransition.swift */; };
-		0BB8A3140F35929835CB4D81 /* Pods_TomperoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78674C4AC52AE8405AB9624B /* Pods_TomperoTests.framework */; };
 		0DC3DEA4422E2AFEC0CEB8EF /* CookableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD4371AC0FD95F489E5BA0D /* CookableComponent.swift */; };
 		0F72097DEBC04D958A004DF3 /* PeerIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E931E3D24AD49EC82CB34C00 /* PeerIdentity.swift */; };
 		101B6BA48BD91835D0AC920A /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FDED977961E9EE88C1C831 /* SKActionExtensions.swift */; };
@@ -74,6 +73,7 @@
 		510D065379F38B27DDF47E08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC512D9B81BA3FC78043E8A /* AppDelegate.swift */; };
 		512CA210C0F133C918305FDD /* DevilMashedBread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5EDE8B3859F01AFD14126E /* DevilMashedBread.swift */; };
 		51ECDD9FD687451869BF0AE3 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B542FA1D2D68BF5C938F2C /* CloudKitManager.swift */; };
+		529480009F5BF63355E39711 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53763D56D5944F2012A89AAA /* Pods_Tompero.framework */; };
 		5346C8FEB36B008C1F2F7D69 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F83B8BFD25D4A5F88E556A /* Coordinator.swift */; };
 		53EBA56234C20C5B1BCE1D41 /* IngredientState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C242A954E5DB9EFC938B97 /* IngredientState.swift */; };
 		557C7F727F6239EF3014C017 /* LANEnvelope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0B29FE5AE2086BB6362093 /* LANEnvelope.swift */; };
@@ -106,6 +106,7 @@
 		732C309769E1E504F1C06874 /* sfx - fireAlarm1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 405F88FB60AF234A9D49C10D /* sfx - fireAlarm1.wav */; };
 		74A51ABE1588970A21CEC7CD /* Asteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A6D36BE40B82445F28EA4C /* Asteroid.swift */; };
 		782E5C7259642282EBD3FE2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19B5707BC16005EC4C360787 /* GoogleService-Info.plist */; };
+		7862B7DA3A0D61E9148C98EF /* PeerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2D0BB98832A5E5A6097197 /* PeerPickerView.swift */; };
 		78B1BC06D18E1E03B17380C6 /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD5F609E76E73F97BDC136D /* SKNodeExtensions.swift */; };
 		797AB21BF35882A755C78851 /* TrackWithIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C696BD4BA769BD0C8216C /* TrackWithIntro.swift */; };
 		7A5DD5A7366563BAB3851D0B /* menuMusicClean.wav in Resources */ = {isa = PBXBuildFile; fileRef = 654FC8494EF5FC5EAE6E9A8D /* menuMusicClean.wav */; };
@@ -134,7 +135,6 @@
 		A29893E82617E84249D704F9 /* IngredientNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B071C148A5B703AF90E3FC5B /* IngredientNode.swift */; };
 		A44C2390642D89389A8DE2EE /* MatchStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6CEC3DFD9CC0B0F824120 /* MatchStatistics.swift */; };
 		A47B195AA994E0C7DBA45A06 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C8529B6E62CE76B76D0E99 /* StatisticsViewController.swift */; };
-		A5A2EE7105DD28305CDDBF49 /* Pods_Tompero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BD85B3AE248460BDFAAF0C /* Pods_Tompero.framework */; };
 		A5E5D7C8707BA586F5D48959 /* menuMusicVintage.wav in Resources */ = {isa = PBXBuildFile; fileRef = AB167E5DB26FCF0645D90069 /* menuMusicVintage.wav */; };
 		A944A58127B7E26C0B67D1F8 /* SelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F928AAB15DC9F449A3735EF /* SelectorButton.swift */; };
 		AB39B0D058588A7077339D56 /* CGPointVectorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71E11FED474729CA4B4CD2 /* CGPointVectorExtensions.swift */; };
@@ -163,6 +163,7 @@
 		CA584DA9625A0CE0755A6EBA /* burn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1B6E30B471BD89D792394515 /* burn.wav */; };
 		CC8874AE16363464516411A1 /* TeleportBlue.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 05901DD4BE9EEB9C9820B9A3 /* TeleportBlue.atlas */; };
 		CDF3140F1F2DD2950976D683 /* putFoodDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42181C62B226F26E5EB94B0 /* putFoodDown.wav */; };
+		CE5178812D331CBA2FAD9BD9 /* Pods_TomperoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971BBCD6F92ED0E6CADB912D /* Pods_TomperoTests.framework */; };
 		D0B77D65AF42FF265BDF84E4 /* WaitingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728DFD6198BBFDBD0C8B9B2C /* WaitingRoomViewController.swift */; };
 		D0DB1561524BEC4C9A9A1453 /* StarsBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C514A7CAD53F689DE2A42 /* StarsBackground.swift */; };
 		D37244883DE635494A787C0A /* Eyes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00076AAEC27A251D7FB4A586 /* Eyes.swift */; };
@@ -225,7 +226,6 @@
 		14AB5BC7A404AD1F2D5189D6 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		1860EB421754953DD5F3A86A /* StationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNode.swift; sourceTree = "<group>"; };
 		1881DD08D2F35296E938FEB6 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
-		195D8EAE8534D529589AF4D2 /* Pods-TomperoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.release.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.release.xcconfig"; sourceTree = "<group>"; };
 		19B5707BC16005EC4C360787 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A4D223860BA5D7AA04A2E42 /* LocalNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetwork.swift; sourceTree = "<group>"; };
 		1B6E30B471BD89D792394515 /* burn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = burn.wav; sourceTree = "<group>"; };
@@ -235,7 +235,6 @@
 		1F928AAB15DC9F449A3735EF /* SelectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorButton.swift; sourceTree = "<group>"; };
 		1FBDA2583A7693EA9D4040D3 /* FryerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FryerNode.swift; sourceTree = "<group>"; };
 		223CEECE360EEFE6745B8736 /* orderDone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = orderDone.wav; sourceTree = "<group>"; };
-		22BD85B3AE248460BDFAAF0C /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23C2EF4A40E85C64D5B29FDC /* sfx - customerCrowd2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - customerCrowd2.wav"; sourceTree = "<group>"; };
 		24DC84B3EDB4A3182399A783 /* MoonCheese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonCheese.swift; sourceTree = "<group>"; };
 		272407CD735838DE7AFA2497 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -255,11 +254,13 @@
 		3EFF981B1563703AAD42729F /* OrderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNode.swift; sourceTree = "<group>"; };
 		3F622B5F629575E57629575F /* StatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCell.swift; sourceTree = "<group>"; };
 		405F88FB60AF234A9D49C10D /* sfx - fireAlarm1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - fireAlarm1.wav"; sourceTree = "<group>"; };
+		427263C8BBE5A33D2885DD3A /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		43535D3B5DB62114466129B6 /* ChoppableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoppableComponent.swift; sourceTree = "<group>"; };
 		4503008E088D6CE382E46BC5 /* WaitingRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingRoomView.swift; sourceTree = "<group>"; };
 		46B93D0B0829AB1985C220C0 /* PipeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipeNode.swift; sourceTree = "<group>"; };
 		4792FD283E019E0DA10145B4 /* menuMusicAmbiance.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menuMusicAmbiance.wav; sourceTree = "<group>"; };
 		4839F7DCF9EADCB2D0B11B50 /* SpaceshipHull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceshipHull.swift; sourceTree = "<group>"; };
+		4A2D0BB98832A5E5A6097197 /* PeerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPickerView.swift; sourceTree = "<group>"; };
 		4A9F29A928383701A6F85E8B /* PeerWithStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerWithStatus.swift; sourceTree = "<group>"; };
 		4E300C57FE93376C807C17E7 /* TeleportPurple.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = TeleportPurple.atlas; sourceTree = "<group>"; };
 		4E6739077E24EBD3B97F67C2 /* chopping.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chopping.wav; sourceTree = "<group>"; };
@@ -268,9 +269,10 @@
 		518DDED6C33356FD48DCDFC8 /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		524B54B43AF98F44F22B6708 /* PlateBoxNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlateBoxNode.swift; sourceTree = "<group>"; };
 		5270855805C5BBC077E4AE45 /* endTimer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = endTimer.wav; sourceTree = "<group>"; };
-		52757EC0BA85E1DAD529FAC8 /* Pods-TomperoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.debug.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		52DC5925CC178FD90700CA9B /* GameConnectionManagerObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConnectionManagerObserver.swift; sourceTree = "<group>"; };
+		53763D56D5944F2012A89AAA /* Pods_Tompero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tompero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5501516F2B2FD6D17AC3F147 /* airSuction.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = airSuction.wav; sourceTree = "<group>"; };
+		55CF73A62C5EB79DEB534061 /* Pods-TomperoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.debug.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5742AF2B802162005F27011D /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		58889C87736BC4F8E46C127C /* Cutscene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cutscene.swift; sourceTree = "<group>"; };
 		5940C6C7865046506E863824 /* WaitingRoom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WaitingRoom.storyboard; sourceTree = "<group>"; };
@@ -294,7 +296,6 @@
 		75AAA587E9FABD1366E1D633 /* DeliveryNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryNode.swift; sourceTree = "<group>"; };
 		76D6CEC3DFD9CC0B0F824120 /* MatchStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchStatistics.swift; sourceTree = "<group>"; };
 		77EA4130F3C65458F5C8054D /* CutsceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutsceneView.swift; sourceTree = "<group>"; };
-		78674C4AC52AE8405AB9624B /* Pods_TomperoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomperoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A315F5DAEF497EEA8F08FD /* GameCenterDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterDashboard.swift; sourceTree = "<group>"; };
 		7A2A77CE8713262CC9EAA7A7 /* GameContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContainerView.swift; sourceTree = "<group>"; };
 		7A3FEE02CB98B201FC3CFE06 /* Broccoli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broccoli.swift; sourceTree = "<group>"; };
@@ -303,7 +304,6 @@
 		7CF75D883632952AD09D3B3F /* sfx - angryCustomer2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - angryCustomer2.wav"; sourceTree = "<group>"; };
 		7D45805F826D33961A969882 /* sfx - angryCustomer1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - angryCustomer1.wav"; sourceTree = "<group>"; };
 		7D86BF69980AC3A956825B86 /* Cutscene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cutscene.storyboard; sourceTree = "<group>"; };
-		826D8DCC9B394422C2BE1A52 /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		83B9F56EA556F93941854611 /* roundStarted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = roundStarted.wav; sourceTree = "<group>"; };
 		846870948EFF7CA26F48EA89 /* CustomAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAudioPlayer.swift; sourceTree = "<group>"; };
 		84F8CFB147A4E4495A5B9857 /* StoveNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoveNode.swift; sourceTree = "<group>"; };
@@ -314,12 +314,14 @@
 		89ECDFAAE91E69094E583A21 /* PeerIdentityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerIdentityTests.swift; sourceTree = "<group>"; };
 		8AEC706B1BC9C6B95D307A45 /* Fry.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Fry.atlas; sourceTree = "<group>"; };
 		8D8E6AFC40D21039ED2A89E5 /* gameMusicIntro.m4a */ = {isa = PBXFileReference; path = gameMusicIntro.m4a; sourceTree = "<group>"; };
+		8DA5B83D5B0DD3F49A3FFE50 /* Pods-Tompero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.debug.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.debug.xcconfig"; sourceTree = "<group>"; };
 		8DC308F6DEEBA85D82A3B860 /* HasSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasSprite.swift; sourceTree = "<group>"; };
 		8FA6F2968A6649DDB1934A7D /* Tentacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tentacle.swift; sourceTree = "<group>"; };
 		9310B6EA6049B343FD22827B /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		939ECEDFDC7EE7D856C0A057 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		95825AEDE093636C09D76910 /* NSLayoutConstraintExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSLayoutConstraintExtention.swift; sourceTree = "<group>"; };
 		9698A7C8EAEEC627090D0097 /* BoardNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardNode.swift; sourceTree = "<group>"; };
+		971BBCD6F92ED0E6CADB912D /* Pods_TomperoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomperoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9779CA9C4438FA15DEEFAF85 /* AnimationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationDelegate.swift; sourceTree = "<group>"; };
 		9B48115C906082D88C826D6E /* MovableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableSpriteNode.swift; sourceTree = "<group>"; };
 		9CEA0F4C960C75092DEEF7C6 /* LANObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANObservers.swift; sourceTree = "<group>"; };
@@ -330,7 +332,6 @@
 		A056BC0FB53C76EC4B247DC6 /* WirePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WirePayload.swift; sourceTree = "<group>"; };
 		A38CEF8B8AD79874C6375A28 /* TitilliumWeb-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Bold.ttf"; sourceTree = "<group>"; };
 		A41A7D96B1D65E2F6D6345E6 /* LANFraming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANFraming.swift; sourceTree = "<group>"; };
-		A4226BCABE8AA3384E23DAE8 /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		A565EA519DDFF6CDC34FC451 /* ComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		A6614B28217E0D3108985AAA /* sfx - angryCustomer3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - angryCustomer3.wav"; sourceTree = "<group>"; };
 		A8441BD688F4C1C59935C0ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -362,6 +363,7 @@
 		C2C242A954E5DB9EFC938B97 /* IngredientState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientState.swift; sourceTree = "<group>"; };
 		C5F7A21E9E1E3497D2771DC9 /* Game.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Game.storyboard; sourceTree = "<group>"; };
 		C732151202AC0EE847435BD1 /* airR1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = airR1.gif; sourceTree = "<group>"; };
+		C9E80DB9F3562C24EC097E73 /* Pods-TomperoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.release.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C9F0AA721B6DBF352084F5B4 /* CookBurnt.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = CookBurnt.atlas; sourceTree = "<group>"; };
 		CBA4E17B973D9CAF49B2D1E2 /* cashRegister.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cashRegister.wav; sourceTree = "<group>"; };
 		CCFEABCF6F5AF5FFDA67652F /* LANBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANBrowser.swift; sourceTree = "<group>"; };
@@ -397,19 +399,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A7453D90D6A0391594D7ED74 /* Frameworks */ = {
+		E8A1CBC1CCC9BAAEE5F8CE77 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5A2EE7105DD28305CDDBF49 /* Pods_Tompero.framework in Frameworks */,
+				529480009F5BF63355E39711 /* Pods_Tompero.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D7265AD4C8125CBFAD92FE5E /* Frameworks */ = {
+		F97D9C8A9FEEAEBD3DCCDDC9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BB8A3140F35929835CB4D81 /* Pods_TomperoTests.framework in Frameworks */,
+				CE5178812D331CBA2FAD9BD9 /* Pods_TomperoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +524,18 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		4668D156E2B59AADEDD92584 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8DA5B83D5B0DD3F49A3FFE50 /* Pods-Tompero.debug.xcconfig */,
+				427263C8BBE5A33D2885DD3A /* Pods-Tompero.release.xcconfig */,
+				55CF73A62C5EB79DEB534061 /* Pods-TomperoTests.debug.xcconfig */,
+				C9E80DB9F3562C24EC097E73 /* Pods-TomperoTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		47EAE3B98272D1C40EB72CF5 /* Order */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +551,7 @@
 				77EA4130F3C65458F5C8054D /* CutsceneView.swift */,
 				5E3F7C3DB7E4DAE93FEDE1E0 /* InicialView.swift */,
 				37C77CDFE7E3C6B128F13C18 /* MenuView.swift */,
+				4A2D0BB98832A5E5A6097197 /* PeerPickerView.swift */,
 				3EA24147851A64ED007127A5 /* SettingsView.swift */,
 				F80B0954C5F615809DE6D3F0 /* StatisticsView.swift */,
 				4503008E088D6CE382E46BC5 /* WaitingRoomView.swift */,
@@ -611,6 +626,15 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		75BCA14A4B45AFAE3656E7EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53763D56D5944F2012A89AAA /* Pods_Tompero.framework */,
+				971BBCD6F92ED0E6CADB912D /* Pods_TomperoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8307FB4F17038A50E5C8732D /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,15 +669,6 @@
 				75A07A6ADE33646209F2DBEC /* DebugLogger.swift */,
 			);
 			path = Logger;
-			sourceTree = "<group>";
-		};
-		96F87A4AB5FA8E2579DACED8 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				22BD85B3AE248460BDFAAF0C /* Pods_Tompero.framework */,
-				78674C4AC52AE8405AB9624B /* Pods_TomperoTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9A601D8DA9F9E6CD6C7704FB /* SFX-B */ = {
@@ -759,18 +774,6 @@
 			path = SFX;
 			sourceTree = "<group>";
 		};
-		C05D990BBCDCE071A0B0A6B1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				826D8DCC9B394422C2BE1A52 /* Pods-Tompero.debug.xcconfig */,
-				A4226BCABE8AA3384E23DAE8 /* Pods-Tompero.release.xcconfig */,
-				52757EC0BA85E1DAD529FAC8 /* Pods-TomperoTests.debug.xcconfig */,
-				195D8EAE8534D529589AF4D2 /* Pods-TomperoTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		CA9F16E306D9E93DF173D29C /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,8 +797,8 @@
 				D5286CBA5548E7CCB883B677 /* Tompero */,
 				3829CFF7FF254BB69BC176A0 /* TomperoTests */,
 				8307FB4F17038A50E5C8732D /* Products */,
-				C05D990BBCDCE071A0B0A6B1 /* Pods */,
-				96F87A4AB5FA8E2579DACED8 /* Frameworks */,
+				4668D156E2B59AADEDD92584 /* Pods */,
+				75BCA14A4B45AFAE3656E7EB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -908,11 +911,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8908D201A50D9474AC566A8 /* Build configuration list for PBXNativeTarget "Tompero" */;
 			buildPhases = (
-				64D22066821BEFB36CEBC7F7 /* [CP] Check Pods Manifest.lock */,
+				0F249EDB51764FAEAFFE54F1 /* [CP] Check Pods Manifest.lock */,
 				8895161365CC4FAD0032D8BD /* Sources */,
 				854A645CA17ED0000CB1D7A0 /* Resources */,
-				A7453D90D6A0391594D7ED74 /* Frameworks */,
-				E86F3452C0891383736A0E3E /* [CP] Embed Pods Frameworks */,
+				E8A1CBC1CCC9BAAEE5F8CE77 /* Frameworks */,
+				671936B74E788D2D5D56C8A8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -927,9 +930,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 007A9C8B08ED629082EEE7D1 /* Build configuration list for PBXNativeTarget "TomperoTests" */;
 			buildPhases = (
-				A0925FDE12E48C0D44697A00 /* [CP] Check Pods Manifest.lock */,
+				8189948B60267C0A504E862A /* [CP] Check Pods Manifest.lock */,
 				FDC15471BF0B9C7891D2A8E6 /* Sources */,
-				D7265AD4C8125CBFAD92FE5E /* Frameworks */,
+				F97D9C8A9FEEAEBD3DCCDDC9 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1052,7 +1055,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		64D22066821BEFB36CEBC7F7 /* [CP] Check Pods Manifest.lock */ = {
+		0F249EDB51764FAEAFFE54F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1074,7 +1077,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A0925FDE12E48C0D44697A00 /* [CP] Check Pods Manifest.lock */ = {
+		671936B74E788D2D5D56C8A8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8189948B60267C0A504E862A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1094,23 +1114,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E86F3452C0891383736A0E3E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tompero/Pods-Tompero-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1195,6 +1198,7 @@
 				BBF6599E32C60494227AF21B /* OrderNode.swift in Sources */,
 				42CB0F1EF810D6DC9B4B8753 /* PeerConnectionState.swift in Sources */,
 				0F72097DEBC04D958A004DF3 /* PeerIdentity.swift in Sources */,
+				7862B7DA3A0D61E9148C98EF /* PeerPickerView.swift in Sources */,
 				E42624BE798E5E568CF58489 /* PeerPickerViewController.swift in Sources */,
 				113BE0694791D3999BC0857B /* PeerWithStatus.swift in Sources */,
 				1DF7E9EC700070E9DE47EA25 /* PipeNode.swift in Sources */,
@@ -1284,7 +1288,7 @@
 /* Begin XCBuildConfiguration section */
 		5A344A478A096AC0D1CA2044 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4226BCABE8AA3384E23DAE8 /* Pods-Tompero.release.xcconfig */;
+			baseConfigurationReference = 427263C8BBE5A33D2885DD3A /* Pods-Tompero.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
@@ -1306,7 +1310,7 @@
 		};
 		72CF34E75AEC3D5724190269 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 52757EC0BA85E1DAD529FAC8 /* Pods-TomperoTests.debug.xcconfig */;
+			baseConfigurationReference = 55CF73A62C5EB79DEB534061 /* Pods-TomperoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1395,7 +1399,7 @@
 		};
 		A0DC54A0C6765B19136F003E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 195D8EAE8534D529589AF4D2 /* Pods-TomperoTests.release.xcconfig */;
+			baseConfigurationReference = C9E80DB9F3562C24EC097E73 /* Pods-TomperoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1416,7 +1420,7 @@
 		};
 		DD47A27835C44028FB447FED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 826D8DCC9B394422C2BE1A52 /* Pods-Tompero.debug.xcconfig */;
+			baseConfigurationReference = 8DA5B83D5B0DD3F49A3FFE50 /* Pods-Tompero.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Tompero/SpaceSpice.entitlements;
