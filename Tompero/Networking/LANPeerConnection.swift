@@ -94,7 +94,7 @@ final class LANPeerConnection {
     private func heartbeatTick() {
         let elapsed = Date().timeIntervalSince(lastInboundActivity)
         if elapsed > Self.heartbeatTimeout {
-            print("[LANPeerConnection] Heartbeat timeout (\(elapsed)s), dropping connection")
+            Log.network.warning("Heartbeat timeout (\(elapsed)s), dropping connection")
             cancel()
             return
         }
@@ -116,12 +116,12 @@ final class LANPeerConnection {
 
     private func sendFrame(_ frame: LANFrame) {
         guard let data = codec.encode(frame) else {
-            print("[LANPeerConnection] Failed to encode frame")
+            Log.network.error("Failed to encode frame")
             return
         }
         nwConnection.send(content: data, completion: .contentProcessed { [weak self] error in
             if let error {
-                print("[LANPeerConnection] Send error: \(error)")
+                Log.network.error("Send error: \(String(describing: error), privacy: .public)")
                 self?.cancel()
             }
         })
@@ -134,14 +134,14 @@ final class LANPeerConnection {
         case .setup, .preparing:
             transition(to: .connecting)
         case .waiting(let error):
-            print("[LANPeerConnection] Waiting: \(error)")
+            Log.network.debug("Waiting: \(String(describing: error), privacy: .public)")
             transition(to: .connecting)
         case .ready:
             transition(to: .connecting) // still "connecting" until handshake completes
             scheduleReceive()
             startHeartbeat()
         case .failed(let error):
-            print("[LANPeerConnection] Failed: \(error)")
+            Log.network.error("Failed: \(String(describing: error), privacy: .public)")
             transition(to: .notConnected)
             delegate?.peerConnection(self, didDisconnectWithError: error)
         case .cancelled:
@@ -159,7 +159,7 @@ final class LANPeerConnection {
             if let data, !data.isEmpty {
                 switch self.codec.decodeFrames(appending: data) {
                 case .corrupt:
-                    print("[LANPeerConnection] Corrupt frame, dropping connection")
+                    Log.network.error("Corrupt frame, dropping connection")
                     self.cancel()
                     return
                 case .frames(let frames):
@@ -170,7 +170,7 @@ final class LANPeerConnection {
             }
 
             if let error {
-                print("[LANPeerConnection] Receive error: \(error)")
+                Log.network.error("Receive error: \(String(describing: error), privacy: .public)")
                 self.cancel()
                 return
             }

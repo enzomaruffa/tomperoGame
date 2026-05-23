@@ -235,7 +235,7 @@ final class LANConnectionManager: NSObject {
 
         var policy = reconnectPolicies[name] ?? .default
         guard let delay = policy.next() else {
-            print("[LANConnectionManager] Reconnect to \(name) gave up after exhausting policy")
+            Log.network.warning("Reconnect to \(name, privacy: .public) gave up after exhausting policy")
             dialledEndpoints.removeValue(forKey: name)
             reconnectPolicies.removeValue(forKey: name)
             pendingSends.removeValue(forKey: name)
@@ -243,7 +243,7 @@ final class LANConnectionManager: NSObject {
         }
         reconnectPolicies[name] = policy
 
-        print("[LANConnectionManager] Reconnecting to \(name) in \(delay)s")
+        Log.network.info("Reconnecting to \(name, privacy: .public) in \(delay)s")
         queue.asyncAfter(deadline: .now() + delay) { [weak self] in
             guard let self else { return }
             guard self.connections[name] == nil else { return }
@@ -292,7 +292,7 @@ final class LANConnectionManager: NSObject {
             let wrapper = MCDataWrapper(object: data, type: .playerData)
             sendEveryone(dataWrapper: wrapper)
         } catch {
-            print("[LANConnectionManager] Encode players status failed: \(error)")
+            Log.network.error("Encode players status failed: \(String(describing: error), privacy: .public)")
         }
     }
 
@@ -412,7 +412,7 @@ extension LANConnectionManager: LANListenerDelegate {
     }
 
     func listener(_ listener: LANListener, didFailWithError error: Error) {
-        print("[LANConnectionManager] Listener error: \(error)")
+        Log.network.error("Listener error: \(String(describing: error), privacy: .public)")
     }
 }
 
@@ -427,7 +427,7 @@ extension LANConnectionManager: LANBrowserDelegate {
     }
 
     func browser(_ browser: LANBrowser, didFailWithError error: Error) {
-        print("[LANConnectionManager] Browser error: \(error)")
+        Log.network.error("Browser error: \(String(describing: error), privacy: .public)")
     }
 }
 

@@ -170,6 +170,7 @@
 		BEEFB00000000000000000BA /* LANObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BA /* LANObservers.swift */; };
 		BEEFB00000000000000000BB /* PeerPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BB /* PeerPickerViewController.swift */; };
 		BEEFB00000000000000000BC /* LANReconnectPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BC /* LANReconnectPolicy.swift */; };
+		BEEFB00000000000000000BD /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEFF00000000000000000BD /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -341,6 +342,7 @@
 		BEEFF00000000000000000BA /* LANObservers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANObservers.swift; sourceTree = "<group>"; };
 		BEEFF00000000000000000BB /* PeerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPickerViewController.swift; sourceTree = "<group>"; };
 		BEEFF00000000000000000BC /* LANReconnectPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANReconnectPolicy.swift; sourceTree = "<group>"; };
+		BEEFF00000000000000000BD /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,6 +419,7 @@
 				BEEFF00000000000000000BA /* LANObservers.swift */,
 				BEEFF00000000000000000BB /* PeerPickerViewController.swift */,
 				BEEFF00000000000000000BC /* LANReconnectPolicy.swift */,
+				BEEFF00000000000000000BD /* Log.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1088,6 +1091,7 @@
 				BEEFB00000000000000000BA /* LANObservers.swift in Sources */,
 				BEEFB00000000000000000BB /* PeerPickerViewController.swift in Sources */,
 				BEEFB00000000000000000BC /* LANReconnectPolicy.swift in Sources */,
+				BEEFB00000000000000000BD /* Log.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
