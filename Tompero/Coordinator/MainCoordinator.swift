@@ -89,7 +89,7 @@ class MainCoordinator: Coordinator {
     
     fileprivate func gameSceneTest() {
         let tables: [String : [PlayerTable]] = [
-            MCManager.shared.selfName : [
+            LANConnectionManager.shared.selfName : [
                 PlayerTable(type: .chopping, ingredient: nil),
                 PlayerTable(type: .cooking, ingredient: nil),
                 PlayerTable(type: .ingredient, ingredient: Tentacle())
@@ -123,7 +123,7 @@ class MainCoordinator: Coordinator {
                 ],
                 playerTables: tables,
                 playerOrder: [
-                    MCManager.shared.selfName,
+                    LANConnectionManager.shared.selfName,
                     "Enzo's Enzo's iPhone",
                     "God",
                     "__empty__"]

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import MultipeerConnectivity
 
 class GameRuleFactory {
     
