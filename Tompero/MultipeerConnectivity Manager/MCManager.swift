@@ -11,38 +11,101 @@ import MultipeerConnectivity
 import UIKit
 
 class MCManager: NSObject, MCSessionDelegate {
-    
+
     // MARK: - Variables
-    
+
     static let shared = MCManager()
-    
+
     let gameName = "spacespice"
-    
+
     var peerID: MCPeerID?
     var mcSession: MCSession?
     var mcAdvertiserAssistant: MCAdvertiserAssistant?
-    
+
     var connectedPeers: [MCPeerID]? {
         self.mcSession?.connectedPeers ?? nil
     }
-    
+
     var dataObservers: [MCManagerDataObserver] = []
     var matchmakingObservers: [MCManagerMatchmakingObserver] = []
-    
+
     var hosting = false
-    
+
     var selfName: String {
         (peerID?.displayName)!
     }
-    
+
+    // The MCPeerID must be persisted across launches. Re-instantiating a peer
+    // with the same displayName on every launch produces a new identity that
+    // peers fail to reconcile, which surfaces as "ghost" players and dropped
+    // sessions. Apple's own guidance is to archive the MCPeerID and reload it.
+    private static let peerIDDefaultsKey = "com.spacespice.mcPeerID"
+    private static let peerDisplayNameDefaultsKey = "com.spacespice.mcPeerID.displayName"
+
     // MARK: - Initializers
-    
+
     override private init() {
         super.init()
-        let peerID = MCPeerID(displayName: UIDevice.current.name)
-        self.peerID = peerID
-        
+        self.peerID = MCManager.loadOrCreatePeerID()
         resetSession()
+    }
+
+    private static func loadOrCreatePeerID() -> MCPeerID {
+        let defaults = UserDefaults.standard
+        let expectedDisplayName = makeStableDisplayName()
+
+        if let data = defaults.data(forKey: peerIDDefaultsKey),
+           let archived = try? NSKeyedUnarchiver.unarchivedObject(ofClass: MCPeerID.self, from: data),
+           archived.displayName == expectedDisplayName {
+            return archived
+        }
+
+        let peer = MCPeerID(displayName: expectedDisplayName)
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject: peer, requiringSecureCoding: true) {
+            defaults.set(data, forKey: peerIDDefaultsKey)
+            defaults.set(expectedDisplayName, forKey: peerDisplayNameDefaultsKey)
+        }
+        return peer
+    }
+
+    // Builds a globally-unique display name. iOS 16 returns the generic
+    // model name (e.g. "iPhone") from UIDevice.current.name unless the app has
+    // the user-assigned-device-name entitlement, so every device on the LAN
+    // collides on the same MCPeerID displayName and direct sends route to the
+    // wrong peer. We suffix a stable random tag so peers are always distinct.
+    private static func makeStableDisplayName() -> String {
+        let defaults = UserDefaults.standard
+        let base = sanitize(UIDevice.current.name)
+
+        let suffixKey = "com.spacespice.mcPeerID.suffix"
+        let suffix: String
+        if let existing = defaults.string(forKey: suffixKey) {
+            suffix = existing
+        } else {
+            suffix = String(UUID().uuidString.prefix(4))
+            defaults.set(suffix, forKey: suffixKey)
+        }
+
+        // MCPeerID rejects displayNames longer than 63 UTF-8 bytes; budget
+        // for the " (XXXX)" suffix and truncate the base accordingly.
+        let suffixWrapped = " (\(suffix))"
+        let maxBaseBytes = 63 - suffixWrapped.utf8.count
+        let truncatedBase = truncate(base, toUTF8Bytes: maxBaseBytes)
+        return truncatedBase + suffixWrapped
+    }
+
+    private static func sanitize(_ name: String) -> String {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? "Player" : trimmed
+    }
+
+    private static func truncate(_ string: String, toUTF8Bytes max: Int) -> String {
+        guard max > 0 else { return "" }
+        var result = string
+        while result.utf8.count > max {
+            result.removeLast()
+        }
+        return result
     }
     
     // MARK: - Session Methods
@@ -55,13 +118,9 @@ class MCManager: NSObject, MCSessionDelegate {
         mcSession?.disconnect()
         mcSession = nil
         stopAdvertiser()
-        if let peerID = self.peerID {
-            createNewSession(peerID)
-        } else {
-            let peerID = MCPeerID(displayName: UIDevice.current.name)
-            self.peerID = peerID
-            createNewSession(peerID)
-        }
+        let peerID = self.peerID ?? MCManager.loadOrCreatePeerID()
+        self.peerID = peerID
+        createNewSession(peerID)
     }
     
     func stopAdvertiser() {
