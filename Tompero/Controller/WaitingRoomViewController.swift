@@ -8,7 +8,6 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
 
     // MARK: - Variables
     var hosting = false
-    var closedBrowser = false
 
     var difficultySelected = GameDifficulty.easy
 
@@ -79,7 +78,71 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         }
 
         LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
-        
+
+        installNameEditorButton()
+    }
+
+    // MARK: - Name editor (programmatic — no storyboard edit needed)
+
+    private lazy var nameEditorButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = UIFont(name: "TitilliumWeb-Bold", size: 18)
+        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        button.layer.cornerRadius = 12
+        button.backgroundColor = UIColor.black.withAlphaComponent(0.35)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(promptForName), for: .touchUpInside)
+        return button
+    }()
+
+    private func installNameEditorButton() {
+        view.addSubview(nameEditorButton)
+        NSLayoutConstraint.activate([
+            nameEditorButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            nameEditorButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        ])
+        refreshNameEditorTitle()
+    }
+
+    private func refreshNameEditorTitle() {
+        nameEditorButton.setTitle("👤 \(LANConnectionManager.shared.selfName)", for: .normal)
+    }
+
+    @objc private func promptForName() {
+        let alert = UIAlertController(
+            title: String(localized: "name.title"),
+            message: String(localized: "name.message"),
+            preferredStyle: .alert
+        )
+        alert.addTextField { textField in
+            textField.text = LocalPeerIdentity.userSetName
+            textField.placeholder = UIDevice.current.name
+            textField.autocapitalizationType = .words
+            textField.clearButtonMode = .whileEditing
+        }
+        alert.addAction(UIAlertAction(title: String(localized: "alert.cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: String(localized: "name.save"), style: .default) { [weak self] _ in
+            guard let self else { return }
+            let newName = alert.textFields?.first?.text
+            LocalPeerIdentity.setUserSetName(newName)
+            self.refreshNameEditorTitle()
+            self.restartSessionWithUpdatedIdentity()
+        })
+        present(alert, animated: true)
+    }
+
+    private func restartSessionWithUpdatedIdentity() {
+        // Restart the listener / browser so the new displayName is what gets
+        // advertised on the LAN.
+        LANConnectionManager.shared.resetSession()
+        if hosting {
+            playersWithStatus[0] = PeerWithStatus(name: LANConnectionManager.shared.selfName, status: .connected)
+            LANConnectionManager.shared.startHosting()
+        } else {
+            LANConnectionManager.shared.startJoining()
+        }
+        updatePlayers(playersWithStatus)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -326,7 +389,6 @@ extension WaitingRoomViewController: PeerPickerDelegate {
 
     func peerPickerDidFinish(_ picker: PeerPickerViewController) {
         picker.dismiss(animated: true)
-        closedBrowser = true
         updatePlayers(playersWithStatus)
     }
 
@@ -390,13 +452,14 @@ extension WaitingRoomViewController: LANMatchmakingObserver {
                 }
             }
 
-            Log.network.debug("Enviando lista pros Peers")
+            Log.network.debug("Sending peer list to joiners")
             LANConnectionManager.shared.sendPeersStatus(playersWithStatus: newPlayerList)
             self.playersWithStatus = newPlayerList
-
-            if closedBrowser {
-                updatePlayers(newPlayerList)
-            }
+            // Always refresh the lobby UI — the legacy `closedBrowser` flag
+            // was gating this behind a manual picker-dismiss, which meant the
+            // host never saw new joiners arrive while the picker was still
+            // open.
+            updatePlayers(newPlayerList)
         }
     }
 }

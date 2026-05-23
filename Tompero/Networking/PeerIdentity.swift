@@ -22,10 +22,37 @@ enum LocalPeerIdentity {
     private static let idKey = "com.spacespice.lanPeer.id"
     private static let displayNameKey = "com.spacespice.lanPeer.displayName"
     private static let suffixKey = "com.spacespice.lanPeer.suffix"
+    private static let userSetNameKey = "com.spacespice.lanPeer.userSetName"
 
-    static var current: PeerIdentity = {
+    /// The user's chosen display name (without the disambiguation suffix), or
+    /// nil if they've never set one. UI surfaces this in the editor; the
+    /// computed identity below always adds a suffix on top so peers on the
+    /// LAN don't collide.
+    static var userSetName: String? {
+        get { UserDefaults.standard.string(forKey: userSetNameKey) }
+    }
+
+    /// Persist a new display name. Pass nil or empty to clear back to the
+    /// device-name default. Callers should follow this with
+    /// `LANConnectionManager.shared.resetSession()` so the listener restarts
+    /// advertising the new name.
+    @discardableResult
+    static func setUserSetName(_ name: String?) -> PeerIdentity {
+        let trimmed = name?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let trimmed, !trimmed.isEmpty {
+            UserDefaults.standard.set(trimmed, forKey: userSetNameKey)
+        } else {
+            UserDefaults.standard.removeObject(forKey: userSetNameKey)
+        }
+        _current = makeIdentity()
+        return _current
+    }
+
+    static var current: PeerIdentity { _current }
+    private static var _current: PeerIdentity = makeIdentity()
+
+    private static func makeIdentity() -> PeerIdentity {
         let defaults = UserDefaults.standard
-
         let id: UUID
         if let raw = defaults.string(forKey: idKey), let saved = UUID(uuidString: raw) {
             id = saved
@@ -33,19 +60,22 @@ enum LocalPeerIdentity {
             id = UUID()
             defaults.set(id.uuidString, forKey: idKey)
         }
-
         let displayName = makeStableDisplayName()
         defaults.set(displayName, forKey: displayNameKey)
         return PeerIdentity(id: id, displayName: displayName)
-    }()
+    }
 
-    // Bonjour-discovered names need to be unique on the LAN. iOS 16 returns
-    // a generic model name from UIDevice.current.name without the
-    // user-assigned-device-name entitlement, so we tag a stable random suffix
-    // generated once per install.
+    // The visible name is `<base> (<XXXX>)` where:
+    // - `<base>` is the user-chosen name, or `UIDevice.current.name` if none.
+    //   iOS 16 returns a generic model name without the
+    //   user-assigned-device-name entitlement, which is why a suffix is still
+    //   needed.
+    // - `<XXXX>` is a 4-character UUID-prefix tag generated once per install
+    //   and stashed in UserDefaults, guaranteeing distinct routing keys even
+    //   when two players choose the same human name.
     private static func makeStableDisplayName() -> String {
         let defaults = UserDefaults.standard
-        let base = sanitize(UIDevice.current.name)
+        let base = sanitize(userSetName ?? UIDevice.current.name)
 
         let suffix: String
         if let existing = defaults.string(forKey: suffixKey) {
