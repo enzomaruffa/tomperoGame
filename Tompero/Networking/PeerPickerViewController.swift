@@ -26,7 +26,7 @@ final class PeerPickerViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        title = "Nearby Players"
+        title = String(localized: "picker.title")
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .cancel,
             target: self,
@@ -44,7 +44,7 @@ final class PeerPickerViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
 
-        emptyLabel.text = "Looking for nearby players…"
+        emptyLabel.text = String(localized: "picker.empty")
         emptyLabel.textAlignment = .center
         emptyLabel.textColor = .secondaryLabel
         emptyLabel.numberOfLines = 0

@@ -61,6 +61,7 @@
 		56A0F1F9239F4A5A003EEF2D /* menuMusicAmbiance.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56A0F1F6239F4A59003EEF2D /* menuMusicAmbiance.wav */; };
 		56A0F1FA239F4A5A003EEF2D /* menuMusicVintage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 56A0F1F7239F4A5A003EEF2D /* menuMusicVintage.wav */; };
 		56FE9217247DACBF007E28BB /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FE9216247DACBF007E28BB /* Settings.storyboard */; };
+		595B824BFF224C465765B039 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 23A48817D53B945647270C46 /* Localizable.xcstrings */; };
 		6063306267938D0A481B48EA /* LANFrameCodecTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E4BB7140B741BD7798D35 /* LANFrameCodecTests.swift */; };
 		68B4B420D1175B93537C64AD /* LANReconnectPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0D5A8194925578D257A750 /* LANReconnectPolicyTests.swift */; };
 		9C5F527400971F3202E09CD4 /* WirePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164FB150BCF6660A856BB9D /* WirePayload.swift */; };
@@ -90,6 +91,7 @@
 /* Begin PBXFileReference section */
 		1C0D5A8194925578D257A750 /* LANReconnectPolicyTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LANReconnectPolicyTests.swift; sourceTree = "<group>"; };
 		225509DAE914630EBFB1B2AD /* WirePayloadType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WirePayloadType.swift; sourceTree = "<group>"; };
+		23A48817D53B945647270C46 /* Localizable.xcstrings */ = {isa = PBXFileReference; includeInIndex = 1; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		2CC7926B399F5168EF8C525B /* Pods-Tompero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tompero.release.xcconfig"; path = "Target Support Files/Pods-Tompero/Pods-Tompero.release.xcconfig"; sourceTree = "<group>"; };
 		30B28FB193E39DDFFE68373F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		37E114B763683786208A686C /* PeerIdentityTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PeerIdentityTests.swift; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 				47BE3ECB239C1DD600246F20 /* Animations */,
 				FB55FBE6239A9DB5002EBB89 /* Font */,
 				562BCF6423881CFC00D5D51D /* Assets.xcassets */,
+				23A48817D53B945647270C46 /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				FB2CB744238D5D2C001C72F3 /* MenuStoryboard.storyboard in Resources */,
 				566E9C8B239D7EC100787210 /* hatch.wav in Resources */,
 				566FC92923A0205F0044AFA4 /* sfx - customerCrowd4.wav in Resources */,
+				595B824BFF224C465765B039 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
