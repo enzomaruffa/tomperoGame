@@ -49,7 +49,7 @@ final class LANBrowser {
         newBrowser.stateUpdateHandler = { [weak self] state in
             guard let self else { return }
             if case .failed(let error) = state {
-                print("[LANBrowser] Failed: \(error)")
+                Log.network.error("Browser failed: \(String(describing: error), privacy: .public)")
                 self.delegate?.browser(self, didFailWithError: error)
                 self.stop()
             }

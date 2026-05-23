@@ -67,11 +67,8 @@ class WaitingRoomViewController: UIViewController, Storyboarded {
         player3Label.adjustsFontSizeToFitWidth = true
         player4Label.adjustsFontSizeToFitWidth = true
         
-        // Array com lista de connected players
-        //MCManager.shared.mcSession?.connectedPeers
-        
         if hosting {
-            print(" CURRENTLY HOSTING<<")
+            Log.network.debug("Hosting waiting room")
             playersWithStatus = [PeerWithStatus(name: LANConnectionManager.shared.selfName, status: .connected),
                                  PeerWithStatus(name: "__empty__", status: .notConnected),
                                  PeerWithStatus(name: "__empty__", status: .notConnected),

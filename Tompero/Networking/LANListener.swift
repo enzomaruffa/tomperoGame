@@ -47,7 +47,7 @@ final class LANListener {
             case .ready:
                 self.delegate?.listenerDidBecomeReady(self)
             case .failed(let error):
-                print("[LANListener] Failed: \(error)")
+                Log.network.error("Listener failed: \(String(describing: error), privacy: .public)")
                 self.delegate?.listener(self, didFailWithError: error)
                 self.stop()
             default:
