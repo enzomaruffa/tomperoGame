@@ -30,7 +30,6 @@ class MatchStatistics: Codable {
         dateFormatter.dateFormat = "dd/MM/yyyy"
         stringToBeHashed += dateFormatter.string(from: Date())
         
-        print("[MatchStatistics.matchHash] To be hashed = { \(stringToBeHashed) }")
         
         return stringToBeHashed.md5Value
     }

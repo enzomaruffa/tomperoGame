@@ -17,7 +17,6 @@ class EventLogger {
     
     func logPlateDeliver(success: Bool, actionCount: Int, ingredientCount: Int) {
         #if !DEBUG
-        print("Loggin plate deliver \(success) \(actionCount),\(ingredientCount)")
         Analytics.logEvent("plate_deliver", parameters: [
             "success": success,
             "action_count": actionCount,
@@ -28,7 +27,6 @@ class EventLogger {
     
     func logOrderResult(success: Bool, actionCount: Int, ingredientCount: Int, difficulty: GameDifficulty) {
         #if !DEBUG
-        print("Loggin order resu;lt \(success) \(actionCount),\(ingredientCount) \(difficulty)")
         Analytics.logEvent("order_result", parameters: [
             "success": success,
             "action_count": actionCount,

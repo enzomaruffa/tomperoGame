@@ -153,8 +153,6 @@ final class PlateNode: MovableDelegate {
         let breadList = [SpaceshipHull(), DevilMashedBread(), Asteroid()]
         var sortedIngredients = plate.ingredients.sorted(by: { $0.texturePrefix < $1.texturePrefix })
         
-        sortedIngredients.forEach { print($0.texturePrefix, type(of: $0)) }
-        
         if let firstBread = sortedIngredients.filter({ breadList.contains($0) }).first {
             sortedIngredients.removeAll(where: { $0 == firstBread })
             
@@ -196,7 +194,6 @@ final class PlateNode: MovableDelegate {
     // MARK: - MovableDelegate
     func attemptMove(to station: StationNode) -> Bool {
         
-        print("Attempting move to \(station.stationType)")
         
         switch station.stationType {
         case .board:
@@ -217,7 +214,6 @@ final class PlateNode: MovableDelegate {
                 showSpriteNode()
                 setPlateIn(station)
             }
-            print("Result: \(canMove)")
             return canMove
             
         case .pipe:
@@ -244,7 +240,6 @@ final class PlateNode: MovableDelegate {
             if let scene = spriteNode.scene as? GameScene {
                 setPlateIn(station)
                 
-                print("Attempting plate delviery")
                 successfulDelivery = scene.makeDelivery(plate: self.plate)
                 
                 implodeSpriteNode(withDuration: 1)
@@ -299,7 +294,6 @@ final class PlateNode: MovableDelegate {
     }
     
     func moveCancel(currentPosition: CGPoint) {
-        print("Move cancelled")
         spriteNode.setScale(scaleBeforeMove)
         spriteNode.alpha = alphaBeforeMove
         spriteNode.zPosition = zPosBeforeMove

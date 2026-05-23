@@ -41,7 +41,6 @@ class TappableSpriteNode: SKSpriteNode {
         if let initialTouchPosition = self.initialTouchPosition {
             let finalTouchPosition = touch.location(in: self)
             if initialTouchPosition.distanceTo(finalTouchPosition) < 10 {
-                print("Tappable delegate pressed \(String(describing: delegate))")
                 delegate?.tap()
             }
         }

@@ -188,7 +188,6 @@ class GameScene: SKScene {
         teleportAnimationNode.position = teleporterNode.position + CGPoint(x: -8, y: -(teleporterNode.size.height + 8))
         teleportAnimationNode.zPosition = 60
         
-        print("Creating \(String(describing: teleportAnimationNode)) with textures \(String(describing: teleportAnimationFrames))")
     }
     
     func setupShelves() {
@@ -368,7 +367,6 @@ class GameScene: SKScene {
         let totalActions = plate.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
         
         guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
-            print("Couldn't find any order")
             let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
             
@@ -385,7 +383,6 @@ class GameScene: SKScene {
         let bonus = difficultyBonus[rule?.difficulty ?? .easy] ?? 1
         let totalScore = targetOrder.score * bonus
         
-        print("Total score: \(totalScore)")
         
         let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
@@ -441,7 +438,7 @@ class GameScene: SKScene {
 extension GameScene: GameConnectionManagerObserver {
     
     func receivePlate(plate: Plate) {
-        print("[GameScene] Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
+        Log.game.debug("Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
         
         guard let shelf = firstEmptyShelf else {
             return
@@ -461,7 +458,7 @@ extension GameScene: GameConnectionManagerObserver {
     }
     
     func receiveIngredient(ingredient: Ingredient) {
-        print("[GameScene] Received ingredient with prefix \(ingredient.texturePrefix) and state as \(ingredient.currentState)")
+        Log.game.debug("Received ingredient with prefix \(ingredient.texturePrefix) and state as \(ingredient.currentState)")
         
         guard let shelf = firstEmptyShelf else {
             return
@@ -481,7 +478,7 @@ extension GameScene: GameConnectionManagerObserver {
     }
     
     func receiveOrders(orders: [Order]) {
-        print("[GameScene] Received new orderList")
+        Log.game.debug("Received new orderList")
         self.orders = orders
         
         if firstOrder {
@@ -504,18 +501,18 @@ extension GameScene: GameConnectionManagerObserver {
     }
     
     func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
-        print("[GameScene] Received new notification")
+        Log.game.debug("Received new notification")
         
         if notification.success {
-            print("[GameScene] Notification was a success! Yay!")
+            Log.game.debug("Notification was a success! Yay!")
             
-            print("[GameScene] Notification points are \(notification.coinsAdded)")
+            Log.game.debug("Notification points are \(notification.coinsAdded)")
             
             matchStatistics?.totalDeliveredOrders += 1
             matchStatistics?.totalPoints += notification.coinsAdded
             totalPoints += notification.coinsAdded
             
-            print("[GameScene] Total points now are \(totalPoints)")
+            Log.game.debug("Total points now are \(totalPoints)")
             
             SFXPlayer.shared.cashRegister.play()
             updateCoinsUI()

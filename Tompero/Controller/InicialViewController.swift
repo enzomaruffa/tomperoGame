@@ -118,7 +118,6 @@ class InicialViewController: UIViewController, Storyboarded {
     // MARK: - Methods
     func setCoinsValue() {
         databaseManager.getPlayerCoinCount { count in
-            print("Current coin count: \(count)")
             DispatchQueue.main.async {
                 self.coinLabel.text = count.description
             }
@@ -192,7 +191,6 @@ class InicialViewController: UIViewController, Storyboarded {
                 // get default leaderboard ID
                 localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
                     if error != nil {
-                        print(error!)
                     } else {
                         self.defaultLeaderboard = leaderboardIdentifer!
                     }
@@ -201,8 +199,6 @@ class InicialViewController: UIViewController, Storyboarded {
             } else {
                 // 3. game center is not enabled on the users device
                 self.isGameCenterEnabled = false
-                print("Local player could not be authenticated!")
-                print(error!)
             }
         }
     }

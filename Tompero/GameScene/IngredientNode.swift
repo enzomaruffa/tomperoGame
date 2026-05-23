@@ -120,7 +120,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     
     func attemptMove(to station: StationNode) -> Bool {
         
-        print("Attempting move \(ingredient.texturePrefix) to \(station.stationType)")
         
         switch station.stationType {
         case .board:
@@ -129,7 +128,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
                 showSpriteNode()
                 setIngredientIn(station)
             }
-            print("Result: \(canMove)")
             return canMove
             
         case .stove:
@@ -142,7 +140,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
                 }
                 setIngredientIn(station)
             }
-            print("Result: \(canMove)")
             return canMove
             
         case .fryer:
@@ -155,7 +152,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
                 }
                 setIngredientIn(station)
             }
-            print("Result: \(canMove)")
             return canMove
             
         case .shelf:
@@ -165,7 +161,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
                 setIngredientIn(station)
             }
             
-            print("Result: \(canMove)")
             return canMove
             
         case .pipe:
@@ -245,7 +240,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     }
     
     func moveCancel(currentPosition: CGPoint) {
-        print("Move cancelled")
         spriteNode.setScale(scaleBeforeMove)
         spriteNode.alpha = alphaBeforeMove
         spriteNode.zPosition = zPosBeforeMove
@@ -253,7 +247,6 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
     
     // MARK: - TappableDelegate
     func tap() {
-        print("Ingredient tapped")
         
         currentStation.tap()
         checkTextureChange()

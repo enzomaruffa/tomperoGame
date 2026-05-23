@@ -179,7 +179,6 @@ final class LANConnectionManager: NSObject {
             do {
                 try self.listener.start()
             } catch {
-                print("[LANConnectionManager] Listener start failed: \(error)")
             }
         }
     }

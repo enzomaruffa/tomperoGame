@@ -94,7 +94,6 @@ class Ingredient: HasSprite, Equatable, Codable {
     }
     
     func attemptChangeState(to state: IngredientState) -> Bool {
-        print("Attempting change from \(currentState) to \(state)")
         if (states[currentState] ?? []).contains(state) {
             currentState = state
             return true
@@ -116,7 +115,6 @@ class Ingredient: HasSprite, Equatable, Codable {
         case "Tardigrades": return Tardigrades(ingredient: self)
         case "Tentacle": return Tentacle(ingredient: self)
         default:
-            print("Impossible to downcast")
             return self
         }
     }
