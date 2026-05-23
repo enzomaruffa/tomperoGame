@@ -4,7 +4,7 @@
 //
 
 import XCTest
-@testable import Tompero
+@testable import SpaceSpice
 
 final class LANFrameCodecTests: XCTestCase {
 

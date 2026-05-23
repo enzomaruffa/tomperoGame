@@ -18,16 +18,22 @@ class CloudKitManager: DatabaseManager {
     let logger = ConsoleDebugLogger.shared
     
     // MARK: iCloud Variables
-    let container: CKContainer
-    let publicDB: CKDatabase
-    let privateDB: CKDatabase
-    
+    // Lazy so the CKContainer is only created on first database access.
+    // Touching CKContainer at init time aborts on simulators without iCloud
+    // entitlements.
+    private lazy var container: CKContainer = CKContainer(identifier: "iCloud.com.enzomaruffa.spacespice")
+    private lazy var publicDB: CKDatabase = container.publicCloudDatabase
+    private lazy var privateDB: CKDatabase = container.privateCloudDatabase
+
+    /// True when CloudKit calls are safe to make. False under XCTest (no
+    /// code signing, no entitlement → `CKContainer(identifier:)` aborts the
+    /// process via `_os_crash` rather than returning an error we can handle).
+    private static let isAvailable: Bool = {
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil
+    }()
+
     // MARK: Initializers
-    private init() {
-        container = CKContainer.default()
-        publicDB = container.publicCloudDatabase
-        privateDB = container.privateCloudDatabase
-    }
+    private init() {}
     
     // MARK: - CloudKit Record Manipulations
     fileprivate func persistRecord(_ record: CKRecord) {
@@ -109,6 +115,7 @@ class CloudKitManager: DatabaseManager {
     
     // MARK: DatabaseManager Methods
     func checkMatchExists(hash: String, _ callback: @escaping (Bool) -> Void) {
+        guard Self.isAvailable else { callback(false); return }
         // Check if it exists in the remote container
         retrieveMatchHistoryRecord(withHash: hash) { (matchRecord) in
             if matchRecord != nil {
@@ -125,6 +132,7 @@ class CloudKitManager: DatabaseManager {
     }
     
     func addNewMatch(withHash hash: String, coinCount: Int) {
+        guard Self.isAvailable else { return }
         logger.log(message: "Attempting to add match with hash \(hash)")
         checkMatchExists(hash: hash, { (result) in
             // doesn't exists
@@ -145,8 +153,9 @@ class CloudKitManager: DatabaseManager {
     }
     
     func getPlayerCoinCount(_ callback: @escaping (Int) -> Void) {
+        guard Self.isAvailable else { callback(0); return }
         // If it does, return count
-        
+
         // Fetch first record and see if it exists
         retrieveCoinRecord { coinRecord in
             if let record = coinRecord {
@@ -165,7 +174,7 @@ class CloudKitManager: DatabaseManager {
     }
     
     func setPlayerCoinCount(toValue value: Int) {
-        
+        guard Self.isAvailable else { return }
         // Check if it exists
         retrieveCoinRecord { coinRecord in
             if let record = coinRecord {
