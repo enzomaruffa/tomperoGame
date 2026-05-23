@@ -274,11 +274,11 @@ final class LANConnectionManager: NSObject {
 
     // MARK: - Sending
 
-    func sendEveryone(dataWrapper: MCDataWrapper) {
+    func sendEveryone(dataWrapper: WirePayload) {
         send(dataWrapper: dataWrapper, toDisplayName: nil)
     }
 
-    func send(dataWrapper: MCDataWrapper, toDisplayName displayName: String?) {
+    func send(dataWrapper: WirePayload, toDisplayName displayName: String?) {
         queue.async { [weak self] in
             guard let self else { return }
             let envelope = LANEnvelope(from: self.selfName, to: displayName, payload: dataWrapper)
@@ -289,7 +289,7 @@ final class LANConnectionManager: NSObject {
     func sendPeersStatus(playersWithStatus: [PeerWithStatus]) {
         do {
             let data = try JSONEncoder().encode(playersWithStatus)
-            let wrapper = MCDataWrapper(object: data, type: .playerData)
+            let wrapper = WirePayload(object: data, type: .playerData)
             sendEveryone(dataWrapper: wrapper)
         } catch {
             Log.network.error("Encode players status failed: \(String(describing: error), privacy: .public)")
