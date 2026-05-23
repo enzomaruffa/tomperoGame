@@ -6,6 +6,10 @@ target 'Tompero' do
   pod 'SwiftLint'
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
+
+  target 'TomperoTests' do
+    inherit! :search_paths
+  end
 end
 
 post_install do |installer|

@@ -458,7 +458,7 @@ extension GameScene: GameConnectionManagerObserver {
     }
     
     func receiveIngredient(ingredient: Ingredient) {
-        Log.game.debug("Received ingredient with prefix \(ingredient.texturePrefix) and state as \(ingredient.currentState)")
+        Log.game.debug("Received ingredient with prefix \(ingredient.texturePrefix) and state \(ingredient.currentState.rawValue)")
         
         guard let shelf = firstEmptyShelf else {
             return
@@ -512,7 +512,7 @@ extension GameScene: GameConnectionManagerObserver {
             matchStatistics?.totalPoints += notification.coinsAdded
             totalPoints += notification.coinsAdded
             
-            Log.game.debug("Total points now are \(totalPoints)")
+            Log.game.debug("Total points now are \(self.totalPoints)")
             
             SFXPlayer.shared.cashRegister.play()
             updateCoinsUI()

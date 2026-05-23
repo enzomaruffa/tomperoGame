@@ -40,6 +40,7 @@
 		255AA4E27DF0FC1506FC5D79 /* LANListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB376F3C96CA68C2A3F96596 /* LANListener.swift */; };
 		27934B1F71EC5F6B1EFCB938 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742546D0BA44E3672841CA3A /* Log.swift */; };
 		27FB50DDB4205AA523DDDD38 /* teleporter.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9D45FAE69D3C95F696517948 /* teleporter.wav */; };
+		2BF4F6E21DD70729814D48D3 /* Pods_TomperoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BEDE71B1F19CDF0F0D1A625 /* Pods_TomperoTests.framework */; };
 		2C1C6300120D50D1336EC51A /* WirePayloadType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17CFE8C43BA7AA3D6C3783 /* WirePayloadType.swift */; };
 		2DD5B2FCCC888FAB95833762 /* sfx - customerCrowd3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 11BBA20E3413FE3F02894A1F /* sfx - customerCrowd3.wav */; };
 		30B1F3E78A658B420B1E078E /* FryableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E95FF6D888D2C7916A705 /* FryableComponent.swift */; };
@@ -199,6 +200,7 @@
 		09CE6823100C574EB0FD67A7 /* PeerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerPickerViewController.swift; sourceTree = "<group>"; };
 		0A9B55EBA19EC32D9E649BF7 /* ShelfNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfNode.swift; sourceTree = "<group>"; };
 		0B14BBB284DA84704AA1DAE2 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
+		0BEDE71B1F19CDF0F0D1A625 /* Pods_TomperoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TomperoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E0B29FE5AE2086BB6362093 /* LANEnvelope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LANEnvelope.swift; sourceTree = "<group>"; };
 		0E17CFE8C43BA7AA3D6C3783 /* WirePayloadType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WirePayloadType.swift; sourceTree = "<group>"; };
 		0F110E14CD01C440410111F8 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		7A3FEE02CB98B201FC3CFE06 /* Broccoli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broccoli.swift; sourceTree = "<group>"; };
 		7B02E01AB1A05D7D959F25C1 /* TappableSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableSpriteNode.swift; sourceTree = "<group>"; };
 		7B246ACDB2A772C34E593753 /* timesUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp.wav; sourceTree = "<group>"; };
+		7C70ED3E9BBA9A7030363025 /* Pods-TomperoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.debug.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7CF75D883632952AD09D3B3F /* sfx - angryCustomer2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - angryCustomer2.wav"; sourceTree = "<group>"; };
 		7D45805F826D33961A969882 /* sfx - angryCustomer1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - angryCustomer1.wav"; sourceTree = "<group>"; };
 		7D86BF69980AC3A956825B86 /* Cutscene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cutscene.storyboard; sourceTree = "<group>"; };
@@ -358,6 +361,7 @@
 		EF397E12646B84B4866A879E /* OrderDeliveryNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeliveryNotification.swift; sourceTree = "<group>"; };
 		F024A87250D85E42F04E9359 /* OrderListNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListNode.swift; sourceTree = "<group>"; };
 		F035DBCC2CA32599A6027540 /* frying.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = frying.wav; sourceTree = "<group>"; };
+		F7600ADEED0ACA47360EC8F1 /* Pods-TomperoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TomperoTests.release.xcconfig"; path = "Target Support Files/Pods-TomperoTests/Pods-TomperoTests.release.xcconfig"; sourceTree = "<group>"; };
 		FCCDB6687FAC5B57CF6EB164 /* PlayerTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTable.swift; sourceTree = "<group>"; };
 		FF284A2AF9B86F89B7015CC4 /* sfx - angryCrowd1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - angryCrowd1.wav"; sourceTree = "<group>"; };
 		FF3DFF7C5D7CCFFA63840FE1 /* sfx - customerCrowd1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sfx - customerCrowd1.wav"; sourceTree = "<group>"; };
@@ -365,6 +369,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5BE13CD459D9B5B468D5AAFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BF4F6E21DD70729814D48D3 /* Pods_TomperoTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8ADAD7458EE7DD9079F3C58 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -475,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				40E6C8E9CEC7B49E70C8C289 /* Pods_Tompero.framework */,
+				0BEDE71B1F19CDF0F0D1A625 /* Pods_TomperoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -493,6 +506,8 @@
 			children = (
 				363BBA1637A6C525A7EB1DA4 /* Pods-Tompero.debug.xcconfig */,
 				8CF48D58F057AF2AF0544452 /* Pods-Tompero.release.xcconfig */,
+				7C70ED3E9BBA9A7030363025 /* Pods-TomperoTests.debug.xcconfig */,
+				F7600ADEED0ACA47360EC8F1 /* Pods-TomperoTests.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -830,7 +845,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 007A9C8B08ED629082EEE7D1 /* Build configuration list for PBXNativeTarget "TomperoTests" */;
 			buildPhases = (
+				176F95B71A3ADB28E7610096 /* [CP] Check Pods Manifest.lock */,
 				FDC15471BF0B9C7891D2A8E6 /* Sources */,
+				5BE13CD459D9B5B468D5AAFA /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -953,6 +970,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		176F95B71A3ADB28E7610096 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TomperoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2A9A9AFD885F20FD8CEE0945 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1171,6 +1210,7 @@
 		};
 		72CF34E75AEC3D5724190269 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C70ED3E9BBA9A7030363025 /* Pods-TomperoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1259,6 +1299,7 @@
 		};
 		A0DC54A0C6765B19136F003E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7600ADEED0ACA47360EC8F1 /* Pods-TomperoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
