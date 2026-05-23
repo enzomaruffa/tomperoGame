@@ -2,24 +2,18 @@
 //  SettingsView.swift
 //  Tompero
 //
-//  Four-tab settings screen: Settings (sound / music toggles + cutscene),
-//  Game Center (leaderboards), Stats ("Coming soon!"), Credits (contributor
-//  list).
+//  Four-tab settings panel. Layout matches Settings.storyboard:
+//  red background, header (back), selector strip (4 SelectorButton-style
+//  tabs at 118.5, 36.5, 673, 50), and a Settings_box content panel at
+//  (104.5, 86.5, 687, 278.5).
 //
 
 import SwiftUI
 import GameKit
 
-/// Tab identity; numeric raw values match the legacy tag-based selection
-/// in the UIKit `SettingsViewController` for consistency.
 enum SettingsTab: Int, CaseIterable, Identifiable {
-    case settings = 0
-    case gameCenter = 1
-    case stats = 2
-    case credits = 3
-
+    case settings = 0, gameCenter = 1, stats = 2, credits = 3
     var id: Int { rawValue }
-
     var title: String {
         switch self {
         case .settings: return "Settings"
@@ -46,8 +40,6 @@ private let contributors: [ContributorProfile] = [
     ContributorProfile(name: "Diego Pontes", role: "Sound Design & Music", url: "https://www.linkedin.com/in/diego-pontes/", domain: "LinkedIn")
 ]
 
-/// Bridges `MusicPlayer.shared`'s mutable toggles into `@Published`
-/// properties SwiftUI can bind to.
 final class MusicSettingsViewModel: ObservableObject {
     @Published var soundOn: Bool {
         didSet { MusicPlayer.shared.soundOn = soundOn }
@@ -55,14 +47,9 @@ final class MusicSettingsViewModel: ObservableObject {
     @Published var musicOn: Bool {
         didSet {
             MusicPlayer.shared.musicOn = musicOn
-            if musicOn {
-                MusicPlayer.shared.play(.menu)
-            } else {
-                MusicPlayer.shared.stopAll()
-            }
+            if musicOn { MusicPlayer.shared.play(.menu) } else { MusicPlayer.shared.stopAll() }
         }
     }
-
     init() {
         self.soundOn = MusicPlayer.shared.soundOn
         self.musicOn = MusicPlayer.shared.musicOn
@@ -72,34 +59,48 @@ final class MusicSettingsViewModel: ObservableObject {
 struct SettingsView: View {
     @EnvironmentObject private var router: AppRouter
     @StateObject private var music = MusicSettingsViewModel()
-
     @State private var selectedTab: SettingsTab = .settings
     @State private var showGameCenter = false
     @State private var redirectPrompt: ContributorProfile?
 
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            StarsBackground().ignoresSafeArea()
-
-            VStack(spacing: 16) {
-                tabBar
-                content
-                Spacer()
-            }
-            .padding()
-
+        DesignCanvas { scale in
+            // Header back button
             Button {
+                EventLogger.shared.logButtonPress(buttonName: "settings-back")
                 router.pop()
             } label: {
-                Image(systemName: "chevron.left")
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .padding(12)
-                    .background(Color.black.opacity(0.35))
-                    .clipShape(Circle())
+                Image("WR_backButton")
+                    .resizable()
+                    .scaledToFit()
             }
-            .padding(.leading, 16)
-            .padding(.top, 16)
+            .buttonStyle(.plain)
+            .designed(x: 48, y: 16, w: 63.5, h: 59, scale: scale)
+
+            // Selector strip (118.5, 36.5, 673, 50) — four tabs side by side
+            HStack(spacing: 0) {
+                ForEach(SettingsTab.allCases) { tab in
+                    TabPill(
+                        title: tab.title,
+                        isSelected: selectedTab == tab,
+                        scale: scale
+                    ) {
+                        selectedTab = tab
+                    }
+                }
+            }
+            .designed(x: 118.5, y: 36.5, w: 673, h: 50, scale: scale)
+
+            // Box panel (104.5, 86.5, 687, 278.5)
+            Image("Settings_box")
+                .resizable()
+                .scaledToFit()
+                .designed(x: 104.5, y: 86.5, w: 687, h: 278.5, scale: scale)
+
+            // Tab content panel — inset inside the box (17.5, 0, 669.5, 239.5)
+            // relative to box (104.5, 86.5) → absolute (122, 86.5)
+            tabContent(scale: scale)
+                .designed(x: 122, y: 86.5, w: 669.5, h: 278.5, scale: scale)
         }
         .sheet(isPresented: $showGameCenter) {
             GameCenterDashboard()
@@ -118,105 +119,136 @@ struct SettingsView: View {
         }
     }
 
-    private var tabBar: some View {
-        HStack(spacing: 8) {
-            ForEach(SettingsTab.allCases) { tab in
-                TabSelectorButton(title: tab.title, isSelected: selectedTab == tab) {
-                    selectedTab = tab
-                }
-            }
-        }
-    }
-
     @ViewBuilder
-    private var content: some View {
+    private func tabContent(scale: CGFloat) -> some View {
         switch selectedTab {
-        case .settings:
-            settingsContent
-        case .gameCenter:
-            gameCenterContent
-        case .stats:
-            statsContent
-        case .credits:
-            creditsContent
+        case .settings: settingsTab(scale: scale)
+        case .gameCenter: gameCenterTab(scale: scale)
+        case .stats: statsTab(scale: scale)
+        case .credits: creditsTab(scale: scale)
         }
     }
 
-    private var settingsContent: some View {
-        VStack(spacing: 24) {
-            Toggle("Sound", isOn: $music.soundOn)
-                .toggleStyle(SwitchToggleStyle(tint: Color(red: 0.66, green: 0.20, blue: 0.27)))
-                .foregroundColor(.white)
-            Toggle("Music", isOn: $music.musicOn)
-                .toggleStyle(SwitchToggleStyle(tint: Color(red: 0.66, green: 0.20, blue: 0.27)))
-                .foregroundColor(.white)
-
+    private func settingsTab(scale: CGFloat) -> some View {
+        VStack(spacing: 16 * scale) {
+            HStack(spacing: 24 * scale) {
+                Text("Sound")
+                    .font(.custom("TitilliumWeb-Bold", size: 22 * scale))
+                    .foregroundColor(.white)
+                Toggle("", isOn: $music.soundOn)
+                    .labelsHidden()
+                    .toggleStyle(SwitchToggleStyle(tint: Color(red: 0.66, green: 0.20, blue: 0.27)))
+            }
+            HStack(spacing: 24 * scale) {
+                Text("Music")
+                    .font(.custom("TitilliumWeb-Bold", size: 22 * scale))
+                    .foregroundColor(.white)
+                Toggle("", isOn: $music.musicOn)
+                    .labelsHidden()
+                    .toggleStyle(SwitchToggleStyle(tint: Color(red: 0.66, green: 0.20, blue: 0.27)))
+            }
             Button {
                 MusicPlayer.shared.stopAll()
                 router.push(.video)
             } label: {
                 Text("Play Cutscene")
-                    .font(.custom("TitilliumWeb-Bold", size: 24))
+                    .font(.custom("TitilliumWeb-Bold", size: 20 * scale))
                     .foregroundColor(.white)
-                    .padding(.horizontal, 32)
-                    .padding(.vertical, 12)
+                    .padding(.horizontal, 24 * scale)
+                    .padding(.vertical, 8 * scale)
                     .background(Color.black.opacity(0.35))
-                    .cornerRadius(12)
+                    .cornerRadius(10 * scale)
             }
+            .buttonStyle(.plain)
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private var gameCenterContent: some View {
-        VStack(spacing: 24) {
+    private func gameCenterTab(scale: CGFloat) -> some View {
+        VStack {
+            Spacer()
             Button {
                 showGameCenter = true
             } label: {
                 Text("Leaderboards")
-                    .font(.custom("TitilliumWeb-Bold", size: 24))
+                    .font(.custom("TitilliumWeb-Bold", size: 24 * scale))
                     .foregroundColor(.white)
-                    .padding(.horizontal, 32)
-                    .padding(.vertical, 12)
+                    .padding(.horizontal, 32 * scale)
+                    .padding(.vertical, 12 * scale)
                     .background(Color.black.opacity(0.35))
-                    .cornerRadius(12)
+                    .cornerRadius(12 * scale)
             }
+            .buttonStyle(.plain)
+            Spacer()
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private var statsContent: some View {
-        List {
-            HStack {
-                Text("Coming soon!")
-                    .font(.custom("TitilliumWeb-Bold", size: 18))
-                Spacer()
-            }
-            .listRowBackground(Color.white.opacity(0.5))
+    private func statsTab(scale: CGFloat) -> some View {
+        VStack {
+            Spacer()
+            Text("Coming soon!")
+                .font(.custom("TitilliumWeb-Bold", size: 22 * scale))
+                .foregroundColor(.white)
+            Spacer()
         }
-        .scrollContentBackground(.hidden)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private var creditsContent: some View {
-        List(contributors) { profile in
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(profile.name)
-                        .font(.custom("TitilliumWeb-Bold", size: 18))
-                    Text(profile.role)
-                        .font(.custom("TitilliumWeb-Light", size: 14))
+    private func creditsTab(scale: CGFloat) -> some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                ForEach(Array(contributors.enumerated()), id: \.element.id) { idx, profile in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(profile.name)
+                                .font(.custom("TitilliumWeb-Bold", size: 16 * scale))
+                                .foregroundColor(.white)
+                            Text(profile.role)
+                                .font(.custom("TitilliumWeb-Light", size: 12 * scale))
+                                .foregroundColor(.white.opacity(0.8))
+                        }
+                        Spacer()
+                        Image("\(profile.domain)Logo")
+                            .renderingMode(.template)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24 * scale, height: 24 * scale)
+                            .foregroundColor(.red)
+                    }
+                    .padding(.horizontal, 16 * scale)
+                    .padding(.vertical, 8 * scale)
+                    .background(idx % 2 == 0 ? Color.white.opacity(0.2) : Color.white.opacity(0.1))
+                    .contentShape(Rectangle())
+                    .onTapGesture { redirectPrompt = profile }
                 }
-                Spacer()
-                Image("\(profile.domain)Logo")
-                    .renderingMode(.template)
+            }
+        }
+    }
+}
+
+private struct TabPill: View {
+    let title: String
+    let isSelected: Bool
+    let scale: CGFloat
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            ZStack {
+                Image(isSelected ? "Settings_selectionButtonON" : "Settings_selectionButtonOFF")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 32, height: 32)
-                    .foregroundColor(.red)
+                Text(title)
+                    .font(.custom(isSelected ? "TitilliumWeb-Bold" : "TitilliumWeb-Light",
+                                  size: (isSelected ? 18 : 14) * scale))
+                    .foregroundColor(.white)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
             }
-            .contentShape(Rectangle())
-            .onTapGesture { redirectPrompt = profile }
-            .listRowBackground(Color.white.opacity(0.5))
+            .frame(maxWidth: .infinity)
         }
-        .scrollContentBackground(.hidden)
+        .buttonStyle(.plain)
+        .animation(.easeInOut(duration: 0.15), value: isSelected)
     }
 }
