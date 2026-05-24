@@ -274,14 +274,6 @@ private struct PlayerSlotView: View {
     let onInvite: () -> Void
 
     private static let hatNames = ["VREX", "SW77", "MORGAN", "JERRY"]
-    /// Matches `GameScene.playerColorPalette` so the lobby slot shows the
-    /// same player color the in-game UI uses for stations / plates.
-    private static let slotColors: [Color] = [
-        Color(red: 0.18, green: 0.41, blue: 0.97), // Blue
-        Color(red: 0.62, green: 0.32, blue: 0.85), // Purple
-        Color(red: 0.27, green: 0.78, blue: 0.41), // Green
-        Color(red: 0.97, green: 0.55, blue: 0.18)  // Orange
-    ]
 
     private var hatPrefix: String {
         PlayerSlotView.hatNames[min(slotIndex, PlayerSlotView.hatNames.count - 1)]
@@ -312,7 +304,10 @@ private struct PlayerSlotView: View {
                 .frame(width: 154 * scale, height: 129 * scale)
                 .frame(maxHeight: .infinity, alignment: .top)
 
-            // Player name label (10, 133.5, 134, 24)
+            // Player name label (10, 133.5, 134, 24). Player color is
+            // conveyed by the character hat itself — `VREX/SW77/MORGAN/JERRY -
+            // FULL` assets are tinted per character to match the in-game
+            // pipe colors (blue / purple / green / orange).
             Text(label)
                 .font(.custom("TitilliumWeb-Bold", size: 16 * scale))
                 .foregroundColor(.white)
@@ -321,14 +316,6 @@ private struct PlayerSlotView: View {
                 .minimumScaleFactor(0.5)
                 .frame(width: 134 * scale, height: 24 * scale)
                 .position(x: 77 * scale, y: 145.5 * scale)
-
-            // Color strip — matches the player color used in-game so the
-            // lobby slot reads as "you'll be the blue player".
-            RoundedRectangle(cornerRadius: 3 * scale)
-                .fill(PlayerSlotView.slotColors[min(slotIndex, PlayerSlotView.slotColors.count - 1)])
-                .frame(width: 60 * scale, height: 4 * scale)
-                .position(x: 77 * scale, y: 156 * scale)
-                .opacity(player.status == .connected ? 1.0 : 0.4)
 
             // Invite button on empty slots (host only)
             if hosting && player.status == .notConnected {
