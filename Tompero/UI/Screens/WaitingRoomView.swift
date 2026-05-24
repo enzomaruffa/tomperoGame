@@ -19,8 +19,14 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
     @Published var difficulty: GameDifficulty = .easy
     @Published var showPicker: Bool = false
     @Published var startedGame: GameRule?
+    /// On the joiner side, the name of the host who just connected. Drives
+    /// the accept/decline invitation prompt. Cleared once the user decides.
+    @Published var pendingInvitationFrom: String?
 
     let hosting: Bool
+    /// True once the joiner has accepted (or declined) the first invite, so
+    /// reconnect events don't re-prompt.
+    private var hasRespondedToInvite = false
 
     init(hosting: Bool) {
         self.hosting = hosting
@@ -89,21 +95,43 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
     }
 
     func playerUpdate(player: String, state: PeerConnectionState) {
-        guard hosting else { return }
-        DispatchQueue.main.async {
-            var newList = self.players.map { $0.copy() }
-            if let existing = newList.first(where: { $0.name == player }) {
-                existing.status = state
-            } else if let emptySlot = newList.first(where: { $0.name == emptyName }) {
-                emptySlot.name = player
-                emptySlot.status = state
-            } else if let dropped = newList.first(where: { $0.status == .notConnected }) {
-                dropped.name = player
-                dropped.status = state
+        if hosting {
+            DispatchQueue.main.async {
+                var newList = self.players.map { $0.copy() }
+                if let existing = newList.first(where: { $0.name == player }) {
+                    existing.status = state
+                } else if let emptySlot = newList.first(where: { $0.name == emptyName }) {
+                    emptySlot.name = player
+                    emptySlot.status = state
+                } else if let dropped = newList.first(where: { $0.status == .notConnected }) {
+                    dropped.name = player
+                    dropped.status = state
+                }
+                LANConnectionManager.shared.sendPeersStatus(playersWithStatus: newList)
+                self.players = newList
             }
-            LANConnectionManager.shared.sendPeersStatus(playersWithStatus: newList)
-            self.players = newList
+        } else if state == .connected, !hasRespondedToInvite {
+            // Joiner side: first peer to fully connect is the host who invited
+            // us. Show the accept/decline prompt before the user is committed
+            // to the match.
+            hasRespondedToInvite = true
+            DispatchQueue.main.async {
+                self.pendingInvitationFrom = player
+            }
         }
+    }
+
+    func acceptInvitation() {
+        pendingInvitationFrom = nil
+    }
+
+    func declineInvitation() {
+        if let host = pendingInvitationFrom {
+            LANConnectionManager.shared.disconnect(displayName: host)
+        }
+        pendingInvitationFrom = nil
+        // Allow re-prompting if a different host invites next
+        hasRespondedToInvite = false
     }
 }
 
@@ -211,6 +239,22 @@ struct WaitingRoomView: View {
         .onReceive(viewModel.$startedGame.compactMap { $0 }) { rule in
             router.push(.game(rule: rule, hosting: hosting))
         }
+        .alert(
+            "Invitation",
+            isPresented: Binding(
+                get: { viewModel.pendingInvitationFrom != nil },
+                set: { if !$0 { viewModel.acceptInvitation() } }
+            ),
+            presenting: viewModel.pendingInvitationFrom
+        ) { _ in
+            Button("Accept") { viewModel.acceptInvitation() }
+            Button("Decline", role: .cancel) {
+                viewModel.declineInvitation()
+                router.pop()
+            }
+        } message: { host in
+            Text("\(host) invited you to play.")
+        }
     }
 
     private var difficultyTitle: String {
@@ -230,6 +274,14 @@ private struct PlayerSlotView: View {
     let onInvite: () -> Void
 
     private static let hatNames = ["VREX", "SW77", "MORGAN", "JERRY"]
+    /// Matches `GameScene.playerColorPalette` so the lobby slot shows the
+    /// same player color the in-game UI uses for stations / plates.
+    private static let slotColors: [Color] = [
+        Color(red: 0.18, green: 0.41, blue: 0.97), // Blue
+        Color(red: 0.62, green: 0.32, blue: 0.85), // Purple
+        Color(red: 0.27, green: 0.78, blue: 0.41), // Green
+        Color(red: 0.97, green: 0.55, blue: 0.18)  // Orange
+    ]
 
     private var hatPrefix: String {
         PlayerSlotView.hatNames[min(slotIndex, PlayerSlotView.hatNames.count - 1)]
@@ -269,6 +321,14 @@ private struct PlayerSlotView: View {
                 .minimumScaleFactor(0.5)
                 .frame(width: 134 * scale, height: 24 * scale)
                 .position(x: 77 * scale, y: 145.5 * scale)
+
+            // Color strip — matches the player color used in-game so the
+            // lobby slot reads as "you'll be the blue player".
+            RoundedRectangle(cornerRadius: 3 * scale)
+                .fill(PlayerSlotView.slotColors[min(slotIndex, PlayerSlotView.slotColors.count - 1)])
+                .frame(width: 60 * scale, height: 4 * scale)
+                .position(x: 77 * scale, y: 156 * scale)
+                .opacity(player.status == .connected ? 1.0 : 0.4)
 
             // Invite button on empty slots (host only)
             if hosting && player.status == .notConnected {

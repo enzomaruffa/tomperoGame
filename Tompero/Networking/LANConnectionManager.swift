@@ -194,17 +194,33 @@ final class LANConnectionManager: NSObject {
     // MARK: - Discovery (host side)
 
     /// Snapshot of peers currently visible to the host's browser, filtered to
-    /// those we haven't already connected to. Used by the picker UI.
+    /// drop (a) the host's own service name — we'd otherwise see ourselves
+    /// and could invite ourselves — and (b) anyone we've already connected to.
     var discoveredPeers: [LANBrowser.DiscoveredPeer] {
         queue.sync {
-            discovered.filter { peer in
-                connections[peer.displayName] == nil
+            let me = selfName
+            return discovered.filter { peer in
+                peer.displayName != me && connections[peer.displayName] == nil
             }
         }
     }
 
     func setDiscoveryObserver(_ observer: LANDiscoveryObserver?) {
         discoveryObserver = observer
+    }
+
+    /// Tear down the connection to a specific peer. Used by the joiner-side
+    /// invitation prompt to decline an invite (host sees the joiner drop and
+    /// removes them from the lobby).
+    func disconnect(displayName: String) {
+        queue.async { [weak self] in
+            guard let self else { return }
+            self.connections[displayName]?.cancel()
+            self.connections.removeValue(forKey: displayName)
+            self.dialledEndpoints.removeValue(forKey: displayName)
+            self.pendingSends.removeValue(forKey: displayName)
+            self.reconnectPolicies.removeValue(forKey: displayName)
+        }
     }
 
     /// Host picked a peer in the picker — dial them.
