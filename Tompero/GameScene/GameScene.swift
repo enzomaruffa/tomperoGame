@@ -95,24 +95,34 @@ class GameScene: SKScene {
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
-        
-        // Scale view size to device
+
+        Log.game.info("GameScene.didMove view.bounds=\(view.bounds.debugDescription, privacy: .public) scene.size=\(self.size.debugDescription, privacy: .public)")
+
+        // Scale view size to device. Design target is iPhone X Pro Max landscape.
         let desiredWidth = CGFloat(2436)
         let desiredHeight = CGFloat(1154)
-        
+
         var currentViewSize = self.viewSizeInLocalCoordinates()
-        
-        let requiredScale = max(desiredWidth / currentViewSize.width, desiredHeight / currentViewSize.height)
-        
+        Log.game.info("currentViewSize before camera = \(currentViewSize.debugDescription, privacy: .public)")
+
+        // Guard against zero-sized views — SwiftUI's SpriteView wrapper can
+        // call didMove before final layout. A zero size would make the
+        // requiredScale infinite and put the camera in geosynchronous orbit.
+        let safeViewWidth = max(currentViewSize.width, 1)
+        let safeViewHeight = max(currentViewSize.height, 1)
+        let requiredScale = max(desiredWidth / safeViewWidth, desiredHeight / safeViewHeight)
+
         let cameraNode = SKCameraNode()
         self.camera = cameraNode
-        self.scene?.addChild(cameraNode)
-        
-        self.camera?.setScale(requiredScale)
-        
+        addChild(cameraNode)
+
+        cameraNode.setScale(requiredScale)
+
         currentViewSize = self.viewSizeInLocalCoordinates(ignoreCameraScale: false)
         let offset = (desiredHeight - currentViewSize.height) / 2
         cameraNode.position = CGPoint(x: 0, y: -offset)
+
+        Log.game.info("camera scale=\(requiredScale) offset=\(offset)")
         
         // Adds itself as a GameConnection observer
         GameConnectionManager.shared.subscribe(observer: self)
