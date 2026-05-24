@@ -2,43 +2,57 @@
 //  GameContainerView.swift
 //  Tompero
 //
-//  SwiftUI wrapper around the UIKit-hosted GameViewController, which runs
-//  the SpriteKit GameScene. Translates the SKScene's callback hooks
-//  (`onMatchEnd`, `onMatchError`) into router actions.
+//  SwiftUI host for the SpriteKit GameScene. Uses native `SpriteView`
+//  instead of wrapping the legacy GameViewController so Auto Layout's size
+//  race with the SwiftUI host doesn't leave the scene rendering into a 0×0
+//  surface (the bug that made audio play but visuals stay blank).
 //
 
 import SwiftUI
+import SpriteKit
 
 struct GameContainerView: View {
     let rule: GameRule
     let hosting: Bool
 
     @EnvironmentObject private var router: AppRouter
+    @State private var scene: GameScene?
 
     var body: some View {
-        GameRepresentable(rule: rule, hosting: hosting) { statistics in
-            router.push(.statistics(statistics))
-        } onError: {
+        ZStack {
+            // Solid black under the scene so the navigation push isn't see-through.
+            Color.black.ignoresSafeArea()
+
+            if let scene {
+                SpriteView(scene: scene)
+                    .ignoresSafeArea()
+            }
+        }
+        .onAppear {
+            if scene == nil {
+                scene = buildScene()
+            }
+        }
+        .onDisappear {
+            GameConnectionManager.shared.removeAllObservers()
+        }
+        .statusBarHidden()
+    }
+
+    private func buildScene() -> GameScene? {
+        guard let scene = GameScene(fileNamed: "GameScene") else {
+            Log.game.error("Failed to load GameScene.sks")
+            return nil
+        }
+        scene.rule = rule
+        scene.hosting = hosting
+        scene.scaleMode = UIDevice.current.userInterfaceIdiom == .pad ? .aspectFit : .aspectFill
+        scene.onMatchEnd = { stats in
+            router.push(.statistics(stats))
+        }
+        scene.onMatchError = {
             router.popToRoot()
         }
-        .ignoresSafeArea()
+        return scene
     }
-}
-
-private struct GameRepresentable: UIViewControllerRepresentable {
-    let rule: GameRule
-    let hosting: Bool
-    let onMatchEnd: (MatchStatistics) -> Void
-    let onError: () -> Void
-
-    func makeUIViewController(context: Context) -> GameViewController {
-        let vc = GameViewController()
-        vc.rule = rule
-        vc.hosting = hosting
-        vc.onMatchEnd = onMatchEnd
-        vc.onMatchError = onError
-        return vc
-    }
-
-    func updateUIViewController(_ uiViewController: GameViewController, context: Context) {}
 }

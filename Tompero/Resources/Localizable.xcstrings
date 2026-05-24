@@ -138,9 +138,6 @@
     "GAME OVER" : {
 
     },
-    "GO" : {
-
-    },
     "Leaderboards" : {
 
     },
@@ -163,6 +160,9 @@
           }
         }
       }
+    },
+    "Music" : {
+
     },
     "name.message" : {
       "extractionState" : "manual",
@@ -250,6 +250,9 @@
       }
     },
     "Play Cutscene" : {
+
+    },
+    "Sound" : {
 
     }
   },

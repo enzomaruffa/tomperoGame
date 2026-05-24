@@ -22,8 +22,7 @@ class GameScene: SKScene {
 
     // MARK: - Game Variables
     var hosting = false
-    weak var controller: UIViewController?
-    
+
     var player: String = LANConnectionManager.shared.selfName
     var rule: GameRule?
     var orders: [Order] = []
