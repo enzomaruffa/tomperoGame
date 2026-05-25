@@ -128,23 +128,28 @@ struct InicialView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     }
 
-                    // Name editor — slotted into the gap between coin label
-                    // (ends ~x=448) and settings (starts x=791). Stays at the
-                    // same y-band as the coin counter for visual alignment.
-                    designed(x: 460, y: 17, w: 320, h: 65, scale: scale) {
+                    // Name editor — pill slotted in the gap between the coin
+                    // label (ends ~x=448) and the settings gear (starts at
+                    // x=791). Uses the same `Settings_selectionButtonOFF`
+                    // pill art the Settings tab strip uses, so it visually
+                    // belongs in the world. Sized to match the storyboard's
+                    // OFF-state pill at 208.5×47.5.
+                    designed(x: 519, y: 26, w: 208.5, h: 47.5, scale: scale) {
                         Button {
                             nameDraft = LocalPeerIdentity.userSetName ?? ""
                             showNameEditor = true
                         } label: {
-                            Text("👤 \(nameButtonTitle)")
-                                .font(.custom("TitilliumWeb-Bold", size: 18 * scale))
-                                .foregroundColor(.white)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.6)
-                                .padding(.horizontal, 12 * scale)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(Color.black.opacity(0.35))
-                                .cornerRadius(10 * scale)
+                            ZStack {
+                                Image("Settings_selectionButtonOFF")
+                                    .resizable()
+                                    .scaledToFit()
+                                Text("👤 \(nameButtonTitle)")
+                                    .font(.custom("TitilliumWeb-Bold", size: 16 * scale))
+                                    .foregroundColor(.white)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.5)
+                                    .padding(.horizontal, 16 * scale)
+                            }
                         }
                         .buttonStyle(.plain)
                     }
@@ -168,8 +173,11 @@ struct InicialView: View {
         }
         .onAppear {
             revealedCount = 0
-            authenticate()
             fetchCoinCount()
+            // Game Center authentication is deferred to the first place that
+            // actually needs it (Statistics → leaderboard submission). Doing
+            // it here was blocking the main thread on the simulator for
+            // 10–15s while iOS waited for the gamed XPC to time out.
         }
         .onReceive(typingTimer) { _ in
             if revealedCount < dialogText.count {
