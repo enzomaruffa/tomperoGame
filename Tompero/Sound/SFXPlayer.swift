@@ -2,35 +2,36 @@
 //  SFXPlayer.swift
 //  Tompero
 //
-//  Created by Vinícius Binder on 08/12/19.
-//  Copyright © 2019 Tompero. All rights reserved.
-//
 
 import Foundation
 import AVFoundation
 
+/// Lazily-loaded sound effects. Each property's AVAudioPlayer is created
+/// only when first played, so accessing `SFXPlayer.shared` no longer
+/// decodes ~12 MB of WAV files on the main thread.
 class SFXPlayer {
-    
+
     static let shared = SFXPlayer()
-    
-    let takeFood        = CustomAudioPlayer(fileName: "takeFood.wav", volume: 1.8)
-    let putFoodDown     = CustomAudioPlayer(fileName: "putFoodDown.wav", volume: 0.5)
-    
-    let chop            = CustomAudioPlayer(fileName: "chopping.wav", volume: 2.0)
-    let cooking                     = Track(fileName: "cooking.wav", volume: 1.5)
-    let frying                      = Track(fileName: "frying.wav", volume: 1.5)
-    let burn            = CustomAudioPlayer(fileName: "burn.wav", volume: 2.0)
-    
-    let hatch           = CustomAudioPlayer(fileName: "hatch.wav", volume: 0.35)
-    let airSuction                  = Track(fileName: "airSuction.wav", volume: 0.35)
-    
-    let orderUp         = CustomAudioPlayer(fileName: "orderUp.wav", volume: 0.9)
-    let orderDone       = CustomAudioPlayer(fileName: "orderDone.wav")
-    let teleporter      = CustomAudioPlayer(fileName: "teleporter.wav", volume: 2.0)
-    let cashRegister    = CustomAudioPlayer(fileName: "cashRegister.wav", volume: 2.0)
-    
-    let roundStarted    = CustomAudioPlayer(fileName: "roundStarted.wav", volume: 1.2)
-    let endTimer        = CustomAudioPlayer(fileName: "endTimer.wav", volume: 0.8)
-    let timesUp         = CustomAudioPlayer(fileName: "timesUp.wav", volume: 1.0)
-    
+
+    lazy var takeFood     = CustomAudioPlayer(fileName: "takeFood.wav", volume: 1.8)
+    lazy var putFoodDown  = CustomAudioPlayer(fileName: "putFoodDown.wav", volume: 0.5)
+
+    lazy var chop         = CustomAudioPlayer(fileName: "chopping.wav", volume: 2.0)
+    lazy var cooking      = Track(fileName: "cooking.wav", volume: 1.5)
+    lazy var frying       = Track(fileName: "frying.wav", volume: 1.5)
+    lazy var burn         = CustomAudioPlayer(fileName: "burn.wav", volume: 2.0)
+
+    lazy var hatch        = CustomAudioPlayer(fileName: "hatch.wav", volume: 0.35)
+    lazy var airSuction   = Track(fileName: "airSuction.wav", volume: 0.35)
+
+    lazy var orderUp      = CustomAudioPlayer(fileName: "orderUp.wav", volume: 0.9)
+    lazy var orderDone    = CustomAudioPlayer(fileName: "orderDone.wav")
+    lazy var teleporter   = CustomAudioPlayer(fileName: "teleporter.wav", volume: 2.0)
+    lazy var cashRegister = CustomAudioPlayer(fileName: "cashRegister.wav", volume: 2.0)
+
+    lazy var roundStarted = CustomAudioPlayer(fileName: "roundStarted.wav", volume: 1.2)
+    lazy var endTimer     = CustomAudioPlayer(fileName: "endTimer.wav", volume: 0.8)
+    lazy var timesUp      = CustomAudioPlayer(fileName: "timesUp.wav", volume: 1.0)
+
+    private init() {}
 }
