@@ -159,7 +159,13 @@ class GameScene: SKScene {
             case .empty: return .empty
             }
         }
-        
+
+        Log.game.info("setupStations: \(self.tables.count) tables for player \(self.player, privacy: .public)")
+        for (i, table) in tables.enumerated() {
+            Log.game.info("  table[\(i)]: type=\(table.type.rawValue, privacy: .public) ingredient=\(table.ingredient?.texturePrefix ?? "nil", privacy: .public)")
+        }
+        Log.game.info("  scene.size=\(self.size.debugDescription, privacy: .public) anchorPoint=\(self.anchorPoint.debugDescription, privacy: .public)")
+
         var nodes: [StationNode] = []
         for table in tables {
             if table.type == .chopping {
@@ -170,19 +176,23 @@ class GameScene: SKScene {
                 nodes.append(FryerNode())
             } else if table.type == .plate {
                 nodes.append(PlateBoxNode())
-            } else if table.type == .ingredient {
-                nodes.append(IngredientBoxNode(ingredient: table.ingredient!))
+            } else if table.type == .ingredient, let ingredient = table.ingredient {
+                nodes.append(IngredientBoxNode(ingredient: ingredient))
             } else if table.type == .empty {
                 nodes.append(StationNode(stationType: .empty))
+            } else {
+                Log.game.error("setupStations: skipped unrecognized table type=\(table.type.rawValue, privacy: .public)")
             }
         }
         stations = nodes
-        
+
         for (index, station) in stations.enumerated() {
             let node = station.spriteNode
-            let pos = scene!.size.width/2-node.size.width/2
-            let xPos = [-pos, 0.0, pos]
-            node.position = CGPoint(x: xPos[index], y: CGFloat(station.spriteYPos))
+            let pos = scene!.size.width / 2 - node.size.width / 2
+            let xPositions: [CGFloat] = [-pos, 0.0, pos]
+            let xPos = index < xPositions.count ? xPositions[index] : 0
+            node.position = CGPoint(x: xPos, y: CGFloat(station.spriteYPos))
+            Log.game.info("  station[\(index)] type=\(station.stationType.rawValue, privacy: .public) pos=\(node.position.debugDescription, privacy: .public) sprite.size=\(node.size.debugDescription, privacy: .public)")
             self.addChild(node)
         }
     }
