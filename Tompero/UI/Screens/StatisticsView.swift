@@ -95,7 +95,7 @@ struct StatisticsView: View {
                     .background(Color.black.opacity(0.35))
                     .cornerRadius(12 * scale)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressableButtonStyle())
             .designed(x: 334, y: 229.5, w: 241, h: 47, scale: scale)
         }
         .task {

@@ -78,7 +78,7 @@ struct InicialView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
 
                     // HOST — sits over the back window of the kombi
@@ -93,7 +93,7 @@ struct InicialView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
 
                     // Bottom: frog character — bottom section starts at y=270
@@ -130,11 +130,14 @@ struct InicialView: View {
                             .aspectRatio(contentMode: .fit)
                     }
 
-                    // Coin count label
+                    // Coin count label — uses .contentTransition(.numericText())
+                    // so the value tick-up animation (kicked off in
+                    // `fetchCoinCount`) renders as rolling digits.
                     designed(x: 129, y: 17, w: 319, h: 65, scale: scale) {
                         Text("\(coinCount)")
                             .font(.custom("TitilliumWeb-Bold", size: 30 * scale))
                             .foregroundColor(.white)
+                            .contentTransition(.numericText())
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     }
 
@@ -161,7 +164,7 @@ struct InicialView: View {
                                     .padding(.horizontal, 16 * scale)
                             }
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
 
                     // Settings gear, top-right
@@ -174,7 +177,7 @@ struct InicialView: View {
                                 .scaledToFit()
                                 .foregroundColor(.white)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
                 }
                 .frame(width: scaledWidth, height: scaledHeight)
@@ -237,7 +240,11 @@ struct InicialView: View {
     private func fetchCoinCount() {
         Task {
             let count = await CloudKitManager.shared.getPlayerCoinCount()
-            await MainActor.run { coinCount = count }
+            await MainActor.run {
+                withAnimation(.easeOut(duration: 0.8)) {
+                    coinCount = count
+                }
+            }
         }
     }
 }

@@ -164,7 +164,7 @@ struct WaitingRoomView: View {
                     .resizable()
                     .scaledToFit()
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressableButtonStyle())
             .designed(x: 676.5, y: 38, w: 96.5, h: 26.5, scale: scale)
 
             // Difficulty panel — host only
@@ -183,8 +183,7 @@ struct WaitingRoomView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .buttonStyle(.plain)
-                // Original (77.5, 198.5, 112, 30) inside difficulty view (44, 135.5)
+                .buttonStyle(PressableButtonStyle())
                 .designed(x: 121.5, y: 334, w: 112, h: 30, scale: scale)
             }
 
@@ -204,7 +203,7 @@ struct WaitingRoomView: View {
                         .scaledToFit()
                         .opacity(viewModel.canStart ? 1.0 : 0.5)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PressableButtonStyle())
                 .disabled(!viewModel.canStart)
                 // Inside go view at (207.5, 24, 72, 72)
                 .designed(x: 722.5, y: 297.5, w: 72, h: 72, scale: scale)
