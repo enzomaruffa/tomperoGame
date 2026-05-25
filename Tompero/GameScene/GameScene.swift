@@ -401,30 +401,27 @@ class GameScene: SKScene {
         )
         
         let totalActions = plate.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
-        
-        guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
+        let difficulty = rule?.difficulty ?? .easy
+        let outcome = DeliveryScorer.score(plate: plate, against: orders, difficulty: difficulty)
+
+        if !outcome.success {
             let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
-            
             EventLogger.shared.logPlateDeliver(success: false, actionCount: totalActions, ingredientCount: plate.ingredients.count)
-            
             updateOrderUI(orders)
             return false
         }
-        
+
         EventLogger.shared.logPlateDeliver(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count)
-        EventLogger.shared.logOrderResult(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count, difficulty: rule?.difficulty ?? .easy)
-        
-        let difficultyBonus: [GameDifficulty: Int] = [.easy: 1, .medium: 2, .hard: 3]
-        let bonus = difficultyBonus[rule?.difficulty ?? .easy] ?? 1
-        let totalScore = targetOrder.score * bonus
-        
-        
-        let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
+        EventLogger.shared.logOrderResult(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count, difficulty: difficulty)
+
+        let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: outcome.coinsAdded)
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
 
-        orders.remove(at: orders.firstIndex { $0.isEquivalent(to: targetOrder) }!)
-        
+        if let index = outcome.matchedOrderIndex {
+            orders.remove(at: index)
+        }
+
         GameConnectionManager.shared.sendEveryone(orderList: orders)
         
         orderGenerationCounter = 0
