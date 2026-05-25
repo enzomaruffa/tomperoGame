@@ -6,18 +6,13 @@
 //  Copyright © 2019 Tompero. All rights reserved.
 //
 
-import Foundation
 import CloudKit
+import Foundation
 
-class CloudKitManager: DatabaseManager {
-    
-    // MARK: Singleton
+class CloudKitManager {
+
     static let shared = CloudKitManager()
-    
-    // MARK: Variables
-    let logger = ConsoleDebugLogger.shared
-    
-    // MARK: iCloud Variables
+
     // Lazy so the CKContainer is only created on first database access.
     // Touching CKContainer at init time aborts on simulators without iCloud
     // entitlements.
@@ -40,160 +35,99 @@ class CloudKitManager: DatabaseManager {
         return FileManager.default.ubiquityIdentityToken != nil
     }()
 
-    // MARK: Initializers
     private init() {}
-    
-    // MARK: - CloudKit Record Manipulations
-    fileprivate func persistRecord(_ record: CKRecord) {
-        privateDB.save(record) { (savedRecord, error) in
-            if error == nil {
-                self.logger.log(message: "Record saved")
+
+    // MARK: - Public API
+
+    func getPlayerCoinCount() async -> Int {
+        guard Self.isAvailable else { return 0 }
+        do {
+            if let record = try await retrieveCoinRecord() {
+                return record["amount"] as? Int ?? 0
             } else {
-                self.logger.log(message: "Record not  saved")
+                await createCoinRecord()
+                return 0
             }
+        } catch {
+            Log.network.error("getPlayerCoinCount failed: \(error.localizedDescription, privacy: .public)")
+            return 0
         }
     }
-    
-    fileprivate func createCoinRecord() {
-        // If it doesn't, create it and return 0
-        let coinCount = 0
-        
+
+    func setPlayerCoinCount(toValue value: Int) async {
+        guard Self.isAvailable else { return }
+        do {
+            if let record = try await retrieveCoinRecord() {
+                record.setValue(value, forKey: "amount")
+                try await persist(record)
+            } else {
+                await createCoinRecord()
+            }
+        } catch {
+            Log.network.error("setPlayerCoinCount failed: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    func checkMatchExists(hash: String) async -> Bool {
+        guard Self.isAvailable else { return false }
+        do {
+            return try await retrieveMatchHistoryRecord(hash: hash) != nil
+        } catch {
+            Log.network.error("checkMatchExists failed: \(error.localizedDescription, privacy: .public)")
+            return false
+        }
+    }
+
+    func addNewMatch(withHash hash: String, coinCount: Int) async {
+        guard Self.isAvailable else { return }
+        guard await !checkMatchExists(hash: hash) else { return }
+        do {
+            try await createMatchHistoryRecord(hash: hash, coinsAwarded: coinCount)
+            let current = await getPlayerCoinCount()
+            await setPlayerCoinCount(toValue: current + coinCount)
+        } catch {
+            Log.network.error("addNewMatch failed: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    // MARK: - Private CK operations
+
+    private func persist(_ record: CKRecord) async throws {
+        _ = try await privateDB.save(record)
+    }
+
+    private func createCoinRecord() async {
         let record = CKRecord(recordType: "Coin")
-        record.setValue(coinCount, forKey: "amount")
-
-        logger.log(message: "Persisting \(record)")
-        
-        persistRecord(record)
-    }
-    
-    private func retrieveCoinRecord(_ callback: @escaping (CKRecord?) -> Void) {
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "Coin", predicate: predicate)
-
-        logger.log(message: " Performing query...")
-        privateDB.fetch(
-            withQuery: query,
-            inZoneWith: CKRecordZone.default().zoneID,
-            desiredKeys: nil,
-            resultsLimit: 1
-        ) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let response):
-                let firstRecord = response.matchResults.compactMap { try? $0.1.get() }.first
-                callback(firstRecord)
-            case .failure(let error):
-                self.logger.log(message: "Error: \(error.localizedDescription)")
-            }
+        record.setValue(0, forKey: "amount")
+        do {
+            try await persist(record)
+        } catch {
+            Log.network.error("createCoinRecord failed: \(error.localizedDescription, privacy: .public)")
         }
     }
-    
-    fileprivate func createMatchHistoryRecord(hash: String, coinsAwarded: Int) {
-        
+
+    private func createMatchHistoryRecord(hash: String, coinsAwarded: Int) async throws {
         let record = CKRecord(recordType: "MatchHistory")
         record.setValue(coinsAwarded, forKey: "coinsAwarded")
         record.setValue(hash, forKey: "matchHash")
-        
-        logger.log(message: "Persisting \(record)")
-        
-        persistRecord(record)
+        try await persist(record)
     }
-    
-    private func retrieveMatchHistoryRecord(withHash hash: String, _ callback: @escaping (CKRecord?) -> Void) {
-        let predicate = NSPredicate(format: "matchHash == %@", hash)
-        let query = CKQuery(recordType: "MatchHistory", predicate: predicate)
 
-        logger.log(message: "Performing query...")
-        privateDB.fetch(
-            withQuery: query,
+    private func retrieveCoinRecord() async throws -> CKRecord? {
+        try await firstRecord(query: CKQuery(recordType: "Coin", predicate: NSPredicate(value: true)))
+    }
+
+    private func retrieveMatchHistoryRecord(hash: String) async throws -> CKRecord? {
+        try await firstRecord(query: CKQuery(recordType: "MatchHistory", predicate: NSPredicate(format: "matchHash == %@", hash)))
+    }
+
+    private func firstRecord(query: CKQuery) async throws -> CKRecord? {
+        let response = try await privateDB.records(
+            matching: query,
             inZoneWith: CKRecordZone.default().zoneID,
             desiredKeys: nil,
             resultsLimit: 1
-        ) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let response):
-                let firstRecord = response.matchResults.compactMap { try? $0.1.get() }.first
-                callback(firstRecord)
-            case .failure(let error):
-                self.logger.log(message: "Error: \(error.localizedDescription)")
-            }
-        }
+        )
+        return response.matchResults.compactMap { try? $0.1.get() }.first
     }
-    
-    // MARK: DatabaseManager Methods
-    func checkMatchExists(hash: String, _ callback: @escaping (Bool) -> Void) {
-        guard Self.isAvailable else { callback(false); return }
-        // Check if it exists in the remote container
-        retrieveMatchHistoryRecord(withHash: hash) { (matchRecord) in
-            if matchRecord != nil {
-                // If it does, return true
-                self.logger.log(message: "Match \(hash) found!")
-                callback(true)
-            } else {
-                // If it doesn't, return false
-                self.logger.log(message: "Match \(hash) not found")
-                callback(false)
-            }
-        }
-        
-    }
-    
-    func addNewMatch(withHash hash: String, coinCount: Int) {
-        guard Self.isAvailable else { return }
-        logger.log(message: "Attempting to add match with hash \(hash)")
-        checkMatchExists(hash: hash, { (result) in
-            // doesn't exists
-            if !result {
-                // Add to database
-                self.logger.log(message: "Match doesn't exist! Great :). Creating record...")
-                self.createMatchHistoryRecord(hash: hash, coinsAwarded: coinCount)
-                
-                // update coin count
-                self.logger.log(message: "Updating coin count.")
-                self.getPlayerCoinCount {
-                    self.setPlayerCoinCount(toValue: $0 + coinCount)
-                }
-            }
-        })
-        //
-            
-    }
-    
-    func getPlayerCoinCount(_ callback: @escaping (Int) -> Void) {
-        guard Self.isAvailable else { callback(0); return }
-        // If it does, return count
-
-        // Fetch first record and see if it exists
-        retrieveCoinRecord { coinRecord in
-            if let record = coinRecord {
-                self.logger.log(message: "Fetch success")
-                let amount = record["amount"] as! Int
-                
-                self.logger.log(message: "Returning amount as \(amount)")
-                callback(amount)
-            } else {
-                self.logger.log(message: "Creating coin record")
-                self.createCoinRecord()
-                callback(0)
-            }
-        }
-        
-    }
-    
-    func setPlayerCoinCount(toValue value: Int) {
-        guard Self.isAvailable else { return }
-        // Check if it exists
-        retrieveCoinRecord { coinRecord in
-            if let record = coinRecord {
-                // If it does, update it's value
-                record.setValue(value, forKey: "amount")
-                self.persistRecord(record)
-            } else {
-                self.createCoinRecord()
-            }
-        }
-        
-    }
-    
 }

@@ -79,7 +79,7 @@ struct StatisticsView: View {
         }
         .task {
             EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
-            CloudKitManager.shared.addNewMatch(
+            await CloudKitManager.shared.addNewMatch(
                 withHash: statistics.matchHash,
                 coinCount: statistics.totalPoints
             )

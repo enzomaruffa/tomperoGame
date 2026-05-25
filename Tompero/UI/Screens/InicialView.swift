@@ -235,10 +235,9 @@ struct InicialView: View {
     // MARK: - Side effects
 
     private func fetchCoinCount() {
-        CloudKitManager.shared.getPlayerCoinCount { count in
-            DispatchQueue.main.async {
-                coinCount = count
-            }
+        Task {
+            let count = await CloudKitManager.shared.getPlayerCoinCount()
+            await MainActor.run { coinCount = count }
         }
     }
 }
