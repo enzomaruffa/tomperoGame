@@ -25,7 +25,11 @@ struct InicialView: View {
     @State private var revealedCount: Int = 0
     @State private var lightsOn: Bool = false
     @State private var coinCount: Int = 0
-    @State private var nameButtonTitle: String = LANConnectionManager.shared.selfName
+    // Empty until .onAppear so we don't force `LANConnectionManager.init()`
+    // (which allocates the listener / browser + registers lifecycle
+    // observers) during the InicialView struct's init — that ran on the
+    // first-frame critical path before this change.
+    @State private var nameButtonTitle: String = ""
     @State private var showNameEditor: Bool = false
     @State private var nameDraft: String = LocalPeerIdentity.userSetName ?? ""
 
@@ -36,8 +40,15 @@ struct InicialView: View {
     private static let designWidth: CGFloat = 896
     private static let designHeight: CGFloat = 414
 
+    // Fires exactly once (lazy static) the first time SwiftUI evaluates the
+    // body, even though `body` itself is re-invoked many times per frame.
+    private static let bodyTimer: Void = {
+        Log.game.info("LAUNCH +\(AppDelegate.elapsed())s InicialView.body first eval")
+    }()
+
     var body: some View {
-        GeometryReader { proxy in
+        _ = Self.bodyTimer
+        return GeometryReader { proxy in
             let scale = min(proxy.size.width / Self.designWidth, proxy.size.height / Self.designHeight)
             let scaledWidth = Self.designWidth * scale
             let scaledHeight = Self.designHeight * scale
@@ -173,6 +184,10 @@ struct InicialView: View {
         .onAppear {
             Log.game.info("LAUNCH +\(AppDelegate.elapsed())s InicialView.onAppear")
             revealedCount = 0
+            // Lazy: forces LANConnectionManager.init() the first time. Doing
+            // this here (not in the @State initializer) keeps it off the
+            // first-frame critical path.
+            nameButtonTitle = LANConnectionManager.shared.selfName
             fetchCoinCount()
         }
         .onReceive(typingTimer) { _ in
