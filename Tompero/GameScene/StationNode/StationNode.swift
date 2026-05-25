@@ -10,9 +10,14 @@ import Foundation
 import SpriteKit
 
 class StationNode: TappableDelegate {
-    
+
     var stationType: StationType
     internal var ingredient: Ingredient?
+
+    /// Set by `MatchSceneBuilder` immediately after construction. Lets
+    /// PlateNode / IngredientNode reach the scene for pipe routing +
+    /// delivery without force-casting `parent as! GameScene`.
+    weak var routing: MatchSceneRouting?
     
     var isEmpty: Bool {
         ingredientNode == nil && plateNode == nil

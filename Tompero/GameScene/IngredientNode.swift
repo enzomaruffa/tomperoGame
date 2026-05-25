@@ -164,17 +164,13 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
             return canMove
             
         case .pipe:
-            var playerToSendTo: String = ""
-            let scene = station.spriteNode.parent as! GameScene
-            switch station.spriteNode.name {
-            case "pipe1": playerToSendTo = scene.players[0]
-            case "pipe2": playerToSendTo = scene.players[1]
-            case "pipe3": playerToSendTo = scene.players[2]
-            default: return false
+            guard
+                let pipeName = station.spriteNode.name,
+                let peer = station.routing?.remotePlayer(forPipeName: pipeName)
+            else {
+                return false
             }
-            
-            GameConnectionManager.shared.send(ingredient: self.ingredient, to: playerToSendTo)
-
+            GameConnectionManager.shared.send(ingredient: self.ingredient, to: peer)
             removeFromPreviousStation()
             sendSpriteNode(to: .pipe)
             return true
