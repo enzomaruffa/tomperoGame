@@ -17,12 +17,13 @@ class IngredientBoxNode: StationNode {
     
     init(ingredient: Ingredient) {
         super.init(stationType: .ingredientBox)
-        
+
         self.ingredient = ingredient
-        
+
         let tappableNode = TappableSpriteNode(imageNamed: ingredient.texturePrefix + "Box.png")
         self.spriteNode = tappableNode
         tappableNode.delegate = self
+        idleBobEnabled = true
     }
     
     override func tap() {

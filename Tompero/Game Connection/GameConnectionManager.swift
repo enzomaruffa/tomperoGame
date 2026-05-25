@@ -2,193 +2,105 @@
 //  GameConnectionManager.swift
 //  Tompero
 //
-//  Created by Enzo Maruffa Moreira on 25/11/19.
-//  Copyright © 2019 Tompero. All rights reserved.
+//  Thin transformer over LANConnectionManager: subscribes to its raw
+//  WirePayload stream, restores concrete Ingredient subclasses via
+//  findDowncast(), and republishes typed GameEvents that the scene
+//  layer sinks on. The hand-rolled NSHashTable observer pattern was
+//  removed in favor of a single PassthroughSubject so subscribers can
+//  filter/map with Combine.
 //
 
+import Combine
 import Foundation
 
-class GameConnectionManager {
+final class GameConnectionManager {
 
-    // MARK: - Static Variables
     static let shared = GameConnectionManager()
 
-    // MARK: - Variables
-    private let observers = NSHashTable<AnyObject>.weakObjects()
-    private var observersSnapshot: [GameConnectionManagerObserver] {
-        observers.allObjects.compactMap { $0 as? GameConnectionManagerObserver }
-    }
+    /// Typed game events. GameScene `.sink`s on this and switches on the case.
+    let events = PassthroughSubject<GameEvent, Never>()
 
-    // MARK: - Methods
+    private var cancellables = Set<AnyCancellable>()
+
     private init() {
-        LANConnectionManager.shared.subscribeDataObserver(observer: self)
+        LANConnectionManager.shared.payloadReceived
+            .sink { [weak self] payload in
+                self?.handle(payload: payload)
+            }
+            .store(in: &cancellables)
     }
 
-    func subscribe(observer: GameConnectionManagerObserver) {
-        observers.add(observer as AnyObject)
-    }
+    // MARK: - Sending
 
-    func remove(observer: GameConnectionManagerObserver) {
-        observers.remove(observer as AnyObject)
-    }
-
-    func removeAllObservers() {
-        observers.removeAllObjects()
-    }
-    
     func sendEveryone(message: String) {
-        do {
-            Log.network.debug("Preparing message")
-            let messageData = try JSONEncoder().encode(message)
-            let wrapped = WirePayload(object: messageData, type: .string)
-            LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
-        } catch let error {
-            Log.network.error("\(error.localizedDescription, privacy: .public)")
-        }
+        LANConnectionManager.shared.send(.string(message))
     }
-    
+
     func sendEveryone(orderList: [Order]) {
-        do {
-            Log.network.debug("Preparing order list")
-            let ordersData = try JSONEncoder().encode(orderList)
-            let wrapped = WirePayload(object: ordersData, type: .orders)
-            LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
-        } catch let error {
-            Log.network.error("\(error.localizedDescription, privacy: .public)")
-        }
+        LANConnectionManager.shared.send(.orders(orderList))
     }
-    
+
     func sendEveryone(deliveryNotification: OrderDeliveryNotification) {
-        do {
-            Log.network.debug("Preparing delivery notification")
-            let notificationData = try JSONEncoder().encode(deliveryNotification)
-            let wrapped = WirePayload(object: notificationData, type: .deliveryNotification)
-            LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
-        } catch let error {
-            Log.network.error("\(error.localizedDescription, privacy: .public)")
-        }
+        LANConnectionManager.shared.send(.deliveryNotification(deliveryNotification))
     }
-    
+
     func sendEveryone(statistics: MatchStatistics) {
-        do {
-            Log.network.debug("Preparing statistics list")
-            let statisticsData = try JSONEncoder().encode(statistics)
-            let wrapped = WirePayload(object: statisticsData, type: .statistics)
-            LANConnectionManager.shared.sendEveryone(dataWrapper: wrapped)
-        } catch let error {
-            Log.network.error("\(error.localizedDescription, privacy: .public)")
-        }
+        LANConnectionManager.shared.send(.statistics(statistics))
     }
-    
+
     func send(ingredient: Ingredient, to player: String) {
-        do {
-            let ingredientData = try JSONEncoder().encode(ingredient)
-            let wrapped = WirePayload(object: ingredientData, type: .ingredient)
-            LANConnectionManager.shared.send(dataWrapper: wrapped, toDisplayName: player)
-        } catch {
-            Log.network.debug("Error encoding ingredient: \(error.localizedDescription)")
-        }
+        LANConnectionManager.shared.send(.ingredient(ingredient), to: player)
     }
 
     func send(plate: Plate, to player: String) {
-        do {
-            let plateData = try JSONEncoder().encode(plate)
-            let wrapped = WirePayload(object: plateData, type: .plate)
-            LANConnectionManager.shared.send(dataWrapper: wrapped, toDisplayName: player)
-        } catch {
-            Log.network.debug("Error encoding plate: \(error.localizedDescription)")
-        }
+        LANConnectionManager.shared.send(.plate(plate), to: player)
     }
-    
-}
 
-// MARK: - LANDataObserver Methods
-extension GameConnectionManager: LANDataObserver {
-    
-    func receiveData(wrapper: WirePayload) {
-        Log.network.debug("Received data with type: \(wrapper.type.rawValue)")
-        
-        switch wrapper.type {
-        case .plate:
-            do {
-                let plate = try JSONDecoder().decode(Plate.self, from: wrapper.object)
-                
-                // downcasting plate
-                let newIngredients = plate.ingredients.map({ $0.findDowncast() })
-                newIngredients.forEach({ $0.currentState = $0.finalState })
-                let newPlate = Plate()
-                newPlate.ingredients = newIngredients
-                
-                observersSnapshot.forEach({ $0.receivePlate(plate: newPlate) })
-            } catch let error {
-                Log.network.debug("Error decoding: \(error.localizedDescription)")
+    // MARK: - Incoming
+
+    private func handle(payload: WirePayload) {
+        switch payload {
+        case .plate(let plate):
+            // Restore concrete Ingredient subclasses + set their currentState
+            // before the scene picks the plate up.
+            let newIngredients = plate.ingredients.map { $0.findDowncast() }
+            newIngredients.forEach { $0.currentState = $0.finalState }
+            let newPlate = Plate()
+            newPlate.ingredients = newIngredients
+            events.send(.plate(newPlate))
+
+        case .ingredient(let ingredient):
+            events.send(.ingredient(ingredient.findDowncast()))
+
+        case .orders(let orders):
+            let newOrders: [Order] = orders.map { order in
+                let newOrder = Order(timeLeft: order.timeLeft)
+                newOrder.totalTime = order.totalTime
+                newOrder.number = order.number
+                newOrder.ingredients = order.ingredients.map { $0.findDowncast() }
+                return newOrder
             }
-            
-        case .ingredient:
-            do {
-                let ingredient = try JSONDecoder().decode(Ingredient.self, from: wrapper.object)
-                
-                let newIngredient = ingredient.findDowncast()
-                
-                observersSnapshot.forEach({ $0.receiveIngredient(ingredient: newIngredient) })
-            } catch let error {
-                Log.network.debug("Error decoding: \(error.localizedDescription)")
-            }
-            
-        case .orders:
-            do {
-                let orders = try JSONDecoder().decode([Order].self, from: wrapper.object)
-                
-                var newOrders: [Order] = []
-                for order in orders {
-                    let newOrder = Order(timeLeft: order.timeLeft)
-                    newOrder.totalTime = order.totalTime
-                    newOrder.number = order.number
-                    newOrder.ingredients = order.ingredients.map({ $0.findDowncast() })
-                    newOrders.append(newOrder)
-                }
-                
-                Log.network.debug("Received orderList: \(String(describing: newOrders))")
-                observersSnapshot.forEach({ $0.receiveOrders(orders: newOrders) })
-                
-                // Chamar delegates que tem o receiveMessage
-            } catch let error {
-                Log.network.debug("Error decoding: \(error.localizedDescription)")
-            }
-            
-        case .deliveryNotification:
-            do {
-                let deliveryNotification = try JSONDecoder().decode(OrderDeliveryNotification.self, from: wrapper.object)
-                Log.network.debug("Received notification: \(String(describing: deliveryNotification))")
-                observersSnapshot.forEach({ $0.receiveDeliveryNotification(notification: deliveryNotification) })
-                
-                // Chamar delegates que tem o receiveMessage
-            } catch let error {
-                Log.network.debug("Error decoding: \(error.localizedDescription)")
-            }
-            
-        case .statistics:
-            do {
-                let statistics = try JSONDecoder().decode(MatchStatistics.self, from: wrapper.object)
-                Log.network.debug("Received statistics: \(String(describing: statistics))")
-                
-                observersSnapshot.forEach({ $0.receiveStatistics(statistics: statistics) })
-            } catch let error {
-                Log.network.debug("Error decoding: \(error.localizedDescription)")
-            }
-            
-        case .string:
-            do {
-                let message = try JSONDecoder().decode(String.self, from: wrapper.object)
-                Log.network.debug("Received message: \(message)")
-                
-                // Chamar delegates que tem o receiveMessage
-            } catch let error {
-                Log.network.debug("Error decoding: \(error.localizedDescription)")
-            } 
-        default:
-            Log.network.debug("Unknown type received")
+            events.send(.orders(newOrders))
+
+        case .deliveryNotification(let notification):
+            events.send(.deliveryNotification(notification))
+
+        case .statistics(let statistics):
+            events.send(.statistics(statistics))
+
+        case .pauseRequest(let paused):
+            events.send(.pauseRequest(paused))
+
+        case .playerAwards(let player, let stats):
+            events.send(.playerAwards(player: player, stats: stats))
+
+        case .string(let message):
+            Log.network.debug("Received string message: \(message, privacy: .public)")
+
+        case .playerData, .gameRule:
+            // Routed via LANConnectionManager.matchmakingEvents; should not
+            // arrive on payloadReceived.
+            break
         }
     }
-    
 }

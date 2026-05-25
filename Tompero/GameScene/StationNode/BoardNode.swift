@@ -68,6 +68,7 @@ class BoardNode: StationNode {
             let choppableComponent = ingredient.choppableComponent {
             choppableComponent.update()
             SFXPlayer.shared.chop.play()
+            routing?.recordAction(.chop)
             
             ingredientNode?.spriteNode.run(.sequence([
                 .scale(to: 0.9, duration: 0.05),

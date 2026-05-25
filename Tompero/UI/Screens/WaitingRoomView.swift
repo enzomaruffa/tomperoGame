@@ -9,11 +9,12 @@
 //  - 4 player slots row (125, 108, 646, 157.5)
 //
 
+import Combine
 import SwiftUI
 
 private let emptyName = "__empty__"
 
-final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
+final class WaitingRoomViewModel: ObservableObject {
 
     @Published var players: [PeerWithStatus]
     @Published var difficulty: GameDifficulty = .easy
@@ -27,6 +28,8 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
     /// True once the joiner has accepted (or declined) the first invite, so
     /// reconnect events don't re-prompt.
     private var hasRespondedToInvite = false
+
+    private var cancellables = Set<AnyCancellable>()
 
     init(hosting: Bool) {
         self.hosting = hosting
@@ -42,11 +45,11 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
             self.players = (0..<4).map { _ in PeerWithStatus(name: emptyName, status: .notConnected) }
             LANConnectionManager.shared.startJoining()
         }
-        LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
-    }
-
-    deinit {
-        LANConnectionManager.shared.unsubscribeMatchmakingObserver(observer: self)
+        LANConnectionManager.shared.matchmakingEvents
+            .sink { [weak self] event in
+                self?.handle(matchmakingEvent: event)
+            }
+            .store(in: &cancellables)
     }
 
     var canStart: Bool {
@@ -64,39 +67,30 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
     func startMatch() {
         let peers = players.map { $0.name }
         let rule = GameRuleFactory.generateRule(difficulty: difficulty, players: peers)
-        do {
-            let ruleData = try JSONEncoder().encode(rule)
-            LANConnectionManager.shared.sendEveryone(dataWrapper: WirePayload(object: ruleData, type: .gameRule))
-        } catch {
-            Log.network.error("Failed to encode GameRule: \(error.localizedDescription, privacy: .public)")
-            return
-        }
+        LANConnectionManager.shared.send(.gameRule(rule))
         MusicPlayer.shared.stop(.menu)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.startedGame = rule
         }
     }
 
-    // MARK: - LANMatchmakingObserver
+    // MARK: - Matchmaking events
 
-    func receiveGameRule(rule: GameRule) {
-        LANConnectionManager.shared.stopAdvertising()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            MusicPlayer.shared.stop(.menu)
-            self.startedGame = rule
-        }
-    }
+    private func handle(matchmakingEvent event: LANMatchmakingEvent) {
+        switch event {
+        case .gameRule(let rule):
+            LANConnectionManager.shared.stopAdvertising()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                MusicPlayer.shared.stop(.menu)
+                self.startedGame = rule
+            }
 
-    func playerListSent(playersWithStatus: [PeerWithStatus]) {
-        guard !hosting else { return }
-        DispatchQueue.main.async {
+        case .playerListSent(let playersWithStatus):
+            guard !hosting else { return }
             self.players = playersWithStatus
-        }
-    }
 
-    func playerUpdate(player: String, state: PeerConnectionState) {
-        if hosting {
-            DispatchQueue.main.async {
+        case .playerUpdate(let player, let state):
+            if hosting {
                 var newList = self.players.map { $0.copy() }
                 if let existing = newList.first(where: { $0.name == player }) {
                     existing.status = state
@@ -107,15 +101,13 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
                     dropped.name = player
                     dropped.status = state
                 }
-                LANConnectionManager.shared.sendPeersStatus(playersWithStatus: newList)
+                LANConnectionManager.shared.send(.playerData(newList))
                 self.players = newList
-            }
-        } else if state == .connected, !hasRespondedToInvite {
-            // Joiner side: first peer to fully connect is the host who invited
-            // us. Show the accept/decline prompt before the user is committed
-            // to the match.
-            hasRespondedToInvite = true
-            DispatchQueue.main.async {
+            } else if state == .connected, !hasRespondedToInvite {
+                // Joiner side: first peer to fully connect is the host who
+                // invited us. Show the accept/decline prompt before the user
+                // is committed to the match.
+                hasRespondedToInvite = true
                 self.pendingInvitationFrom = player
             }
         }
@@ -172,7 +164,7 @@ struct WaitingRoomView: View {
                     .resizable()
                     .scaledToFit()
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressableButtonStyle())
             .designed(x: 676.5, y: 38, w: 96.5, h: 26.5, scale: scale)
 
             // Difficulty panel — host only
@@ -191,8 +183,7 @@ struct WaitingRoomView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .buttonStyle(.plain)
-                // Original (77.5, 198.5, 112, 30) inside difficulty view (44, 135.5)
+                .buttonStyle(PressableButtonStyle())
                 .designed(x: 121.5, y: 334, w: 112, h: 30, scale: scale)
             }
 
@@ -212,7 +203,7 @@ struct WaitingRoomView: View {
                         .scaledToFit()
                         .opacity(viewModel.canStart ? 1.0 : 0.5)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(PressableButtonStyle())
                 .disabled(!viewModel.canStart)
                 // Inside go view at (207.5, 24, 72, 72)
                 .designed(x: 722.5, y: 297.5, w: 72, h: 72, scale: scale)

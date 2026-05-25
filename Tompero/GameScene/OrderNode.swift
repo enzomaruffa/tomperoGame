@@ -15,6 +15,8 @@ class OrderNode: SKSpriteNode {
     var progressNode = ProgressBar()
     var yellow = false
     var red = false
+    private var urgent = false
+    private static let urgentPulseKey = "urgentPulse"
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         //super.init(texture: texture, color: #colorLiteral(red: 1, green: 0.270588249, blue: 0.2274509817, alpha: 1), size: CGSize(width: 600, height: 568))
@@ -124,15 +126,27 @@ class OrderNode: SKSpriteNode {
     
     func updateBar() {
         progressNode.progress = CGFloat(1 - order!.timeLeft/order!.totalTime)
-        
+
         if progressNode.progress > 0.35 && progressNode.progress <= 0.7 && !yellow {
             yellow = true
             progressNode.bar?.run(.colorize(with: .yellow, colorBlendFactor: 1, duration: 0.5))
         }
-        
+
         if progressNode.progress > 0.7 && !red {
             red = true
             progressNode.bar?.run(.colorize(with: .red, colorBlendFactor: 1, duration: 0.5))
+        }
+
+        // Under 5 seconds: pulse the whole order card forever (until parent
+        // removal stops it). Acts as a final "ship it now" hint when the
+        // timer is critical.
+        if !urgent, let timeLeft = order?.timeLeft, timeLeft < 5 {
+            urgent = true
+            let up = SKAction.scale(to: 1.06, duration: 0.4)
+            up.timingMode = .easeInEaseOut
+            let down = SKAction.scale(to: 1.0, duration: 0.4)
+            down.timingMode = .easeInEaseOut
+            run(SKAction.repeatForever(SKAction.sequence([up, down])), withKey: OrderNode.urgentPulseKey)
         }
     }
 }

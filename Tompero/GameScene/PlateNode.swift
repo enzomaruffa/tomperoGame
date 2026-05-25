@@ -217,37 +217,27 @@ final class PlateNode: MovableDelegate {
             return canMove
             
         case .pipe:
-            var playerToSendTo: String = ""
-            let scene = station.spriteNode.parent as! GameScene
-            switch station.spriteNode.name {
-            case "pipe1": playerToSendTo = scene.players[0]
-            case "pipe2": playerToSendTo = scene.players[1]
-            case "pipe3": playerToSendTo = scene.players[2]
-            default: return false
+            guard
+                let pipeName = station.spriteNode.name,
+                let peer = station.routing?.remotePlayer(forPipeName: pipeName)
+            else {
+                return false
             }
-            
-            GameConnectionManager.shared.send(plate: self.plate, to: playerToSendTo)
-        
+            GameConnectionManager.shared.send(plate: self.plate, to: peer)
+            station.routing?.recordAction(.pipeForward)
             sendSpriteNode(to: .pipe)
             return true
-            
+
         case .hatch:
             sendSpriteNode(to: .hatch)
             return true
-            
+
         case .delivery:
-            
-            if let scene = spriteNode.scene as? GameScene {
-                setPlateIn(station)
-                
-                successfulDelivery = scene.makeDelivery(plate: self.plate)
-                
-                implodeSpriteNode(withDuration: 1)
-                
-                return true
-            }
-            
-            return false
+            guard let routing = station.routing else { return false }
+            setPlateIn(station)
+            successfulDelivery = routing.attemptDelivery(plate: self.plate)
+            implodeSpriteNode(withDuration: 1)
+            return true
             
         default:
             return false

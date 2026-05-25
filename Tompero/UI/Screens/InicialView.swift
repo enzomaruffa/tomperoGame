@@ -25,7 +25,11 @@ struct InicialView: View {
     @State private var revealedCount: Int = 0
     @State private var lightsOn: Bool = false
     @State private var coinCount: Int = 0
-    @State private var nameButtonTitle: String = LANConnectionManager.shared.selfName
+    // Empty until .onAppear so we don't force `LANConnectionManager.init()`
+    // (which allocates the listener / browser + registers lifecycle
+    // observers) during the InicialView struct's init — that ran on the
+    // first-frame critical path before this change.
+    @State private var nameButtonTitle: String = ""
     @State private var showNameEditor: Bool = false
     @State private var nameDraft: String = LocalPeerIdentity.userSetName ?? ""
 
@@ -36,8 +40,15 @@ struct InicialView: View {
     private static let designWidth: CGFloat = 896
     private static let designHeight: CGFloat = 414
 
+    // Fires exactly once (lazy static) the first time SwiftUI evaluates the
+    // body, even though `body` itself is re-invoked many times per frame.
+    private static let bodyTimer: Void = {
+        Log.game.info("LAUNCH +\(AppDelegate.elapsed())s InicialView.body first eval")
+    }()
+
     var body: some View {
-        GeometryReader { proxy in
+        _ = Self.bodyTimer
+        return GeometryReader { proxy in
             let scale = min(proxy.size.width / Self.designWidth, proxy.size.height / Self.designHeight)
             let scaledWidth = Self.designWidth * scale
             let scaledHeight = Self.designHeight * scale
@@ -67,7 +78,7 @@ struct InicialView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
 
                     // HOST — sits over the back window of the kombi
@@ -82,7 +93,7 @@ struct InicialView: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
 
                     // Bottom: frog character — bottom section starts at y=270
@@ -119,11 +130,14 @@ struct InicialView: View {
                             .aspectRatio(contentMode: .fit)
                     }
 
-                    // Coin count label
+                    // Coin count label — uses .contentTransition(.numericText())
+                    // so the value tick-up animation (kicked off in
+                    // `fetchCoinCount`) renders as rolling digits.
                     designed(x: 129, y: 17, w: 319, h: 65, scale: scale) {
                         Text("\(coinCount)")
                             .font(.custom("TitilliumWeb-Bold", size: 30 * scale))
                             .foregroundColor(.white)
+                            .contentTransition(.numericText())
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     }
 
@@ -150,7 +164,7 @@ struct InicialView: View {
                                     .padding(.horizontal, 16 * scale)
                             }
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
 
                     // Settings gear, top-right
@@ -163,7 +177,7 @@ struct InicialView: View {
                                 .scaledToFit()
                                 .foregroundColor(.white)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(PressableButtonStyle())
                     }
                 }
                 .frame(width: scaledWidth, height: scaledHeight)
@@ -173,6 +187,10 @@ struct InicialView: View {
         .onAppear {
             Log.game.info("LAUNCH +\(AppDelegate.elapsed())s InicialView.onAppear")
             revealedCount = 0
+            // Lazy: forces LANConnectionManager.init() the first time. Doing
+            // this here (not in the @State initializer) keeps it off the
+            // first-frame critical path.
+            nameButtonTitle = LANConnectionManager.shared.selfName
             fetchCoinCount()
         }
         .onReceive(typingTimer) { _ in
@@ -220,9 +238,12 @@ struct InicialView: View {
     // MARK: - Side effects
 
     private func fetchCoinCount() {
-        CloudKitManager.shared.getPlayerCoinCount { count in
-            DispatchQueue.main.async {
-                coinCount = count
+        Task {
+            let count = await CloudKitManager.shared.getPlayerCoinCount()
+            await MainActor.run {
+                withAnimation(.easeOut(duration: 0.8)) {
+                    coinCount = count
+                }
             }
         }
     }

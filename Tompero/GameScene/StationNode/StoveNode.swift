@@ -100,6 +100,7 @@ class StoveNode: StationNode {
                 if ingredient.states[ingredient.currentState]?.contains(IngredientState.cooked) == true {
                     ingredient.currentState = .cooked
                     ingredientNode?.checkTextureChange()
+                    routing?.recordAction(.cook)
                 }
             } else {
                 progressBarNode?.bar?.color = .green

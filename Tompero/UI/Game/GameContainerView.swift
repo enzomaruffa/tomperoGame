@@ -33,9 +33,6 @@ struct GameContainerView: View {
                 scene = buildScene()
             }
         }
-        .onDisappear {
-            GameConnectionManager.shared.removeAllObservers()
-        }
         .statusBarHidden()
     }
 
@@ -53,8 +50,10 @@ struct GameContainerView: View {
         // scene.size to the SwiftUI host size shrinks the canvas and stations
         // overlap.
         scene.scaleMode = UIDevice.current.userInterfaceIdiom == .pad ? .aspectFit : .aspectFill
-        scene.onMatchEnd = { stats in
-            router.push(.statistics(stats))
+        scene.onMatchEnd = { [weak scene] stats in
+            let actions = scene?.state.myActions ?? .zero
+            let peers = scene?.state.peerAwards ?? [:]
+            router.push(.statistics(stats, localActions: actions, peerAwards: peers))
         }
         scene.onMatchError = {
             router.popToRoot()

@@ -6,35 +6,29 @@
 //  PeerPickerViewController. Auto-dismisses on the first successful handshake.
 //
 
+import Combine
 import SwiftUI
 
-final class PeerPickerViewModel: ObservableObject, LANDiscoveryObserver, LANMatchmakingObserver {
+final class PeerPickerViewModel: ObservableObject {
     @Published var peers: [LANBrowser.DiscoveredPeer] = []
     @Published var connectedPeerName: String?
 
+    private var cancellables = Set<AnyCancellable>()
+
     init() {
         peers = LANConnectionManager.shared.discoveredPeers
-        LANConnectionManager.shared.setDiscoveryObserver(self)
-        LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
-    }
 
-    deinit {
-        LANConnectionManager.shared.setDiscoveryObserver(nil)
-        LANConnectionManager.shared.unsubscribeMatchmakingObserver(observer: self)
-    }
+        LANConnectionManager.shared.discoveredPeersChanged
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$peers)
 
-    func discoveryDidUpdate(peers: [LANBrowser.DiscoveredPeer]) {
-        DispatchQueue.main.async {
-            self.peers = peers
-        }
-    }
-
-    func playerUpdate(player: String, state: PeerConnectionState) {
-        if state == .connected {
-            DispatchQueue.main.async {
-                self.connectedPeerName = player
+        LANConnectionManager.shared.matchmakingEvents
+            .sink { [weak self] event in
+                if case .playerUpdate(let player, let state) = event, state == .connected {
+                    self?.connectedPeerName = player
+                }
             }
-        }
+            .store(in: &cancellables)
     }
 }
 

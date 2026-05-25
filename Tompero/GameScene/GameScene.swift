@@ -11,7 +11,19 @@ import GameplayKit
 
 // swiftlint:disable force_cast
 class GameScene: SKScene {
-    
+
+    /// Owns the Combine subscriptions for inbound game + matchmaking events
+    /// and dispatches them via the `MatchNetworkDelegate` protocol below.
+    /// Set in `didMove` once the match state is configured.
+    private var network: MatchNetworkAdapter!
+
+    /// Pause UI — constructed lazily on first pause.
+    private var pauseOverlay: PauseOverlay?
+
+    /// Tap delegate for the pause button. Holds a closure that broadcasts a
+    /// `.pauseRequest(true)` to all peers.
+    private var pauseButtonDelegate: TappableClosure?
+
     // MARK: - Host callbacks
     /// Fired when a successful match ends with final statistics; SwiftUI
     /// host pushes the statistics screen. Replaces direct coordinator access.
@@ -20,77 +32,50 @@ class GameScene: SKScene {
     /// SwiftUI host pops to root.
     var onMatchError: (() -> Void)?
 
-    // MARK: - Game Variables
+    // MARK: - Match configuration (set by GameContainerView before didMove)
     var hosting = false
-
-    var player: String = LANConnectionManager.shared.selfName
     var rule: GameRule?
-    var orders: [Order] = []
-    var tables: [PlayerTable] {
-        rule?.playerTables[player] ?? []
-    }
-    var playerOrder: [String] {
-        rule?.playerOrder ?? []
-    }
-    var players: [String] {
-        playerOrder.filter { $0 != player }
-    }
-    private static let playerColorPalette = ["Blue", "Purple", "Green", "Orange"]
-    var playerColor: String {
-        guard let index = playerOrder.firstIndex(of: player) else { return GameScene.playerColorPalette[0] }
-        return GameScene.playerColorPalette[index]
-    }
-    var colors: [String] {
-        var palette = GameScene.playerColorPalette
-        if let index = playerOrder.firstIndex(of: player) {
-            palette.remove(at: index)
-        }
-        return palette
-    }
-    
-    var stations: [StationNode] = []
-    var shelves: [StationNode] {
-        stations.filter({ $0.stationType == .shelf })
-    }
-    var pipes: [StationNode] {
-        stations.filter({ $0.stationType == .pipe })
-    }
-    var hatch: StationNode {
-        stations.filter({ $0.stationType == .hatch }).first!
-    }
-    
-    var firstEmptyShelf: StationNode? {
-        shelves.filter({ $0.isEmpty }).first
-    }
-    
-    var orderListNode: OrderListNode!
-    var orderGenerationCounter = 3 * 60
-    let timeBetweenOrders = 10 * 60
-    var orderCount = 0
-    let maxOrders = 3
-    var firstOrder = false
-    
-    var matchStatistics: MatchStatistics?
-    
-    var matchTimer: Float = 180
-    var timerStarted = false
-    var timerUpdateCounter = 0
-    
-    var totalPoints = 0
-    
-    var endTimerPlayed = false
-    var timesUpPlayed = false
-    
+
+    // MARK: - Match-scoped domain types
+
+    /// Derived per-match info — local player, peer order, colors, my tables.
+    /// Populated in `didMove`.
+    private(set) var context: MatchContext!
+
+    /// Mutable match bookkeeping (orders, statistics, lifecycle flags).
+    let state = MatchState()
+
+    /// Counts down + fires under-15s warning + times-up callbacks.
+    private(set) var clock = MatchClock()
+
+    /// Host-only order spawn loop. Nil on joiners.
+    private var orderGenerator: OrderGenerator?
+
+    /// Output of `MatchSceneBuilder.build()`. Holds the stations array,
+    /// teleporter sprite + frames, order list, HUD labels — i.e. every
+    /// scene-graph reference the scene reads each frame.
+    private var nodes: MatchSceneNodes!
+
+    // MARK: - Scene graph references (convenience accessors)
+
+    var player: String { context?.player ?? LANConnectionManager.shared.selfName }
+    var players: [String] { context?.otherPlayers ?? [] }
+    var stations: [StationNode] { nodes?.stations ?? [] }
+    var shelves: [StationNode] { stations.filter({ $0.stationType == .shelf }) }
+    var pipes: [StationNode] { stations.filter({ $0.stationType == .pipe }) }
+    var hatch: StationNode? { stations.first(where: { $0.stationType == .hatch }) }
+    var firstEmptyShelf: StationNode? { shelves.first(where: { $0.isEmpty }) }
+    var orderListNode: OrderListNode! { nodes?.orderList }
+
     // MARK: - Animation Variables
     var stationsAnimationsRunning = false
 
-    // Disconnect-recovery overlay
-    fileprivate var reconnectingOverlay: SKNode?
-    fileprivate var reconnectTimeoutTimer: Timer?
-    
-    // Teleport variables
-    private var teleportAnimationNode: SKSpriteNode!
-    private var teleportAnimationFrames: [SKTexture]!
+    // Disconnect-recovery overlay — built lazily on first peer drop so
+    // didMove doesn't allocate it for matches that never disconnect.
+    private var reconnectionOverlay: ReconnectionOverlayController?
+
+    /// Teleport animation duration in seconds (frames-per-second derived
+    /// from `nodes.teleportFrames.count`).
     private let teleportDuration = 1
     
     // MARK: - Scene Lifecycle
@@ -123,197 +108,126 @@ class GameScene: SKScene {
         cameraNode.position = CGPoint(x: 0, y: -offset)
 
         Log.game.info("camera scale=\(requiredScale) offset=\(offset)")
-        
-        // Adds itself as a GameConnection observer
-        GameConnectionManager.shared.subscribe(observer: self)
-        LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
 
-        if hosting, let rule {
-            matchStatistics = MatchStatistics(ruleUsed: rule)
-            EventLogger.shared.logMatchStart(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule.difficulty)
+        guard let rule else {
+            Log.game.error("GameScene.didMove: no rule set — match cannot start")
+            return
         }
-        
-        setupOrderListNode()
-        setupStations()
-        setupShelves()
-        setupPiping()
-        setupHUD()
-        setupBackground()
-        
-        SFXPlayer.shared.roundStarted.play()
-    }
-    
-    func setupOrderListNode() {
-        orderListNode = (childNode(withName: "orders") as! OrderListNode)
-        orderListNode.texture = SKTexture(imageNamed: "OrderList" + playerColor)
-    }
-    
-    func setupStations() {
-        func convertTableToStation(type: PlayerTableType) -> StationType {
-            switch type {
-            case .chopping: return .board
-            case .cooking: return .stove
-            case .frying: return .fryer
-            case .plate: return .plateBox
-            case .ingredient: return .ingredientBox
-            case .empty: return .empty
-            }
+        context = MatchContext(rule: rule, hosting: hosting, player: LANConnectionManager.shared.selfName)
+
+        configureClock()
+
+        if hosting {
+            orderGenerator = OrderGenerator()
+            state.matchStatistics = MatchStatistics(ruleUsed: rule)
+            EventLogger.shared.logMatchStart(
+                withPlayerCount: context.playerOrder.filter({ $0 != "__empty__" }).count,
+                andDifficulty: rule.difficulty
+            )
         }
 
-        Log.game.info("setupStations: \(self.tables.count) tables for player \(self.player, privacy: .public)")
-        for (i, table) in tables.enumerated() {
-            Log.game.info("  table[\(i)]: type=\(table.type.rawValue, privacy: .public) ingredient=\(table.ingredient?.texturePrefix ?? "nil", privacy: .public)")
-        }
-        Log.game.info("  scene.size=\(self.size.debugDescription, privacy: .public) anchorPoint=\(self.anchorPoint.debugDescription, privacy: .public)")
+        network = MatchNetworkAdapter(state: state, delegate: self)
 
-        var nodes: [StationNode] = []
-        for table in tables {
-            if table.type == .chopping {
-                nodes.append(BoardNode())
-            } else if table.type == .cooking {
-                nodes.append(StoveNode())
-            } else if table.type == .frying {
-                nodes.append(FryerNode())
-            } else if table.type == .plate {
-                nodes.append(PlateBoxNode())
-            } else if table.type == .ingredient, let ingredient = table.ingredient {
-                nodes.append(IngredientBoxNode(ingredient: ingredient))
-            } else if table.type == .empty {
-                nodes.append(StationNode(stationType: .empty))
-            } else {
-                Log.game.error("setupStations: skipped unrecognized table type=\(table.type.rawValue, privacy: .public)")
-            }
-        }
-        stations = nodes
-
-        for (index, station) in stations.enumerated() {
-            let node = station.spriteNode
-            let pos = scene!.size.width / 2 - node.size.width / 2
-            let xPositions: [CGFloat] = [-pos, 0.0, pos]
-            let xPos = index < xPositions.count ? xPositions[index] : 0
-            node.position = CGPoint(x: xPos, y: CGFloat(station.spriteYPos))
-            Log.game.info("  station[\(index)] type=\(station.stationType.rawValue, privacy: .public) pos=\(node.position.debugDescription, privacy: .public) sprite.size=\(node.size.debugDescription, privacy: .public)")
-            self.addChild(node)
-        }
-    }
-    
-    func createTeleporterAnimation(_ teleporterNode: (SKSpriteNode)) {
-        
-        let teleportAtlas = SKTextureAtlas(named: "Teleport" + playerColor)
-        teleportAnimationFrames = []
-        for currentAnimation in 0..<teleportAtlas.textureNames.count {
-            let teleportFrameName = "teleport\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
-            teleportAnimationFrames.append(teleportAtlas.textureNamed(teleportFrameName))
-        }
-        
-        teleportAnimationNode = SKSpriteNode(texture: teleportAnimationFrames[0])
-        self.addChild(teleportAnimationNode)
-        
-        teleportAnimationNode.position = teleporterNode.position + CGPoint(x: -8, y: -(teleporterNode.size.height + 8))
-        teleportAnimationNode.zPosition = 60
-        
-    }
-    
-    func setupShelves() {
-        stations.append(ShelfNode(node: self.childNode(withName: "shelf1") as! SKSpriteNode))
-        stations.append(ShelfNode(node: self.childNode(withName: "shelf2") as! SKSpriteNode))
-        stations.append(ShelfNode(node: self.childNode(withName: "shelf3") as! SKSpriteNode))
-        
-        stations.append(DeliveryNode(node: self.childNode(withName: "delivery") as! SKSpriteNode))
-        
-        (self.childNode(withName: "target") as! SKSpriteNode).texture = SKTexture(imageNamed: "Target" + playerColor)
-        
-        let teleporterNode = (self.childNode(withName: "teleporter") as! SKSpriteNode)
-        teleporterNode.texture = SKTexture(imageNamed: "Teleporter" + playerColor)
-        
-        createTeleporterAnimation(teleporterNode)
-    }
-    
-    func setupPiping() {
-        for (index, color) in colors.enumerated() {
-            let pipeNode = self.childNode(withName: "pipeArea" + (index+1).description) as! SKSpriteNode
-            let pipeImage = self.childNode(withName: "pipe" + (index+1).description) as! SKSpriteNode
-            pipeNode.name = "pipe" + (index+1).description
-            if playerOrder[index+1] != "__empty__" {
-                pipeImage.texture = SKTexture(imageNamed: "Pipe" + color)
-                stations.append(PipeNode(node: pipeNode))
-            } else {
-                pipeImage.texture = SKTexture(imageNamed: "PipeClosed" + color)
-            }
-        }
-        
-        stations.append(HatchNode(node: self.childNode(withName: "hatch") as! SKSpriteNode))
-    }
-    
-    func setupBackground() {
-        let background = self.childNode(withName: "background") as! SKSpriteNode
-        background.texture = SKTexture(imageNamed: "BackgroundXL" + playerColor)
-    }
-    
-    func setupHUD() {
-        let timerContainer = self.childNode(withName: "timerContainer") as! SKSpriteNode
-        timerContainer.texture = SKTexture(imageNamed: "Timer" + playerColor)
-        
+        nodes = MatchSceneBuilder(scene: self, context: context, routing: self).build()
         updateTimerUI()
         updateCoinsUI()
+
+        configurePause()
+
+        SFXPlayer.shared.roundStarted.play()
+    }
+
+    private func configurePause() {
+        pauseButtonDelegate = TappableClosure { [weak self] in
+            guard let self, !self.state.ended else { return }
+            LANConnectionManager.shared.send(.pauseRequest(!self.state.paused))
+        }
+        nodes.pauseButton.delegate = pauseButtonDelegate
+
+        pauseOverlay = PauseOverlay(
+            scene: self,
+            onResume: { [weak self] in
+                LANConnectionManager.shared.send(.pauseRequest(false))
+            },
+            onQuit: { [weak self] in
+                LANConnectionManager.shared.send(.pauseRequest(false))
+                self?.onMatchError?()
+            }
+        )
+    }
+
+    private func configureClock() {
+        clock.onSecondElapsed = { [weak self] in
+            self?.updateTimerUI()
+        }
+        clock.onWarning = { [weak self] in
+            guard let self else { return }
+            self.state.endTimerPlayed = true
+            SFXPlayer.shared.endTimer.play()
+        }
+        clock.onTimesUp = { [weak self] in
+            guard let self else { return }
+            self.state.timesUpPlayed = true
+            SFXPlayer.shared.timesUp.play()
+            MusicPlayer.shared.stop(.game)
+            if self.hosting {
+                self.stations.forEach({ $0.stopAnimation() })
+                self.endMatch()
+            }
+        }
     }
     
+    // The setup methods used to live here — now in MatchSceneBuilder.
+
     // MARK: - Game Logic
-    
-    func generateRandomOrder() {
-        guard let order = rule?.generateOrder() else { return }
-        orderCount += 1
-        order.number = orderCount
-        orders.append(order)
 
-        updateOrderUI(orders)
-
-        matchStatistics?.totalGeneratedOrders += 1
-    }
-    
+    /// Walk the order list ticking each one's clock; expire any past-due
+    /// orders on the host (joiners just observe via the broadcast that the
+    /// host sends after removing). The host's spawn cadence lives in
+    /// `OrderGenerator` and is driven from `update(_:)`.
     fileprivate func updateOrders() {
-        for (index, order) in orders.enumerated() {
-            order.timeLeft -= 1/60
-            
-            if hosting {
-                if order.timeLeft <= 0.0 {
+        for (index, order) in state.orders.enumerated().reversed() {
+            order.timeLeft -= 1 / 60
 
-                    let totalActions = order.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
-                    EventLogger.shared.logOrderResult(success: false, actionCount: totalActions, ingredientCount: order.ingredients.count, difficulty: rule?.difficulty ?? .easy)
-                    
-                    orders.remove(at: index)
-                    GameConnectionManager.shared.sendEveryone(orderList: orders)
-                    updateOrderUI(orders)
-                }
+            if hosting, order.timeLeft <= 0.0 {
+                let totalActions = order.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
+                EventLogger.shared.logOrderResult(
+                    success: false,
+                    actionCount: totalActions,
+                    ingredientCount: order.ingredients.count,
+                    difficulty: context.rule.difficulty
+                )
+                state.removeOrder(at: index)
+                GameConnectionManager.shared.sendEveryone(orderList: state.orders)
+                updateOrderUI(state.orders)
             }
         }
         orderListNode.update()
-        
-        if hosting {
-            orderGenerationCounter += 1
-            
-            if (orderGenerationCounter >= timeBetweenOrders && orders.count < maxOrders) || (timerStarted && orders.isEmpty) {
-                generateRandomOrder()
-                if firstOrder {
-                    SFXPlayer.shared.orderUp.play()
-                    orderListNode.jump()
-                } else {
-                    orderListNode.open()
-                }
-                GameConnectionManager.shared.sendEveryone(orderList: orders)
-                orderGenerationCounter = 0
-                
-                // timer only starts when the first order is generated
-                if !timerStarted {
-                    timerStarted = true   
-                }
+    }
+
+    /// Drives the host-only spawn loop. Plays SFX, animates the order list,
+    /// broadcasts the new order to joiners. Joiners get the order via the
+    /// `.orders` payload subscription instead.
+    private func tickHostOrderGenerator() {
+        guard hosting, let generator = orderGenerator else { return }
+        let spawned = generator.tick(state: state, rule: context.rule) { _ in
+            if state.firstOrder {
+                SFXPlayer.shared.orderUp.play()
+                orderListNode.jump()
+            } else {
+                orderListNode.open()
             }
-            
-            if self.orders.count == 1 && !firstOrder {
-                firstOrder = true
+        }
+        if spawned {
+            updateOrderUI(state.orders)
+            GameConnectionManager.shared.sendEveryone(orderList: state.orders)
+            if !clock.didStart {
+                clock.start()
+            }
+            if state.orders.count == 1 && !state.firstOrder {
+                state.firstOrder = true
                 MusicPlayer.shared.play(.game)
             }
-            
         }
     }
     
@@ -322,24 +236,38 @@ class GameScene: SKScene {
         
         if isMoving && !stationsAnimationsRunning {
             pipes.forEach({ $0.playAnimation() })
-            hatch.playAnimation()
+            hatch?.playAnimation()
             stationsAnimationsRunning = true
         } else if !isMoving && stationsAnimationsRunning {
             pipes.forEach({ $0.stopAnimation() })
-            hatch.stopAnimation()
+            hatch?.stopAnimation()
             stationsAnimationsRunning = false
         }
     }
     
     func endMatch(error: Bool = false) {
+        guard !state.ended else { return }
+        state.ended = true
         self.isPaused = true
         stations.forEach({ $0.stopAnimation() })
-        
-        if hosting && !error, let matchStatistics {
-            EventLogger.shared.logMatchEnd(withPlayerCount: playerOrder.filter({ $0 != "__empty__"}).count, andDifficulty: rule?.difficulty ?? .easy)
 
-            GameConnectionManager.shared.sendEveryone(statistics: matchStatistics)
-            onMatchEnd?(matchStatistics)
+        if !error {
+            // Broadcast our own action tally before the .statistics
+            // payload so peers can render awards on the StatisticsView.
+            // (The receive guard in MatchNetworkAdapter lets .playerAwards
+            // through even after `state.ended` flips on the receiver.)
+            LANConnectionManager.shared.send(
+                .playerAwards(player: context.player, stats: state.myActions)
+            )
+        }
+
+        if hosting && !error, let stats = state.matchStatistics {
+            EventLogger.shared.logMatchEnd(
+                withPlayerCount: context.playerOrder.filter({ $0 != "__empty__" }).count,
+                andDifficulty: context.rule.difficulty
+            )
+            GameConnectionManager.shared.sendEveryone(statistics: stats)
+            onMatchEnd?(stats)
         }
 
         if error {
@@ -347,279 +275,219 @@ class GameScene: SKScene {
             onMatchError?()
         }
     }
-    
-    fileprivate func updateTimer() {
-        timerUpdateCounter += 1
-        if timerStarted && timerUpdateCounter >= 60 {
-            matchTimer -= 1
-            updateTimerUI()
-            timerUpdateCounter = 0
-        }
-        
-        if matchTimer < 0 {
-            if !timesUpPlayed {
-                timesUpPlayed = true
-                SFXPlayer.shared.timesUp.play()
-                MusicPlayer.shared.stop(.game)
-            }
-            
-            if hosting {
-                stations.forEach({ $0.stopAnimation() })
-                endMatch()
-            }
-        }
-        
-        if matchTimer < 15 && !endTimerPlayed {
-            endTimerPlayed = true
-            SFXPlayer.shared.endTimer.play()
-        }
-    }
-    
+
     func makeDelivery(plate: Plate) -> Bool {
-        
-        let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(teleportAnimationFrames.count)
+        let frames = nodes.teleportFrames
+        let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(frames.count)
         SFXPlayer.shared.teleporter.play()
-        teleportAnimationNode.run(SKAction.animate(
-            with: teleportAnimationFrames,
+        nodes.teleportAnimationNode.run(SKAction.animate(
+            with: frames,
             timePerFrame: timePerFrame,
             resize: false,
             restore: true)
         )
-        
+
         let totalActions = plate.ingredients.map({ $0.numberOfActionsTilReady }).reduce(0, +)
-        
-        guard let targetOrder = orders.filter({ $0.isEquivalent(to: plate) }).first else {
-            let notification = OrderDeliveryNotification(playerName: player, success: false, coinsAdded: 0)
+        let outcome = DeliveryScorer.score(
+            plate: plate,
+            against: state.orders,
+            difficulty: context.rule.difficulty
+        )
+
+        if !outcome.success {
+            let notification = OrderDeliveryNotification(playerName: context.player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
-            
             EventLogger.shared.logPlateDeliver(success: false, actionCount: totalActions, ingredientCount: plate.ingredients.count)
-            
-            updateOrderUI(orders)
+            FloatingTextNode.spawn(
+                text: "MISS",
+                color: UIColor(red: 0.95, green: 0.30, blue: 0.30, alpha: 1),
+                at: nodes.teleportAnimationNode.position,
+                in: self
+            )
+            updateOrderUI(state.orders)
             return false
         }
-        
+
         EventLogger.shared.logPlateDeliver(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count)
-        EventLogger.shared.logOrderResult(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count, difficulty: rule?.difficulty ?? .easy)
-        
-        let difficultyBonus: [GameDifficulty: Int] = [.easy: 1, .medium: 2, .hard: 3]
-        let bonus = difficultyBonus[rule?.difficulty ?? .easy] ?? 1
-        let totalScore = targetOrder.score * bonus
-        
-        
-        let notification = OrderDeliveryNotification(playerName: player, success: true, coinsAdded: totalScore)
+        EventLogger.shared.logOrderResult(success: true, actionCount: totalActions, ingredientCount: plate.ingredients.count, difficulty: context.rule.difficulty)
+
+        let notification = OrderDeliveryNotification(playerName: context.player, success: true, coinsAdded: outcome.coinsAdded)
         GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
 
-        orders.remove(at: orders.firstIndex { $0.isEquivalent(to: targetOrder) }!)
-        
-        GameConnectionManager.shared.sendEveryone(orderList: orders)
-        
-        orderGenerationCounter = 0
-        updateOrderUI(orders)
-        
-        matchStatistics?.totalDeliveredOrders += 1
-        matchStatistics?.totalPoints += notification.coinsAdded
-        totalPoints += notification.coinsAdded
-        
+        if let index = outcome.matchedOrderIndex {
+            state.removeOrder(at: index)
+        }
+
+        GameConnectionManager.shared.sendEveryone(orderList: state.orders)
+
+        state.resetSpawnCounter()
+        updateOrderUI(state.orders)
+        state.recordDelivery(coins: outcome.coinsAdded)
+        state.myActions.ordersDelivered += 1
         updateCoinsUI()
-        
+
+        FloatingTextNode.spawn(
+            text: "+\(outcome.coinsAdded)",
+            color: UIColor(red: 1.0, green: 0.83, blue: 0.25, alpha: 1),
+            at: nodes.teleportAnimationNode.position,
+            in: self
+        )
+        camera?.run(SKAction.cameraShake(amplitude: 12, duration: 0.25))
         return true
     }
-    
+
     // MARK: - Update
     override func update(_ currentTime: TimeInterval) {
+        guard !state.ended, !state.paused else { return }
         stations.forEach({ $0.update() })
-        
         checkAnimations()
         updateOrders()
-        updateTimer()
+        tickHostOrderGenerator()
+        clock.tick()
     }
-    
+
     // MARK: - UI Updates
     func updateOrderUI(_ orders: [Order]) {
         orderListNode.updateList(orders)
     }
-    
+
     func updateTimerUI() {
-        let timerLabel = self.childNode(withName: "timerLabel") as! SKLabelNode
-        
-        var currentSeconds = max(Int(ceil(matchTimer)), 0)
-        
+        guard let nodes else { return }
+        var currentSeconds = max(Int(ceil(clock.timeRemaining)), 0)
         let currentMinutes = currentSeconds / 60
         currentSeconds -= (currentMinutes * 60)
-        
-        timerLabel.text = "\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)"
+        nodes.timerLabel.text = "\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)"
     }
-    
+
     func updateCoinsUI() {
-        let coinsLabel = self.childNode(withName: "coinsLabel") as! SKLabelNode
-        coinsLabel.text = "\(totalPoints)"
+        nodes?.coinsLabel.text = "\(state.totalPoints)"
     }
 }
 
-// MARK: - GameConnectionManagerObserver Methods
-extension GameScene: GameConnectionManagerObserver {
-    
-    func receivePlate(plate: Plate) {
-        Log.game.debug("Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
-        
-        guard let shelf = firstEmptyShelf else {
-            return
+// MARK: - MatchSceneRouting
+extension GameScene: MatchSceneRouting {
+    func remotePlayer(forPipeName name: String) -> String? {
+        let peers = context.otherPlayers
+        switch name {
+        case "pipe1": return peers.indices.contains(0) ? peers[0] : nil
+        case "pipe2": return peers.indices.contains(1) ? peers[1] : nil
+        case "pipe3": return peers.indices.contains(2) ? peers[2] : nil
+        default: return nil
         }
-        
+    }
+
+    func attemptDelivery(plate: Plate) -> Bool {
+        return makeDelivery(plate: plate)
+    }
+
+    func recordAction(_ kind: MatchActionKind) {
+        switch kind {
+        case .chop: state.myActions.chopActions += 1
+        case .cook: state.myActions.cookActions += 1
+        case .fry: state.myActions.fryActions += 1
+        case .plateCreated: state.myActions.platesCreated += 1
+        case .pipeForward: state.myActions.pipeForwards += 1
+        case .orderDelivered: state.myActions.ordersDelivered += 1
+        }
+    }
+}
+
+// MARK: - MatchNetworkDelegate
+extension GameScene: MatchNetworkDelegate {
+
+    func didReceivePlate(_ plate: Plate) {
+        guard let shelf = firstEmptyShelf else { return }
         let node = MovableSpriteNode(imageNamed: "Plate")
-        shelf.plateNode = PlateNode(
-            plate: plate,
-            movableNode: node,
-            currentLocation: shelf
-        )
+        shelf.plateNode = PlateNode(plate: plate, movableNode: node, currentLocation: shelf)
         shelf.plateNode?.updateTexture()
         node.zPosition = 2
         node.setScale(0)
         self.addChild(node)
         node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
-    
-    func receiveIngredient(ingredient: Ingredient) {
-        Log.game.debug("Received ingredient with prefix \(ingredient.texturePrefix) and state \(ingredient.currentState.rawValue)")
-        
-        guard let shelf = firstEmptyShelf else {
-            return
-        }
-        
+
+    func didReceiveIngredient(_ ingredient: Ingredient) {
+        guard let shelf = firstEmptyShelf else { return }
         let node = MovableSpriteNode(imageNamed: ingredient.textureName)
-        shelf.ingredientNode = IngredientNode(
-            ingredient: ingredient,
-            movableNode: node,
-            currentLocation: shelf
-        )
+        shelf.ingredientNode = IngredientNode(ingredient: ingredient, movableNode: node, currentLocation: shelf)
         shelf.ingredientNode?.checkTextureChange()
         node.zPosition = 2
         node.setScale(0)
         self.addChild(node)
         node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
-    
-    func receiveOrders(orders: [Order]) {
-        Log.game.debug("Received new orderList")
-        self.orders = orders
-        
-        if firstOrder {
+
+    func didReceiveOrders(_ orders: [Order]) {
+        state.orders = orders
+
+        if state.firstOrder {
             SFXPlayer.shared.orderUp.play()
             orderListNode.jump()
         } else {
             orderListNode.open()
         }
-        
-        if self.orders.count == 1 && !firstOrder {
-            firstOrder = true
+
+        if orders.count == 1 && !state.firstOrder {
+            state.firstOrder = true
             MusicPlayer.shared.play(.game)
         }
-        
-        if !timerStarted && !orders.isEmpty {
-            timerStarted = true
+
+        if !clock.didStart && !orders.isEmpty {
+            clock.start()
         }
-        
+
         updateOrderUI(orders)
     }
-    
-    func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
-        Log.game.debug("Received new notification")
-        
-        if notification.success {
-            Log.game.debug("Notification was a success! Yay!")
-            
-            Log.game.debug("Notification points are \(notification.coinsAdded)")
-            
-            matchStatistics?.totalDeliveredOrders += 1
-            matchStatistics?.totalPoints += notification.coinsAdded
-            totalPoints += notification.coinsAdded
-            
-            Log.game.debug("Total points now are \(self.totalPoints)")
-            
-            SFXPlayer.shared.cashRegister.play()
-            updateCoinsUI()
-        }
-    }
-    
-    func receiveStatistics(statistics: MatchStatistics) {
-        endMatch()
-        DispatchQueue.main.async {
-            self.onMatchEnd?(statistics)
-        }
-    }
-    
-}
 
-extension GameScene: LANMatchmakingObserver {
-    func playerUpdate(player: String, state: PeerConnectionState) {
+    func didReceiveDelivery(_ notification: OrderDeliveryNotification) {
+        guard notification.success else { return }
+        state.recordDelivery(coins: notification.coinsAdded)
+        SFXPlayer.shared.cashRegister.play()
+        updateCoinsUI()
+    }
+
+    func didReceiveStatistics(_ statistics: MatchStatistics) {
+        endMatch()
+        DispatchQueue.main.async { [weak self] in
+            self?.onMatchEnd?(statistics)
+        }
+    }
+
+    func didReceivePlayerAwards(player: String, stats: PlayerAwardStats) {
+        state.peerAwards[player] = stats
+    }
+
+    func didReceivePauseRequest(paused: Bool) {
+        guard !state.ended else { return }
+        state.paused = paused
+        if paused {
+            pauseOverlay?.show()
+        } else {
+            pauseOverlay?.hide()
+        }
+    }
+
+    func didReceivePeerUpdate(player: String, state: PeerConnectionState) {
         // A bare .notConnected used to end the match instantly. With the
         // reconnect work in PR #6 a drop is often transient (background, brief
-        // Wi-Fi loss), so we now hold the match paused for a 30s grace window
+        // Wi-Fi loss), so we hold the match paused for a 30s grace window
         // and only declare it over if the peer doesn't come back.
         guard view != nil else { return }
 
+        let controller = reconnectionOverlay ?? makeReconnectionOverlay()
         switch state {
-        case .notConnected:
-            beginReconnectingOverlay(for: player)
-        case .connecting:
-            beginReconnectingOverlay(for: player)
+        case .notConnected, .connecting:
+            controller.begin(for: player)
         case .connected:
-            endReconnectingOverlay(for: player)
+            controller.end()
         }
     }
 
-    fileprivate func beginReconnectingOverlay(for player: String) {
-        let overlay = reconnectingOverlay ?? makeReconnectingOverlay()
-        (overlay.children.compactMap { $0 as? SKLabelNode }).forEach {
-            $0.text = "\(player) reconnecting…"
+    private func makeReconnectionOverlay() -> ReconnectionOverlayController {
+        let controller = ReconnectionOverlayController(scene: self) { [weak self] in
+            self?.endMatch(error: true)
         }
-        if overlay.parent == nil, let camera {
-            camera.addChild(overlay)
-        }
-        isPaused = true
-        reconnectingOverlay = overlay
-        cancelReconnectTimeout()
-        scheduleReconnectTimeout()
-    }
-
-    fileprivate func endReconnectingOverlay(for player: String) {
-        guard reconnectingOverlay != nil else { return }
-        reconnectingOverlay?.removeFromParent()
-        reconnectingOverlay = nil
-        cancelReconnectTimeout()
-        isPaused = false
-    }
-
-    fileprivate func makeReconnectingOverlay() -> SKNode {
-        let overlay = SKNode()
-        overlay.zPosition = 1000
-        overlay.name = "reconnectingOverlay"
-
-        let dim = SKShapeNode(rectOf: CGSize(width: 4000, height: 4000))
-        dim.fillColor = UIColor.black.withAlphaComponent(0.65)
-        dim.strokeColor = .clear
-        overlay.addChild(dim)
-
-        let label = SKLabelNode(fontNamed: "TitilliumWeb-Bold")
-        label.fontSize = 80
-        label.fontColor = .white
-        label.verticalAlignmentMode = .center
-        overlay.addChild(label)
-        return overlay
-    }
-
-    fileprivate func scheduleReconnectTimeout() {
-        let timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: false) { [weak self] _ in
-            DispatchQueue.main.async {
-                guard let self else { return }
-                self.endMatch(error: true)
-            }
-        }
-        reconnectTimeoutTimer = timer
-    }
-
-    fileprivate func cancelReconnectTimeout() {
-        reconnectTimeoutTimer?.invalidate()
-        reconnectTimeoutTimer = nil
+        reconnectionOverlay = controller
+        return controller
     }
 }
