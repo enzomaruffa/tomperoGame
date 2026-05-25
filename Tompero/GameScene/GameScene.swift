@@ -6,14 +6,16 @@
 //  Copyright © 2019 Tompero. All rights reserved.
 //
 
-import Combine
 import SpriteKit
 import GameplayKit
 
 // swiftlint:disable force_cast
 class GameScene: SKScene {
 
-    private var cancellables = Set<AnyCancellable>()
+    /// Owns the Combine subscriptions for inbound game + matchmaking events
+    /// and dispatches them via the `MatchNetworkDelegate` protocol below.
+    /// Set in `didMove` once the match state is configured.
+    private var network: MatchNetworkAdapter!
 
     // MARK: - Host callbacks
     /// Fired when a successful match ends with final statistics; SwiftUI
@@ -117,19 +119,7 @@ class GameScene: SKScene {
             )
         }
 
-        // Game-event stream — typed payloads coming off GameConnectionManager.
-        GameConnectionManager.shared.events
-            .sink { [weak self] event in
-                self?.handle(gameEvent: event)
-            }
-            .store(in: &cancellables)
-
-        // Matchmaking stream — reconnect overlay watches player state changes.
-        LANConnectionManager.shared.matchmakingEvents
-            .sink { [weak self] event in
-                self?.handle(matchmakingEvent: event)
-            }
-            .store(in: &cancellables)
+        network = MatchNetworkAdapter(state: state, delegate: self)
 
         nodes = MatchSceneBuilder(scene: self, context: context, routing: self).build()
         updateTimerUI()
@@ -338,65 +328,32 @@ extension GameScene: MatchSceneRouting {
     }
 }
 
-// MARK: - Game event handlers
-extension GameScene {
+// MARK: - MatchNetworkDelegate
+extension GameScene: MatchNetworkDelegate {
 
-    fileprivate func handle(gameEvent: GameEvent) {
-        switch gameEvent {
-        case .plate(let plate):
-            receivePlate(plate: plate)
-        case .ingredient(let ingredient):
-            receiveIngredient(ingredient: ingredient)
-        case .orders(let orders):
-            receiveOrders(orders: orders)
-        case .deliveryNotification(let notification):
-            receiveDeliveryNotification(notification: notification)
-        case .statistics(let statistics):
-            receiveStatistics(statistics: statistics)
-        }
-    }
-
-    fileprivate func receivePlate(plate: Plate) {
-        Log.game.debug("Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
-        
-        guard let shelf = firstEmptyShelf else {
-            return
-        }
-        
+    func didReceivePlate(_ plate: Plate) {
+        guard let shelf = firstEmptyShelf else { return }
         let node = MovableSpriteNode(imageNamed: "Plate")
-        shelf.plateNode = PlateNode(
-            plate: plate,
-            movableNode: node,
-            currentLocation: shelf
-        )
+        shelf.plateNode = PlateNode(plate: plate, movableNode: node, currentLocation: shelf)
         shelf.plateNode?.updateTexture()
         node.zPosition = 2
         node.setScale(0)
         self.addChild(node)
         node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
-    
-    fileprivate func receiveIngredient(ingredient: Ingredient) {
-        Log.game.debug("Received ingredient with prefix \(ingredient.texturePrefix) and state \(ingredient.currentState.rawValue)")
-        
-        guard let shelf = firstEmptyShelf else {
-            return
-        }
-        
+
+    func didReceiveIngredient(_ ingredient: Ingredient) {
+        guard let shelf = firstEmptyShelf else { return }
         let node = MovableSpriteNode(imageNamed: ingredient.textureName)
-        shelf.ingredientNode = IngredientNode(
-            ingredient: ingredient,
-            movableNode: node,
-            currentLocation: shelf
-        )
+        shelf.ingredientNode = IngredientNode(ingredient: ingredient, movableNode: node, currentLocation: shelf)
         shelf.ingredientNode?.checkTextureChange()
         node.zPosition = 2
         node.setScale(0)
         self.addChild(node)
         node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
-    
-    fileprivate func receiveOrders(orders: [Order]) {
+
+    func didReceiveOrders(_ orders: [Order]) {
         state.orders = orders
 
         if state.firstOrder {
@@ -418,33 +375,24 @@ extension GameScene {
         updateOrderUI(orders)
     }
 
-    fileprivate func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
+    func didReceiveDelivery(_ notification: OrderDeliveryNotification) {
         guard notification.success else { return }
         state.recordDelivery(coins: notification.coinsAdded)
         SFXPlayer.shared.cashRegister.play()
         updateCoinsUI()
     }
 
-    fileprivate func receiveStatistics(statistics: MatchStatistics) {
+    func didReceiveStatistics(_ statistics: MatchStatistics) {
         endMatch()
         DispatchQueue.main.async { [weak self] in
             self?.onMatchEnd?(statistics)
         }
     }
-}
 
-extension GameScene {
-
-    fileprivate func handle(matchmakingEvent: LANMatchmakingEvent) {
-        if case .playerUpdate(let player, let state) = matchmakingEvent {
-            playerUpdate(player: player, state: state)
-        }
-    }
-
-    fileprivate func playerUpdate(player: String, state: PeerConnectionState) {
+    func didReceivePeerUpdate(player: String, state: PeerConnectionState) {
         // A bare .notConnected used to end the match instantly. With the
         // reconnect work in PR #6 a drop is often transient (background, brief
-        // Wi-Fi loss), so we now hold the match paused for a 30s grace window
+        // Wi-Fi loss), so we hold the match paused for a 30s grace window
         // and only declare it over if the peer doesn't come back.
         guard view != nil else { return }
 
