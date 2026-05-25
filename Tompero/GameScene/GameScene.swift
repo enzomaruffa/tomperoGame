@@ -251,6 +251,16 @@ class GameScene: SKScene {
         self.isPaused = true
         stations.forEach({ $0.stopAnimation() })
 
+        if !error {
+            // Broadcast our own action tally before the .statistics
+            // payload so peers can render awards on the StatisticsView.
+            // (The receive guard in MatchNetworkAdapter lets .playerAwards
+            // through even after `state.ended` flips on the receiver.)
+            LANConnectionManager.shared.send(
+                .playerAwards(player: context.player, stats: state.myActions)
+            )
+        }
+
         if hosting && !error, let stats = state.matchStatistics {
             EventLogger.shared.logMatchEnd(
                 withPlayerCount: context.playerOrder.filter({ $0 != "__empty__" }).count,
@@ -313,6 +323,7 @@ class GameScene: SKScene {
         state.resetSpawnCounter()
         updateOrderUI(state.orders)
         state.recordDelivery(coins: outcome.coinsAdded)
+        state.myActions.ordersDelivered += 1
         updateCoinsUI()
 
         FloatingTextNode.spawn(
@@ -367,6 +378,17 @@ extension GameScene: MatchSceneRouting {
 
     func attemptDelivery(plate: Plate) -> Bool {
         return makeDelivery(plate: plate)
+    }
+
+    func recordAction(_ kind: MatchActionKind) {
+        switch kind {
+        case .chop: state.myActions.chopActions += 1
+        case .cook: state.myActions.cookActions += 1
+        case .fry: state.myActions.fryActions += 1
+        case .plateCreated: state.myActions.platesCreated += 1
+        case .pipeForward: state.myActions.pipeForwards += 1
+        case .orderDelivered: state.myActions.ordersDelivered += 1
+        }
     }
 }
 
@@ -429,6 +451,10 @@ extension GameScene: MatchNetworkDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.onMatchEnd?(statistics)
         }
+    }
+
+    func didReceivePlayerAwards(player: String, stats: PlayerAwardStats) {
+        state.peerAwards[player] = stats
     }
 
     func didReceivePauseRequest(paused: Bool) {

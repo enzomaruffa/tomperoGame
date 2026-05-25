@@ -15,6 +15,19 @@
 
 import Foundation
 
+/// Per-action signals the station + node code emits during a match. The
+/// scene's conformance increments the local `MatchState.myActions` counters,
+/// which get broadcast at match end so every device can compute the same
+/// per-player awards.
+enum MatchActionKind {
+    case chop
+    case cook
+    case fry
+    case plateCreated
+    case pipeForward
+    case orderDelivered
+}
+
 protocol MatchSceneRouting: AnyObject {
     /// Map a pipe sprite name ("pipe1" / "pipe2" / "pipe3") to the display
     /// name of the peer that pipe sends to. Returns nil for an unknown name.
@@ -23,4 +36,8 @@ protocol MatchSceneRouting: AnyObject {
     /// Forwarded by `PlateNode` when it lands on the delivery teleporter.
     /// Returns true on a successful delivery (caller plays the success VFX).
     func attemptDelivery(plate: Plate) -> Bool
+
+    /// Increment the local per-action counter for the kind of work the
+    /// player just performed. Routes into `MatchState.myActions`.
+    func recordAction(_ kind: MatchActionKind)
 }

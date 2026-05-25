@@ -21,6 +21,7 @@ enum WirePayload {
     case deliveryNotification(OrderDeliveryNotification)
     case statistics(MatchStatistics)
     case pauseRequest(Bool)
+    case playerAwards(player: String, stats: PlayerAwardStats)
 }
 
 extension WirePayload: Codable {
@@ -42,6 +43,7 @@ extension WirePayload: Codable {
         case deliveryNotification = 6
         case statistics = 7
         case pauseRequest = 8
+        case playerAwards = 9
     }
 
     func encode(to encoder: Encoder) throws {
@@ -74,6 +76,10 @@ extension WirePayload: Codable {
         case .pauseRequest(let value):
             try container.encode(Discriminator.pauseRequest, forKey: .type)
             try container.encode(try JSONEncoder().encode(value), forKey: .object)
+        case .playerAwards(let player, let stats):
+            try container.encode(Discriminator.playerAwards, forKey: .type)
+            let payload = PlayerAwardsPayload(player: player, stats: stats)
+            try container.encode(try JSONEncoder().encode(payload), forKey: .object)
         }
     }
 
@@ -104,6 +110,16 @@ extension WirePayload: Codable {
             self = .statistics(try json.decode(MatchStatistics.self, from: inner))
         case .pauseRequest:
             self = .pauseRequest(try json.decode(Bool.self, from: inner))
+        case .playerAwards:
+            let payload = try json.decode(PlayerAwardsPayload.self, from: inner)
+            self = .playerAwards(player: payload.player, stats: payload.stats)
         }
     }
+}
+
+/// Wire-only DTO so `playerAwards` can carry two values inside a single
+/// Codable object slot.
+private struct PlayerAwardsPayload: Codable {
+    let player: String
+    let stats: PlayerAwardStats
 }

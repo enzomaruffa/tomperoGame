@@ -30,11 +30,12 @@ class PlateBoxNode: StationNode {
             let plateMovableNode = MovableSpriteNode(imageNamed: newPlate.textureName)
             spriteNode.scene!.addChild(plateMovableNode)
             plateMovableNode.zPosition = 4
-            
+
             let plateNode = PlateNode(plate: newPlate, movableNode: plateMovableNode, currentLocation: self)
             plateMovableNode.position = CGPoint(x: spriteNode.position.x, y: spriteNode.position.y + 85)
-            
+
             self.plateNode = plateNode
+            routing?.recordAction(.plateCreated)
         }
     }
     

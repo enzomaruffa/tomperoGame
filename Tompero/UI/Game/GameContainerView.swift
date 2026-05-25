@@ -52,7 +52,8 @@ struct GameContainerView: View {
         scene.scaleMode = UIDevice.current.userInterfaceIdiom == .pad ? .aspectFit : .aspectFill
         scene.onMatchEnd = { [weak scene] stats in
             let actions = scene?.state.myActions ?? .zero
-            router.push(.statistics(stats, localActions: actions))
+            let peers = scene?.state.peerAwards ?? [:]
+            router.push(.statistics(stats, localActions: actions, peerAwards: peers))
         }
         scene.onMatchError = {
             router.popToRoot()

@@ -25,6 +25,7 @@ protocol MatchNetworkDelegate: AnyObject {
     func didReceiveStatistics(_ statistics: MatchStatistics)
     func didReceivePeerUpdate(player: String, state: PeerConnectionState)
     func didReceivePauseRequest(paused: Bool)
+    func didReceivePlayerAwards(player: String, stats: PlayerAwardStats)
 }
 
 final class MatchNetworkAdapter {
@@ -51,12 +52,21 @@ final class MatchNetworkAdapter {
     }
 
     private func handleGameEvent(_ event: GameEvent) {
-        // Re-entry guard. The host calls `endMatch()` synchronously when the
-        // clock fires `onTimesUp`, which broadcasts a `.statistics` payload.
-        // The host's own loopback of that payload would re-enter the delegate
-        // here if we didn't short-circuit.
-        guard !state.ended else { return }
         guard let delegate else { return }
+
+        // Awards are post-match signals — they MUST flow even after the
+        // local `state.ended` flips, so peers can still slot their action
+        // tallies into `MatchState.peerAwards` for the StatisticsView.
+        if case .playerAwards(let player, let stats) = event {
+            delegate.didReceivePlayerAwards(player: player, stats: stats)
+            return
+        }
+
+        // Re-entry guard for all other events. The host calls `endMatch()`
+        // synchronously when the clock fires `onTimesUp`, which broadcasts
+        // a `.statistics` payload — the host's own loopback of that payload
+        // would re-enter the delegate here if we didn't short-circuit.
+        guard !state.ended else { return }
         switch event {
         case .plate(let plate):
             delegate.didReceivePlate(plate)
@@ -69,11 +79,10 @@ final class MatchNetworkAdapter {
         case .statistics(let statistics):
             delegate.didReceiveStatistics(statistics)
         case .pauseRequest(let paused):
-            // Pause is allowed even after end so the overlay can be
-            // dismissed gracefully — but only if the local state isn't
-            // already ended. The early `state.ended` guard above already
-            // covers that.
             delegate.didReceivePauseRequest(paused: paused)
+        case .playerAwards:
+            // Handled above the guard.
+            break
         }
     }
 

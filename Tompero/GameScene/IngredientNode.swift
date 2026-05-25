@@ -171,6 +171,7 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
                 return false
             }
             GameConnectionManager.shared.send(ingredient: self.ingredient, to: peer)
+            station.routing?.recordAction(.pipeForward)
             removeFromPreviousStation()
             sendSpriteNode(to: .pipe)
             return true

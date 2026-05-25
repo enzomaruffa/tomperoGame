@@ -105,6 +105,7 @@ class FryerNode: StationNode {
                 if ingredient.states[ingredient.currentState]?.contains(IngredientState.fried) == true {
                     ingredient.currentState = .fried
                     ingredientNode?.checkTextureChange()
+                    routing?.recordAction(.fry)
                 }
             } else {
                 progressBarNode?.bar?.color = .green

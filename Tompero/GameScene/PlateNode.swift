@@ -224,6 +224,7 @@ final class PlateNode: MovableDelegate {
                 return false
             }
             GameConnectionManager.shared.send(plate: self.plate, to: peer)
+            station.routing?.recordAction(.pipeForward)
             sendSpriteNode(to: .pipe)
             return true
 
