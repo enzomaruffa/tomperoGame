@@ -174,10 +174,6 @@ struct InicialView: View {
             Log.game.info("LAUNCH +\(AppDelegate.elapsed())s InicialView.onAppear")
             revealedCount = 0
             fetchCoinCount()
-            // Game Center authentication is deferred to the first place that
-            // actually needs it (Statistics → leaderboard submission). Doing
-            // it here was blocking the main thread on the simulator for
-            // 10–15s while iOS waited for the gamed XPC to time out.
         }
         .onReceive(typingTimer) { _ in
             if revealedCount < dialogText.count {
