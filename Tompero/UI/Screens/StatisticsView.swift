@@ -42,19 +42,26 @@ struct StatisticsView: View {
                 .minimumScaleFactor(0.5)
                 .designed(x: 194.5, y: 68, w: 520.5, h: 45.5, scale: scale)
 
-            Text("\(statistics.totalDeliveredOrders) orders delivered!")
-                .font(.custom("TitilliumWeb-Bold", size: 24 * scale))
-                .foregroundColor(.white)
-                .multilineTextAlignment(.center)
-                .minimumScaleFactor(0.5)
-                .designed(x: 349, y: 113.5, w: 211, h: 74, scale: scale)
-
-            Text("\(statistics.totalPoints) coins earned!")
-                .font(.custom("TitilliumWeb-Bold", size: 24 * scale))
-                .foregroundColor(.white)
-                .multilineTextAlignment(.center)
-                .minimumScaleFactor(0.5)
-                .designed(x: 369.5, y: 147.5, w: 170.5, h: 74.5, scale: scale)
+            // Two stacked status lines, centered inside the storyboard's
+            // inner container (194.5, 113.5, 520.5, 108.5). Previously these
+            // were placed as two separately-positioned frames that overlapped
+            // both horizontally and vertically.
+            VStack(spacing: 4 * scale) {
+                Text("\(statistics.totalDeliveredOrders) orders delivered!")
+                    .font(.custom("TitilliumWeb-Bold", size: 24 * scale))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                Text("\(statistics.totalPoints) coins earned!")
+                    .font(.custom("TitilliumWeb-Bold", size: 24 * scale))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .designed(x: 194.5, y: 113.5, w: 520.5, h: 108.5, scale: scale)
 
             Button {
                 EventLogger.shared.logButtonPress(buttonName: "statistics-menu")
