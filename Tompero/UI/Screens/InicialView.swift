@@ -10,7 +10,6 @@
 //
 
 import SwiftUI
-import GameKit
 
 private let dialogIntro = """
 Okay, okay…. I know this Food-Ship doesn’t look like the best investment in the galaxy, but you'll see. This lil' baby is gonna make it rain!
@@ -172,6 +171,7 @@ struct InicialView: View {
             }
         }
         .onAppear {
+            Log.game.info("LAUNCH +\(AppDelegate.elapsed())s InicialView.onAppear")
             revealedCount = 0
             fetchCoinCount()
             // Game Center authentication is deferred to the first place that
@@ -222,15 +222,6 @@ struct InicialView: View {
     }
 
     // MARK: - Side effects
-
-    private func authenticate() {
-        let player = GKLocalPlayer.local
-        player.authenticateHandler = { _, error in
-            if let error {
-                Log.game.error("GameKit auth failed: \(error.localizedDescription, privacy: .public)")
-            }
-        }
-    }
 
     private func fetchCoinCount() {
         CloudKitManager.shared.getPlayerCoinCount { count in
