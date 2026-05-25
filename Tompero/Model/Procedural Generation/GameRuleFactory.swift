@@ -142,29 +142,35 @@ class GameRuleFactory {
         }
         
         // Verificações adicionais
-        // Check user with empty spaces
+        // Check user with empty spaces — copy a non-empty table from someone
+        // (anyone) until every slot is filled.
         playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}) ?? false) })
         while !playerWithEmptyTablesList.isEmpty {
             let randomPlayerWithEmpty = playerWithEmptyTablesList.randomElement()!
 
-            // List of those with something
+            // Source player: prefer one with no remaining empties. With a
+            // single real player (or any degenerate case where everyone
+            // still has empties) that filter is empty, so fall back to a
+            // non-empty table on the SAME player. Crash regression: 1 real
+            // + 3 empty used to trap on `randomElement()!` here.
             let playersWithSomethingList = playerTables.keys.filter({ !(playerTables[$0]?.contains(where: {$0.type == .empty}) ?? true) })
-            
-            // Random player with something
-            let randomPlayerWithSomething = playersWithSomethingList.randomElement()!
-            
-            // Random table type from the player that has something
-            let randomTableToCopy = playerTables[randomPlayerWithSomething]!.filter({$0.type != .empty}).randomElement()!
-            
+            let sourcePlayer = playersWithSomethingList.randomElement() ?? randomPlayerWithEmpty
+
+            guard let randomTableToCopy = playerTables[sourcePlayer]?.filter({ $0.type != .empty }).randomElement() else {
+                // No non-empty table to copy from anywhere — nothing we can
+                // do; leave the remaining empties (caller will degrade
+                // gracefully) instead of looping forever.
+                break
+            }
+
             // Setting it in the player that has an empty space
             randomTable = playerTables[randomPlayerWithEmpty]?.filter({ $0.type == .empty }).randomElement()!
             randomTable?.type = randomTableToCopy.type
-            
+
             if randomTableToCopy.type == .ingredient {
                 randomTable?.ingredient = randomTableToCopy.ingredient
             }
-            
-            
+
             // repeating search
             playerWithEmptyTablesList = playerTables.keys.filter({ (playerTables[$0]?.contains(where: {$0.type == .empty}) ?? false) })
         }
