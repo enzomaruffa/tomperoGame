@@ -42,21 +42,21 @@ class GameScene: SKScene {
     /// Host-only order spawn loop. Nil on joiners.
     private var orderGenerator: OrderGenerator?
 
-    // MARK: - Scene graph references
+    /// Output of `MatchSceneBuilder.build()`. Holds the stations array,
+    /// teleporter sprite + frames, order list, HUD labels — i.e. every
+    /// scene-graph reference the scene reads each frame.
+    private var nodes: MatchSceneNodes!
 
-    /// Local player display name. Convenience for legacy code paths.
+    // MARK: - Scene graph references (convenience accessors)
+
     var player: String { context?.player ?? LANConnectionManager.shared.selfName }
-
-    /// Other-player names in pipe order. Drives `MatchSceneRouting`.
     var players: [String] { context?.otherPlayers ?? [] }
-
-    var stations: [StationNode] = []
+    var stations: [StationNode] { nodes?.stations ?? [] }
     var shelves: [StationNode] { stations.filter({ $0.stationType == .shelf }) }
     var pipes: [StationNode] { stations.filter({ $0.stationType == .pipe }) }
-    var hatch: StationNode { stations.first(where: { $0.stationType == .hatch })! }
+    var hatch: StationNode? { stations.first(where: { $0.stationType == .hatch }) }
     var firstEmptyShelf: StationNode? { shelves.first(where: { $0.isEmpty }) }
-
-    var orderListNode: OrderListNode!
+    var orderListNode: OrderListNode! { nodes?.orderList }
 
     // MARK: - Animation Variables
     var stationsAnimationsRunning = false
@@ -65,9 +65,8 @@ class GameScene: SKScene {
     // didMove doesn't allocate it for matches that never disconnect.
     private var reconnectionOverlay: ReconnectionOverlayController?
 
-    // Teleport variables
-    private var teleportAnimationNode: SKSpriteNode!
-    private var teleportAnimationFrames: [SKTexture]!
+    /// Teleport animation duration in seconds (frames-per-second derived
+    /// from `nodes.teleportFrames.count`).
     private let teleportDuration = 1
     
     // MARK: - Scene Lifecycle
@@ -132,12 +131,9 @@ class GameScene: SKScene {
             }
             .store(in: &cancellables)
 
-        setupOrderListNode()
-        setupStations()
-        setupShelves()
-        setupPiping()
-        setupHUD()
-        setupBackground()
+        nodes = MatchSceneBuilder(scene: self, context: context, routing: self).build()
+        updateTimerUI()
+        updateCoinsUI()
 
         SFXPlayer.shared.roundStarted.play()
     }
@@ -163,115 +159,8 @@ class GameScene: SKScene {
         }
     }
     
-    func setupOrderListNode() {
-        orderListNode = (childNode(withName: "orders") as! OrderListNode)
-        orderListNode.texture = SKTexture(imageNamed: "OrderList" + context.playerColor)
-    }
+    // The setup methods used to live here — now in MatchSceneBuilder.
 
-    func setupStations() {
-        let tables = context.tables
-        Log.game.info("setupStations: \(tables.count) tables for player \(self.context.player, privacy: .public)")
-
-        var nodes: [StationNode] = []
-        for table in tables {
-            switch table.type {
-            case .chopping:
-                nodes.append(BoardNode())
-            case .cooking:
-                nodes.append(StoveNode())
-            case .frying:
-                nodes.append(FryerNode())
-            case .plate:
-                nodes.append(PlateBoxNode())
-            case .ingredient:
-                if let ingredient = table.ingredient {
-                    nodes.append(IngredientBoxNode(ingredient: ingredient))
-                } else {
-                    Log.game.error("setupStations: ingredient table has nil ingredient")
-                }
-            case .empty:
-                nodes.append(StationNode(stationType: .empty))
-            }
-        }
-        stations = nodes
-
-        for (index, station) in stations.enumerated() {
-            station.routing = self
-            let node = station.spriteNode
-            let pos = scene!.size.width / 2 - node.size.width / 2
-            let xPositions: [CGFloat] = [-pos, 0.0, pos]
-            let xPos = index < xPositions.count ? xPositions[index] : 0
-            node.position = CGPoint(x: xPos, y: CGFloat(station.spriteYPos))
-            self.addChild(node)
-        }
-    }
-    
-    func createTeleporterAnimation(_ teleporterNode: SKSpriteNode) {
-        let teleportAtlas = SKTextureAtlas(named: "Teleport" + context.playerColor)
-        teleportAnimationFrames = []
-        for currentAnimation in 0..<teleportAtlas.textureNames.count {
-            let teleportFrameName = "teleport\(currentAnimation > 9 ? currentAnimation.description : "0" + currentAnimation.description)"
-            teleportAnimationFrames.append(teleportAtlas.textureNamed(teleportFrameName))
-        }
-
-        teleportAnimationNode = SKSpriteNode(texture: teleportAnimationFrames[0])
-        self.addChild(teleportAnimationNode)
-
-        teleportAnimationNode.position = teleporterNode.position + CGPoint(x: -8, y: -(teleporterNode.size.height + 8))
-        teleportAnimationNode.zPosition = 60
-    }
-
-    func setupShelves() {
-        let shelves: [StationNode] = [
-            ShelfNode(node: self.childNode(withName: "shelf1") as! SKSpriteNode),
-            ShelfNode(node: self.childNode(withName: "shelf2") as! SKSpriteNode),
-            ShelfNode(node: self.childNode(withName: "shelf3") as! SKSpriteNode),
-            DeliveryNode(node: self.childNode(withName: "delivery") as! SKSpriteNode)
-        ]
-        shelves.forEach { $0.routing = self }
-        stations.append(contentsOf: shelves)
-
-        (self.childNode(withName: "target") as! SKSpriteNode).texture = SKTexture(imageNamed: "Target" + context.playerColor)
-
-        let teleporterNode = (self.childNode(withName: "teleporter") as! SKSpriteNode)
-        teleporterNode.texture = SKTexture(imageNamed: "Teleporter" + context.playerColor)
-
-        createTeleporterAnimation(teleporterNode)
-    }
-
-    func setupPiping() {
-        for (index, color) in context.peerColors.enumerated() {
-            let pipeNode = self.childNode(withName: "pipeArea" + (index + 1).description) as! SKSpriteNode
-            let pipeImage = self.childNode(withName: "pipe" + (index + 1).description) as! SKSpriteNode
-            pipeNode.name = "pipe" + (index + 1).description
-            if context.playerOrder[index + 1] != "__empty__" {
-                pipeImage.texture = SKTexture(imageNamed: "Pipe" + color)
-                let pipe = PipeNode(node: pipeNode)
-                pipe.routing = self
-                stations.append(pipe)
-            } else {
-                pipeImage.texture = SKTexture(imageNamed: "PipeClosed" + color)
-            }
-        }
-
-        let hatch = HatchNode(node: self.childNode(withName: "hatch") as! SKSpriteNode)
-        hatch.routing = self
-        stations.append(hatch)
-    }
-
-    func setupBackground() {
-        let background = self.childNode(withName: "background") as! SKSpriteNode
-        background.texture = SKTexture(imageNamed: "BackgroundXL" + context.playerColor)
-    }
-
-    func setupHUD() {
-        let timerContainer = self.childNode(withName: "timerContainer") as! SKSpriteNode
-        timerContainer.texture = SKTexture(imageNamed: "Timer" + context.playerColor)
-
-        updateTimerUI()
-        updateCoinsUI()
-    }
-    
     // MARK: - Game Logic
 
     /// Walk the order list ticking each one's clock; expire any past-due
@@ -329,11 +218,11 @@ class GameScene: SKScene {
         
         if isMoving && !stationsAnimationsRunning {
             pipes.forEach({ $0.playAnimation() })
-            hatch.playAnimation()
+            hatch?.playAnimation()
             stationsAnimationsRunning = true
         } else if !isMoving && stationsAnimationsRunning {
             pipes.forEach({ $0.stopAnimation() })
-            hatch.stopAnimation()
+            hatch?.stopAnimation()
             stationsAnimationsRunning = false
         }
     }
@@ -360,10 +249,11 @@ class GameScene: SKScene {
     }
 
     func makeDelivery(plate: Plate) -> Bool {
-        let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(teleportAnimationFrames.count)
+        let frames = nodes.teleportFrames
+        let timePerFrame = TimeInterval(teleportDuration) / TimeInterval(frames.count)
         SFXPlayer.shared.teleporter.play()
-        teleportAnimationNode.run(SKAction.animate(
-            with: teleportAnimationFrames,
+        nodes.teleportAnimationNode.run(SKAction.animate(
+            with: frames,
             timePerFrame: timePerFrame,
             resize: false,
             restore: true)
@@ -419,18 +309,15 @@ class GameScene: SKScene {
     }
 
     func updateTimerUI() {
-        let timerLabel = self.childNode(withName: "timerLabel") as! SKLabelNode
-
+        guard let nodes else { return }
         var currentSeconds = max(Int(ceil(clock.timeRemaining)), 0)
         let currentMinutes = currentSeconds / 60
         currentSeconds -= (currentMinutes * 60)
-
-        timerLabel.text = "\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)"
+        nodes.timerLabel.text = "\(currentMinutes):\(currentSeconds > 9 ? currentSeconds.description : "0" + currentSeconds.description)"
     }
 
     func updateCoinsUI() {
-        let coinsLabel = self.childNode(withName: "coinsLabel") as! SKLabelNode
-        coinsLabel.text = "\(state.totalPoints)"
+        nodes?.coinsLabel.text = "\(state.totalPoints)"
     }
 }
 
