@@ -289,25 +289,13 @@ final class LANConnectionManager: NSObject {
 
     // MARK: - Sending
 
-    func sendEveryone(dataWrapper: WirePayload) {
-        send(dataWrapper: dataWrapper, toDisplayName: nil)
-    }
-
-    func send(dataWrapper: WirePayload, toDisplayName displayName: String?) {
+    /// Single send entrypoint. `displayName == nil` broadcasts; non-nil
+    /// targets one peer (the host re-routes if we're a joiner).
+    func send(_ payload: WirePayload, to displayName: String? = nil) {
         queue.async { [weak self] in
             guard let self else { return }
-            let envelope = LANEnvelope(from: self.selfName, to: displayName, payload: dataWrapper)
+            let envelope = LANEnvelope(from: self.selfName, to: displayName, payload: payload)
             self.dispatchOutgoing(envelope)
-        }
-    }
-
-    func sendPeersStatus(playersWithStatus: [PeerWithStatus]) {
-        do {
-            let data = try JSONEncoder().encode(playersWithStatus)
-            let wrapper = WirePayload(object: data, type: .playerData)
-            sendEveryone(dataWrapper: wrapper)
-        } catch {
-            Log.network.error("Encode players status failed: \(String(describing: error), privacy: .public)")
         }
     }
 
@@ -387,25 +375,25 @@ final class LANConnectionManager: NSObject {
     }
 
     private func dispatchLocally(_ envelope: LANEnvelope) {
-        let wrapper = envelope.payload
+        let payload = envelope.payload
         let matchmakingObservers = matchmakingObserversSnapshot
         let dataObservers = dataObserversSnapshot
 
-        switch wrapper.type {
-        case .playerData:
-            guard let peers = try? JSONDecoder().decode([PeerWithStatus].self, from: wrapper.object) else { return }
+        switch payload {
+        case .playerData(let peers):
             DispatchQueue.main.async {
                 matchmakingObservers.forEach { $0.playerListSent(playersWithStatus: peers) }
             }
-        case .gameRule:
-            guard let rule = try? JSONDecoder().decode(GameRule.self, from: wrapper.object) else { return }
+        case .gameRule(let rule):
+            // Ingredient subclasses don't survive Codable on their own, so
+            // restore concrete types before handing to observers.
             rule.possibleIngredients = rule.possibleIngredients.map { $0.findDowncast() }
             DispatchQueue.main.async {
                 matchmakingObservers.forEach { $0.receiveGameRule(rule: rule) }
             }
         default:
             DispatchQueue.main.async {
-                dataObservers.forEach { $0.receiveData(wrapper: wrapper) }
+                dataObservers.forEach { $0.receiveData(payload: payload) }
             }
         }
     }

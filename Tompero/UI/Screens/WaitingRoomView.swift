@@ -64,13 +64,7 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
     func startMatch() {
         let peers = players.map { $0.name }
         let rule = GameRuleFactory.generateRule(difficulty: difficulty, players: peers)
-        do {
-            let ruleData = try JSONEncoder().encode(rule)
-            LANConnectionManager.shared.sendEveryone(dataWrapper: WirePayload(object: ruleData, type: .gameRule))
-        } catch {
-            Log.network.error("Failed to encode GameRule: \(error.localizedDescription, privacy: .public)")
-            return
-        }
+        LANConnectionManager.shared.send(.gameRule(rule))
         MusicPlayer.shared.stop(.menu)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.startedGame = rule
@@ -107,7 +101,7 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
                     dropped.name = player
                     dropped.status = state
                 }
-                LANConnectionManager.shared.sendPeersStatus(playersWithStatus: newList)
+                LANConnectionManager.shared.send(.playerData(newList))
                 self.players = newList
             }
         } else if state == .connected, !hasRespondedToInvite {
