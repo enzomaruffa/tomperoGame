@@ -9,11 +9,12 @@
 //  - 4 player slots row (125, 108, 646, 157.5)
 //
 
+import Combine
 import SwiftUI
 
 private let emptyName = "__empty__"
 
-final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
+final class WaitingRoomViewModel: ObservableObject {
 
     @Published var players: [PeerWithStatus]
     @Published var difficulty: GameDifficulty = .easy
@@ -27,6 +28,8 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
     /// True once the joiner has accepted (or declined) the first invite, so
     /// reconnect events don't re-prompt.
     private var hasRespondedToInvite = false
+
+    private var cancellables = Set<AnyCancellable>()
 
     init(hosting: Bool) {
         self.hosting = hosting
@@ -42,11 +45,11 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
             self.players = (0..<4).map { _ in PeerWithStatus(name: emptyName, status: .notConnected) }
             LANConnectionManager.shared.startJoining()
         }
-        LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
-    }
-
-    deinit {
-        LANConnectionManager.shared.unsubscribeMatchmakingObserver(observer: self)
+        LANConnectionManager.shared.matchmakingEvents
+            .sink { [weak self] event in
+                self?.handle(matchmakingEvent: event)
+            }
+            .store(in: &cancellables)
     }
 
     var canStart: Bool {
@@ -71,26 +74,23 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
         }
     }
 
-    // MARK: - LANMatchmakingObserver
+    // MARK: - Matchmaking events
 
-    func receiveGameRule(rule: GameRule) {
-        LANConnectionManager.shared.stopAdvertising()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            MusicPlayer.shared.stop(.menu)
-            self.startedGame = rule
-        }
-    }
+    private func handle(matchmakingEvent event: LANMatchmakingEvent) {
+        switch event {
+        case .gameRule(let rule):
+            LANConnectionManager.shared.stopAdvertising()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                MusicPlayer.shared.stop(.menu)
+                self.startedGame = rule
+            }
 
-    func playerListSent(playersWithStatus: [PeerWithStatus]) {
-        guard !hosting else { return }
-        DispatchQueue.main.async {
+        case .playerListSent(let playersWithStatus):
+            guard !hosting else { return }
             self.players = playersWithStatus
-        }
-    }
 
-    func playerUpdate(player: String, state: PeerConnectionState) {
-        if hosting {
-            DispatchQueue.main.async {
+        case .playerUpdate(let player, let state):
+            if hosting {
                 var newList = self.players.map { $0.copy() }
                 if let existing = newList.first(where: { $0.name == player }) {
                     existing.status = state
@@ -103,13 +103,11 @@ final class WaitingRoomViewModel: ObservableObject, LANMatchmakingObserver {
                 }
                 LANConnectionManager.shared.send(.playerData(newList))
                 self.players = newList
-            }
-        } else if state == .connected, !hasRespondedToInvite {
-            // Joiner side: first peer to fully connect is the host who invited
-            // us. Show the accept/decline prompt before the user is committed
-            // to the match.
-            hasRespondedToInvite = true
-            DispatchQueue.main.async {
+            } else if state == .connected, !hasRespondedToInvite {
+                // Joiner side: first peer to fully connect is the host who
+                // invited us. Show the accept/decline prompt before the user
+                // is committed to the match.
+                hasRespondedToInvite = true
                 self.pendingInvitationFrom = player
             }
         }

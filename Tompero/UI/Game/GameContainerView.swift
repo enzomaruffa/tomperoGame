@@ -33,9 +33,6 @@ struct GameContainerView: View {
                 scene = buildScene()
             }
         }
-        .onDisappear {
-            GameConnectionManager.shared.removeAllObservers()
-        }
         .statusBarHidden()
     }
 

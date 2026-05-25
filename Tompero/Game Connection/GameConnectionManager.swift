@@ -2,39 +2,35 @@
 //  GameConnectionManager.swift
 //  Tompero
 //
-//  Created by Enzo Maruffa Moreira on 25/11/19.
-//  Copyright © 2019 Tompero. All rights reserved.
+//  Thin transformer over LANConnectionManager: subscribes to its raw
+//  WirePayload stream, restores concrete Ingredient subclasses via
+//  findDowncast(), and republishes typed GameEvents that the scene
+//  layer sinks on. The hand-rolled NSHashTable observer pattern was
+//  removed in favor of a single PassthroughSubject so subscribers can
+//  filter/map with Combine.
 //
 
+import Combine
 import Foundation
 
-class GameConnectionManager {
+final class GameConnectionManager {
 
-    // MARK: - Static Variables
     static let shared = GameConnectionManager()
 
-    // MARK: - Variables
-    private let observers = NSHashTable<AnyObject>.weakObjects()
-    private var observersSnapshot: [GameConnectionManagerObserver] {
-        observers.allObjects.compactMap { $0 as? GameConnectionManagerObserver }
-    }
+    /// Typed game events. GameScene `.sink`s on this and switches on the case.
+    let events = PassthroughSubject<GameEvent, Never>()
 
-    // MARK: - Methods
+    private var cancellables = Set<AnyCancellable>()
+
     private init() {
-        LANConnectionManager.shared.subscribeDataObserver(observer: self)
+        LANConnectionManager.shared.payloadReceived
+            .sink { [weak self] payload in
+                self?.handle(payload: payload)
+            }
+            .store(in: &cancellables)
     }
 
-    func subscribe(observer: GameConnectionManagerObserver) {
-        observers.add(observer as AnyObject)
-    }
-
-    func remove(observer: GameConnectionManagerObserver) {
-        observers.remove(observer as AnyObject)
-    }
-
-    func removeAllObservers() {
-        observers.removeAllObjects()
-    }
+    // MARK: - Sending
 
     func sendEveryone(message: String) {
         LANConnectionManager.shared.send(.string(message))
@@ -59,12 +55,10 @@ class GameConnectionManager {
     func send(plate: Plate, to player: String) {
         LANConnectionManager.shared.send(.plate(plate), to: player)
     }
-}
 
-// MARK: - LANDataObserver Methods
-extension GameConnectionManager: LANDataObserver {
+    // MARK: - Incoming
 
-    func receiveData(payload: WirePayload) {
+    private func handle(payload: WirePayload) {
         switch payload {
         case .plate(let plate):
             // Restore concrete Ingredient subclasses + set their currentState
@@ -73,11 +67,10 @@ extension GameConnectionManager: LANDataObserver {
             newIngredients.forEach { $0.currentState = $0.finalState }
             let newPlate = Plate()
             newPlate.ingredients = newIngredients
-            observersSnapshot.forEach { $0.receivePlate(plate: newPlate) }
+            events.send(.plate(newPlate))
 
         case .ingredient(let ingredient):
-            let newIngredient = ingredient.findDowncast()
-            observersSnapshot.forEach { $0.receiveIngredient(ingredient: newIngredient) }
+            events.send(.ingredient(ingredient.findDowncast()))
 
         case .orders(let orders):
             let newOrders: [Order] = orders.map { order in
@@ -87,19 +80,20 @@ extension GameConnectionManager: LANDataObserver {
                 newOrder.ingredients = order.ingredients.map { $0.findDowncast() }
                 return newOrder
             }
-            observersSnapshot.forEach { $0.receiveOrders(orders: newOrders) }
+            events.send(.orders(newOrders))
 
         case .deliveryNotification(let notification):
-            observersSnapshot.forEach { $0.receiveDeliveryNotification(notification: notification) }
+            events.send(.deliveryNotification(notification))
 
         case .statistics(let statistics):
-            observersSnapshot.forEach { $0.receiveStatistics(statistics: statistics) }
+            events.send(.statistics(statistics))
 
         case .string(let message):
             Log.network.debug("Received string message: \(message, privacy: .public)")
 
         case .playerData, .gameRule:
-            // Routed through LANMatchmakingObserver; should not reach here.
+            // Routed via LANConnectionManager.matchmakingEvents; should not
+            // arrive on payloadReceived.
             break
         }
     }

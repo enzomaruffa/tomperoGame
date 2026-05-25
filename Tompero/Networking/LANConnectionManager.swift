@@ -3,6 +3,7 @@
 //  Tompero
 //
 
+import Combine
 import Foundation
 import Network
 import UIKit
@@ -72,9 +73,19 @@ final class LANConnectionManager: NSObject {
     /// on `didBecomeActive`.
     private var isBackgrounded = false
 
-    private let dataObservers = NSHashTable<AnyObject>.weakObjects()
-    private let matchmakingObservers = NSHashTable<AnyObject>.weakObjects()
-    private weak var discoveryObserver: LANDiscoveryObserver?
+    // MARK: - Combine surface
+
+    /// Every received payload (except `playerData` / `gameRule`, which are
+    /// routed via `matchmakingEvents` since they drive the lobby state
+    /// machine, not gameplay). Subscribers store an AnyCancellable bag.
+    let payloadReceived = PassthroughSubject<WirePayload, Never>()
+
+    /// Lobby / matchmaking signals: peer connection state changes, the host's
+    /// authoritative player list, and the game rule that kicks off a match.
+    let matchmakingEvents = PassthroughSubject<LANMatchmakingEvent, Never>()
+
+    /// Browser updates — current set of advertising peers other than self.
+    let discoveredPeersChanged = PassthroughSubject<[LANBrowser.DiscoveredPeer], Never>()
 
     // MARK: - Init
 
@@ -205,10 +216,6 @@ final class LANConnectionManager: NSObject {
         }
     }
 
-    func setDiscoveryObserver(_ observer: LANDiscoveryObserver?) {
-        discoveryObserver = observer
-    }
-
     /// Tear down the connection to a specific peer. Used by the joiner-side
     /// invitation prompt to decline an invite (host sees the joiner drop and
     /// removes them from the lobby).
@@ -323,32 +330,6 @@ final class LANConnectionManager: NSObject {
         }
     }
 
-    // MARK: - Observers
-
-    func subscribeDataObserver(observer: LANDataObserver) {
-        dataObservers.add(observer as AnyObject)
-    }
-
-    func unsubscribeDataObserver(observer: LANDataObserver) {
-        dataObservers.remove(observer as AnyObject)
-    }
-
-    func subscribeMatchmakingObserver(observer: LANMatchmakingObserver) {
-        matchmakingObservers.add(observer as AnyObject)
-    }
-
-    func unsubscribeMatchmakingObserver(observer: LANMatchmakingObserver) {
-        matchmakingObservers.remove(observer as AnyObject)
-    }
-
-    private var dataObserversSnapshot: [LANDataObserver] {
-        dataObservers.allObjects.compactMap { $0 as? LANDataObserver }
-    }
-
-    private var matchmakingObserversSnapshot: [LANMatchmakingObserver] {
-        matchmakingObservers.allObjects.compactMap { $0 as? LANMatchmakingObserver }
-    }
-
     // MARK: - Incoming routing
 
     private func handleIncoming(_ envelope: LANEnvelope, from connection: LANPeerConnection) {
@@ -376,24 +357,21 @@ final class LANConnectionManager: NSObject {
 
     private func dispatchLocally(_ envelope: LANEnvelope) {
         let payload = envelope.payload
-        let matchmakingObservers = matchmakingObserversSnapshot
-        let dataObservers = dataObserversSnapshot
-
         switch payload {
         case .playerData(let peers):
-            DispatchQueue.main.async {
-                matchmakingObservers.forEach { $0.playerListSent(playersWithStatus: peers) }
+            DispatchQueue.main.async { [weak self] in
+                self?.matchmakingEvents.send(.playerListSent(playersWithStatus: peers))
             }
         case .gameRule(let rule):
             // Ingredient subclasses don't survive Codable on their own, so
-            // restore concrete types before handing to observers.
+            // restore concrete types before publishing to subscribers.
             rule.possibleIngredients = rule.possibleIngredients.map { $0.findDowncast() }
-            DispatchQueue.main.async {
-                matchmakingObservers.forEach { $0.receiveGameRule(rule: rule) }
+            DispatchQueue.main.async { [weak self] in
+                self?.matchmakingEvents.send(.gameRule(rule))
             }
         default:
-            DispatchQueue.main.async {
-                dataObservers.forEach { $0.receiveData(payload: payload) }
+            DispatchQueue.main.async { [weak self] in
+                self?.payloadReceived.send(payload)
             }
         }
     }
@@ -423,9 +401,8 @@ extension LANConnectionManager: LANBrowserDelegate {
     func browser(_ browser: LANBrowser, didUpdate peers: [LANBrowser.DiscoveredPeer]) {
         discovered = peers
         let snapshot = discoveredPeers
-        let observer = discoveryObserver
-        DispatchQueue.main.async {
-            observer?.discoveryDidUpdate(peers: snapshot)
+        DispatchQueue.main.async { [weak self] in
+            self?.discoveredPeersChanged.send(snapshot)
         }
     }
 
@@ -440,9 +417,8 @@ extension LANConnectionManager: LANPeerConnectionDelegate {
 
     func peerConnection(_ connection: LANPeerConnection, didChangeState state: PeerConnectionState) {
         guard let name = connection.remoteIdentity?.displayName else { return }
-        let observers = matchmakingObserversSnapshot
-        DispatchQueue.main.async {
-            observers.forEach { $0.playerUpdate(player: name, state: state) }
+        DispatchQueue.main.async { [weak self] in
+            self?.matchmakingEvents.send(.playerUpdate(player: name, state: state))
         }
     }
 
@@ -461,9 +437,8 @@ extension LANConnectionManager: LANPeerConnectionDelegate {
         reconnectPolicies[name]?.reset()
         flushPendingSends(to: name)
 
-        let observers = matchmakingObserversSnapshot
-        DispatchQueue.main.async {
-            observers.forEach { $0.playerUpdate(player: name, state: .connected) }
+        DispatchQueue.main.async { [weak self] in
+            self?.matchmakingEvents.send(.playerUpdate(player: name, state: .connected))
         }
     }
 
@@ -478,9 +453,8 @@ extension LANConnectionManager: LANPeerConnectionDelegate {
             connections.removeValue(forKey: name)
         }
         if let name {
-            let observers = matchmakingObserversSnapshot
-            DispatchQueue.main.async {
-                observers.forEach { $0.playerUpdate(player: name, state: .notConnected) }
+            DispatchQueue.main.async { [weak self] in
+                self?.matchmakingEvents.send(.playerUpdate(player: name, state: .notConnected))
             }
             // If this was an outbound connection (we know the endpoint),
             // attempt to re-establish.
@@ -489,11 +463,5 @@ extension LANConnectionManager: LANPeerConnectionDelegate {
             }
         }
     }
-}
-
-// MARK: - Observers for discovered peer list (used by the picker UI)
-
-protocol LANDiscoveryObserver: AnyObject {
-    func discoveryDidUpdate(peers: [LANBrowser.DiscoveredPeer])
 }
 

@@ -6,11 +6,15 @@
 //  Copyright © 2019 Tompero. All rights reserved.
 //
 
+import Combine
 import SpriteKit
 import GameplayKit
 
 // swiftlint:disable force_cast
 class GameScene: SKScene {
+
+    private var cancellables = Set<AnyCancellable>()
+
     
     // MARK: - Host callbacks
     /// Fired when a successful match ends with final statistics; SwiftUI
@@ -124,9 +128,19 @@ class GameScene: SKScene {
 
         Log.game.info("camera scale=\(requiredScale) offset=\(offset)")
         
-        // Adds itself as a GameConnection observer
-        GameConnectionManager.shared.subscribe(observer: self)
-        LANConnectionManager.shared.subscribeMatchmakingObserver(observer: self)
+        // Game-event stream — typed payloads coming off GameConnectionManager.
+        GameConnectionManager.shared.events
+            .sink { [weak self] event in
+                self?.handle(gameEvent: event)
+            }
+            .store(in: &cancellables)
+
+        // Matchmaking stream — reconnect overlay watches player state changes.
+        LANConnectionManager.shared.matchmakingEvents
+            .sink { [weak self] event in
+                self?.handle(matchmakingEvent: event)
+            }
+            .store(in: &cancellables)
 
         if hosting, let rule {
             matchStatistics = MatchStatistics(ruleUsed: rule)
@@ -456,10 +470,25 @@ class GameScene: SKScene {
     }
 }
 
-// MARK: - GameConnectionManagerObserver Methods
-extension GameScene: GameConnectionManagerObserver {
-    
-    func receivePlate(plate: Plate) {
+// MARK: - Game event handlers
+extension GameScene {
+
+    fileprivate func handle(gameEvent: GameEvent) {
+        switch gameEvent {
+        case .plate(let plate):
+            receivePlate(plate: plate)
+        case .ingredient(let ingredient):
+            receiveIngredient(ingredient: ingredient)
+        case .orders(let orders):
+            receiveOrders(orders: orders)
+        case .deliveryNotification(let notification):
+            receiveDeliveryNotification(notification: notification)
+        case .statistics(let statistics):
+            receiveStatistics(statistics: statistics)
+        }
+    }
+
+    fileprivate func receivePlate(plate: Plate) {
         Log.game.debug("Received plate with ingredients \(plate.ingredients.map({ type(of: $0) }))")
         
         guard let shelf = firstEmptyShelf else {
@@ -479,7 +508,7 @@ extension GameScene: GameConnectionManagerObserver {
         node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
     
-    func receiveIngredient(ingredient: Ingredient) {
+    fileprivate func receiveIngredient(ingredient: Ingredient) {
         Log.game.debug("Received ingredient with prefix \(ingredient.texturePrefix) and state \(ingredient.currentState.rawValue)")
         
         guard let shelf = firstEmptyShelf else {
@@ -499,7 +528,7 @@ extension GameScene: GameConnectionManagerObserver {
         node.run(.scale(to: shelf.plateNodeScale, duration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1))
     }
     
-    func receiveOrders(orders: [Order]) {
+    fileprivate func receiveOrders(orders: [Order]) {
         Log.game.debug("Received new orderList")
         self.orders = orders
         
@@ -522,7 +551,7 @@ extension GameScene: GameConnectionManagerObserver {
         updateOrderUI(orders)
     }
     
-    func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
+    fileprivate func receiveDeliveryNotification(notification: OrderDeliveryNotification) {
         Log.game.debug("Received new notification")
         
         if notification.success {
@@ -541,7 +570,7 @@ extension GameScene: GameConnectionManagerObserver {
         }
     }
     
-    func receiveStatistics(statistics: MatchStatistics) {
+    fileprivate func receiveStatistics(statistics: MatchStatistics) {
         endMatch()
         DispatchQueue.main.async {
             self.onMatchEnd?(statistics)
@@ -550,8 +579,15 @@ extension GameScene: GameConnectionManagerObserver {
     
 }
 
-extension GameScene: LANMatchmakingObserver {
-    func playerUpdate(player: String, state: PeerConnectionState) {
+extension GameScene {
+
+    fileprivate func handle(matchmakingEvent: LANMatchmakingEvent) {
+        if case .playerUpdate(let player, let state) = matchmakingEvent {
+            playerUpdate(player: player, state: state)
+        }
+    }
+
+    fileprivate func playerUpdate(player: String, state: PeerConnectionState) {
         // A bare .notConnected used to end the match instantly. With the
         // reconnect work in PR #6 a drop is often transient (background, brief
         // Wi-Fi loss), so we now hold the match paused for a 30s grace window
