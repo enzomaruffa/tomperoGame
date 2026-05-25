@@ -24,6 +24,7 @@ protocol MatchNetworkDelegate: AnyObject {
     func didReceiveDelivery(_ notification: OrderDeliveryNotification)
     func didReceiveStatistics(_ statistics: MatchStatistics)
     func didReceivePeerUpdate(player: String, state: PeerConnectionState)
+    func didReceivePauseRequest(paused: Bool)
 }
 
 final class MatchNetworkAdapter {
@@ -67,6 +68,12 @@ final class MatchNetworkAdapter {
             delegate.didReceiveDelivery(notification)
         case .statistics(let statistics):
             delegate.didReceiveStatistics(statistics)
+        case .pauseRequest(let paused):
+            // Pause is allowed even after end so the overlay can be
+            // dismissed gracefully — but only if the local state isn't
+            // already ended. The early `state.ended` guard above already
+            // covers that.
+            delegate.didReceivePauseRequest(paused: paused)
         }
     }
 

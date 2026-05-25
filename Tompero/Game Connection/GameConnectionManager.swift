@@ -88,6 +88,9 @@ final class GameConnectionManager {
         case .statistics(let statistics):
             events.send(.statistics(statistics))
 
+        case .pauseRequest(let paused):
+            events.send(.pauseRequest(paused))
+
         case .string(let message):
             Log.network.debug("Received string message: \(message, privacy: .public)")
 

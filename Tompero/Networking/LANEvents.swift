@@ -22,4 +22,5 @@ enum GameEvent {
     case orders([Order])
     case deliveryNotification(OrderDeliveryNotification)
     case statistics(MatchStatistics)
+    case pauseRequest(Bool)
 }

@@ -45,6 +45,11 @@ final class MatchState {
     /// `endMatch` from the joiner side.
     var ended: Bool = false
 
+    /// Set by an inbound `.pauseRequest(true)` and cleared by
+    /// `.pauseRequest(false)`. `GameScene.update(_:)` short-circuits while
+    /// this is true so the clock + order generator stop ticking.
+    var paused: Bool = false
+
     // MARK: - Mutations
 
     func appendOrder(_ order: Order) {

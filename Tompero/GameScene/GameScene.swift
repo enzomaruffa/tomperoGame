@@ -17,6 +17,13 @@ class GameScene: SKScene {
     /// Set in `didMove` once the match state is configured.
     private var network: MatchNetworkAdapter!
 
+    /// Pause UI — constructed lazily on first pause.
+    private var pauseOverlay: PauseOverlay?
+
+    /// Tap delegate for the pause button. Holds a closure that broadcasts a
+    /// `.pauseRequest(true)` to all peers.
+    private var pauseButtonDelegate: TappableClosure?
+
     // MARK: - Host callbacks
     /// Fired when a successful match ends with final statistics; SwiftUI
     /// host pushes the statistics screen. Replaces direct coordinator access.
@@ -125,7 +132,28 @@ class GameScene: SKScene {
         updateTimerUI()
         updateCoinsUI()
 
+        configurePause()
+
         SFXPlayer.shared.roundStarted.play()
+    }
+
+    private func configurePause() {
+        pauseButtonDelegate = TappableClosure { [weak self] in
+            guard let self, !self.state.ended else { return }
+            LANConnectionManager.shared.send(.pauseRequest(!self.state.paused))
+        }
+        nodes.pauseButton.delegate = pauseButtonDelegate
+
+        pauseOverlay = PauseOverlay(
+            scene: self,
+            onResume: { [weak self] in
+                LANConnectionManager.shared.send(.pauseRequest(false))
+            },
+            onQuit: { [weak self] in
+                LANConnectionManager.shared.send(.pauseRequest(false))
+                self?.onMatchError?()
+            }
+        )
     }
 
     private func configureClock() {
@@ -299,7 +327,7 @@ class GameScene: SKScene {
 
     // MARK: - Update
     override func update(_ currentTime: TimeInterval) {
-        guard !state.ended else { return }
+        guard !state.ended, !state.paused else { return }
         stations.forEach({ $0.update() })
         checkAnimations()
         updateOrders()
@@ -400,6 +428,16 @@ extension GameScene: MatchNetworkDelegate {
         endMatch()
         DispatchQueue.main.async { [weak self] in
             self?.onMatchEnd?(statistics)
+        }
+    }
+
+    func didReceivePauseRequest(paused: Bool) {
+        guard !state.ended else { return }
+        state.paused = paused
+        if paused {
+            pauseOverlay?.show()
+        } else {
+            pauseOverlay?.hide()
         }
     }
 

@@ -29,6 +29,8 @@ struct MatchSceneNodes {
     var orderList: OrderListNode
     var timerLabel: SKLabelNode
     var coinsLabel: SKLabelNode
+    /// In-HUD pause button (camera-attached). Tap broadcasts a pause request.
+    var pauseButton: TappableSpriteNode
 }
 
 final class MatchSceneBuilder {
@@ -53,6 +55,7 @@ final class MatchSceneBuilder {
         let (teleporter, teleportFrames, teleportAnimationNode) = buildTeleporter()
         decorateBackground()
         let (timerLabel, coinsLabel) = buildHUD()
+        let pauseButton = buildPauseButton()
         return MatchSceneNodes(
             stations: stations,
             teleporter: teleporter,
@@ -60,8 +63,37 @@ final class MatchSceneBuilder {
             teleportAnimationNode: teleportAnimationNode,
             orderList: orderList,
             timerLabel: timerLabel,
-            coinsLabel: coinsLabel
+            coinsLabel: coinsLabel,
+            pauseButton: pauseButton
         )
+    }
+
+    /// Camera-attached "II" button in the top-right corner. The scene's
+    /// `MatchSceneRouting` conformance assigns it a tap delegate that
+    /// broadcasts a `.pauseRequest(true)` so multiplayer stays in sync.
+    private func buildPauseButton() -> TappableSpriteNode {
+        let size = CGSize(width: 140, height: 140)
+        let button = TappableSpriteNode(color: UIColor(white: 1, alpha: 0.18), size: size)
+        button.name = "pauseButton"
+        button.zPosition = 1200
+        // Top-right inside the 2436×1154 camera frame. The camera scales
+        // with the view; using camera-local coords keeps it pinned regardless.
+        button.position = CGPoint(x: 1100, y: 450)
+
+        let label = SKLabelNode(fontNamed: "TitilliumWeb-Bold")
+        label.text = "II"
+        label.fontSize = 80
+        label.fontColor = .white
+        label.verticalAlignmentMode = .center
+        label.horizontalAlignmentMode = .center
+        button.addChild(label)
+
+        if let camera = scene.camera {
+            camera.addChild(button)
+        } else {
+            scene.addChild(button)
+        }
+        return button
     }
 
     // MARK: - Pieces

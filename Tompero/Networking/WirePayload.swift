@@ -20,6 +20,7 @@ enum WirePayload {
     case orders([Order])
     case deliveryNotification(OrderDeliveryNotification)
     case statistics(MatchStatistics)
+    case pauseRequest(Bool)
 }
 
 extension WirePayload: Codable {
@@ -40,6 +41,7 @@ extension WirePayload: Codable {
         case orders = 5
         case deliveryNotification = 6
         case statistics = 7
+        case pauseRequest = 8
     }
 
     func encode(to encoder: Encoder) throws {
@@ -69,6 +71,9 @@ extension WirePayload: Codable {
         case .statistics(let value):
             try container.encode(Discriminator.statistics, forKey: .type)
             try container.encode(try JSONEncoder().encode(value), forKey: .object)
+        case .pauseRequest(let value):
+            try container.encode(Discriminator.pauseRequest, forKey: .type)
+            try container.encode(try JSONEncoder().encode(value), forKey: .object)
         }
     }
 
@@ -97,6 +102,8 @@ extension WirePayload: Codable {
             self = .deliveryNotification(try json.decode(OrderDeliveryNotification.self, from: inner))
         case .statistics:
             self = .statistics(try json.decode(MatchStatistics.self, from: inner))
+        case .pauseRequest:
+            self = .pauseRequest(try json.decode(Bool.self, from: inner))
         }
     }
 }
