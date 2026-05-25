@@ -12,6 +12,10 @@ import GameKit
 
 struct StatisticsView: View {
     let statistics: MatchStatistics
+    /// Per-action tally the local player accumulated this match. Defaults to
+    /// zero so callers that haven't wired up the in-game tracker yet still
+    /// compile; populated by `GameContainerView` via the scene's `state.myActions`.
+    var localActions: PlayerAwardStats = .zero
 
     @EnvironmentObject private var router: AppRouter
 
@@ -79,6 +83,13 @@ struct StatisticsView: View {
         }
         .task {
             EventLogger.shared.logCoinsInMatch(coins: statistics.totalPoints)
+            // Lifetime aggregates first — instant, local. CloudKit can fail
+            // or be unavailable (signed-out simulator) and stats should
+            // still update locally.
+            PlayerStatsStore.shared.record(
+                matchStatistics: statistics,
+                localActions: localActions
+            )
             await CloudKitManager.shared.addNewMatch(
                 withHash: statistics.matchHash,
                 coinCount: statistics.totalPoints

@@ -18,7 +18,7 @@ enum AppDestination: Hashable {
     case menu
     case waitingRoom(hosting: Bool)
     case game(rule: GameRule, hosting: Bool)
-    case statistics(MatchStatistics)
+    case statistics(MatchStatistics, localActions: PlayerAwardStats)
 
     static func == (lhs: AppDestination, rhs: AppDestination) -> Bool {
         switch (lhs, rhs) {
@@ -28,8 +28,8 @@ enum AppDestination: Hashable {
             return a == b
         case (.game(let aRule, let aHost), .game(let bRule, let bHost)):
             return aRule === bRule && aHost == bHost
-        case (.statistics(let a), .statistics(let b)):
-            return a === b
+        case (.statistics(let a, let aActions), .statistics(let b, let bActions)):
+            return a === b && aActions == bActions
         default:
             return false
         }
@@ -47,7 +47,7 @@ enum AppDestination: Hashable {
             hasher.combine(4)
             hasher.combine(ObjectIdentifier(rule))
             hasher.combine(hosting)
-        case .statistics(let stats):
+        case .statistics(let stats, _):
             hasher.combine(5)
             hasher.combine(ObjectIdentifier(stats))
         }

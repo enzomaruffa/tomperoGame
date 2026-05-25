@@ -185,14 +185,7 @@ struct SettingsView: View {
     }
 
     private func statsTab(scale: CGFloat) -> some View {
-        VStack {
-            Spacer()
-            Text("Coming soon!")
-                .font(.custom("TitilliumWeb-Bold", size: 22 * scale))
-                .foregroundColor(.white)
-            Spacer()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        StatsTabView(scale: scale)
     }
 
     private func creditsTab(scale: CGFloat) -> some View {
@@ -224,6 +217,91 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+}
+
+private struct StatsTabView: View {
+    let scale: CGFloat
+
+    @State private var matches: Int = 0
+    @State private var ordersDelivered: Int = 0
+    @State private var coins: Int = 0
+    @State private var accuracy: String = "—"
+    @State private var bestEasy: Int = 0
+    @State private var bestMedium: Int = 0
+    @State private var bestHard: Int = 0
+    @State private var actions: PlayerAwardStats = .zero
+
+    var body: some View {
+        VStack(spacing: 16 * scale) {
+            HStack(spacing: 12 * scale) {
+                StatsTile(label: "Matches", value: "\(matches)", scale: scale)
+                StatsTile(label: "Delivered", value: "\(ordersDelivered)", scale: scale)
+                StatsTile(label: "Coins", value: "\(coins)", scale: scale)
+                StatsTile(label: "Accuracy", value: accuracy, scale: scale)
+            }
+            HStack(spacing: 12 * scale) {
+                StatsTile(label: "Best Easy", value: "\(bestEasy)", scale: scale)
+                StatsTile(label: "Best Medium", value: "\(bestMedium)", scale: scale)
+                StatsTile(label: "Best Hard", value: "\(bestHard)", scale: scale)
+            }
+            HStack(spacing: 12 * scale) {
+                StatsTile(label: "Chops", value: "\(actions.chopActions)", scale: scale)
+                StatsTile(label: "Cooks", value: "\(actions.cookActions)", scale: scale)
+                StatsTile(label: "Fries", value: "\(actions.fryActions)", scale: scale)
+                StatsTile(label: "Plates", value: "\(actions.platesCreated)", scale: scale)
+                StatsTile(label: "Pipes", value: "\(actions.pipeForwards)", scale: scale)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 16 * scale)
+        .padding(.top, 12 * scale)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear(perform: loadStats)
+    }
+
+    private func loadStats() {
+        let store = PlayerStatsStore.shared
+        withAnimation(.easeOut(duration: 0.6)) {
+            matches = store.totalMatches
+            ordersDelivered = store.totalOrdersDelivered
+            coins = store.totalCoinsEarned
+            bestEasy = store.bestScore(for: .easy)
+            bestMedium = store.bestScore(for: .medium)
+            bestHard = store.bestScore(for: .hard)
+            actions = store.lifetimeActions
+        }
+        if let acc = store.accuracy {
+            accuracy = String(format: "%.0f%%", acc * 100)
+        } else {
+            accuracy = "—"
+        }
+    }
+}
+
+private struct StatsTile: View {
+    let label: String
+    let value: String
+    let scale: CGFloat
+
+    var body: some View {
+        VStack(spacing: 4 * scale) {
+            Text(value)
+                .font(.custom("TitilliumWeb-Bold", size: 24 * scale))
+                .foregroundColor(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .contentTransition(.numericText())
+            Text(label)
+                .font(.custom("TitilliumWeb-Light", size: 11 * scale))
+                .foregroundColor(.white.opacity(0.85))
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 10 * scale)
+        .background(Color.white.opacity(0.12))
+        .cornerRadius(8 * scale)
     }
 }
 

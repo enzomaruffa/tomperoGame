@@ -50,6 +50,15 @@ final class MatchState {
     /// this is true so the clock + order generator stop ticking.
     var paused: Bool = false
 
+    /// Per-action tally for the local player this match. Incremented from
+    /// the station nodes via `MatchSceneRouting.recordAction(_:)` and read
+    /// at match end so per-player awards can be computed.
+    var myActions: PlayerAwardStats = .zero
+
+    /// Awards received from peers during the post-match award broadcast.
+    /// Populated by `MatchNetworkAdapter.didReceivePlayerAwards`.
+    var peerAwards: [String: PlayerAwardStats] = [:]
+
     // MARK: - Mutations
 
     func appendOrder(_ order: Order) {

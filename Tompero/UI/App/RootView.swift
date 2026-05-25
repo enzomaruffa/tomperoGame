@@ -42,8 +42,8 @@ struct RootView: View {
             WaitingRoomView(hosting: hosting)
         case .game(let rule, let hosting):
             GameContainerView(rule: rule, hosting: hosting)
-        case .statistics(let stats):
-            StatisticsView(statistics: stats)
+        case .statistics(let stats, let localActions):
+            StatisticsView(statistics: stats, localActions: localActions)
         }
     }
 }
