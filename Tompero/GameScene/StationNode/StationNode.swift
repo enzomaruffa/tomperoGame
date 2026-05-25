@@ -45,13 +45,37 @@ class StationNode: TappableDelegate {
     var ingredientNode: IngredientNode? {
         didSet {
             ingredientNode?.spriteNode.setScale(ingredientNodeScale)
+            updateIdleBob()
         }
     }
-    
+
     var plateNode: PlateNode? {
         didSet {
             plateNode?.spriteNode.setScale(plateNodeScale)
+            updateIdleBob()
         }
+    }
+
+    /// Opt-in subtle bob applied to the station sprite when `isEmpty`.
+    /// Subclasses (box-type stations) flip this true in init.
+    var idleBobEnabled: Bool = false {
+        didSet { updateIdleBob() }
+    }
+
+    private static let idleBobKey = "stationIdleBob"
+
+    func updateIdleBob() {
+        guard idleBobEnabled, isEmpty else {
+            spriteNode.removeAction(forKey: StationNode.idleBobKey)
+            return
+        }
+        guard spriteNode.action(forKey: StationNode.idleBobKey) == nil else { return }
+        let up = SKAction.moveBy(x: 0, y: 6, duration: 1.2)
+        up.timingMode = .easeInEaseOut
+        let down = SKAction.moveBy(x: 0, y: -6, duration: 1.2)
+        down.timingMode = .easeInEaseOut
+        let cycle = SKAction.sequence([up, down])
+        spriteNode.run(SKAction.repeatForever(cycle), withKey: StationNode.idleBobKey)
     }
     
     var progressBarNode: ProgressBar?

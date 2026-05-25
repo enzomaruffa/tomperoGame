@@ -21,6 +21,7 @@ class PlateBoxNode: StationNode {
         let tappableNode = TappableSpriteNode(imageNamed: "PlateBox.png")
         self.spriteNode = tappableNode
         tappableNode.delegate = self
+        idleBobEnabled = true
     }
     
     override func tap() {
