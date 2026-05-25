@@ -260,6 +260,12 @@ class GameScene: SKScene {
             let notification = OrderDeliveryNotification(playerName: context.player, success: false, coinsAdded: 0)
             GameConnectionManager.shared.sendEveryone(deliveryNotification: notification)
             EventLogger.shared.logPlateDeliver(success: false, actionCount: totalActions, ingredientCount: plate.ingredients.count)
+            FloatingTextNode.spawn(
+                text: "MISS",
+                color: UIColor(red: 0.95, green: 0.30, blue: 0.30, alpha: 1),
+                at: nodes.teleportAnimationNode.position,
+                in: self
+            )
             updateOrderUI(state.orders)
             return false
         }
@@ -280,6 +286,14 @@ class GameScene: SKScene {
         updateOrderUI(state.orders)
         state.recordDelivery(coins: outcome.coinsAdded)
         updateCoinsUI()
+
+        FloatingTextNode.spawn(
+            text: "+\(outcome.coinsAdded)",
+            color: UIColor(red: 1.0, green: 0.83, blue: 0.25, alpha: 1),
+            at: nodes.teleportAnimationNode.position,
+            in: self
+        )
+        camera?.run(SKAction.cameraShake(amplitude: 12, duration: 0.25))
         return true
     }
 

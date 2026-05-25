@@ -295,11 +295,26 @@ extension SKAction {
                 propertyToAnimation[keyPath: _keyPath] = currentValue
             }
         })
-        
+
         if delay > 0 {
             return SKAction.sequence([SKAction.wait(forDuration: delay), animation])
         } else {
             return animation
         }
+    }
+
+    /// Camera shake — a short sequence of randomized offset moves that
+    /// returns the camera to (0, 0). Apply directly to the SKCameraNode.
+    class func cameraShake(amplitude: CGFloat, duration: TimeInterval) -> SKAction {
+        let stepCount = max(Int(duration * 30), 4)
+        let stepDuration = duration / TimeInterval(stepCount)
+        var steps: [SKAction] = []
+        for _ in 0..<stepCount {
+            let dx = CGFloat.random(in: -amplitude...amplitude)
+            let dy = CGFloat.random(in: -amplitude...amplitude)
+            steps.append(SKAction.moveBy(x: dx, y: dy, duration: stepDuration / 2))
+            steps.append(SKAction.moveBy(x: -dx, y: -dy, duration: stepDuration / 2))
+        }
+        return SKAction.sequence(steps)
     }
 }
