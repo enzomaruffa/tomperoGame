@@ -12,8 +12,13 @@ import SwiftUI
 struct RootView: View {
     @StateObject private var router = AppRouter()
 
+    private static let bodyTimer: Void = {
+        Log.game.info("LAUNCH +\(AppDelegate.elapsed())s RootView first body")
+    }()
+
     var body: some View {
-        NavigationStack(path: $router.path) {
+        _ = Self.bodyTimer
+        return NavigationStack(path: $router.path) {
             InicialView()
                 .navigationBarHidden(true)
                 .navigationDestination(for: AppDestination.self) { destination in
