@@ -39,7 +39,7 @@ struct RootView: View {
         switch preview {
         case "lobby":
             router.push(.waitingRoom(hosting: true))
-        case "game":
+        case "game", "pause":
             // Real lobbies always hand off a 4-slot list (padded with
             // "__empty__"); the pipe setup indexes playerOrder[1...3].
             let rule = GameRuleFactory.generateRule(
