@@ -265,9 +265,21 @@ private struct PlayerSlotView: View {
     let onInvite: () -> Void
 
     private static let hatNames = ["VREX", "SW77", "MORGAN", "JERRY"]
+    /// Per-slot player color, matching the in-game pipe palette
+    /// (VREX=blue, SW77=purple, MORGAN=green, JERRY=orange).
+    private static let slotColors: [Color] = [
+        Color(red: 0.27, green: 0.56, blue: 0.96),
+        Color(red: 0.62, green: 0.36, blue: 0.87),
+        Color(red: 0.30, green: 0.76, blue: 0.46),
+        Color(red: 0.96, green: 0.61, blue: 0.21)
+    ]
 
     private var hatPrefix: String {
         PlayerSlotView.hatNames[min(slotIndex, PlayerSlotView.hatNames.count - 1)]
+    }
+
+    private var slotColor: Color {
+        PlayerSlotView.slotColors[min(slotIndex, PlayerSlotView.slotColors.count - 1)]
     }
 
     private var hatImage: String {
@@ -288,6 +300,18 @@ private struct PlayerSlotView: View {
 
     var body: some View {
         ZStack {
+            // Colored glow disc behind the hat — the reliable per-player
+            // color indicator (the FULL hat art doesn't read as distinct
+            // colors on its own). Only shown for occupied slots.
+            if player.status != .notConnected {
+                Circle()
+                    .fill(slotColor.opacity(0.55))
+                    .frame(width: 120 * scale, height: 120 * scale)
+                    .blur(radius: 18 * scale)
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .offset(y: 18 * scale)
+            }
+
             // Hat image (154, 129) anchored top
             Image(hatImage)
                 .resizable()
@@ -295,18 +319,23 @@ private struct PlayerSlotView: View {
                 .frame(width: 154 * scale, height: 129 * scale)
                 .frame(maxHeight: .infinity, alignment: .top)
 
-            // Player name label (10, 133.5, 134, 24). Player color is
-            // conveyed by the character hat itself — `VREX/SW77/MORGAN/JERRY -
-            // FULL` assets are tinted per character to match the in-game
-            // pipe colors (blue / purple / green / orange).
-            Text(label)
-                .font(.custom("TitilliumWeb-Bold", size: 16 * scale))
-                .foregroundColor(.white)
-                .multilineTextAlignment(.center)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-                .frame(width: 134 * scale, height: 24 * scale)
-                .position(x: 77 * scale, y: 145.5 * scale)
+            // Player name on a colored capsule so the slot color is obvious
+            // even when the hat art reads as monochrome.
+            if !label.isEmpty {
+                Text(label)
+                    .font(.custom("TitilliumWeb-Bold", size: 16 * scale))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                    .padding(.horizontal, 10 * scale)
+                    .frame(width: 134 * scale, height: 26 * scale)
+                    .background(
+                        Capsule().fill(slotColor)
+                            .overlay(Capsule().stroke(Color.white.opacity(0.7), lineWidth: 1.5 * scale))
+                    )
+                    .position(x: 77 * scale, y: 145.5 * scale)
+            }
 
             // Invite button on empty slots (host only)
             if hosting && player.status == .notConnected {
