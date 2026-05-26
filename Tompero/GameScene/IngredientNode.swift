@@ -195,6 +195,30 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
         }
     }
     
+    /// Read-only mirror of `attemptMove(to:)`'s validity conditions, for
+    /// drop-target highlighting. Must stay in sync with `attemptMove`.
+    func canAccept(at station: StationNode) -> Bool {
+        switch station.stationType {
+        case .board:
+            return station.ingredientNode?.ingredient == nil && ingredient.canChangeState(to: .chopping)
+        case .stove:
+            return station.ingredientNode?.ingredient == nil && ingredient.canChangeState(to: .cooking)
+        case .fryer:
+            return station.ingredientNode?.ingredient == nil && ingredient.canChangeState(to: .frying)
+        case .shelf:
+            return station.ingredientNode?.ingredient == nil
+                && ((station.plateNode != nil && ingredient.currentState == ingredient.finalState) || station.plateNode == nil)
+        case .pipe:
+            return (station.spriteNode.name).flatMap { station.routing?.remotePlayer(forPipeName: $0) } != nil
+        case .hatch:
+            return true
+        case .plateBox:
+            return ingredient.finalState == ingredient.currentState && station.plateNode != nil
+        default:
+            return false
+        }
+    }
+
     func moveStarted(currentPosition: CGPoint) {
         scaleBeforeMove = spriteNode.yScale
         alphaBeforeMove = spriteNode.alpha

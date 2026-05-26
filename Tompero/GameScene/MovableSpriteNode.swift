@@ -52,8 +52,39 @@ class MovableSpriteNode: SKSpriteNode {
                 // Lift the dragged item above the fingertip so it isn't hidden
                 // under the finger — makes aiming at a station much easier.
                 self.position = finalTouchPosition + CGPoint(x: 0, y: MovableSpriteNode.dragLift)
+                updateDropHighlight()
             }
         }
+    }
+
+    /// The station currently glowing as the drop target during a drag.
+    private weak var highlightedStation: StationNode?
+
+    /// Highlights the valid station the item would drop onto right now (same
+    /// nearest-within-radius rule the drop uses), so the player can see where
+    /// it'll land. Cosmetic only.
+    private func updateDropHighlight() {
+        guard let gameScene = scene as? GameScene, let moveDelegate else { return }
+        let dropPoint = self.position
+        let chosen = gameScene.stations
+            .filter { moveDelegate.canAccept(at: $0) }
+            .filter {
+                let frame = $0.spriteNode.frame
+                let radius = max(frame.width, frame.height) * 0.85
+                return frame.contains(dropPoint) || $0.spriteNode.position.distanceTo(dropPoint) <= radius
+            }
+            .min { $0.spriteNode.position.distanceTo(dropPoint) < $1.spriteNode.position.distanceTo(dropPoint) }
+
+        if chosen !== highlightedStation {
+            highlightedStation?.setHighlighted(false)
+            chosen?.setHighlighted(true)
+            highlightedStation = chosen
+        }
+    }
+
+    private func clearDropHighlight() {
+        highlightedStation?.setHighlighted(false)
+        highlightedStation = nil
     }
 
     /// Movement (in scene units, 2436-wide canvas) before a touch counts as a
@@ -64,7 +95,8 @@ class MovableSpriteNode: SKSpriteNode {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
-        
+
+        clearDropHighlight()
         moveDelegate?.moveEnded(currentPosition: touch.location(in: scene!))
         
         if let initialTouchPosition = self.initialTouchPosition {

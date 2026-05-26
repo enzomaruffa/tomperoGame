@@ -100,6 +100,12 @@ class Ingredient: HasSprite, Equatable, Codable {
         }
         return false
     }
+
+    /// Read-only sibling of `attemptChangeState` — does the transition without
+    /// performing it. Used by drop-target highlighting to preview validity.
+    func canChangeState(to state: IngredientState) -> Bool {
+        (states[currentState] ?? []).contains(state)
+    }
     
     func findDowncast() -> Ingredient {
         switch texturePrefix {
