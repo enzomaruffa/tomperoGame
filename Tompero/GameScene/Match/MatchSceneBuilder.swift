@@ -68,24 +68,34 @@ final class MatchSceneBuilder {
         )
     }
 
-    /// Camera-attached "II" button in the top-right corner. The scene's
-    /// `MatchSceneRouting` conformance assigns it a tap delegate that
-    /// broadcasts a `.pauseRequest(true)` so multiplayer stays in sync.
+    /// Camera-attached pause button. Repositioned by `GameScene` to the
+    /// visible top-left corner; the scene's `MatchSceneRouting` conformance
+    /// assigns a tap delegate that broadcasts `.pauseRequest(true)`.
+    /// Styled as a dark circle with a white "II" to match the menu HUD
+    /// (gear / name tag) and the pause overlay's aesthetic.
     private func buildPauseButton() -> TappableSpriteNode {
-        let size = CGSize(width: 140, height: 140)
-        let button = TappableSpriteNode(color: UIColor(white: 1, alpha: 0.18), size: size)
+        // Clear hit-target square (generous tap area); the visible chrome is
+        // the child circle below.
+        let size = CGSize(width: 150, height: 150)
+        let button = TappableSpriteNode(color: .clear, size: size)
         button.name = "pauseButton"
         button.zPosition = 1200
-        // Top-right inside the 2436×1154 camera frame. The camera scales
-        // with the view; using camera-local coords keeps it pinned regardless.
         button.position = CGPoint(x: 1100, y: 450)
+
+        let disc = SKShapeNode(circleOfRadius: 66)
+        disc.fillColor = UIColor(red: 0.13, green: 0.11, blue: 0.26, alpha: 1)
+        disc.strokeColor = UIColor.white.withAlphaComponent(0.55)
+        disc.lineWidth = 5
+        disc.zPosition = 0
+        button.addChild(disc)
 
         let label = SKLabelNode(fontNamed: "TitilliumWeb-Bold")
         label.text = "II"
-        label.fontSize = 80
+        label.fontSize = 72
         label.fontColor = .white
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
+        label.zPosition = 1
         button.addChild(label)
 
         if let camera = scene.camera {
