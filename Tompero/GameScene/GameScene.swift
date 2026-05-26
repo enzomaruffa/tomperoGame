@@ -138,10 +138,10 @@ class GameScene: SKScene {
         SFXPlayer.shared.roundStarted.play()
     }
 
-    /// Pin the pause button to the true top-right corner of the *visible*
-    /// camera frame (the builder's default position was a hardcoded guess
-    /// that drifted on devices with a different aspect / notch). Insets for
-    /// the safe area so it never tucks under the dynamic island.
+    /// Pin the pause button to the top-*left* corner of the visible camera
+    /// frame — the top-right is occupied by the coin + timer HUD, so the
+    /// button was colliding with it there. Insets for the safe area so it
+    /// clears the dynamic island / notch in either landscape orientation.
     private func positionPauseButton() {
         guard let camera else { return }
         let visible = viewSizeInLocalCoordinates(ignoreCameraScale: false)
@@ -152,7 +152,7 @@ class GameScene: SKScene {
         let buttonHalf = nodes.pauseButton.size.width / 2
         let margin: CGFloat = 60
         nodes.pauseButton.position = CGPoint(
-            x: visible.width / 2 - buttonHalf - margin - sideInset,
+            x: -(visible.width / 2) + buttonHalf + margin + sideInset,
             y: visible.height / 2 - buttonHalf - margin - topInset
         )
     }
