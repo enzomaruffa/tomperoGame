@@ -41,10 +41,14 @@ struct RootView: View {
             router.push(.waitingRoom(hosting: true))
         case "game", "pause":
             // Real lobbies always hand off a 4-slot list (padded with
-            // "__empty__"); the pipe setup indexes playerOrder[1...3].
+            // "__empty__"); the pipe setup indexes playerOrder[1...3]. The
+            // FIRST player MUST be this device's selfName — GameScene reads
+            // `rule.playerTables[selfName]` for its own stations, so a
+            // mismatched name yields zero table stations.
+            let me = LANConnectionManager.shared.selfName
             let rule = GameRuleFactory.generateRule(
                 difficulty: .medium,
-                players: ["You", "Bot", "__empty__", "__empty__"]
+                players: [me, "Bot", "__empty__", "__empty__"]
             )
             router.push(.game(rule: rule, hosting: true))
         case "stats":
