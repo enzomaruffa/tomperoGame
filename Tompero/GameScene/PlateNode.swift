@@ -244,6 +244,24 @@ final class PlateNode: MovableDelegate {
         }
     }
     
+    /// Read-only mirror of `attemptMove(to:)`'s validity conditions, for
+    /// drop-target highlighting. Must stay in sync with `attemptMove`.
+    func canAccept(at station: StationNode) -> Bool {
+        switch station.stationType {
+        case .shelf:
+            return station.plateNode == nil
+                && ((station.ingredientNode?.ingredient != nil
+                     && station.ingredientNode?.ingredient.currentState == station.ingredientNode?.ingredient.finalState)
+                    || station.ingredientNode?.ingredient == nil)
+        case .pipe:
+            return (station.spriteNode.name).flatMap { station.routing?.remotePlayer(forPipeName: $0) } != nil
+        case .hatch, .delivery:
+            return true
+        default:
+            return false
+        }
+    }
+
     func moveStarted(currentPosition: CGPoint) {
         scaleBeforeMove = spriteNode.yScale
         alphaBeforeMove = spriteNode.alpha

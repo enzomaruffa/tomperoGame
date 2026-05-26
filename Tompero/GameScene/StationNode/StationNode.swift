@@ -18,9 +18,40 @@ class StationNode: TappableDelegate {
     /// PlateNode / IngredientNode reach the scene for pipe routing +
     /// delivery without force-casting `parent as! GameScene`.
     weak var routing: MatchSceneRouting?
-    
+
     var isEmpty: Bool {
         ingredientNode == nil && plateNode == nil
+    }
+
+    private var dropHighlightNode: SKShapeNode?
+    private static let dropHighlightKey = "dropHighlightPulse"
+
+    /// Glowing outline shown while a draggable item hovers over this station
+    /// as the valid drop target. Purely cosmetic.
+    func setHighlighted(_ highlighted: Bool) {
+        if highlighted {
+            guard dropHighlightNode == nil else { return }
+            let s = spriteNode.size
+            let glow = SKShapeNode(
+                rectOf: CGSize(width: max(s.width, 120) * 0.92, height: max(s.height, 120) * 0.92),
+                cornerRadius: 24
+            )
+            glow.strokeColor = SKColor(red: 0.45, green: 1.0, blue: 0.65, alpha: 0.95)
+            glow.lineWidth = 14
+            glow.glowWidth = 6
+            glow.fillColor = SKColor(red: 0.45, green: 1.0, blue: 0.65, alpha: 0.12)
+            glow.zPosition = 40
+            spriteNode.addChild(glow)
+            let pulse = SKAction.sequence([
+                SKAction.scale(to: 1.05, duration: 0.35),
+                SKAction.scale(to: 1.0, duration: 0.35)
+            ])
+            glow.run(.repeatForever(pulse), withKey: StationNode.dropHighlightKey)
+            dropHighlightNode = glow
+        } else {
+            dropHighlightNode?.removeFromParent()
+            dropHighlightNode = nil
+        }
     }
     
     var spriteNode: SKSpriteNode
