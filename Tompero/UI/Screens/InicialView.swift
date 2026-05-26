@@ -181,7 +181,10 @@ struct InicialView: View {
                         .buttonStyle(PressableButtonStyle())
                     }
 
-                    // Settings gear, top-right
+                    // Settings gear, top-right — seated in a dark circular
+                    // button so it reads as part of the HUD instead of a bare
+                    // white system glyph floating over the starfield (matches
+                    // the name tag's dark/bordered treatment).
                     designed(x: 791, y: 20, w: 61, h: 59, scale: scale) {
                         Button {
                             router.push(.settings)
@@ -189,7 +192,14 @@ struct InicialView: View {
                             Image(systemName: "gearshape.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(.white)
+                                .padding(13 * scale)
+                                .foregroundColor(.white.opacity(0.92))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(
+                                    Circle()
+                                        .fill(Color(red: 0.13, green: 0.11, blue: 0.26))
+                                        .overlay(Circle().stroke(Color.white.opacity(0.55), lineWidth: 2 * scale))
+                                )
                         }
                         .buttonStyle(PressableButtonStyle())
                     }
