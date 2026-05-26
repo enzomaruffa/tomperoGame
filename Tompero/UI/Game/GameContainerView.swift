@@ -17,6 +17,7 @@ struct GameContainerView: View {
 
     @EnvironmentObject private var router: AppRouter
     @State private var scene: GameScene?
+    @State private var isPaused = false
 
     var body: some View {
         ZStack {
@@ -27,7 +28,19 @@ struct GameContainerView: View {
                 SpriteView(scene: scene)
                     .ignoresSafeArea()
             }
+
+            // Full-screen pause overlay — rendered in SwiftUI (not SpriteKit)
+            // so it reliably covers the whole screen. Driven by the scene's
+            // pause state, which flips for both local taps and remote peers.
+            if isPaused {
+                PauseOverlayView(
+                    onResume: { scene?.resumeMatch() },
+                    onQuit: { scene?.quitMatch() }
+                )
+                .transition(.opacity)
+            }
         }
+        .animation(.easeInOut(duration: 0.2), value: isPaused)
         .onAppear {
             if scene == nil {
                 scene = buildScene()
@@ -58,7 +71,56 @@ struct GameContainerView: View {
         scene.onMatchError = {
             router.popToRoot()
         }
+        scene.onPauseChanged = { paused in
+            isPaused = paused
+        }
         Log.game.info("GameContainerView built scene with size \(scene.size.debugDescription, privacy: .public)")
         return scene
+    }
+}
+
+/// Full-screen modal pause UI rendered over the SpriteView. Replaces the
+/// camera-attached SKNode overlay, which couldn't reliably cover the whole
+/// frame (a foreground scene sprite rendered above it).
+private struct PauseOverlayView: View {
+    let onResume: () -> Void
+    let onQuit: () -> Void
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.72).ignoresSafeArea()
+
+            VStack(spacing: 28) {
+                Text("PAUSED")
+                    .font(.custom("TitilliumWeb-Bold", size: 56))
+                    .foregroundColor(.white)
+
+                Button(action: onResume) {
+                    Text("RESUME")
+                        .font(.custom("TitilliumWeb-Bold", size: 26))
+                        .foregroundColor(.white)
+                        .frame(width: 280, height: 64)
+                        .background(
+                            Capsule()
+                                .fill(Color(red: 0.13, green: 0.11, blue: 0.26))
+                                .overlay(Capsule().stroke(Color.white.opacity(0.55), lineWidth: 2))
+                        )
+                }
+                .buttonStyle(PressableButtonStyle())
+
+                Button(action: onQuit) {
+                    Text("QUIT")
+                        .font(.custom("TitilliumWeb-Bold", size: 26))
+                        .foregroundColor(.white)
+                        .frame(width: 280, height: 64)
+                        .background(
+                            Capsule()
+                                .fill(Color(red: 0.62, green: 0.12, blue: 0.12))
+                                .overlay(Capsule().stroke(Color.white.opacity(0.5), lineWidth: 2))
+                        )
+                }
+                .buttonStyle(PressableButtonStyle())
+            }
+        }
     }
 }

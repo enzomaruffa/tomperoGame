@@ -17,8 +17,10 @@ class GameScene: SKScene {
     /// Set in `didMove` once the match state is configured.
     private var network: MatchNetworkAdapter!
 
-    /// Pause UI — constructed lazily on first pause.
-    private var pauseOverlay: PauseOverlay?
+    /// Notifies the SwiftUI host (GameContainerView) when pause state flips,
+    /// so it can present/dismiss the full-screen SwiftUI pause overlay. Fires
+    /// for both local taps and remote `.pauseRequest` broadcasts.
+    var onPauseChanged: ((Bool) -> Void)?
 
     /// Tap delegate for the pause button. Holds a closure that broadcasts a
     /// `.pauseRequest(true)` to all peers.
@@ -136,6 +138,14 @@ class GameScene: SKScene {
         configurePause()
 
         SFXPlayer.shared.roundStarted.play()
+
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["UI_PREVIEW"] == "pause" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+                self?.setPaused(true)
+            }
+        }
+        #endif
     }
 
     /// Pin the pause button to the top-*left* corner of the visible camera
@@ -163,26 +173,26 @@ class GameScene: SKScene {
             self.setPaused(!self.state.paused)
         }
         nodes.pauseButton.delegate = pauseButtonDelegate
-
-        pauseOverlay = PauseOverlay(
-            scene: self,
-            onResume: { [weak self] in
-                self?.setPaused(false)
-            },
-            onQuit: { [weak self] in
-                self?.setPaused(false)
-                self?.onMatchError?()
-            }
-        )
     }
 
     /// Apply a pause state change locally AND broadcast it. The local apply
     /// is essential — `dispatchOutgoing` never loops an envelope back to its
     /// sender, so without this the player who tapped pause would never see
-    /// their own overlay.
+    /// the overlay.
     private func setPaused(_ paused: Bool) {
         didReceivePauseRequest(paused: paused)
         LANConnectionManager.shared.send(.pauseRequest(paused))
+    }
+
+    /// Called by the SwiftUI pause overlay's RESUME button.
+    func resumeMatch() {
+        setPaused(false)
+    }
+
+    /// Called by the SwiftUI pause overlay's QUIT button.
+    func quitMatch() {
+        setPaused(false)
+        onMatchError?()
     }
 
     private func configureClock() {
@@ -489,11 +499,9 @@ extension GameScene: MatchNetworkDelegate {
     func didReceivePauseRequest(paused: Bool) {
         guard !state.ended else { return }
         state.paused = paused
-        if paused {
-            pauseOverlay?.show()
-        } else {
-            pauseOverlay?.hide()
-        }
+        // SwiftUI host renders the full-screen pause overlay (reliable
+        // coverage, unlike the camera-child SKNode it replaced).
+        onPauseChanged?(paused)
     }
 
     func didReceivePeerUpdate(player: String, state: PeerConnectionState) {
