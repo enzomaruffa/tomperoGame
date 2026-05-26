@@ -47,6 +47,18 @@ struct RootView: View {
                 players: ["You", "Bot", "__empty__", "__empty__"]
             )
             router.push(.game(rule: rule, hosting: true))
+        case "stats":
+            // Seed sample lifetime stats so the tiles have content to lay out.
+            let sample = MatchStatistics(ruleUsed: GameRuleFactory.generateRule(
+                difficulty: .hard, players: ["You", "Bot", "__empty__", "__empty__"]))
+            sample.totalDeliveredOrders = 142
+            sample.totalGeneratedOrders = 170
+            sample.totalPoints = 2480
+            PlayerStatsStore.shared.record(
+                matchStatistics: sample,
+                localActions: PlayerAwardStats(ordersDelivered: 142, chopActions: 311, cookActions: 88, fryActions: 54, platesCreated: 150, pipeForwards: 27)
+            )
+            router.push(.settings)
         default:
             break
         }
@@ -57,7 +69,11 @@ struct RootView: View {
     private func destinationView(for destination: AppDestination) -> some View {
         switch destination {
         case .settings:
+            #if DEBUG
+            SettingsView(initialTab: ProcessInfo.processInfo.environment["UI_PREVIEW"] == "stats" ? .stats : .settings)
+            #else
             SettingsView()
+            #endif
         case .video:
             CutsceneView()
         case .menu:

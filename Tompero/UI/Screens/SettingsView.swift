@@ -57,6 +57,7 @@ final class MusicSettingsViewModel: ObservableObject {
 }
 
 struct SettingsView: View {
+    var initialTab: SettingsTab = .settings
     @EnvironmentObject private var router: AppRouter
     @StateObject private var music = MusicSettingsViewModel()
     @State private var selectedTab: SettingsTab = .settings
@@ -102,6 +103,7 @@ struct SettingsView: View {
             tabContent(scale: scale)
                 .designed(x: 122, y: 86.5, w: 669.5, h: 278.5, scale: scale)
         }
+        .onAppear { selectedTab = initialTab }
         .sheet(isPresented: $showGameCenter) {
             GameCenterDashboard()
         }
