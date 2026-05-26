@@ -123,22 +123,31 @@ struct InicialView: View {
                             }
                     }
 
-                    // Coin icon
-                    designed(x: 54, y: 17, w: 65, h: 65, scale: scale) {
-                        Image("Coin")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    }
-
-                    // Coin count label — uses .contentTransition(.numericText())
-                    // so the value tick-up animation (kicked off in
-                    // `fetchCoinCount`) renders as rolling digits.
-                    designed(x: 129, y: 17, w: 319, h: 65, scale: scale) {
-                        Text("\(coinCount)")
-                            .font(.custom("TitilliumWeb-Bold", size: 30 * scale))
-                            .foregroundColor(.white)
-                            .contentTransition(.numericText())
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    // Coin balance — icon + count grouped on a dark capsule so
+                    // the number stays readable over the bright sky and the
+                    // top HUD row (coins / name tag / gear) reads as one set.
+                    // `.numericText()` rolls the digits when fetchCoinCount lands.
+                    designed(x: 44, y: 17, w: 188, h: 56, scale: scale) {
+                        HStack(spacing: 8 * scale) {
+                            Image("Coin")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40 * scale, height: 40 * scale)
+                            Text("\(coinCount)")
+                                .font(.custom("TitilliumWeb-Bold", size: 26 * scale))
+                                .foregroundColor(.white)
+                                .contentTransition(.numericText())
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
+                            Spacer(minLength: 0)
+                        }
+                        .padding(.horizontal, 12 * scale)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(
+                            Capsule()
+                                .fill(Color(red: 0.13, green: 0.11, blue: 0.26))
+                                .overlay(Capsule().stroke(Color.white.opacity(0.55), lineWidth: 2 * scale))
+                        )
                     }
 
                     // Name tag — a solid "ID badge" centered in the gap
@@ -181,7 +190,10 @@ struct InicialView: View {
                         .buttonStyle(PressableButtonStyle())
                     }
 
-                    // Settings gear, top-right
+                    // Settings gear, top-right — seated in a dark circular
+                    // button so it reads as part of the HUD instead of a bare
+                    // white system glyph floating over the starfield (matches
+                    // the name tag's dark/bordered treatment).
                     designed(x: 791, y: 20, w: 61, h: 59, scale: scale) {
                         Button {
                             router.push(.settings)
@@ -189,7 +201,14 @@ struct InicialView: View {
                             Image(systemName: "gearshape.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(.white)
+                                .padding(13 * scale)
+                                .foregroundColor(.white.opacity(0.92))
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(
+                                    Circle()
+                                        .fill(Color(red: 0.13, green: 0.11, blue: 0.26))
+                                        .overlay(Circle().stroke(Color.white.opacity(0.55), lineWidth: 2 * scale))
+                                )
                         }
                         .buttonStyle(PressableButtonStyle())
                     }
