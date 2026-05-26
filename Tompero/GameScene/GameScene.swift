@@ -131,29 +131,58 @@ class GameScene: SKScene {
         nodes = MatchSceneBuilder(scene: self, context: context, routing: self).build()
         updateTimerUI()
         updateCoinsUI()
+        positionPauseButton()
 
         configurePause()
 
         SFXPlayer.shared.roundStarted.play()
     }
 
+    /// Pin the pause button to the true top-right corner of the *visible*
+    /// camera frame (the builder's default position was a hardcoded guess
+    /// that drifted on devices with a different aspect / notch). Insets for
+    /// the safe area so it never tucks under the dynamic island.
+    private func positionPauseButton() {
+        guard let camera else { return }
+        let visible = viewSizeInLocalCoordinates(ignoreCameraScale: false)
+        let cameraScale = camera.xScale
+        let insets = view?.safeAreaInsets ?? .zero
+        let sideInset = max(insets.left, insets.right) * cameraScale
+        let topInset = max(insets.top, 0) * cameraScale
+        let buttonHalf = nodes.pauseButton.size.width / 2
+        let margin: CGFloat = 60
+        nodes.pauseButton.position = CGPoint(
+            x: visible.width / 2 - buttonHalf - margin - sideInset,
+            y: visible.height / 2 - buttonHalf - margin - topInset
+        )
+    }
+
     private func configurePause() {
         pauseButtonDelegate = TappableClosure { [weak self] in
             guard let self, !self.state.ended else { return }
-            LANConnectionManager.shared.send(.pauseRequest(!self.state.paused))
+            self.setPaused(!self.state.paused)
         }
         nodes.pauseButton.delegate = pauseButtonDelegate
 
         pauseOverlay = PauseOverlay(
             scene: self,
             onResume: { [weak self] in
-                LANConnectionManager.shared.send(.pauseRequest(false))
+                self?.setPaused(false)
             },
             onQuit: { [weak self] in
-                LANConnectionManager.shared.send(.pauseRequest(false))
+                self?.setPaused(false)
                 self?.onMatchError?()
             }
         )
+    }
+
+    /// Apply a pause state change locally AND broadcast it. The local apply
+    /// is essential — `dispatchOutgoing` never loops an envelope back to its
+    /// sender, so without this the player who tapped pause would never see
+    /// their own overlay.
+    private func setPaused(_ paused: Bool) {
+        didReceivePauseRequest(paused: paused)
+        LANConnectionManager.shared.send(.pauseRequest(paused))
     }
 
     private func configureClock() {
