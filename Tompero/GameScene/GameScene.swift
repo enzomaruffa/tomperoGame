@@ -343,6 +343,7 @@ class GameScene: SKScene {
                 at: nodes.teleportAnimationNode.position,
                 in: self
             )
+            Haptics.failure()
             updateOrderUI(state.orders)
             return false
         }
@@ -372,6 +373,7 @@ class GameScene: SKScene {
             in: self
         )
         camera?.run(SKAction.cameraShake(amplitude: 12, duration: 0.25))
+        Haptics.success()
         return true
     }
 
