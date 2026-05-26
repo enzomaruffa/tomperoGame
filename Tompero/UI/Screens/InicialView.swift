@@ -141,28 +141,42 @@ struct InicialView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     }
 
-                    // Name editor — pill slotted in the gap between the coin
-                    // label (ends ~x=448) and the settings gear (starts at
-                    // x=791). Uses the same `Settings_selectionButtonOFF`
-                    // pill art the Settings tab strip uses, so it visually
-                    // belongs in the world. Sized to match the storyboard's
-                    // OFF-state pill at 208.5×47.5.
-                    designed(x: 519, y: 26, w: 208.5, h: 47.5, scale: scale) {
+                    // Name tag — a solid "ID badge" centered in the gap
+                    // between the coin label (ends ~x=448) and the settings
+                    // gear (x=791), vertically aligned with the top row. Solid
+                    // opaque capsule (no see-through art over the starfield)
+                    // with a person glyph + pencil affordance signalling it's
+                    // editable.
+                    designed(x: 500, y: 22, w: 238, h: 50, scale: scale) {
                         Button {
                             nameDraft = LocalPeerIdentity.userSetName ?? ""
                             showNameEditor = true
                         } label: {
-                            ZStack {
-                                Image("Settings_selectionButtonOFF")
+                            HStack(spacing: 8 * scale) {
+                                Image(systemName: "person.crop.circle.fill")
                                     .resizable()
                                     .scaledToFit()
-                                Text("👤 \(nameButtonTitle)")
-                                    .font(.custom("TitilliumWeb-Bold", size: 16 * scale))
+                                    .frame(width: 26 * scale, height: 26 * scale)
+                                    .foregroundColor(.white.opacity(0.9))
+                                Text(nameButtonTitle)
+                                    .font(.custom("TitilliumWeb-Bold", size: 17 * scale))
                                     .foregroundColor(.white)
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.5)
-                                    .padding(.horizontal, 16 * scale)
+                                Spacer(minLength: 0)
+                                Image(systemName: "pencil")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 16 * scale, height: 16 * scale)
+                                    .foregroundColor(.white.opacity(0.7))
                             }
+                            .padding(.horizontal, 16 * scale)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(
+                                Capsule()
+                                    .fill(Color(red: 0.13, green: 0.11, blue: 0.26))
+                                    .overlay(Capsule().stroke(Color.white.opacity(0.55), lineWidth: 2 * scale))
+                            )
                         }
                         .buttonStyle(PressableButtonStyle())
                     }
