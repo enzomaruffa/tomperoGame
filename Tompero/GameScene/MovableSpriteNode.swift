@@ -93,6 +93,7 @@ class MovableSpriteNode: SKSpriteNode {
                 guard withinReach else { continue }
                 if moveDelegate?.attemptMove(to: station) ?? false {
                     SFXPlayer.shared.putFoodDown.play()
+                    Haptics.place()
                     self.run(.group([
                         .move(to: station.spriteNode.position, duration: 0.1),
                         .rotate(toAngle: 0, duration: 0.1)

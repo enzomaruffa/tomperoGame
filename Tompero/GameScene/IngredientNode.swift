@@ -205,6 +205,7 @@ final class IngredientNode: TappableDelegate, MovableDelegate {
         if currentPosition.distanceTo(currentStation.spriteNode.position) > 80 && rotationTimer == nil {
             
             SFXPlayer.shared.takeFood.play()
+            Haptics.pickup()
             moving = true
             zPosBeforeMove = spriteNode.zPosition
             spriteNode.zPosition = 90

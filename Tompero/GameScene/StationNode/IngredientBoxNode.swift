@@ -30,6 +30,7 @@ class IngredientBoxNode: StationNode {
         if self.ingredientNode == nil {
             
             SFXPlayer.shared.takeFood.play()
+            Haptics.pickup()
             
             let newIngredient = ingredient!.findDowncast()
             

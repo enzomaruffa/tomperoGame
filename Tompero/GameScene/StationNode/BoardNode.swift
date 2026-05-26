@@ -68,6 +68,7 @@ class BoardNode: StationNode {
             let choppableComponent = ingredient.choppableComponent {
             choppableComponent.update()
             SFXPlayer.shared.chop.play()
+            Haptics.chop()
             routing?.recordAction(.chop)
             
             ingredientNode?.spriteNode.run(.sequence([
